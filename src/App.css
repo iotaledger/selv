@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+.steps-wrapper {
+  text-align: left;
+  width: 250px;
+  display: inline-table;
+  vertical-align: top;
+}
+
+.rs-steps-item-tail {
+  display: none;
+}
+.rs-steps-item-icon-wrapper {
+  background: none !important;
+  border-radius: 5px !important;
+}
+.rs-steps-item-icon-process, .rs-steps-item-icon-wait {
+  display: none !important;
+}
+
+.rs-steps-item-status-finish > .rs-steps-item-content > .rs-steps-item-title {
+  text-decoration: line-through !important;
+}

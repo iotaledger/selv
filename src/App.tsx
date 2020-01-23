@@ -6,10 +6,6 @@ import 'rsuite/lib/styles/index.less'; // or 'rsuite/dist/styles/rsuite-default.
 import './App.css';
 import { routes } from './steps'
 
-// context for translations
-// context for steps
-// custom hook to determine current step/subspep and link to next step
-
 const App: React.FC = () => {
   return (
     <GlobalState>

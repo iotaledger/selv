@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from 'react-router-dom'
+import { Button } from 'rsuite';
 import useStep from "../utils/useStep";
 import Steps from "../components/Steps";
 /**
@@ -11,6 +13,11 @@ const IntroShowCTA = ({ match }: any) => {
     return (
         <div className="">
             IntroShowCTA
+            <Link to={nextStep}>
+                <Button size="lg">
+                    Next Page
+                </Button> 
+            </Link>
             <Steps 
                 steps={mainSteps} 
                 stepId={step} 

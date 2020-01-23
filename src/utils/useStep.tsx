@@ -11,17 +11,27 @@ interface MatchResult {
 const useStep = (match: any) => {
     const [step, setStep] = useState(0)
     const [subStep, setSubStep] = useState(0)
-    const { nextStep, subSteps, mainSteps }: any = useContext(Context);
+    const { subSteps, mainSteps, routes }: any = useContext(Context);
+    const [nextStep, setNextStep] = useState('')
   
     useEffect(() => {
-        const matchStepResult: MatchResult | null | undefined = matchStep(match.path)
-        if (matchStepResult?.step) {
-            setStep(Number(step))
-        }
-        if (matchStepResult?.subStep) {
-            setSubStep(Number(subStep))
-        }
-    }, [])
+        async function setSteps() {
+            const matchStepResult: MatchResult | null | undefined = matchStep(match.path)
+            if (matchStepResult?.step) {
+                setStep(Number(matchStepResult?.step))
+            }
+            if (matchStepResult?.subStep) {
+                setSubStep(Number(matchStepResult?.subStep))
+            }
+    
+            const idx = routes.findIndex(({ path }: { path: string; }) => path === match.path)
+            if (idx && routes.length > idx + 1) {
+              const next = routes[idx + 1].path
+              setNextStep(next)
+            }
+        } 
+        setSteps()
+    }, [match, routes, step, subStep])
 
   return { step, subStep, nextStep, subSteps, mainSteps };
 };
