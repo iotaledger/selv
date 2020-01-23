@@ -14,7 +14,7 @@ import {
 
 export const routes = [ 
   { path: '/', page: Landing },
-  { path: '/intro/1', page: IntroShowTodos }, 
+  { path: '/progress/intro/2', page: IntroShowTodos }, 
   { path: '/progress/cta/2', page: IntroShowCTA },
   { path: '/progress/qr/2/0', page: IntroShowQR }, 
   { path: '/progress/intro/2/1', page: CompanyIntro }, 

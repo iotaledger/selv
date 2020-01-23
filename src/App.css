@@ -58,3 +58,47 @@
 .rs-steps-item-status-finish > .rs-steps-item-content > .rs-steps-item-title {
   text-decoration: line-through !important;
 }
+
+.rs-steps-item-status-process > .rs-steps-item-content > .rs-steps-item-title {
+  font-weight: bold;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.main-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 60px solid #F6F6F6;
+  background-color: #fff;
+}
+
+.sidebar-wrapper {
+  display: flex;
+  align-items: center;
+  width: 400px;
+  padding: 50px;
+  height: 100vh;
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 50px;
+}
+
+.rs-sidenav {
+  background-color: #fff !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+}
