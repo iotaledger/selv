@@ -1,0 +1,5 @@
+{
+    "websocketURL": "http://localhost:8000",
+    "provider": "https://nodes.devnet.iota.org:443",
+    "keyId": "didi"
+}

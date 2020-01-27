@@ -1,0 +1,29 @@
+{
+  "name": "DINaaS",
+  "version": "1.0.0",
+  "description": "Digital Identity Narratives as a Service PoC",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently --kill-others-on-fail \"node index.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iotaledger/poc-dinaas.git"
+  },
+  "author": "IOTA Foundation",
+  "engines": {
+    "node": ">=10.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "identity_ts": "iotaledger/identity.ts#Revocation",
+    "nedb": "^1.8.0",
+    "nedb-async": "0.1.3",
+    "socket.io": "2.3.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  }
+}
