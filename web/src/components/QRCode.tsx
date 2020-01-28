@@ -1,6 +1,6 @@
 import React from 'react';
 import QRCode, { ImageSettings } from 'qrcode.react';
-import logo from '../iota.png'
+import logo from '../assets/iota.png'
 
 export default ({ text }: { text: string }) => {
     const imageSettings: ImageSettings = {

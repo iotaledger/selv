@@ -1,6 +1,7 @@
 import { 
   Landing,
   IntroShowTodos,
+  IntroShowMobile,
   IntroShowCTA,
   IntroShowQR,
   ProveIdentity,
@@ -10,12 +11,15 @@ import {
   CompanyCredentials,
   CompanyConfirmation,
   BankIntro,
+  IncorporatedCompanies,
 } from './pages'
 
 export const routes = [ 
   { path: '/', page: Landing },
   { path: '/progress/intro/2', page: IntroShowTodos }, 
-  { path: '/progress/cta/2', page: IntroShowCTA },
+  { path: '/progress/intromobile/2', page: IntroShowMobile }, 
+  { path: '/progress/companies/2', page: IncorporatedCompanies }, 
+  // { path: '/progress/cta/2', page: IntroShowCTA },
   { path: '/progress/qr/2/0', page: IntroShowQR }, 
   { path: '/progress/intro/2/1', page: CompanyIntro }, 
   { path: '/progress/prove/2/1', page: ProveIdentity }, 

@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from 'react-router-dom'
-import { Button } from 'rsuite';
 import useStep from "../utils/useStep";
 import { Steps, Sidebar, QRCode } from "../components";
+import logo from '../assets/companyHouse.svg'
+import appStore from '../assets/appStore.png'
+import googlePlay from '../assets/googlePlay.png'
 
 /**
  * Component which will display a IntroShowQR.
@@ -13,13 +14,29 @@ const IntroShowQR: React.FC = ({ match }: any) => {
     return (
         <div className="page-wrapper">
             <div className="main-section">
-                <h1>IntroShowQR</h1>
-                <Link to={nextStep}>
-                    <Button size="lg">
-                        Next Page
-                    </Button> 
-                </Link>
-                <QRCode text="Hello World!" />
+                <div className="prove-identity-page-wrapper">
+                    <img src={logo} alt="Company House Logo" />
+                    <h2>Prove Your Identity</h2>
+                    <p>Scan this QR code with <strong>DIDI App</strong> to continue</p>
+                    <QRCode text="Hello World!" />
+                    <p>Download DIDI app on your phone</p>
+                    <div className="app-cta-wrapper">
+                        <a 
+                            href='https://apps.apple.com/us/app/trinity-wallet/id1385929472?ls=1'
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img src={appStore} alt="Apple AppStore" />
+                        </a>
+                        <a 
+                            href='https://play.google.com/store/apps/details?id=com.iota.trinity'
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <img src={googlePlay} alt="Google Play Market" />
+                        </a>
+                    </div>
+                </div>
             </div>
             <Sidebar>
                 <Steps 

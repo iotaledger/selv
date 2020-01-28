@@ -102,3 +102,20 @@
   justify-content: space-between;
   height: 100vh;
 }
+
+.companies-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 840px;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.companies-cta-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin: 50px 0;
+}
