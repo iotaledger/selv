@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom'
 import { Button } from 'rsuite';
 import useStep from "../utils/useStep";
-import { Steps, Sidebar } from "../components";
+import { Steps, Sidebar, QRCode } from "../components";
 
 /**
  * Component which will display a IntroShowQR.
@@ -19,6 +19,7 @@ const IntroShowQR: React.FC = ({ match }: any) => {
                         Next Page
                     </Button> 
                 </Link>
+                <QRCode text="Hello World!" />
             </div>
             <Sidebar>
                 <Steps 
