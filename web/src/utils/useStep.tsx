@@ -6,6 +6,7 @@ interface MatchResult {
     page: string | undefined;
     step: string | undefined;
     subStep: string | undefined;
+    companyId: string | undefined;
 }
 
 const useStep = (match: any) => {

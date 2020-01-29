@@ -9,7 +9,7 @@ import googlePlay from '../assets/googlePlay.png'
  * Component which will display a IntroShowQR.
  */
 const IntroShowQR: React.FC = ({ match }: any) => {
-    const { step, subStep, nextStep, subSteps, mainSteps } = useStep(match); 
+    const { step, subStep, subSteps, mainSteps } = useStep(match); 
     
     return (
         <div className="page-wrapper">

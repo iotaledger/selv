@@ -20,21 +20,21 @@ const SidebarInstance = ({ children }: {
             </Sidenav.Body>
                 <div className="sidebar-links">
                     <a 
-                        href="" 
+                        href="https://www.iota.org/" 
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         What's this?
                     </a>
                     <a 
-                        href="" 
+                        href="https://www.iota.org/" 
                         target="_blank"
                         rel="noopener noreferrer"
                     >
                         FAQ
                     </a>
                     <a 
-                        href="" 
+                        href="https://www.iota.org/" 
                         target="_blank"
                         rel="noopener noreferrer"
                     >

@@ -2,7 +2,7 @@ import {
   Landing,
   IntroShowTodos,
   IntroShowMobile,
-  IntroShowCTA,
+  // IntroShowCTA,
   IntroShowQR,
   ProveIdentity,
   SingInConfirmation,

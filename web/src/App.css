@@ -119,3 +119,7 @@
   width: 100%;
   margin: 50px 0;
 }
+
+.rs-table-row {
+  cursor: pointer;
+}

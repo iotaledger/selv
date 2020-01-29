@@ -4,6 +4,7 @@ interface MatchResult {
     page: string | undefined;
     step: string | undefined;
     subStep: string | undefined;
+    companyId: string | undefined;
 }
 
 interface Match {

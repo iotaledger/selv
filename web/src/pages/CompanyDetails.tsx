@@ -1,20 +1,18 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { Button } from 'rsuite';
+import { Button, Nav } from 'rsuite';
 import useStep from "../utils/useStep";
-import { Steps, Sidebar, Table } from "../components";
+import { Steps, Sidebar } from "../components";
 import companies from "../incorporatedCompanies.json"
 import logo from '../assets/companyHouse.svg'
 
 /**
- * Component which will display a CompanyIntro.
+ * Component which will display a CompanyData.
  */
-const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
-    const { step, nextStep, mainSteps } = useStep(match); 
-
-    function onRowClick(data: any) {
-        history.push(`/details/company/${data.id}`)
-    }
+const CompanyData: React.FC = ({ match }: any) => {
+    const { step, subStep, nextStep, subSteps, mainSteps } = useStep(match); 
+    const companyData = companies.find(company => company.id === match?.params?.companyId)
+    console.log('companyData', companyData)
 
     return (
         <div className="page-wrapper">
@@ -29,17 +27,17 @@ const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
                             </Button> 
                         </Link>
                     </div>
-                    <Table data={companies} onRowClick={onRowClick} />
                 </div>
             </div>
             <Sidebar>
                 <Steps 
                     steps={mainSteps} 
                     stepId={step} 
+                    subSteps={<Steps steps={subSteps} stepId={subStep} />}
                 />
             </Sidebar>
         </div>
     );
 }
 
-export default IncorporatedCompanies;
+export default CompanyData;

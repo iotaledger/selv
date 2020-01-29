@@ -7,6 +7,7 @@ import CompanyIntro from './CompanyIntro'
 import ProveIdentity from './ProveIdentity'
 import SingInConfirmation from './SingInConfirmation'
 import CompanyData from './CompanyData'
+import CompanyDetails from './CompanyDetails'
 import CompanyCredentials from './CompanyCredentials'
 import CompanyConfirmation from './CompanyConfirmation'
 import BankIntro from './BankIntro'
@@ -22,6 +23,7 @@ export {
     SingInConfirmation,
     CompanyIntro,
     CompanyData,
+    CompanyDetails,
     CompanyCredentials,
     CompanyConfirmation,
     BankIntro,
