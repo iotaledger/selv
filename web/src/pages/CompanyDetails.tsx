@@ -27,7 +27,7 @@ interface CompanyData {
 const CompanyData: React.FC = ({ match }: any) => {
     const [companyData, setCompanyData] = useState();
     const [activeTab, setActiveTab] = useState('overview');
-    const { step, subStep, subSteps, mainSteps } = useStep(match); 
+    const { mainSteps } = useStep(match); 
     const companyId = match?.params?.companyId;
 
     useEffect(() => {
@@ -77,8 +77,7 @@ const CompanyData: React.FC = ({ match }: any) => {
             <Sidebar>
                 <Steps 
                     steps={mainSteps} 
-                    stepId={step} 
-                    subSteps={<Steps steps={subSteps} stepId={subStep} />}
+                    stepId={2} 
                 />
             </Sidebar>
         </div>
