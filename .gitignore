@@ -1,5 +1,5 @@
 backend/db
-/mobile*
+/mobile_app
 
 */node_modules
 */build
