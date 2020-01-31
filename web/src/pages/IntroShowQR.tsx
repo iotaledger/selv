@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import randomstring from "randomstring";
+import AppContext from '../context/app-context';
 import useStep from "../utils/useStep";
 import { Steps, Sidebar, QRCode } from "../components";
 import logo from '../assets/companyHouse.svg'
@@ -10,18 +11,30 @@ import googlePlay from '../assets/googlePlay.png'
  * Component which will display a IntroShowQR.
  */
 const IntroShowQR: React.FC = ({ match }: any) => {
-    const [qrContent, setQrContent] = useState({});
+    const [qrContent, setQrContent] = useState('');
     const { step, subStep, subSteps, mainSteps } = useStep(match);
+    const { connectWebSocket, ioClient }: any = useContext(AppContext)
     
     useEffect(() => {
         async function setQR() {
-            setQrContent({ 
-                channelId: randomstring.generate(12), 
-                encryptionKey: randomstring.generate() 
-            });
+            const newQrContent = JSON.stringify({ 
+                channelId: randomstring.generate(7), 
+                key: randomstring.generate() 
+            })
+            setQrContent(newQrContent);
+            await localStorage.setItem('WebSocket_DID', newQrContent);
+            connectWebSocket();
         } 
         setQR();
     }, [])
+
+    ioClient?.on('credential', async (payload: any) => {
+        try {
+            console.log('WebSocket credential', payload)
+        } catch (error) {
+            console.log('Error credential' + error.toString())
+        }
+    })
 
     return (
         <div className="page-wrapper">
