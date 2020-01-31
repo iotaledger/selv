@@ -11,11 +11,15 @@ export default ({ text }: { text: string }) => {
     }
 
     return (
-      <QRCode 
-        value={text} 
-        size={290}  
-        level="H" 
-        imageSettings={imageSettings}
-      />
+      <>
+        { text && (
+            <QRCode 
+                value={text} 
+                size={290}  
+                level="H" 
+                imageSettings={imageSettings}
+            />
+        )}
+      </>
     );
 };

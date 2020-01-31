@@ -43,7 +43,7 @@ const IntroShowQR: React.FC = ({ match }: any) => {
                     <img src={logo} alt="Company House Logo" />
                     <h2>Prove Your Identity</h2>
                     <p>Scan this QR code with <strong>DIDI App</strong> to continue</p>
-                    <QRCode text={JSON.stringify(qrContent)} />
+                    <QRCode text={qrContent} />
                     <p>Download DIDI app on your phone</p>
                     <div className="app-cta-wrapper">
                         <a 
