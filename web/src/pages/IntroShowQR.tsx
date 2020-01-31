@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import randomstring from "randomstring";
 import useStep from "../utils/useStep";
 import { Steps, Sidebar, QRCode } from "../components";
 import logo from '../assets/companyHouse.svg'
@@ -9,8 +10,19 @@ import googlePlay from '../assets/googlePlay.png'
  * Component which will display a IntroShowQR.
  */
 const IntroShowQR: React.FC = ({ match }: any) => {
-    const { step, subStep, subSteps, mainSteps } = useStep(match); 
+    const [qrContent, setQrContent] = useState({});
+    const { step, subStep, subSteps, mainSteps } = useStep(match);
     
+    useEffect(() => {
+        async function setQR() {
+            setQrContent({ 
+                channelId: randomstring.generate(12), 
+                encryptionKey: randomstring.generate() 
+            });
+        } 
+        setQR();
+    }, [])
+
     return (
         <div className="page-wrapper">
             <div className="main-section">
@@ -18,7 +30,7 @@ const IntroShowQR: React.FC = ({ match }: any) => {
                     <img src={logo} alt="Company House Logo" />
                     <h2>Prove Your Identity</h2>
                     <p>Scan this QR code with <strong>DIDI App</strong> to continue</p>
-                    <QRCode text="Hello World!" />
+                    <QRCode text={JSON.stringify(qrContent)} />
                     <p>Download DIDI app on your phone</p>
                     <div className="app-cta-wrapper">
                         <a 
