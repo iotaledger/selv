@@ -3,6 +3,7 @@ backend/db
 
 */node_modules
 */build
+.build
 
 # misc
 .DS_Store
@@ -13,3 +14,5 @@ backend/db
 
 yarn-debug.log*
 yarn-error.log*
+
+.gradle/

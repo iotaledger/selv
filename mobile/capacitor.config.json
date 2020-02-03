@@ -1,0 +1,7 @@
+{
+  "appId": "com.iota.did",
+  "appName": "poc-dinaas",
+  "bundledWebRuntime": true,
+  "npmClient": "yarn",
+  "webDir": ".build"
+}
