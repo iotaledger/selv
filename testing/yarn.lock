@@ -5408,9 +5408,9 @@ identity-obj-proxy@3.0.0:
   dependencies:
     harmony-reflect "^1.4.6"
 
-identity@iotaledger/identity.ts:
+identity@iotaledger/identity.ts#removed-fs-dependency:
   version "0.2.0"
-  resolved "https://codeload.github.com/iotaledger/identity.ts/tar.gz/87bdd8fe2ad3da2735fc82dd148c7f66bc1b38ce"
+  resolved "https://codeload.github.com/iotaledger/identity.ts/tar.gz/fd2a8d7a62a206809a4f13ad21211d986639e55a"
   dependencies:
     "@iota/converter" "^1.0.0-beta.21"
     "@iota/core" "^1.0.0-beta.21"

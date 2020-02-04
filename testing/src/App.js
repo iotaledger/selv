@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import SocketIOClient from 'socket.io-client';
+import { Button } from 'antd';
+import 'antd/dist/antd.css';
 import { websocketURL } from './config.json'
 import { Form } from './components'
+import { createIdentity, createCredential, createPresentation } from './did'
 import 'rsuite/lib/styles/index.less';
 
 const App = () => {
@@ -14,7 +17,7 @@ const App = () => {
     }
   }, [])
 
-  function setChannel(channelId) {
+  async function setChannel(channelId) {
     console.log('setChannel', channelId);
     connectWebSocket(channelId)
   }
@@ -37,9 +40,35 @@ const App = () => {
     }
   } 
 
+  async function processIdentity() {
+    console.log('Creating identity')
+    const result = await createIdentity()
+    console.log('processIdentity result', result.status)
+  } 
+
+  async function processCredential() {
+    console.log('Creating verifiable credential')
+    const result = await createCredential('testCredential', {Language: 'English'})
+    console.log('processCredential result', result.status)
+  } 
+
+  async function processPresentation() {
+    console.log('Creating verifiable presentation')
+    const result = await createPresentation('testCredential')
+    console.log('createPresentation result')
+    console.log(result)
+  } 
+
   return (
       <div>
         <Form setChannel={setChannel} />
+        <Button type="primary" onClick={setChannel}>Connect to WebSocket channel</Button>
+        <hr />
+        <Button type="primary" onClick={processIdentity}>Create Own Identity</Button>
+        <hr />
+        <Button type="primary" onClick={processCredential}>Process Identity</Button>
+        <hr />
+        <Button type="primary" onClick={processPresentation}>Create Presentation</Button>
       </div>
   );
 }
