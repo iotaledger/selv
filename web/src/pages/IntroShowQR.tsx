@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import randomstring from "randomstring";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { serverAPI } from '../config.json'
 import AppContext from '../context/app-context';
 import useStep from "../utils/useStep";
+import useInterval from "../utils/useInterval";
 import { Steps, Sidebar, QRCode } from "../components";
 import logo from '../assets/companyHouse.svg'
 import appStore from '../assets/appStore.png'
@@ -12,16 +16,59 @@ import googlePlay from '../assets/googlePlay.png'
  */
 const IntroShowQR: React.FC = ({ match }: any) => {
     const [qrContent, setQrContent] = useState('');
+    const [channel, setChannel] = useState('');
     const { step, subStep, subSteps, mainSteps } = useStep(match);
     const { connectWebSocket, ioClient }: any = useContext(AppContext)
+
+    const [isRunning, setIsRunning] = useState(true);
+
+    function notify(type: string) {
+        if (type === 'success') {
+            toast.success('Mobile app connected', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        } else {
+            toast.warn('Please scan the QR code to connect the mobile app', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        }
+    }
+
+    async function checkConnectedStatus() {
+        const response = await axios.get(`${serverAPI}/connection?channelId=${channel}`)
+        console.log('checkConnected', response?.data);
+
+        if (response && response?.data?.status === 'success') {
+            setIsRunning(false);
+        } else {
+            setIsRunning(true);
+        }
+        notify(response?.data?.status)
+    }
+
+    useInterval(() => {
+        checkConnectedStatus()
+    }, isRunning ? 10000 : null);
     
     useEffect(() => {
         async function setQR() {
+            const channelId = randomstring.generate(7)
             const newQrContent = JSON.stringify({ 
-                channelId: randomstring.generate(7), 
+                channelId, 
                 key: randomstring.generate() 
             })
             setQrContent(newQrContent);
+            setChannel(channelId);
             await localStorage.setItem('WebSocket_DID', newQrContent);
             connectWebSocket();
         } 

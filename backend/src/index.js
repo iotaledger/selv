@@ -54,7 +54,7 @@ socketServer.on('connection', (socket) => {
   socket.on('registerMobileClient', async (data) => {
     const { channelId } = data
     console.info(`Mobile client connected [id=${socket.id}, channel=${channelId}]`)
-    mobileClients.set(channelId, socket)
+    mobileClients.set(channelId, { socket, channelId, socketId: socket.id })
   })
 
   socket.on('registerDesktopClient', async (data) => {
@@ -63,19 +63,19 @@ socketServer.on('connection', (socket) => {
     desktopClients.set(channelId, { socket, channelId, socketId: socket.id })
   })
 
-  socket.on('disconnect', () => {
+  socket.on('disconnect', async () => {
     console.info(`Client gone [id=${socket.id}]`)
     
     const desktopClient = getChannelIdBySocket(desktopClients, socket.id)
     if (desktopClient && desktopClient.channelId) {
       console.log('desktop client removed', desktopClient.channelId)
-      desktopClients.delete(desktopClient.channelId)
+      await desktopClients.delete(desktopClient.channelId)
     }
     
     const mobileClient = getChannelIdBySocket(mobileClients, socket.id)
     if (mobileClient && mobileClient.channelId) {
       console.log('mobile client removed', mobileClient.channelId)
-      mobileClients.delete(mobileClient.channelId)
+      await mobileClients.delete(mobileClient.channelId)
     }
 
     console.log('connected desktopClients', desktopClients.keys())
@@ -87,5 +87,32 @@ socketServer.on('connection', (socket) => {
 //       const socket = clients.get(idInput)
 //       const { credential, serverRoot } = await createAccessCredential()
 //       socket && socket.emit('credential', { credential })
+
+/*
+Check if mobile client is connected
+*/
+app.get('/connection', async (req, res) => {
+  try {
+    const mobileClient = mobileClients.has(req.query.channelId);
+    console.log('isMobileConnected', req.query.channelId, mobileClient);
+    if (mobileClient) {
+      res.json({
+        status: 'success'
+      });
+    } else {
+      res.json({
+        status: 'not connected'
+      });
+    }
+  } catch (e) {
+    console.error(e)
+    res.json({
+      status: 'failure',
+      error: JSON.stringify(e),
+      mobileClient: null
+    });
+  }
+})
+
 
 module.exports = app
