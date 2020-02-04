@@ -19,7 +19,7 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 Clone repository by running:
 
 ```
-git clone https://github.com/iotaledger/spark-wallet.git
+git clone https://github.com/iotaledger/poc-dinaas.git
 ```
 
 #### 4. Install dependencies
@@ -42,6 +42,6 @@ and open `http://localhost:3000` in your favourite browser.
 
 ## Build appliciation
 
-To build application for iOS or android, some additional [dependencies](https://capacitor.ionicframework.com/docs/getting-started/dependencies) need to be installed. 
+To build application for iOS or android, some additional [dependencies](https://capacitor.ionicframework.com/docs/getting-started/dependencies) need to be installed.
 
 To start the build process, run `yarn run:ios` or `yarn run:android`.
