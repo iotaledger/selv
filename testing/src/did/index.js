@@ -11,6 +11,7 @@ import {
   VerifiableCredential,
   VerifiablePresentation,
   SignDIDAuthentication,
+  DID
 } from 'identity'
 import { 
   decrypt, 
@@ -20,6 +21,7 @@ import {
   retrieveIdentity, 
   retrieveCredential 
 } from './helper'
+import UserDataSchema from './UserDataCredential.json'
 import { keyId, provider } from '../config.json'
 
 export const createIdentity = async (password = '') => {
@@ -66,8 +68,8 @@ export const createCredential = async (credentialId, userData, password = '') =>
     const subjectDID = await DIDDocument.readDIDDocument(provider, issuer.root)
 
     // This loads a standard schema
-    // SchemaManager.GetInstance().AddSchema('UserData', UserDataSchema)
-    const schema = SchemaManager.GetInstance().GetSchema('UserDataCredential')
+    SchemaManager.GetInstance().AddSchema('UserData', UserDataSchema)
+    const schema = SchemaManager.GetInstance().GetSchema('UserData')
 
     // Fill in the schema
     const schemaData = {
@@ -77,6 +79,7 @@ export const createCredential = async (credentialId, userData, password = '') =>
 
     const revocationAddress = GenerateSeed()
     const credential = Credential.Create(schema, issuerDID.GetDID(), schemaData, revocationAddress)
+    console.log('credential', schemaData)
     console.log(credential)
 
     // Sign the schema
@@ -103,7 +106,7 @@ export const createCredential = async (credentialId, userData, password = '') =>
   }
 }
 
-export const createPresentation = async (credentialId, password = '') => {
+export const createPresentation = async (credentialId, challengeNonce, password = '') => {
     try {
       let did = await retrieveIdentity()
       if (password) {
@@ -112,17 +115,17 @@ export const createPresentation = async (credentialId, password = '') => {
         did = await decrypt(password, did)
       }
 
-      let credential = await retrieveCredential(credentialId)
+      let credentialData = await retrieveCredential(credentialId)
       if (password) {
         // FIXME: doesn't work with password
         // Decrypt the identity
-        credential = await decrypt(password, credential)
+        credentialData = await decrypt(password, credentialData)
       }
-
-      const challengeNonce = Date.now().toString()
+      const credential = credentialData.credential
 
       console.log(111)
-      console.log(did, credential)
+      console.log(did)
+      console.log(credential)
       // Read DID Document might fail when no DID is actually located at the root - Unlikely as it is the DID of this instance
       const issuerDID = await DIDDocument.readDIDDocument(provider, did.root);
 
@@ -130,24 +133,33 @@ export const createPresentation = async (credentialId, password = '') => {
       console.log(issuerDID)
       issuerDID.GetKeypair(did.keyId).GetEncryptionKeypair().SetPrivateKey(did.privateKey)
 
+      SchemaManager.GetInstance().AddSchema('UserData', UserDataSchema)
+      SchemaManager.GetInstance().GetSchema('UserData').AddTrustedDID(new DID(did.root))
+      SchemaManager.GetInstance().GetSchema('DIDAuthenticationCredential').AddTrustedDID(new DID(did.root))
+      
       const verifiableCredential = SignDIDAuthentication(issuerDID, did.keyId, challengeNonce)
       console.log(333)
       console.log(verifiableCredential)
-      // const verifiableCredentials = [verifiableCredential]
+
+      const credentialsArray = [verifiableCredential]
       // const proofResponse = await axios.post(`${apiURL}/mam`, { root: (new DID(credential.proof.creator)).uuid })
       // if (proofResponse && proofResponse.data) {
       //   const issuerDID = await readDIDDocument(proofResponse.data)
-      //   const proofParameters = {
-      //     issuer: issuerDID,
-      //     issuerKeyId: new DID(credential.proof.verificationMethod).GetFragment(),
-      //     challengeNonce: credential.proof.nonce
-      //   }
-      //   credentialsArray.push(VerifiableCredential.DecodeFromJSON(credential, proofParameters))
-      // }
+      const proofParameters = {
+        issuer: issuerDID,
+        issuerKeyId: new DID(credential.proof.verificationMethod).GetFragment(),
+        challengeNonce
+      }
+      console.log(444)
+      console.log(proofParameters)
+
+      // credentialsArray.push(VerifiableCredential.DecodeFromJSON(credential, proofParameters))
+      console.log(555)
+      console.log(credentialsArray)
 
       // Create the presentation
-      const presentation = Presentation.Create([verifiableCredential])
-      console.log(444)
+      const presentation = Presentation.Create(credentialsArray)
+      console.log(666)
       console.log(presentation)
       // const presentationProof = BuildRSAProof({
       //   issuer: userDIDDocument,
@@ -161,15 +173,15 @@ export const createPresentation = async (credentialId, password = '') => {
           challengeNonce
         });
 
-      console.log(555)
+      console.log(777)
       console.log(presentationProof)
       
       presentationProof.Sign(presentation.EncodeToJSON())
-      console.log(666)
+      console.log(888)
       console.log(presentationProof)
       
       const verifiablePresentation = VerifiablePresentation.Create(presentation, presentationProof)
-      console.log(777)
+      console.log(999)
       console.log(verifiablePresentation)
 
       return verifiablePresentation.EncodeToJSON()

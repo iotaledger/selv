@@ -2,8 +2,8 @@ const crypto = require('crypto');
 
 export const encrypt = async (key, payload) => {
     const IV_LENGTH = 16; // For AES, this is always 16
-	let iv = crypto.randomBytes(IV_LENGTH);
-	let cipher = crypto.createCipheriv('aes-256-cbc', new Buffer.from(key), iv);
+	const iv = crypto.randomBytes(IV_LENGTH);
+	const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(key), iv);
 	let encrypted = cipher.update(payload);
 
 	encrypted = Buffer.concat([encrypted, cipher.final()]);
@@ -12,10 +12,10 @@ export const encrypt = async (key, payload) => {
 }
 
 export const decrypt = async (key, payload) => {
-	let textParts = payload.split(':');
-	let iv = new Buffer.from(textParts.shift(), 'hex');
-	let encryptedText = new Buffer.from(textParts.join(':'), 'hex');
-	let decipher = crypto.createDecipheriv('aes-256-cbc', new Buffer.from(key), iv);
+	const textParts = payload.split(':');
+	const iv = Buffer.from(textParts.shift(), 'hex');
+	const encryptedText = Buffer.from(textParts.join(':'), 'hex');
+	const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
 	let decrypted = decipher.update(encryptedText);
 
 	decrypted = Buffer.concat([decrypted, decipher.final()]);

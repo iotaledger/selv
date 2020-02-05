@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SocketIOClient from 'socket.io-client';
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
@@ -6,11 +6,20 @@ import { websocketURL } from './config.json'
 import { Form } from './components'
 import { createIdentity, createCredential, createPresentation } from './did'
 import 'rsuite/lib/styles/index.less';
+import { encrypt } from './did/helper'
 
 const App = () => {
-  let ioClient;
+  const [password, setPassword] = useState('HerpaDerperDerpaHerpaDerperDerpa')
+  const [channelId, setChannelId] = useState(null)
+  const [ioClient, setIoClient] = useState(null)
 
   useEffect(() => {
+    if (ioClient) {
+      ioClient.on('error', async (payload) => {
+          console.error('WebSocket error', payload)
+      })
+    }
+
     // Removing the listener before unmounting the component in order to avoid addition of multiple listener
     return () => {
       ioClient.disconnect();
@@ -19,6 +28,7 @@ const App = () => {
 
   async function setChannel(channelId) {
     console.log('setChannel', channelId);
+    setChannelId(channelId)
     connectWebSocket(channelId)
   }
 
@@ -26,15 +36,16 @@ const App = () => {
     console.log('connectWebSocket', channelId)
     if (channelId) {
       // ioClient && ioClient.disconnect()
-      ioClient = SocketIOClient(websocketURL, {
+      const newIoClient = SocketIOClient(websocketURL, {
         reconnection: true,
         reconnectionDelay: 500,
         jsonp: false,
         reconnectionAttempts: Infinity,
         transports: ['websocket']
       })
+      setIoClient(newIoClient)
 
-      ioClient.emit('registerMobileClient', { channelId })
+      newIoClient.emit('registerMobileClient', { channelId })
     } else {
       console.log('No websocket connection details')
     }
@@ -48,21 +59,37 @@ const App = () => {
 
   async function processCredential() {
     console.log('Creating verifiable credential')
-    const result = await createCredential('testCredential', {Language: 'English'})
+    const result = await createCredential('testCredential', {
+      Language: 'English',
+      UserPersonalData: {
+        UserName: {
+          FirstName: 'Bob',
+          LastName: 'Smith'
+        }
+      }
+    })
     console.log('processCredential result', result.status)
   } 
 
   async function processPresentation() {
     console.log('Creating verifiable presentation')
-    const result = await createPresentation('testCredential')
+    const presentationJSON = await createPresentation('testCredential', 'HerpaDerperDerp')
     console.log('createPresentation result')
-    console.log(result)
+    console.log(JSON.stringify(presentationJSON))
+    const payload = await encrypt(password, JSON.stringify(presentationJSON))
+    await emitMessage(payload)
+  } 
+
+  async function emitMessage(payload) {
+    console.log('emitMessage')
+    console.log(ioClient)
+    ioClient && ioClient.emit('verifiablePresentation', { channelId, payload })
+    return true;
   } 
 
   return (
       <div>
         <Form setChannel={setChannel} />
-        <Button type="primary" onClick={setChannel}>Connect to WebSocket channel</Button>
         <hr />
         <Button type="primary" onClick={processIdentity}>Create Own Identity</Button>
         <hr />
