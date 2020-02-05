@@ -1,10 +1,13 @@
-import React, { useEffect, useState, useContext } from "react";
-import randomstring from "randomstring";
+import React, { useEffect, useState } from 'react';
+import randomstring from 'randomstring';
+import SocketIOClient from 'socket.io-client';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { serverAPI } from '../config.json'
-import AppContext from '../context/app-context';
+import { serverAPI, websocketURL } from '../config.json'
+// import AppContext from '../context/app-context';
 import useStep from "../utils/useStep";
+import decrypt from "../utils/decrypt";
+import evaluateCredential from "../utils/did";
 import useInterval from "../utils/useInterval";
 import { Steps, Sidebar, QRCode } from "../components";
 import logo from '../assets/companyHouse.svg'
@@ -15,12 +18,50 @@ import googlePlay from '../assets/googlePlay.png'
  * Component which will display a IntroShowQR.
  */
 const IntroShowQR: React.FC = ({ match }: any) => {
+    const [challengeNonce, setChallengeNonce] = useState('')
+    const [password, setPassword] = useState('')
     const [qrContent, setQrContent] = useState('');
     const [channel, setChannel] = useState('');
     const { step, subStep, subSteps, mainSteps } = useStep(match);
-    const { connectWebSocket, ioClient }: any = useContext(AppContext)
+    const [ioClient, setIoClient] = useState({})
+    // const { connectWebSocket, ioClient }: any = useContext(AppContext)
 
     const [isRunning, setIsRunning] = useState(true);
+
+    async function connectWebSocket() {
+        const storedChannelDetails = await localStorage.getItem('WebSocket_DID') || null;
+        const channelDetails = storedChannelDetails && JSON.parse(storedChannelDetails);
+    
+        if (channelDetails?.channelId) {
+        //   ioClient?.disconnect()
+          const newIoClient = SocketIOClient(websocketURL, {
+            reconnection: true,
+            reconnectionDelay: 500,
+            jsonp: false,
+            reconnectionAttempts: Infinity,
+            transports: ['websocket']
+          })
+          setIoClient(newIoClient)
+    
+          newIoClient?.emit('registerDesktopClient', { channelId: channelDetails?.channelId })
+        
+          newIoClient.on('error', async (error: any) => {
+            console.error('WebSocket error', error)
+          })
+
+          newIoClient.on('verifiablePresentation', async (payload: any) => {
+            console.log('challengeNonce', challengeNonce)
+            console.log('WebSocket payload', password, payload)
+            let verifiablePresentation = await decrypt('HerpaDerperDerpaHerpaDerperDerpa', payload)
+            verifiablePresentation = JSON.parse(verifiablePresentation)
+            console.log('verifiablePresentation', verifiablePresentation)
+            const evaluationResult = await evaluateCredential(verifiablePresentation, 'HerpaDerperDerp' )
+            console.log('evaluationResult', evaluationResult)
+          })
+        } else {
+          console.log('No websocket connection details')
+        }
+    } 
 
     function notify(type: string) {
         if (type === 'success') {
@@ -63,25 +104,29 @@ const IntroShowQR: React.FC = ({ match }: any) => {
     useEffect(() => {
         async function setQR() {
             const channelId = randomstring.generate(7)
+            await setChannel(channelId);
+
+            const challenge = randomstring.generate(30) 
+            console.log('generated challenge', challenge)
+            await setChallengeNonce(challenge)
+            console.log('stored challenge', challengeNonce)
+
+            const payloadPassword = randomstring.generate() 
+            await setPassword(payloadPassword)
+
             const newQrContent = JSON.stringify({ 
                 channelId, 
-                key: randomstring.generate() 
+                challenge,
+                password: payloadPassword,
+                requestedCredentials: ['UserPersonalData', 'UserContacts'],
             })
-            setQrContent(newQrContent);
-            setChannel(channelId);
+            await setQrContent(newQrContent);
+            
             await localStorage.setItem('WebSocket_DID', newQrContent);
-            connectWebSocket();
+            await connectWebSocket();
         } 
         setQR();
     }, [])
-
-    ioClient?.on('credential', async (payload: any) => {
-        try {
-            console.log('WebSocket credential', payload)
-        } catch (error) {
-            console.log('Error credential' + error.toString())
-        }
-    })
 
     return (
         <div className="page-wrapper">
