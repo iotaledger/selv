@@ -81,6 +81,14 @@ socketServer.on('connection', (socket) => {
     console.log('connected desktopClients', desktopClients.keys())
     console.log('connected mobileClients', mobileClients.keys())
   })
+
+  socket.on('verifiablePresentation', async (data) => {
+    const { channelId, payload } = data
+    const desktopClient = desktopClients.get(channelId)
+    const desktopSocket = desktopClient.socket
+    desktopSocket && desktopSocket.emit('verifiablePresentation', payload)
+    console.info('Verifiable Presentation sent to desktop client')
+  })
 })
 
 
