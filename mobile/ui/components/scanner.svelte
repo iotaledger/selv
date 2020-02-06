@@ -1,23 +1,24 @@
 <script>
-    import { Plugins } from '@capacitor/core'
-    import QrScanner from 'qr-scanner'
+    import { Capacitor, Plugins } from '@capacitor/core'
     import { onMount } from 'svelte'
+
+    import QrScanner from 'qr-scanner'
     QrScanner.WORKER_PATH = '/scanner.worker.min.js'
+
+    export let onQrScan
 
     let video
     let scanner
     let camera
-    let cameraError = false
 
-    const scan = async (init) => {
+    const initiateScanner = async (init) => {
         if (typeof init === 'boolean') {
             try {
                 const { CameraPreview } = Plugins
                 camera = CameraPreview
                 await camera.start({ position: 'rear' })
             } catch (err) {
-                error.set(`Camera: ${err.message || err}`)
-                cameraError = true
+                console.log(error)
             }
         }
         try {
@@ -27,19 +28,31 @@
                 img.src = `data:image/jpeg;base64,${capture.value}`
                 const data = await QrScanner.scanImage(img)
                 if (data) {
+                    onQrScan(data)
                     camera.stop()
                     camera = null
                 } else {
-                    requestAnimationFrame(scan)
+                    requestAnimationFrame(initateScanner)
                 }
             }
         } catch (err) {
-            requestAnimationFrame(scan)
+            requestAnimationFrame(initateScanner)
         }
     }
 
     onMount(() => {
-        scan(true)
+        initiateScanner(true)
+        return () => {
+            if (camera) {
+                camera.stop()
+                camera = null
+            }
+            if (scanner) {
+                scanner.destroy()
+                scanner = null
+            }
+        }
+
         return () => {
             if (camera) {
                 camera.stop()
@@ -55,6 +68,22 @@
 </script>
 
 <style>
+    main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    scanner {
+        flex: 1;
+        position: relative;
+        background: #000;
+        overflow: hidden;
+        opacity: 0;
+    }
+    scanner.enabled {
+        opacity: 1;
+    }
     .video-container {
         position: absolute;
         top: 0px;
@@ -69,10 +98,10 @@
     }
 </style>
 
-<container>
+<main>
     <scanner class:enabled={scanner}>
         <div class="video-container">
             <video bind:this={video} autoplay playsinline />
         </div>
     </scanner>
-</container>
+</main>
