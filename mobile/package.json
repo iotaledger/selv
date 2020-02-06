@@ -14,7 +14,8 @@
     "@capacitor/android": "^1.4.0",
     "@capacitor/core": "^1.4.0",
     "@capacitor/ios": "^1.4.0",
-    "svelte": "^3.18.1"
+    "svelte": "^3.18.1",
+    "@iota/identity": "iotaledger/identity.ts"
   },
   "devDependencies": {
     "@capacitor/cli": "^1.4.0",
