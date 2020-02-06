@@ -14,8 +14,6 @@ import {
   DID
 } from 'identity'
 import { 
-  decrypt, 
-  encrypt, 
   storeCredential, 
   storeIdentity, 
   retrieveIdentity, 
@@ -24,7 +22,7 @@ import {
 import UserDataSchema from './UserDataCredential.json'
 import { keyId, provider } from '../config.json'
 
-export const createIdentity = async (password = '') => {
+export const createIdentity = async () => {
     try {
       const seed = GenerateSeed()
       const userDIDDocument = CreateRandomDID(seed)
@@ -37,27 +35,16 @@ export const createIdentity = async (password = '') => {
       const mamState = publisher.ExportMAMChannelState()
       const identity = { seed, root, keyId, privateKey, mamState }
 
-      if (password) {
-        // Encrypt the identity
-        const encryptedIdentity = await encrypt(password, JSON.stringify(identity))
-        await storeIdentity(encryptedIdentity)
-      } else {
-        await storeIdentity(identity)
-      }
+      await storeIdentity(identity)
       return { status: 'success' }
     } catch (error) {
       console.log('Enroll error', error)
     }
 }
 
-export const createCredential = async (credentialId, userData, password = '') => {
+export const createCredential = async (credentialId, userData) => {
   try {
     let issuer = await retrieveIdentity()
-    if (password) {
-      // FIXME: doesn't work with password
-      // Decrypt the identity
-      issuer = await decrypt(password, issuer)
-    }
 
     // Retrieves the latest DID Document from the Tangle
     const issuerDID = await DIDDocument.readDIDDocument(provider, issuer.root)
@@ -92,13 +79,7 @@ export const createCredential = async (credentialId, userData, password = '') =>
     const verifiableCredential = VerifiableCredential.Create(credential, proof)
     const verifiableCredentialJSON = verifiableCredential.EncodeToJSON()
 
-    if (password) {
-      // Encrypt the credential
-      const encryptedCredential = await encrypt(password, JSON.stringify(verifiableCredentialJSON))
-      await storeCredential(credentialId, { userData, credential: encryptedCredential })
-    } else {
-      await storeCredential(credentialId, { userData, credential: verifiableCredentialJSON })
-    }
+    await storeCredential(credentialId, { userData, credential: verifiableCredentialJSON })
     return { status: 'success' }
   } catch (error) {
     console.log('Error', error)
@@ -106,21 +87,10 @@ export const createCredential = async (credentialId, userData, password = '') =>
   }
 }
 
-export const createPresentation = async (credentialId, challengeNonce, password = '') => {
+export const createPresentation = async (credentialId, challengeNonce) => {
     try {
       let did = await retrieveIdentity()
-      if (password) {
-        // FIXME: doesn't work with password
-        // Decrypt the identity
-        did = await decrypt(password, did)
-      }
-
       let credentialData = await retrieveCredential(credentialId)
-      if (password) {
-        // FIXME: doesn't work with password
-        // Decrypt the identity
-        credentialData = await decrypt(password, credentialData)
-      }
 
       // Read DID Document might fail when no DID is actually located at the root - Unlikely as it is the DID of this instance
       const issuerDID = await DIDDocument.readDIDDocument(provider, did.root);
