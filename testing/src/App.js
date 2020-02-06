@@ -6,7 +6,7 @@ import { websocketURL } from './config.json'
 import { Form } from './components'
 import { createIdentity, createCredential, createPresentation } from './did'
 import 'rsuite/lib/styles/index.less';
-import { encrypt } from './did/helper'
+import { encrypt } from './helper'
 
 // https://randomuser.me/api/
 const App = () => {
