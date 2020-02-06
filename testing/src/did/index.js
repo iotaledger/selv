@@ -13,14 +13,23 @@ import {
   SignDIDAuthentication,
   DID
 } from 'identity'
-import { 
-  storeCredential, 
-  storeIdentity, 
-  retrieveIdentity, 
-  retrieveCredential 
-} from './helper'
-import UserDataSchema from './UserDataCredential.json'
+import { storeCredential, storeIdentity, retrieveIdentity, retrieveCredential } from './helper'
 import { keyId, provider } from '../config.json'
+import Address from './schemas/Address.json'
+import BankAccount from './schemas/BankAccount.json'
+import Company from './schemas/Company.json'
+import ContactDetails from './schemas/ContactDetails.json'
+import Insurance from './schemas/Insurance.json'
+import PersonalData from './schemas/PersonalData.json'
+
+const schemas = {
+  Address,
+  BankAccount,
+  Company,
+  ContactDetails,
+  Insurance,
+  PersonalData
+}
 
 export const createIdentity = async () => {
     try {
@@ -42,7 +51,7 @@ export const createIdentity = async () => {
     }
 }
 
-export const createCredential = async (credentialId, userData) => {
+export const createCredential = async (credentialId, schemaName, userData) => {
   try {
     let issuer = await retrieveIdentity()
 
@@ -52,11 +61,9 @@ export const createCredential = async (credentialId, userData) => {
     const signatureKeypair = issuerDID.GetKeypair(issuer.keyId).GetEncryptionKeypair()
     signatureKeypair.SetPrivateKey(issuer.privateKey)
 
-    // const issuerDID = await DIDDocument.readDIDDocument(provider, issuer.root)
-
     // This loads a standard schema
-    // SchemaManager.GetInstance().AddSchema('UserData', UserDataSchema)
-    const schema = SchemaManager.GetInstance().GetSchema('UserDataCredential')
+    SchemaManager.GetInstance().AddSchema(schemaName, schemas[schemaName])
+    const schema = SchemaManager.GetInstance().GetSchema(schemaName)
 
     // Fill in the schema
     const schemaData = {
@@ -87,7 +94,7 @@ export const createCredential = async (credentialId, userData) => {
   }
 }
 
-export const createPresentation = async (credentialId, challengeNonce) => {
+export const createPresentation = async (credentialId, schemaName, challengeNonce) => {
     try {
       let did = await retrieveIdentity()
       let credentialData = await retrieveCredential(credentialId)
@@ -104,8 +111,8 @@ export const createPresentation = async (credentialId, challengeNonce) => {
 
       issuerDID.GetKeypair(did.keyId).GetEncryptionKeypair().SetPrivateKey(did.privateKey)
 
-      // SchemaManager.GetInstance().AddSchema('UserData', UserDataSchema)
-      const schema = SchemaManager.GetInstance().GetSchema('UserDataCredential')
+      SchemaManager.GetInstance().AddSchema(schemaName, schemas[schemaName])
+      const schema = SchemaManager.GetInstance().GetSchema(schemaName)
       schema.AddTrustedDID(issuerDID.GetDID())
       SchemaManager.GetInstance().GetSchema('DIDAuthenticationCredential').AddTrustedDID(issuerDID.GetDID())
       

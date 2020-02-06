@@ -10,7 +10,7 @@ import { encrypt } from './did/helper'
 
 // https://randomuser.me/api/
 const App = () => {
-  const [password, setPassword] = useState('HerpaDerperDerpaHerpaDerperDerpa')
+  const [password] = useState('HerpaDerperDerpaHerpaDerperDerpa')
   const [channelId, setChannelId] = useState(null)
   const [ioClient, setIoClient] = useState(null)
 
@@ -60,7 +60,7 @@ const App = () => {
 
   async function processCredential() {
     console.log('Creating verifiable credential')
-    const result = await createCredential('testCredential', {
+    const result = await createCredential('testCredential', 'PersonalData', {
       Language: 'English',
       UserPersonalData: {
         UserName: {
@@ -74,7 +74,7 @@ const App = () => {
 
   async function processPresentation() {
     console.log('Creating verifiable presentation')
-    const presentationJSON = await createPresentation('testCredential', 'HerpaDerperDerp')
+    const presentationJSON = await createPresentation('testCredential', 'PersonalData', 'HerpaDerperDerp')
     console.log('createPresentation result')
     console.log(JSON.stringify(presentationJSON))
     const payload = await encrypt(password, JSON.stringify(presentationJSON))
@@ -94,7 +94,7 @@ const App = () => {
         <hr />
         <Button type="primary" onClick={processIdentity}>Create Own Identity</Button>
         <hr />
-        <Button type="primary" onClick={processCredential}>Process Identity</Button>
+        <Button type="primary" onClick={processCredential}>Process Credential</Button>
         <hr />
         <Button type="primary" onClick={processPresentation}>Create Presentation</Button>
       </div>
