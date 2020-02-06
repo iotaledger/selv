@@ -51,7 +51,7 @@ export const createIdentity = async () => {
   }
 }
 
-export const createCredential = async (schemaName, userData) => {
+export const createCredential = async (schemaName, data) => {
   try {
     const issuer = await retrieveIdentity()
 
@@ -69,7 +69,7 @@ export const createCredential = async (schemaName, userData) => {
     // Fill in the schema
     const schemaData = {
       DID: issuerDID.GetDID().GetDID(),
-      ...userData
+      ...data
     } // Make an object conform to the schema, which contains the data about the subject.
 
     const revocationAddress = GenerateSeed()
