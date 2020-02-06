@@ -1,0 +1,41 @@
+{
+	"type" : "object",
+	"required" : ["DID"],
+	"properties" : {
+		"DID" : {
+			"type" : "string"
+		},
+		"Language" : {
+			"type" : "string"
+		},
+		"Locale" : {
+			"type" : "string"
+		},
+		"TimezoneOffset" : {
+			"type" : "string"
+		},
+		"Insurance" : {
+			"type" : "object",
+			"properties" : {
+				"Name" : {
+					"type" : "string"
+				},
+				"Address" : {
+					"type" : "string"
+				},
+				"AccountNumber" : {
+					"type" : "string"
+				},
+				"InsuranceType" : {
+					"type" : "string"
+				},
+				"StartDate" : {
+					"type" : "string"
+				},
+				"EndDate" : {
+					"type" : "string"
+				}
+			}
+		}
+	}
+}

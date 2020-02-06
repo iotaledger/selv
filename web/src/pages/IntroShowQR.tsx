@@ -55,7 +55,7 @@ const IntroShowQR: React.FC = ({ match }: any) => {
             let verifiablePresentation = await decrypt('HerpaDerperDerpaHerpaDerperDerpa', payload)
             verifiablePresentation = JSON.parse(verifiablePresentation)
             console.log('verifiablePresentation', verifiablePresentation)
-            const evaluationResult = await evaluateCredential(verifiablePresentation, 'HerpaDerperDerp' )
+            const evaluationResult = await evaluateCredential(verifiablePresentation, 'PersonalData', 'HerpaDerperDerp' )
             console.log('evaluationResult', evaluationResult)
           })
         } else {
