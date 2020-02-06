@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { serverAPI, websocketURL } from '../config.json'
 // import AppContext from '../context/app-context';
 import useStep from "../utils/useStep";
-import decrypt from "../utils/decrypt";
+import { flattenObject, decrypt } from "../utils/helper";
 import evaluateCredential from "../utils/did";
 import useInterval from "../utils/useInterval";
 import { Steps, Sidebar, QRCode } from "../components";
@@ -24,6 +24,7 @@ const IntroShowQR: React.FC = ({ match }: any) => {
     const [channel, setChannel] = useState('');
     const { step, subStep, subSteps, mainSteps } = useStep(match);
     const [ioClient, setIoClient] = useState({})
+    const [requestedCredentials] = useState(['Address', 'PersonalData', 'ContactDetails'])
     // const { connectWebSocket, ioClient }: any = useContext(AppContext)
 
     const [isRunning, setIsRunning] = useState(true);
@@ -50,13 +51,13 @@ const IntroShowQR: React.FC = ({ match }: any) => {
           })
 
           newIoClient.on('verifiablePresentation', async (payload: any) => {
-            console.log('challengeNonce', challengeNonce)
-            console.log('WebSocket payload', password, payload)
             let verifiablePresentation = await decrypt('HerpaDerperDerpaHerpaDerperDerpa', payload)
             verifiablePresentation = JSON.parse(verifiablePresentation)
             console.log('verifiablePresentation', verifiablePresentation)
-            const evaluationResult = await evaluateCredential(verifiablePresentation, 'PersonalData', 'HerpaDerperDerp' )
+            const evaluationResult: any = await evaluateCredential(verifiablePresentation, requestedCredentials, 'HerpaDerperDerp' )
             console.log('evaluationResult', evaluationResult)
+            const flattenData = flattenObject(evaluationResult)
+            console.log('flattenData', flattenData)
           })
         } else {
           console.log('No websocket connection details')
@@ -118,7 +119,7 @@ const IntroShowQR: React.FC = ({ match }: any) => {
                 channelId, 
                 challenge,
                 password: payloadPassword,
-                requestedCredentials: ['UserPersonalData', 'UserContacts'],
+                requestedCredentials,
             })
             await setQrContent(newQrContent);
             

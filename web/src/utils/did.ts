@@ -28,37 +28,40 @@ const VERIFICATION_LEVEL = {
     DID_TRUSTED: 2
 }
   
-export default (presentationData: VerifiablePresentationDataModel, schemaName: string, challengeNonce: string) => {
-    return new Promise(async (resolve, reject) => {
+export default (presentationData: VerifiablePresentationDataModel, requestedCredentials: string[], challengeNonce: string) => {
+    return new Promise(async resolve => {
       try {
         // Check if the credential fits to the request
-        if (presentationData
-            && presentationData.proof
-            && presentationData.verifiableCredential.length > 1
-            && presentationData.verifiableCredential[1].credentialSubject
-            // && presentationData.verifiableCredential[1].credentialSubject.Name === name
-            ) {
-          SchemaManager.GetInstance().AddSchema(schemaName, schemas[schemaName])
-  
-          const proofParameters: ProofParameters = await DecodeProofDocument(presentationData.proof, provider);
+        if (presentationData?.proof && presentationData?.verifiableCredential.length > 1) {
+          requestedCredentials.forEach(schemaName => {
+            SchemaManager.GetInstance().AddSchema(schemaName, schemas[schemaName])
+          })
+          
+          const proofParameters: ProofParameters = await DecodeProofDocument(presentationData?.proof, provider);
           const verifiablePresentation: VerifiablePresentation = await VerifiablePresentation.DecodeFromJSON(presentationData, provider, proofParameters);
-          SchemaManager.GetInstance().GetSchema(schemaName).AddTrustedDID(proofParameters.issuer.GetDID());
-          SchemaManager.GetInstance().GetSchema('DIDAuthenticationCredential').AddTrustedDID(proofParameters.issuer.GetDID());
+          
+          requestedCredentials.forEach(schemaName => {
+            SchemaManager.GetInstance().GetSchema(schemaName).AddTrustedDID(proofParameters.issuer.GetDID());
+          })
 
+          SchemaManager.GetInstance().GetSchema('DIDAuthenticationCredential').AddTrustedDID(proofParameters.issuer.GetDID());
           
           verifiablePresentation.Verify(provider)
             .then(() => {
                 // Determine level of trust
                 let verificationLevel = VERIFICATION_LEVEL.UNVERIFIED
-                if (presentationData.proof && presentationData.proof.nonce === challengeNonce) {
-                    verificationLevel = VERIFICATION_LEVEL.DID_OWNER
-                    if (verifiablePresentation.GetVerifiedTypes().includes(schemaName)) {
-                        verificationLevel = VERIFICATION_LEVEL.DID_TRUSTED
+                if (presentationData?.proof?.nonce === challengeNonce) {
+                  verificationLevel = VERIFICATION_LEVEL.DID_TRUSTED 
+                  requestedCredentials.forEach(schemaName => {
+                    if (!verifiablePresentation.GetVerifiedTypes().includes(schemaName)) {
+                      verificationLevel = VERIFICATION_LEVEL.DID_OWNER
                     }
+                  })
                 }
+                const subjects = presentationData.verifiableCredential.map(credential => credential?.credentialSubject)
                 resolve({
                     status: verificationLevel,
-                    data: presentationData.verifiableCredential[1].credentialSubject
+                    data: subjects.reduce((a, b) => ({ ...a, ...b }))
                 })
             })
             .catch((error: Error) => {
@@ -69,9 +72,6 @@ export default (presentationData: VerifiablePresentationDataModel, schemaName: s
             })
             .finally(() => {
                 SchemaManager.GetInstance().GetSchema('DIDAuthenticationCredential').RemoveTrustedDID(proofParameters.issuer.GetDID());
-                resolve({
-                  data: presentationData.verifiableCredential[1].credentialSubject
-                })
             })
         } else {
           resolve({
