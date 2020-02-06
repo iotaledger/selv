@@ -121,84 +121,36 @@ export const createPresentation = async (credentialId, challengeNonce, password 
         // Decrypt the identity
         credentialData = await decrypt(password, credentialData)
       }
-      console.log(100)
-      console.log(credentialData.credential)
 
-      console.log(111)
-      console.log(did)
-      // console.log(credential)
       // Read DID Document might fail when no DID is actually located at the root - Unlikely as it is the DID of this instance
       const issuerDID = await DIDDocument.readDIDDocument(provider, did.root);
+      
       const proofParameters = {
         issuer: issuerDID,
-        issuerKeyId: new DID(credentialData.credential.proof.verificationMethod).GetFragment(),
-        // challengeNonce
+        issuerKeyId: new DID(credentialData.credential.proof.verificationMethod).GetFragment()
       }
 
       const credential = VerifiableCredential.DecodeFromJSON(credentialData.credential, proofParameters)
-      // const credential = credentialData.credential
-      console.log(200)
-      console.log(credential)
 
-      console.log(222)
-      console.log(issuerDID)
       issuerDID.GetKeypair(did.keyId).GetEncryptionKeypair().SetPrivateKey(did.privateKey)
-
-
 
       // SchemaManager.GetInstance().AddSchema('UserData', UserDataSchema)
       const schema = SchemaManager.GetInstance().GetSchema('UserDataCredential')
-
-      console.log('Schema')
-      console.log(schema)
       schema.AddTrustedDID(issuerDID.GetDID())
       SchemaManager.GetInstance().GetSchema('DIDAuthenticationCredential').AddTrustedDID(issuerDID.GetDID())
       
       const verifiableCredential = SignDIDAuthentication(issuerDID, did.keyId, challengeNonce)
-      console.log(333)
-      console.log(verifiableCredential)
-
       const credentialsArray = [verifiableCredential, credential]
-      // const proofResponse = await axios.post(`${apiURL}/mam`, { root: (new DID(credential.proof.creator)).uuid })
-      // if (proofResponse && proofResponse.data) {
-      //   const issuerDID = await readDIDDocument(proofResponse.data)
-
-      // const proofParameters = {
-      //   issuer: issuerDID,
-      //   issuerKeyId: new DID(credential.proof.verificationMethod).GetFragment(),
-      //   challengeNonce
-      // }
-      // console.log(444)
-      // console.log(proofParameters)
-
-      // credentialsArray.push(VerifiableCredential.DecodeFromJSON(credential, proofParameters))
-      console.log(555)
-      console.log(credentialsArray)
 
       // Create the presentation
       const presentation = Presentation.Create(credentialsArray)
-      console.log(666)
-      console.log(presentation)
-      console.log(JSON.stringify(presentation))
-      console.log(presentation.EncodeToJSON())
-      // const presentationProof = BuildRSAProof({
-      //   issuer: userDIDDocument,
-      //   issuerKeyId: keyId,
-      //   challengeNonce
-      // })
       const presentationProof = ProofTypeManager.GetInstance()
         .CreateProofWithBuilder('EcdsaSecp256k1VerificationKey2019', { 
           issuer: issuerDID, 
           issuerKeyId: did.keyId, 
           challengeNonce
         });
-
-      console.log(777)
-      console.log(presentationProof)
-      console.log(77777)
       presentationProof.Sign(presentation.EncodeToJSON())
-      console.log(888)
-      console.log(presentationProof)
       
       const verifiablePresentation = VerifiablePresentation.Create(presentation, presentationProof)
       console.log(999)

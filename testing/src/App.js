@@ -8,6 +8,7 @@ import { createIdentity, createCredential, createPresentation } from './did'
 import 'rsuite/lib/styles/index.less';
 import { encrypt } from './did/helper'
 
+// https://randomuser.me/api/
 const App = () => {
   const [password, setPassword] = useState('HerpaDerperDerpaHerpaDerperDerpa')
   const [channelId, setChannelId] = useState(null)
