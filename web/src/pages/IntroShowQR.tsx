@@ -11,8 +11,8 @@ import evaluateCredential from "../utils/did";
 import useInterval from "../utils/useInterval";
 import { Steps, Sidebar, QRCode } from "../components";
 import logo from '../assets/companyHouse.svg'
-import appStore from '../assets/appStore.png'
-import googlePlay from '../assets/googlePlay.png'
+import appStore from '../assets/appStore.svg'
+import googlePlay from '../assets/googlePlay.svg'
 
 /**
  * Component which will display a IntroShowQR.
@@ -27,7 +27,7 @@ const IntroShowQR: React.FC = ({ match }: any) => {
     const [requestedCredentials] = useState(['Address', 'PersonalData', 'ContactDetails'])
     // const { connectWebSocket, ioClient }: any = useContext(AppContext)
 
-    const [isRunning, setIsRunning] = useState(true);
+    const [isRunning, setIsRunning] = useState(false);
 
     async function connectWebSocket() {
         const storedChannelDetails = await localStorage.getItem('WebSocket_DID') || null;
@@ -134,10 +134,10 @@ const IntroShowQR: React.FC = ({ match }: any) => {
             <div className="main-section">
                 <div className="prove-identity-page-wrapper">
                     <img src={logo} alt="Company House Logo" />
-                    <h2>Prove Your Identity</h2>
+                    <h2>Provide your Digital Identity credentials</h2>
                     <p>Scan this QR code with <strong>DIDI App</strong> to continue</p>
                     <QRCode text={qrContent} />
-                    <p>Download DIDI app on your phone</p>
+                    <p>Don't have the app? Download DIDI app on your phone</p>
                     <div className="app-cta-wrapper">
                         <a 
                             href='https://apps.apple.com/us/app/trinity-wallet/id1385929472?ls=1'
