@@ -32,31 +32,32 @@ const schemas = {
 }
 
 export const createIdentity = async () => {
-    try {
-      const seed = GenerateSeed()
-      const userDIDDocument = CreateRandomDID(seed)
-      const keypair = await GenerateECDSAKeypair()
-      const privateKey = keypair.GetPrivateKey()
-      userDIDDocument.AddKeypair(keypair, keyId)
+  try {
+    const seed = GenerateSeed()
+    const userDIDDocument = CreateRandomDID(seed)
+    const keypair = await GenerateECDSAKeypair()
+    const privateKey = keypair.GetPrivateKey()
+    userDIDDocument.AddKeypair(keypair, keyId)
 
-      const publisher = new DIDPublisher(provider, seed)
-      const root = await publisher.PublishDIDDocument(userDIDDocument)
-      const mamState = publisher.ExportMAMChannelState()
-      const identity = { seed, root, keyId, privateKey, mamState }
+    const publisher = new DIDPublisher(provider, seed)
+    const root = await publisher.PublishDIDDocument(userDIDDocument)
+    const mamState = publisher.ExportMAMChannelState()
+    const identity = { seed, root, keyId, privateKey, mamState }
 
-      await storeIdentity(identity)
-      return { status: 'success' }
-    } catch (error) {
-      console.log('Enroll error', error)
-    }
+    await storeIdentity(identity)
+    return { status: 'success' }
+  } catch (error) {
+    console.log('Enroll error', error)
+  }
 }
 
-export const createCredential = async (credentialId, schemaName, userData) => {
+export const createCredential = async (schemaName, userData) => {
   try {
-    let issuer = await retrieveIdentity()
+    const issuer = await retrieveIdentity()
 
     // Retrieves the latest DID Document from the Tangle
     const issuerDID = await DIDDocument.readDIDDocument(provider, issuer.root)
+    
     // Set the private key, this enables the keypair to sign. The privatekey should be loaded from the secured location.
     const signatureKeypair = issuerDID.GetKeypair(issuer.keyId).GetEncryptionKeypair()
     signatureKeypair.SetPrivateKey(issuer.privateKey)
@@ -69,11 +70,10 @@ export const createCredential = async (credentialId, schemaName, userData) => {
     const schemaData = {
       DID: issuerDID.GetDID().GetDID(),
       ...userData
-    } // Make an object, conform to the schema, which contains the data about the subject.
+    } // Make an object conform to the schema, which contains the data about the subject.
 
     const revocationAddress = GenerateSeed()
     const credential = Credential.Create(schema, issuerDID.GetDID(), schemaData, revocationAddress)
-    console.log('credential', schemaData)
     console.log(credential)
 
     // Sign the schema
@@ -83,10 +83,11 @@ export const createCredential = async (credentialId, schemaName, userData) => {
         issuerKeyId: issuer.keyId 
       });
     proof.Sign(credential.EncodeToJSON()) // Signs the JSON document
+    
     const verifiableCredential = VerifiableCredential.Create(credential, proof)
     const verifiableCredentialJSON = verifiableCredential.EncodeToJSON()
 
-    await storeCredential(credentialId, { userData, credential: verifiableCredentialJSON })
+    await storeCredential(schemaName, { userData, credential: verifiableCredentialJSON })
     return { status: 'success' }
   } catch (error) {
     console.log('Error', error)
@@ -94,33 +95,19 @@ export const createCredential = async (credentialId, schemaName, userData) => {
   }
 }
 
-export const createPresentation = async (credentialId, schemaName, challengeNonce) => {
+export const createPresentations = async (requestedSchemas, challengeNonce) => {
     try {
-      let did = await retrieveIdentity()
-      let credentialData = await retrieveCredential(credentialId)
-
-      // Read DID Document might fail when no DID is actually located at the root - Unlikely as it is the DID of this instance
-      const issuerDID = await DIDDocument.readDIDDocument(provider, did.root);
+      const did = await retrieveIdentity()
       
-      const proofParameters = {
-        issuer: issuerDID,
-        issuerKeyId: new DID(credentialData.credential.proof.verificationMethod).GetFragment()
-      }
-
-      const credential = VerifiableCredential.DecodeFromJSON(credentialData.credential, proofParameters)
-
+      const issuerDID = await DIDDocument.readDIDDocument(provider, did.root);
       issuerDID.GetKeypair(did.keyId).GetEncryptionKeypair().SetPrivateKey(did.privateKey)
-
-      SchemaManager.GetInstance().AddSchema(schemaName, schemas[schemaName])
-      const schema = SchemaManager.GetInstance().GetSchema(schemaName)
-      schema.AddTrustedDID(issuerDID.GetDID())
       SchemaManager.GetInstance().GetSchema('DIDAuthenticationCredential').AddTrustedDID(issuerDID.GetDID())
       
+      const credentials = await getPresentationCredentials(requestedSchemas, issuerDID)
       const verifiableCredential = SignDIDAuthentication(issuerDID, did.keyId, challengeNonce)
-      const credentialsArray = [verifiableCredential, credential]
-
-      // Create the presentation
-      const presentation = Presentation.Create(credentialsArray)
+      
+      // Create presentation
+      const presentation = Presentation.Create([verifiableCredential, ...credentials])
       const presentationProof = ProofTypeManager.GetInstance()
         .CreateProofWithBuilder('EcdsaSecp256k1VerificationKey2019', { 
           issuer: issuerDID, 
@@ -130,12 +117,40 @@ export const createPresentation = async (credentialId, schemaName, challengeNonc
       presentationProof.Sign(presentation.EncodeToJSON())
       
       const verifiablePresentation = VerifiablePresentation.Create(presentation, presentationProof)
-      console.log(999)
-      console.log(verifiablePresentation)
 
       return verifiablePresentation.EncodeToJSON()
     } catch (error) {
       console.log('createPresentation generic' + error.toString())
       return error
     }
+}
+
+const getPresentationCredential = async (schemaName, issuerDID) => {
+  try {
+    const credentialData = await retrieveCredential(schemaName)
+    const proofParameters = {
+      issuer: issuerDID,
+      issuerKeyId: new DID(credentialData.credential.proof.verificationMethod).GetFragment()
+    }
+
+    SchemaManager.GetInstance().AddSchema(schemaName, schemas[schemaName])
+    SchemaManager.GetInstance().GetSchema(schemaName).AddTrustedDID(issuerDID.GetDID())
+
+    return await VerifiableCredential.DecodeFromJSON(credentialData.credential, proofParameters)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const getPresentationCredentials = async (requestedSchemas, issuerDID) => {
+  return new Promise(resolve => {
+    try {
+      const promises = requestedSchemas.map(async schemaName =>
+        await getPresentationCredential(schemaName, issuerDID)
+      );
+      Promise.all(promises).then(resolve)
+    } catch (error) {
+      console.error(error)
+    }
+  })
 }

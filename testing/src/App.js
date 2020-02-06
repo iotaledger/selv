@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import 'antd/dist/antd.css';
 import { websocketURL } from './config.json'
 import { Form } from './components'
-import { createIdentity, createCredential, createPresentation } from './did'
+import { createIdentity, createCredential, createPresentations } from './did'
 import 'rsuite/lib/styles/index.less';
 import { encrypt } from './helper'
 
@@ -60,7 +60,7 @@ const App = () => {
 
   async function processCredential() {
     console.log('Creating verifiable credential')
-    const result = await createCredential('testCredential', 'PersonalData', {
+    let result = await createCredential('PersonalData', {
       Language: 'English',
       UserPersonalData: {
         UserName: {
@@ -69,12 +69,34 @@ const App = () => {
         }
       }
     })
-    console.log('processCredential result', result.status)
+    console.log('PersonalData result', result.status)
+
+    result = await createCredential('Address', {
+      Language: 'English',
+      UserAddress: {
+        City: 'Berlin',
+        Country: 'Germany'
+      }
+    })
+    console.log('Address result', result.status)
+
+    result = await createCredential('ContactDetails', {
+      Language: 'English',
+      UserContacts: {
+        UserName: {
+          Email: 'bob.smith@iota.com',
+          Phone: '777-777-7777'
+        }
+      }
+    })
+    console.log('ContactDetails result', result.status)
   } 
 
   async function processPresentation() {
+    const schemas = ['Address', 'PersonalData', 'ContactDetails']
+
     console.log('Creating verifiable presentation')
-    const presentationJSON = await createPresentation('testCredential', 'PersonalData', 'HerpaDerperDerp')
+    const presentationJSON = await createPresentations(schemas, 'HerpaDerperDerp')
     console.log('createPresentation result')
     console.log(JSON.stringify(presentationJSON))
     const payload = await encrypt(password, JSON.stringify(presentationJSON))
