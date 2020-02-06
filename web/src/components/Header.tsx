@@ -1,4 +1,6 @@
 import React from 'react';
+import companyHouse from '../assets/companyHouse.svg'
+import snsBank from '../assets/snsBank.svg'
 
 const Header = ({ children, theme }: {
     children?: JSX.Element | null | undefined;
@@ -6,8 +8,9 @@ const Header = ({ children, theme }: {
 }) => {
     return (
         <div className="header-wrapper">
-          header
-          { children }
+            { theme === 'companyHouse' && <img src={companyHouse} alt="Company House Logo" /> }
+            { theme === 'snsBank' && <img src={snsBank} alt="SNS Bank Logo" /> }
+            { children }
         </div>
     );
 };

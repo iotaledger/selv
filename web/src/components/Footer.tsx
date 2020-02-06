@@ -1,4 +1,5 @@
 import React from 'react';
+import companyHouse from '../assets/companyHouseCrone.svg'
 
 const Footer = ({ children, theme }: {
     children?: JSX.Element | null | undefined;
@@ -6,8 +7,8 @@ const Footer = ({ children, theme }: {
 }) => {
     return (
         <div className="footer-wrapper">
-          footer
-          { children }
+            {children}
+            { theme === 'companyHouse' && <img src={companyHouse} alt="Company House Logo" /> }
         </div>
     );
 };
