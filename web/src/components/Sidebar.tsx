@@ -4,6 +4,12 @@ import { Sidenav } from 'rsuite';
 
 // https://rsuitejs.com/en/components/sidenav
 
+const externalPages = [
+    { url: 'https://iota.org', title: `What's this?` },
+    { url: 'https://blog.iota.org', title: 'FAQ' },
+    { url: 'https://docs.iota.org', title: 'Get involved' },
+]
+
 const SidebarInstance = ({ children }: {
     children?: JSX.Element | null | undefined;
 }) => {
@@ -12,34 +18,23 @@ const SidebarInstance = ({ children }: {
           <Sidenav defaultOpenKeys={['3', '4']} activeKey="1">
             <Sidenav.Header>
                 <div className="sidebar-header">
-                    Bob
                 </div>
             </Sidenav.Header>
             <Sidenav.Body>
                 { children }
             </Sidenav.Body>
                 <div className="sidebar-links">
-                    <a 
-                        href="https://www.iota.org/" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        What's this?
-                    </a>
-                    <a 
-                        href="https://www.iota.org/" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        FAQ
-                    </a>
-                    <a 
-                        href="https://www.iota.org/" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Get involved
-                    </a>
+                    {externalPages.map(page => (
+                        <a 
+                            href={page.url} 
+                            key={page.title} 
+                            className="external-menu-link" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {page.title}
+                        </a>
+                    ))}
                 </div>
             </Sidenav>
         </div>
