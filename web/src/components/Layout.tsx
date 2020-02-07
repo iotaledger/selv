@@ -8,12 +8,13 @@ import Steps from './Steps'
 import Sidebar from './Sidebar'
 import useStep from "../utils/useStep";
 
-export default ({ children, match, theme }: {
+export default ({ children, match, step, theme }: {
     children?: JSX.Element | null | undefined;
     match: any;
+    step: number | null;
     theme: string;
 }) => {
-    const { step, mainSteps, /* subStep, subSteps */ } = useStep(match);
+    const { mainSteps, /* subStep, subSteps */ } = useStep(match);
 
     ReactGA.pageview(match.path);
 
