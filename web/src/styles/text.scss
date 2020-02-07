@@ -1,0 +1,119 @@
+.bold {
+    font-weight: 700;
+}
+
+a {
+    outline: none !important;
+    font-weight: 400;
+
+    @include themify($themes) {
+      color: themed('linkColor');  
+      font-size: themed('defaultTextSize');
+      line-height: themed('defaultLineHeight');;
+    }
+  
+    &:hover {
+      text-decoration: none;
+    }
+}
+
+h1 {
+    font-weight: bold;
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+        font-size: themed('h1TextSize');
+        line-height: themed('h1LineHeight');;
+    }
+    @include breakPoint(small) {
+        @include font-size(24px);
+    }
+}
+  
+h2 {
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+        font-size: themed('h2TextSize');
+        line-height: themed('h2LineHeight');;
+    }
+
+    font-weight: bold;
+    @include breakPoint(small) {
+        @include font-size(28px);
+    }
+}
+
+h3 {
+    font-weight: bold;
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+        font-size: themed('h3TextSize');
+        line-height: themed('h3LineHeight');;
+    }
+    @include breakPoint(small) {
+        // @include font-size(24px);
+    }
+}
+  
+// h4 {
+//     @include font-size(22px);
+//     @include breakPoint(small) {
+//         @include font-size(14px);
+//     }
+  
+//     color: $white;
+//     font-weight: bold;
+//     line-height: 1.75;
+// }
+  
+// h5 {
+//     @include font-size(20px);
+//     @include breakPoint(small) {
+//         @include font-size(16px);
+//     }
+  
+//     color: $primary;
+//     font-weight: 500;
+//     line-height: 1.5;
+// }
+  
+p {
+    font-weight: 400;
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+        font-size: themed('defaultTextSize');
+        line-height: themed('defaultLineHeight');;
+    }
+    @include breakPoint(small) {
+        // @include font-size(24px);
+    }
+}
+  
+// .text-responsive-align {
+//     @include breakPoint(small) {
+//         text-align: left !important;
+//     }
+
+//     margin-bottom: 20px;
+//     line-height: 1.5;
+//     text-align: right !important;
+// }
+
+// .text-responsive-align-alt {
+//     @include breakPoint(small) {
+//         text-align: left !important;
+//     }
+
+//     margin-bottom: 20px;
+//     line-height: 1.5;
+//     text-align: left !important;
+// }
+
+// .justify-content-responsive {
+//     @include breakPoint(small) {
+//         justify-content: left !important;
+//         text-align: left;
+//     }
+
+//     justify-content: center !important;
+//     text-align: center;
+// }
