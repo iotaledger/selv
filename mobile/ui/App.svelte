@@ -24,6 +24,12 @@
     retrieveCredentials
   } from "~/lib/identity";
   import { SchemaNames } from "~/lib/identity/schemas";
+  import Button from "~/components/button";
+  import Scanner from "~/components/scanner";
+  import io from "socket.io-client";
+  import { urlPortRegex } from "../libs/utils";
+
+  let displayScanner = false;
 
   function processIdentity() {
     createIdentity()
@@ -118,4 +124,18 @@
   <button on:click={processVerifiablePresentations}>
     Create Verifiable Presentation
   </button>
+  {#if displayScanner}
+    <Scanner
+      onQrScan={data => {
+        if (data.match(urlPortRegex)) {
+          io.socket.connect(data);
+        }
+      }} />
+  {:else}
+    <Button
+      onClick={() => {
+        displayScanner = true;
+      }}
+      label="Scan QR" />
+  {/if}
 </main>

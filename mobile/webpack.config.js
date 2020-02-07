@@ -79,6 +79,7 @@ const config = {
     plugins: [
         new CopyPlugin([
             { from: './ui/assets/*', to: './', flatten: true },
+            { from: './node_modules/qr-scanner/qr-scanner-worker.min.js', to: './scanner.worker.min.js' },
         ]),
         new HtmlWebpackPlugin({
             template: './ui/index.html',
