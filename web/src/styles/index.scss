@@ -1,0 +1,94 @@
+@import 'globals';
+
+@import './text';
+@import './table';
+@import './sidebar';
+@import './companies';
+@import './header';
+@import './footer';
+@import './buttons';
+
+html {
+  background: none !important;
+  font-size: unset !important;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden !important;
+  height: 100%;
+  width: 100%;
+
+  &.cookie-bar-bottom-bar {
+    margin-top: 70px;
+  }
+}
+
+#root, #root > div, #root > div > div {
+  height: 100%;
+  width: 100%;
+}
+
+.content-stretch {
+  flex: 1;
+  width: 100%;
+  align-items: flex-start;
+}
+
+h1, h2, h3, h4, h5, h6, div, span, p, label, input, select, section, footer, header, nav, ul, li, button, tr, td, th {
+  @include themify($themes) {
+    font-family: themed('fontFamily');  
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+button {
+  outline: none !important;
+}
+
+.hidden-xs-down {
+  @include breakPoint(small) {
+    display: none !important;
+  }
+}
+
+.hidden-sm-down {
+  @include breakPoint(small) {
+    display: none !important;
+  }
+}
+
+.hidden-md-down {
+  @include breakPoint(medium) {
+    display: none !important;
+  }
+}
+
+.hidden-sm-up {
+  @include breakPoint(small) {
+    display: none !important;
+  }
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100vh;
+}
+
+.main-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;;
+  align-items: center;
+  background-color: #fff;
+}
+
