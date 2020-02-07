@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
-import { Button, Nav } from 'rsuite';
+import { Nav } from 'rsuite';
 import useStep from "../utils/useStep";
-import { Steps, Sidebar } from "../components";
+import { Layout } from "../components";
 import companies from "../incorporatedCompanies.json"
-import logo from '../assets/companyHouse.svg'
+import back from '../assets/back.svg';
 
 interface CompanyData {
     "id": string;
@@ -55,32 +55,21 @@ const CompanyData: React.FC = ({ match }: any) => {
     }
 
     return (
-        <div className="page-wrapper">
-            <div className="main-section">
-                <div className="company-details-page-wrapper">
-                    <img src={logo} alt="Company House Logo" />
-                    <Link to={'/progress/companies/2'}>
-                        <Button size="lg" appearance="subtle" active>
-                            Back
-                        </Button> 
-                    </Link>
-                    <div className="company-details-wrapper">
-                        <h2>{companyData?.name}</h2>
-                        <p>Company number <strong>{companyData?.companyNumber}</strong></p>
-                        <CustomNav active={activeTab} onSelect={handleSelect} />
-                        <div className="company-details">
-                            {renderActiveComponent()}
-                        </div>
-                    </div>
+        <Layout theme="companyHouse" match={match} step={2}>
+            <div className="company-details-wrapper">
+                <Link to={'/progress/companies/2'} className="company-details-back bold">
+                    <img src={back} alt="" />&nbsp;&nbsp;&nbsp;Back
+                </Link>
+                <h2>{companyData?.name}</h2>
+                <p className="company-number-wrapper">
+                    Company number <span className="company-number">{companyData?.companyNumber}</span>
+                </p>
+                <CustomNav active={activeTab} onSelect={handleSelect} />
+                <div className="company-details">
+                    {renderActiveComponent()}
                 </div>
             </div>
-            <Sidebar>
-                <Steps 
-                    steps={mainSteps} 
-                    stepId={2} 
-                />
-            </Sidebar>
-        </div>
+        </Layout>
     );
 }
 
