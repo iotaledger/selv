@@ -8,8 +8,10 @@ const Header = ({ children, theme }: {
 }) => {
     return (
         <div className="header-wrapper">
-            { theme === 'companyHouse' && <img src={companyHouse} alt="Company House Logo" /> }
-            { theme === 'snsBank' && <img src={snsBank} alt="SNS Bank Logo" /> }
+            <div className="logo">
+                { theme === 'companyHouse' && <img src={companyHouse} alt="Company House Logo" /> }
+                { theme === 'snsBank' && <img src={snsBank} alt="SNS Bank Logo" /> }
+            </div>
             { children }
         </div>
     );
