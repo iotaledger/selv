@@ -18,7 +18,7 @@ const config = {
             svelte: path.resolve('node_modules', 'svelte'),
             '~': path.resolve('ui')
         },
-        extensions: ['.mjs', '.ts', '.js', '.svelte'],
+        extensions: ['.mjs', '.ts', '.js', '.svelte', '.json'],
         mainFields: ['svelte', 'browser', 'module', 'main']
     },
     output: {

@@ -1,5 +1,4 @@
 <script>
-  import { writable } from "svelte/store";
   import {
     Credential,
     GenerateECDSAKeypair,
@@ -13,87 +12,81 @@
     VerifiablePresentation,
     Presentation
   } from "@iota/identity";
+  import Keychain from "~/lib/keychain";
+  import {
+    createCredentials,
+    createVerifiablePresentations,
+    Identity,
+    retrieveIdentity,
+    createIdentity,
+    storeIdentity,
+    storeCredentials,
+    retrieveCredentials
+  } from "~/lib/identity";
+  import { SchemaNames } from "~/lib/identity/schemas";
 
-  const verifiableCredentials = writable(null);
-  const subjectDIDDocument = writable(null);
-
-  let hasGeneratedCredentials = false;
-
-  function getUserSchema() {
-    return {
-      type: "object",
-      required: ["id", "dateOfBirth"],
-      properties: {
-        name: {
-          type: "string"
-        },
-        dateOfBirth: {
-          type: "string"
-        },
-        emailAddress: {
-          type: "string"
-        }
-      }
-    };
+  function processIdentity() {
+    createIdentity()
+      .then(identity => storeIdentity("did", identity))
+      .then(() => console.info("Identity successfully stored in keychain!"))
+      .catch(console.error);
   }
 
-  async function generateCredentials() {
-    // 1. Create issuer
-    const issuerSeed = GenerateSeed();
-    const issuerDIDDocument = CreateRandomDID(issuerSeed);
-    const issuerKeyPair = await GenerateECDSAKeypair();
-    // Add keypair to isser DID document
-    issuerDIDDocument.AddKeypair(issuerKeyPair, "0");
+  function processCredentials() {
+    const schemaName = SchemaNames.BANK_ACCOUNT;
 
-    // 2. Create subject
-    const subjectSeed = GenerateSeed();
-    $subjectDIDDocument = CreateRandomDID(subjectSeed);
-    const subjectKeyPair = await GenerateECDSAKeypair();
-    // Add keypair to subject DID document
-    $subjectDIDDocument.AddKeypair(subjectKeyPair, "0");
-
-    // 3. Create credentials
-    const credentialsData = {
-      name: "John Doe",
-      dateOfBirth: "02/02/1993",
-      emailAddress: "foo@baz.com"
-    };
-    const credentials = Credential.Create(
-      new Schema("UserSchema", getUserSchema()),
-      issuerDIDDocument.GetDID(),
-      credentialsData
-    );
-
-    // 4. Build verifiable credential
-    const proof = ProofTypeManager.GetInstance().CreateProofWithBuilder(
-      "EcdsaSecp256k1VerificationKey2019",
-      { issuer: issuerDIDDocument, issuerKeyId: "0" }
-    );
-    // Signs the document
-    proof.Sign(credentials.EncodeToJSON());
-    verifiableCredentials.set(VerifiableCredential.Create(credentials, proof));
-
-    hasGeneratedCredentials = true;
+    retrieveIdentity("did")
+      .then(identity =>
+        createCredentials(identity, schemaName, {
+          language: "English",
+          locale: "en",
+          bank: {
+            name: "foo",
+            accountType: "current",
+            accountNumber: "XXXX-XXXX"
+          }
+        })
+      )
+      .then(credentials => storeCredentials(schemaName, credentials))
+      .then(() => console.log("Credentials successfully created!"))
+      .catch(console.error);
   }
 
-  async function createVerifiablePresentation() {
-    const challenge = Date.now().toString();
-    const presentation = Presentation.Create([$verifiableCredentials]);
-    const proofMethod = ProofTypeManager.GetInstance().GetProofBuilder(
-      "EcdsaSecp256k1VerificationKey2019"
-    );
+  function processVerifiablePresentations() {
+    retrieveIdentity("did").then(identity => {
+      Object.values(SchemaNames)
+        .reduce((promise, schemaName) => {
+          return promise.then(acc => {
+            return retrieveCredentials(schemaName)
+              .then(credentials => {
+                acc[schemaName] = credentials;
 
-    const presentationProof = proofMethod({
-      issuer: $subjectDIDDocument,
-      issuerKeyId: "0",
-      challengeNonce: challenge
+                return acc;
+              })
+              .catch(console.log);
+          });
+        }, Promise.resolve({}))
+        .then(schemaNamesWithCredentials =>
+          createVerifiablePresentations(
+            identity,
+            Object.keys(schemaNamesWithCredentials).reduce(
+              (acc, schemaName) => {
+                if (schemaNamesWithCredentials[schemaName]) {
+                  acc[schemaName] = schemaNamesWithCredentials[schemaName];
+                }
+
+                return acc;
+              },
+              {}
+            ),
+            Date.now().toString()
+          )
+        )
+        .then(() =>
+          console.log("Successfully created verifiable presentations!")
+        )
+        .catch(console.error);
     });
-
-    presentationProof.Sign(presentation.EncodeToJSON());
-    const verifiablePresentation = VerifiablePresentation.Create(
-      presentation,
-      presentationProof
-    );
   }
 </script>
 
@@ -120,10 +113,9 @@
 </style>
 
 <main>
-  <button on:click={generateCredentials}>Generate Credentials</button>
-  {#if hasGeneratedCredentials}
-    <button on:click={createVerifiablePresentation}>
-      Create Verifiable Credentials
-    </button>
-  {/if}
+  <button on:click={processIdentity}>Create Own Identity</button>
+  <button on:click={processCredentials}>Process Credentials</button>
+  <button on:click={processVerifiablePresentations}>
+    Create Verifiable Presentation
+  </button>
 </main>
