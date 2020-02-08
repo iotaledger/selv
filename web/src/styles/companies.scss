@@ -34,7 +34,27 @@
 
     .company-details {
         width: 100%;
+        height: 200px;
         word-break: break-word;
+        border-top: 1px solid #E2E5EC;
+        padding-top: 30px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .company-details-item {
+            margin-bottom: 30px;
+            width: 45%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            & .status {
+                width: auto;
+                margin-top: 8px;
+            }
+        }
     }
 
     .company-number-wrapper {
@@ -47,10 +67,15 @@
 
     .rs-nav {
         width: 450px;
+        margin-bottom: 30px !important;
 
         & > ul {
             display: flex;
             justify-content: space-between;
+        }
+
+        .rs-nav-waterline {
+            display: none;
         }
 
         .rs-nav-item {
@@ -58,6 +83,24 @@
             border-radius: 100px;
             width: 120px;
             height: 32px;
+
+            &.rs-nav-item-active {
+                background: #6F9CEB;
+                 
+                .rs-nav-item-content {
+                    color: #ffffff;
+
+                    &:hover {
+                        color: #ffffff;
+                    }
+                }
+            }
+
+            .rs-nav-item-content {
+                &:before {
+                    content: none;
+                }
+            }
     
             .rs-nav-item-content {
                 display: flex;
@@ -67,10 +110,32 @@
                 font-weight: bold;
                 font-size: 13px;
                 line-height: 20px;
-                padding-top: 5px;
+                padding-top: 6px;
+                color: #8593AC;
+
+                &:hover {
+                    color: $primary-font-color-companyHouse;
+                }
             }
         }
     }
 
 }
 
+.status {
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+
+    &.active {
+      color: #35C0A1;
+      background: #DAF9F2;
+    }
+    &.pending {
+      color: #F17105;
+      background: #FFEDDE;
+    }
+  }
