@@ -1,8 +1,7 @@
-import React from 'react';
-import 'rsuite/dist/styles/rsuite-default.css'
+import React, { useState } from 'react';
 import { Table } from 'rsuite';
 
-const { Column, HeaderCell, Cell } = Table;
+const { Column, HeaderCell, Cell, Pagination } = Table;
 
 // https://rsuitejs.com/en/components/table#%3CTable%3E
 
@@ -45,44 +44,95 @@ const TableInstance = ({ data, onRowClick }: {
     data?: { name: string, date: string, type: string, status: string }[];
     onRowClick: (rowData: object) => void
 }) => {
+    const [displayLength, setDisplayLength] = useState(5)
+    const [loading, setLoading] = useState(false)
+    const [page, setPage] = useState(1)
+
+    function handleChangePage(dataKey: number) {
+        setPage(dataKey)
+    }
+    
+    function handleChangeLength(dataKey: number) {
+        setPage(1)
+        setDisplayLength(dataKey)
+    }
+
+    function getData() {
+        return data?.filter((v, i) => {
+            const start = displayLength * (page - 1);
+            const end = start + displayLength;
+            return i >= start && i < end;
+        });
+    }
+
     return (
-        <div className="table-wrapper">
-            <Table width={710} height={570} data={data} rowHeight={90} onRowClick={onRowClick}>
-                <Column width={300} fixed>
-                    <HeaderCell>Company Name</HeaderCell>
-                    <CompanyCell />
-                </Column>
+        <div>
+            <div className="table-wrapper">
+                <Table 
+                    width={710} 
+                    height={500} 
+                    data={getData()} 
+                    rowHeight={90} 
+                    onRowClick={onRowClick}
+                    loading={loading}
+                >
+                    <Column width={300} fixed>
+                        <HeaderCell>Company Name</HeaderCell>
+                        <CompanyCell />
+                    </Column>
 
-                <Column width={200} fixed>
-                    <HeaderCell>Incorporated on</HeaderCell>
-                    <Cell dataKey="date" style={{ 
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center'
-                    }} />
-                </Column>
+                    <Column width={200} fixed>
+                        <HeaderCell>Incorporated on</HeaderCell>
+                        <Cell dataKey="date" style={{ 
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center'
+                        }} />
+                    </Column>
 
-                <Column width={130} fixed>
-                    <HeaderCell>Status</HeaderCell>
-                    <StatusCell />
-                </Column>
+                    <Column width={130} fixed>
+                        <HeaderCell>Status</HeaderCell>
+                        <StatusCell />
+                    </Column>
 
-                <Column width={50} fixed>
-                    <HeaderCell></HeaderCell>
-                    <Cell className="dots" style={{ 
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        fontSize: 30,
-                        position: 'relative',
-                        top: -8
-                    }} >
-                        <div className="cell-content">
-                            ...
-                        </div>
-                    </Cell>
-                </Column>
-            </Table>
+                    <Column width={50} fixed>
+                        <HeaderCell></HeaderCell>
+                        <Cell className="dots" style={{ 
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                            fontSize: 30,
+                            position: 'relative',
+                            top: -8
+                        }} >
+                            <div className="cell-content">
+                                ...
+                            </div>
+                        </Cell>
+                    </Column>
+                </Table>
+        </div>
+            <Pagination
+                lengthMenu={[
+                    {
+                        value: 5,
+                        label: 5
+                    },
+                    {
+                        value: 10,
+                        label: 10
+                    },
+                    {
+                        value: 20,
+                        label: 20
+                    }
+                ]}
+                activePage={page}
+                displayLength={displayLength}
+                total={data?.length}
+                onChangePage={handleChangePage}
+                onChangeLength={handleChangeLength}
+            />
       </div>
     );
 };
