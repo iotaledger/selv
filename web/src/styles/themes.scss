@@ -1,20 +1,131 @@
+$font-family-companyHouse: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-snsBank: 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+$primary-color-companyHouse: #3B6AC5;
+$secondary-color-companyHouse: #4247DC;
+$trinary-color-companyHouse: #F5F6FF;
+$primary-font-color-companyHouse: #333333;
+$secondary-font-color-companyHouse: #6F6F6F;
+
+$primary-color-snsBank: #F39B26;
+$secondary-color-snsBank: #562A71;
+$trinary-color-snsBank: #64CDF5;
+$primary-font-color-snsBank: #585858;
+$secondary-font-color-snsBank: #BBBBBB;
+
 $themes: (
-    light: (
-        backgroundColor: #fff,
-        textColor: #408bbd,
-        buttonTextColor: #408bbd,
-        buttonTextTransform: none,
-        buttonTextHoverColor: #61b0e7,
-        buttonColor: #fff,
-        buttonBorder: 2px solid #fff,
+    demo: (
+        buttonBackgroundColor: $primary-color-companyHouse,
+        buttonHeight: 43px,
     ),
-    dark: (
-        backgroundColor: #222,
-        textColor: #ddd,
-        buttonTextColor: #aaa,
-        buttonTextTransform: uppercase,
-        buttonTextHoverColor: #ddd,
-        buttonColor: #333,
-        buttonBorder: 1px solid #aaa,
+    companyHouse: (
+        fontFamily: $font-family-companyHouse,
+
+        defaultTextSize: 16px,
+        defaultLineHeight: 20px,
+
+        primaryColor: $primary-color-companyHouse,
+        secondaryColor: $secondary-color-companyHouse,
+        trinaryColor: $trinary-color-companyHouse,
+        primaryFontColor: $primary-font-color-companyHouse,
+        secondaryFontColor: $secondary-font-color-companyHouse,
+        linkColor: $primary-color-companyHouse,
+
+        h1TextSize: 36px,
+        h1LineHeight: 42px,
+        h2TextSize: 24px,
+        h2LineHeight: 33px,
+        h3TextSize: 18px,
+        h3LineHeight: 20px,
+        // h4TextSize: 16px,
+        // h4LineHeight: 20px,
+        // h5TextSize: 16px,
+        // h5LineHeight: 20px,
+
+        // labelTextSize: 16px,
+        // labelLineHeight: 20px,
+
+        // tabTextSize: 13px,
+        // tabLineHeight: 20px,
+
+        buttonBackgroundColor: $primary-color-companyHouse,
+        buttonHeight: 43px,
+
+        headerBackgroundColor: #032F5D,
+        headerHeight: 60px,
+        headerLogoAlign: left,
+        headerLogoHeight: 24px,
+
+        footerBackgroundColor: #EEF0F2,
+        footerHeight: 76px,
+        footerLogoAlign: center,
+        footerLogoHeight: 24px,
+
+        // backgroundColor: #fff,
+        // textColor: #408bbd,
+        // buttonTextColor: #408bbd,
+        // buttonTextTransform: none,
+        // buttonTextHoverColor: #61b0e7,
+        // buttonColor: #fff,
+        // buttonBorder: 2px solid #fff,
+    ),
+    snsBank: (
+        fontFamily: $font-family-snsBank,
+
+        defaultTextSize: 15px,
+        defaultLineHeight: 20px,
+
+        primaryColor: $primary-color-snsBank,
+        secondaryColor: $secondary-color-snsBank,
+        trinaryColor: $trinary-color-snsBank,
+        primaryFontColor: $primary-font-color-snsBank,
+        secondaryFontColor: $secondary-font-color-snsBank,
+        linkColor: $primary-color-companyHouse,
+
+        h1TextSize: 36px,
+        h1LineHeight: 42px,
+        h2TextSize: 36px,
+        h2LineHeight: 42px,
+        h3TextSize: 24px,
+        h3LineHeight: 28px,
+        // h4TextSize: 16px,
+        // h4LineHeight: 20px,
+        // h5TextSize: 16px,
+        // h5LineHeight: 20px,
+
+        // labelTextSize: 16px,
+        // labelLineHeight: 20px,
+
+        // tabTextSize: 13px,
+        // tabLineHeight: 20px,
+
+        buttonBackgroundColor: $primary-color-snsBank,
+        buttonHeight: 51px,
+
+        headerBackgroundColor: #562A71,
+        headerHeight: 100px,
+        headerLogoAlign: left,
+        headerLogoHeight: 39px,
+
+        footerBackgroundColor: #562A71,
+        footerHeight: 80px,
+        footerLogoAlign: right,
+        footerLogoHeight: 24px,
+        // backgroundColor: #222,
+        // textColor: #ddd,
+        // buttonTextColor: #aaa,
+        // buttonTextTransform: uppercase,
+        // buttonTextHoverColor: #ddd,
+        // buttonColor: #333,
+        // buttonBorder: 1px solid #aaa,
+    ),
+    insurance: (
+        // backgroundColor: #222,
+        // textColor: #ddd,
+        // buttonTextColor: #aaa,
+        // buttonTextTransform: uppercase,
+        // buttonTextHoverColor: #ddd,
+        // buttonColor: #333,
+        // buttonBorder: 1px solid #aaa,
     ),
 );

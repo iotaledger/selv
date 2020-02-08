@@ -1,44 +1,55 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
-import { Button } from 'rsuite';
+import { Button } from 'antd';
 import useStep from "../utils/useStep";
-import { Steps, Sidebar, Table } from "../components";
+import { Layout, Table, NextStepDrawer } from "../components";
 import companies from "../incorporatedCompanies.json"
-import logo from '../assets/companyHouse.svg'
 
 /**
  * Component which will display a CompanyIntro.
  */
 const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
-    const { step, nextStep, mainSteps } = useStep(match); 
+    const { nextStep } = useStep(match); 
+    const [nextStepCTA, setNextStep] = useState(false);
+
+    useEffect(() => {
+        async function setNextStepCTA() {
+            const companyHouse = await localStorage.getItem('companyHouse')
+            console.log('companyHouse', companyHouse)
+            if (companyHouse && companyHouse === 'completed') {
+                setNextStep(true)
+            }
+        } 
+        setNextStepCTA()
+    }, [])
 
     function onRowClick(data: any) {
         history.push(`/details/company/${data.id}`)
     }
 
     return (
-        <div className="page-wrapper">
-            <div className="main-section">
+        <Layout theme="companyHouse" match={match} step={2}>
+            <React.Fragment>
                 <div className="companies-page-wrapper">
-                    <img src={logo} alt="Company House Logo" />
                     <div className="companies-cta-wrapper">
-                        <h4>Newly Incorporated Companies</h4>
-                        <Link to={nextStep}>
-                            <Button size="lg" appearance="subtle" active>
-                                Register New Company
-                            </Button> 
-                        </Link>
+                        <h2>Newly Incorporated Companies</h2>
+                        {
+                            nextStepCTA ? null : (
+                                <Link to={nextStep}>
+                                    <Button>
+                                        Register new Company
+                                    </Button> 
+                                </Link>
+                            ) 
+                        }
                     </div>
                     <Table data={companies} onRowClick={onRowClick} />
                 </div>
-            </div>
-            <Sidebar>
-                <Steps 
-                    steps={mainSteps} 
-                    stepId={step} 
-                />
-            </Sidebar>
-        </div>
+                {
+                    nextStepCTA ? <NextStepDrawer link={'/progress/bank/prove/3'} /> : null
+                }
+            </React.Fragment>
+        </Layout>
     );
 }
 

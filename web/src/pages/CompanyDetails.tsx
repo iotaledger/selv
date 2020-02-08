@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
-import { Button, Nav } from 'rsuite';
-import useStep from "../utils/useStep";
-import { Steps, Sidebar } from "../components";
+import { Nav } from 'rsuite';
+import { Layout, NextStepDrawer } from "../components";
 import companies from "../incorporatedCompanies.json"
-import logo from '../assets/companyHouse.svg'
+import back from '../assets/back.svg';
 
 interface CompanyData {
     "id": string;
@@ -27,13 +26,19 @@ interface CompanyData {
 const CompanyData: React.FC = ({ match }: any) => {
     const [companyData, setCompanyData] = useState();
     const [activeTab, setActiveTab] = useState('overview');
-    const { mainSteps } = useStep(match); 
+    const [nextStep, setNextStep] = useState(false);
     const companyId = match?.params?.companyId;
 
     useEffect(() => {
         async function setCompanyInfo(companyId: string) {
             const data: CompanyData | undefined = await companies.find(company => company.id === companyId)
             setCompanyData(data)
+
+            const companyHouse = await localStorage.getItem('companyHouse')
+            console.log('companyHouse', companyHouse)
+            if (companyHouse && companyHouse === 'completed') {
+                setNextStep(true)
+            }
         } 
         setCompanyInfo(companyId)
     }, [companyId])
@@ -55,32 +60,26 @@ const CompanyData: React.FC = ({ match }: any) => {
     }
 
     return (
-        <div className="page-wrapper">
-            <div className="main-section">
-                <div className="company-details-page-wrapper">
-                    <img src={logo} alt="Company House Logo" />
-                    <Link to={'/progress/companies/2'}>
-                        <Button size="lg" appearance="subtle" active>
-                            Back
-                        </Button> 
+        <Layout theme="companyHouse" match={match} step={2}>
+            <React.Fragment>
+                <div className="company-details-wrapper">
+                    <Link to={'/progress/company/list/2'} className="company-details-back bold">
+                        <img src={back} alt="" />&nbsp;&nbsp;&nbsp;Back
                     </Link>
-                    <div className="company-details-wrapper">
-                        <h2>{companyData?.name}</h2>
-                        <p>Company number <strong>{companyData?.companyNumber}</strong></p>
-                        <CustomNav active={activeTab} onSelect={handleSelect} />
-                        <div className="company-details">
-                            {renderActiveComponent()}
-                        </div>
+                    <h2>{companyData?.name}</h2>
+                    <p className="company-number-wrapper">
+                        Company number <span className="company-number">{companyData?.companyNumber}</span>
+                    </p>
+                    <CustomNav active={activeTab} onSelect={handleSelect} />
+                    <div className="company-details">
+                        {renderActiveComponent()}
                     </div>
                 </div>
-            </div>
-            <Sidebar>
-                <Steps 
-                    steps={mainSteps} 
-                    stepId={2} 
-                />
-            </Sidebar>
-        </div>
+                {
+                    nextStep && <NextStepDrawer link={'/progress/bank/prove/3'} />
+                }
+            </React.Fragment>
+        </Layout>
     );
 }
 
@@ -106,23 +105,23 @@ const CompanyDetails = ({ details }: { details: CompanyData | undefined }) => {
         <React.Fragment>
             <div className="company-details-item">
                 <p>Registered office address</p>
-                <p><strong>{details?.registeredAddress}</strong></p>
-            </div>
-            <div className="company-details-item">
-                <p>Incorporated on</p>
-                <p><strong>{details?.date}</strong></p>
-            </div>
-            <div className="company-details-item">
-                <p>Nature of business</p>
-                <p><strong>{details?.natureOfBusiness}</strong></p>
+                <p className="bold">{details?.registeredAddress}</p>
             </div>
             <div className="company-details-item">
                 <p>Company Type</p>
-                <p><strong>{details?.type}</strong></p>
+                <p className="bold">{details?.type}</p>
+            </div>
+            <div className="company-details-item">
+                <p>Incorporated on</p>
+                <p className="bold">{details?.date}</p>
             </div>
             <div className="company-details-item">
                 <p>Company status</p>
-                <p><strong>{details?.status}</strong></p>
+                <p className={`status ${details?.status.toLowerCase()}`}>{details?.status}</p>
+            </div>
+            <div className="company-details-item">
+                <p>Nature of business</p>
+                <p className="bold">{details?.natureOfBusiness}</p>
             </div>
         </React.Fragment>
     )
@@ -134,7 +133,7 @@ const People = ({ details }: { details: CompanyData | undefined }) => {
             {
                 details?.people?.map(person => 
                     <div key={person} className="company-details-item">
-                        <p>{person}</p>
+                        <p className="bold">{person}</p>
                     </div>
                 )
             }
@@ -145,7 +144,7 @@ const People = ({ details }: { details: CompanyData | undefined }) => {
 const TangleData = ({ details }: { details: CompanyData | undefined }) => {
     return (
         <React.Fragment>
-            <div className="company-details-item">
+            <div className="company-details-tangle">
                 <p>{details?.tangle?.root}</p>
             </div>
         </React.Fragment>

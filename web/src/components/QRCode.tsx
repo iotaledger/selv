@@ -11,7 +11,7 @@ export default ({ text }: { text: string }) => {
     }
 
     return (
-      <>
+      <div className="qr-code">
         { text && (
             <QRCode 
                 value={text} 
@@ -20,6 +20,6 @@ export default ({ text }: { text: string }) => {
                 imageSettings={imageSettings}
             />
         )}
-      </>
+      </div>
     );
 };

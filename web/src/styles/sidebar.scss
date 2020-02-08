@@ -1,0 +1,49 @@
+.sidebar-wrapper {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    padding: 50px;
+    height: 100vh;
+    background-color: #F6F8FC;
+  }
+
+.sidebar-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 50px;
+}
+  
+.rs-sidenav {
+    background-color: #F6F8FC !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.steps-wrapper {
+    text-align: left;
+    width: 250px;
+    display: inline-table;
+    vertical-align: top;
+  }
+  
+.rs-steps-item-tail {
+    display: none;
+}
+.rs-steps-item-icon-wrapper {
+    background: none !important;
+    border-radius: 5px !important;
+}
+.rs-steps-item-icon-process, .rs-steps-item-icon-wait {
+    display: none !important;
+}
+
+.rs-steps-item-status-finish > .rs-steps-item-content > .rs-steps-item-title {
+    text-decoration: line-through !important;
+}
+
+.rs-steps-item-status-process > .rs-steps-item-content > .rs-steps-item-title {
+    font-weight: bold;
+}

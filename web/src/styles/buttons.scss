@@ -1,0 +1,20 @@
+button {
+    border-radius: 4px;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 20px;
+    text-align: center;
+    padding: 10px 25px !important;
+    letter-spacing: 0.04em;
+
+    @include themify($themes) {
+        background-color: themed('buttonBackgroundColor') !important;  
+        height: themed('buttonHeight');
+
+        &:hover {
+            background-color: themed('secondaryColor') !important;
+        }
+    }
+
+}
