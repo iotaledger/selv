@@ -4,6 +4,7 @@ import QRCode from './QRCode'
 import Table from './Table'
 import Layout from './Layout'
 import Loading from './Loading'
+import NextStepDrawer from './NextStepDrawer'
 
 export { 
     Sidebar,
@@ -12,4 +13,5 @@ export {
     Table,
     Layout,
     Loading,
+    NextStepDrawer,
 }
