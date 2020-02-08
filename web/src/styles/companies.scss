@@ -138,4 +138,25 @@
       color: #F17105;
       background: #FFEDDE;
     }
-  }
+}
+
+.next-step-drawer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    word-break: break-word;
+    background-color: #FFEDDE;
+    min-height: 182px;
+    padding: 20px;
+
+    z-index: 100;
+    position: fixed;
+    bottom: 0;
+    width: calc(100% - 350px);
+    left: 0;
+
+    h3 {
+        color: #F17105;  
+    }
+}
