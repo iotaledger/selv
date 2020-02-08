@@ -13,15 +13,15 @@ import {
 
 export const routes = [ 
   { path: '/', page: Landing },
-  { path: '/progress/intro/2', page: IntroShowTodos }, 
-  { path: '/progress/intromobile/2', page: IntroShowMobile }, 
-  { path: '/progress/companies/2', page: IncorporatedCompanies }, 
-  { path: '/progress/qr/2', page: AppDownloadQR }, 
-  { path: '/progress/prove/2', page: ProveIdentity }, 
-  { path: '/progress/signin/2', page: SingInConfirmation }, 
-  { path: '/progress/companydata/2', page: CompanyData }, 
-  { path: '/progress/companysuccess/2', page: CompanyConfirmation }, 
-  { path: '/progress/intro/3', page: BankIntro }, 
+  { path: '/progress/intro/todos/2', page: IntroShowTodos }, 
+  { path: '/progress/intro/app/2', page: IntroShowMobile }, 
+  { path: '/progress/company/list/2', page: IncorporatedCompanies }, 
+  { path: '/progress/company/app/2', page: AppDownloadQR }, 
+  { path: '/progress/company/prove/2', page: ProveIdentity }, 
+  { path: '/progress/company/signin/2', page: SingInConfirmation }, 
+  { path: '/progress/company/data/2', page: CompanyData }, 
+  { path: '/progress/company/success/2', page: CompanyConfirmation }, 
+  { path: '/progress/bank/prove/3', page: BankIntro }, 
 ]
 
 export const subSteps = [
