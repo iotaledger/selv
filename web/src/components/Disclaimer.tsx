@@ -8,7 +8,7 @@ const Disclaimer = ({ cookies }: { cookies: any }) => {
   const [ack, setAck] = useState(true)
 
   useEffect(() => {
-    const ack = cookies.get('didi-cookie');
+    const ack = cookies.get('selv-cookie');
     if (!ack && document) {
       const element = document.getElementById('footer');
       if (element) {
@@ -19,7 +19,7 @@ const Disclaimer = ({ cookies }: { cookies: any }) => {
   }, [])
 
   function dismiss() {
-    cookies.set('didi-cookie', true, { path: '/' });
+    cookies.set('selv-cookie', true, { path: '/' });
     if (document) {
       const element = document.getElementById('footer');
       if (element) {
