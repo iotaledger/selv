@@ -11,7 +11,7 @@ import useStep from "../utils/useStep";
 export default ({ children, match, step, theme }: {
     children?: JSX.Element | null | undefined;
     match: any;
-    step: number | null;
+    step?: number | null;
     theme: string;
 }) => {
     const { mainSteps, /* subStep, subSteps */ } = useStep(match);
@@ -26,13 +26,17 @@ export default ({ children, match, step, theme }: {
                     {children}
                     <Footer theme={theme} />
                 </div>
-                <Sidebar>
-                    <Steps 
-                        steps={mainSteps} 
-                        stepId={step} 
-                        // subSteps={<Steps steps={subSteps} stepId={subStep} />}
-                    />
-                </Sidebar>
+                {
+                    step ? (
+                        <Sidebar>
+                            <Steps 
+                                steps={mainSteps} 
+                                stepId={step} 
+                                // subSteps={<Steps steps={subSteps} stepId={subStep} />}
+                            />
+                        </Sidebar>
+                    ) : null
+                }
             </div>
             <Disclaimer />
         </div>
