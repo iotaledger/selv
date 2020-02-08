@@ -1,5 +1,4 @@
 import React from 'react';
-import 'rsuite/dist/styles/rsuite-default.css'
 import { Sidenav } from 'rsuite';
 
 // https://rsuitejs.com/en/components/sidenav
