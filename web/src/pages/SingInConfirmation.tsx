@@ -1,33 +1,26 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { Button } from 'rsuite';
+import { Button } from 'antd';
 import useStep from "../utils/useStep";
-import { Steps, Sidebar } from "../components";
+import { Layout } from "../components";
 
 /**
  * Component which will display a SingInConfirmation.
  */
 const SingInConfirmation: React.FC = ({ match }: any) => {
-    const { step, subStep, nextStep, subSteps, mainSteps } = useStep(match); 
+    const { nextStep } = useStep(match); 
 
     return (
-        <div className="page-wrapper">
-            <div className="main-section">
-                <h1>SingInConfirmation</h1>
+        <Layout theme="companyHouse" match={match} step={2}>
+            <div className="sign-in-confirmation">
+                <h3>Hello, Bob!</h3>
                 <Link to={nextStep}>
-                    <Button size="lg">
-                        Next Page
+                    <Button>
+                        Set up a new company
                     </Button> 
                 </Link>
             </div>
-            <Sidebar>
-                <Steps 
-                    steps={mainSteps} 
-                    stepId={step} 
-                    subSteps={<Steps steps={subSteps} stepId={subStep} />}
-                />
-            </Sidebar>
-        </div>
+        </Layout>
     );
 }
 
