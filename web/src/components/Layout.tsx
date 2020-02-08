@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import ReactGA from 'react-ga';
 import Disclaimer from './Disclaimer'
 import Header from './Header'
