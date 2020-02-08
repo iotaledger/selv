@@ -95,23 +95,23 @@ const CompanyDetails = ({ details }: { details: CompanyData | undefined }) => {
         <React.Fragment>
             <div className="company-details-item">
                 <p>Registered office address</p>
-                <p><strong>{details?.registeredAddress}</strong></p>
-            </div>
-            <div className="company-details-item">
-                <p>Incorporated on</p>
-                <p><strong>{details?.date}</strong></p>
-            </div>
-            <div className="company-details-item">
-                <p>Nature of business</p>
-                <p><strong>{details?.natureOfBusiness}</strong></p>
+                <p className="bold">{details?.registeredAddress}</p>
             </div>
             <div className="company-details-item">
                 <p>Company Type</p>
-                <p><strong>{details?.type}</strong></p>
+                <p className="bold">{details?.type}</p>
+            </div>
+            <div className="company-details-item">
+                <p>Incorporated on</p>
+                <p className="bold">{details?.date}</p>
             </div>
             <div className="company-details-item">
                 <p>Company status</p>
-                <p><strong>{details?.status}</strong></p>
+                <p className={`status ${details?.status.toLowerCase()}`}>{details?.status}</p>
+            </div>
+            <div className="company-details-item">
+                <p>Nature of business</p>
+                <p className="bold">{details?.natureOfBusiness}</p>
             </div>
         </React.Fragment>
     )
@@ -123,7 +123,7 @@ const People = ({ details }: { details: CompanyData | undefined }) => {
             {
                 details?.people?.map(person => 
                     <div key={person} className="company-details-item">
-                        <p>{person}</p>
+                        <p className="bold">{person}</p>
                     </div>
                 )
             }
@@ -134,7 +134,7 @@ const People = ({ details }: { details: CompanyData | undefined }) => {
 const TangleData = ({ details }: { details: CompanyData | undefined }) => {
     return (
         <React.Fragment>
-            <div className="company-details-item">
+            <div className="company-details-tangle">
                 <p>{details?.tangle?.root}</p>
             </div>
         </React.Fragment>
