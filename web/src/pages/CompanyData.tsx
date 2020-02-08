@@ -1,33 +1,26 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { Button } from 'rsuite';
+import { Button } from 'antd';
 import useStep from "../utils/useStep";
-import { Steps, Sidebar } from "../components";
+import { Layout } from "../components";
 
 /**
  * Component which will display a CompanyData.
  */
 const CompanyData: React.FC = ({ match }: any) => {
-    const { step, subStep, nextStep, subSteps, mainSteps } = useStep(match); 
+    const { nextStep } = useStep(match); 
 
     return (
-        <div className="page-wrapper">
-            <div className="main-section">
+        <Layout theme="companyHouse" match={match} step={2}>
+            <div className="scan-qr-page-wrapper">
                 <h1>CompanyData</h1>
                 <Link to={nextStep}>
-                    <Button size="lg">
+                    <Button>
                         Next Page
                     </Button> 
                 </Link>
             </div>
-            <Sidebar>
-                <Steps 
-                    steps={mainSteps} 
-                    stepId={step} 
-                    subSteps={<Steps steps={subSteps} stepId={subStep} />}
-                />
-            </Sidebar>
-        </div>
+        </Layout>
     );
 }
 

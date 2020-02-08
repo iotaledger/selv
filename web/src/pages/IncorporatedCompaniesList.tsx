@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { Button } from 'rsuite';
+import { Button } from 'antd';
 import useStep from "../utils/useStep";
 import { Layout, Table } from "../components";
 import companies from "../incorporatedCompanies.json"
@@ -21,7 +21,7 @@ const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
                 <div className="companies-cta-wrapper">
                     <h2>Newly Incorporated Companies</h2>
                     <Link to={nextStep}>
-                        <Button size="lg" appearance="subtle" active>
+                        <Button>
                             Register new Company
                         </Button> 
                     </Link>

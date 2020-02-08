@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom'
-import { Button } from 'rsuite';
+import { Button } from 'antd';
 import useStep from "../utils/useStep";
 import { Steps, Sidebar } from "../components";
 
@@ -15,7 +15,7 @@ const CompanyIntro: React.FC = ({ match }: any) => {
             <div className="main-section">
                 <h1>CompanyIntro</h1>
                 <Link to={nextStep}>
-                    <Button size="lg">
+                    <Button>
                         Next Page
                     </Button> 
                 </Link>
