@@ -2,13 +2,12 @@ import Landing from './Landing'
 import IntroShowTodos from './IntroShowTodos'
 import IntroShowMobile from './IntroShowMobile'
 import IntroShowCTA from './IntroShowCTA'
-import IntroShowQR from './IntroShowQR'
+import AppDownloadQR from './AppDownloadQR'
 import CompanyIntro from './CompanyIntro'
 import ProveIdentity from './ProveIdentity'
 import SingInConfirmation from './SingInConfirmation'
 import CompanyData from './CompanyData'
 import CompanyDetails from './CompanyDetails'
-import CompanyCredentials from './CompanyCredentials'
 import CompanyConfirmation from './CompanyConfirmation'
 import BankIntro from './BankIntro'
 import IncorporatedCompanies from './IncorporatedCompaniesList'
@@ -18,13 +17,12 @@ export {
     IntroShowTodos,
     IntroShowMobile,
     IntroShowCTA,
-    IntroShowQR,
+    AppDownloadQR,
     ProveIdentity,
     SingInConfirmation,
     CompanyIntro,
     CompanyData,
     CompanyDetails,
-    CompanyCredentials,
     CompanyConfirmation,
     BankIntro,
     IncorporatedCompanies,
