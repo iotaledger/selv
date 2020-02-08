@@ -10,7 +10,7 @@ import companies from "../incorporatedCompanies.json"
  */
 const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
     const { nextStep } = useStep(match); 
-    const [nextStepCTA, setNextStep] = useState(true);
+    const [nextStepCTA, setNextStep] = useState(false);
 
     useEffect(() => {
         async function setNextStepCTA() {
