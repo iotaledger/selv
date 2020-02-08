@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import { Button } from 'antd';
-import useStep from "../utils/useStep";
 import { Layout } from "../components";
 import checkmark from '../assets/checkmark.svg'
 import selv from '../assets/selv.svg'
@@ -10,7 +9,17 @@ import selv from '../assets/selv.svg'
  * Component which will display a CompanyConfirmation.
  */
 const CompanyConfirmation: React.FC = ({ match }: any) => {
-    const { nextStep } = useStep(match); 
+    const [companyId, setCompanyId] = useState(null)
+
+    useEffect(() => {
+        async function getCompanyId() {
+            const companyData = await localStorage.getItem('companyData')
+            if (companyData) {
+                setCompanyId((JSON.parse(companyData))?.companyId)
+            }
+        } 
+        getCompanyId();
+    }, [])
 
     return (
         <Layout theme="companyHouse" match={match} step={2}>
@@ -21,7 +30,7 @@ const CompanyConfirmation: React.FC = ({ match }: any) => {
                     <img src={selv} alt="Selv app logo" />
                     <h3>Your new credentials are sent to Selv app</h3>
                 </div>
-                <Link to={nextStep}>
+                <Link to={`/details/company/${companyId}`}>
                     <Button>
                         Continue
                     </Button> 
