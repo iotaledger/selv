@@ -1,12 +1,18 @@
 @import 'globals';
 
+// components
 @import './text';
 @import './table';
 @import './sidebar';
-@import './companies';
 @import './header';
 @import './footer';
 @import './buttons';
+
+// pages
+@import './companies';
+@import './scanQRcode';
+@import './introPage';
+@import './confirmation';
 
 html {
   background: none !important;
@@ -21,6 +27,8 @@ body {
   overflow-x: hidden !important;
   height: 100%;
   width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
   &.cookie-bar-bottom-bar {
     margin-top: 70px;
