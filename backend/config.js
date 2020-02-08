@@ -3,6 +3,6 @@ module.exports = {
   serverPort: 8080,
   websocketPort: 8000,
   did: {
-    keyId: 'didi'
+    keyId: 'selv'
   }
 }
