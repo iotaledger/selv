@@ -11,6 +11,10 @@ button {
     @include themify($themes) {
         background-color: themed('buttonBackgroundColor') !important;  
         height: themed('buttonHeight');
+
+        &:hover {
+            background-color: themed('secondaryColor') !important;
+        }
     }
 
 }
