@@ -87,7 +87,7 @@ export const createCredential = async (schemaName, data) => {
     const verifiableCredential = VerifiableCredential.Create(credential, proof)
     const verifiableCredentialJSON = verifiableCredential.EncodeToJSON()
 
-    await storeCredential(schemaName, { userData, credential: verifiableCredentialJSON })
+    await storeCredential(schemaName, { data, credential: verifiableCredentialJSON })
     return { status: 'success' }
   } catch (error) {
     console.log('Error', error)
