@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import { Nav } from 'rsuite';
-import useStep from "../utils/useStep";
-import { Layout } from "../components";
+import { Layout, NextStepDrawer } from "../components";
 import companies from "../incorporatedCompanies.json"
 import back from '../assets/back.svg';
 
@@ -27,13 +26,19 @@ interface CompanyData {
 const CompanyData: React.FC = ({ match }: any) => {
     const [companyData, setCompanyData] = useState();
     const [activeTab, setActiveTab] = useState('overview');
-    const { mainSteps } = useStep(match); 
+    const [nextStep, setNextStep] = useState(false);
     const companyId = match?.params?.companyId;
 
     useEffect(() => {
         async function setCompanyInfo(companyId: string) {
             const data: CompanyData | undefined = await companies.find(company => company.id === companyId)
             setCompanyData(data)
+
+            const companyHouse = await localStorage.getItem('companyHouse')
+            console.log('companyHouse', companyHouse)
+            if (companyHouse && companyHouse === 'completed') {
+                setNextStep(true)
+            }
         } 
         setCompanyInfo(companyId)
     }, [companyId])
@@ -56,19 +61,24 @@ const CompanyData: React.FC = ({ match }: any) => {
 
     return (
         <Layout theme="companyHouse" match={match} step={2}>
-            <div className="company-details-wrapper">
-                <Link to={'/progress/companies/2'} className="company-details-back bold">
-                    <img src={back} alt="" />&nbsp;&nbsp;&nbsp;Back
-                </Link>
-                <h2>{companyData?.name}</h2>
-                <p className="company-number-wrapper">
-                    Company number <span className="company-number">{companyData?.companyNumber}</span>
-                </p>
-                <CustomNav active={activeTab} onSelect={handleSelect} />
-                <div className="company-details">
-                    {renderActiveComponent()}
+            <React.Fragment>
+                <div className="company-details-wrapper">
+                    <Link to={'/progress/company/list/2'} className="company-details-back bold">
+                        <img src={back} alt="" />&nbsp;&nbsp;&nbsp;Back
+                    </Link>
+                    <h2>{companyData?.name}</h2>
+                    <p className="company-number-wrapper">
+                        Company number <span className="company-number">{companyData?.companyNumber}</span>
+                    </p>
+                    <CustomNav active={activeTab} onSelect={handleSelect} />
+                    <div className="company-details">
+                        {renderActiveComponent()}
+                    </div>
                 </div>
-            </div>
+                {
+                    nextStep && <NextStepDrawer link={'/progress/bank/prove/3'} />
+                }
+            </React.Fragment>
         </Layout>
     );
 }
