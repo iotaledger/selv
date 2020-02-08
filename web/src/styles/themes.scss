@@ -14,6 +14,10 @@ $primary-font-color-snsBank: #585858;
 $secondary-font-color-snsBank: #BBBBBB;
 
 $themes: (
+    demo: (
+        buttonBackgroundColor: $primary-color-companyHouse,
+        buttonHeight: 43px,
+    ),
     companyHouse: (
         fontFamily: $font-family-companyHouse,
 
