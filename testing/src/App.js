@@ -66,7 +66,12 @@ const App = () => {
         UserName: {
           FirstName: 'Bob',
           LastName: 'Smith'
-        }
+        },
+        UserDOB: {
+          Date: '15/09/1972',
+        },
+        Birthplace: 'Wakanda',
+        Nationality: 'wakandian'
       }
     })
     console.log('PersonalData result', result.status)
@@ -74,8 +79,12 @@ const App = () => {
     result = await createCredential('Address', {
       Language: 'English',
       UserAddress: {
-        City: 'Berlin',
-        Country: 'Germany'
+        City: 'Leicester',
+        Country: 'England',
+        State: '',
+        Postcode: 'LE2 6QT',
+        Street: 'Main Street',
+        House: '77'
       }
     })
     console.log('Address result', result.status)
