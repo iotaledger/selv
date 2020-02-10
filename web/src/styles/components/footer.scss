@@ -7,7 +7,7 @@
 
     @include themify($themes) {
         background-color: themed('footerBackgroundColor');  
-        height: themed('footerHeight');
+        min-height: themed('footerHeight');
     }
 
     .logo {

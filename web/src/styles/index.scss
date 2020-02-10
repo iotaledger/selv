@@ -1,18 +1,19 @@
-@import 'globals';
+@import './helpers/globals';
 
 // components
-@import './text';
-@import './table';
-@import './sidebar';
-@import './header';
-@import './footer';
-@import './buttons';
+@import './components/text';
+@import './components/table';
+@import './components/sidebar';
+@import './components/header';
+@import './components/footer';
+@import './components/buttons';
 
 // pages
-@import './companies';
-@import './scanQRcode';
-@import './introPage';
-@import './confirmation';
+@import './pages/companies';
+@import './pages/scanQRcode';
+@import './pages/introPage';
+@import './pages/confirmation';
+@import './pages/formPage';
 
 html {
   background: none !important;
@@ -98,5 +99,14 @@ button {
   justify-content: space-between;;
   align-items: center;
   background-color: #fff;
+  overflow-x: auto;
+
+  .content {
+    padding: 50px;
+    min-width: 535px;
+    @include themify($themes) {
+      margin-top: themed('headerHeight');
+    }
+  }
 }
 
