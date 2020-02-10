@@ -5,14 +5,14 @@ const SocketIO = require('socket.io')
 const { Server } = require('http');
 const { storeOwnIdentity, getOwnIdentity } = require('./helper')
 const { createIdentity, createAccessCredential } = require('./DID')
-const config = require('../config')
+const { websocketPort } = require('../config')
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const app = express()
 app.use(cors());
-app.use(bodyParser.json({ limit: '30mb' }));
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -105,6 +105,5 @@ app.get('/connection', async (req, res) => {
     });
   }
 })
-
 
 module.exports = app

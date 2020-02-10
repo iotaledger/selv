@@ -1,6 +1,6 @@
 const backend = require('./src')
-const config = require('./config')
+const { serverPort } = require('./config')
 
-backend.listen(config.serverPort,
-  () => console.log(`DINaaS backend running on port ${config.serverPort}!`)
+backend.listen(serverPort,
+  () => console.log(`DINaaS backend running on port ${serverPort}!`)
 )
