@@ -4,10 +4,11 @@ import icon from '../assets/formIcon.svg'
 
 const Icon = () => <img src={icon} alt="" />
 
-const PrefilledForm = ({ form, dataFields, labels }: {
+const PrefilledForm = ({ form, dataFields, labels, shortFields }: {
     form: any;
     dataFields: any;
     labels: { [ key: string ]: string; }
+    shortFields: string[]
 }) => {
     const { getFieldDecorator, setFieldsValue } = form;
 
@@ -20,7 +21,11 @@ const PrefilledForm = ({ form, dataFields, labels }: {
             <Form layout='vertical'>
                 { 
                     Object.keys(dataFields).map((field: string) => (
-                        <Form.Item label={labels[field]} key={field}>
+                        <Form.Item 
+                            label={labels[field]} 
+                            key={field} 
+                            className={shortFields.includes(field) ? 'short-field' : ''}
+                        >
                             { getFieldDecorator(field, {})(
                                 <Input disabled suffix={<Icon />} />
                             ) }
