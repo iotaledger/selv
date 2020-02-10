@@ -15,8 +15,6 @@ import useStep from "../utils/useStep";
  */
 const ProveIdentity: React.FC = ({ history, match }: any) => {
     const { nextStep } = useStep(match); 
-    const [challengeNonce, setChallengeNonce] = useState('')
-    const [password, setPassword] = useState('')
     const [message, setMessage] = useState('Waiting for login...')
     const [qrContent, setQrContent] = useState('');
     const [channel, setChannel] = useState('');
@@ -88,10 +86,8 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
             await setChannel(channelId);
 
             const challenge = randomstring.generate(30) 
-            await setChallengeNonce(challenge)
 
             const payloadPassword = randomstring.generate() 
-            await setPassword(payloadPassword)
 
             const newQrContent = JSON.stringify({ 
                 channelId, 
