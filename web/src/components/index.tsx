@@ -6,6 +6,7 @@ import Layout from './Layout'
 import Loading from './Loading'
 import NextStepDrawer from './NextStepDrawer'
 import PrefilledUserDataForm from './PrefilledUserDataForm'
+import Form from './Form'
 
 export { 
     Sidebar,
@@ -16,4 +17,5 @@ export {
     Loading,
     NextStepDrawer,
     PrefilledUserDataForm,
+    Form,
 }
