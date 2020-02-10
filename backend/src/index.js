@@ -22,27 +22,11 @@ app.use((req, res, next) => {
     next();
 });
 
-const processOwnIdentity = async () => {
-  try {
-    const did = await getOwnIdentity()
-    if (!did) {
-      const identity = await createIdentity()
-      console.log('New identity created', identity)
-      storeOwnIdentity(identity)
-    }
-  } catch (e) {
-    console.error('processOwnIdentity', e)
-  }
-}
-
-processOwnIdentity()
-
-console.log('Websocket server starting', config.websocketPort)
+console.log('Websocket server starting', websocketPort)
 
 const server = new Server(app);
 const socketServer = SocketIO(server);
-server.listen(config.websocketPort);
-// const server = io.listen(config.websocketPort)
+server.listen(websocketPort);
 const mobileClients = new Map()
 const desktopClients = new Map()
 
