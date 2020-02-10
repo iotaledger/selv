@@ -22,7 +22,9 @@ export default ({ children, match, step, theme }: {
             <div className="page-wrapper">
                 <div className="main-section">
                     <Header theme={theme} />
-                    {children}
+                    <div className="content">
+                        {children}
+                    </div>
                     <Footer theme={theme} />
                 </div>
                 {
