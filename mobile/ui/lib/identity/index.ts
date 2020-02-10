@@ -18,7 +18,7 @@ import {
 } from "@iota/identity";
 import { KEY_ID, IOTA_NODE_URL } from '~/lib/config';
 import Keychain from '~/lib/keychain';
-import { Schemas, SchemaNames, BankAccountSchema } from '~/lib/identity/schemas';
+import { Schemas, SchemaNames } from '~/lib/identity/schemas';
 
 export type Identity = {
     seed: string;
@@ -102,9 +102,9 @@ export const retrieveIdentity = (identifier: string): Promise<Identity> => {
 };
 
 /**
- * Creates credentials
+ * Creates credential
  * 
- * @method createCredentials
+ * @method createCredential
  * 
  * @param {Identity} issuer 
  * @param {SchemaNames} schemaName 
@@ -113,7 +113,7 @@ export const retrieveIdentity = (identifier: string): Promise<Identity> => {
  * 
  * @returns {Promise<VerifiableCredentialDataModel>}
  */
-export const createCredentials = (
+export const createCredential = (
     issuer: Identity,
     schemaName: SchemaNames,
     data: any,
@@ -128,15 +128,15 @@ export const createCredentials = (
         // Set the private key, this enables the keypair to sign. 
         keypair.SetPrivateKey(issuer.privateKey);
 
-        const credentialsData = {
+        const credentialData = {
             did: issuerDID.GetDID().GetDID(),
             ...data
         };
 
-        const credentials = Credential.Create(
-            new Schema(schemaName, BankAccountSchema),
+        const credential = Credential.Create(
+            new Schema(schemaName, Schemas[schemaName]),
             issuerDID.GetDID(),
-            credentialsData,
+            credentialData,
             revocationAddress
         );
 
@@ -147,9 +147,9 @@ export const createCredentials = (
                 issuerKeyId: issuer.keyId
             });
 
-        proof.Sign(credentials.EncodeToJSON()) // Signs the JSON document
+        proof.Sign(credential.EncodeToJSON()) // Signs the JSON document
 
-        const verifiableCredential = VerifiableCredential.Create(credentials, proof)
+        const verifiableCredential = VerifiableCredential.Create(credential, proof)
 
         return verifiableCredential.EncodeToJSON();
 
@@ -157,29 +157,29 @@ export const createCredentials = (
 };
 
 /**
- * Stores credentials in keychain
+ * Stores credential in keychain
  * 
- * @method storeCredentials
+ * @method storeCredential
  * 
  * @param {string} credentialId 
- * @param {VerifiableCredentialDataModel} credentials
+ * @param {VerifiableCredentialDataModel} credential
  * 
  * @returns {Promise<{ value: boolean }>}
  */
-export const storeCredentials = (credentialId: string, credentials: VerifiableCredentialDataModel): Promise<{ value: boolean }> => {
-    return Keychain.set(credentialId, JSON.stringify(credentials));
+export const storeCredential = (credentialId: string, credential: VerifiableCredentialDataModel): Promise<{ value: boolean }> => {
+    return Keychain.set(credentialId, JSON.stringify(credential));
 }
 
 /**
- * Retrieves credentials from keychain
+ * Retrieves credential from keychain
  * 
- * @method retrieveCredentials
+ * @method retrieveCredential
  * 
  * @param {string} credentialId 
  * 
  * @returns {Promise<VerifiableCredentialDataModel>}
  */
-export const retrieveCredentials = (credentialId: string): Promise<VerifiableCredentialDataModel> => {
+export const retrieveCredential = (credentialId: string): Promise<VerifiableCredentialDataModel> => {
     return Keychain.get(credentialId).then((data) => parse(data.value));
 }
 
@@ -210,7 +210,8 @@ export const createVerifiablePresentations = (
 
         SchemaManager.GetInstance().GetSchema('DIDAuthenticationCredential').AddTrustedDID(issuerDID.GetDID());
 
-        const verifiableCredentials = SignDIDAuthentication(issuerDID, issuer.keyId, challengeNonce);
+        const verifiableCredential = SignDIDAuthentication(issuerDID, issuer.keyId, challengeNonce);
+
         const restCredentials = Object.keys(schemaNamesWithCredentials)
             .reduce((acc: VerifiableCredential[], schemaName: SchemaNames) => {
                 const credentials: VerifiableCredentialDataModel = schemaNamesWithCredentials[schemaName];
@@ -231,7 +232,7 @@ export const createVerifiablePresentations = (
 
 
         // Create presentation
-        const presentation = Presentation.Create([verifiableCredentials, ...restCredentials])
+        const presentation = Presentation.Create([verifiableCredential, ...restCredentials])
         const presentationProof = ProofTypeManager.GetInstance()
             .CreateProofWithBuilder('EcdsaSecp256k1VerificationKey2019', {
                 issuer: issuerDID,

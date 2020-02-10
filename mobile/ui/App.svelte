@@ -15,18 +15,18 @@
   } from "@iota/identity";
   import Keychain from "~/lib/keychain";
   import {
-    createCredentials,
+    createCredential,
     createVerifiablePresentations,
     Identity,
     retrieveIdentity,
     createIdentity,
     storeIdentity,
-    storeCredentials,
-    retrieveCredentials,
+    storeCredential,
+    retrieveCredential,
     parse
   } from "~/lib/identity";
   import { encrypt, parseLink, QRLink } from "~/lib/helpers";
-  import { SchemaNames } from "~/lib/identity/schemas";
+  import { Schemas, SchemaNames } from "~/lib/identity/schemas";
   import Button from "~/components/button";
   import Scanner from "~/components/scanner";
   import io from "socket.io-client";
@@ -37,6 +37,7 @@
   let socket = null;
   let channelId;
   let password;
+  let requestedCredentials = Object.keys(Schemas); // Default to all schemas
 
   function handleScannerData(event) {
     const parsedLink = parseLink(event.detail);
@@ -44,6 +45,7 @@
     if (parsedLink) {
       channelId = parsedLink.channelId;
       password = parsedLink.password;
+      requestedCredentials = parsedLink.requestedCredentials;
 
       establishConnection();
       registerMobileClient(channelId);
@@ -57,32 +59,100 @@
       .catch(console.error);
   }
 
-  function processCredentials() {
+  function processCredential() {
     const schemaName = SchemaNames.BANK_ACCOUNT;
 
+    const _createAndStore = (schemaName, identity, data) => {
+      return createCredential(identity, schemaName, data).then(credential => {
+        return storeCredential(schemaName, credential).then(() =>
+          console.log(
+            `Credential with schema name ${schemaName} successfully created!`
+          )
+        );
+      });
+    };
+
     retrieveIdentity("did")
-      .then(identity =>
-        createCredentials(identity, schemaName, {
+      .then(identity => {
+        // Create credential for address
+        _createAndStore(SchemaNames.ADDRESS, identity, {
+          language: "English",
+          locale: "en",
+          address: {
+            city: "Islamabad",
+            state: "Punjab",
+            country: "Pakistan",
+            postCode: "44000",
+            street: "02"
+          }
+        });
+
+        // Create credential for bank account
+        _createAndStore(SchemaNames.BANK_ACCOUNT, identity, {
           language: "English",
           locale: "en",
           bank: {
-            name: "foo",
-            accountType: "current",
+            name: "Foo Bank",
+            accountType: "Current",
             accountNumber: "XXXX-XXXX"
           }
-        })
-      )
-      .then(credentials => storeCredentials(schemaName, credentials))
-      .then(() => console.log("Credentials successfully created!"))
+        });
+
+        // Create credential for company
+        _createAndStore(SchemaNames.COMPANY, identity, {
+          language: "English",
+          locale: "en",
+          company: {
+            name: "Foo Company",
+            address: "Street # 02, Block # C, NPF"
+          }
+        });
+
+        // Create credential for contact details
+        _createAndStore(SchemaNames.CONTACT_DETAILS, identity, {
+          language: "English",
+          locale: "en",
+          contacts: {
+            email: "Foo@baz.com",
+            phone: "+92-446-99900000"
+          }
+        });
+
+        // Create credential for insurance
+        _createAndStore(SchemaNames.INSURANCE, identity, {
+          language: "English",
+          locale: "en",
+          insurance: {
+            name: "Insurer",
+            startDate: "10/10/1993"
+          }
+        });
+
+        // Create credential for personal data
+        _createAndStore(SchemaNames.PERSONAL_DATA, identity, {
+          language: "English",
+          locale: "en",
+          personalInfo: {
+            username: {
+              title: "Mr.",
+              firstName: "Umair",
+              lastName: "Sarfraz"
+            },
+            dob: {
+              date: "02/02/1993"
+            }
+          }
+        });
+      })
       .catch(console.error);
   }
 
   function processVerifiablePresentations() {
     retrieveIdentity("did").then(identity => {
-      Object.values(SchemaNames)
+      requestedCredentials
         .reduce((promise, schemaName) => {
           return promise.then(acc => {
-            return retrieveCredentials(schemaName)
+            return retrieveCredential(schemaName)
               .then(credentials => {
                 acc[schemaName] = credentials;
 
@@ -113,6 +183,7 @@
             password,
             JSON.stringify(verifiablePresentations)
           );
+
           sendVerifiablePresentations(channelId, payload);
         })
         .catch(console.error);
@@ -168,7 +239,7 @@
 
 <main>
   <button on:click={processIdentity}>Create Own Identity</button>
-  <button on:click={processCredentials}>Process Credentials</button>
+  <button on:click={processCredential}>Process Credentials</button>
   <button on:click={processVerifiablePresentations}>
     Create Verifiable Presentation
   </button>
