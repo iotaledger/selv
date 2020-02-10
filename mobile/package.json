@@ -15,8 +15,9 @@
     "@capacitor/core": "^1.4.0",
     "@capacitor/ios": "^1.4.0",
     "@iota/identity": "iotaledger/identity.ts",
-    "capacitor-secure-storage-plugin": "^0.3.0",
+    "browserify-aes": "^1.2.0",
     "capacitor-camera-preview": "^0.2.0",
+    "capacitor-secure-storage-plugin": "^0.3.0",
     "qr-scanner": "rihardsgravis/qr-scanner",
     "socket.io-client": "^2.3.0",
     "svelte": "^3.18.1"

@@ -1,4 +1,5 @@
 <script>
+  import { onDestroy } from "svelte";
   import {
     Credential,
     GenerateECDSAKeypair,
@@ -21,15 +22,33 @@
     createIdentity,
     storeIdentity,
     storeCredentials,
-    retrieveCredentials
+    retrieveCredentials,
+    parse
   } from "~/lib/identity";
+  import { encrypt, parseLink, QRLink } from "~/lib/helpers";
   import { SchemaNames } from "~/lib/identity/schemas";
   import Button from "~/components/button";
   import Scanner from "~/components/scanner";
   import io from "socket.io-client";
   import { urlPortRegex } from "../libs/utils";
+  import { WEBSOCKETS_URL } from "~/lib/config";
 
   let displayScanner = false;
+  let socket = null;
+  let channelId;
+  let password;
+
+  function handleScannerData(event) {
+    const parsedLink = parseLink(event.detail);
+
+    if (parsedLink) {
+      channelId = parsedLink.channelId;
+      password = parsedLink.password;
+
+      establishConnection();
+      registerMobileClient(channelId);
+    }
+  }
 
   function processIdentity() {
     createIdentity()
@@ -88,19 +107,48 @@
             Date.now().toString()
           )
         )
-        .then(() =>
-          console.log("Successfully created verifiable presentations!")
-        )
+        .then(verifiablePresentations => {
+          console.log("Successfully created verifiable presentations!");
+          const payload = encrypt(
+            password,
+            JSON.stringify(verifiablePresentations)
+          );
+          sendVerifiablePresentations(channelId, payload);
+        })
         .catch(console.error);
     });
   }
+
+  function establishConnection() {
+    socket = io(WEBSOCKETS_URL, {
+      reconnection: true,
+      reconnectionDelay: 500,
+      jsonp: false,
+      reconnectionAttempts: Infinity,
+      transports: ["websocket"]
+    });
+  }
+
+  function registerMobileClient(channelId) {
+    socket.emit("registerMobileClient", { channelId });
+  }
+
+  function sendVerifiablePresentations(channelId, payload) {
+    socket.emit("verifiablePresentations", { channelId, payload });
+  }
+
+  onDestroy(() => {
+    if (socket) {
+      socket.disconnect();
+    }
+  });
 </script>
 
 <style>
   main {
     text-align: center;
     padding: 1em;
-    max-width: 240px;
+    max-width: 540px;
     margin: 0 auto;
   }
 
@@ -125,17 +173,13 @@
     Create Verifiable Presentation
   </button>
   {#if displayScanner}
-    <Scanner
-      onQrScan={data => {
-        if (data.match(urlPortRegex)) {
-          io.socket.connect(data);
-        }
-      }} />
+    <Scanner on:message={handleScannerData} />
   {:else}
-    <Button
-      onClick={() => {
+    <button
+      on:click={() => {
         displayScanner = true;
-      }}
-      label="Scan QR" />
+      }}>
+      Scan QR
+    </button>
   {/if}
 </main>
