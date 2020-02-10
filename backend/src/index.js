@@ -73,12 +73,23 @@ socketServer.on('connection', (socket) => {
     desktopSocket && desktopSocket.emit('verifiablePresentation', payload)
     console.info('Verifiable Presentation sent to desktop client')
   })
+
+  socket.on('createCredential', async (data) => {
+    const { channelId, payload } = data
+    const mobileClient = mobileClients.get(channelId)
+    const mobileSocket = mobileClient.socket
+    mobileSocket && mobileSocket.emit('createCredential', payload)
+    console.info('Create Credential request sent to mobile client', channelId)
+  })
+
+  socket.on('createCredentialConfirmation', async (data) => {
+    const { channelId, payload } = data
+    const desktopClient = desktopClients.get(channelId)
+    const desktopSocket = desktopClient.socket
+    desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload)
+    console.info('Create Credential Confirmation sent to desktop client', channelId)
+  })
 })
-
-
-//       const socket = clients.get(idInput)
-//       const { credential, serverRoot } = await createAccessCredential()
-//       socket && socket.emit('credential', { credential })
 
 /*
 Check if mobile client is connected
