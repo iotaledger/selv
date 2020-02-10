@@ -15,12 +15,6 @@ const App = () => {
   const [ioClient, setIoClient] = useState(null)
 
   useEffect(() => {
-    if (ioClient) {
-      ioClient.on('error', async (payload) => {
-          console.error('WebSocket error', payload)
-      })
-    }
-
     // Removing the listener before unmounting the component in order to avoid addition of multiple listener
     return () => {
       ioClient.disconnect();
@@ -47,6 +41,16 @@ const App = () => {
       setIoClient(newIoClient)
 
       newIoClient.emit('registerMobileClient', { channelId })
+
+      newIoClient.on('error', async (payload) => {
+          console.error('WebSocket error', payload)
+      })
+    
+      newIoClient.on('createCredential', async (payload) => {
+        console.log('createCredential', payload)
+        const status = await processCustomCredential(payload)
+        newIoClient.emit('createCredentialConfirmation', { channelId, payload: status })
+      })
     } else {
       console.log('No websocket connection details')
     }
@@ -56,6 +60,13 @@ const App = () => {
     console.log('Creating identity')
     const result = await createIdentity()
     console.log('processIdentity result', result.status)
+  } 
+
+  async function processCustomCredential({ schemaName, data }) {
+    console.log('Creating custom verifiable credential for', schemaName)
+    const result = await createCredential(schemaName, data)
+    console.log(`${schemaName} result`, result.status)
+    return result
   } 
 
   async function processCredential() {
