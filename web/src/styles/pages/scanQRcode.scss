@@ -27,4 +27,12 @@
     h1, h2 {
         margin-bottom: 20px;
     }
+
+    h2 {
+        @include themify($themes) {
+            color: themed('trinaryColor');  
+            font-size: themed('h2TextSize');
+            line-height: themed('h2LineHeight');;
+        }
+    }
 }
