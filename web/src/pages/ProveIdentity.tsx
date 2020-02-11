@@ -18,8 +18,9 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
     const [message, setMessage] = useState('Waiting for login...')
     const [qrContent, setQrContent] = useState('');
     const [channel, setChannel] = useState('');
+    const [password, setPassword] = useState();
     // const [ioClient, setIoClient] = useState({})
-    const [requestedCredentials] = useState(['Address', 'PersonalData', 'ContactDetails'])
+    const [requestedCredentials] = useState(['Address', 'PersonalData', 'ContactDetails', 'Company'])
     // const { connectWebSocket, ioClient }: any = useContext(AppContext)
 
     let ioClient: any
@@ -48,7 +49,7 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
 
           ioClient.on('verifiablePresentation', async (payload: any) => {
             setMessage('Verifying credentials...')
-            let verifiablePresentation = await decrypt('HerpaDerperDerpaHerpaDerperDerpa', payload)
+            let verifiablePresentation = await decrypt(password, payload)
             verifiablePresentation = JSON.parse(verifiablePresentation)
             console.log('verifiablePresentation', verifiablePresentation)
             const evaluationResult: any = await evaluateCredential(verifiablePresentation, requestedCredentials, 'HerpaDerperDerp' )
@@ -88,6 +89,7 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
             const challenge = randomstring.generate(30) 
 
             const payloadPassword = randomstring.generate() 
+            setPassword(payloadPassword)
 
             const newQrContent = JSON.stringify({ 
                 channelId, 

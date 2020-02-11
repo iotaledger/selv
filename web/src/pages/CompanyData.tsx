@@ -6,8 +6,6 @@ import useStep from "../utils/useStep";
 import { flattenObject, encrypt, decrypt } from "../utils/helper";
 import { Layout, Form, PrefilledForm } from "../components";
 
-const password = 'HerpaDerperDerpaHerpaDerperDerpa'
-
 interface ICompanyData {
     "CompanyNumber": string;
     "CompanyName": string;
@@ -61,6 +59,7 @@ const labels = {
 const CompanyData: React.FC = ({ history, match }: any) => {
     const { nextStep } = useStep(match); 
     const [prefilledData, setPrefilledData] = useState({})
+    const [password, setPassword] = useState();
 
     let ioClient: any
 
@@ -130,6 +129,7 @@ const CompanyData: React.FC = ({ history, match }: any) => {
     async function getChannelId() {
         const storedChannelDetails = await localStorage.getItem('WebSocket_DID') || null;
         const channelDetails = storedChannelDetails && JSON.parse(storedChannelDetails);
+        setPassword(channelDetails?.password)
         return channelDetails?.channelId
     }
 
