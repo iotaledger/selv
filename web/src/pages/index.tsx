@@ -9,7 +9,7 @@ import SingInConfirmation from './SingInConfirmation'
 import CompanyData from './CompanyData'
 import CompanyDetails from './CompanyDetails'
 import CompanyConfirmation from './CompanyConfirmation'
-import BankIntro from './BankIntro'
+import BankData from './BankData'
 import IncorporatedCompanies from './IncorporatedCompaniesList'
 
 export { 
@@ -24,6 +24,6 @@ export {
     CompanyData,
     CompanyDetails,
     CompanyConfirmation,
-    BankIntro,
+    BankData,
     IncorporatedCompanies,
  }

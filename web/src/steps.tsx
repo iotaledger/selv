@@ -7,7 +7,7 @@ import {
   SingInConfirmation,
   CompanyData,
   CompanyConfirmation,
-  BankIntro,
+  BankData,
   IncorporatedCompanies,
 } from './pages'
 
@@ -21,7 +21,8 @@ export const routes = [
   { path: '/progress/company/signin/2', page: SingInConfirmation }, 
   { path: '/progress/company/data/2', page: CompanyData }, 
   { path: '/progress/company/success/2', page: CompanyConfirmation }, 
-  { path: '/progress/bank/prove/3', page: BankIntro }, 
+  { path: '/progress/bank/prove/3', page: ProveIdentity }, 
+  { path: '/progress/bank/data/3', page: BankData }, 
 ]
 
 export const subSteps = [
