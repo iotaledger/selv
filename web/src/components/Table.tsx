@@ -40,12 +40,12 @@ const StatusCell = ({ ...props }) => {
     );
 };
 
-const TableInstance = ({ data, onRowClick }: {
+const TableInstance = ({ data, onRowClick, loading }: {
     data?: { CompanyName: string, CompanyCreationDate: string, CompanyType: string, CompanyStatus: string }[];
-    onRowClick: (rowData: object) => void
+    onRowClick: (rowData: object) => void;
+    loading?: boolean;
 }) => {
     const [displayLength, setDisplayLength] = useState(5)
-    const [loading, setLoading] = useState(false)
     const [page, setPage] = useState(1)
 
     function handleChangePage(dataKey: number) {
