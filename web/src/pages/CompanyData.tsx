@@ -165,7 +165,6 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                     Object.keys(prefilledFormData.dataFields).length && 
                     <PrefilledForm { ...prefilledFormData } />
                 }
-                <p className="notice bold small">Credentials provided by Selv ID</p>
 
                 <h3 className="section-header">Company Details</h3>
                 <Form { ...emptyFormData } />

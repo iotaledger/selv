@@ -33,6 +33,7 @@ const PrefilledForm = ({ form, dataFields, labels, shortFields }: {
                     ))
                 }
             </Form>
+            <p className="notice bold small">Credentials provided by Selv ID</p>
         </div>
     )
 }
