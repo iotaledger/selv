@@ -22,10 +22,9 @@
     createIdentity,
     storeIdentity,
     storeCredential,
-    retrieveCredential,
-    parse
+    retrieveCredential
   } from "~/lib/identity";
-  import { encrypt, parseLink, QRLink } from "~/lib/helpers";
+  import { parse, encrypt, parseLink, QRLink } from "~/lib/helpers";
   import { Schemas, SchemaNames } from "~/lib/identity/schemas";
   import Button from "~/components/button";
   import Scanner from "~/components/scanner";

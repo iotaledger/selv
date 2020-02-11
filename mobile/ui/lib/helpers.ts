@@ -1,6 +1,3 @@
-import {
-    parse
-} from "~/lib/identity";
 import { createCipheriv, createDecipheriv } from 'browserify-aes';
 
 export type QRLink = {
@@ -8,6 +5,24 @@ export type QRLink = {
     challenge: string;
     password: string;
     requestedCredentials: string[];
+};
+
+export const urlPortRegex: RegExp = new RegExp("(https?://.*):(\d*)\/?(.*)");
+
+/**
+ * Parses serialised data
+ *
+ * @method parse
+ *
+ * @param {string} data
+ * @returns {object}
+ */
+export const parse = (data: string): any => {
+    try {
+        return JSON.parse(data);
+    } catch (e) {
+        return null;
+    }
 };
 
 /**

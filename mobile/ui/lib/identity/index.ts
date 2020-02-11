@@ -19,6 +19,7 @@ import {
 import { KEY_ID, IOTA_NODE_URL } from '~/lib/config';
 import Keychain from '~/lib/keychain';
 import { Schemas, SchemaNames } from '~/lib/identity/schemas';
+import { parse } from '~/lib/helpers';
 
 export type Identity = {
     seed: string;
@@ -30,22 +31,6 @@ export type Identity = {
 
 export type SchemaNamesWithCredentials = {
     [key in SchemaNames]: VerifiableCredentialDataModel;
-};
-
-/**
- * Parses serialised data
- *
- * @method parse
- *
- * @param {string} data
- * @returns {object}
- */
-export const parse = (data: string): any => {
-    try {
-        return JSON.parse(data);
-    } catch (e) {
-        return null;
-    }
 };
 
 /**
