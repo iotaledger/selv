@@ -14,10 +14,10 @@ const CompanyCell = ({ ...props }) => {
         }} >
             <div className="cell-content">
                 <p className="company-name">
-                    {props.rowData.name}
+                    {props.rowData.CompanyName}
                 </p>
                 <p className="company-type">
-                    {props.rowData.type}
+                    {props.rowData.CompanyType}
                 </p>
             </div>
         </Cell>
@@ -32,8 +32,8 @@ const StatusCell = ({ ...props }) => {
             justifyContent: 'center'
         }} >
             <div className="cell-content status-wrapper">
-                <p className={`status ${props.rowData.status.toLowerCase()}`}>
-                    {props.rowData.status}
+                <p className={`status ${props.rowData.CompanyStatus.toLowerCase()}`}>
+                    {props.rowData.CompanyStatus}
                 </p>
             </div>
         </Cell>
@@ -41,7 +41,7 @@ const StatusCell = ({ ...props }) => {
 };
 
 const TableInstance = ({ data, onRowClick }: {
-    data?: { name: string, date: string, type: string, status: string }[];
+    data?: { CompanyName: string, CompanyCreationDate: string, CompanyType: string, CompanyStatus: string }[];
     onRowClick: (rowData: object) => void
 }) => {
     const [displayLength, setDisplayLength] = useState(5)
@@ -83,7 +83,7 @@ const TableInstance = ({ data, onRowClick }: {
 
                     <Column width={200} fixed>
                         <HeaderCell>Incorporated on</HeaderCell>
-                        <Cell dataKey="date" style={{ 
+                        <Cell dataKey="CompanyCreationDate" style={{ 
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'center'
