@@ -70,7 +70,7 @@ export const parseLink = (link: string): QRLink => {
 export const encrypt = (key: string, payload: string): string => {
     const IV_LENGTH = 16; // For AES, this is always 16
     const iv = crypto.getRandomValues(new Uint8Array(IV_LENGTH));
-
+    
     const cipher = createCipheriv('aes-256-cbc', Buffer.from(key), iv);
     let encrypted = cipher.update(payload);
 
