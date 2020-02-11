@@ -6,6 +6,7 @@ const { Server } = require('http');
 const { storeOwnIdentity, getOwnIdentity } = require('./helper')
 const { createIdentity, createAccessCredential } = require('./DID')
 const { websocketPort } = require('../config')
+const { createCompany } = require('./database')
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -88,6 +89,12 @@ socketServer.on('connection', (socket) => {
     const desktopSocket = desktopClient.socket
     desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload)
     console.info('Create Credential Confirmation sent to desktop client', channelId)
+  })
+
+  socket.on('createCompany', async (data) => {
+    const { payload } = data
+    await createCompany(payload)
+    console.info('Company created', payload)
   })
 })
 
