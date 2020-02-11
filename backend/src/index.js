@@ -3,7 +3,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const SocketIO = require('socket.io')
 const { Server } = require('http');
-const { storeOwnIdentity, getOwnIdentity } = require('./helper')
 const { createIdentity, createAccessCredential } = require('./DID')
 const { websocketPort } = require('../config')
 const { createCompany, readData, readAllData } = require('./database')
