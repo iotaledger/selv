@@ -1,20 +1,38 @@
-import path from 'path';
-import sqlite3 from 'sqlite3';
-import { database } from '../config.json';
+const path = require('path');
+const sqlite3 = require('sqlite3');
+const { database } = require('../config')
+const incorporatedCompanies = require('./incorporatedCompanies.json');
 
 sqlite3.verbose();
 const db = new sqlite3.Database(
     path.resolve(__dirname, database), async error => {
-        if (error) {
-            return console.error('New database Error', error);
+        try {
+            if (error) {
+                return console.error('New database Error', error);
+            }
+    
+            await db.run(`CREATE TABLE IF NOT EXISTS company (
+                CompanyNumber TEXT PRIMARY KEY, 
+                CompanyName TEXT, 
+                CompanyCreationDate TEXT, 
+                CompanyType TEXT, 
+                CompanyStatus TEXT,
+                CompanyOwner TEXT, 
+                CompanyOwners TEXT, 
+                CompanyAddress TEXT, 
+                CompanyBusiness TEXT, 
+                tangle TEXT
+                )`);
+            await db.run('CREATE TABLE IF NOT EXISTS did (root TEXT, privateKey TEXT, keyId TEXT, seed TEXT, mamState TEXT)');
+            await db.run('CREATE TABLE IF NOT EXISTS credentials (id TEXT, credential TEXT)');
+        } catch (error) {
+            console.log('create', error);
+            return null;
         }
-        await db.run('CREATE TABLE IF NOT EXISTS company (id TEXT PRIMARY KEY, name TEXT, role TEXT, location TEXT, address TEXT)');
-        await db.run('CREATE TABLE IF NOT EXISTS did (root TEXT, privateKey TEXT, keyId TEXT, seed TEXT, next_root TEXT, start INTEGER)');
-        await db.run('CREATE TABLE IF NOT EXISTS credentials (id TEXT, credential TEXT)');
     }
 );
 
-export const close = async () => {
+exports.close = async () => {
     db.close(error => {
         if (error) {
             return console.error(error.message);
@@ -22,15 +40,46 @@ export const close = async () => {
     });
 };
 
-export const createCompany = async ({ root, privateKey, keyId, seed, next_root, start }) => {
+exports.createCompany = async ({
+    CompanyNumber, 
+    CompanyName, 
+    CompanyCreationDate, 
+    CompanyType, 
+    CompanyStatus, 
+    CompanyOwner, 
+    CompanyOwners,
+    CompanyAddress,
+    CompanyBusiness,
+    tangle
+}) => {
     const insert = `
         INSERT INTO company (
-        root, privateKey, keyId, seed, next_root, start)
-        VALUES (?, ?, ?, ?, ?, ?)`;
-    await db.run(insert, [root, privateKey, keyId, seed, next_root, start]);
+            CompanyNumber, 
+            CompanyName, 
+            CompanyCreationDate, 
+            CompanyType, 
+            CompanyStatus, 
+            CompanyOwner, 
+            CompanyOwners,
+            CompanyAddress,
+            CompanyBusiness,
+            tangle
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    await db.run(insert, [
+        CompanyNumber, 
+        CompanyName, 
+        CompanyCreationDate, 
+        CompanyType, 
+        CompanyStatus, 
+        CompanyOwner, 
+        CompanyOwners,
+        CompanyAddress,
+        CompanyBusiness,
+        tangle
+    ]);
 };
 
-export const createDID = async ({ root, privateKey, keyId, seed, next_root, start }) => {
+exports.createDID = async ({ root, privateKey, keyId, seed, next_root, start }) => {
     const insert = `
         INSERT INTO did (
         root, privateKey, keyId, seed, next_root, start)
@@ -38,11 +87,11 @@ export const createDID = async ({ root, privateKey, keyId, seed, next_root, star
     await db.run(insert, [root, privateKey, keyId, seed, next_root, start]);
 };
 
-export const createCredential = async ({ id, credential }) => {
+exports.createCredential = async ({ id, credential }) => {
     await db.run('INSERT INTO credentials (id, credential) VALUES (?, ?)', [id, credential]);
 };
 
-export const writeData = async (table, data) => {
+exports.writeData = async (table, data) => {
     try {
         console.log('writeData', table, data);
         switch (table) {
@@ -52,7 +101,7 @@ export const writeData = async (table, data) => {
             case 'credential':
                 await createCredential(data);
                 return;
-            case'company':
+            case 'company':
             default:
                 await createCompany(data);
                 return;
@@ -63,7 +112,7 @@ export const writeData = async (table, data) => {
     }
 };
 
-export const readData = async (table, searchField = null) => {
+exports.readData = async (table, searchField = null) => {
     return new Promise((resolve, reject) => {
         try {
             let query = `SELECT * FROM ${table} ORDER BY rowid DESC LIMIT 1`;
@@ -84,7 +133,7 @@ export const readData = async (table, searchField = null) => {
     });
 };
 
-export const readAllData = async (table) => {
+exports.readAllData = async (table) => {
     return new Promise((resolve, reject) => {
         try {
             db.all(`SELECT * FROM ${table}`, (err, rows) => {
@@ -101,7 +150,7 @@ export const readAllData = async (table) => {
     });
 };
 
-export const removeData = (table) => {
+exports.removeData = (table) => {
     return new Promise(async resolve => {
         await db.run(`DELETE FROM ${table}`);
         resolve();
@@ -142,3 +191,12 @@ import { removeData } from './databaseHelper';
 await removeData(entry);
 
 */
+
+// const processData = async () => {
+//     incorporatedCompanies.map(async company => {
+//         console.log('creating', company)
+//         await createCompany(company)
+//     })
+// }
+
+// processData()
