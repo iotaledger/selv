@@ -114,7 +114,9 @@ const CompanyData: React.FC = ({ history, match }: any) => {
             console.error('WebSocket error', error)
         })
 
-        ioClient.on('createCredentialConfirmation', async (payload: any) => {
+        ioClient.on('createCredentialConfirmation', async (encryptedPayload: any) => {
+            let payload = await decrypt(password, encryptedPayload)
+            payload = JSON.parse(payload)
             console.log('createCredentialConfirmation', payload)
             if (payload?.status === 'success') {
                 console.log('Company data setup completed, redirecting to', nextStep)
