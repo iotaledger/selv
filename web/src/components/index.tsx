@@ -7,6 +7,8 @@ import Loading from './Loading'
 import NextStepDrawer from './NextStepDrawer'
 import Form from './Form'
 import PrefilledForm from './PrefilledForm'
+import Checkbox from './Checkbox'
+import AccountType from './AccountType'
 
 export { 
     Sidebar,
@@ -18,4 +20,6 @@ export {
     NextStepDrawer,
     Form,
     PrefilledForm,
+    Checkbox,
+    AccountType,
 }
