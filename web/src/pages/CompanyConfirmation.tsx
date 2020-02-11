@@ -13,9 +13,9 @@ const CompanyConfirmation: React.FC = ({ match }: any) => {
 
     useEffect(() => {
         async function getCompanyId() {
-            const companyData = await localStorage.getItem('companyData')
-            if (companyData) {
-                setCompanyId((JSON.parse(companyData))?.companyId)
+            const companyDetails = await localStorage.getItem('companyDetails')
+            if (companyDetails) {
+                setCompanyId((JSON.parse(companyDetails))?.CompanyNumber)
             }
         } 
         getCompanyId();
