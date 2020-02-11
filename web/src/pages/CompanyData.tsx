@@ -3,8 +3,22 @@ import SocketIOClient from 'socket.io-client';
 import axios from 'axios';
 import { serverAPI, websocketURL } from '../config.json'
 import useStep from "../utils/useStep";
-import { flattenObject } from "../utils/helper";
+import { flattenObject, encrypt, decrypt } from "../utils/helper";
 import { Layout, Form, PrefilledForm } from "../components";
+
+const password = 'HerpaDerperDerpaHerpaDerperDerpa'
+
+interface ICompanyData {
+    "CompanyNumber": string;
+    "CompanyName": string;
+    "CompanyCreationDate": string;
+    "CompanyType": string;
+    "CompanyStatus": string;
+    "CompanyOwner": string;
+    "CompanyAddress": string;
+    "CompanyBusiness": string;
+    "CompanyOwners": string[];
+}
 
 const prefilledFields = [
     'FirstName',
@@ -92,7 +106,7 @@ const CompanyData: React.FC = ({ history, match }: any) => {
         console.log('emit createCredential')
         const payload = {
             schemaName: 'Company', 
-            data
+            data: await encrypt(password, JSON.stringify(data))
         }
         ioClient.emit('createCredential', { channelId, payload })
     
@@ -102,6 +116,12 @@ const CompanyData: React.FC = ({ history, match }: any) => {
 
         ioClient.on('createCredentialConfirmation', async (payload: any) => {
             console.log('createCredentialConfirmation', payload)
+            if (payload?.status === 'success') {
+                console.log('Company data setup completed, redirecting to', nextStep)
+                await localStorage.setItem('companyHouse', 'completed')
+                await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload }))
+                history.push(nextStep)
+            }
         })
     } 
 
