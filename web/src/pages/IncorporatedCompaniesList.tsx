@@ -28,7 +28,7 @@ const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
     }
 
     return (
-        <Layout theme="companyHouse" match={match} step={2}>
+        <Layout match={match} step={2}>
             <React.Fragment>
                 <div className="companies-page-wrapper">
                     <div className="companies-cta-wrapper">

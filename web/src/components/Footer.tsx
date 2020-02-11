@@ -10,8 +10,8 @@ const Footer = ({ children, theme }: {
         <div className="footer-wrapper">
             {children}
             <div className="logo">
-                { theme === 'companyHouse' && <img src={companyHouse} alt="Company House Logo" /> }
-                { theme === 'snsBank' && <img src={snsBank} alt="SNS Bank Logo" /> }
+                { theme === 'company' && <img src={companyHouse} alt="Company House Logo" /> }
+                { theme === 'bank' && <img src={snsBank} alt="SNS Bank Logo" /> }
             </div>
         </div>
     );

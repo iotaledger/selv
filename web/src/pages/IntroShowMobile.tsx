@@ -12,7 +12,7 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
     const { nextStep } = useStep(match); 
     
     return (
-        <Layout theme="demo" match={match}>
+        <Layout match={match}>
             <React.Fragment>
                 <h2>Looks like a lot of work,<br />unless Bob is using Selv 🧐</h2>
                 <img src={mobile} alt="Mobile phone" />

@@ -22,7 +22,7 @@ const CompanyConfirmation: React.FC = ({ match }: any) => {
     }, [])
 
     return (
-        <Layout theme="companyHouse" match={match} step={2}>
+        <Layout match={match} step={2}>
             <div className="company-confirmation-page">
                 <img src={checkmark} alt="Success checkmark" />
                 <h2>Congratulations,<br/>your company is now set up!</h2>

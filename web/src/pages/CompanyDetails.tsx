@@ -68,7 +68,7 @@ const CompanyData: React.FC = ({ match }: any) => {
     }
 
     return (
-        <Layout theme="companyHouse" match={match} step={2}>
+        <Layout customTheme="company" match={match} step={2}>
             <React.Fragment>
                 <div className="company-details-wrapper">
                     <Link to={'/progress/company/list/2'} className="company-details-back bold">

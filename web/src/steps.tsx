@@ -13,8 +13,8 @@ import {
 
 export const routes = [ 
   { path: '/', page: Landing },
-  { path: '/progress/intro/todos/2', page: IntroShowTodos }, 
-  { path: '/progress/intro/app/2', page: IntroShowMobile }, 
+  { path: '/progress/demo/todos/2', page: IntroShowTodos }, 
+  { path: '/progress/demo/app/2', page: IntroShowMobile }, 
   { path: '/progress/company/list/2', page: IncorporatedCompanies }, 
   { path: '/progress/company/app/2', page: AppDownloadQR }, 
   { path: '/progress/company/prove/2', page: ProveIdentity }, 

@@ -5,6 +5,7 @@ interface MatchResult {
     step: string | undefined;
     subStep: string | undefined;
     companyId: string | undefined;
+    theme: string | undefined;
 }
 
 interface Match {
@@ -13,7 +14,7 @@ interface Match {
 
 export default (path: string): MatchResult | null | undefined => {
     const match: Match | null = matchPath(path, {
-        path: "/progress/:category/:page/:step?/:subStep?",
+        path: "/progress/:theme/:page/:step?/:subStep?",
         exact: true,
         strict: false
     });

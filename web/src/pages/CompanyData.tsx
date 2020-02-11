@@ -157,7 +157,7 @@ const CompanyData: React.FC = ({ history, match }: any) => {
     const emptyFormData: any = { dataFields: emptyFields, labels, processValues }
 
     return (
-        <Layout theme="companyHouse" match={match} step={2}>
+        <Layout match={match} step={2}>
             <div className="company-data-page-wrapper">
                 <h2>Set up a private limited company</h2>
                 <h3 className="section-header">Business owner</h3>

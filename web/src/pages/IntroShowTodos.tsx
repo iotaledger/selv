@@ -11,7 +11,7 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
     const { step, nextStep, mainSteps } = useStep(match); 
     
     return (
-        <Layout theme="demo" match={match}>
+        <Layout match={match}>
             <React.Fragment>
                 <h2>You are now Bob<br />and this is your to-do list</h2>
                 <Steps 

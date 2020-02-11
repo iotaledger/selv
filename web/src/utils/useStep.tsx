@@ -7,6 +7,7 @@ interface MatchResult {
     step: string | undefined;
     subStep: string | undefined;
     companyId: string | undefined;
+    theme: string | undefined;
 }
 
 const useStep = (match: any) => {
@@ -14,6 +15,7 @@ const useStep = (match: any) => {
     const [subStep, setSubStep] = useState(0)
     const { subSteps, mainSteps, routes }: any = useContext(Context);
     const [nextStep, setNextStep] = useState('')
+    const [theme, setTheme] = useState('')
   
     useEffect(() => {
         async function setSteps() {
@@ -23,6 +25,9 @@ const useStep = (match: any) => {
             }
             if (matchStepResult?.subStep) {
                 setSubStep(Number(matchStepResult?.subStep))
+            }
+            if (matchStepResult?.theme) {
+                setTheme(matchStepResult?.theme)
             }
     
             const idx = routes.findIndex(({ path }: { path: string; }) => path === match.path)
@@ -34,7 +39,7 @@ const useStep = (match: any) => {
         setSteps()
     }, [match, routes, step, subStep])
 
-  return { step, subStep, nextStep, subSteps, mainSteps };
+  return { step, subStep, nextStep, subSteps, mainSteps, theme };
 };
 
 export default useStep;
