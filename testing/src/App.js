@@ -55,12 +55,14 @@ const App = () => {
           length: 7,
           charset: 'numeric'
         });
-        const CompanyStatus = 'pending'
+        const CompanyStatus = 'Pending'
         const CompanyCreationDate =  (new Date()).toLocaleDateString('en-GB', dateOptions)
         const CompanyOwner = `${userData.data.UserPersonalData.UserName.FirstName} ${userData.data.UserPersonalData.UserName.LastName}`
-        const responsePayload = { 
+        const responsePayload = await encrypt(password, JSON.stringify({ 
           ...status, CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner
-        }
+        }))
+        const decryptedData = await decrypt(password, payload.data)
+        newIoClient.emit('createCompany', { payload: { ...JSON.parse(decryptedData), CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner } })
         newIoClient.emit('createCredentialConfirmation', { channelId, payload: responsePayload })
       })
     } else {
@@ -78,7 +80,7 @@ const App = () => {
     console.log('Creating custom verifiable credential for', schemaName, data)
     const decryptedData = await decrypt(password, data)
     console.log('Decrypted', decryptedData)
-    const result = await createCredential(schemaName, decryptedData)
+    const result = await createCredential(schemaName, JSON.parse(decryptedData))
     console.log(`${schemaName} result`, result.status)
     return result
   } 
