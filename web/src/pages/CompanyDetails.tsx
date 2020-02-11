@@ -6,15 +6,15 @@ import companies from "../incorporatedCompanies.json"
 import back from '../assets/back.svg';
 
 interface CompanyData {
-    "id": string;
-    "name": string;
-    "date": string;
-    "type": string;
-    "status": string;
-    "companyNumber": string;
-    "registeredAddress": string;
-    "natureOfBusiness": string;
-    "people": string[];
+    "CompanyNumber": string;
+    "CompanyName": string;
+    "CompanyCreationDate": string;
+    "CompanyType": string;
+    "CompanyStatus": string;
+    "CompanyOwner": string;
+    "CompanyAddress": string;
+    "CompanyBusiness": string;
+    "CompanyOwners": string[];
     "tangle": {
         "root": string;
     };
@@ -31,13 +31,21 @@ const CompanyData: React.FC = ({ match }: any) => {
 
     useEffect(() => {
         async function setCompanyInfo(companyId: string) {
-            const data: CompanyData | undefined = await companies.find(company => company.id === companyId)
+            const data: CompanyData | undefined = await companies.find(company => company.CompanyNumber === companyId)
             setCompanyData(data)
 
             const companyHouse = await localStorage.getItem('companyHouse')
+            const companyDetails = await localStorage.getItem('companyDetails')
             console.log('companyHouse', companyHouse)
-            if (companyHouse && companyHouse === 'completed') {
+            if (companyDetails && companyHouse && companyHouse === 'completed') {
                 setNextStep(true)
+                const companyDetails = await localStorage.getItem('companyDetails')
+                const data = companyDetails && JSON.parse(companyDetails)
+
+                setCompanyData(data)
+            } else {
+                const data: CompanyData | undefined = await companies.find(company => company.CompanyNumber === companyId)
+                setCompanyData(data)
             }
         } 
         setCompanyInfo(companyId)
@@ -66,9 +74,9 @@ const CompanyData: React.FC = ({ match }: any) => {
                     <Link to={'/progress/company/list/2'} className="company-details-back bold">
                         <img src={back} alt="" />&nbsp;&nbsp;&nbsp;Back
                     </Link>
-                    <h2>{companyData?.name}</h2>
+                    <h2>{companyData?.CompanyName}</h2>
                     <p className="company-number-wrapper">
-                        Company number <span className="company-number">{companyData?.companyNumber}</span>
+                        Company number <span className="company-number">{companyData?.CompanyNumber}</span>
                     </p>
                     <CustomNav active={activeTab} onSelect={handleSelect} />
                     <div className="company-details">
@@ -105,23 +113,23 @@ const CompanyDetails = ({ details }: { details: CompanyData | undefined }) => {
         <React.Fragment>
             <div className="company-details-item">
                 <p>Registered office address</p>
-                <p className="bold">{details?.registeredAddress}</p>
+                <p className="bold">{details?.CompanyAddress}</p>
             </div>
             <div className="company-details-item">
                 <p>Company Type</p>
-                <p className="bold">{details?.type}</p>
+                <p className="bold">{details?.CompanyType}</p>
             </div>
             <div className="company-details-item">
                 <p>Incorporated on</p>
-                <p className="bold">{details?.date}</p>
+                <p className="bold">{details?.CompanyCreationDate}</p>
             </div>
             <div className="company-details-item">
                 <p>Company status</p>
-                <p className={`status ${details?.status.toLowerCase()}`}>{details?.status}</p>
+                <p className={`status ${details?.CompanyStatus.toLowerCase()}`}>{details?.CompanyStatus}</p>
             </div>
             <div className="company-details-item">
                 <p>Nature of business</p>
-                <p className="bold">{details?.natureOfBusiness}</p>
+                <p className="bold">{details?.CompanyBusiness}</p>
             </div>
         </React.Fragment>
     )
@@ -131,11 +139,14 @@ const People = ({ details }: { details: CompanyData | undefined }) => {
     return (
         <React.Fragment>
             {
-                details?.people?.map(person => 
-                    <div key={person} className="company-details-item">
-                        <p className="bold">{person}</p>
-                    </div>
-                )
+                details?.CompanyOwners?.length
+                    ? details?.CompanyOwners?.map(person => 
+                        <div key={person} className="company-details-item">
+                            <p className="bold">{person}</p>
+                        </div>) 
+                    : (<div className="company-details-item">
+                            <p className="bold">{details?.CompanyOwner}</p>
+                        </div>)
             }
         </React.Fragment>
     )
