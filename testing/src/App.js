@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import SocketIOClient from 'socket.io-client';
+import randomstring from 'randomstring';
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
 import { websocketURL } from './config.json'
 import { Form } from './components'
 import { createIdentity, createCredential, createPresentations } from './did'
 import 'rsuite/lib/styles/index.less';
-import { encrypt } from './helper'
+import { encrypt, decrypt, retrieveCredential } from './helper'
 
 // https://randomuser.me/api/
 const App = () => {
@@ -47,9 +48,20 @@ const App = () => {
       })
     
       newIoClient.on('createCredential', async (payload) => {
-        console.log('createCredential', payload)
         const status = await processCustomCredential(payload)
-        newIoClient.emit('createCredentialConfirmation', { channelId, payload: status })
+        const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+        const userData = await retrieveCredential('PersonalData')
+        const CompanyNumber = randomstring.generate({
+          length: 7,
+          charset: 'numeric'
+        });
+        const CompanyStatus = 'pending'
+        const CompanyCreationDate =  (new Date()).toLocaleDateString('en-GB', dateOptions)
+        const CompanyOwner = `${userData.data.UserPersonalData.UserName.FirstName} ${userData.data.UserPersonalData.UserName.LastName}`
+        const responsePayload = { 
+          ...status, CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner
+        }
+        newIoClient.emit('createCredentialConfirmation', { channelId, payload: responsePayload })
       })
     } else {
       console.log('No websocket connection details')
@@ -63,8 +75,10 @@ const App = () => {
   } 
 
   async function processCustomCredential({ schemaName, data }) {
-    console.log('Creating custom verifiable credential for', schemaName)
-    const result = await createCredential(schemaName, data)
+    console.log('Creating custom verifiable credential for', schemaName, data)
+    const decryptedData = await decrypt(password, data)
+    console.log('Decrypted', decryptedData)
+    const result = await createCredential(schemaName, decryptedData)
     console.log(`${schemaName} result`, result.status)
     return result
   } 
