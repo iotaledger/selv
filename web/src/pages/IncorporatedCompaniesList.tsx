@@ -24,7 +24,7 @@ const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
     }, [])
 
     function onRowClick(data: any) {
-        history.push(`/details/company/${data.id}`)
+        history.push(`/details/company/${data.CompanyNumber}`)
     }
 
     return (
