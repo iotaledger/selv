@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import { Button } from 'antd';
 import { Layout } from "../components";
-import checkmark from '../assets/checkmark.svg'
+import checkmark from '../assets/companyCheckmark.svg'
 import selv from '../assets/selv.svg'
 
 /**
