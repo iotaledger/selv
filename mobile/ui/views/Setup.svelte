@@ -199,7 +199,7 @@
     }
 
     function sendVerifiablePresentations(channelId, payload) {
-        socket.emit('verifiablePresentations', { channelId, payload });
+        socket.emit('verifiablePresentation', { channelId, payload });
     }
 
     function initiateListeners() {
