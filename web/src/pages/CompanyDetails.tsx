@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { Nav } from 'rsuite';
 import { Layout, NextStepDrawer } from "../components";
-import companies from "../incorporatedCompanies.json"
 import back from '../assets/back.svg';
+import { serverAPI } from '../config.json'
 
 interface CompanyData {
     "CompanyNumber": string;
@@ -31,21 +32,17 @@ const CompanyData: React.FC = ({ match }: any) => {
 
     useEffect(() => {
         async function setCompanyInfo(companyId: string) {
-            const data: CompanyData | undefined = await companies.find(company => company.CompanyNumber === companyId)
-            setCompanyData(data)
+            const response = await axios.get(`${serverAPI}/company?company=${companyId}`)
+
+            if (response && response?.data?.status === 'success') {
+                const data: CompanyData | undefined = response?.data?.company
+                setCompanyData(data)
+            }
 
             const companyHouse = await localStorage.getItem('companyHouse')
             const companyDetails = await localStorage.getItem('companyDetails')
-            console.log('companyHouse', companyHouse)
             if (companyDetails && companyHouse && companyHouse === 'completed') {
                 setNextStep(true)
-                const companyDetails = await localStorage.getItem('companyDetails')
-                const data = companyDetails && JSON.parse(companyDetails)
-
-                setCompanyData(data)
-            } else {
-                const data: CompanyData | undefined = await companies.find(company => company.CompanyNumber === companyId)
-                setCompanyData(data)
             }
         } 
         setCompanyInfo(companyId)
