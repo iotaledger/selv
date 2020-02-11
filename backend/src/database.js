@@ -1,7 +1,6 @@
 const path = require('path');
 const sqlite3 = require('sqlite3');
 const { database } = require('../config')
-const incorporatedCompanies = require('./incorporatedCompanies.json');
 
 sqlite3.verbose();
 const db = new sqlite3.Database(
@@ -117,7 +116,7 @@ exports.readData = async (table, searchField = null) => {
         try {
             let query = `SELECT * FROM ${table} ORDER BY rowid DESC LIMIT 1`;
             if (searchField) {
-                query = `SELECT * FROM ${table} WHERE id = '${searchField}' ORDER BY rowid DESC LIMIT 1`;
+                query = `SELECT * FROM ${table} WHERE CompanyNumber = '${searchField}' ORDER BY rowid DESC LIMIT 1`;
             }
             db.get(query, (err, row) => {
                 if (err) {

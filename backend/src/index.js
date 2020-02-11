@@ -6,7 +6,7 @@ const { Server } = require('http');
 const { storeOwnIdentity, getOwnIdentity } = require('./helper')
 const { createIdentity, createAccessCredential } = require('./DID')
 const { websocketPort } = require('../config')
-const { createCompany } = require('./database')
+const { createCompany, readData, readAllData } = require('./database')
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -120,6 +120,34 @@ app.get('/connection', async (req, res) => {
       status: 'failure',
       error: JSON.stringify(e),
       mobileClient: null
+    });
+  }
+})
+
+/*
+Check if mobile client is connected
+*/
+app.get('/company', async (req, res) => {
+  try {
+    const companyNumber = req.query.company;
+    if (companyNumber) {
+      const company = await readData('company', companyNumber) 
+      res.json({
+        status: 'success',
+        company
+      });
+    } else {
+      const companies = await readAllData('company')
+      res.json({
+        status: 'success',
+        companies
+      });
+    }
+  } catch (e) {
+    console.error(e)
+    res.json({
+      status: 'failure',
+      error: JSON.stringify(e),
     });
   }
 })
