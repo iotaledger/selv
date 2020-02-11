@@ -6,13 +6,11 @@ export enum SchemaNames {
     INSURANCE = 'Insurance',
     PERSONAL_DATA = 'PersonalData',
     USER_DATA_CREDENTIALS = 'UserDataCredentials'
-};
+}
 
 export const AddressSchema = {
     type: 'object',
-    required: [
-        'did'
-    ],
+    required: ['did'],
     properties: {
         did: {
             type: 'string'
@@ -46,7 +44,7 @@ export const AddressSchema = {
                 },
                 house: {
                     type: 'string'
-                },
+                }
             }
         }
     }
@@ -54,9 +52,7 @@ export const AddressSchema = {
 
 export const BankAccountSchema = {
     type: 'object',
-    required: [
-        'did'
-    ],
+    required: ['did'],
     properties: {
         did: {
             type: 'string'
@@ -78,7 +74,7 @@ export const BankAccountSchema = {
                 },
                 accountNumber: {
                     type: 'string'
-                },
+                }
             }
         }
     }
@@ -86,9 +82,7 @@ export const BankAccountSchema = {
 
 export const CompanySchema = {
     type: 'object',
-    required: [
-        'did'
-    ],
+    required: ['did'],
     properties: {
         did: {
             type: 'string'
@@ -125,7 +119,7 @@ export const CompanySchema = {
                 },
                 status: {
                     type: 'string'
-                },
+                }
             }
         }
     }
@@ -133,9 +127,7 @@ export const CompanySchema = {
 
 export const ContactDetailsSchema = {
     type: 'object',
-    required: [
-        'did'
-    ],
+    required: ['did'],
     properties: {
         did: {
             type: 'string'
@@ -160,7 +152,7 @@ export const ContactDetailsSchema = {
                 },
                 cell: {
                     type: 'string'
-                },
+                }
             }
         }
     }
@@ -168,9 +160,7 @@ export const ContactDetailsSchema = {
 
 export const InsuranceSchema = {
     type: 'object',
-    required: [
-        'did'
-    ],
+    required: ['did'],
     properties: {
         did: {
             type: 'string'
@@ -212,9 +202,7 @@ export const InsuranceSchema = {
 
 export const PersonalDataSchema = {
     type: 'object',
-    required: [
-        'did'
-    ],
+    required: ['did'],
     properties: {
         did: {
             type: 'string'
@@ -269,9 +257,7 @@ export const PersonalDataSchema = {
 
 export const UserDataCredentialsSchema = {
     type: 'object',
-    required: [
-        'did'
-    ],
+    required: ['did'],
     properties: {
         did: {
             type: 'string'
@@ -296,7 +282,7 @@ export const UserDataCredentialsSchema = {
                 },
                 cell: {
                     type: 'string'
-                },
+                }
             }
         },
         personalData: {
@@ -311,7 +297,7 @@ export const UserDataCredentialsSchema = {
                     },
                     lastName: {
                         type: 'string'
-                    },
+                    }
                 }
             },
             dateOfBirth: {
@@ -322,7 +308,7 @@ export const UserDataCredentialsSchema = {
                     },
                     age: {
                         type: 'string'
-                    },
+                    }
                 }
             },
             nationality: {
@@ -368,5 +354,5 @@ export const Schemas = {
     [SchemaNames.CONTACT_DETAILS]: ContactDetailsSchema,
     [SchemaNames.INSURANCE]: InsuranceSchema,
     [SchemaNames.PERSONAL_DATA]: PersonalDataSchema,
-    [SchemaNames.USER_DATA_CREDENTIALS]: UserDataCredentialsSchema,
+    [SchemaNames.USER_DATA_CREDENTIALS]: UserDataCredentialsSchema
 };

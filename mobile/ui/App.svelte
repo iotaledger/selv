@@ -1,14 +1,14 @@
 <script>
-  import { onDestroy } from "svelte";
+    import { onDestroy } from 'svelte';
 
-  import Route from "~/components/Route";
-  import Theme from "~/components/Theme";
+    import Route from '~/components/Route';
+    import Theme from '~/components/Theme';
 
-  import Setup from "~/views/Setup";
+    import Setup from '~/views/Setup';
 </script>
 
 <Theme>
-  <Route route="" primary>
-    <Setup />
-  </Route>
+    <Route route="" primary>
+        <Setup />
+    </Route>
 </Theme>

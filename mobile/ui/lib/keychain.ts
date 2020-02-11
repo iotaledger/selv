@@ -10,4 +10,4 @@ export default {
     set(key: string, value: string): Promise<{ value: boolean }> {
         return SecureStoragePlugin.set({ key, value });
     }
-}
+};

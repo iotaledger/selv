@@ -3,5 +3,10 @@ declare module 'browserify-aes' {
     import { TransformOptions } from 'stream';
 
     export function createCipheriv(algorithm: string, key: CipherKey, iv: BinaryLike | null, options?: CipherCCMTypes): Cipher;
-    export function createDecipheriv(algorithm: string, key: BinaryLike, iv: BinaryLike | null, options?: TransformOptions): Decipher;
+    export function createDecipheriv(
+        algorithm: string,
+        key: BinaryLike,
+        iv: BinaryLike | null,
+        options?: TransformOptions
+    ): Decipher;
 }
