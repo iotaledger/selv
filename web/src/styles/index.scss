@@ -97,7 +97,7 @@ button {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;;
+  justify-content: space-between;
   align-items: center;
   background-color: #fff;
   overflow-x: auto;
@@ -105,6 +105,9 @@ button {
   .content {
     padding: 50px;
     min-width: 535px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
     @include themify($themes) {
       margin-top: themed('headerHeight');
     }
