@@ -13,7 +13,7 @@ export default ({ children, match, customTheme, customStep }: {
     customTheme?: string;
     customStep?: number;
 }) => {
-    const { step, mainSteps, theme, /* subStep, subSteps */ } = useStep(match);
+    const { step, mainSteps, theme } = useStep(match);
 
     ReactGA.pageview(match.path);
 
@@ -33,7 +33,6 @@ export default ({ children, match, customTheme, customStep }: {
                             <Steps 
                                 steps={mainSteps} 
                                 stepId={customStep || step} 
-                                // subSteps={<Steps steps={subSteps} stepId={subStep} />}
                             />
                         </Sidebar>
                     ) : null

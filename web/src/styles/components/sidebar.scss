@@ -2,24 +2,56 @@
     display: flex;
     align-items: center;
     width: 400px;
-    padding: 50px;
+    padding: 50px 50px 10px;
     height: 100vh;
     background-color: #F6F8FC;
-  }
 
-.sidebar-links {
+    .todo-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+
+        img {
+            height: 18px;
+        }
+    }
+}
+
+.sidebar-footer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    margin-bottom: 50px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 130px;
+
+    .sidebar-links {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 50px;
+
+        a {
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 24px;
+            color: #8593AC;
+        }
+    }
 }
   
 .rs-sidenav {
+    @include themify($themes) {
+        margin-top: themed('headerHeight');
+    }
     background-color: #F6F8FC !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100vh;
+    height: 100%;
 }
 
 .steps-wrapper {
