@@ -13,6 +13,9 @@ $trinary-color-snsBank: #64CDF5;
 $primary-font-color-snsBank: #585858;
 $secondary-font-color-snsBank: #BBBBBB;
 
+$notice-color: #4247DC;
+$form-selector-color: #339BB6;
+
 $themes: (
     demo: (
         buttonBackgroundColor: $primary-color-companyHouse,
@@ -30,6 +33,8 @@ $themes: (
         primaryFontColor: $primary-font-color-companyHouse,
         secondaryFontColor: $secondary-font-color-companyHouse,
         linkColor: $primary-color-companyHouse,
+        noticeColor: $notice-color,
+        formSelectorColor: $form-selector-color,
 
         h1TextSize: 36px,
         h1LineHeight: 42px,
@@ -81,6 +86,8 @@ $themes: (
         primaryFontColor: $primary-font-color-snsBank,
         secondaryFontColor: $secondary-font-color-snsBank,
         linkColor: $primary-color-companyHouse,
+        noticeColor: $notice-color,
+        formSelectorColor: $form-selector-color,
 
         h1TextSize: 36px,
         h1LineHeight: 42px,
