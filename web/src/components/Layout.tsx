@@ -15,7 +15,7 @@ export default ({ children, match, customTheme, customStep }: {
 }) => {
     const { step, mainSteps, theme } = useStep(match);
 
-    ReactGA.pageview(match.path);
+    ReactGA.pageview(match.url);
 
     return (
         <div className={`theme-${theme || customTheme}`}>
