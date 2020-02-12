@@ -1,11 +1,13 @@
 import React from 'react'
 import { Form, Button, Checkbox } from 'antd';
 
-const EmptyForm = ({ form, onSubmit }: {
+const CheckboxInstance = ({ form, onSubmit, status, messages }: {
     form: any;
     onSubmit: (values: object) => void;
+    status: string;
+    messages: { [ key: string ]: string; };
 }) => {
-    const { getFieldDecorator, getFieldsError, validateFields, resetFields } = form;
+    const { getFieldDecorator, getFieldsError, validateFields } = form;
 
     function handleSubmit(e: any) {
         e.preventDefault();
@@ -49,6 +51,6 @@ const EmptyForm = ({ form, onSubmit }: {
     )
 }
 
-const WrappedForm = Form.create({name: 'form'})(EmptyForm)
+const WrappedForm = Form.create({name: 'checkbox'})(CheckboxInstance)
 
 export default WrappedForm;

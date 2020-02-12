@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Button, Checkbox, Radio } from 'antd';
 
-const EmptyForm = ({ form, onSubmit }: {
+const RadioGroup = ({ form, onSubmit }: {
     form: any;
     onSubmit: (values: object) => void;
 }) => {
@@ -24,7 +24,7 @@ const EmptyForm = ({ form, onSubmit }: {
         <div className="empty-form">
             <Form onSubmit={handleSubmit}>
                 <Form.Item label="Choose account type" colon={false}>
-                    {getFieldDecorator('account-type', {
+                    {getFieldDecorator('accountType', {
                         rules: [{
                             required: true,
                             message: 'Please choose an account type'
@@ -54,6 +54,6 @@ const EmptyForm = ({ form, onSubmit }: {
     )
 }
 
-const WrappedForm = Form.create({name: 'form'})(EmptyForm)
+const WrappedForm = Form.create({name: 'radioGroup'})(RadioGroup)
 
 export default WrappedForm;
