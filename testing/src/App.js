@@ -11,7 +11,8 @@ import { encrypt, decrypt, retrieveCredential } from './helper'
 
 // https://randomuser.me/api/
 const App = () => {
-  const [password] = useState('HerpaDerperDerpaHerpaDerperDerpa')
+  const [password] = useState("RecJ683STt8cOKMBsPACNE08ysSuJOYr")
+  const [challengeNonce] = useState("Umxl7CiqSm43TjoEyYzX685Mdl8sX0nb")
   const [channelId, setChannelId] = useState(null)
   const [ioClient, setIoClient] = useState(null)
 
@@ -43,27 +44,33 @@ const App = () => {
 
       newIoClient.emit('registerMobileClient', { channelId })
 
-      newIoClient.on('error', async (payload) => {
-          console.error('WebSocket error', payload)
-      })
+      // newIoClient.on('error', async (payload) => {
+      //     console.error('WebSocket error', payload)
+      // })
     
       newIoClient.on('createCredential', async (payload) => {
-        const status = await processCustomCredential(payload)
-        const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-        const userData = await retrieveCredential('PersonalData')
-        const CompanyNumber = randomstring.generate({
-          length: 7,
-          charset: 'numeric'
-        });
-        const CompanyStatus = 'Pending'
-        const CompanyCreationDate =  (new Date()).toLocaleDateString('en-GB', dateOptions)
-        const CompanyOwner = `${userData.data.UserPersonalData.UserName.FirstName} ${userData.data.UserPersonalData.UserName.LastName}`
-        const responsePayload = await encrypt(password, JSON.stringify({ 
-          ...status, CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner
-        }))
-        const decryptedData = await decrypt(password, payload.data)
-        newIoClient.emit('createCompany', { payload: { ...JSON.parse(decryptedData), CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner } })
-        newIoClient.emit('createCredentialConfirmation', { channelId, payload: responsePayload })
+        try {
+          const status = await processCustomCredential(payload)
+          const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+          const userData = await retrieveCredential('PersonalData')
+          const CompanyNumber = randomstring.generate({
+            length: 7,
+            charset: 'numeric'
+          });
+          const CompanyStatus = 'Pending'
+          const CompanyCreationDate =  (new Date()).toLocaleDateString('en-GB', dateOptions)
+          const CompanyOwner = `${userData.data.UserPersonalData.UserName.FirstName} ${userData.data.UserPersonalData.UserName.LastName}`
+          const responsePayload = await encrypt(password, JSON.stringify({ 
+            ...status, CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner
+          }))
+          const decryptedData = await decrypt(password, payload.data)
+          await new Promise(resolve => setTimeout(resolve, 5000));
+          newIoClient.emit('createCompany', { payload: { ...JSON.parse(decryptedData), CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner } })
+          newIoClient.emit('createCredentialConfirmation', { channelId, payload: responsePayload })
+        } catch (error) {
+          console.log(error.toString())
+          newIoClient.emit('errorMessage', { channelId, payload: error.toString() })
+        }
       })
     } else {
       console.log('No websocket connection details')
@@ -77,12 +84,16 @@ const App = () => {
   } 
 
   async function processCustomCredential({ schemaName, data }) {
+    try {
     console.log('Creating custom verifiable credential for', schemaName, data)
     const decryptedData = await decrypt(password, data)
     console.log('Decrypted', decryptedData)
     const result = await createCredential(schemaName, JSON.parse(decryptedData))
     console.log(`${schemaName} result`, result.status)
     return result
+    } catch (error) {
+      throw new Error(error);
+    }
   } 
 
   async function processCredential() {
@@ -129,10 +140,10 @@ const App = () => {
   } 
 
   async function processPresentation() {
-    const schemas = ['Address', 'PersonalData', 'ContactDetails']
+    const schemas = ['Address', 'PersonalData', 'ContactDetails', 'Company', 'Bank'] // , 'Company'
 
     console.log('Creating verifiable presentation')
-    const presentationJSON = await createPresentations(schemas, 'HerpaDerperDerp')
+    const presentationJSON = await createPresentations(schemas, challengeNonce)
     console.log('createPresentation result')
     console.log(JSON.stringify(presentationJSON))
     const payload = await encrypt(password, JSON.stringify(presentationJSON))
