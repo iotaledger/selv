@@ -45,7 +45,7 @@ const EmptyForm = ({ form, onSubmit }: {
                     )}
                 </Form.Item>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                    <Button htmlType="submit" disabled={hasErrors(getFieldsError())}>
                         Continue
                     </Button>
                 </Form.Item>

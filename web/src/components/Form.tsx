@@ -36,7 +36,7 @@ const EmptyForm = ({ form, dataFields, labels, processValues }: {
                     ))
                 }
                 <Form.Item>
-                    <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                    <Button htmlType="submit" disabled={hasErrors(getFieldsError())}>
                         Register new Company
                     </Button>
                 </Form.Item>
