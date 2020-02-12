@@ -6,18 +6,6 @@ import useStep from "../utils/useStep";
 import { flattenObject, encrypt, decrypt } from "../utils/helper";
 import { Layout, Form, PrefilledForm } from "../components";
 
-interface ICompanyData {
-    "CompanyNumber": string;
-    "CompanyName": string;
-    "CompanyCreationDate": string;
-    "CompanyType": string;
-    "CompanyStatus": string;
-    "CompanyOwner": string;
-    "CompanyAddress": string;
-    "CompanyBusiness": string;
-    "CompanyOwners": string[];
-}
-
 const prefilledFields = [
     'FirstName',
     'LastName',
@@ -35,18 +23,7 @@ const emptyFields = [
     'CompanyBusiness',
 ]
 
-const shortFields = ['Date', 'Nationality']
-
 const labels = {
-    FirstName: 'First Name',
-    LastName: 'Last Name',
-    Date: 'Date of birth',
-    Nationality: 'Nationality',
-    Gender: 'Gender',
-    Birthplace: 'Birthplace',
-    Country: 'Country of residence',
-    Phone: 'Phone number',
-    Address: 'Address',
     CompanyName: 'Company name',
     CompanyAddress: 'Company address',
     CompanyType: 'Company type',
@@ -153,11 +130,11 @@ const CompanyData: React.FC = ({ history, match }: any) => {
         }
     }
 
-    const prefilledFormData: any = { dataFields: prefilledData, labels, shortFields }
+    const prefilledFormData: any = { dataFields: prefilledData }
     const emptyFormData: any = { dataFields: emptyFields, labels, processValues }
 
     return (
-        <Layout match={match} step={2}>
+        <Layout match={match}>
             <div className="company-data-page-wrapper">
                 <h2>Set up a private limited company</h2>
                 <h3 className="section-header">Business owner</h3>
