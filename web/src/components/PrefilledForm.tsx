@@ -2,13 +2,29 @@ import React, { useEffect } from 'react';
 import { Form, Input } from 'antd';
 import icon from '../assets/formIcon.svg'
 
+const shortFields: string[] = ['Date', 'Nationality']
+
+const labels: { [ key: string ]: string; } = {
+    FirstName: 'First Name',
+    LastName: 'Last Name',
+    Date: 'Date of birth',
+    Nationality: 'Nationality',
+    Gender: 'Gender',
+    Birthplace: 'Birthplace',
+    Country: 'Country of residence',
+    Phone: 'Phone number',
+    Address: 'Address',
+    CompanyName: 'Company name',
+    CompanyAddress: 'Company address',
+    CompanyType: 'Company type',
+    CompanyBusiness: 'Nature of business'
+}
+
 const Icon = () => <img src={icon} alt="" />
 
-const PrefilledForm = ({ form, dataFields, labels, shortFields }: {
+const PrefilledForm = ({ form, dataFields }: {
     form: any;
     dataFields: any;
-    labels: { [ key: string ]: string; }
-    shortFields: string[]
 }) => {
     const { getFieldDecorator, setFieldsValue } = form;
 
