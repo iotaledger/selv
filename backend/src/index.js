@@ -90,6 +90,13 @@ socketServer.on('connection', (socket) => {
     console.info('Create Credential Confirmation sent to desktop client', channelId)
   })
 
+  socket.on('errorMessage', async (data) => {
+    const { channelId, payload } = data
+    const desktopClient = desktopClients.get(channelId)
+    const desktopSocket = desktopClient.socket
+    desktopSocket && desktopSocket.emit('errorMessage', payload)
+  })
+
   socket.on('createCompany', async (data) => {
     const { payload } = data
     await createCompany(payload)
