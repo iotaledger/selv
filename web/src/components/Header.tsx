@@ -4,7 +4,7 @@ import snsBank from '../assets/snsBank.svg'
 
 const Header = ({ children, theme }: {
     children?: JSX.Element | null | undefined;
-    theme: string;
+    theme: string | undefined;
 }) => {
     return (
         <div className="header-wrapper">

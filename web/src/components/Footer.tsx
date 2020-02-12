@@ -4,7 +4,7 @@ import snsBank from '../assets/snsBank.svg'
 
 const Footer = ({ children, theme }: {
     children?: JSX.Element | null | undefined;
-    theme: string;
+    theme: string | undefined;
 }) => {
     return (
         <div className="footer-wrapper">
