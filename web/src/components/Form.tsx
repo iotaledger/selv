@@ -37,7 +37,10 @@ const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }
                     ))
                 }
                 <Form.Item>
-                    <Button htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                    <Button 
+                        htmlType="submit" 
+                        disabled={hasErrors(getFieldsError()) || status === messages.waiting }
+                    >
                         Register new Company
                     </Button>
                 </Form.Item>

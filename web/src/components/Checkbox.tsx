@@ -42,7 +42,10 @@ const CheckboxInstance = ({ form, onSubmit, status, messages }: {
                     )}
                 </Form.Item>
                 <Form.Item>
-                    <Button htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                    <Button 
+                        htmlType="submit" 
+                        disabled={hasErrors(getFieldsError()) || status === messages.waiting}
+                    >
                         Open an account
                     </Button>
                 </Form.Item>
