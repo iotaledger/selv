@@ -8,7 +8,7 @@ import { flattenObject, encrypt, decrypt } from "../utils/helper";
 import { Layout, AccountType, PrefilledForm, Checkbox } from "../components";
 import checkmark from '../assets/bankCheckmark.svg'
 
-const prefilledFields = [
+const personalDataFields = [
     'FirstName',
     'LastName',
     'Date',
@@ -18,23 +18,12 @@ const prefilledFields = [
     'Phone',
 ]
 
-const shortFields = ['Date', 'Nationality']
-
-const labels = {
-    FirstName: 'First Name',
-    LastName: 'Last Name',
-    Date: 'Date of birth',
-    Nationality: 'Nationality',
-    Gender: 'Gender',
-    Birthplace: 'Birthplace',
-    Country: 'Country of residence',
-    Phone: 'Phone number',
-    Address: 'Address',
-    CompanyName: 'Company name',
-    CompanyAddress: 'Company address',
-    CompanyType: 'Company type',
-    CompanyBusiness: 'Nature of business'
-}
+const companyFields = [
+    'CompanyName',
+    'CompanyAddress',
+    'CompanyType',
+    'CompanyBusiness',
+]
 
 /**
  * Component which will display a BankData.
@@ -59,11 +48,13 @@ const BankData: React.FC = ({ history, match }: any) => {
             }
             const flattenData = flattenObject(credentials?.data)
             const address = { Address: `${flattenData.Street} ${flattenData.House}, ${flattenData.City}, ${flattenData.Country}, ${flattenData.Postcode}` }
-            const result = prefilledFields.reduce((acc: any, entry: string) => 
+            const personalData = personalDataFields.reduce((acc: any, entry: string) => 
                 ({ ...acc, [entry]: flattenData[entry] }), {})
-            const { CompanyName, CompanyAddress, CompanyType, CompanyBusiness } = flattenData
-            setPrefilledPersonalData({ ...result, ...address })
-            setPrefilledCompanyData({ CompanyName, CompanyAddress, CompanyType, CompanyBusiness })
+            setPrefilledPersonalData({ ...personalData, ...address })
+            
+            const companyData = companyFields.reduce((acc: any, entry: string) => 
+                ({ ...acc, [entry]: flattenData[entry] }), {})
+            setPrefilledCompanyData({ ...companyData })
         } 
         getData()
 
@@ -147,13 +138,13 @@ const BankData: React.FC = ({ history, match }: any) => {
         accountStep > step && setAccountStep(Number(step))
     }
 
-    const prefilledPersonalFormData: any = { dataFields: prefilledPersonalData, labels, shortFields }
-    const prefilledCompanyFormData: any = { dataFields: prefilledCompanyData, labels, shortFields }
+    const prefilledPersonalFormData: any = { dataFields: prefilledPersonalData }
+    const prefilledCompanyFormData: any = { dataFields: prefilledCompanyData }
     const formData: any = { onSubmit: continueNextStep }
 
     return (
-        <Layout match={match} step={3}>
-            <div className="company-data-page-wrapper">
+        <Layout match={match}>
+            <div className="bank-data-page-wrapper">
                 <h1>Open an account</h1>
                 <Collapse 
                     onChange={onChange}
@@ -193,7 +184,7 @@ const BankData: React.FC = ({ history, match }: any) => {
                             Object.keys(prefilledPersonalFormData.dataFields).length && 
                             <PrefilledForm { ...prefilledPersonalFormData } />
                         }
-                        <Button type="primary" onClick={continueNextStep}>
+                        <Button onClick={continueNextStep}>
                             Continue
                         </Button> 
                     </Collapse.Panel>
@@ -214,7 +205,7 @@ const BankData: React.FC = ({ history, match }: any) => {
                             Object.keys(prefilledCompanyFormData.dataFields).length && 
                             <PrefilledForm { ...prefilledCompanyFormData } />
                         }
-                        <Button type="primary" onClick={continueNextStep}>
+                        <Button onClick={continueNextStep}>
                             Continue
                         </Button> 
                     </Collapse.Panel>
