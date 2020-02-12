@@ -1,16 +1,94 @@
-.company-data-page-wrapper {
+.bank-data-page-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    overflow-x: auto;
+    width: 685px;
+
+    h1 {
+        font-weight: 900;
+        margin-bottom: 20px;
+        @include themify($themes) {
+            color: themed('trinaryColor');  
+        }
+    }
 
     .section-header {
-        margin: 50px 0 35px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        img {
+            height: 48px;
+            width: 46px;
+            margin-right: 30px;
+        }
+
+        span {
+            font-weight: 600;
+            border-radius: 46px;
+            width: 46px;
+            text-align: center;
+            line-height: 39px;
+            height: 45px;
+            margin-right: 30px;
+            @include themify($themes) {
+                color: themed('secondaryColor');  
+                font-size: themed('h1TextSize');
+                border: 2px solid themed('secondaryColor');
+            }
+        }
+        h3 {
+            @include themify($themes) {
+                color: themed('secondaryColor');  
+            }
+        }
     }
 
     .notice {
         text-align: right;
+        max-width: 535px;
+        margin-bottom: 20px;
         @include themify($themes) {
-            color: themed('secondaryColor');  
+            color: themed('noticeColor');  
+        }
+    }
+
+    .ant-collapse-borderless {
+        @include themify($themes) {
+            border-top: 2px solid themed('secondaryFontColor');
+        }
+        background-color: #ffffff;
+
+        .ant-collapse-item {
+            @include themify($themes) {
+                border-bottom: 2px solid themed('secondaryFontColor');
+            }
+
+            &.ant-collapse-item-disabled {
+                .section-header {
+                    span {
+                        @include themify($themes) {
+                            color: themed('secondaryFontColor');
+                            border: 2px solid themed('secondaryFontColor');
+                        }
+                    }
+                    h3 {
+                        @include themify($themes) {
+                            color: themed('secondaryFontColor');  
+                        }
+                    }
+                }
+            }
+
+            .ant-collapse-header {
+                padding: 15px 0;
+            }
+
+            .ant-collapse-content {
+                margin-left: 60px;
+            }
         }
     }
 
@@ -19,6 +97,15 @@
         max-width: 535px;
         flex-wrap: wrap;
         justify-content: space-between;
+
+        label {
+            font-weight: 400;
+            @include themify($themes) {
+                color: themed('primaryFontColor');  
+                font-size: themed('defaultTextSize');
+                line-height: themed('defaultLineHeight');
+            }
+        }
     }
 
     .ant-form-item {
@@ -34,7 +121,7 @@
             @include themify($themes) {
                 color: themed('primaryFontColor');  
                 font-size: themed('defaultTextSize');
-                line-height: themed('defaultLineHeight');;
+                line-height: themed('defaultLineHeight');
             }
         }
 
@@ -46,8 +133,80 @@
             @include themify($themes) {
                 color: themed('primaryFontColor');  
                 font-size: themed('h4TextSize');
-                line-height: themed('h4LineHeight');;
+                line-height: themed('h4LineHeight');
             }
+        }
+    }
+
+    .ant-radio-group {
+        .ant-radio-wrapper {
+            height: 30px;
+            margin: 10px 0;
+
+            .ant-radio {
+                vertical-align: middle;
+
+                .ant-radio-inner {
+                    width: 28px;
+                    height: 28px;
+                    @include themify($themes) {
+                        background-color: #ffffff;
+                        border-color: themed('trinaryColor');  
+                    }
+                }
+
+                &.ant-radio-checked {
+                    .ant-radio-inner {
+                        @include themify($themes) {
+                            background-color: themed('formSelectorColor');
+                            border-color: themed('formSelectorColor');   
+                        }
+
+                        &:after {
+                            top: 6px;
+                            left: 5.5px;
+                            width: 14px;
+                            height: 14px;
+                            background-color: #ffffff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .ant-checkbox {
+        .ant-checkbox-inner {
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            @include themify($themes) {
+                background-color: #ffffff;
+                border-color: themed('trinaryColor');  
+            }
+        }
+
+        &.ant-checkbox-checked {
+            .ant-checkbox-inner {
+                @include themify($themes) {
+                    background-color: themed('formSelectorColor');
+                    border-color: themed('formSelectorColor');  
+                }
+
+                &:after {
+                    top: 47%;
+                    left: 22%;
+                    width: 8px;
+                    height: 15px;
+                }
+            }
+        }
+    }
+
+    .ant-checkbox-wrapper {
+        & > span:last-child {
+            margin-left: 5px;
+            // font-weight: 600;
         }
     }
 
@@ -63,7 +222,11 @@
         min-width: 260px;
     }
 
-    button[type=submit] {
-        margin-top: 30px;
+    button {
+        margin-bottom: 15px;
+
+        &[type=submit] {
+            margin-top: 15px;
+        }
     }
 }
