@@ -10,20 +10,18 @@ const styles = {
   
 // https://rsuitejs.com/en/components/sidenav
 
-const StepsInstance = ({ steps, subSteps, stepId }: {
+const StepsInstance = ({ steps, stepId }: {
     steps: any;
-    subSteps?: JSX.Element | null | undefined;
     stepId: any;
 }) => {
     return (
         <div className="steps-wrapper">
-            <Steps current={stepId} vertical style={styles}>
+            <Steps current={Number(stepId)} vertical style={styles}>
                 {
-                    steps.map((step: any, index: number) => 
+                    steps.map((step: any) => 
                         <Steps.Item 
                             key={step.title} 
                             title={step.title} 
-                            description={step.subSteps && stepId === index ? subSteps : null}
                         />
                     )
                 }
