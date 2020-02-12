@@ -45,7 +45,7 @@ const TableInstance = ({ data, onRowClick, loading }: {
     onRowClick: (rowData: object) => void;
     loading?: boolean;
 }) => {
-    const [displayLength, setDisplayLength] = useState(5)
+    const [displayLength, setDisplayLength] = useState(10)
     const [page, setPage] = useState(1)
 
     function handleChangePage(dataKey: number) {
@@ -70,7 +70,7 @@ const TableInstance = ({ data, onRowClick, loading }: {
             <div className="table-wrapper">
                 <Table 
                     width={710} 
-                    height={500} 
+                    height={950} 
                     data={getData()} 
                     rowHeight={90} 
                     onRowClick={onRowClick}
@@ -114,10 +114,6 @@ const TableInstance = ({ data, onRowClick, loading }: {
         </div>
             <Pagination
                 lengthMenu={[
-                    {
-                        value: 5,
-                        label: 5
-                    },
                     {
                         value: 10,
                         label: 10
