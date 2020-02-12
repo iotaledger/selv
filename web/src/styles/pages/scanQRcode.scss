@@ -1,7 +1,7 @@
 .scan-qr-page-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 
     .qr-code {
@@ -32,7 +32,7 @@
         @include themify($themes) {
             color: themed('trinaryColor');  
             font-size: themed('h2TextSize');
-            line-height: themed('h2LineHeight');;
+            line-height: themed('h2LineHeight');
         }
     }
 }

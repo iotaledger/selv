@@ -10,7 +10,7 @@
     .notice {
         text-align: right;
         @include themify($themes) {
-            color: themed('secondaryColor');  
+            color: themed('noticeColor');  
         }
     }
 
@@ -34,7 +34,7 @@
             @include themify($themes) {
                 color: themed('primaryFontColor');  
                 font-size: themed('defaultTextSize');
-                line-height: themed('defaultLineHeight');;
+                line-height: themed('defaultLineHeight');
             }
         }
 
@@ -46,7 +46,7 @@
             @include themify($themes) {
                 color: themed('primaryFontColor');  
                 font-size: themed('h4TextSize');
-                line-height: themed('h4LineHeight');;
+                line-height: themed('h4LineHeight');
             }
         }
     }
