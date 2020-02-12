@@ -1,20 +1,21 @@
 import React from 'react'
 import { Form, Button, Input } from 'antd';
 
-const EmptyForm = ({ form, dataFields, labels, processValues }: {
+const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }: {
     form: any;
     dataFields: string[];
     labels: { [ key: string ]: string; };
     processValues: (values: object) => void;
+    status: string;
+    messages: { [ key: string ]: string; };
 }) => {
-    const { getFieldDecorator, getFieldsError, validateFields, resetFields } = form;
+    const { getFieldDecorator, getFieldsError, validateFields } = form;
 
     function handleSubmit(e: any) {
         e.preventDefault();
         validateFields((err: any, values: string[]) => {
             if (!err) {
                 processValues(values);
-                // resetFields()
             }
         });
     }
