@@ -24,7 +24,7 @@ const SingInConfirmation: React.FC = ({ history, match }: any) => {
     }, [])
 
     return (
-        <Layout match={match} step={2}>
+        <Layout match={match}>
             <div className="sign-in-confirmation">
                 <h3>Hello, Bob!</h3>
                 <Link to={nextStep}>

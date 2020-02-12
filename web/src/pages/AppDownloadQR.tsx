@@ -16,7 +16,7 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
     const [qrContent] = useState(link);
 
     return (
-        <Layout match={match} step={2}>
+        <Layout match={match}>
             <div className="scan-qr-page-wrapper">
                 <h1>Download the Selv app</h1>
                 <p>Scan this QR code with you camera app to download the app</p>

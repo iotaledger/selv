@@ -116,7 +116,7 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
     }, [nextStep])
 
     return (
-        <Layout match={match} step={2}>
+        <Layout match={match}>
             <div className="scan-qr-page-wrapper">
                 <h2>Provide your Digital Identity credentials</h2>
                 <p>Scan this QR code with <strong>Selv App</strong> to continue</p>
