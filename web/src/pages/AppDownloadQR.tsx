@@ -19,7 +19,7 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
         <Layout match={match}>
             <div className="scan-qr-page-wrapper">
                 <h1>Download the Selv app</h1>
-                <p>Scan this QR code with you camera app to download the app</p>
+                <p>Scan this QR code with you camera to download the app</p>
                 <QRCode text={qrContent} />
 
                 <div className="app-cta-wrapper">
