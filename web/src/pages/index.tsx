@@ -10,7 +10,9 @@ import CompanyData from './CompanyData'
 import CompanyDetails from './CompanyDetails'
 import Confirmation from './Confirmation'
 import BankData from './BankData'
+import InsuranceData from './InsuranceData'
 import IncorporatedCompanies from './IncorporatedCompaniesList'
+import GreatSuccess from './GreatSuccess'
 
 export { 
     Landing,
@@ -25,5 +27,7 @@ export {
     CompanyDetails,
     Confirmation,
     BankData,
+    InsuranceData,
     IncorporatedCompanies,
+    GreatSuccess,
  }
