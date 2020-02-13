@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     width: 400px;
-    padding: 50px 50px 10px;
+    padding: 10px 50px;
     height: 100vh;
     background-color: #F6F8FC;
 
@@ -24,14 +24,14 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 130px;
+    height: 110px;
 
     .sidebar-links {
         width: 90%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        margin-bottom: 50px;
+        margin-bottom: 20px;
 
         a {
             text-transform: uppercase;
@@ -44,14 +44,17 @@
 }
   
 .rs-sidenav {
-    @include themify($themes) {
-        margin-top: themed('headerHeight');
-    }
     background-color: #F6F8FC !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
+
+    .rs-sidenav-body {
+        @include themify($themes) {
+            margin-top: themed('headerHeight');
+        }
+    }
 }
 
 .steps-wrapper {
