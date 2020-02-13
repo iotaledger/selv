@@ -10,6 +10,12 @@ import useInterval from "../utils/useInterval";
 import { Layout, Loading, QRCode } from "../components";
 import useStep from "../utils/useStep";
 
+interface IChannelDetails {
+    channelId :string;
+    challenge :string;
+    password :string;
+    requestedCredentials :string[];
+}
 /**
  * Component which will display a ProveIdentity.
  */
@@ -18,53 +24,49 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
     const [message, setMessage] = useState('Waiting for login...')
     const [qrContent, setQrContent] = useState('');
     const [channel, setChannel] = useState('');
-    const [password, setPassword] = useState();
     // const [ioClient, setIoClient] = useState({})
-    const [requestedCredentials] = useState(['Address', 'PersonalData', 'ContactDetails', 'Company'])
     // const { connectWebSocket, ioClient }: any = useContext(AppContext)
 
     let ioClient: any
 
     const [isRunning, setIsRunning] = useState(false);
 
-    async function connectWebSocket() {
-        const storedChannelDetails = await localStorage.getItem('WebSocket_DID') || null;
-        const channelDetails = storedChannelDetails && JSON.parse(storedChannelDetails);
-    
-        if (channelDetails?.channelId) {
-          ioClient = SocketIOClient(websocketURL, {
+    async function connectWebSocket({ channelId, challenge, password, requestedCredentials }: IChannelDetails) {
+        ioClient = SocketIOClient(websocketURL, {
             reconnection: true,
             reconnectionDelay: 500,
             jsonp: false,
             reconnectionAttempts: Infinity,
             transports: ['websocket']
-          })
+        })
+
+        ioClient.emit('registerDesktopClient', { channelId })
     
-          ioClient.emit('registerDesktopClient', { channelId: channelDetails?.channelId })
-        
-          ioClient.on('error', async (error: any) => {
+        ioClient.on('error', async (error: any) => {
             console.error('WebSocket error', error)
             setMessage('Mobile application connection error')
-          })
+        })
 
-          ioClient.on('verifiablePresentation', async (payload: any) => {
-            setMessage('Verifying credentials...')
-            let verifiablePresentation = await decrypt(password, payload)
-            verifiablePresentation = JSON.parse(verifiablePresentation)
-            console.log('verifiablePresentation', verifiablePresentation)
-            const evaluationResult: any = await evaluateCredential(verifiablePresentation, requestedCredentials, 'HerpaDerperDerp' )
-            console.log('evaluationResult', evaluationResult)
-            const flattenData = flattenObject(evaluationResult)
-            console.log('flattenData', flattenData)
-            if (evaluationResult?.status === 2) { // DID_TRUSTED
-                console.log('Verification completed, redirecting to', nextStep)
-                await localStorage.setItem('credentials', JSON.stringify(evaluationResult))
-                history.push(nextStep)
+        ioClient.on('verifiablePresentation', async (payload: any) => {
+            try {
+                console.log('password', password)
+                setMessage('Verifying credentials...')
+                let verifiablePresentation = await decrypt(password, payload)
+                verifiablePresentation = JSON.parse(verifiablePresentation)
+                console.log('verifiablePresentation', verifiablePresentation)
+                const evaluationResult: any = await evaluateCredential(verifiablePresentation, requestedCredentials, challenge )
+                console.log('evaluationResult', evaluationResult)
+                const flattenData = flattenObject(evaluationResult)
+                console.log('flattenData', flattenData)
+                if (evaluationResult?.status === 2) { // DID_TRUSTED
+                    console.log('Verification completed, redirecting to', nextStep)
+                    await localStorage.setItem('credentials', JSON.stringify(evaluationResult))
+                    history.push(nextStep)
+                }
+            } catch (e) {
+                console.error(e)
             }
-          })
-        } else {
-          console.log('No websocket connection details')
-        }
+        })
     } 
 
     async function checkConnectedStatus() {
@@ -83,24 +85,41 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
     
     useEffect(() => {
         async function setQR() {
+            const companyHouseStatus = await localStorage.getItem('companyHouse')
+            const bankStatus = await localStorage.getItem('bank')
+            const requestedCredentials = ['Address', 'PersonalData', 'ContactDetails']
+
+            if (companyHouseStatus && companyHouseStatus === 'completed') {
+                if (bankStatus && bankStatus === 'completed') {
+                    await localStorage.setItem('insurance', 'pending')
+                    requestedCredentials.push('Company', 'Bank')
+                } else {
+                    await localStorage.setItem('bank', 'pending')
+                    requestedCredentials.push('Company')
+                }
+            } else {
+                await localStorage.setItem('companyHouse', 'pending')
+            }
+
             const channelId = randomstring.generate(7)
             await setChannel(channelId);
 
-            const challenge = randomstring.generate(30) 
+            const challenge = randomstring.generate(10) 
 
             const payloadPassword = randomstring.generate() 
-            setPassword(payloadPassword)
-
-            const newQrContent = JSON.stringify({ 
+            const channelDetails: IChannelDetails = {
                 channelId, 
                 challenge,
                 password: payloadPassword,
-                requestedCredentials,
-            })
+                requestedCredentials, 
+            }
+
+            const newQrContent = JSON.stringify(channelDetails)
             await setQrContent(newQrContent);
-            await localStorage.setItem('companyHouse', 'pending')
             await localStorage.setItem('WebSocket_DID', newQrContent);
-            await connectWebSocket();
+    
+            console.log('channelDetails', channelDetails)
+            await connectWebSocket(channelDetails);
         } 
         if (nextStep) {
             setQR();
