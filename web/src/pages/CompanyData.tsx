@@ -1,10 +1,11 @@
 import React, { useState , useEffect } from "react";
 import SocketIOClient from 'socket.io-client';
 import axios from 'axios';
+import { notification, message } from 'antd';
 import { serverAPI, websocketURL } from '../config.json'
 import useStep from "../utils/useStep";
 import { flattenObject, encrypt, decrypt } from "../utils/helper";
-import { Layout, Form, PrefilledForm } from "../components";
+import { Layout, Loading, Form, PrefilledForm } from "../components";
 
 const prefilledFields = [
     'FirstName',
@@ -30,13 +31,27 @@ const labels = {
     CompanyBusiness: 'Nature of business'
 }
 
+const messages = {
+    waiting: 'Waiting for Selv app...',
+    connectionError: 'Connection error. Please try again!',
+    missing: 'Credentials missing or not trusted'
+}
+
+const notify = (type: string, message: string, description: string) => {
+    return type === 'error' 
+        ? notification.error({ message, description })
+        : notification.warning({ message, description });
+};
+
 /**
  * Component which will display a CompanyData.
  */
 const CompanyData: React.FC = ({ history, match }: any) => {
     const { nextStep } = useStep(match); 
+    const [status, setStatus] = useState('')
     const [prefilledData, setPrefilledData] = useState({})
     const [password, setPassword] = useState();
+    const [channelId, setChannelId] = useState();
 
     let ioClient: any
 
@@ -46,7 +61,9 @@ const CompanyData: React.FC = ({ history, match }: any) => {
             const credentials = credentialsString && await JSON.parse(credentialsString)
             const status = credentials?.status
             if (!status || Number(status) !== 2) {
-                console.log('Credentials missing or not trusted')
+                console.log(messages.missing)
+                message.error({ content: messages.connectionError, key: 'status', duration: 10 });
+                notify('error', 'Error', messages.connectionError)
                 history.goBack()
             }
             const flattenData = flattenObject(credentials?.data)
@@ -55,6 +72,8 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                 ({ ...acc, [entry]: flattenData[entry] }), {})
             
             setPrefilledData({ ...result, ...address })
+
+            await setChannel()
         } 
         getData()
 
@@ -79,23 +98,34 @@ const CompanyData: React.FC = ({ history, match }: any) => {
 
         ioClient.emit('registerDesktopClient', { channelId })
 
-        console.log('emit createCredential')
         const payload = {
             schemaName: 'Company', 
             data: await encrypt(password, JSON.stringify(data))
         }
         ioClient.emit('createCredential', { channelId, payload })
+        
+        const timeout = setTimeout(() => { 
+            setStatus(messages.connectionError)
+            message.error({ content: messages.connectionError, key: 'status' });
+            notify('error', 'Connection error', 'Please try again!')
+        }, 10000)
     
-        ioClient.on('error', async (error: any) => {
-            console.error('WebSocket error', error)
+        ioClient.on('errorMessage', async (error: any) => {
+            clearTimeout(timeout)
+            console.error('Mobile client', error)
+            setStatus(messages.connectionError)
+            message.error({ content: messages.connectionError, key: 'status' });
+            notify('error', 'Mobile client error', error)
         })
 
         ioClient.on('createCredentialConfirmation', async (encryptedPayload: any) => {
+            clearTimeout(timeout)
             let payload = await decrypt(password, encryptedPayload)
             payload = JSON.parse(payload)
             console.log('createCredentialConfirmation', payload)
             if (payload?.status === 'success') {
                 console.log('Company data setup completed, redirecting to', nextStep)
+                message.destroy()
                 await localStorage.setItem('companyHouse', 'completed')
                 await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload }))
                 history.push(nextStep)
@@ -103,11 +133,19 @@ const CompanyData: React.FC = ({ history, match }: any) => {
         })
     } 
 
-    async function getChannelId() {
+    async function setChannel() {
         const storedChannelDetails = await localStorage.getItem('WebSocket_DID') || null;
         const channelDetails = storedChannelDetails && JSON.parse(storedChannelDetails);
         setPassword(channelDetails?.password)
-        return channelDetails?.channelId
+        setChannelId(channelDetails?.channelId)
+        if (channelDetails?.channelId) {
+            const isMobileConnected = await checkConnectedStatus(channelDetails?.channelId)
+            if (!isMobileConnected) {
+                notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app')
+            }
+        } else {
+            notify('error', 'No connection details', 'Please return to the previous page and scan the QR code with your Selv app')
+        }
     }
 
     async function checkConnectedStatus(channelId: string) {
@@ -116,22 +154,19 @@ const CompanyData: React.FC = ({ history, match }: any) => {
     }
 
     async function processValues(fields: object) {
-        console.log('page got data', fields)
-        const channelId = await getChannelId()
-        console.log('got channelId', channelId)
+        await setChannel()
         if (channelId) {
             const isMobileConnected = await checkConnectedStatus(channelId)
-            console.log('isMobileConnected', isMobileConnected)
             if (isMobileConnected) {
+                setStatus(messages.waiting)
+                message.loading({ content: messages.waiting, key: 'status', duration: 0 });
                 await connectWebSocket(channelId, fields);
             }
-        } else {
-            console.log('No websocket connection details')
         }
     }
 
     const prefilledFormData: any = { dataFields: prefilledData }
-    const emptyFormData: any = { dataFields: emptyFields, labels, processValues }
+    const emptyFormData: any = { dataFields: emptyFields, labels, processValues, status, messages }
 
     return (
         <Layout match={match}>
@@ -145,6 +180,16 @@ const CompanyData: React.FC = ({ history, match }: any) => {
 
                 <h3 className="section-header">Company Details</h3>
                 <Form { ...emptyFormData } />
+                {
+                    status && (
+                        <div className="loading">
+                            <p className="bold">{status}</p>
+                            {
+                                status === messages.waiting && <Loading />
+                            }
+                        </div>
+                    )
+                }
             </div>
         </Layout>
     );
