@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import WebFontLoader from 'webfontloader';
 import ReactGA from 'react-ga';
 import { Landing, CompanyDetails } from './pages'
@@ -8,11 +7,8 @@ import GlobalState from './context/globalState'
 import 'antd/dist/antd.css';
 import 'rsuite/lib/styles/index.less';
 import 'rsuite/dist/styles/rsuite-default.css'
-import 'react-toastify/dist/ReactToastify.css';
 import './styles/index.scss';
 import { routes } from './steps'
-
-toast.configure();
 
 WebFontLoader.load({
   google: {
