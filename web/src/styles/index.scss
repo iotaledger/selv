@@ -1,18 +1,21 @@
-@import 'globals';
+@import './helpers/globals';
 
 // components
-@import './text';
-@import './table';
-@import './sidebar';
-@import './header';
-@import './footer';
-@import './buttons';
+@import './components/text';
+@import './components/table';
+@import './components/sidebar';
+@import './components/header';
+@import './components/footer';
+@import './components/buttons';
 
 // pages
-@import './companies';
-@import './scanQRcode';
-@import './introPage';
-@import './confirmation';
+@import './pages/companies';
+@import './pages/scanQRcode';
+@import './pages/introPage';
+@import './pages/confirmation';
+@import './pages/companyData';
+@import './pages/bankData';
+@import './pages/signInPage';
 
 html {
   background: none !important;
@@ -88,15 +91,25 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 100vh;
 }
 
 .main-section {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;;
+  justify-content: space-between;
   align-items: center;
   background-color: #fff;
+  overflow-x: auto;
+
+  .content {
+    padding: 50px;
+    min-width: 535px;
+    display: flex;
+    justify-content: center;
+    @include themify($themes) {
+      margin-top: themed('headerHeight');
+    }
+  }
 }
 

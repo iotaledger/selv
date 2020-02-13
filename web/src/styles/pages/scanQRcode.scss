@@ -1,11 +1,12 @@
 .scan-qr-page-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
+    margin-top: 50px;
 
     .qr-code {
-        margin: 70px 30px 30px;
+        margin: 70px 30px;
     }
 
     .cta {
@@ -26,5 +27,13 @@
 
     h1, h2 {
         margin-bottom: 20px;
+    }
+
+    h2 {
+        @include themify($themes) {
+            color: themed('trinaryColor');  
+            font-size: themed('h2TextSize');
+            line-height: themed('h2LineHeight');
+        }
     }
 }

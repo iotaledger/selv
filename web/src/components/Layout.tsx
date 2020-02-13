@@ -7,31 +7,32 @@ import Steps from './Steps'
 import Sidebar from './Sidebar'
 import useStep from "../utils/useStep";
 
-export default ({ children, match, step, theme }: {
+export default ({ children, match, customTheme, customStep }: {
     children?: JSX.Element | null | undefined;
     match: any;
-    step?: number | null;
-    theme: string;
+    customTheme?: string;
+    customStep?: number;
 }) => {
-    const { mainSteps, /* subStep, subSteps */ } = useStep(match);
+    const { step, mainSteps, theme } = useStep(match);
 
-    ReactGA.pageview(match.path);
+    ReactGA.pageview(match.url);
 
     return (
-        <div className={`theme-${theme}`}>
+        <div className={`theme-${theme || customTheme}`}>
             <div className="page-wrapper">
                 <div className="main-section">
-                    <Header theme={theme} />
-                    {children}
-                    <Footer theme={theme} />
+                    <Header theme={theme || customTheme} />
+                    <div className="content">
+                        {children}
+                    </div>
+                    <Footer theme={theme || customTheme} />
                 </div>
                 {
-                    step ? (
+                    customStep || step ? (
                         <Sidebar>
                             <Steps 
                                 steps={mainSteps} 
-                                stepId={step} 
-                                // subSteps={<Steps steps={subSteps} stepId={subStep} />}
+                                stepId={customStep || step} 
                             />
                         </Sidebar>
                     ) : null

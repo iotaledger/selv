@@ -3,16 +3,16 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const SocketIO = require('socket.io')
 const { Server } = require('http');
-const { storeOwnIdentity, getOwnIdentity } = require('./helper')
 const { createIdentity, createAccessCredential } = require('./DID')
-const config = require('../config')
+const { websocketPort } = require('../config')
+const { createCompany, readData, readAllData } = require('./database')
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const app = express()
 app.use(cors());
-app.use(bodyParser.json({ limit: '30mb' }));
-app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
+app.use(bodyParser.json({ limit: '100mb' }));
+app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -22,27 +22,11 @@ app.use((req, res, next) => {
     next();
 });
 
-const processOwnIdentity = async () => {
-  try {
-    const did = await getOwnIdentity()
-    if (!did) {
-      const identity = await createIdentity()
-      console.log('New identity created', identity)
-      storeOwnIdentity(identity)
-    }
-  } catch (e) {
-    console.error('processOwnIdentity', e)
-  }
-}
-
-processOwnIdentity()
-
-console.log('Websocket server starting', config.websocketPort)
+console.log('Websocket server starting', websocketPort)
 
 const server = new Server(app);
 const socketServer = SocketIO(server);
-server.listen(config.websocketPort);
-// const server = io.listen(config.websocketPort)
+server.listen(websocketPort);
 const mobileClients = new Map()
 const desktopClients = new Map()
 
@@ -89,12 +73,36 @@ socketServer.on('connection', (socket) => {
     desktopSocket && desktopSocket.emit('verifiablePresentation', payload)
     console.info('Verifiable Presentation sent to desktop client')
   })
+
+  socket.on('createCredential', async (data) => {
+    const { channelId, payload } = data
+    const mobileClient = mobileClients.get(channelId)
+    const mobileSocket = mobileClient.socket
+    mobileSocket && mobileSocket.emit('createCredential', payload)
+    console.info('Create Credential request sent to mobile client', channelId)
+  })
+
+  socket.on('createCredentialConfirmation', async (data) => {
+    const { channelId, payload } = data
+    const desktopClient = desktopClients.get(channelId)
+    const desktopSocket = desktopClient.socket
+    desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload)
+    console.info('Create Credential Confirmation sent to desktop client', channelId)
+  })
+
+  socket.on('errorMessage', async (data) => {
+    const { channelId, payload } = data
+    const desktopClient = desktopClients.get(channelId)
+    const desktopSocket = desktopClient.socket
+    desktopSocket && desktopSocket.emit('errorMessage', payload)
+  })
+
+  socket.on('createCompany', async (data) => {
+    const { payload } = data
+    await createCompany(payload)
+    console.info('Company created', payload)
+  })
 })
-
-
-//       const socket = clients.get(idInput)
-//       const { credential, serverRoot } = await createAccessCredential()
-//       socket && socket.emit('credential', { credential })
 
 /*
 Check if mobile client is connected
@@ -122,5 +130,32 @@ app.get('/connection', async (req, res) => {
   }
 })
 
+/*
+Check if mobile client is connected
+*/
+app.get('/company', async (req, res) => {
+  try {
+    const companyNumber = req.query.company;
+    if (companyNumber) {
+      const company = await readData('company', companyNumber) 
+      res.json({
+        status: 'success',
+        company
+      });
+    } else {
+      const companies = await readAllData('company')
+      res.json({
+        status: 'success',
+        companies
+      });
+    }
+  } catch (e) {
+    console.error(e)
+    res.json({
+      status: 'failure',
+      error: JSON.stringify(e),
+    });
+  }
+})
 
 module.exports = app

@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.26.8",
     "identity": "iotaledger/identity.ts",
+    "randomstring": "^1.1.5",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.1",

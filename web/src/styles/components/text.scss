@@ -2,6 +2,11 @@
     font-weight: 700;
 }
 
+.small {
+    font-size: 12px;
+    line-height: 16px;
+}
+
 a {
     outline: none !important;
     font-weight: 400;
@@ -9,7 +14,7 @@ a {
     @include themify($themes) {
       color: themed('linkColor');  
       font-size: themed('defaultTextSize');
-      line-height: themed('defaultLineHeight');;
+      line-height: themed('defaultLineHeight');
     }
   
     &:hover {
@@ -22,7 +27,7 @@ h1 {
     @include themify($themes) {
         color: themed('primaryFontColor');  
         font-size: themed('h1TextSize');
-        line-height: themed('h1LineHeight');;
+        line-height: themed('h1LineHeight');
     }
     @include breakPoint(small) {
         @include font-size(24px);
@@ -33,7 +38,7 @@ h2 {
     @include themify($themes) {
         color: themed('primaryFontColor');  
         font-size: themed('h2TextSize');
-        line-height: themed('h2LineHeight');;
+        line-height: themed('h2LineHeight');
     }
 
     font-weight: bold;
@@ -47,7 +52,7 @@ h3 {
     @include themify($themes) {
         color: themed('primaryFontColor');  
         font-size: themed('h3TextSize');
-        line-height: themed('h3LineHeight');;
+        line-height: themed('h3LineHeight');
     }
     @include breakPoint(small) {
         // @include font-size(24px);
@@ -81,7 +86,7 @@ p {
     @include themify($themes) {
         color: themed('primaryFontColor');  
         font-size: themed('defaultTextSize');
-        line-height: themed('defaultLineHeight');;
+        line-height: themed('defaultLineHeight');
     }
     @include breakPoint(small) {
         // @include font-size(24px);

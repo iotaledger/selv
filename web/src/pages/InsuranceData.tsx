@@ -1,13 +1,14 @@
 import React, { useState , useEffect } from "react";
 import SocketIOClient from 'socket.io-client';
 import axios from 'axios';
-import { notification, message } from 'antd';
+import { Button, Collapse, notification, message } from 'antd';
 import { serverAPI, websocketURL } from '../config.json'
 import useStep from "../utils/useStep";
 import { flattenObject, encrypt, decrypt } from "../utils/helper";
-import { Layout, Loading, Form, PrefilledForm } from "../components";
+import { Layout, Loading, AccountType, PrefilledForm, Checkbox } from "../components";
+import checkmark from '../assets/bankCheckmark.svg'
 
-const prefilledFields = [
+const personalDataFields = [
     'FirstName',
     'LastName',
     'Date',
@@ -17,19 +18,12 @@ const prefilledFields = [
     'Phone',
 ]
 
-const emptyFields = [
+const companyFields = [
     'CompanyName',
     'CompanyAddress',
     'CompanyType',
     'CompanyBusiness',
 ]
-
-const labels = {
-    CompanyName: 'Company name',
-    CompanyAddress: 'Company address',
-    CompanyType: 'Company type',
-    CompanyBusiness: 'Nature of business'
-}
 
 const messages = {
     waiting: 'Waiting for Selv app...',
@@ -44,14 +38,17 @@ const notify = (type: string, message: string, description: string) => {
 };
 
 /**
- * Component which will display a CompanyData.
+ * Component which will display a InsuranceData.
  */
-const CompanyData: React.FC = ({ history, match }: any) => {
+const InsuranceData: React.FC = ({ history, match }: any) => {
     const { nextStep } = useStep(match); 
+    const [accountType, setAccountType] = useState()
     const [status, setStatus] = useState('')
-    const [prefilledData, setPrefilledData] = useState({})
-    const [password, setPassword] = useState();
     const [channelId, setChannelId] = useState();
+    const [password, setPassword] = useState();
+    const [accountStep, setAccountStep] = useState(1)
+    const [prefilledPersonalData, setPrefilledPersonalData] = useState({})
+    const [prefilledCompanyData, setPrefilledCompanyData] = useState({})
 
     let ioClient: any
 
@@ -68,10 +65,13 @@ const CompanyData: React.FC = ({ history, match }: any) => {
             }
             const flattenData = flattenObject(credentials?.data)
             const address = { Address: `${flattenData.Street} ${flattenData.House}, ${flattenData.City}, ${flattenData.Country}, ${flattenData.Postcode}` }
-            const result = prefilledFields.reduce((acc: any, entry: string) => 
+            const personalData = personalDataFields.reduce((acc: any, entry: string) => 
                 ({ ...acc, [entry]: flattenData[entry] }), {})
+            setPrefilledPersonalData({ ...personalData, ...address })
             
-            setPrefilledData({ ...result, ...address })
+            const companyData = companyFields.reduce((acc: any, entry: string) => 
+                ({ ...acc, [entry]: flattenData[entry] }), {})
+            setPrefilledCompanyData({ ...companyData })
 
             await setChannel()
         } 
@@ -98,12 +98,13 @@ const CompanyData: React.FC = ({ history, match }: any) => {
 
         ioClient.emit('registerDesktopClient', { channelId })
 
+        console.log('emit createCredential')
         const payload = {
-            schemaName: 'Company', 
+            schemaName: 'Insurance', 
             data: await encrypt(password, JSON.stringify(data))
         }
         ioClient.emit('createCredential', { channelId, payload })
-        
+    
         const timeout = setTimeout(() => { 
             setStatus(messages.connectionError)
             message.error({ content: messages.connectionError, key: 'status' });
@@ -124,10 +125,9 @@ const CompanyData: React.FC = ({ history, match }: any) => {
             payload = JSON.parse(payload)
             console.log('createCredentialConfirmation', payload)
             if (payload?.status === 'success') {
-                console.log('Company data setup completed, redirecting to', nextStep)
+                console.log('Insurance data setup completed, redirecting to', nextStep)
                 message.destroy()
-                await localStorage.setItem('companyHouse', 'completed')
-                await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload }))
+                await localStorage.setItem('insurance', 'completed')
                 history.push(nextStep)
             }
         })
@@ -165,21 +165,109 @@ const CompanyData: React.FC = ({ history, match }: any) => {
         }
     }
 
-    const prefilledFormData: any = { dataFields: prefilledData }
-    const emptyFormData: any = { dataFields: emptyFields, labels, processValues, status, messages }
+    async function continueNextStep(params: any) {
+        if (accountStep < 4) {
+            setAccountStep(accountStep => accountStep + 1)
+            if (params.accountType) {
+                setAccountType(params.accountType)
+            }
+        } else {
+            const fields = {
+                InsuranceType: accountType
+            }
+            await processValues(fields)
+        }
+    }
+
+    function onChange(step: any) {
+        accountStep > step && setAccountStep(Number(step))
+    }
+
+    const prefilledPersonalFormData: any = { dataFields: prefilledPersonalData }
+    const prefilledCompanyFormData: any = { dataFields: prefilledCompanyData }
+    const formData: any = { onSubmit: continueNextStep, status, messages }
 
     return (
         <Layout match={match}>
-            <div className="company-data-page-wrapper">
-                <h2>Set up a private limited company</h2>
-                <h3 className="section-header">Business owner</h3>
-                {
-                    Object.keys(prefilledFormData.dataFields).length && 
-                    <PrefilledForm { ...prefilledFormData } />
-                }
-
-                <h3 className="section-header">Company Details</h3>
-                <Form { ...emptyFormData } />
+            <div className="insurance-data-page-wrapper">
+                <h1>Open an account</h1>
+                <Collapse 
+                    onChange={onChange}
+                    bordered={false} 
+                    defaultActiveKey={[1]} 
+                    activeKey={accountStep} 
+                    accordion
+                >
+                    <Collapse.Panel
+                        header={(
+                            <div className="section-header">
+                                {
+                                    accountStep > 1 ? <img src={checkmark} alt="" /> : <span>1</span>
+                                }
+                                <h3>Account type</h3>
+                            </div>
+                        )} 
+                        showArrow={false}
+                        key={1}
+                    >
+                        <AccountType { ...formData } />
+                    </Collapse.Panel>
+                    <Collapse.Panel
+                        header={(
+                            <div className="section-header">
+                                {
+                                    accountStep > 2 ? <img src={checkmark} alt="" /> : <span>2</span>
+                                }
+                                <h3>Business owner</h3>
+                            </div>
+                        )} 
+                        showArrow={false}
+                        disabled={accountStep < 2}
+                        key={2}
+                    >
+                        {
+                            Object.keys(prefilledPersonalFormData.dataFields).length && 
+                            <PrefilledForm { ...prefilledPersonalFormData } />
+                        }
+                        <Button onClick={continueNextStep}>
+                            Continue
+                        </Button> 
+                    </Collapse.Panel>
+                    <Collapse.Panel
+                        header={(
+                            <div className="section-header">
+                                {
+                                    accountStep > 3 ? <img src={checkmark} alt="" /> : <span>3</span>
+                                }
+                                <h3>Company Details</h3>
+                            </div>
+                        )} 
+                        showArrow={false}
+                        disabled={accountStep < 3}
+                        key={3}
+                    >
+                        {
+                            Object.keys(prefilledCompanyFormData.dataFields).length && 
+                            <PrefilledForm { ...prefilledCompanyFormData } />
+                        }
+                        <Button onClick={continueNextStep}>
+                            Continue
+                        </Button> 
+                    </Collapse.Panel>
+                    <Collapse.Panel
+                        header={(
+                            <div className="section-header">
+                                <span>4</span>
+                                <h3>Confirm</h3>
+                            </div>
+                        )} 
+                        showArrow={false}
+                        disabled={accountStep < 4}
+                        key={4}
+                    >
+                        <Checkbox { ...formData } />
+                    </Collapse.Panel>
+                </Collapse>
                 {
                     status && (
                         <div className="loading">
@@ -195,4 +283,4 @@ const CompanyData: React.FC = ({ history, match }: any) => {
     );
 }
 
-export default CompanyData;
+export default InsuranceData;

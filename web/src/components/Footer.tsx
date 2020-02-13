@@ -4,14 +4,14 @@ import snsBank from '../assets/snsBank.svg'
 
 const Footer = ({ children, theme }: {
     children?: JSX.Element | null | undefined;
-    theme: string;
+    theme: string | undefined;
 }) => {
     return (
         <div className="footer-wrapper">
             {children}
             <div className="logo">
-                { theme === 'companyHouse' && <img src={companyHouse} alt="Company House Logo" /> }
-                { theme === 'snsBank' && <img src={snsBank} alt="SNS Bank Logo" /> }
+                { theme === 'company' && <img src={companyHouse} alt="Company House Logo" /> }
+                { theme === 'bank' && <img src={snsBank} alt="SNS Bank Logo" /> }
             </div>
         </div>
     );

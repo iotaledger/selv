@@ -10,7 +10,7 @@ const Landing: React.FC = () => {
         <div className="theme-demo page-wrapper">
             <div className="main-section">
                 <h1>Landing Page</h1>
-                <Link to="/progress/intro/todos/2">
+                <Link to="/progress/demo/todos/2">
                     <Button type="primary">
                         Start Demo
                     </Button> 

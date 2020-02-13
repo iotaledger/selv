@@ -8,7 +8,7 @@ import { Steps, Sidebar } from "../components";
  */
 
 const IntroShowCTA = ({ match }: any) => {
-    const { step, subStep, nextStep, subSteps, mainSteps } = useStep(match);  
+    const { step, nextStep, mainSteps } = useStep(match);  
 
     return (
         <div className="page-wrapper">
@@ -24,7 +24,6 @@ const IntroShowCTA = ({ match }: any) => {
                 <Steps 
                     steps={mainSteps} 
                     stepId={step} 
-                    subSteps={<Steps steps={subSteps} stepId={subStep} />}
                 />
             </Sidebar>
         </div>

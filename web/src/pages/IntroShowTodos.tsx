@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from 'react-router-dom'
 import { Button } from 'antd';
 import useStep from "../utils/useStep";
@@ -10,8 +10,13 @@ import { Layout, Steps } from "../components";
 const IntroShowTodos: React.FC = ({ match }: any) => {
     const { step, nextStep, mainSteps } = useStep(match); 
     
+    useEffect(() => {
+        const reset = async () => await localStorage.clear()
+        reset()
+    }, [])
+
     return (
-        <Layout theme="demo" match={match}>
+        <Layout match={match}>
             <React.Fragment>
                 <h2>You are now Bob<br />and this is your to-do list</h2>
                 <Steps 

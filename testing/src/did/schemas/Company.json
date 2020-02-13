@@ -37,6 +37,15 @@
 				},
 				"CompanyStatus" : {
 					"type" : "string"
+				},
+				"CompanyNumber" : {
+					"type" : "number"
+				},
+				"CompanyOwners" : { 
+					"type" : "array",
+					"CompanyOwner" : {
+						"type" : "string"
+					}
 				}
 			}
 		}

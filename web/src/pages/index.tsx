@@ -8,9 +8,11 @@ import ProveIdentity from './ProveIdentity'
 import SingInConfirmation from './SingInConfirmation'
 import CompanyData from './CompanyData'
 import CompanyDetails from './CompanyDetails'
-import CompanyConfirmation from './CompanyConfirmation'
-import BankIntro from './BankIntro'
+import Confirmation from './Confirmation'
+import BankData from './BankData'
+import InsuranceData from './InsuranceData'
 import IncorporatedCompanies from './IncorporatedCompaniesList'
+import GreatSuccess from './GreatSuccess'
 
 export { 
     Landing,
@@ -23,7 +25,9 @@ export {
     CompanyIntro,
     CompanyData,
     CompanyDetails,
-    CompanyConfirmation,
-    BankIntro,
+    Confirmation,
+    BankData,
+    InsuranceData,
     IncorporatedCompanies,
+    GreatSuccess,
  }

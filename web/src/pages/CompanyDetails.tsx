@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { Nav } from 'rsuite';
+import useStep from "../utils/useStep";
 import { Layout, NextStepDrawer } from "../components";
-import companies from "../incorporatedCompanies.json"
 import back from '../assets/back.svg';
+import { serverAPI } from '../config.json'
 
 interface CompanyData {
-    "id": string;
-    "name": string;
-    "date": string;
-    "type": string;
-    "status": string;
-    "companyNumber": string;
-    "registeredAddress": string;
-    "natureOfBusiness": string;
-    "people": string[];
+    "CompanyNumber": string;
+    "CompanyName": string;
+    "CompanyCreationDate": string;
+    "CompanyType": string;
+    "CompanyStatus": string;
+    "CompanyOwner": string;
+    "CompanyAddress": string;
+    "CompanyBusiness": string;
+    "CompanyOwners": string[];
     "tangle": {
         "root": string;
     };
@@ -26,18 +28,16 @@ interface CompanyData {
 const CompanyData: React.FC = ({ match }: any) => {
     const [companyData, setCompanyData] = useState();
     const [activeTab, setActiveTab] = useState('overview');
-    const [nextStep, setNextStep] = useState(false);
+    const { nextStep } = useStep(match); 
     const companyId = match?.params?.companyId;
 
     useEffect(() => {
         async function setCompanyInfo(companyId: string) {
-            const data: CompanyData | undefined = await companies.find(company => company.id === companyId)
-            setCompanyData(data)
+            const response = await axios.get(`${serverAPI}/company?company=${companyId}`)
 
-            const companyHouse = await localStorage.getItem('companyHouse')
-            console.log('companyHouse', companyHouse)
-            if (companyHouse && companyHouse === 'completed') {
-                setNextStep(true)
+            if (response && response?.data?.status === 'success') {
+                const data: CompanyData | undefined = response?.data?.company
+                setCompanyData(data)
             }
         } 
         setCompanyInfo(companyId)
@@ -60,24 +60,28 @@ const CompanyData: React.FC = ({ match }: any) => {
     }
 
     return (
-        <Layout theme="companyHouse" match={match} step={2}>
+        <Layout match={match}>
             <React.Fragment>
                 <div className="company-details-wrapper">
-                    <Link to={'/progress/company/list/2'} className="company-details-back bold">
+                    <Link 
+                        to={{
+                            pathname: `${match.url.replace(companyId, '').replace('details', 'list')}`, 
+                            state: { nextStep }
+                        }}
+                        className="company-details-back bold"
+                    >
                         <img src={back} alt="" />&nbsp;&nbsp;&nbsp;Back
                     </Link>
-                    <h2>{companyData?.name}</h2>
+                    <h2>{companyData?.CompanyName}</h2>
                     <p className="company-number-wrapper">
-                        Company number <span className="company-number">{companyData?.companyNumber}</span>
+                        Company number <span className="company-number">{companyData?.CompanyNumber}</span>
                     </p>
                     <CustomNav active={activeTab} onSelect={handleSelect} />
                     <div className="company-details">
                         {renderActiveComponent()}
                     </div>
                 </div>
-                {
-                    nextStep && <NextStepDrawer link={'/progress/bank/prove/3'} />
-                }
+                <NextStepDrawer link={nextStep} />
             </React.Fragment>
         </Layout>
     );
@@ -105,23 +109,23 @@ const CompanyDetails = ({ details }: { details: CompanyData | undefined }) => {
         <React.Fragment>
             <div className="company-details-item">
                 <p>Registered office address</p>
-                <p className="bold">{details?.registeredAddress}</p>
+                <p className="bold">{details?.CompanyAddress}</p>
             </div>
             <div className="company-details-item">
                 <p>Company Type</p>
-                <p className="bold">{details?.type}</p>
+                <p className="bold">{details?.CompanyType}</p>
             </div>
             <div className="company-details-item">
                 <p>Incorporated on</p>
-                <p className="bold">{details?.date}</p>
+                <p className="bold">{details?.CompanyCreationDate}</p>
             </div>
             <div className="company-details-item">
                 <p>Company status</p>
-                <p className={`status ${details?.status.toLowerCase()}`}>{details?.status}</p>
+                <p className={`status ${details?.CompanyStatus.toLowerCase()}`}>{details?.CompanyStatus}</p>
             </div>
             <div className="company-details-item">
                 <p>Nature of business</p>
-                <p className="bold">{details?.natureOfBusiness}</p>
+                <p className="bold">{details?.CompanyBusiness}</p>
             </div>
         </React.Fragment>
     )
@@ -131,11 +135,14 @@ const People = ({ details }: { details: CompanyData | undefined }) => {
     return (
         <React.Fragment>
             {
-                details?.people?.map(person => 
-                    <div key={person} className="company-details-item">
-                        <p className="bold">{person}</p>
-                    </div>
-                )
+                details?.CompanyOwners?.length
+                    ? details?.CompanyOwners?.map(person => 
+                        <div key={person} className="company-details-item">
+                            <p className="bold">{person}</p>
+                        </div>) 
+                    : (<div className="company-details-item">
+                            <p className="bold">{details?.CompanyOwner}</p>
+                        </div>)
             }
         </React.Fragment>
     )

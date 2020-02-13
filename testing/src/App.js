@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import SocketIOClient from 'socket.io-client';
+import randomstring from 'randomstring';
 import { Button } from 'antd';
 import 'antd/dist/antd.css';
 import { websocketURL } from './config.json'
 import { Form } from './components'
 import { createIdentity, createCredential, createPresentations } from './did'
 import 'rsuite/lib/styles/index.less';
-import { encrypt } from './helper'
+import { encrypt, decrypt, retrieveCredential } from './helper'
 
 // https://randomuser.me/api/
 const App = () => {
-  const [password] = useState('HerpaDerperDerpaHerpaDerperDerpa')
+  const [password] = useState("RecJ683STt8cOKMBsPACNE08ysSuJOYr")
+  const [challengeNonce] = useState("Umxl7CiqSm43TjoEyYzX685Mdl8sX0nb")
   const [channelId, setChannelId] = useState(null)
   const [ioClient, setIoClient] = useState(null)
 
   useEffect(() => {
-    if (ioClient) {
-      ioClient.on('error', async (payload) => {
-          console.error('WebSocket error', payload)
-      })
-    }
-
     // Removing the listener before unmounting the component in order to avoid addition of multiple listener
     return () => {
       ioClient.disconnect();
@@ -47,6 +43,35 @@ const App = () => {
       setIoClient(newIoClient)
 
       newIoClient.emit('registerMobileClient', { channelId })
+
+      // newIoClient.on('error', async (payload) => {
+      //     console.error('WebSocket error', payload)
+      // })
+    
+      newIoClient.on('createCredential', async (payload) => {
+        try {
+          const status = await processCustomCredential(payload)
+          const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+          const userData = await retrieveCredential('PersonalData')
+          const CompanyNumber = randomstring.generate({
+            length: 7,
+            charset: 'numeric'
+          });
+          const CompanyStatus = 'Pending'
+          const CompanyCreationDate =  (new Date()).toLocaleDateString('en-GB', dateOptions)
+          const CompanyOwner = `${userData.data.UserPersonalData.UserName.FirstName} ${userData.data.UserPersonalData.UserName.LastName}`
+          const responsePayload = await encrypt(password, JSON.stringify({ 
+            ...status, CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner
+          }))
+          const decryptedData = await decrypt(password, payload.data)
+          await new Promise(resolve => setTimeout(resolve, 5000));
+          newIoClient.emit('createCompany', { payload: { ...JSON.parse(decryptedData), CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner } })
+          newIoClient.emit('createCredentialConfirmation', { channelId, payload: responsePayload })
+        } catch (error) {
+          console.log(error.toString())
+          newIoClient.emit('errorMessage', { channelId, payload: error.toString() })
+        }
+      })
     } else {
       console.log('No websocket connection details')
     }
@@ -58,6 +83,19 @@ const App = () => {
     console.log('processIdentity result', result.status)
   } 
 
+  async function processCustomCredential({ schemaName, data }) {
+    try {
+    console.log('Creating custom verifiable credential for', schemaName, data)
+    const decryptedData = await decrypt(password, data)
+    console.log('Decrypted', decryptedData)
+    const result = await createCredential(schemaName, JSON.parse(decryptedData))
+    console.log(`${schemaName} result`, result.status)
+    return result
+    } catch (error) {
+      throw new Error(error);
+    }
+  } 
+
   async function processCredential() {
     console.log('Creating verifiable credential')
     let result = await createCredential('PersonalData', {
@@ -66,7 +104,12 @@ const App = () => {
         UserName: {
           FirstName: 'Bob',
           LastName: 'Smith'
-        }
+        },
+        UserDOB: {
+          Date: '15/09/1972',
+        },
+        Birthplace: 'Wakanda',
+        Nationality: 'wakandian'
       }
     })
     console.log('PersonalData result', result.status)
@@ -74,8 +117,12 @@ const App = () => {
     result = await createCredential('Address', {
       Language: 'English',
       UserAddress: {
-        City: 'Berlin',
-        Country: 'Germany'
+        City: 'Leicester',
+        Country: 'England',
+        State: '',
+        Postcode: 'LE2 6QT',
+        Street: 'Main Street',
+        House: '77'
       }
     })
     console.log('Address result', result.status)
@@ -93,10 +140,10 @@ const App = () => {
   } 
 
   async function processPresentation() {
-    const schemas = ['Address', 'PersonalData', 'ContactDetails']
+    const schemas = ['Address', 'PersonalData', 'ContactDetails', 'Company', 'Bank'] // , 'Company'
 
     console.log('Creating verifiable presentation')
-    const presentationJSON = await createPresentations(schemas, 'HerpaDerperDerp')
+    const presentationJSON = await createPresentations(schemas, challengeNonce)
     console.log('createPresentation result')
     console.log(JSON.stringify(presentationJSON))
     const payload = await encrypt(password, JSON.stringify(presentationJSON))

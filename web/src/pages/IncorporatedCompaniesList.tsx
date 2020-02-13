@@ -1,40 +1,48 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { Button } from 'antd';
 import useStep from "../utils/useStep";
 import { Layout, Table, NextStepDrawer } from "../components";
-import companies from "../incorporatedCompanies.json"
+import { serverAPI } from '../config.json'
 
 /**
- * Component which will display a CompanyIntro.
+ * Component which will display a IncorporatedCompanies.
  */
-const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
+const IncorporatedCompanies: React.FC = ({ history, match, ...props }: any) => {
     const { nextStep } = useStep(match); 
-    const [nextStepCTA, setNextStep] = useState(false);
+    const [companyData, setCompanyData] = useState([]);
 
     useEffect(() => {
         async function setNextStepCTA() {
-            const companyHouse = await localStorage.getItem('companyHouse')
-            console.log('companyHouse', companyHouse)
-            if (companyHouse && companyHouse === 'completed') {
-                setNextStep(true)
+            const response = await axios.get(`${serverAPI}/company`)
+
+            if (response && response?.data?.status === 'success') {
+                const data = response?.data?.companies
+                setCompanyData(data)
             }
         } 
         setNextStepCTA()
     }, [])
 
     function onRowClick(data: any) {
-        history.push(`/details/company/${data.id}`)
+        history.push(`/progress/company/details/${match?.params?.step || 2}/${data.CompanyNumber}`)
     }
 
     return (
-        <Layout theme="companyHouse" match={match} step={2}>
+        <Layout match={match}>
             <React.Fragment>
                 <div className="companies-page-wrapper">
                     <div className="companies-cta-wrapper">
                         <h2>Newly Incorporated Companies</h2>
                         {
-                            nextStepCTA ? null : (
+                            props?.location?.state?.nextStep ? (
+                                <Link to={props?.location?.state?.nextStep}>
+                                    <Button>
+                                        Continue to next step
+                                    </Button> 
+                                </Link>
+                            ) : (
                                 <Link to={nextStep}>
                                     <Button>
                                         Register new Company
@@ -43,11 +51,13 @@ const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
                             ) 
                         }
                     </div>
-                    <Table data={companies} onRowClick={onRowClick} />
+                    <Table 
+                        data={companyData} 
+                        onRowClick={onRowClick} 
+                        loading={companyData.length === 0}
+                    />
                 </div>
-                {
-                    nextStepCTA ? <NextStepDrawer link={'/progress/bank/prove/3'} /> : null
-                }
+                <NextStepDrawer link={props?.location?.state?.nextStep} />
             </React.Fragment>
         </Layout>
     );

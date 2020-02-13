@@ -1,14 +1,14 @@
 [
     {
-        "id": "1",
-        "name": "The Business LTD",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "NCC-1701",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "1",
+        "CompanyName": "The Business LTD",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -21,15 +21,15 @@
         }
     },
     {
-        "id": "2",
-        "name": "Make Moneys",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Pending",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "2",
+        "CompanyName": "Make Moneys",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Pending",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -42,15 +42,15 @@
         }
     },
     {
-        "id": "3",
-        "name": "The Good Corp",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "3",
+        "CompanyName": "The Good Corp",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -63,15 +63,15 @@
         }
     },
     {
-        "id": "4",
-        "name": "Moes Bar",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Pending",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "4",
+        "CompanyName": "Moes Bar",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Pending",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -84,15 +84,15 @@
         }
     },
     {
-        "id": "5",
-        "name": "The Business LTD",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "5",
+        "CompanyName": "The Business LTD",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -105,15 +105,15 @@
         }
     },
     {
-        "id": "6",
-        "name": "Make Moneys",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "6",
+        "CompanyName": "Make Moneys",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -126,15 +126,15 @@
         }
     },
     {
-        "id": "7",
-        "name": "The Good Corp",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "7",
+        "CompanyName": "The Good Corp",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -147,15 +147,15 @@
         }
     },
     {
-        "id": "8",
-        "name": "The Business LTD",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "NCC-1701",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "8",
+        "CompanyName": "The Business LTD",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -168,15 +168,15 @@
         }
     },
     {
-        "id": "9",
-        "name": "Make Moneys",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Pending",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "9",
+        "CompanyName": "Make Moneys",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Pending",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -189,15 +189,15 @@
         }
     },
     {
-        "id": "10",
-        "name": "The Good Corp",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "10",
+        "CompanyName": "The Good Corp",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -210,15 +210,15 @@
         }
     },
     {
-        "id": "11",
-        "name": "Moes Bar",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Pending",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "11",
+        "CompanyName": "Moes Bar",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Pending",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -231,15 +231,15 @@
         }
     },
     {
-        "id": "12",
-        "name": "The Business LTD",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "12",
+        "CompanyName": "The Business LTD",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -252,15 +252,15 @@
         }
     },
     {
-        "id": "13",
-        "name": "Make Moneys",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "13",
+        "CompanyName": "Make Moneys",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -273,15 +273,15 @@
         }
     },
     {
-        "id": "14",
-        "name": "The Good Corp",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "14",
+        "CompanyName": "The Good Corp",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -294,15 +294,15 @@
         }
     },
     {
-        "id": "15",
-        "name": "The Business LTD",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "NCC-1701",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "15",
+        "CompanyName": "The Business LTD",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -315,15 +315,15 @@
         }
     },
     {
-        "id": "16",
-        "name": "Make Moneys",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Pending",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "16",
+        "CompanyName": "Make Moneys",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Pending",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -336,15 +336,15 @@
         }
     },
     {
-        "id": "17",
-        "name": "The Good Corp",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "17",
+        "CompanyName": "The Good Corp",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -357,15 +357,15 @@
         }
     },
     {
-        "id": "18",
-        "name": "Moes Bar",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Pending",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "18",
+        "CompanyName": "Moes Bar",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Pending",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -378,15 +378,15 @@
         }
     },
     {
-        "id": "19",
-        "name": "The Business LTD",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "19",
+        "CompanyName": "The Business LTD",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -399,15 +399,15 @@
         }
     },
     {
-        "id": "20",
-        "name": "Make Moneys",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "20",
+        "CompanyName": "Make Moneys",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
@@ -420,15 +420,15 @@
         }
     },
     {
-        "id": "21",
-        "name": "The Good Corp",
-        "date": "22 January 2020",
-        "type": "Private limited company",
-        "status": "Active",
-        "companyNumber": "03244589",
-        "registeredAddress": "Big Street 66, Leicester, England, LE2 6QT",
-        "natureOfBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
-        "people": [
+        "CompanyNumber": "21",
+        "CompanyName": "The Good Corp",
+        "CompanyCreationDate": "22 January 2020",
+        "CompanyType": "Private limited company",
+        "CompanyStatus": "Active",
+        "CompanyOwner":  "James T. Kirk, commanding officer",
+        "CompanyAddress": "Big Street 66, Leicester, England, LE2 6QT",
+        "CompanyBusiness": "to explore strange, new worlds; to seek out new life and new civilizations; to boldly go where no man has gone before",
+        "CompanyOwners": [
             "James T. Kirk, commanding officer",
             "Mr. Spock, first officer",
             "Leonard McCoy, chief medical officer",
