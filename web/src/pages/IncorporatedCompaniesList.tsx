@@ -7,11 +7,10 @@ import { Layout, Table, NextStepDrawer } from "../components";
 import { serverAPI } from '../config.json'
 
 /**
- * Component which will display a CompanyIntro.
+ * Component which will display a IncorporatedCompanies.
  */
-const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
+const IncorporatedCompanies: React.FC = ({ history, match, ...props }: any) => {
     const { nextStep } = useStep(match); 
-    const [nextStepCTA, setNextStep] = useState(false);
     const [companyData, setCompanyData] = useState([]);
 
     useEffect(() => {
@@ -22,18 +21,12 @@ const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
                 const data = response?.data?.companies
                 setCompanyData(data)
             }
-
-            const companyHouse = await localStorage.getItem('companyHouse')
-            console.log('companyHouse', companyHouse)
-            if (companyHouse && companyHouse === 'completed') {
-                setNextStep(true)
-            }
         } 
         setNextStepCTA()
     }, [])
 
     function onRowClick(data: any) {
-        history.push(`/details/company/${data.CompanyNumber}`)
+        history.push(`/progress/company/details/${match?.params?.step || 2}/${data.CompanyNumber}`)
     }
 
     return (
@@ -43,7 +36,13 @@ const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
                     <div className="companies-cta-wrapper">
                         <h2>Newly Incorporated Companies</h2>
                         {
-                            nextStepCTA ? null : (
+                            props?.location?.state?.nextStep ? (
+                                <Link to={props?.location?.state?.nextStep}>
+                                    <Button>
+                                        Continue to next step
+                                    </Button> 
+                                </Link>
+                            ) : (
                                 <Link to={nextStep}>
                                     <Button>
                                         Register new Company
@@ -58,9 +57,7 @@ const IncorporatedCompanies: React.FC = ({ history, match }: any) => {
                         loading={companyData.length === 0}
                     />
                 </div>
-                {
-                    nextStepCTA ? <NextStepDrawer link={'/progress/bank/prove/3'} /> : null
-                }
+                <NextStepDrawer link={props?.location?.state?.nextStep} />
             </React.Fragment>
         </Layout>
     );

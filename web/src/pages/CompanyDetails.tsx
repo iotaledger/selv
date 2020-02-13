@@ -63,9 +63,6 @@ const CompanyData: React.FC = ({ match }: any) => {
         <Layout match={match}>
             <React.Fragment>
                 <div className="company-details-wrapper">
-                    {
-                        console.log('Details', match, nextStep)
-                    }
                     <Link 
                         to={{
                             pathname: `${match.url.replace(companyId, '').replace('details', 'list')}`, 
