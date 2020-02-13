@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 10%; 
+    padding: 0 7%; 
 
     @include themify($themes) {
         background-color: themed('footerBackgroundColor');  
