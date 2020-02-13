@@ -1,8 +1,9 @@
 .scan-qr-page-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    margin-top: 50px;
 
     .qr-code {
         margin: 70px 30px;
