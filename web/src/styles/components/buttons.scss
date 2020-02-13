@@ -15,6 +15,13 @@ button {
         &:hover {
             background-color: themed('secondaryColor') !important;
         }
-    }
 
+        &:disabled {
+            background-color: themed('secondaryFontColor') !important;  
+    
+            &:hover {
+                background-color: themed('secondaryFontColor') !important;
+            }
+        }
+    }
 }
