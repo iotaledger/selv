@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { Nav } from 'rsuite';
+import useStep from "../utils/useStep";
 import { Layout, NextStepDrawer } from "../components";
 import back from '../assets/back.svg';
 import { serverAPI } from '../config.json'
@@ -27,7 +28,7 @@ interface CompanyData {
 const CompanyData: React.FC = ({ match }: any) => {
     const [companyData, setCompanyData] = useState();
     const [activeTab, setActiveTab] = useState('overview');
-    const [nextStep, setNextStep] = useState(false);
+    const { nextStep } = useStep(match); 
     const companyId = match?.params?.companyId;
 
     useEffect(() => {
@@ -37,12 +38,6 @@ const CompanyData: React.FC = ({ match }: any) => {
             if (response && response?.data?.status === 'success') {
                 const data: CompanyData | undefined = response?.data?.company
                 setCompanyData(data)
-            }
-
-            const companyHouse = await localStorage.getItem('companyHouse')
-            const companyDetails = await localStorage.getItem('companyDetails')
-            if (companyDetails && companyHouse && companyHouse === 'completed') {
-                setNextStep(true)
             }
         } 
         setCompanyInfo(companyId)
@@ -65,10 +60,19 @@ const CompanyData: React.FC = ({ match }: any) => {
     }
 
     return (
-        <Layout match={match} customTheme="company" customStep={2}>
+        <Layout match={match}>
             <React.Fragment>
                 <div className="company-details-wrapper">
-                    <Link to={'/progress/company/list/2'} className="company-details-back bold">
+                    {
+                        console.log('Details', match, nextStep)
+                    }
+                    <Link 
+                        to={{
+                            pathname: `${match.url.replace(companyId, '').replace('details', 'list')}`, 
+                            state: { nextStep }
+                        }}
+                        className="company-details-back bold"
+                    >
                         <img src={back} alt="" />&nbsp;&nbsp;&nbsp;Back
                     </Link>
                     <h2>{companyData?.CompanyName}</h2>
@@ -80,9 +84,7 @@ const CompanyData: React.FC = ({ match }: any) => {
                         {renderActiveComponent()}
                     </div>
                 </div>
-                {
-                    nextStep && <NextStepDrawer link={'/progress/bank/prove/3'} />
-                }
+                <NextStepDrawer link={nextStep} />
             </React.Fragment>
         </Layout>
     );
