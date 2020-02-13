@@ -4,7 +4,7 @@
   "description": "Digital Identity Narratives as a Service PoC",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently --kill-others-on-fail \"node index.js\""
+    "start": "concurrently --kill-others-on-fail \"nodemon index.js\""
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
-    "concurrently": "^5.1.0"
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
   }
 }
