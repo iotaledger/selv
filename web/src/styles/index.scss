@@ -91,7 +91,6 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 100vh;
 }
 
 .main-section {
@@ -108,7 +107,6 @@ button {
     min-width: 535px;
     display: flex;
     justify-content: center;
-    height: 100%;
     @include themify($themes) {
       margin-top: themed('headerHeight');
     }
