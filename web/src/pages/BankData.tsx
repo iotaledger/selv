@@ -1,11 +1,11 @@
 import React, { useState , useEffect } from "react";
 import SocketIOClient from 'socket.io-client';
 import axios from 'axios';
-import { Button, Collapse } from 'antd';
+import { Button, Collapse, notification, message } from 'antd';
 import { serverAPI, websocketURL } from '../config.json'
 import useStep from "../utils/useStep";
 import { flattenObject, encrypt, decrypt } from "../utils/helper";
-import { Layout, AccountType, PrefilledForm, Checkbox } from "../components";
+import { Layout, Loading, AccountType, PrefilledForm, Checkbox } from "../components";
 import checkmark from '../assets/bankCheckmark.svg'
 
 const personalDataFields = [
@@ -25,11 +25,26 @@ const companyFields = [
     'CompanyBusiness',
 ]
 
+const messages = {
+    waiting: 'Waiting for Selv app...',
+    connectionError: 'Connection error. Please try again!',
+    missing: 'Credentials missing or not trusted'
+}
+
+const notify = (type: string, message: string, description: string) => {
+    return type === 'error' 
+        ? notification.error({ message, description })
+        : notification.warning({ message, description });
+};
+
 /**
  * Component which will display a BankData.
  */
 const BankData: React.FC = ({ history, match }: any) => {
     const { nextStep } = useStep(match); 
+    const [accountType, setAccountType] = useState()
+    const [status, setStatus] = useState('')
+    const [channelId, setChannelId] = useState();
     const [password, setPassword] = useState();
     const [accountStep, setAccountStep] = useState(1)
     const [prefilledPersonalData, setPrefilledPersonalData] = useState({})
@@ -43,7 +58,9 @@ const BankData: React.FC = ({ history, match }: any) => {
             const credentials = credentialsString && await JSON.parse(credentialsString)
             const status = credentials?.status
             if (!status || Number(status) !== 2) {
-                console.log('Credentials missing or not trusted')
+                console.log(messages.missing)
+                message.error({ content: messages.connectionError, key: 'status', duration: 10 });
+                notify('error', 'Error', messages.connectionError)
                 history.goBack()
             }
             const flattenData = flattenObject(credentials?.data)
@@ -55,6 +72,8 @@ const BankData: React.FC = ({ history, match }: any) => {
             const companyData = companyFields.reduce((acc: any, entry: string) => 
                 ({ ...acc, [entry]: flattenData[entry] }), {})
             setPrefilledCompanyData({ ...companyData })
+
+            await setChannel()
         } 
         getData()
 
@@ -86,28 +105,48 @@ const BankData: React.FC = ({ history, match }: any) => {
         }
         ioClient.emit('createCredential', { channelId, payload })
     
-        ioClient.on('error', async (error: any) => {
-            console.error('WebSocket error', error)
+        const timeout = setTimeout(() => { 
+            setStatus(messages.connectionError)
+            message.error({ content: messages.connectionError, key: 'status' });
+            notify('error', 'Connection error', 'Please try again!')
+        }, 10000)
+    
+        ioClient.on('errorMessage', async (error: any) => {
+            clearTimeout(timeout)
+            console.error('Mobile client', error)
+            setStatus(messages.connectionError)
+            message.error({ content: messages.connectionError, key: 'status' });
+            notify('error', 'Mobile client error', error)
         })
 
         ioClient.on('createCredentialConfirmation', async (encryptedPayload: any) => {
+            clearTimeout(timeout)
             let payload = await decrypt(password, encryptedPayload)
             payload = JSON.parse(payload)
             console.log('createCredentialConfirmation', payload)
             if (payload?.status === 'success') {
                 console.log('Bank account data setup completed, redirecting to', nextStep)
-                await localStorage.setItem('companyHouse', 'completed')
-                await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload }))
+                message.destroy()
+                await localStorage.setItem('bank', 'completed')
+                await localStorage.setItem('bankDetails', JSON.stringify({ ...data, ...payload }))
                 history.push(nextStep)
             }
         })
     } 
 
-    async function getChannelId() {
+    async function setChannel() {
         const storedChannelDetails = await localStorage.getItem('WebSocket_DID') || null;
         const channelDetails = storedChannelDetails && JSON.parse(storedChannelDetails);
         setPassword(channelDetails?.password)
-        return channelDetails?.channelId
+        setChannelId(channelDetails?.channelId)
+        if (channelDetails?.channelId) {
+            const isMobileConnected = await checkConnectedStatus(channelDetails?.channelId)
+            if (!isMobileConnected) {
+                notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app')
+            }
+        } else {
+            notify('error', 'No connection details', 'Please return to the previous page and scan the QR code with your Selv app')
+        }
     }
 
     async function checkConnectedStatus(channelId: string) {
@@ -116,22 +155,30 @@ const BankData: React.FC = ({ history, match }: any) => {
     }
 
     async function processValues(fields: object) {
-        console.log('page got data', fields)
-        const channelId = await getChannelId()
-        console.log('got channelId', channelId)
+        await setChannel()
         if (channelId) {
             const isMobileConnected = await checkConnectedStatus(channelId)
-            console.log('isMobileConnected', isMobileConnected)
             if (isMobileConnected) {
+                setStatus(messages.waiting)
+                message.loading({ content: messages.waiting, key: 'status', duration: 0 });
                 await connectWebSocket(channelId, fields);
             }
-        } else {
-            console.log('No websocket connection details')
         }
     }
 
-    function continueNextStep(params: any) {
-        accountStep < 4 && setAccountStep(accountStep => accountStep + 1)
+    async function continueNextStep(params: any) {
+        if (accountStep < 4) {
+            setAccountStep(accountStep => accountStep + 1)
+            if (params.accountType) {
+                setAccountType(params.accountType)
+            }
+        } else {
+            const fields = {
+                AccountType: accountType,
+                BankName: 'SNS Bank'
+            }
+            await processValues(fields)
+        }
     }
 
     function onChange(step: any) {
@@ -140,7 +187,7 @@ const BankData: React.FC = ({ history, match }: any) => {
 
     const prefilledPersonalFormData: any = { dataFields: prefilledPersonalData }
     const prefilledCompanyFormData: any = { dataFields: prefilledCompanyData }
-    const formData: any = { onSubmit: continueNextStep }
+    const formData: any = { onSubmit: continueNextStep, status, messages }
 
     return (
         <Layout match={match}>
@@ -223,6 +270,16 @@ const BankData: React.FC = ({ history, match }: any) => {
                         <Checkbox { ...formData } />
                     </Collapse.Panel>
                 </Collapse>
+                {
+                    status && (
+                        <div className="loading">
+                            <p className="bold">{status}</p>
+                            {
+                                status === messages.waiting && <Loading />
+                            }
+                        </div>
+                    )
+                }
             </div>
         </Layout>
     );
