@@ -17,7 +17,12 @@ const labels: { [ key: string ]: string; } = {
     CompanyName: 'Company name',
     CompanyAddress: 'Company address',
     CompanyType: 'Company type',
-    CompanyBusiness: 'Nature of business'
+    CompanyBusiness: 'Nature of business',
+    CompanyCreationDate: 'Company creation date',
+    CompanyNumber: 'Company number',
+    CompanyOwner: 'Managing director',
+    BankName: 'Name of the bank',
+    AccountType: 'Bank account type',
 }
 
 const Icon = () => <img src={icon} alt="" />
