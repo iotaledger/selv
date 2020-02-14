@@ -7,10 +7,10 @@ import { Button } from 'antd';
  */
 const Landing: React.FC = () => {
     return (
-        <div className="theme-demo page-wrapper">
+        <div className="page-wrapper">
             <div className="main-section">
                 <h1>Landing Page</h1>
-                <Link to="/progress/demo/todos/2">
+                <Link to="/progress/demo/todos">
                     <Button type="primary">
                         Start Demo
                     </Button> 
