@@ -1,9 +1,16 @@
 import React from 'react'
 import { Form, Button, Checkbox, Radio } from 'antd';
 
-const RadioGroup = ({ form, onSubmit }: {
+interface IAccountType {
+    label: string;
+    error: string;
+    accounts: string[];
+    special: string;
+}
+const RadioGroup = ({ form, onSubmit, accountTypes }: {
     form: any;
     onSubmit: (values: object) => void;
+    accountTypes: IAccountType;
 }) => {
     const { getFieldDecorator, getFieldsError, validateFields, resetFields } = form;
 
@@ -23,24 +30,27 @@ const RadioGroup = ({ form, onSubmit }: {
     return (
         <div className="empty-form">
             <Form onSubmit={handleSubmit}>
-                <Form.Item label="Choose account type" colon={false}>
+                <Form.Item label={accountTypes.label} colon={false}>
                     {getFieldDecorator('accountType', {
                         rules: [{
                             required: true,
-                            message: 'Please choose an account type'
+                            message: accountTypes.error
                         }]})(
                         <Radio.Group>
-                            <Radio style={{ display: 'block '}} value={1}>Type 1</Radio>
-                            <Radio style={{ display: 'block '}} value={2}>Type 2</Radio>
+                            {
+                                accountTypes.accounts.map((account: string) => 
+                                    <Radio key={account} style={{ display: 'block '}} value={account}>{account}</Radio>
+                                )
+                            }
                         </Radio.Group>
                     )}
                 </Form.Item>
                 <Form.Item label="Special feature" colon={false}>
-                    {getFieldDecorator('feature', {
+                    {getFieldDecorator(accountTypes.special, {
                         valuePropName: 'checked',
                     })(
                         <Checkbox>
-                            Add special feature
+                            {accountTypes.special}
                         </Checkbox>
                     )}
                 </Form.Item>
