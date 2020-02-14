@@ -1,0 +1,46 @@
+.demo-intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-x: auto;
+    width: 640px;
+    margin-top: 100px;
+
+    .todos {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        h3, button {
+            margin: 50px 0;
+        }
+    
+        h1 {
+            line-height: 40px;
+        }
+    }
+
+    .app {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        
+        h3, button {
+            margin: 40px 0;
+        }
+
+        .info {
+            max-width: 300px;
+        }
+
+        .phone {
+            position: fixed;
+            bottom: 0;
+            left: 40%;
+        }
+    }
+
+    button {
+        text-transform: uppercase;
+    }
+}
