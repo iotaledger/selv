@@ -1,11 +1,12 @@
 import React from 'react'
 import { Form, Button, Checkbox } from 'antd';
 
-const CheckboxInstance = ({ form, onSubmit, status, messages }: {
+const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
     form: any;
     onSubmit: (values: object) => void;
     status: string;
     messages: { [ key: string ]: string; };
+    buttonText: string;
 }) => {
     const { getFieldDecorator, getFieldsError, validateFields } = form;
 
@@ -46,7 +47,7 @@ const CheckboxInstance = ({ form, onSubmit, status, messages }: {
                         htmlType="submit" 
                         disabled={hasErrors(getFieldsError()) || status === messages.waiting}
                     >
-                        Open an account
+                        {buttonText}
                     </Button>
                 </Form.Item>
             </Form>
