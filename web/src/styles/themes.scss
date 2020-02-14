@@ -1,5 +1,7 @@
 $font-family-companyHouse: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 $font-family-snsBank: 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-insurance: 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-demo: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
 $primary-color-companyHouse: #3B6AC5;
 $secondary-color-companyHouse: #4247DC;
@@ -13,13 +15,43 @@ $trinary-color-snsBank: #64CDF5;
 $primary-font-color-snsBank: #585858;
 $secondary-font-color-snsBank: #BBBBBB;
 
+$primary-color-insurance: #F39B26;
+$secondary-color-insurance: #562A71;
+$trinary-color-insurance: #64CDF5;
+$primary-font-color-insurance: #585858;
+$secondary-font-color-insurance: #BBBBBB;
+
+$primary-color-demo: #4247DC;
+$secondary-color-demo: #3B6AC5;
+$trinary-color-demo: #25C1B6;
+$primary-font-color-demo: #495875;
+$secondary-font-color-demo: #BBBBBB;
+
+$link-color: #3B6AC5;
 $notice-color: #4247DC;
 $form-selector-color: #339BB6;
 
 $themes: (
     demo: (
-        buttonBackgroundColor: $primary-color-companyHouse,
-        buttonHeight: 43px,
+        fontFamily: $font-family-demo,
+
+        defaultTextSize: 16px,
+        defaultLineHeight: 24px,
+
+        primaryColor: $primary-color-demo,
+        secondaryColor: $secondary-color-demo,
+        trinaryColor: $trinary-color-demo,
+        primaryFontColor: $primary-font-color-demo,
+        secondaryFontColor: $secondary-font-color-demo,
+
+        h1TextSize: 38px,
+        h1LineHeight: 40px,
+        h3TextSize: 21px,
+        h3LineHeight: 30px,
+
+        buttonBackgroundColor: $primary-color-demo,
+        buttonHeight: 48px,
+
     ),
     company: (
         fontFamily: $font-family-companyHouse,
@@ -32,7 +64,7 @@ $themes: (
         trinaryColor: $trinary-color-companyHouse,
         primaryFontColor: $primary-font-color-companyHouse,
         secondaryFontColor: $secondary-font-color-companyHouse,
-        linkColor: $primary-color-companyHouse,
+        linkColor: $link-color,
         noticeColor: $notice-color,
         formSelectorColor: $form-selector-color,
 
@@ -42,16 +74,6 @@ $themes: (
         h2LineHeight: 30px,
         h3TextSize: 18px,
         h3LineHeight: 20px,
-        h4TextSize: 16px,
-        h4LineHeight: 20px,
-        // h5TextSize: 16px,
-        // h5LineHeight: 20px,
-
-        // labelTextSize: 16px,
-        // labelLineHeight: 20px,
-
-        // tabTextSize: 13px,
-        // tabLineHeight: 20px,
 
         buttonBackgroundColor: $primary-color-companyHouse,
         buttonHeight: 43px,
@@ -65,14 +87,6 @@ $themes: (
         footerHeight: 76px,
         footerLogoAlign: center,
         footerLogoHeight: 24px,
-
-        // backgroundColor: #fff,
-        // textColor: #408bbd,
-        // buttonTextColor: #408bbd,
-        // buttonTextTransform: none,
-        // buttonTextHoverColor: #61b0e7,
-        // buttonColor: #fff,
-        // buttonBorder: 2px solid #fff,
     ),
     bank: (
         fontFamily: $font-family-snsBank,
@@ -85,7 +99,7 @@ $themes: (
         trinaryColor: $trinary-color-snsBank,
         primaryFontColor: $primary-font-color-snsBank,
         secondaryFontColor: $secondary-font-color-snsBank,
-        linkColor: $primary-color-companyHouse,
+        linkColor: $link-color,
         noticeColor: $notice-color,
         formSelectorColor: $form-selector-color,
 
@@ -95,16 +109,6 @@ $themes: (
         h2LineHeight: 28px,
         h3TextSize: 24px,
         h3LineHeight: 28px,
-        h4TextSize: 16px,
-        h4LineHeight: 20px,
-        // h5TextSize: 16px,
-        // h5LineHeight: 20px,
-
-        // labelTextSize: 16px,
-        // labelLineHeight: 20px,
-
-        // tabTextSize: 13px,
-        // tabLineHeight: 20px,
 
         buttonBackgroundColor: $primary-color-snsBank,
         buttonHeight: 51px,
@@ -118,21 +122,40 @@ $themes: (
         footerHeight: 80px,
         footerLogoAlign: right,
         footerLogoHeight: 24px,
-        // backgroundColor: #222,
-        // textColor: #ddd,
-        // buttonTextColor: #aaa,
-        // buttonTextTransform: uppercase,
-        // buttonTextHoverColor: #ddd,
-        // buttonColor: #333,
-        // buttonBorder: 1px solid #aaa,
     ),
     insurance: (
-        // backgroundColor: #222,
-        // textColor: #ddd,
-        // buttonTextColor: #aaa,
-        // buttonTextTransform: uppercase,
-        // buttonTextHoverColor: #ddd,
-        // buttonColor: #333,
-        // buttonBorder: 1px solid #aaa,
+        fontFamily: $font-family-insurance,
+
+        defaultTextSize: 16px,
+        defaultLineHeight: 24px,
+
+        primaryColor: $primary-color-insurance,
+        secondaryColor: $secondary-color-insurance,
+        trinaryColor: $trinary-color-insurance,
+        primaryFontColor: $primary-font-color-insurance,
+        secondaryFontColor: $secondary-font-color-insurance,
+        linkColor: $link-color,
+        noticeColor: $notice-color,
+        formSelectorColor: $form-selector-color,
+
+        h1TextSize: 36px,
+        h1LineHeight: 42px,
+        h2TextSize: 24px,
+        h2LineHeight: 28px,
+        h3TextSize: 24px,
+        h3LineHeight: 28px,
+
+        buttonBackgroundColor: $primary-color-insurance,
+        buttonHeight: 51px,
+
+        headerBackgroundColor: #562A71,
+        headerHeight: 100px,
+        headerLogoAlign: left,
+        headerLogoHeight: 39px,
+
+        footerBackgroundColor: #562A71,
+        footerHeight: 80px,
+        footerLogoAlign: right,
+        footerLogoHeight: 24px,
     ),
 );
