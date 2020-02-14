@@ -50,22 +50,11 @@ const App = () => {
     
       newIoClient.on('createCredential', async (payload) => {
         try {
-          const status = await processCustomCredential(payload)
-          const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
-          const userData = await retrieveCredential('PersonalData')
-          const CompanyNumber = randomstring.generate({
-            length: 7,
-            charset: 'numeric'
-          });
-          const CompanyStatus = 'Pending'
-          const CompanyCreationDate =  (new Date()).toLocaleDateString('en-GB', dateOptions)
-          const CompanyOwner = `${userData.data.UserPersonalData.UserName.FirstName} ${userData.data.UserPersonalData.UserName.LastName}`
-          const responsePayload = await encrypt(password, JSON.stringify({ 
-            ...status, CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner
-          }))
-          const decryptedData = await decrypt(password, payload.data)
-          await new Promise(resolve => setTimeout(resolve, 5000));
-          newIoClient.emit('createCompany', { payload: { ...JSON.parse(decryptedData), CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner } })
+          const response = await processCustomCredential(payload)
+          const responsePayload = await encrypt(password, JSON.stringify({ status: response.status }))
+          if (payload.schemaName === 'Company') {
+            newIoClient.emit('createCompany', { payload: response.payload })
+          }
           newIoClient.emit('createCredentialConfirmation', { channelId, payload: responsePayload })
         } catch (error) {
           console.log(error.toString())
@@ -85,12 +74,28 @@ const App = () => {
 
   async function processCustomCredential({ schemaName, data }) {
     try {
-    console.log('Creating custom verifiable credential for', schemaName, data)
-    const decryptedData = await decrypt(password, data)
-    console.log('Decrypted', decryptedData)
-    const result = await createCredential(schemaName, JSON.parse(decryptedData))
-    console.log(`${schemaName} result`, result.status)
-    return result
+      console.log('Creating custom verifiable credential for', schemaName, data)
+      let decryptedData = await decrypt(password, data)
+      let payload = JSON.parse(decryptedData)
+      console.log('payload', payload)
+
+      if (schemaName === 'Company') {
+        const dateOptions = { day: 'numeric', month: 'long', year: 'numeric' };
+        const userData = await retrieveCredential('PersonalData')
+        const CompanyNumber = randomstring.generate({
+          length: 7,
+          charset: 'numeric'
+        });
+        const CompanyStatus = 'Pending'
+        const CompanyCreationDate =  (new Date()).toLocaleDateString('en-GB', dateOptions)
+        const CompanyOwner = `${userData.data.UserPersonalData.UserName.FirstName} ${userData.data.UserPersonalData.UserName.LastName}`
+        
+        payload = { ...payload, CompanyNumber, CompanyStatus, CompanyCreationDate, CompanyOwner }
+      }
+
+      const result = await createCredential(schemaName, payload)
+      console.log(`${schemaName} result`, result.status)
+      return { status: result.status, payload }
     } catch (error) {
       throw new Error(error);
     }
@@ -140,7 +145,7 @@ const App = () => {
   } 
 
   async function processPresentation() {
-    const schemas = ['Address', 'PersonalData', 'ContactDetails', 'Company', 'Bank'] // , 'Company'
+    const schemas = ['Address', 'PersonalData', 'ContactDetails'] // , 'Company' , 'BankAccount'
 
     console.log('Creating verifiable presentation')
     const presentationJSON = await createPresentations(schemas, challengeNonce)
