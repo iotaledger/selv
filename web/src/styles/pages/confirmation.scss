@@ -1,4 +1,4 @@
-.company-confirmation-page {
+.confirmation-page {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -9,6 +9,9 @@
 
     h2 {
         margin: 30px 0;
+        @include themify($themes) {
+            color: themed('trinaryColor');  
+        }
     }
 
     .selv-wrapper {
