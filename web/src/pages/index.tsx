@@ -1,7 +1,6 @@
 import Landing from './Landing'
 import IntroShowTodos from './IntroShowTodos'
 import IntroShowMobile from './IntroShowMobile'
-import IntroShowCTA from './IntroShowCTA'
 import AppDownloadQR from './AppDownloadQR'
 import CompanyIntro from './CompanyIntro'
 import ProveIdentity from './ProveIdentity'
@@ -18,7 +17,6 @@ export {
     Landing,
     IntroShowTodos,
     IntroShowMobile,
-    IntroShowCTA,
     AppDownloadQR,
     ProveIdentity,
     SingInConfirmation,
