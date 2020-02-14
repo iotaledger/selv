@@ -23,7 +23,17 @@ const companyFields = [
     'CompanyAddress',
     'CompanyType',
     'CompanyBusiness',
+    'CompanyCreationDate',
+    'CompanyNumber',
+    'CompanyOwner'
 ]
+
+const accountTypes = {
+    label: 'Choose bank account type',
+    error: 'Please choose an account type',
+    accounts: ['Business checking account', 'Business savings account'],
+    special: 'Brokerage account'
+}
 
 const messages = {
     waiting: 'Waiting for Selv app...',
@@ -187,7 +197,7 @@ const BankData: React.FC = ({ history, match }: any) => {
 
     const prefilledPersonalFormData: any = { dataFields: prefilledPersonalData }
     const prefilledCompanyFormData: any = { dataFields: prefilledCompanyData }
-    const formData: any = { onSubmit: continueNextStep, status, messages }
+    const formData: any = { onSubmit: continueNextStep, status, messages, accountTypes, buttonText: 'Open bank account' }
 
     return (
         <Layout match={match}>
