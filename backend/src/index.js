@@ -35,79 +35,83 @@ server.listen(websocketPort);
 const mobileClients = new Map()
 const desktopClients = new Map()
 
-const getChannelIdBySocket = (clients, socketId) =>
-  [...clients.values()].find(entry => entry.socketId === socketId);
+try {
+  const getChannelIdBySocket = (clients, socketId) =>
+    [...clients.values()].find(entry => entry.socketId === socketId);
 
-socketServer.on('connection', (socket) => {
-  
-  socket.on('registerMobileClient', async (data) => {
-    const { channelId } = data
-    console.info(`Mobile client connected [id=${socket.id}, channel=${channelId}]`)
-    mobileClients.set(channelId, { socket, channelId, socketId: socket.id })
-  })
-
-  socket.on('registerDesktopClient', async (data) => {
-    const { channelId } = data
-    console.info(`Desktop client connected [id=${socket.id}, channel=${channelId}]`)
-    desktopClients.set(channelId, { socket, channelId, socketId: socket.id })
-  })
-
-  socket.on('disconnect', async () => {
-    console.info(`Client gone [id=${socket.id}]`)
+  socketServer.on('connection', (socket) => {
     
-    const desktopClient = getChannelIdBySocket(desktopClients, socket.id)
-    if (desktopClient && desktopClient.channelId) {
-      console.log('desktop client removed', desktopClient.channelId)
-      await desktopClients.delete(desktopClient.channelId)
-    }
-    
-    const mobileClient = getChannelIdBySocket(mobileClients, socket.id)
-    if (mobileClient && mobileClient.channelId) {
-      console.log('mobile client removed', mobileClient.channelId)
-      await mobileClients.delete(mobileClient.channelId)
-    }
+    socket.on('registerMobileClient', async (data) => {
+      const { channelId } = data
+      console.info(`Mobile client connected [id=${socket.id}, channel=${channelId}]`)
+      mobileClients.set(channelId, { socket, channelId, socketId: socket.id })
+    })
 
-    console.log('connected desktopClients', desktopClients.keys())
-    console.log('connected mobileClients', mobileClients.keys())
-  })
+    socket.on('registerDesktopClient', async (data) => {
+      const { channelId } = data
+      console.info(`Desktop client connected [id=${socket.id}, channel=${channelId}]`)
+      desktopClients.set(channelId, { socket, channelId, socketId: socket.id })
+    })
 
-  socket.on('verifiablePresentation', async (data) => {
-    const { channelId, payload } = data
-    const desktopClient = desktopClients.get(channelId)
-    const desktopSocket = desktopClient.socket
-    desktopSocket && desktopSocket.emit('verifiablePresentation', payload)
-    console.info('Verifiable Presentation sent to desktop client')
-  })
+    socket.on('disconnect', async () => {
+      console.info(`Client gone [id=${socket.id}]`)
+      
+      const desktopClient = getChannelIdBySocket(desktopClients, socket.id)
+      if (desktopClient && desktopClient.channelId) {
+        console.log('desktop client removed', desktopClient.channelId)
+        await desktopClients.delete(desktopClient.channelId)
+      }
+      
+      const mobileClient = getChannelIdBySocket(mobileClients, socket.id)
+      if (mobileClient && mobileClient.channelId) {
+        console.log('mobile client removed', mobileClient.channelId)
+        await mobileClients.delete(mobileClient.channelId)
+      }
 
-  socket.on('createCredential', async (data) => {
-    const { channelId, payload } = data
-    const mobileClient = mobileClients.get(channelId)
-    const mobileSocket = mobileClient.socket
-    mobileSocket && mobileSocket.emit('createCredential', payload)
-    console.info('Create Credential request sent to mobile client', channelId)
-  })
+      console.log('connected desktopClients', desktopClients.keys())
+      console.log('connected mobileClients', mobileClients.keys())
+    })
 
-  socket.on('createCredentialConfirmation', async (data) => {
-    const { channelId, payload } = data
-    const desktopClient = desktopClients.get(channelId)
-    const desktopSocket = desktopClient.socket
-    desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload)
-    console.info('Create Credential Confirmation sent to desktop client', channelId)
-  })
+    socket.on('verifiablePresentation', async (data) => {
+      const { channelId, payload } = data
+      const desktopClient = desktopClients.get(channelId)
+      const desktopSocket = desktopClient.socket
+      desktopSocket && desktopSocket.emit('verifiablePresentation', payload)
+      console.info('Verifiable Presentation sent to desktop client')
+    })
 
-  socket.on('errorMessage', async (data) => {
-    const { channelId, payload } = data
-    const desktopClient = desktopClients.get(channelId)
-    const desktopSocket = desktopClient.socket
-    desktopSocket && desktopSocket.emit('errorMessage', payload)
-  })
+    socket.on('createCredential', async (data) => {
+      const { channelId, payload } = data
+      const mobileClient = mobileClients.get(channelId)
+      const mobileSocket = mobileClient.socket
+      mobileSocket && mobileSocket.emit('createCredential', payload)
+      console.info('Create Credential request sent to mobile client', channelId)
+    })
 
-  socket.on('createCompany', async (data) => {
-    const { payload } = data
-    await createCompany(payload)
-    console.info('Company created', payload)
+    socket.on('createCredentialConfirmation', async (data) => {
+      const { channelId, payload } = data
+      const desktopClient = desktopClients.get(channelId)
+      const desktopSocket = desktopClient.socket
+      desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload)
+      console.info('Create Credential Confirmation sent to desktop client', channelId)
+    })
+
+    socket.on('errorMessage', async (data) => {
+      const { channelId, payload } = data
+      const desktopClient = desktopClients.get(channelId)
+      const desktopSocket = desktopClient.socket
+      desktopSocket && desktopSocket.emit('errorMessage', payload)
+    })
+
+    socket.on('createCompany', async (data) => {
+      const { payload } = data
+      await createOrUpdateCompany(payload)
+      console.info('Company created', payload)
+    })
   })
-})
+} catch (error) {
+  console.error(error)
+}
 
 /*
 Check if mobile client is connected
