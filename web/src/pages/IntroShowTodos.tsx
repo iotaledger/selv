@@ -8,7 +8,7 @@ import { Layout, Steps } from "../components";
  * Component which will display a IntroShowTodos.
  */
 const IntroShowTodos: React.FC = ({ match }: any) => {
-    const { step, nextStep, mainSteps } = useStep(match); 
+    const { nextStep, mainSteps } = useStep(match); 
     
     useEffect(() => {
         const reset = async () => await localStorage.clear()
@@ -17,18 +17,21 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
 
     return (
         <Layout match={match}>
-            <React.Fragment>
-                <h2>You are now Bob<br />and this is your to-do list</h2>
-                <Steps 
-                    steps={mainSteps} 
-                    stepId={step} 
-                />
-                <Link to={nextStep}>
-                    <Button type="primary">
-                        Get things done
-                    </Button> 
-                </Link>
-            </React.Fragment>
+            <div className="demo-intro">
+                <div className="todos">
+                    <h1>Welcome to the Selv demo for setting up your own company.</h1>
+                    <h3>Here is your to-do list for today:</h3>
+                    <Steps 
+                        steps={mainSteps} 
+                        stepId={2} 
+                    />
+                    <Link to={nextStep}>
+                        <Button type="primary">
+                            Get things done
+                        </Button> 
+                    </Link>
+                </div>
+            </div>
         </Layout>
     );
 }
