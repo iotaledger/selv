@@ -27,7 +27,19 @@ const VERIFICATION_LEVEL = {
     DID_OWNER: 1,
     DID_TRUSTED: 2
 }
-  
+
+const verificationStatus = {
+  notVerified: 'Credentials could not be verified',
+  missing: 'Missing credential of type',
+  trusted: 'Credentials successfully verified',
+}
+
+const verificationType = {
+  notVerified: 'error',
+  missing: 'warning',
+  trusted: 'success',
+}
+
 export default (presentationData: VerifiablePresentationDataModel, requestedCredentials: string[], challengeNonce: string) => {
     return new Promise(async resolve => {
       try {
@@ -49,11 +61,17 @@ export default (presentationData: VerifiablePresentationDataModel, requestedCred
           verifiablePresentation.Verify(provider)
             .then(() => {
                 // Determine level of trust
+                let type = verificationType.notVerified
+                let message = verificationStatus.notVerified
                 let verificationLevel = VERIFICATION_LEVEL.UNVERIFIED
                 if (presentationData?.proof?.nonce === challengeNonce) {
+                  type = verificationType.trusted
+                  message = verificationStatus.trusted
                   verificationLevel = VERIFICATION_LEVEL.DID_TRUSTED 
                   requestedCredentials.forEach(schemaName => {
                     if (!verifiablePresentation.GetVerifiedTypes().includes(schemaName)) {
+                      type = verificationType.missing
+                      message = `${verificationStatus.missing} ${schemaName}`
                       verificationLevel = VERIFICATION_LEVEL.DID_OWNER
                     }
                   })
@@ -61,6 +79,8 @@ export default (presentationData: VerifiablePresentationDataModel, requestedCred
                 const subjects = presentationData.verifiableCredential.map(credential => credential?.credentialSubject)
                 resolve({
                     status: verificationLevel,
+                    message,
+                    type,
                     data: subjects.reduce((a, b) => ({ ...a, ...b }))
                 })
             })
@@ -68,6 +88,8 @@ export default (presentationData: VerifiablePresentationDataModel, requestedCred
                 console.error('Error 1', error)
                 resolve({
                     status: VERIFICATION_LEVEL.UNVERIFIED,
+                    message: verificationStatus.notVerified,
+                    type: verificationType.notVerified,
                 })
             })
             .finally(() => {
@@ -76,11 +98,18 @@ export default (presentationData: VerifiablePresentationDataModel, requestedCred
         } else {
           resolve({
             status: VERIFICATION_LEVEL.UNVERIFIED,
+            message: verificationStatus.notVerified,
+            type: verificationType.notVerified,
           })
         }
       } catch (error) {
         console.error('Error 2', error)
-        return error
+        return {
+          status: VERIFICATION_LEVEL.UNVERIFIED,
+          message: verificationStatus.notVerified,
+          type: verificationType.notVerified,
+          error
+        }
       }
     })
 }
