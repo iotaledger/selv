@@ -3,24 +3,29 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const SocketIO = require('socket.io')
 const { Server } = require('http');
-const { createIdentity, createAccessCredential } = require('./DID')
+// const { createIdentity, createAccessCredential } = require('./DID')
 const { websocketPort } = require('../config')
-const { createCompany, readData, readAllData } = require('./database')
+const { createOrUpdateCompany, readData, readAllData } = require('./database')
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
+const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://poc-dinaas.alexey-iota.now.sh']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      console.log('Allowed by CORS', origin)
+      callback(null)
+    } else {
+      console.error('Not allowed by CORS', origin)
+      callback(new Error('Not allowed by CORS ' + origin))
+    }
+  }
+}
+
 const app = express()
-app.use(cors());
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json());
-
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'content-type');
-    next();
-});
 
 console.log('Websocket server starting', websocketPort)
 
@@ -107,7 +112,7 @@ socketServer.on('connection', (socket) => {
 /*
 Check if mobile client is connected
 */
-app.get('/connection', async (req, res) => {
+app.get('/connection', cors(corsOptions), async (req, res, next) => {
   try {
     const mobileClient = mobileClients.has(req.query.channelId);
     console.log('isMobileConnected', req.query.channelId, mobileClient);
@@ -131,22 +136,44 @@ app.get('/connection', async (req, res) => {
 })
 
 /*
-Check if mobile client is connected
+Get company details
 */
-app.get('/company', async (req, res) => {
+app.get('/company', cors(corsOptions), async (req, res, next) => {
   try {
     const companyNumber = req.query.company;
     if (companyNumber) {
-      const company = await readData('company', companyNumber) 
+      const data = await readData('company', companyNumber) 
       res.json({
         status: 'success',
-        company
+        data
       });
     } else {
-      const companies = await readAllData('company')
+      const data = await readAllData('company')
       res.json({
         status: 'success',
-        companies
+        data
+      });
+    }
+  } catch (e) {
+    console.error(e)
+    res.json({
+      status: 'failure',
+      error: JSON.stringify(e),
+    });
+  }
+})
+
+/*
+Activate company
+*/
+app.post('/activate', cors(corsOptions), async (req, res, next) => {
+  try {
+    const companyNumber = req.body.company;
+    if (companyNumber) {
+      const company = await readData('company', companyNumber) 
+      await createOrUpdateCompany({ ...company, CompanyStatus: 'Active' })
+      res.json({
+        status: 'success'
       });
     }
   } catch (e) {
