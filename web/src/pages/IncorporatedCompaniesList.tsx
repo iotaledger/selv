@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import React from "react";
+// import axios from 'axios';
 import { Link } from 'react-router-dom'
 import { Button } from 'antd';
 import useStep from "../utils/useStep";
+import useFetch from "../utils/useFetch";
 import { Layout, Table, NextStepDrawer } from "../components";
 import { serverAPI } from '../config.json'
 
@@ -11,19 +12,7 @@ import { serverAPI } from '../config.json'
  */
 const IncorporatedCompanies: React.FC = ({ history, match, ...props }: any) => {
     const { nextStep } = useStep(match); 
-    const [companyData, setCompanyData] = useState([]);
-
-    useEffect(() => {
-        async function setNextStepCTA() {
-            const response = await axios.get(`${serverAPI}/company`)
-
-            if (response && response?.data?.status === 'success') {
-                const data = response?.data?.companies
-                setCompanyData(data)
-            }
-        } 
-        setNextStepCTA()
-    }, [])
+    const { response, loading } = useFetch(`${serverAPI}/company`);  
 
     function onRowClick(data: any) {
         history.push(`/progress/company/details/${match?.params?.step || 2}/${data.CompanyNumber}`)
@@ -52,9 +41,9 @@ const IncorporatedCompanies: React.FC = ({ history, match, ...props }: any) => {
                         }
                     </div>
                     <Table 
-                        data={companyData} 
+                        data={response && response.data} 
                         onRowClick={onRowClick} 
-                        loading={companyData.length === 0}
+                        loading={loading}
                     />
                 </div>
                 <NextStepDrawer link={props?.location?.state?.nextStep} />
