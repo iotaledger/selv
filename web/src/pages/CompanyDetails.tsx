@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import React, { useState } from "react";
 import { Link } from 'react-router-dom'
 import { Nav } from 'rsuite';
 import useStep from "../utils/useStep";
-import { Layout, NextStepDrawer } from "../components";
+import useFetch from "../utils/useFetch";
+import { Layout, Loading, NextStepDrawer } from "../components";
 import back from '../assets/back.svg';
 import { serverAPI } from '../config.json'
 
@@ -26,22 +26,10 @@ interface CompanyData {
  * Component which will display a CompanyData.
  */
 const CompanyData: React.FC = ({ match }: any) => {
-    const [companyData, setCompanyData] = useState();
+    const companyId = match?.params?.companyId;
     const [activeTab, setActiveTab] = useState('overview');
     const { nextStep } = useStep(match); 
-    const companyId = match?.params?.companyId;
-
-    useEffect(() => {
-        async function setCompanyInfo(companyId: string) {
-            const response = await axios.get(`${serverAPI}/company?company=${companyId}`)
-
-            if (response && response?.data?.status === 'success') {
-                const data: CompanyData | undefined = response?.data?.company
-                setCompanyData(data)
-            }
-        } 
-        setCompanyInfo(companyId)
-    }, [companyId])
+    const { response, loading } = useFetch(`${serverAPI}/company?company=${companyId}`);  
 
     function handleSelect(activeKey: string) {
         setActiveTab(activeKey);
@@ -50,12 +38,12 @@ const CompanyData: React.FC = ({ match }: any) => {
     function renderActiveComponent() {
         switch (activeTab) {
             case 'people':
-                return <People details={companyData} />;
+                return <People details={response?.data} />;
             case 'tangle':
-                return <TangleData details={companyData} />;
+                return <TangleData details={response?.data} />;
             case 'overview':
             default:
-                return <CompanyDetails details={companyData} />;
+                return <CompanyDetails details={response?.data} />;
         }
     }
 
@@ -63,23 +51,29 @@ const CompanyData: React.FC = ({ match }: any) => {
         <Layout match={match}>
             <React.Fragment>
                 <div className="company-details-wrapper">
-                    <Link 
-                        to={{
-                            pathname: `${match.url.replace(companyId, '').replace('details', 'list')}`, 
-                            state: { nextStep }
-                        }}
-                        className="company-details-back bold"
-                    >
-                        <img src={back} alt="" />&nbsp;&nbsp;&nbsp;Back
-                    </Link>
-                    <h2>{companyData?.CompanyName}</h2>
-                    <p className="company-number-wrapper">
-                        Company number <span className="company-number">{companyData?.CompanyNumber}</span>
-                    </p>
-                    <CustomNav active={activeTab} onSelect={handleSelect} />
-                    <div className="company-details">
-                        {renderActiveComponent()}
-                    </div>
+                    {
+                        loading ? <Loading /> : (
+                            <React.Fragment>
+                                <Link 
+                                    to={{
+                                        pathname: `${match.url.replace(companyId, '').replace('details', 'list')}`, 
+                                        state: { nextStep }
+                                    }}
+                                    className="company-details-back bold"
+                                >
+                                    <img src={back} alt="" />&nbsp;&nbsp;&nbsp;Back
+                                </Link>
+                                <h2>{response?.data?.CompanyName}</h2>
+                                <p className="company-number-wrapper">
+                                    Company number <span className="company-number">{response?.data?.CompanyNumber}</span>
+                                </p>
+                                <CustomNav active={activeTab} onSelect={handleSelect} />
+                                <div className="company-details">
+                                    {renderActiveComponent()}
+                                </div>
+                            </React.Fragment>
+                        )
+                    }
                 </div>
                 <NextStepDrawer link={nextStep} />
             </React.Fragment>
