@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import randomstring from 'randomstring';
 import SocketIOClient from 'socket.io-client';
 import axios from 'axios';
+import { notification, message } from 'antd';
 import { serverAPI, websocketURL } from '../config.json'
-// import AppContext from '../context/app-context';
 import { flattenObject, decrypt } from "../utils/helper";
 import evaluateCredential from "../utils/did";
 import useInterval from "../utils/useInterval";
@@ -16,16 +16,34 @@ interface IChannelDetails {
     password :string;
     requestedCredentials :string[];
 }
+
+const notify = (type: string, message: string, description: string) => {
+    switch (type) {
+        case 'success':
+            notification.success({ message, description })
+            break;
+        case 'warning':
+            notification.warning({ message, description })
+            break;
+        case 'info':
+            notification.info({ message, description })
+            break;
+        case 'error':
+        default:
+            notification.error({ message, description })
+            break;
+    }
+};
+
 /**
  * Component which will display a ProveIdentity.
  */
 const ProveIdentity: React.FC = ({ history, match }: any) => {
     const { nextStep } = useStep(match); 
-    const [message, setMessage] = useState('Waiting for login...')
+    const [loading, setLoading] = useState(true)
+    const [status, setStatus] = useState('Waiting for login...')
     const [qrContent, setQrContent] = useState('');
     const [channel, setChannel] = useState('');
-    // const [ioClient, setIoClient] = useState({})
-    // const { connectWebSocket, ioClient }: any = useContext(AppContext)
 
     let ioClient: any
 
@@ -42,29 +60,46 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
 
         ioClient.emit('registerDesktopClient', { channelId })
     
-        ioClient.on('error', async (error: any) => {
+        ioClient.on('errorMessage', async (error: any) => {
             console.error('WebSocket error', error)
-            setMessage('Mobile application connection error')
+            setIsRunning(false);
+            setStatus('Mobile application connection error')
+            setLoading(false)
+            message.error({ content: 'Mobile application connection error' });
+            notify('error', 'Mobile client error', error)
+
         })
 
         ioClient.on('verifiablePresentation', async (payload: any) => {
             try {
                 console.log('password', password)
-                setMessage('Verifying credentials...')
+                setIsRunning(false);
+                setStatus('Verifying credentials...')
+                message.loading({ content: 'Verifying credentials...', duration: 0 });
+                notify('info', 'Verification', 'Verifying credentials...')
                 let verifiablePresentation = await decrypt(password, payload)
+                console.log('verifiablePresentation 1 ', verifiablePresentation)
                 verifiablePresentation = JSON.parse(verifiablePresentation)
-                console.log('verifiablePresentation', verifiablePresentation)
+                console.log('verifiablePresentation 2 ', verifiablePresentation)
                 const evaluationResult: any = await evaluateCredential(verifiablePresentation, requestedCredentials, challenge )
                 console.log('evaluationResult', evaluationResult)
                 const flattenData = flattenObject(evaluationResult)
                 console.log('flattenData', flattenData)
+
+                setStatus(evaluationResult.message)
+                notify(evaluationResult.type, 'Verification result', evaluationResult.message)
+                setLoading(false)
+
                 if (evaluationResult?.status === 2) { // DID_TRUSTED
+                    message.destroy()
                     console.log('Verification completed, redirecting to', nextStep)
                     await localStorage.setItem('credentials', JSON.stringify(evaluationResult))
                     history.push(nextStep)
                 }
             } catch (e) {
                 console.error(e)
+                setLoading(false)
+                message.destroy()
             }
         })
     } 
@@ -76,12 +111,13 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
             setIsRunning(false);
         } else {
             setIsRunning(true);
+            notify('warning', 'Selv App not connected', 'Scan the QR code with Selv App to continue')
         }
     }
 
     useInterval(() => {
         checkConnectedStatus()
-    }, isRunning ? 3000 : null);
+    }, isRunning ? 10000 : null);
     
     useEffect(() => {
         async function setQR() {
@@ -92,7 +128,7 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
             if (companyHouseStatus && companyHouseStatus === 'completed') {
                 if (bankStatus && bankStatus === 'completed') {
                     await localStorage.setItem('insurance', 'pending')
-                    requestedCredentials.push('Company', 'Bank')
+                    requestedCredentials.push('Company', 'BankAccount')
                 } else {
                     await localStorage.setItem('bank', 'pending')
                     requestedCredentials.push('Company')
@@ -102,23 +138,23 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
             }
 
             const channelId = randomstring.generate(7)
-            await setChannel(channelId);
-
             const challenge = randomstring.generate(10) 
-
             const payloadPassword = randomstring.generate() 
+
             const channelDetails: IChannelDetails = {
                 channelId, 
                 challenge,
                 password: payloadPassword,
                 requestedCredentials, 
             }
+            console.log('channelDetails', channelDetails)
 
             const newQrContent = JSON.stringify(channelDetails)
-            await setQrContent(newQrContent);
+            setQrContent(newQrContent);
+            setChannel(channelId);
+            setIsRunning(true);
             await localStorage.setItem('WebSocket_DID', newQrContent);
     
-            console.log('channelDetails', channelDetails)
             await connectWebSocket(channelDetails);
         } 
         if (nextStep) {
@@ -127,7 +163,6 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
         
         // Removing the listener before unmounting the component in order to avoid addition of multiple listener
         return () => {
-            ioClient && console.log('WebSocket disconnected');
             ioClient?.off('verifiablePresentation');
             ioClient?.off('error');
             ioClient?.disconnect();
@@ -140,8 +175,8 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
                 <h2>Provide your Digital Identity credentials</h2>
                 <p>Scan this QR code with <strong>Selv App</strong> to continue</p>
                 <QRCode text={qrContent} />
-                <p className="bold">{message}</p>
-                <Loading />
+                <p className="bold">{status}</p>
+                { loading && <Loading /> }
             </div>
         </Layout>
     );

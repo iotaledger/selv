@@ -28,7 +28,7 @@ export default ({ link }: { link: string }) => {
     switch (nextStep) {
         case 'completed':
             return (
-                <div className="next-step-drawer">
+                <div className="next-step-drawer completed">
                     <h3>Your company is now Active</h3>
                     <p>
                         You have completed all the steps in this demo

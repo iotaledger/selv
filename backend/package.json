@@ -2,9 +2,9 @@
   "name": "DINaaS",
   "version": "1.0.0",
   "description": "Digital Identity Narratives as a Service PoC",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "concurrently --kill-others-on-fail \"node index.js\""
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,6 @@
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
-    "concurrently": "^5.1.0"
+    "nodemon": "^2.0.2"
   }
 }

@@ -32,3 +32,10 @@ export const flattenObject = (obj: {[key: string]: any;}, prefix = '') =>
     }
     return acc;
   }, {});
+
+export const getCompanyId = async () => {
+  const credentialsString: string | null = await localStorage.getItem('credentials')
+  const credentials = credentialsString && await JSON.parse(credentialsString)
+  const flattenData = flattenObject(credentials?.data)
+  return flattenData?.CompanyNumber
+}

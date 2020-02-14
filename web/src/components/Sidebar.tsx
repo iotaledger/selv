@@ -8,7 +8,7 @@ import poweredByIota from '../assets/poweredByIota.svg'
 
 const externalPages = [
     { url: 'https://iota.org', title: 'Home' },
-    { url: 'https://blog.iota.org', title: 'FAQ' },
+    { url: 'https://iota.org', title: 'FAQ' },
     { url: 'https://iota.org', title: 'IOTA.org' },
 ]
 
@@ -21,7 +21,7 @@ const SidebarInstance = ({ children }: {
                 <Sidenav.Body>
                     <h2 className="todo-list">
                         Your to-do list
-                        <Link to="/progress/demo/todos/2">
+                        <Link to="/progress/demo/todos">
                             <img src={reset} alt="Reset" />
                         </Link>
                     </h2>

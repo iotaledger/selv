@@ -39,7 +39,7 @@ exports.close = async () => {
     });
 };
 
-exports.createCompany = async ({
+exports.createOrUpdateCompany = async ({
     CompanyNumber, 
     CompanyName, 
     CompanyCreationDate, 
@@ -51,8 +51,8 @@ exports.createCompany = async ({
     CompanyBusiness,
     tangle
 }) => {
-    const insert = `
-        INSERT INTO company (
+    const query = `
+        REPLACE INTO company (
             CompanyNumber, 
             CompanyName, 
             CompanyCreationDate, 
@@ -64,7 +64,7 @@ exports.createCompany = async ({
             CompanyBusiness,
             tangle
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    await db.run(insert, [
+    await db.run(query, [
         CompanyNumber, 
         CompanyName, 
         CompanyCreationDate, 
@@ -102,7 +102,7 @@ exports.writeData = async (table, data) => {
                 return;
             case 'company':
             default:
-                await createCompany(data);
+                await createOrUpdateCompany(data);
                 return;
         }
     } catch (error) {
@@ -135,7 +135,7 @@ exports.readData = async (table, searchField = null) => {
 exports.readAllData = async (table) => {
     return new Promise((resolve, reject) => {
         try {
-            db.all(`SELECT * FROM ${table}`, (err, rows) => {
+            db.all(`SELECT * FROM ${table} ORDER BY rowid DESC`, (err, rows) => {
                 if (err) {
                     return resolve(null);
                 } else {

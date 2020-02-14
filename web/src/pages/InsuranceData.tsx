@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Button, Collapse, notification, message } from 'antd';
 import { serverAPI, websocketURL } from '../config.json'
 import useStep from "../utils/useStep";
+import { getCompanyId } from '../utils/helper'
 import { flattenObject, encrypt, decrypt } from "../utils/helper";
 import { Layout, Loading, AccountType, PrefilledForm, Checkbox } from "../components";
 import checkmark from '../assets/bankCheckmark.svg'
@@ -23,7 +24,22 @@ const companyFields = [
     'CompanyAddress',
     'CompanyType',
     'CompanyBusiness',
+    'CompanyCreationDate',
+    'CompanyNumber',
+    'CompanyOwner'
 ]
+
+const bankFields = [
+    'BankName',
+    'AccountType',
+]
+
+const accountTypes = {
+    label: 'Choose liability insurance type',
+    error: 'Please choose a type of liability insurance',
+    accounts: ['General liability', 'Professional liability', 'Employer liability'],
+    special: 'Business liability'
+}
 
 const messages = {
     waiting: 'Waiting for Selv app...',
@@ -49,6 +65,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
     const [accountStep, setAccountStep] = useState(1)
     const [prefilledPersonalData, setPrefilledPersonalData] = useState({})
     const [prefilledCompanyData, setPrefilledCompanyData] = useState({})
+    const [prefilledBankData, setPrefilledBankData] = useState({})
 
     let ioClient: any
 
@@ -72,6 +89,10 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
             const companyData = companyFields.reduce((acc: any, entry: string) => 
                 ({ ...acc, [entry]: flattenData[entry] }), {})
             setPrefilledCompanyData({ ...companyData })
+
+            const bankData = bankFields.reduce((acc: any, entry: string) => 
+            ({ ...acc, [entry]: flattenData[entry] }), {})
+            setPrefilledBankData({ ...bankData })
 
             await setChannel()
         } 
@@ -128,6 +149,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                 console.log('Insurance data setup completed, redirecting to', nextStep)
                 message.destroy()
                 await localStorage.setItem('insurance', 'completed')
+                await updateCompanyStatus()
                 history.push(nextStep)
             }
         })
@@ -166,7 +188,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
     }
 
     async function continueNextStep(params: any) {
-        if (accountStep < 4) {
+        if (accountStep < 5) {
             setAccountStep(accountStep => accountStep + 1)
             if (params.accountType) {
                 setAccountType(params.accountType)
@@ -183,9 +205,15 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
         accountStep > step && setAccountStep(Number(step))
     }
 
+    async function updateCompanyStatus() {
+        const companyId = await getCompanyId()
+        await axios.post(`${serverAPI}/activate`, { company: companyId })
+    }
+
     const prefilledPersonalFormData: any = { dataFields: prefilledPersonalData }
     const prefilledCompanyFormData: any = { dataFields: prefilledCompanyData }
-    const formData: any = { onSubmit: continueNextStep, status, messages }
+    const prefilledBankFormData: any = { dataFields: prefilledBankData }
+    const formData: any = { onSubmit: continueNextStep, status, messages, accountTypes, buttonText: 'Get liability insurance' }
 
     return (
         <Layout match={match}>
@@ -257,13 +285,36 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                     <Collapse.Panel
                         header={(
                             <div className="section-header">
-                                <span>4</span>
-                                <h3>Confirm</h3>
+                                {
+                                    accountStep > 4 ? <img src={checkmark} alt="" /> : <span>4</span>
+                                }
+                                <h3>Bank Account Details</h3>
                             </div>
                         )} 
                         showArrow={false}
                         disabled={accountStep < 4}
                         key={4}
+                    >
+                        {
+                            Object.keys(prefilledBankFormData.dataFields).length && 
+                            <PrefilledForm { ...prefilledBankFormData } />
+                        }
+                        <Button onClick={continueNextStep}>
+                            Continue
+                        </Button> 
+                    </Collapse.Panel>
+
+
+                    <Collapse.Panel
+                        header={(
+                            <div className="section-header">
+                                <span>5</span>
+                                <h3>Confirm</h3>
+                            </div>
+                        )} 
+                        showArrow={false}
+                        disabled={accountStep < 5}
+                        key={5}
                     >
                         <Checkbox { ...formData } />
                     </Collapse.Panel>

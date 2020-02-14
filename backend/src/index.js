@@ -3,24 +3,29 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const SocketIO = require('socket.io')
 const { Server } = require('http');
-const { createIdentity, createAccessCredential } = require('./DID')
+// const { createIdentity, createAccessCredential } = require('./DID')
 const { websocketPort } = require('../config')
-const { createCompany, readData, readAllData } = require('./database')
+const { createOrUpdateCompany, readData, readAllData } = require('./database')
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
+const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://poc-dinaas.alexey-iota.now.sh']
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      console.log('Allowed by CORS', origin)
+      callback(null)
+    } else {
+      console.error('Not allowed by CORS', origin)
+      callback(new Error('Not allowed by CORS ' + origin))
+    }
+  }
+}
+
 const app = express()
-app.use(cors());
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json());
-
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'content-type');
-    next();
-});
 
 console.log('Websocket server starting', websocketPort)
 
@@ -30,84 +35,88 @@ server.listen(websocketPort);
 const mobileClients = new Map()
 const desktopClients = new Map()
 
-const getChannelIdBySocket = (clients, socketId) =>
-  [...clients.values()].find(entry => entry.socketId === socketId);
+try {
+  const getChannelIdBySocket = (clients, socketId) =>
+    [...clients.values()].find(entry => entry.socketId === socketId);
 
-socketServer.on('connection', (socket) => {
-  
-  socket.on('registerMobileClient', async (data) => {
-    const { channelId } = data
-    console.info(`Mobile client connected [id=${socket.id}, channel=${channelId}]`)
-    mobileClients.set(channelId, { socket, channelId, socketId: socket.id })
-  })
-
-  socket.on('registerDesktopClient', async (data) => {
-    const { channelId } = data
-    console.info(`Desktop client connected [id=${socket.id}, channel=${channelId}]`)
-    desktopClients.set(channelId, { socket, channelId, socketId: socket.id })
-  })
-
-  socket.on('disconnect', async () => {
-    console.info(`Client gone [id=${socket.id}]`)
+  socketServer.on('connection', (socket) => {
     
-    const desktopClient = getChannelIdBySocket(desktopClients, socket.id)
-    if (desktopClient && desktopClient.channelId) {
-      console.log('desktop client removed', desktopClient.channelId)
-      await desktopClients.delete(desktopClient.channelId)
-    }
-    
-    const mobileClient = getChannelIdBySocket(mobileClients, socket.id)
-    if (mobileClient && mobileClient.channelId) {
-      console.log('mobile client removed', mobileClient.channelId)
-      await mobileClients.delete(mobileClient.channelId)
-    }
+    socket.on('registerMobileClient', async (data) => {
+      const { channelId } = data
+      console.info(`Mobile client connected [id=${socket.id}, channel=${channelId}]`)
+      mobileClients.set(channelId, { socket, channelId, socketId: socket.id })
+    })
 
-    console.log('connected desktopClients', desktopClients.keys())
-    console.log('connected mobileClients', mobileClients.keys())
-  })
+    socket.on('registerDesktopClient', async (data) => {
+      const { channelId } = data
+      console.info(`Desktop client connected [id=${socket.id}, channel=${channelId}]`)
+      desktopClients.set(channelId, { socket, channelId, socketId: socket.id })
+    })
 
-  socket.on('verifiablePresentation', async (data) => {
-    const { channelId, payload } = data
-    const desktopClient = desktopClients.get(channelId)
-    const desktopSocket = desktopClient.socket
-    desktopSocket && desktopSocket.emit('verifiablePresentation', payload)
-    console.info('Verifiable Presentation sent to desktop client')
-  })
+    socket.on('disconnect', async () => {
+      console.info(`Client gone [id=${socket.id}]`)
+      
+      const desktopClient = getChannelIdBySocket(desktopClients, socket.id)
+      if (desktopClient && desktopClient.channelId) {
+        console.log('desktop client removed', desktopClient.channelId)
+        await desktopClients.delete(desktopClient.channelId)
+      }
+      
+      const mobileClient = getChannelIdBySocket(mobileClients, socket.id)
+      if (mobileClient && mobileClient.channelId) {
+        console.log('mobile client removed', mobileClient.channelId)
+        await mobileClients.delete(mobileClient.channelId)
+      }
 
-  socket.on('createCredential', async (data) => {
-    const { channelId, payload } = data
-    const mobileClient = mobileClients.get(channelId)
-    const mobileSocket = mobileClient.socket
-    mobileSocket && mobileSocket.emit('createCredential', payload)
-    console.info('Create Credential request sent to mobile client', channelId)
-  })
+      console.log('connected desktopClients', desktopClients.keys())
+      console.log('connected mobileClients', mobileClients.keys())
+    })
 
-  socket.on('createCredentialConfirmation', async (data) => {
-    const { channelId, payload } = data
-    const desktopClient = desktopClients.get(channelId)
-    const desktopSocket = desktopClient.socket
-    desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload)
-    console.info('Create Credential Confirmation sent to desktop client', channelId)
-  })
+    socket.on('verifiablePresentation', async (data) => {
+      const { channelId, payload } = data
+      const desktopClient = desktopClients.get(channelId)
+      const desktopSocket = desktopClient.socket
+      desktopSocket && desktopSocket.emit('verifiablePresentation', payload)
+      console.info('Verifiable Presentation sent to desktop client')
+    })
 
-  socket.on('errorMessage', async (data) => {
-    const { channelId, payload } = data
-    const desktopClient = desktopClients.get(channelId)
-    const desktopSocket = desktopClient.socket
-    desktopSocket && desktopSocket.emit('errorMessage', payload)
-  })
+    socket.on('createCredential', async (data) => {
+      const { channelId, payload } = data
+      const mobileClient = mobileClients.get(channelId)
+      const mobileSocket = mobileClient.socket
+      mobileSocket && mobileSocket.emit('createCredential', payload)
+      console.info('Create Credential request sent to mobile client', channelId)
+    })
 
-  socket.on('createCompany', async (data) => {
-    const { payload } = data
-    await createCompany(payload)
-    console.info('Company created', payload)
+    socket.on('createCredentialConfirmation', async (data) => {
+      const { channelId, payload } = data
+      const desktopClient = desktopClients.get(channelId)
+      const desktopSocket = desktopClient.socket
+      desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload)
+      console.info('Create Credential Confirmation sent to desktop client', channelId)
+    })
+
+    socket.on('errorMessage', async (data) => {
+      const { channelId, payload } = data
+      const desktopClient = desktopClients.get(channelId)
+      const desktopSocket = desktopClient.socket
+      desktopSocket && desktopSocket.emit('errorMessage', payload)
+    })
+
+    socket.on('createCompany', async (data) => {
+      const { payload } = data
+      await createOrUpdateCompany(payload)
+      console.info('Company created', payload)
+    })
   })
-})
+} catch (error) {
+  console.error(error)
+}
 
 /*
 Check if mobile client is connected
 */
-app.get('/connection', async (req, res) => {
+app.get('/connection', cors(corsOptions), async (req, res, next) => {
   try {
     const mobileClient = mobileClients.has(req.query.channelId);
     console.log('isMobileConnected', req.query.channelId, mobileClient);
@@ -131,22 +140,44 @@ app.get('/connection', async (req, res) => {
 })
 
 /*
-Check if mobile client is connected
+Get company details
 */
-app.get('/company', async (req, res) => {
+app.get('/company', cors(corsOptions), async (req, res, next) => {
   try {
     const companyNumber = req.query.company;
     if (companyNumber) {
-      const company = await readData('company', companyNumber) 
+      const data = await readData('company', companyNumber) 
       res.json({
         status: 'success',
-        company
+        data
       });
     } else {
-      const companies = await readAllData('company')
+      const data = await readAllData('company')
       res.json({
         status: 'success',
-        companies
+        data
+      });
+    }
+  } catch (e) {
+    console.error(e)
+    res.json({
+      status: 'failure',
+      error: JSON.stringify(e),
+    });
+  }
+})
+
+/*
+Activate company
+*/
+app.post('/activate', cors(corsOptions), async (req, res, next) => {
+  try {
+    const companyNumber = req.body.company;
+    if (companyNumber) {
+      const company = await readData('company', companyNumber) 
+      await createOrUpdateCompany({ ...company, CompanyStatus: 'Active' })
+      res.json({
+        status: 'success'
       });
     }
   } catch (e) {
