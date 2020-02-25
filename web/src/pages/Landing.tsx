@@ -1,21 +1,32 @@
 import React from "react";
-import { Link } from 'react-router-dom'
-import { Button } from 'antd';
+import { 
+    App,
+    ControlIdentity,
+    FAQ,
+    Footer,
+    Header,
+    HowItWorks,
+    Main,
+    Selv,
+    UsersBusiness,
+} from '../components/landing'
+
 
 /**
- * Component which will display a Landing.
+ * Component which will display a Landing page.
  */
 const Landing: React.FC = () => {
     return (
-        <div className="page-wrapper">
-            <div className="main-section">
-                <h1>Landing Page</h1>
-                <Link to="/progress/demo/todos">
-                    <Button type="primary">
-                        Start Demo
-                    </Button> 
-                </Link>
-            </div>
+        <div className="landing-page-wrapper">
+            <Header />
+            <Main />
+            <ControlIdentity />
+            <Selv />
+            <HowItWorks />
+            <UsersBusiness />
+            <App />
+            <FAQ />
+            <Footer />
         </div>
     );
 }
