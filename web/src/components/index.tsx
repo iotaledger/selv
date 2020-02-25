@@ -9,6 +9,7 @@ import Form from './Form'
 import PrefilledForm from './PrefilledForm'
 import Checkbox from './Checkbox'
 import AccountType from './AccountType'
+import RandomGraphicElement from './RandomGraphicElement'
 
 export { 
     Sidebar,
@@ -22,4 +23,5 @@ export {
     PrefilledForm,
     Checkbox,
     AccountType,
+    RandomGraphicElement
 }
