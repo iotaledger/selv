@@ -45,8 +45,8 @@ const RandomGraphicElement = ({ children, elements }: {
                     const styles: any = {
                         zIndex: 0,
                         position: 'absolute',
-                        top: 100 + dimensions.top + getRandomInt(dimensions.height - 200),
-                        left: 100 + getRandomInt(dimensions.width - 200),
+                        top: 50 + getRandomInt(dimensions.height - 100),
+                        left: 50 + getRandomInt(dimensions.width - 100),
                         // opacity: 0.7 + Math.floor(Math.random())
                     };
                     return ( 

@@ -41,4 +41,4 @@ export const getCompanyId = async () => {
 }
 
 export const getRandomInt = (max: number) => 
-  Math.floor(Math.random() * Math.floor(max));
+  Math.abs(Math.floor(Math.random() * Math.floor(max)));
