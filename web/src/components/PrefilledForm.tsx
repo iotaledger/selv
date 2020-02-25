@@ -31,11 +31,9 @@ const PrefilledForm = ({ form, dataFields }: {
     form: any;
     dataFields: any;
 }) => {
-    const { getFieldDecorator, setFieldsValue } = form;
-
     useEffect(() => {
-        setFieldsValue(dataFields);
-    }, [])
+        form.setFieldsValue(dataFields);
+    }, [form, dataFields])
 
     return (
         <div className="prefilled-form">
@@ -47,7 +45,7 @@ const PrefilledForm = ({ form, dataFields }: {
                             key={field} 
                             className={shortFields.includes(field) ? 'short-field' : ''}
                         >
-                            { getFieldDecorator(field, {})(
+                            { form.getFieldDecorator(field, {})(
                                 <Input disabled suffix={<Icon />} />
                             ) }
                         </Form.Item>

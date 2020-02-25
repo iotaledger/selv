@@ -22,7 +22,7 @@ const SingInConfirmation: React.FC = ({ history, match }: any) => {
             }
         } 
         getData()
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <Layout match={match}>

@@ -33,7 +33,7 @@ const Confirmation: React.FC = ({ match }: any) => {
             }
         } 
         determineCompanyId();
-    }, [companyId])
+    }, [companyId, theme])
 
     return (
         <Layout match={match}>

@@ -167,7 +167,7 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
             ioClient?.off('error');
             ioClient?.disconnect();
         }
-    }, [nextStep])
+    }, [nextStep]) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <Layout match={match}>

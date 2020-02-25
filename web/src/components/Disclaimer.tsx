@@ -16,7 +16,7 @@ const Disclaimer = ({ cookies }: { cookies: any }) => {
         setAck(false)
       }
     }
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   function dismiss() {
     cookies.set('selv-cookie', true, { path: '/' });

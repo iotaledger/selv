@@ -94,7 +94,7 @@ const BankData: React.FC = ({ history, match }: any) => {
             ioClient?.off('error');
             ioClient?.disconnect();
         }
-    }, [])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
     async function connectWebSocket(channelId: string, data: object) {
