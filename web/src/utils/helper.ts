@@ -39,3 +39,6 @@ export const getCompanyId = async () => {
   const flattenData = flattenObject(credentials?.data)
   return flattenData?.CompanyNumber
 }
+
+export const getRandomInt = (max: number) => 
+  Math.floor(Math.random() * Math.floor(max));
