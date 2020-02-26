@@ -38,8 +38,8 @@ const RandomGraphicElement = ({ children, elements }: {
                     const styles: any = {
                         zIndex: 0,
                         position: 'absolute',
-                        top: 25 + getRandomInt(dimensions.height - 50),
-                        left: 25 + getRandomInt(dimensions.width - 50),
+                        top: 50 + getRandomInt(dimensions.height - 100),
+                        left: 50 + getRandomInt(dimensions.width - 100),
                     };
                     return ( 
                         <img 

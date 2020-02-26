@@ -190,24 +190,26 @@
                     flex-direction: column;
                     justify-content: flex-start;
                     position: relative;
+                    top: -80px;
 
                     &:first-of-type {
-                        padding-top: 100px;
+                        padding-top: 180px;
+                        top: 0;
                     }
 
                     .info {
                         background-color: #fff;
 
                         &:last-of-type {
-                            margin-top: 100px;
+                            margin-top: 150px;
                         }
                     }
                 }
 
                 .howItWorks1 {
-                    width: 572px;
+                    width: 530px;
                     position: relative;
-                    left: -50px;
+                    left: -40px;
                 }
 
                 .howItWorks2 {
