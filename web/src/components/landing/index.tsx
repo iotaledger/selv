@@ -6,7 +6,7 @@ import Header from './Header'
 import HowItWorks from './HowItWorks'
 import Main from './Main'
 import Selv from './Selv'
-import UsersBusiness from './UsersBusiness'
+import Benefits from './Benefits'
 
 export { 
     App,
@@ -17,5 +17,5 @@ export {
     HowItWorks,
     Main,
     Selv,
-    UsersBusiness,
+    Benefits,
 }
