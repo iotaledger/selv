@@ -8,8 +8,8 @@ import appMobile from '../../assets/landing/app-mobile.png'
 export default ({ }) => (
     <RandomGraphicElement elements={5}>
         <div className="app-section" id="the-app">
-            <h4>Benefits</h4>
-            <h1>For users</h1>
+            <h4>Demo</h4>
+            <h1>the App</h1>
 
             <div className="content-wrapper">
                 <img src={app} alt="App" className="desktop" />
