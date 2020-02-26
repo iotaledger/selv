@@ -8,7 +8,7 @@ import {
     HowItWorks,
     Main,
     Selv,
-    UsersBusiness,
+    Benefits,
 } from '../components/landing'
 
 
@@ -23,7 +23,7 @@ const Landing: React.FC = () => {
             <ControlIdentity />
             <Selv />
             <HowItWorks />
-            <UsersBusiness />
+            <Benefits />
             <App />
             <FAQ />
             <Footer />
