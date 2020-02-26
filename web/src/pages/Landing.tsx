@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { 
     App,
     ControlIdentity,
@@ -15,7 +15,14 @@ import {
 /**
  * Component which will display a Landing page.
  */
-const Landing: React.FC = () => {
+const Landing: React.FC = ({ location }: any) => {
+    useEffect(() => {
+        if (location.hash) {
+            const target: Element | null = document.querySelector(location.hash);
+            target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [location.hash])
+
     return (
         <div className="landing-page-wrapper">
             <Header />
