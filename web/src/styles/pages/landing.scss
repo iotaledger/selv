@@ -142,7 +142,22 @@
     }
 
     .selv-section {
+        min-height: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #151F35;
 
+        p {
+            margin-top: 50px;
+            font-family: 'Metropolis', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 400;
+            font-size: 25px;
+            line-height: 39px;
+            text-align: center;
+            color: #FFFFFF;
+        }
     }
 
     .how-it-works-section {
