@@ -242,6 +242,23 @@
                         &:last-of-type {
                             margin-top: 150px;
                         }
+
+                        .content-header-wrapper {
+                            margin-bottom: 10px;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                        }
+        
+                        h5 {
+                            margin-left: 20px;
+                            line-height: 35px;
+                            border-bottom: 5px solid #B5F3D8;
+                        }
+        
+                        p {
+                            margin-left: 55px;
+                        }
                     }
                 }
 
