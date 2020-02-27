@@ -11,7 +11,7 @@ export default () => (
     <RandomGraphicElement elements={10}>
         <div className="benefits-section" id="benefits">
             <h4>Benefits</h4>
-            <h1>For users</h1>
+            <h2>For users</h2>
             <div className="benefits-wrapper">
                 <div className="benefit">
                     <img src={control} alt="Control" />
@@ -31,7 +31,7 @@ export default () => (
             </div>
 
             <h4>Benefits</h4>
-            <h1>For business</h1>
+            <h2>For business</h2>
             <div className="benefits-wrapper">
                 <div className="benefit">
                     <img src={laws} alt="Privacy Laws" />

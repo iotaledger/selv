@@ -9,7 +9,7 @@ export default ({ }) => (
     <RandomGraphicElement elements={10}>
         <div className="how-it-works-section" id="how-it-works">
             <h4>In brief</h4>
-            <h1>How it works</h1>
+            <h2>How it works</h2>
             <div className="content-wrapper">
                 <div className="desktop">
                     <div className="column">

@@ -12,7 +12,7 @@ const Icon = () => (
 export default () => (
     <RandomGraphicElement elements={10}>
         <div className="faq-section" id="faq">
-            <h1>FAQs</h1>
+            <h2>FAQs</h2>
             <Collapse 
                     bordered={false} 
                     defaultActiveKey={[1]} 
