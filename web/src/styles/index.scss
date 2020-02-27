@@ -49,7 +49,7 @@ body {
   align-items: flex-start;
 }
 
-h1, h2, h3, h4, h5, h6, div, span, p, label, input, select, section, footer, header, nav, ul, li, button, tr, td, th {
+div, span, p, label, input, select, section, footer, header, nav, ul, li, button, tr, td, th {
   @include themify($themes) {
     font-family: themed('fontFamily');  
   }

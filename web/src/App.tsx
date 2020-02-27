@@ -13,10 +13,10 @@ import { routes } from './steps'
 WebFontLoader.load({
   google: {
       families: [
-        'Open Sans:300,400,500,600,700', 
-        'Maven Pro:300,400,500,600,700',
-        'Inter:300,400,500,600,700, 800',
-        'Metropolis:300,400,500,600,700,800'
+        'Open Sans:300,400,500,600,700,800', 
+        'Maven Pro:300,400,500,600,700,800',
+        'Inter:300,400,500,600,700,800',
+        'Metropolis:300,400,500,600,700,800,900'
       ],
   },
 });
