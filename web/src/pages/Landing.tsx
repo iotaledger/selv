@@ -24,16 +24,18 @@ const Landing: React.FC = ({ location }: any) => {
     }, [location.hash])
 
     return (
-        <div className="landing-page-wrapper">
-            <Header />
-            <Main />
-            <ControlIdentity />
-            <Selv />
-            <HowItWorks />
-            <Benefits />
-            <App />
-            <FAQ />
-            <Footer />
+        <div className="theme-demo">
+            <div className="landing-page-wrapper">
+                <Header />
+                <Main />
+                <ControlIdentity />
+                <Selv />
+                <HowItWorks />
+                <Benefits />
+                <App />
+                <FAQ />
+                <Footer />
+            </div>
         </div>
     );
 }
