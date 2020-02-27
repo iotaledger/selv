@@ -10,15 +10,33 @@
         height: 100%;
     }
 
+    h2 {
+        border-bottom: 24px solid #B5F3D8;
+        line-height: 6px;
+        margin-top: 50px;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-weight: bold;
+        letter-spacing: 0.58em;
+        text-transform: uppercase;
+        color: #9DA5B2;
+    }
+
     .cta {
-        background: #4247DC;
+        @include themify($themes) {
+            background: themed('primaryColor');
+        }
         border-radius: 35px;
         height: 55px;
         padding: 10px 40px !important;
 
         > span {
             color: #ffffff;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            @include themify($themes) {
+                font-family: themed('fontFamily');
+            }
             font-weight: bold;
             font-size: 16px;
             line-height: 16px;
@@ -40,12 +58,24 @@
             justify-content: space-between;
 
             .menu-link {
-                font-family: 'Metropolis', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+                @include themify($themes) {
+                    font-family: themed('fontFamilyHeadings');
+                }
                 font-weight: 800;
                 font-size: 17px;
                 line-height: 57px;
                 color: #142037;
                 margin: 0 25px;
+                border-bottom: 3px solid #ffffff;
+
+                &:hover {
+                    @include themify($themes) {
+                        border-bottom: 3px solid themed('primaryColor');
+                    }
+                    -webkit-transition: border-color 500ms ease;
+                    -ms-transition: border-color 500ms ease;
+                    transition: border-color 500ms ease;
+                }
             }
 
             .cta {
@@ -85,7 +115,7 @@
                 justify-content: flex-start;
                 align-items: flex-end;
                 margin-top: 100px;
-                margin-bottom: 278px;
+                margin-bottom: 272px;
 
                 .content {
                     max-width: 370px;
@@ -116,7 +146,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px 0;
+        padding: 130px 0 30px;
 
         .content-wrapper {
             max-width: 960px;
@@ -133,6 +163,13 @@
                 align-items: flex-start;
                 z-index: 2;
                 background: #F2F5FA;
+
+                .heading-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                }
 
                 > * {
                     width: 50%;
@@ -151,7 +188,9 @@
 
         p {
             margin-top: 50px;
-            font-family: 'Metropolis', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            @include themify($themes) {
+                font-family: themed('fontFamilyHeadings');
+            }
             font-weight: 400;
             font-size: 25px;
             line-height: 39px;
@@ -164,7 +203,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px 0;
+        padding: 130px 0 60px;
 
         .content-wrapper {
             max-width: 960px;
@@ -235,7 +274,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px 0;
+        padding: 130px 0 30px;
 
         .benefits-wrapper {
             max-width: 990px;
@@ -243,7 +282,7 @@
             display: flex;
             justify-content: space-between;
             flex-direction: row;
-            margin: 40px 0 60px;
+            margin: 110px 0;
 
             .benefit {
                 z-index: 2;
@@ -271,22 +310,39 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px 0;
+        padding: 130px 0;
 
         .content-wrapper {
             display: flex;
             flex-direction: row;
             align-items: center;
-            justify-content: center;
+            justify-content: space-around;
             max-width: 1200px;
+            width: 100%;
 
             .content-list {
                 z-index: 2;
+                margin: 70px 0;
             }
 
             .content-item {
-                margin: 30px 0;
+                margin: 50px 0;
                 max-width: 545px;
+
+                .content-header-wrapper {
+                    margin-bottom: 10px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                h5 {
+                    margin-left: 20px;
+                }
+
+                p {
+                    margin-left: 55px;
+                }
             }
 
             .desktop {
@@ -313,25 +369,28 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 30px 0;
+        padding: 130px 0 60px;
 
         .ant-collapse {
             z-index: 2;
             max-width: 810px;
             width: 100%;
+            margin-top: 60px;
             background-color: transparent;
 
             .ant-collapse-header {
                 padding: 0;
 
                 .section-header {
-                    color: #ffffff;
+                    h5 {
+                        color: #ffffff;
+                    }
                     height: 65px;
                     background: #151F35;
                     border-radius: 10px;
                     display: flex;
                     align-items: center;
-                    padding: 0 35px;
+                    padding: 10px 35px;
                 }
             }
 
@@ -346,8 +405,11 @@
 
                     .ant-collapse-header {
                         .section-header {
-                            padding: 10px 35px 0;
-                            color: #151F35;
+                            h5 {
+                                @include themify($themes) {
+                                    color: themed('primaryFontColor');  
+                                }
+                            }
                             background: transparent;
                             -webkit-transition: background-color 250ms linear;
                             -ms-transition: background-color 250ms linear;
@@ -371,9 +433,8 @@
         justify-content: space-between;
         padding: 100px 25px 20px;
         width: 100%;
-        color: #FFFFFF;
 
-        a {
+        a, h1, p {
             color: #FFFFFF;
         }
 
