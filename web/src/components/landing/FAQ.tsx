@@ -12,12 +12,14 @@ const Icon = () => (
 export default () => (
     <RandomGraphicElement elements={10}>
         <div className="faq-section" id="faq">
-            <h2>FAQs</h2>
-            <Collapse 
+            <h2 data-aos="fade-up">FAQs</h2>
+            <div data-aos="fade-up">
+                <Collapse 
                     bordered={false} 
                     defaultActiveKey={[1]} 
                     expandIconPosition="right"
                     expandIcon={() => <Icon />}
+                    data-aos="fade-up"
                 >
                     <Collapse.Panel
                         header={(
@@ -92,6 +94,7 @@ export default () => (
                         </div>
                     </Collapse.Panel>
                 </Collapse>
+            </div>
         </div>
     </RandomGraphicElement>
 );
