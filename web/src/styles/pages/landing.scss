@@ -29,6 +29,32 @@
         color: #9DA5B2;
     }
 
+    @include breakPoint(small) {
+        h1 {
+            font-size: 34px;
+            line-height: 48px;
+        }
+        h2 {
+            font-size: 32px;
+            line-height: 6px;
+            margin-top: 12px;
+            border-bottom: 20px solid #B5F3D8;
+        }
+        h4 {
+            font-size: 14px;
+            line-height: 24px;
+            margin-bottom: 30px;
+        }
+        h5 {
+            font-size: 21px;
+            line-height: 24px;
+        }
+        p {
+            font-size: 15px;
+            line-height: 30px;
+        }
+    }
+
     .cta {
         @include themify($themes) {
             background: themed('primaryColor');
