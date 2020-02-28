@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { Button } from 'antd';
 import logo from '../../assets/landing/logoHeader.svg' 
@@ -22,14 +22,20 @@ const links = [
     },
 ]
 export default () => {
+    const [menuOpenState, setMenuState] = useState(false);
+
     function onAnchorClick(anchor: string) {
         const target: Element | null = document.querySelector(anchor);
         target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    function handleMenu() {
+        setMenuState(menuOpenState => !menuOpenState)
+    }
+
     return (
         <div className="header-section">
-            <img src={logo} alt="Selv logo" />
+            <img src={logo} alt="Selv logo" className="logo" />
             <div className="menu-links">
                 {
                     links.map(link => (
@@ -43,6 +49,16 @@ export default () => {
                         Try the demo
                     </Button> 
                 </Link>
+            </div>
+            <div className="burger-icon-wrapper">
+                <span 
+                    className={`mobile-menu ${menuOpenState ? 'toggled' : ''}`}
+                    onClick={handleMenu}
+                >
+                <span></span>
+                <span></span>
+                <span></span>
+                </span>
             </div>
         </div>
     );
