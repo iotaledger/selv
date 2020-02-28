@@ -38,9 +38,9 @@ export default ({ }) => (
 );
 
 const Create = () => (
-    <div className="info">
+    <div className="info" data-aos="fade-up">
         <span className="content-header-wrapper">
-            <img src={selv} alt="" />
+            <img src={selv} alt="" className="logo" />
             <h5>Create</h5>
         </span>
         <p>Download a SSI app and create a unique identifier, representing you online. This profile remains in your control and doesn’t leave the app without your consent.</p>
@@ -60,7 +60,7 @@ const Share = () => (
 const Grow = () => (
     <div className="info" data-aos="fade-up">
         <span className="content-header-wrapper">
-            <img src={selv} alt="" />
+            <img src={selv} alt="" className="logo" />
             <h5>Grow</h5>
         </span>
         <p>Gather statements, or credentials, about yourself, verified by others, to grow your personal identity. Fully under your control and not stored in any database.</p>
@@ -70,7 +70,7 @@ const Grow = () => (
 const Accept = () => (
     <div className="info" data-aos="fade-up">
         <span className="content-header-wrapper">
-            <img src={selv} alt="" />
+            <img src={selv} alt="" className="logo" />
             <h5>Accept</h5>
         </span>
         <p>By accepting BYOI, companies can verify customer data, instantly and for free. This allows you to speed up processes such as onboarding and reduce the amount of typing your customers have to do.</p>
