@@ -2,8 +2,10 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import WebFontLoader from 'webfontloader';
 import ReactGA from 'react-ga';
+import AOS from 'aos';
 import { Landing, IncorporatedCompanies, CompanyDetails } from './pages'
 import GlobalState from './context/globalState'
+import 'aos/dist/aos.css';
 import 'antd/dist/antd.css';
 import 'rsuite/lib/styles/index.less';
 import 'rsuite/dist/styles/rsuite-default.css'
@@ -23,6 +25,8 @@ WebFontLoader.load({
 
 ReactGA.initialize('222308434'); // (trackingID, { debug: true })
 ReactGA.set({ anonymizeIp: true });
+
+AOS.init();
 
 const App: React.FC = () => {
   return (
