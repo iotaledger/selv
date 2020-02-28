@@ -1,0 +1,37 @@
+.mobile-menu {
+    border-radius: 3px;
+    cursor: pointer;
+    user-select: none;
+    display: block;
+    padding: 16px 0 14px;
+
+    span {
+        @include themify($themes) {
+            background: themed('primaryColor');
+        }
+        display: block;
+        width: 24px;
+        height: 3px;
+        border-radius: 3px;
+        transform-origin: center;
+        transition: 300ms all cubic-bezier(.4,0,.2,1);
+        
+        &:nth-child(2) {
+            margin: 4px 0;
+        }
+    }
+
+    &.toggled {
+        span {
+            &:first-child {
+                transform: translateY(6px) rotate(45deg);
+            }
+            &:nth-child(2) {
+                opacity: 0;
+            }
+            &:last-child {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+        }
+    }
+}
