@@ -22,7 +22,7 @@ export default ({ }) => {
                     <div className="content">
                         <Content />
                     </div>
-                    <img src={mainMobile} alt="Portrait" />
+                    <img src={mainMobile} alt="Portrait" className="portrait" />
                     <Buttons />
                 </div>
             </div>
