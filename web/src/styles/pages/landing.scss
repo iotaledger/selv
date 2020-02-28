@@ -4,6 +4,10 @@
     flex-direction: column;
     justify-content: center;
 
+    [data-aos] {
+        z-index: 2;
+    }
+
     .random-element-wrapper {
         position: relative;
         width: 100%;
@@ -15,6 +19,7 @@
         line-height: 6px;
         margin-top: 50px;
         font-weight: 800;
+        padding: 0 15px;
     }
 
     h4 {
