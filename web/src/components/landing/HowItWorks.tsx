@@ -9,17 +9,17 @@ import howItWorks2Mobile from '../../assets/landing/howItWorks2-mobile.png'
 export default ({ }) => (
     <RandomGraphicElement elements={10}>
         <div className="how-it-works-section" id="how-it-works">
-            <h4>In brief</h4>
-            <h2>How it works</h2>
+            <h4 data-aos="fade-up">In brief</h4>
+            <h2 data-aos="fade-up">How it works</h2>
             <div className="content-wrapper">
                 <div className="desktop">
                     <div className="column">
                         <Create />
                         <Share />
-                        <img src={howItWorks2} alt="how It Works" className="howItWorks2" />
+                        <img data-aos="fade-up" src={howItWorks2} alt="how It Works" className="howItWorks2" />
                     </div>
                     <div className="column">
-                        <img src={howItWorks1} alt="how It Works" className="howItWorks1" />
+                        <img data-aos="fade-up" src={howItWorks1} alt="how It Works" className="howItWorks1" />
                         <Grow />
                         <Accept />
                     </div>
@@ -27,10 +27,10 @@ export default ({ }) => (
                 <div className="mobile">
                     <Create />
                     <Grow />
-                    <img src={howItWorks1Mobile} alt="how It Works" />
+                    <img data-aos="fade-up" src={howItWorks1Mobile} alt="how It Works" className="howItWorks1" />
                     <Share />
                     <Accept />
-                    <img src={howItWorks2Mobile} alt="how It Works" />
+                    <img data-aos="fade-up" src={howItWorks2Mobile} alt="how It Works" className="howItWorks2" />
                 </div>
             </div>
         </div>
@@ -48,9 +48,9 @@ const Create = () => (
 );
 
 const Share = () => (
-    <div className="info">
+    <div className="info" data-aos="fade-up">
         <span className="content-header-wrapper">
-            <img src={selv} alt="" />
+            <img src={selv} alt="" className="logo" />
             <h5>Share</h5>
         </span>
         <p>Decide who and what others get to see from your personal profile. You can share your data peer-to-peer or on request. Controlled data flow allows you to always get something in return for your data.</p>
@@ -58,7 +58,7 @@ const Share = () => (
 );
 
 const Grow = () => (
-    <div className="info">
+    <div className="info" data-aos="fade-up">
         <span className="content-header-wrapper">
             <img src={selv} alt="" />
             <h5>Grow</h5>
@@ -68,7 +68,7 @@ const Grow = () => (
 );
 
 const Accept = () => (
-    <div className="info">
+    <div className="info" data-aos="fade-up">
         <span className="content-header-wrapper">
             <img src={selv} alt="" />
             <h5>Accept</h5>
