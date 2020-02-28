@@ -99,9 +99,11 @@ const BankData: React.FC = ({ history, match }: any) => {
 
     async function connectWebSocket(channelId: string, data: object) {
         ioClient = SocketIOClient(websocketURL, {
+            autoConnect: true,
             reconnection: true,
             reconnectionDelay: 500,
             jsonp: false,
+            secure: true,
             reconnectionAttempts: Infinity,
             transports: ['websocket']
         })

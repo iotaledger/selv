@@ -51,9 +51,11 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
 
     async function connectWebSocket({ channelId, challenge, password, requestedCredentials }: IChannelDetails) {
         ioClient = SocketIOClient(websocketURL, {
+            autoConnect: true,
             reconnection: true,
             reconnectionDelay: 500,
             jsonp: false,
+            secure: true,
             reconnectionAttempts: Infinity,
             transports: ['websocket']
         })
