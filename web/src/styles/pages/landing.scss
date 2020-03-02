@@ -59,6 +59,7 @@
         @include themify($themes) {
             background: themed('primaryColor');
         }
+        z-index: 10;
         border-radius: 35px;
         height: 55px;
         padding: 10px 40px !important;
@@ -194,11 +195,24 @@
             position: relative;
             padding: 0 30px;
 
+            .dots {
+                position: absolute;
+                top: -140px;
+                right: -20px;
+                z-index: -1;
+            }
+
+            .ellipse {
+                position: absolute;
+                bottom: -140px;
+                right: -120px;
+                z-index: 20;
+                max-width: 25%;
+            }
+
             .image-wrapper {
                 display: inline-block;
                 position: relative;
-                // flex-direction: column;
-                // justify-content: flex-end;
                 width: 100%;
                 max-width: 50%;
             }
@@ -223,10 +237,6 @@
                 padding-right: 4%;
 
                 @include breakPoint(medium) {
-                    // width: 100%;
-                    // align-items: flex-start;
-                    // margin-top: 50px;
-                    // margin-bottom: 72px;
                     min-width: 322px;
                     padding-right: 0;
                 }
@@ -377,6 +387,17 @@
             padding: 60px 30px 30px;
         }
 
+        .circle {
+            position: absolute;
+            top: -340px;
+            left: -30px;
+            z-index: -1;
+
+            @include breakPoint(small) {
+                display: none;
+            }
+        }
+
         .content-wrapper {
             max-width: 960px;
             width: 100%;
@@ -388,6 +409,7 @@
                 flex-direction: row;
                 justify-content: space-around;
                 width: 100%;
+                position: relative;
     
                 @include breakPoint(small) {
                     display: none;
@@ -553,6 +575,13 @@
             padding: 60px 30px 80px;
         }
 
+        .circle {
+            position: absolute;
+            top: -340px;
+            right: 0;
+            z-index: -1;
+        }
+
         .content-wrapper {
             display: flex;
             flex-direction: row;
@@ -641,6 +670,39 @@
         flex-direction: column;
         align-items: center;
         padding: 130px 30px 60px;
+        position: relative;
+
+        .ellipse {
+            position: absolute;
+            top: -170px;
+            right: -170px;
+            // z-index: -1;
+
+            @include breakPoint(small) {
+                display: none;
+            }
+        }
+
+        .circle {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            @include breakPoint(small) {
+                display: none;
+            }
+        }
+
+        .circle-mobile {
+            display: none;
+
+            @include breakPoint(small) {
+                display: block;
+                position: absolute;
+                bottom: -77px;
+                left: 0;
+            }
+        }
 
         .ant-collapse {
             z-index: 2;
