@@ -6,6 +6,6 @@
         @media (max-width: 989px) { @content; }
     } 
     @else if $point == small {
-        @media (max-width: 680px) { @content; }
+        @media (max-width: 767px) { @content; }
     }
 }
