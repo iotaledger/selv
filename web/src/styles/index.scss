@@ -60,6 +60,11 @@ div, span, p, label, input, select, section, footer, header, nav, ul, li, button
   display: none !important;
 }
 
+.no-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
 button {
   outline: none !important;
 }
