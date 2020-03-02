@@ -3,6 +3,8 @@ import { RandomGraphicElement } from '../'
 import main from '../../assets/landing/main.png' 
 import appStore from '../../assets/appStore.svg'
 import googlePlay from '../../assets/googlePlay.svg'
+import dots from '../../assets/backgrounds/dots.png'
+import ellipse from '../../assets/backgrounds/ellipse1.svg'
 
 export default ({ }) => {
     return (
@@ -18,6 +20,8 @@ export default ({ }) => {
                     <div className="image-wrapper">
                         <img src={main} alt="Portrait" className="portrait" />
                     </div>
+                    <img src={dots} alt="" className="dots" />
+                    <img src={ellipse} alt="" className="ellipse" />
                 </div>
                 <div className="mobile">
                     <div className="content">
