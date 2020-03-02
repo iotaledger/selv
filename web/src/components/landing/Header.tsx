@@ -26,12 +26,20 @@ export default () => {
 
     function onAnchorClick(anchor: string) {
         setMenuState(false)
+        const root = document.getElementById('root');
+        root?.classList.remove('no-scroll');
         const target: Element | null = document.querySelector(anchor);
         target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function handleMenu() {
         setMenuState(menuOpenState => !menuOpenState)
+        const root = document.getElementById('root');
+        if (root?.classList.contains('no-scroll')) {
+            root?.classList.remove('no-scroll');
+        } else {
+            root?.classList.add('no-scroll');
+        }
     }
 
     return (
