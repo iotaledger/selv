@@ -384,7 +384,7 @@
         padding: 130px 30px 60px;
 
         @include breakPoint(small) {
-            padding: 60px 30px 30px;
+            padding: 60px 0 30px;
         }
 
         .circle {
@@ -489,9 +489,8 @@
                     }
 
                     .info {
-                        margin-top: 40px;
+                        margin: 40px 30px 0;
                     }
-
 
                     .howItWorks1 {
                         width: 100%;
@@ -658,8 +657,6 @@
                         line-height: 24px;
                     }
                 }
-
-
             }
         }
     }
@@ -676,7 +673,6 @@
             position: absolute;
             top: -170px;
             right: -170px;
-            // z-index: -1;
 
             @include breakPoint(small) {
                 display: none;
@@ -702,6 +698,11 @@
                 bottom: -77px;
                 left: 0;
             }
+        }
+
+        .faq-wrapper {
+            max-width: 810px;
+            width: 100%;
         }
 
         .ant-collapse {
