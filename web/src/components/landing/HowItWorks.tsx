@@ -5,10 +5,12 @@ import howItWorks1 from '../../assets/landing/howItWorks1.png'
 import howItWorks1Mobile from '../../assets/landing/howItWorks1-mobile.png' 
 import howItWorks2 from '../../assets/landing/howItWorks2.png' 
 import howItWorks2Mobile from '../../assets/landing/howItWorks2-mobile.png' 
+import circle from '../../assets/backgrounds/circleFrame1.svg'
 
 export default ({ }) => (
     <RandomGraphicElement elements={10}>
         <div className="how-it-works-section" id="how-it-works">
+            <img src={circle} alt="" className="circle" />
             <h4 data-aos="fade-up">In brief</h4>
             <h2 data-aos="fade-up">How it works</h2>
             <div className="content-wrapper">
