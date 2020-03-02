@@ -2,6 +2,9 @@ import React from 'react';
 import { Collapse } from 'antd';
 import { RandomGraphicElement } from '../'
 import faq from '../../assets/landing/faq.svg' 
+import ellipse from '../../assets/backgrounds/ellipse2.svg'
+import circle from '../../assets/backgrounds/circleFrame3.svg'
+import circleMobile from '../../assets/backgrounds/circleFrame4.svg'
 
 const Icon = () => (
     <i aria-label="icon: right" className="anticon anticon-right ant-collapse-arrow">
@@ -12,6 +15,10 @@ const Icon = () => (
 export default () => (
     <RandomGraphicElement elements={10}>
         <div className="faq-section" id="faq">
+            <img src={ellipse} alt="" className="ellipse" />
+            <img src={circle} alt="" className="circle" />
+            <img src={circleMobile} alt="" className="circle-mobile" />
+
             <h2 data-aos="fade-up">FAQs</h2>
             <div data-aos="fade-up">
                 <Collapse 
