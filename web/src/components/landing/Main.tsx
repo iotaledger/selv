@@ -1,7 +1,6 @@
 import React from 'react';
 import { RandomGraphicElement } from '../'
 import main from '../../assets/landing/main.png' 
-import mainMobile from '../../assets/landing/main-mobile.png' 
 import appStore from '../../assets/appStore.svg'
 import googlePlay from '../../assets/googlePlay.svg'
 
@@ -16,13 +15,15 @@ export default ({ }) => {
                             <Buttons />
                         </div>
                     </div>
-                    <img src={main} alt="Portrait" className="portrait" />
+                    <div className="image-wrapper">
+                        <img src={main} alt="Portrait" className="portrait" />
+                    </div>
                 </div>
                 <div className="mobile">
                     <div className="content">
                         <Content />
                     </div>
-                    <img src={mainMobile} alt="Portrait" className="portrait" />
+                    <img src={main} alt="Portrait" className="portrait" />
                     <Buttons />
                 </div>
             </div>
@@ -32,7 +33,7 @@ export default ({ }) => {
 
 const Content = () => (
     <React.Fragment>
-        <h1>Claim, Control & Reuse your new Digital Identity</h1>
+        <h1>Claim, Control &<br />Reuse your new<br />Digital Identity</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     </React.Fragment>
 );
