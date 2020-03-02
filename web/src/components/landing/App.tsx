@@ -11,28 +11,28 @@ export default ({ }) => (
     <RandomGraphicElement elements={5}>
         <div className="app-section" id="the-app">
             <img src={circle} alt="" className="circle" />
-            <h4 data-aos="fade-up">Demo</h4>
-            <h2 data-aos="fade-up">The App</h2>
+            <h4 data-aos="fade-up" data-aos-duration="2000">Demo</h4>
+            <h2 data-aos="fade-up" data-aos-duration="2000">The App</h2>
 
             <div className="content-wrapper">
-                <img data-aos="fade-up" src={app} alt="App" className="desktop" />
-                <img data-aos="fade-up" src={appMobile} alt="App" className="mobile" />
+                <img data-aos="fade-right" data-aos-duration="2000" src={app} alt="App" className="desktop" />
+                <img data-aos="fade-right" data-aos-duration="2000" src={appMobile} alt="App" className="mobile" />
                 <div className="content-list">
-                    <div className="content-item" data-aos="fade-up">
+                    <div className="content-item" data-aos="fade-left" data-aos-duration="2000">
                         <span className="content-header-wrapper">
                             <img src={selv} alt="" className="logo" />
                             <h5>Self Sovereign Identity</h5>
                         </span>
                         <p>Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.</p>
                     </div>
-                    <div className="content-item" data-aos="fade-up">
+                    <div className="content-item" data-aos="fade-left" data-aos-duration="2000">
                         <span className="content-header-wrapper">
                             <img src={selv} alt="" className="logo" />
                             <h5>One App – One Protocol</h5>
                         </span>
                         <p>This solution provides an easy and cheap way to comply with GDPR and similar privacy laws.</p>
                     </div>
-                    <div className="content-item" data-aos="fade-up">
+                    <div className="content-item" data-aos="fade-left" data-aos-duration="2000">
                         <span className="content-header-wrapper">
                             <img src={selv} alt="" className="logo" />
                             <h5>A Unified Identity</h5>
@@ -43,7 +43,7 @@ export default ({ }) => (
             </div>
 
             <Link to={'/progress/demo/todos'}>
-                <Button className="cta" data-aos="fade-up">
+                <Button className="cta" data-aos="fade-up" data-aos-duration="2000">
                     Try the demo
                 </Button> 
             </Link>

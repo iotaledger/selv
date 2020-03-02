@@ -11,17 +11,17 @@ export default ({ }) => (
     <RandomGraphicElement elements={10}>
         <div className="how-it-works-section" id="how-it-works">
             <img src={circle} alt="" className="circle" />
-            <h4 data-aos="fade-up">In brief</h4>
-            <h2 data-aos="fade-up">How it works</h2>
+            <h4 data-aos="fade-up" data-aos-duration="2000">In brief</h4>
+            <h2 data-aos="fade-up" data-aos-duration="2000">How it works</h2>
             <div className="content-wrapper">
                 <div className="desktop">
                     <div className="column">
                         <Create />
                         <Share />
-                        <img data-aos="fade-up" src={howItWorks2} alt="how It Works" className="howItWorks2" />
+                        <img data-aos="fade-up" data-aos-duration="2000" src={howItWorks2} alt="how It Works" className="howItWorks2" />
                     </div>
                     <div className="column">
-                        <img data-aos="fade-up" src={howItWorks1} alt="how It Works" className="howItWorks1" />
+                        <img data-aos="fade-up" data-aos-duration="2000" src={howItWorks1} alt="how It Works" className="howItWorks1" />
                         <Grow />
                         <Accept />
                     </div>
@@ -29,10 +29,10 @@ export default ({ }) => (
                 <div className="mobile">
                     <Create />
                     <Grow />
-                    <img data-aos="fade-up" src={howItWorks1Mobile} alt="how It Works" className="howItWorks1" />
+                    <img data-aos="fade-up" data-aos-duration="2000" src={howItWorks1Mobile} alt="how It Works" className="howItWorks1" />
                     <Share />
                     <Accept />
-                    <img data-aos="fade-up" src={howItWorks2Mobile} alt="how It Works" className="howItWorks2" />
+                    <img data-aos="fade-up" data-aos-duration="2000" src={howItWorks2Mobile} alt="how It Works" className="howItWorks2" />
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@ export default ({ }) => (
 );
 
 const Create = () => (
-    <div className="info" data-aos="fade-up">
+    <div className="info" data-aos="fade-left" data-aos-duration="2000">
         <span className="content-header-wrapper">
             <img src={selv} alt="" className="logo" />
             <h5>Create</h5>
@@ -50,7 +50,7 @@ const Create = () => (
 );
 
 const Share = () => (
-    <div className="info" data-aos="fade-up">
+    <div className="info" data-aos="fade-left" data-aos-duration="2000">
         <span className="content-header-wrapper">
             <img src={selv} alt="" className="logo" />
             <h5>Share</h5>
@@ -60,7 +60,7 @@ const Share = () => (
 );
 
 const Grow = () => (
-    <div className="info" data-aos="fade-up">
+    <div className="info" data-aos="fade-right" data-aos-duration="2000">
         <span className="content-header-wrapper">
             <img src={selv} alt="" className="logo" />
             <h5>Grow</h5>
@@ -70,7 +70,7 @@ const Grow = () => (
 );
 
 const Accept = () => (
-    <div className="info" data-aos="fade-up">
+    <div className="info" data-aos="fade-right" data-aos-duration="2000">
         <span className="content-header-wrapper">
             <img src={selv} alt="" className="logo" />
             <h5>Accept</h5>
