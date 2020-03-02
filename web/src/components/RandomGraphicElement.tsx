@@ -11,9 +11,13 @@ import circle6 from '../assets/randomGraphics/circle6.svg'
 import circle7 from '../assets/randomGraphics/circle7.svg'
 import circle8 from '../assets/randomGraphics/circle8.svg'
 import circle9 from '../assets/randomGraphics/circle9.svg'
+import circle10 from '../assets/randomGraphics/circle10.svg'
+import circle11 from '../assets/randomGraphics/circle11.svg'
+import circle12 from '../assets/randomGraphics/circle12.svg'
 
 const graphics = [
-    circle1, circle2, circle3, circle4, circle5, circle6, circle7, circle8, circle9, 
+    circle1, circle2, circle3, circle4, circle5, circle6, 
+    circle7, circle8, circle9, circle10, circle11, circle12
 ]
 
 const RandomGraphicElement = ({ children, elements }: { 
