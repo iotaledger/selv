@@ -9,26 +9,30 @@ $secondary-color-companyHouse: #4247DC;
 $trinary-color-companyHouse: #333333;
 $primary-font-color-companyHouse: #333333;
 $secondary-font-color-companyHouse: #6F6F6F;
+$page-background-companyHouse: #EEF2FA;
 
 $primary-color-snsBank: #F39B26;
 $secondary-color-snsBank: #562A71;
 $trinary-color-snsBank: #64CDF5;
 $primary-font-color-snsBank: #585858;
 $secondary-font-color-snsBank: #BBBBBB;
+$page-background-snsBank: #EEF2FA;
 
 $primary-color-insurance: #F39B26;
 $secondary-color-insurance: #562A71;
 $trinary-color-insurance: #64CDF5;
 $primary-font-color-insurance: #585858;
 $secondary-font-color-insurance: #BBBBBB;
+$page-background-insurance: #FFFFFF;
 
 $primary-color-demo: #4247DC;
 $secondary-color-demo: #3B6AC5;
 $trinary-color-demo: #25C1B6;
 $primary-font-color-demo: #142037;
 $secondary-font-color-demo: #BBBBBB;
+$page-background-demo: #EEF2FA;
 
-$link-color: #3B6AC5;
+$link-color: #306ADC;
 $notice-color: #4247DC;
 $form-selector-color: #339BB6;
 
@@ -45,6 +49,7 @@ $themes: (
         trinaryColor: $trinary-color-demo,
         primaryFontColor: $primary-font-color-demo,
         secondaryFontColor: $secondary-font-color-demo,
+        pageBackground: $page-background-demo,
 
         h1TextSize: 44px,
         h1LineHeight: 57px,
@@ -59,6 +64,7 @@ $themes: (
 
         buttonBackgroundColor: $primary-color-demo,
         buttonHeight: 48px,
+        buttonBorderRadius: 100px,
 
     ),
     company: (
@@ -76,6 +82,7 @@ $themes: (
         linkColor: $link-color,
         noticeColor: $notice-color,
         formSelectorColor: $form-selector-color,
+        pageBackground: $page-background-companyHouse,
 
         h1TextSize: 36px,
         h1LineHeight: 42px,
@@ -90,13 +97,14 @@ $themes: (
 
         buttonBackgroundColor: $primary-color-companyHouse,
         buttonHeight: 43px,
+        buttonBorderRadius: 0,
 
         headerBackgroundColor: #032F5D,
         headerHeight: 60px,
         headerLogoAlign: left,
         headerLogoHeight: 24px,
 
-        footerBackgroundColor: #EEF0F2,
+        footerBackgroundColor: #FFFFFF,
         footerHeight: 76px,
         footerLogoAlign: center,
         footerLogoHeight: 24px,
@@ -116,6 +124,7 @@ $themes: (
         linkColor: $link-color,
         noticeColor: $notice-color,
         formSelectorColor: $form-selector-color,
+        pageBackground: $page-background-snsBank,
 
         h1TextSize: 36px,
         h1LineHeight: 42px,
@@ -130,6 +139,7 @@ $themes: (
 
         buttonBackgroundColor: $primary-color-snsBank,
         buttonHeight: 51px,
+        buttonBorderRadius: 0,
 
         headerBackgroundColor: #562A71,
         headerHeight: 100px,
@@ -156,6 +166,7 @@ $themes: (
         linkColor: $link-color,
         noticeColor: $notice-color,
         formSelectorColor: $form-selector-color,
+        pageBackground: $page-background-insurance,
 
         h1TextSize: 36px,
         h1LineHeight: 42px,
@@ -170,6 +181,7 @@ $themes: (
 
         buttonBackgroundColor: $primary-color-insurance,
         buttonHeight: 51px,
+        buttonBorderRadius: 0,
 
         headerBackgroundColor: #562A71,
         headerHeight: 100px,
