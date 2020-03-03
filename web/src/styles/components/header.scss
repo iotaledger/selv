@@ -6,8 +6,12 @@
     z-index: 100;
     position: fixed;
     top: 0;
-    width: calc(100% - 350px);
+    width: calc(100% - 320px);
     left: 0;
+
+    @include breakPoint(medium) {
+        width: 100%;
+    }
 
     @include themify($themes) {
         background-color: themed('headerBackgroundColor');  
