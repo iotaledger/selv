@@ -99,22 +99,37 @@ button {
   justify-content: space-between;
 }
 
+#rrot {
+  @include breakPoint(small) {
+    overflow-x: hidden;
+  }
+}
+
 .main-section {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
   overflow-x: auto;
+  height: 100vh;
+
+  @include themify($themes) {
+    background-color: themed('pageBackground');
+  }
 
   .content {
     padding: 50px;
     min-width: 535px;
+    width: 100%;
     display: flex;
     justify-content: center;
+
     @include themify($themes) {
       margin-top: themed('headerHeight');
+    }
+    @include breakPoint(small) {
+      min-width: unset;
     }
   }
 }
