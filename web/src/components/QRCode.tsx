@@ -2,11 +2,11 @@ import React from 'react';
 import QRCode, { ImageSettings } from 'qrcode.react';
 import logo from '../assets/iota.png'
 
-export default ({ text }: { text: string }) => {
+export default ({ text, size }: { text: string; size?: number; }) => {
     const imageSettings: ImageSettings = {
       src: logo,
-      height: 75,
-      width: 75,
+      height: 55,
+      width: 55,
       excavate: true,
     }
 
@@ -15,7 +15,7 @@ export default ({ text }: { text: string }) => {
         { text && (
             <QRCode 
                 value={text} 
-                size={290}  
+                size={size || 290}  
                 level="H" 
                 imageSettings={imageSettings}
             />
