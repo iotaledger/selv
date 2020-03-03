@@ -3,6 +3,8 @@ import { Sidenav } from 'rsuite';
 import { Link } from 'react-router-dom'
 import reset from '../assets/reset.svg'
 import poweredByIota from '../assets/poweredByIota.svg'
+import logo from '../assets/landing/logoHeader.svg' 
+import frame from '../assets/backgrounds/circleFrame5.svg' 
 
 // https://rsuitejs.com/en/components/sidenav
 
@@ -17,7 +19,8 @@ const SidebarInstance = ({ children }: {
 }) => {
     return (
         <div className="sidebar-wrapper">
-          <Sidenav defaultOpenKeys={['3', '4']} activeKey="1">
+            <img src={logo} alt="Selv logo" className="sidebar-logo" />
+            <Sidenav activeKey="0">
                 <Sidenav.Body>
                     <h2 className="todo-list">
                         Your to-do list
@@ -27,29 +30,30 @@ const SidebarInstance = ({ children }: {
                     </h2>
                     { children }
                 </Sidenav.Body>
-                <div className="sidebar-footer">
-                    <a 
-                        href='https://iota.org' 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <img src={poweredByIota} alt="powered by Iota" />
-                    </a>
-                    <div className="sidebar-links">
-                        {externalPages.map(page => (
-                            <a 
-                                href={page.url} 
-                                key={page.title} 
-                                className="external-menu-link" 
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {page.title}
-                            </a>
-                        ))}
-                    </div>
-                </div>
             </Sidenav>
+            <div className="sidebar-footer">
+                <div className="sidebar-links">
+                    {externalPages.map(page => (
+                        <a 
+                            href={page.url} 
+                            key={page.title} 
+                            className="external-menu-link" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {page.title}
+                        </a>
+                    ))}
+                </div>
+                <a 
+                    href='https://iota.org' 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <img src={poweredByIota} alt="powered by Iota" />
+                </a>
+            </div>
+            <img src={frame} alt="" className="frame" />
         </div>
     );
 };
