@@ -7,7 +7,7 @@ import { serverAPI, websocketURL } from '../config.json'
 import { flattenObject, decrypt } from "../utils/helper";
 import evaluateCredential from "../utils/did";
 import useInterval from "../utils/useInterval";
-import { Layout, Loading, QRCode } from "../components";
+import { Layout, Loading, QRCode, RandomGraphicElement } from "../components";
 import useStep from "../utils/useStep";
 
 interface IChannelDetails {
@@ -173,13 +173,17 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
 
     return (
         <Layout match={match}>
-            <div className="scan-qr-page-wrapper">
-                <h2>Provide your Digital Identity credentials</h2>
-                <p>Scan this QR code with <strong>Selv App</strong> to continue</p>
-                <QRCode text={qrContent} />
-                <p className="bold">{status}</p>
-                { loading && <Loading /> }
-            </div>
+            <RandomGraphicElement elements={5}>
+                <div className="scan-qr-page-wrapper">
+                    <h2>Provide your Digital Identity credentials</h2>
+                    <p>Scan this QR code with <strong>Selv App</strong> to continue</p>
+                    <div className="qr-wrapper">
+                        <QRCode text={qrContent} />
+                    </div>
+                    <p className="bold">{status}</p>
+                    { loading && <Loading /> }
+                </div>
+            </RandomGraphicElement>
         </Layout>
     );
 }
