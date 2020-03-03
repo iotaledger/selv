@@ -91,7 +91,7 @@ h5 {
     }
 }
   
-p {
+p, li {
     font-weight: 400;
     @include themify($themes) {
         color: themed('primaryFontColor');  
