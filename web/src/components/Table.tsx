@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table } from 'rsuite';
-
+import useWindowSize from "../utils/useWindowSize";
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
 // https://rsuitejs.com/en/components/table#%3CTable%3E
@@ -47,6 +47,22 @@ const TableInstance = ({ data, onRowClick, loading }: {
 }) => {
     const [displayLength, setDisplayLength] = useState(10)
     const [page, setPage] = useState(1)
+    const [tableDimensions, setTableDimentions] = useState([710, 300, 200, 130, 50])
+    const [windowWidth] = useWindowSize();
+
+    useEffect(() => {
+        if (windowWidth) {
+            if (windowWidth < 450) {
+                setTableDimentions([370, 160, 120, 90, 0])
+            } else if (windowWidth < 750) {
+                setTableDimentions([440, 190, 120, 90, 40])
+            } else if (windowWidth < 1050 && windowWidth >= 990) {
+                setTableDimentions([640, 280, 180, 130, 50])
+            } else {
+                setTableDimentions([710, 300, 200, 130, 50])
+            }
+        }
+    }, [windowWidth])
 
     function handleChangePage(dataKey: number) {
         setPage(dataKey)
@@ -69,19 +85,19 @@ const TableInstance = ({ data, onRowClick, loading }: {
         <div>
             <div className="table-wrapper">
                 <Table 
-                    width={710} 
+                    width={tableDimensions[0]} 
                     height={950} 
                     data={getData()} 
                     rowHeight={90} 
                     onRowClick={onRowClick}
                     loading={loading}
                 >
-                    <Column width={300} fixed>
+                    <Column width={tableDimensions[1]} fixed>
                         <HeaderCell>Company Name</HeaderCell>
                         <CompanyCell />
                     </Column>
 
-                    <Column width={200} fixed>
+                    <Column width={tableDimensions[2]} fixed>
                         <HeaderCell>Incorporated on</HeaderCell>
                         <Cell dataKey="CompanyCreationDate" style={{ 
                             display: 'flex',
@@ -90,12 +106,12 @@ const TableInstance = ({ data, onRowClick, loading }: {
                         }} />
                     </Column>
 
-                    <Column width={130} fixed>
+                    <Column width={tableDimensions[3]} fixed>
                         <HeaderCell>Status</HeaderCell>
                         <StatusCell />
                     </Column>
 
-                    <Column width={50} fixed>
+                    <Column width={tableDimensions[4]} fixed>
                         <HeaderCell></HeaderCell>
                         <Cell className="dots" style={{ 
                             display: 'flex',
