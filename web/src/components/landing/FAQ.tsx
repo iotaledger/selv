@@ -1,16 +1,21 @@
 import React from 'react';
 import { Collapse } from 'antd';
 import { RandomGraphicElement } from '../'
-import faq from '../../assets/landing/faq.svg' 
 import ellipse from '../../assets/backgrounds/ellipse2.svg'
 import circle from '../../assets/backgrounds/circleFrame3.svg'
 import circleMobile from '../../assets/backgrounds/circleFrame4.svg'
 
-const Icon = () => (
-    <i aria-label="icon: right" className="anticon anticon-right ant-collapse-arrow">
-        <img src={faq} alt="" />
-    </i>
-)
+const Icon = ({ params }: any) => {
+    const fill = params?.isActive ? '#142037' : '#FFFFFF';
+    return (
+        <i aria-label="icon: right" className="anticon anticon-right ant-collapse-arrow">
+            <svg width="24" height="24" focusable="false" data-icon="right" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.0003 24C11.3403 24 10.8003 23.46 10.8003 22.8V1.2C10.8003 0.54 11.3403 0 12.0003 0C12.6603 0 13.2003 0.54 13.2003 1.2V22.8C13.2003 23.46 12.6603 24 12.0003 24Z" fill="white"/>
+                <path d="M22.8 13.2008H1.2C0.54 13.2008 0 12.6608 0 12.0008C0 11.3408 0.54 10.8008 1.2 10.8008H22.8C23.46 10.8008 24 11.3408 24 12.0008C24 12.6608 23.46 13.2008 22.8 13.2008Z" fill={fill}/>
+            </svg>
+        </i>
+    )
+}
 
 export default () => (
     <RandomGraphicElement elements={10}>
@@ -22,10 +27,9 @@ export default () => (
             <h2 data-aos="fade-up" data-aos-duration="2000">FAQs</h2>
             <div className="faq-wrapper" data-aos="fade-up" data-aos-duration="2000">
                 <Collapse 
-                    // defaultActiveKey={[1]} 
                     bordered={false} 
                     expandIconPosition="right"
-                    expandIcon={() => <Icon />}
+                    expandIcon={params => <Icon params={params} />}
                     data-aos="fade-up" data-aos-duration="2000"
                 >
                     <Collapse.Panel
