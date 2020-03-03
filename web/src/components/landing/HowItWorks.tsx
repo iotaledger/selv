@@ -18,7 +18,7 @@ export default ({ }) => (
                     <div className="column">
                         <Create />
                         <Share />
-                        <img data-aos="fade-up" data-aos-duration="2000" src={howItWorks2} alt="how It Works" className="howItWorks2" />
+                        <img data-aos="fade-left" data-aos-duration="2000" src={howItWorks2} alt="how It Works" className="howItWorks2" />
                     </div>
                     <div className="column">
                         <img data-aos="fade-up" data-aos-duration="2000" src={howItWorks1} alt="how It Works" className="howItWorks1" />
