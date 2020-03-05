@@ -1,12 +1,7 @@
 import React, { useState , useEffect } from "react";
-import SocketIOClient from 'socket.io-client';
-import axios from 'axios';
 import { Button, Collapse, notification, message } from 'antd';
-import { serverAPI, websocketURL } from '../config.json'
-import useStep from "../utils/useStep";
-import { getCompanyId } from '../utils/helper'
-import { flattenObject, encrypt, decrypt } from "../utils/helper";
-import { Layout, Loading, AccountType, PrefilledForm, Checkbox } from "../components";
+import { flattenObject } from "../utils/helper";
+import { Layout, Loading, AccountType, PrefilledForm, Checkbox, WebSocket } from "../components";
 import checkmark from '../assets/bankCheckmark.svg'
 
 const personalDataFields = [
@@ -57,17 +52,14 @@ const notify = (type: string, message: string, description: string) => {
  * Component which will display a InsuranceData.
  */
 const InsuranceData: React.FC = ({ history, match }: any) => {
-    const { nextStep } = useStep(match); 
+    const [webSocket, setWebSocket] = useState(false)
+    const [fields, setFields] = useState()
     const [accountType, setAccountType] = useState()
     const [status, setStatus] = useState('')
-    const [channelId, setChannelId] = useState();
-    const [password, setPassword] = useState();
     const [accountStep, setAccountStep] = useState(1)
     const [prefilledPersonalData, setPrefilledPersonalData] = useState({})
     const [prefilledCompanyData, setPrefilledCompanyData] = useState({})
     const [prefilledBankData, setPrefilledBankData] = useState({})
-
-    let ioClient: any
 
     useEffect(() => {
         async function getData() {
@@ -93,100 +85,17 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
             const bankData = bankFields.reduce((acc: any, entry: string) => 
             ({ ...acc, [entry]: flattenData[entry] }), {})
             setPrefilledBankData({ ...bankData })
-
-            await setChannel()
         } 
         getData()
-
-        // Removing the listener before unmounting the component in order to avoid addition of multiple listener
-        return () => {
-            ioClient && console.log('WebSocket disconnected');
-            ioClient?.off('createCredentialConfirmation');
-            ioClient?.off('error');
-            ioClient?.disconnect();
-        }
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-
-    async function connectWebSocket(channelId: string, data: object) {
-        ioClient = SocketIOClient(websocketURL, {
-            autoConnect: true,
-            reconnection: true,
-            reconnectionDelay: 500,
-            jsonp: false,
-            secure: true,
-            reconnectionAttempts: Infinity,
-            transports: ['websocket']
-        })
-
-        ioClient.emit('registerDesktopClient', { channelId })
-
-        console.log('emit createCredential')
-        const payload = {
-            schemaName: 'Insurance', 
-            data: await encrypt(password, JSON.stringify(data))
-        }
-        ioClient.emit('createCredential', { channelId, payload })
-    
-        const timeout = setTimeout(() => { 
-            setStatus(messages.connectionError)
-            message.error({ content: messages.connectionError, key: 'status' });
-            notify('error', 'Connection error', 'Please try again!')
-        }, 10000)
-    
-        ioClient.on('errorMessage', async (error: any) => {
-            clearTimeout(timeout)
-            console.error('Mobile client', error)
-            setStatus(messages.connectionError)
-            message.error({ content: messages.connectionError, key: 'status' });
-            notify('error', 'Mobile client error', error)
-        })
-
-        ioClient.on('createCredentialConfirmation', async (encryptedPayload: any) => {
-            clearTimeout(timeout)
-            let payload = await decrypt(password, encryptedPayload)
-            payload = JSON.parse(payload)
-            console.log('createCredentialConfirmation', payload)
-            if (payload?.status === 'success') {
-                console.log('Insurance data setup completed, redirecting to', nextStep)
-                message.destroy()
-                await localStorage.setItem('insurance', 'completed')
-                await updateCompanyStatus()
-                history.push(nextStep)
-            }
-        })
-    } 
-
-    async function setChannel() {
-        const storedChannelDetails = await localStorage.getItem('WebSocket_DID') || null;
-        const channelDetails = storedChannelDetails && JSON.parse(storedChannelDetails);
-        setPassword(channelDetails?.password)
-        setChannelId(channelDetails?.channelId)
-        if (channelDetails?.channelId) {
-            const isMobileConnected = await checkConnectedStatus(channelDetails?.channelId)
-            if (!isMobileConnected) {
-                notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app')
-            }
-        } else {
-            notify('error', 'No connection details', 'Please return to the previous page and scan the QR code with your Selv app')
-        }
-    }
-
-    async function checkConnectedStatus(channelId: string) {
-        const response = await axios.get(`${serverAPI}/connection?channelId=${channelId}`)
-        return response && response?.data?.status === 'success'
-    }
-
     async function processValues(fields: object) {
-        await setChannel()
-        if (channelId) {
-            const isMobileConnected = await checkConnectedStatus(channelId)
-            if (isMobileConnected) {
-                setStatus(messages.waiting)
-                message.loading({ content: messages.waiting, key: 'status', duration: 0 });
-                await connectWebSocket(channelId, fields);
-            }
-        }
+        setFields(fields)
+        setWebSocket(true)
+    }
+
+    function setStatusMessage(message: string) {
+        setStatus(message)
     }
 
     async function continueNextStep(params: any) {
@@ -205,12 +114,6 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
 
     function onChange(step: any) {
         accountStep > step && setAccountStep(Number(step))
-    }
-
-    async function updateCompanyStatus() {
-        const companyId = await getCompanyId()
-        const response = await axios.get(`${serverAPI}/activate?company=${companyId}`)
-        console.log(`Company ${companyId} activated. Status: ${response?.data?.status}`)
     }
 
     const prefilledPersonalFormData: any = { dataFields: prefilledPersonalData }
@@ -331,6 +234,15 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                             }
                         </div>
                     )
+                }
+                {
+                    webSocket && <WebSocket 
+                        history={history}
+                        match={match}
+                        schemaName="Insurance"
+                        setStatus={setStatusMessage}
+                        fields={fields}
+                    />
                 }
             </div>
         </Layout>
