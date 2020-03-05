@@ -7,23 +7,23 @@ $font-family-demo-headings: 'Metropolis', -apple-system, BlinkMacSystemFont, 'Se
 $primary-color-companyHouse: #3B6AC5;
 $secondary-color-companyHouse: #4247DC;
 $trinary-color-companyHouse: #333333;
-$primary-font-color-companyHouse: #333333;
+$primary-font-color-companyHouse: #142037;
 $secondary-font-color-companyHouse: #6F6F6F;
 $page-background-companyHouse: #EEF2FA;
 
-$primary-color-snsBank: #F39B26;
+$primary-color-snsBank: #64CDF5;
 $secondary-color-snsBank: #562A71;
 $trinary-color-snsBank: #64CDF5;
-$primary-font-color-snsBank: #585858;
+$primary-font-color-snsBank: #142037;
 $secondary-font-color-snsBank: #BBBBBB;
 $page-background-snsBank: #EEF2FA;
 
 $primary-color-insurance: #F39B26;
 $secondary-color-insurance: #562A71;
 $trinary-color-insurance: #64CDF5;
-$primary-font-color-insurance: #585858;
+$primary-font-color-insurance: #142037;
 $secondary-font-color-insurance: #BBBBBB;
-$page-background-insurance: #FFFFFF;
+$page-background-insurance: #EEF2FA;
 
 $primary-color-demo: #4247DC;
 $secondary-color-demo: #3B6AC5;
@@ -97,7 +97,7 @@ $themes: (
 
         buttonBackgroundColor: $primary-color-companyHouse,
         buttonHeight: 43px,
-        buttonBorderRadius: 0,
+        buttonBorderRadius: 4px,
 
         headerBackgroundColor: #032F5D,
         headerHeight: 60px,
@@ -139,7 +139,7 @@ $themes: (
 
         buttonBackgroundColor: $primary-color-snsBank,
         buttonHeight: 51px,
-        buttonBorderRadius: 0,
+        buttonBorderRadius: 4px,
 
         headerBackgroundColor: #562A71,
         headerHeight: 100px,
@@ -181,7 +181,7 @@ $themes: (
 
         buttonBackgroundColor: $primary-color-insurance,
         buttonHeight: 51px,
-        buttonBorderRadius: 0,
+        buttonBorderRadius: 4px,
 
         headerBackgroundColor: #562A71,
         headerHeight: 100px,
