@@ -77,32 +77,40 @@ try {
     socket.on('verifiablePresentation', async (data) => {
       const { channelId, payload } = data
       const desktopClient = desktopClients.get(channelId)
-      const desktopSocket = desktopClient.socket
-      desktopSocket && desktopSocket.emit('verifiablePresentation', payload)
-      console.info('Verifiable Presentation sent to desktop client')
+      if (desktopClient && desktopClient.socket) {
+        const desktopSocket = desktopClient.socket
+        desktopSocket && desktopSocket.emit('verifiablePresentation', payload)
+        console.info('Verifiable Presentation sent to desktop client')
+      }
     })
 
     socket.on('createCredential', async (data) => {
       const { channelId, payload } = data
       const mobileClient = mobileClients.get(channelId)
-      const mobileSocket = mobileClient.socket
-      mobileSocket && mobileSocket.emit('createCredential', payload)
-      console.info('Create Credential request sent to mobile client', channelId)
+      if (mobileClient && mobileClient.socket) {
+        const mobileSocket = mobileClient.socket
+        mobileSocket && mobileSocket.emit('createCredential', payload)
+        console.info('Create Credential request sent to mobile client', channelId)
+      }
     })
 
     socket.on('createCredentialConfirmation', async (data) => {
       const { channelId, payload } = data
       const desktopClient = desktopClients.get(channelId)
-      const desktopSocket = desktopClient.socket
-      desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload)
-      console.info('Create Credential Confirmation sent to desktop client', channelId)
+      if (desktopClient && desktopClient.socket) {
+        const desktopSocket = desktopClient.socket
+        desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload)
+        console.info('Create Credential Confirmation sent to desktop client', channelId)
+      }
     })
 
     socket.on('errorMessage', async (data) => {
       const { channelId, payload } = data
       const desktopClient = desktopClients.get(channelId)
-      const desktopSocket = desktopClient.socket
-      desktopSocket && desktopSocket.emit('errorMessage', payload)
+      if (desktopClient && desktopClient.socket) {
+        const desktopSocket = desktopClient.socket
+        desktopSocket && desktopSocket.emit('errorMessage', payload)
+      }
     })
 
     socket.on('createCompany', async (data) => {
