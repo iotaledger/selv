@@ -33,12 +33,22 @@
         justify-content: space-between;
     }
 
+    .ant-form-item-required::before {
+        display: none;
+    }
+
     .ant-form-item {
         margin-bottom: 15px;
         min-width: 535px;
 
         &:last-child {
             margin-bottom: 0;
+        }
+
+        @include breakPoint(small) {
+            min-width: 300px;
+            max-width: 535px;
+            width: 100%;
         }
 
         .ant-form-item-label > label {
@@ -73,6 +83,11 @@
     .short-field {
         width: 260px;
         min-width: 260px;
+
+        @include breakPoint(small) {
+            min-width: unset;
+            width: 100%;
+        }
     }
 
     button[type=submit] {

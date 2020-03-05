@@ -35,6 +35,10 @@
     width: 900px;
     padding: 5% 10%; 
 
+    @include breakPoint(medium) {
+        padding-bottom: 100px;
+    }
+
     @include breakPoint(small) {
         width: 100%;
     }
