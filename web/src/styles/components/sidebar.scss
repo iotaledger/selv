@@ -87,9 +87,7 @@
     height: 100%;
 
     .rs-sidenav-body {
-        @include themify($themes) {
-            margin-top: themed('headerHeight');
-        }
+        margin-top: 60px;
     }
 }
 
