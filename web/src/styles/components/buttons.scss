@@ -7,6 +7,7 @@ button {
     text-align: center;
     padding: 10px 30px !important;
     letter-spacing: 0.04em;
+    border: none !important;
 
     @include themify($themes) {
         background-color: themed('buttonBackgroundColor') !important;  
@@ -23,6 +24,29 @@ button {
             &:hover {
                 background-color: themed('secondaryFontColor') !important;
             }
+        }
+    }
+}
+
+.landing-page-wrapper,
+.thank-you-page-wrapper {
+    .cta {
+        @include themify($themes) {
+            background: themed('primaryColor');
+        }
+        z-index: 10;
+        border-radius: 35px;
+        height: 55px;
+        padding: 10px 40px !important;
+
+        > span {
+            color: #ffffff;
+            @include themify($themes) {
+                font-family: themed('fontFamily');
+            }
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 16px;
         }
     }
 }

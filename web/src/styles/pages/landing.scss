@@ -55,26 +55,6 @@
         }
     }
 
-    .cta {
-        @include themify($themes) {
-            background: themed('primaryColor');
-        }
-        z-index: 10;
-        border-radius: 35px;
-        height: 55px;
-        padding: 10px 40px !important;
-
-        > span {
-            color: #ffffff;
-            @include themify($themes) {
-                font-family: themed('fontFamily');
-            }
-            font-weight: bold;
-            font-size: 16px;
-            line-height: 16px;
-        }
-    }
-
     .header-section {
         max-height: 60px;
         margin: 40px 20px;
