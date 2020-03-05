@@ -11,6 +11,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://poc-dinaas.alexey-iota.now.sh']
 const corsOptions = {
+  // methods: ["GET, POST, OPTIONS"],
+  // allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
       console.log('Allowed by CORS', origin)
@@ -170,7 +172,29 @@ app.get('/company', cors(corsOptions), async (req, res, next) => {
 /*
 Activate company
 */
+app.get('/activate', cors(corsOptions), async (req, res, next) => {
+  try {
+    const companyNumber = req.query.company;
+    if (companyNumber) {
+      const company = await readData('company', companyNumber) 
+      await createOrUpdateCompany({ ...company, CompanyStatus: 'Active' })
+      console.log('Activating company', companyNumber)
+      res.json({
+        status: 'success'
+      });
+    }
+  } catch (e) {
+    console.error(e)
+    res.json({
+      status: 'failure',
+      error: JSON.stringify(e),
+    });
+  }
+})
+
 app.post('/activate', cors(corsOptions), async (req, res, next) => {
+  // res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
+  // res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   try {
     const companyNumber = req.body.company;
     if (companyNumber) {
