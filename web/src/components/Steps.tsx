@@ -26,7 +26,7 @@ const StepsInstance = ({ steps, stepId }: {
                     )
                 }
             </Steps>
-      </div>
+        </div>
     );
 };
 
