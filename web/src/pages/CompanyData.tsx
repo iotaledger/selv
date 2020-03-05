@@ -129,7 +129,7 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                 console.log('Company data setup completed, redirecting to', nextStep)
                 message.destroy()
                 await localStorage.setItem('companyHouse', 'completed')
-                await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload }))
+                await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload.payload }))
                 history.push(nextStep)
             }
         })
