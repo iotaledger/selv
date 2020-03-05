@@ -209,7 +209,8 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
 
     async function updateCompanyStatus() {
         const companyId = await getCompanyId()
-        await axios.post(`${serverAPI}/activate`, { company: companyId })
+        const response = await axios.get(`${serverAPI}/activate?company=${companyId}`)
+        console.log(`Company ${companyId} activated. Status: ${response?.data?.status}`)
     }
 
     const prefilledPersonalFormData: any = { dataFields: prefilledPersonalData }
