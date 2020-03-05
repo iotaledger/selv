@@ -99,10 +99,8 @@ button {
   justify-content: space-between;
 }
 
-#rrot {
-  @include breakPoint(small) {
-    overflow-x: hidden;
-  }
+#root {
+  overflow-x: hidden;
 }
 
 .main-section {
