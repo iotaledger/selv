@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Form, Input } from 'antd';
-import icon from '../assets/formIcon.svg'
+import icon from '../assets/selv.svg'
 
 const shortFields: string[] = ['Date', 'Nationality']
 
@@ -25,7 +25,7 @@ const labels: { [ key: string ]: string; } = {
     AccountType: 'Bank account type',
 }
 
-const Icon = () => <img src={icon} alt="" />
+const Icon = () => <img src={icon} alt="" width={18} />
 
 const PrefilledForm = ({ form, dataFields }: {
     form: any;
@@ -33,7 +33,7 @@ const PrefilledForm = ({ form, dataFields }: {
 }) => {
     useEffect(() => {
         form.setFieldsValue(dataFields);
-    }, [form, dataFields])
+    }, [])
 
     return (
         <div className="prefilled-form">
