@@ -12,6 +12,7 @@ import {
   InsuranceData,
   IncorporatedCompanies,
   GreatSuccess,
+  ThankYou
 } from './pages'
 
 export const routes = [ 
@@ -34,7 +35,8 @@ export const routes = [
   { path: '/progress/insurance/data/2', page: InsuranceData },
   { path: '/progress/insurance/confirm/3', page: Confirmation }, 
   { path: '/progress/company/details/3/:companyId', page: CompanyDetails },
-  { path: '/progress/demo/success/3', page: GreatSuccess },  
+  { path: '/progress/demo/success/3', page: GreatSuccess }, 
+  { path: '/progress/demo/thankyou', page: ThankYou },  
 ]
 
 export const mainSteps = [
