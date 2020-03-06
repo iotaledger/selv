@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Form, Button, Checkbox, Radio } from 'antd';
 
 interface IAccountType {
@@ -14,7 +14,7 @@ const RadioGroup = ({ form, onSubmit, accountTypes }: {
 }) => {
     const { getFieldDecorator, getFieldsError, validateFields } = form;
 
-    function handleSubmit(e: any) {
+    function handleSubmit (e: any) {
         e.preventDefault();
         validateFields((err: any, values: string[]) => {
             if (!err) {
@@ -23,31 +23,31 @@ const RadioGroup = ({ form, onSubmit, accountTypes }: {
         });
     }
 
-    function hasErrors(fieldsError: any) {
+    function hasErrors (fieldsError: any) {
         return Object.keys(fieldsError).some(field => fieldsError[field]);
     }
 
     return (
-        <div className="empty-form">
+        <div className='empty-form'>
             <Form onSubmit={handleSubmit}>
                 <Form.Item label={accountTypes.label} colon={false}>
                     {getFieldDecorator('accountType', {
                         rules: [{
                             required: true,
                             message: accountTypes.error
-                        }]})(
+                        }] })(
                         <Radio.Group>
-                            {
-                                accountTypes.accounts.map((account: string) => 
-                                    <Radio key={account} style={{ display: 'block '}} value={account}>{account}</Radio>
+                                {
+                                accountTypes.accounts.map((account: string) =>
+                                    <Radio key={account} style={{ display: 'block ' }} value={account}>{account}</Radio>
                                 )
                             }
-                        </Radio.Group>
+                            </Radio.Group>
                     )}
                 </Form.Item>
-                <Form.Item label="Special feature" colon={false}>
+                <Form.Item label='Special feature' colon={false}>
                     {getFieldDecorator(accountTypes.special, {
-                        valuePropName: 'checked',
+                        valuePropName: 'checked'
                     })(
                         <Checkbox>
                             {accountTypes.special}
@@ -55,15 +55,15 @@ const RadioGroup = ({ form, onSubmit, accountTypes }: {
                     )}
                 </Form.Item>
                 <Form.Item>
-                    <Button htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                    <Button htmlType='submit' disabled={hasErrors(getFieldsError())}>
                         Continue
                     </Button>
                 </Form.Item>
             </Form>
         </div>
-    )
-}
+    );
+};
 
-const WrappedForm = Form.create({name: 'radioGroup'})(RadioGroup)
+const WrappedForm = Form.create({ name: 'radioGroup' })(RadioGroup);
 
 export default WrappedForm;
