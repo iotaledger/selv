@@ -4,12 +4,12 @@ const bodyParser = require('body-parser');
 const SocketIO = require('socket.io')
 const { Server } = require('http');
 // const { createIdentity, createAccessCredential } = require('./DID')
-const { websocketPort } = require('../config')
-const { createOrUpdateCompany, readData, readAllData } = require('./database')
+const { websocketPort } = require('../config');
+const { createOrUpdateCompany, readData, readAllData, removeData } = require('./database');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://poc-dinaas.alexey-iota.now.sh']
+const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://selv.now.sh', 'https://poc-dinaas.alexey-iota.now.sh'];
 const corsOptions = {
   // methods: ["GET, POST, OPTIONS"],
   // allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
@@ -221,4 +221,26 @@ app.post('/activate', cors(corsOptions), async (req, res, next) => {
   }
 })
 
-module.exports = app
+/*
+Remove company
+*/
+app.get('/remove', cors(corsOptions), async (req, res) => {
+    try {
+        const companyNumber = req.query.company;
+        if (companyNumber) {
+            await removeData('company', companyNumber);
+            console.log('Removed company', companyNumber);
+            res.json({
+                status: 'success'
+            });
+        }
+    } catch (e) {
+        console.error(e);
+        res.json({
+            status: 'failure',
+            error: JSON.stringify(e)
+        });
+    }
+});
+
+module.exports = app;
