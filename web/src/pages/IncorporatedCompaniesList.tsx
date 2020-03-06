@@ -15,7 +15,7 @@ const IncorporatedCompanies: React.FC = ({ history, match, ...props }: any) => {
     const { response, loading } = useFetch(`${serverAPI}/company`);  
 
     function onRowClick(data: any) {
-        history.push(`/progress/company/details/${match?.params?.step || 2}/${data.CompanyNumber}`)
+        history.push(`/company/details/${match?.params?.step || 0}/${data.CompanyNumber}`)
     }
 
     return (

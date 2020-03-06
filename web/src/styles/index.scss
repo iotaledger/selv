@@ -1,4 +1,5 @@
 @import './helpers/globals';
+@import './helpers/breakpoints.scss';
 
 // components
 @import './components/text';
@@ -8,11 +9,13 @@
 @import './components/footer';
 @import './components/buttons';
 @import './components/drawer';
+@import './components/mobileMenu';
 
 // pages
+@import './pages/landing';
 @import './pages/companies';
 @import './pages/scanQRcode';
-@import './pages/introPage';
+@import './pages/thankYou';
 @import './pages/confirmation';
 @import './pages/companyData';
 @import './pages/bankData';
@@ -41,18 +44,13 @@ body {
   }
 }
 
-#root, #root > div, #root > div > div {
-  height: 100%;
-  width: 100%;
-}
-
 .content-stretch {
   flex: 1;
   width: 100%;
   align-items: flex-start;
 }
 
-h1, h2, h3, h4, h5, h6, div, span, p, label, input, select, section, footer, header, nav, ul, li, button, tr, td, th {
+div, span, p, label, input, select, section, footer, header, nav, ul, li, button, tr, td, th {
   @include themify($themes) {
     font-family: themed('fontFamily');  
   }
@@ -60,6 +58,11 @@ h1, h2, h3, h4, h5, h6, div, span, p, label, input, select, section, footer, hea
 
 .hidden {
   display: none !important;
+}
+
+.no-scroll {
+  height: 100%;
+  overflow: hidden;
 }
 
 button {
@@ -96,22 +99,35 @@ button {
   justify-content: space-between;
 }
 
+#root {
+  overflow-x: hidden;
+}
+
 .main-section {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
   overflow-x: auto;
+  height: 100vh;
+
+  @include themify($themes) {
+    background-color: themed('pageBackground');
+  }
 
   .content {
     padding: 50px;
     min-width: 535px;
+    width: 100%;
     display: flex;
     justify-content: center;
+
     @include themify($themes) {
       margin-top: themed('headerHeight');
+    }
+    @include breakPoint(small) {
+      min-width: unset;
     }
   }
 }

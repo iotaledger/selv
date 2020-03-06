@@ -12,6 +12,7 @@ import BankData from './BankData'
 import InsuranceData from './InsuranceData'
 import IncorporatedCompanies from './IncorporatedCompaniesList'
 import GreatSuccess from './GreatSuccess'
+import ThankYou from './ThankYou'
 
 export { 
     Landing,
@@ -28,4 +29,5 @@ export {
     InsuranceData,
     IncorporatedCompanies,
     GreatSuccess,
+    ThankYou
  }

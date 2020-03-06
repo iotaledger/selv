@@ -31,7 +31,7 @@ export default ({ link }: { link: string }) => {
                 <div className="next-step-drawer completed">
                     <h3>Your company is now Active</h3>
                     <p>
-                        You have completed all the steps in this demo
+                        You have successfully set up your entire business. This is the end of this demo and we thank you for participating. Selv will be updated with more demonstrations and will be updated with more features
                     </p>
                     <Link to={link}>
                         <Button>

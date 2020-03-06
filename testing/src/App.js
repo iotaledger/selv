@@ -51,7 +51,7 @@ const App = () => {
       newIoClient.on('createCredential', async (payload) => {
         try {
           const response = await processCustomCredential(payload)
-          const responsePayload = await encrypt(password, JSON.stringify({ status: response.status }))
+          const responsePayload = await encrypt(password, JSON.stringify({ status: response.status, payload: response.payload }))
           if (payload.schemaName === 'Company') {
             newIoClient.emit('createCompany', { payload: response.payload })
           }

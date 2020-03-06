@@ -1,11 +1,7 @@
 import React, { useState , useEffect } from "react";
-import SocketIOClient from 'socket.io-client';
-import axios from 'axios';
 import { notification, message } from 'antd';
-import { serverAPI, websocketURL } from '../config.json'
-import useStep from "../utils/useStep";
-import { flattenObject, encrypt, decrypt } from "../utils/helper";
-import { Layout, Loading, Form, PrefilledForm } from "../components";
+import { flattenObject } from "../utils/helper";
+import { Layout, Loading, Form, PrefilledForm, WebSocket } from "../components";
 
 const prefilledFields = [
     'FirstName',
@@ -47,13 +43,10 @@ const notify = (type: string, message: string, description: string) => {
  * Component which will display a CompanyData.
  */
 const CompanyData: React.FC = ({ history, match }: any) => {
-    const { nextStep } = useStep(match); 
+    const [webSocket, setWebSocket] = useState(false)
+    const [fields, setFields] = useState()
     const [status, setStatus] = useState('')
     const [prefilledData, setPrefilledData] = useState({})
-    const [password, setPassword] = useState();
-    const [channelId, setChannelId] = useState();
-
-    let ioClient: any
 
     useEffect(() => {
         async function getData() {
@@ -72,97 +65,17 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                 ({ ...acc, [entry]: flattenData[entry] }), {})
             
             setPrefilledData({ ...result, ...address })
-
-            await setChannel()
         } 
         getData()
-
-        // Removing the listener before unmounting the component in order to avoid addition of multiple listener
-        return () => {
-            ioClient && console.log('WebSocket disconnected');
-            ioClient?.off('createCredentialConfirmation');
-            ioClient?.off('error');
-            ioClient?.disconnect();
-        }
-    }, [])
-
-
-    async function connectWebSocket(channelId: string, data: object) {
-        ioClient = SocketIOClient(websocketURL, {
-            reconnection: true,
-            reconnectionDelay: 500,
-            jsonp: false,
-            reconnectionAttempts: Infinity,
-            transports: ['websocket']
-        })
-
-        ioClient.emit('registerDesktopClient', { channelId })
-
-        const payload = {
-            schemaName: 'Company', 
-            data: await encrypt(password, JSON.stringify(data))
-        }
-        ioClient.emit('createCredential', { channelId, payload })
-        
-        const timeout = setTimeout(() => { 
-            setStatus(messages.connectionError)
-            message.error({ content: messages.connectionError, key: 'status' });
-            notify('error', 'Connection error', 'Please try again!')
-        }, 10000)
-    
-        ioClient.on('errorMessage', async (error: any) => {
-            clearTimeout(timeout)
-            console.error('Mobile client', error)
-            setStatus(messages.connectionError)
-            message.error({ content: messages.connectionError, key: 'status' });
-            notify('error', 'Mobile client error', error)
-        })
-
-        ioClient.on('createCredentialConfirmation', async (encryptedPayload: any) => {
-            clearTimeout(timeout)
-            let payload = await decrypt(password, encryptedPayload)
-            payload = JSON.parse(payload)
-            console.log('createCredentialConfirmation', payload)
-            if (payload?.status === 'success') {
-                console.log('Company data setup completed, redirecting to', nextStep)
-                message.destroy()
-                await localStorage.setItem('companyHouse', 'completed')
-                await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload }))
-                history.push(nextStep)
-            }
-        })
-    } 
-
-    async function setChannel() {
-        const storedChannelDetails = await localStorage.getItem('WebSocket_DID') || null;
-        const channelDetails = storedChannelDetails && JSON.parse(storedChannelDetails);
-        setPassword(channelDetails?.password)
-        setChannelId(channelDetails?.channelId)
-        if (channelDetails?.channelId) {
-            const isMobileConnected = await checkConnectedStatus(channelDetails?.channelId)
-            if (!isMobileConnected) {
-                notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app')
-            }
-        } else {
-            notify('error', 'No connection details', 'Please return to the previous page and scan the QR code with your Selv app')
-        }
-    }
-
-    async function checkConnectedStatus(channelId: string) {
-        const response = await axios.get(`${serverAPI}/connection?channelId=${channelId}`)
-        return response && response?.data?.status === 'success'
-    }
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     async function processValues(fields: object) {
-        await setChannel()
-        if (channelId) {
-            const isMobileConnected = await checkConnectedStatus(channelId)
-            if (isMobileConnected) {
-                setStatus(messages.waiting)
-                message.loading({ content: messages.waiting, key: 'status', duration: 0 });
-                await connectWebSocket(channelId, fields);
-            }
-        }
+        setFields(fields)
+        setWebSocket(true)
+    }
+
+    function setStatusMessage(message: string) {
+        setStatus(message)
     }
 
     const prefilledFormData: any = { dataFields: prefilledData }
@@ -189,6 +102,15 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                             }
                         </div>
                     )
+                }
+                {
+                    webSocket && <WebSocket 
+                        history={history}
+                        match={match}
+                        schemaName="Company"
+                        setStatus={setStatusMessage}
+                        fields={fields}
+                    />
                 }
             </div>
         </Layout>

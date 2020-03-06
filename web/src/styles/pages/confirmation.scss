@@ -4,7 +4,7 @@
     justify-content: flex-start;
     align-items: center;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 50px;
     max-width: 660px;
 
     h2 {
@@ -14,16 +14,28 @@
         }
     }
 
+    button {
+        margin-top: 50px;
+    }
+
     .selv-wrapper {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
         background-color: #EEF2FA;
         border-radius: 16px;
-        padding: 20px 10px;
-        margin: 70px 0;
-        min-width: 490px;
-    }
+        padding: 0 20px 10px;
+        margin-bottom: 40px;
+        max-width: 393px;
+        width: 100%;
+        min-height: 234px;
+        background: #FFFFFF;
+        border-radius: 16px;
+        z-index: 2;
 
+        img {
+            width: 143px;
+        }
+    }
 }

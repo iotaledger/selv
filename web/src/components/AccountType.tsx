@@ -12,7 +12,7 @@ const RadioGroup = ({ form, onSubmit, accountTypes }: {
     onSubmit: (values: object) => void;
     accountTypes: IAccountType;
 }) => {
-    const { getFieldDecorator, getFieldsError, validateFields, resetFields } = form;
+    const { getFieldDecorator, getFieldsError, validateFields } = form;
 
     function handleSubmit(e: any) {
         e.preventDefault();

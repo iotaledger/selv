@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: flex-start;
     overflow-x: auto;
-    width: 685px;
+    width: 610px;
 
     h1 {
         font-weight: 900;
@@ -61,7 +61,7 @@
 
     .notice {
         text-align: right;
-        max-width: 535px;
+        max-width: 490px;
         margin-bottom: 20px;
         @include themify($themes) {
             color: themed('noticeColor');  
@@ -70,26 +70,28 @@
 
     .ant-collapse-borderless {
         @include themify($themes) {
-            border-top: 2px solid themed('secondaryFontColor');
+            border-top: 2px solid #FFFFFF;
         }
-        background-color: #ffffff;
+        background-color: #EEF2FA;
 
         .ant-collapse-item {
             @include themify($themes) {
-                border-bottom: 2px solid themed('secondaryFontColor');
+                border-bottom: 2px solid #FFFFFF;
             }
 
             &.ant-collapse-item-disabled {
                 .section-header {
                     span {
                         @include themify($themes) {
-                            color: themed('secondaryFontColor');
-                            border: 2px solid themed('secondaryFontColor');
+                            color: themed('primaryFontColor');
+                            border: 2px solid themed('primaryFontColor');
+                            opacity: 0.2;
                         }
                     }
                     h3 {
                         @include themify($themes) {
-                            color: themed('secondaryFontColor');  
+                            color: themed('primaryFontColor');  
+                            opacity: 0.2;
                         }
                     }
                 }
@@ -107,7 +109,7 @@
 
     .ant-form {
         display: flex;
-        max-width: 535px;
+        max-width: 490px;
         flex-wrap: wrap;
         justify-content: space-between;
 
@@ -121,12 +123,22 @@
         }
     }
 
+    .ant-form-item-required::before {
+        display: none;
+    }
+
     .ant-form-item {
         margin-bottom: 15px;
-        min-width: 535px;
+        min-width: 490px;
 
         &:last-child {
             margin-bottom: 0;
+        }
+
+        @include breakPoint(small) {
+            min-width: 180px;
+            max-width: 525px;
+            width: 100%;
         }
 
         .ant-form-item-label > label {
@@ -200,6 +212,11 @@
         }
 
         &.ant-checkbox-checked {
+
+            &:after {
+                border: none;
+            }
+
             .ant-checkbox-inner {
                 @include themify($themes) {
                     background-color: themed('formSelectorColor');
@@ -217,9 +234,10 @@
     }
 
     .ant-checkbox-wrapper {
+        display: flex;
+
         & > span:last-child {
             margin-left: 5px;
-            // font-weight: 600;
         }
     }
 
@@ -231,8 +249,13 @@
     }
 
     .short-field {
-        width: 260px;
-        min-width: 260px;
+        width: 230px;
+        min-width: 230px;
+
+        @include breakPoint(small) {
+            min-width: unset;
+            width: 100%;
+        }
     }
 
     button {
