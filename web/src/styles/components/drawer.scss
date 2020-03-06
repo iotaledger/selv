@@ -6,7 +6,7 @@
     word-break: break-word;
     background-color: #FFFFFF;
     min-height: 182px;
-    padding: 20px;
+    padding: 30px;
     z-index: 0;
     position: fixed;
     bottom: 0;
@@ -20,6 +20,13 @@
 
     h3 {
         color: #F17105;  
+    }
+
+    p {
+        max-width: 570px;
+        width: 100%;
+        margin: 20px 0;
+        text-align: center;
     }
 
     &.completed {
