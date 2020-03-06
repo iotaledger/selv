@@ -149,9 +149,9 @@ exports.readAllData = async (table) => {
     });
 };
 
-exports.removeData = (table) => {
+exports.removeData = (table, value) => {
     return new Promise(async resolve => {
-        await db.run(`DELETE FROM ${table}`);
+        await db.run(`DELETE FROM ${table} WHERE (CompanyNumber = '${value}') OR CompanyNumber IS NULL`);
         resolve();
     });
 };
