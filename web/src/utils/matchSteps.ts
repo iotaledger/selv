@@ -1,4 +1,4 @@
-import { matchPath } from "react-router";
+import { matchPath } from 'react-router';
 
 interface MatchResult {
     page: string | undefined;
@@ -13,9 +13,9 @@ interface Match {
 
 export default (path: string): MatchResult | null | undefined => {
     const match: Match | null = matchPath(path, {
-        path: "/:theme/:page/:step?/:companyId?",
+        path: '/:theme/:page/:step?/:companyId?',
         exact: true,
         strict: false
     });
-    return match?.params
-}
+    return match?.params;
+};

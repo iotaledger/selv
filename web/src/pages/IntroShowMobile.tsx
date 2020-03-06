@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import useStep from '../utils/useStep';
 import mobile from '../assets/mobile.png';
@@ -11,15 +11,15 @@ import ellipse from '../assets/backgrounds/ellipse1.svg';
  * Component which will display a IntroShowTodos.
  */
 const IntroShowTodos: React.FC = ({ match }: any) => {
-    const { nextStep } = useStep(match); 
-    
+    const { nextStep } = useStep(match);
+
     useEffect(() => {
         window.scrollTo({
             top: 0,
             left: 0,
             behavior: 'smooth'
         });
-    }, [])
+    }, []);
 
     return (
         <RandomGraphicElement elements={7}>
@@ -29,9 +29,9 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                         <h2>That looks like a lot of work...</h2>
                         <h3>But using IOTA’s Unified Identity Protocol and the Selv app, it will be <strong>​quick and easy​.</strong></h3>
                         <Link to={nextStep}>
-                            <Button className="cta">
-                                Let's do it 
-                            </Button> 
+                            <Button className='cta'>
+                                Let's do it
+                            </Button>
                         </Link>
                     </div>
                     <img className='phone' src={mobile} alt='Mobile phone' />
@@ -44,6 +44,6 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
             </div>
         </RandomGraphicElement>
     );
-}
+};
 
 export default IntroShowTodos;

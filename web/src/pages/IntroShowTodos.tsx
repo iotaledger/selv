@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { Disclaimer, RandomGraphicElement } from '../components';
 import useStep from '../utils/useStep';
@@ -10,8 +10,8 @@ import dots from '../assets/backgrounds/dots.png';
  * Component which will display a IntroShowTodos.
  */
 const IntroShowTodos: React.FC = ({ match }: any) => {
-    const { nextStep } = useStep(match); 
-    
+    const { nextStep } = useStep(match);
+
     useEffect(() => {
         const reset = async () => {
             window.scrollTo({
@@ -19,10 +19,10 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                 left: 0,
                 behavior: 'smooth'
             });
-            await localStorage.clear()
-        }
-        reset()
-    }, [])
+            await localStorage.clear();
+        };
+        reset();
+    }, []);
 
     return (
         <RandomGraphicElement elements={7}>
@@ -31,19 +31,19 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                     <div className='todos'>
                         <span className='heading'><h2>Welcome to the</h2>&nbsp;&nbsp;&nbsp;<h2 className='highlight'>Selv demo</h2></span>
                         <h3>Here is <strong>your to-do list</strong> for today:</h3>
-                        <ul className="todos">
+                        <ul className='todos'>
                             <li>Set up a company</li>
                             <li>Get a bank account</li>
                             <li>Get liability insurance</li>
                         </ul>
                         <Link to={nextStep}>
-                            <Button className="cta">
+                            <Button className='cta'>
                                 Continue
-                            </Button> 
+                            </Button>
                         </Link>
                     </div>
-                    <div className="image-wrapper">
-                        <img src={howItWorks} alt="how It Works" className="howItWorks" />
+                    <div className='image-wrapper'>
+                        <img src={howItWorks} alt='how It Works' className='howItWorks' />
                     </div>
                     <img src={dots} alt='' className='dots-top' />
                     <img src={dots} alt='' className='dots-bottom' />
@@ -52,6 +52,6 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
             </div>
         </RandomGraphicElement>
     );
-}
+};
 
 export default IntroShowTodos;

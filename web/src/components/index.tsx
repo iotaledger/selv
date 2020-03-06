@@ -13,7 +13,7 @@ import RandomGraphicElement from './RandomGraphicElement';
 import WebSocket from './WebSocket';
 import Disclaimer from './Disclaimer'
 
-export { 
+export {
     Sidebar,
     Steps,
     QRCode,
@@ -28,4 +28,4 @@ export {
     RandomGraphicElement,
     WebSocket,
     Disclaimer
-}
+};

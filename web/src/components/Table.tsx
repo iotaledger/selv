@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'rsuite';
-import useWindowSize from "../utils/useWindowSize";
+import useWindowSize from '../utils/useWindowSize';
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
 // https://rsuitejs.com/en/components/table#%3CTable%3E
 
 const CompanyCell = ({ ...props }) => {
     return (
-        <Cell {...props} style={{ 
+        <Cell {...props} style={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center'
         }} >
-            <div className="cell-content">
-                <p className="company-name">
+            <div className='cell-content'>
+                <p className='company-name'>
                     {props.rowData.CompanyName}
                 </p>
-                <p className="company-type">
+                <p className='company-type'>
                     {props.rowData.CompanyType}
                 </p>
             </div>
@@ -26,12 +26,12 @@ const CompanyCell = ({ ...props }) => {
 
 const StatusCell = ({ ...props }) => {
     return (
-        <Cell {...props} style={{ 
+        <Cell {...props} style={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center'
         }} >
-            <div className="cell-content status-wrapper">
+            <div className='cell-content status-wrapper'>
                 <p className={`status ${props.rowData.CompanyStatus.toLowerCase()}`}>
                     {props.rowData.CompanyStatus}
                 </p>
@@ -45,35 +45,35 @@ const TableInstance = ({ data, onRowClick, loading }: {
     onRowClick: (rowData: object) => void;
     loading?: boolean;
 }) => {
-    const [displayLength, setDisplayLength] = useState(10)
-    const [page, setPage] = useState(1)
-    const [tableDimensions, setTableDimentions] = useState([710, 300, 200, 130, 50])
+    const [displayLength, setDisplayLength] = useState(10);
+    const [page, setPage] = useState(1);
+    const [tableDimensions, setTableDimentions] = useState([710, 300, 200, 130, 50]);
     const [windowWidth] = useWindowSize();
 
     useEffect(() => {
         if (windowWidth) {
             if (windowWidth < 450) {
-                setTableDimentions([370, 160, 120, 90, 0])
+                setTableDimentions([370, 160, 120, 90, 0]);
             } else if (windowWidth < 750) {
-                setTableDimentions([440, 190, 120, 90, 40])
+                setTableDimentions([440, 190, 120, 90, 40]);
             } else if (windowWidth < 1050 && windowWidth >= 990) {
-                setTableDimentions([640, 280, 180, 130, 50])
+                setTableDimentions([640, 280, 180, 130, 50]);
             } else {
-                setTableDimentions([710, 300, 200, 130, 50])
+                setTableDimentions([710, 300, 200, 130, 50]);
             }
         }
-    }, [windowWidth])
+    }, [windowWidth]);
 
-    function handleChangePage(dataKey: number) {
-        setPage(dataKey)
-    }
-    
-    function handleChangeLength(dataKey: number) {
-        setPage(1)
-        setDisplayLength(dataKey)
+    function handleChangePage (dataKey: number) {
+        setPage(dataKey);
     }
 
-    function getData() {
+    function handleChangeLength (dataKey: number) {
+        setPage(1);
+        setDisplayLength(dataKey);
+    }
+
+    function getData () {
         return data?.filter((v, i) => {
             const start = displayLength * (page - 1);
             const end = start + displayLength;
@@ -83,12 +83,12 @@ const TableInstance = ({ data, onRowClick, loading }: {
 
     return (
         <div>
-            <div className="table-wrapper">
-                <Table 
-                    width={tableDimensions[0]} 
-                    height={950} 
-                    data={getData()} 
-                    rowHeight={90} 
+            <div className='table-wrapper'>
+                <Table
+                    width={tableDimensions[0]}
+                    height={950}
+                    data={getData()}
+                    rowHeight={90}
                     onRowClick={onRowClick}
                     loading={loading}
                 >
@@ -99,7 +99,7 @@ const TableInstance = ({ data, onRowClick, loading }: {
 
                     <Column width={tableDimensions[2]} fixed>
                         <HeaderCell>Incorporated on</HeaderCell>
-                        <Cell dataKey="CompanyCreationDate" style={{ 
+                        <Cell dataKey='CompanyCreationDate' style={{
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'center'
@@ -112,8 +112,8 @@ const TableInstance = ({ data, onRowClick, loading }: {
                     </Column>
 
                     <Column width={tableDimensions[4]} fixed>
-                        <HeaderCell></HeaderCell>
-                        <Cell className="dots" style={{ 
+                        <HeaderCell />
+                        <Cell className='dots' style={{
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'center',
@@ -121,13 +121,13 @@ const TableInstance = ({ data, onRowClick, loading }: {
                             position: 'relative',
                             top: -8
                         }} >
-                            <div className="cell-content">
+                            <div className='cell-content'>
                                 ...
                             </div>
                         </Cell>
                     </Column>
                 </Table>
-        </div>
+            </div>
             <Pagination
                 lengthMenu={[
                     {
@@ -145,8 +145,8 @@ const TableInstance = ({ data, onRowClick, loading }: {
                 onChangePage={handleChangePage}
                 onChangeLength={handleChangeLength}
             />
-      </div>
+        </div>
     );
 };
 
-export default TableInstance
+export default TableInstance;

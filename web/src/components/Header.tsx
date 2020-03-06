@@ -1,6 +1,7 @@
 import React from 'react';
-import companyHouse from '../assets/companyHouse.svg'
-import snsBank from '../assets/snsBank.svg'
+// import companyHouse from '../assets/companyHouse.svg'
+// import snsBank from '../assets/snsBank.svg'
+import selv from '../assets/selv.svg';
 
 const Header = ({ children, theme }: {
     children?: JSX.Element | null | undefined;
@@ -19,4 +20,4 @@ const Header = ({ children, theme }: {
     );
 };
 
-export default Header
+export default Header;

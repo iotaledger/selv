@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Form, Input } from 'antd';
-import icon from '../assets/selv.svg'
+import icon from '../assets/selv.svg';
 
-const shortFields: string[] = ['Date', 'Nationality']
+const shortFields: string[] = ['Date', 'Nationality'];
 
 const labels: { [ key: string ]: string; } = {
     FirstName: 'First Name',
@@ -22,10 +22,10 @@ const labels: { [ key: string ]: string; } = {
     CompanyNumber: 'Company number',
     CompanyOwner: 'Managing director',
     BankName: 'Name of the bank',
-    AccountType: 'Bank account type',
-}
+    AccountType: 'Bank account type'
+};
 
-const Icon = () => <img src={icon} alt="" width={18} />
+const Icon = () => <img src={icon} alt='' width={18} />;
 
 const PrefilledForm = ({ form, dataFields }: {
     form: any;
@@ -33,16 +33,16 @@ const PrefilledForm = ({ form, dataFields }: {
 }) => {
     useEffect(() => {
         form.setFieldsValue(dataFields);
-    }, [])
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <div className="prefilled-form">
+        <div className='prefilled-form'>
             <Form layout='vertical'>
-                { 
+                {
                     Object.keys(dataFields).map((field: string) => (
-                        <Form.Item 
-                            label={labels[field]} 
-                            key={field} 
+                        <Form.Item
+                            label={labels[field]}
+                            key={field}
                             className={shortFields.includes(field) ? 'short-field' : ''}
                         >
                             { form.getFieldDecorator(field, {})(
@@ -52,11 +52,11 @@ const PrefilledForm = ({ form, dataFields }: {
                     ))
                 }
             </Form>
-            <p className="notice bold small">Credentials provided by Selv ID</p>
+            <p className='notice bold small'>Credentials provided by Selv ID</p>
         </div>
-    )
-}
+    );
+};
 
-const WrappedPrefilledForm = Form.create()(PrefilledForm)
+const WrappedPrefilledForm = Form.create()(PrefilledForm);
 
 export default WrappedPrefilledForm;

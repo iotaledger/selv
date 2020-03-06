@@ -1,6 +1,7 @@
 import React from 'react';
-import companyHouse from '../assets/companyHouseCrone.svg'
-import snsBank from '../assets/snsBank.svg'
+// import companyHouse from '../assets/companyHouseCrone.svg'
+// import snsBank from '../assets/snsBank.svg'
+import selv from '../assets/selv.svg';
 
 const Footer = ({ children, theme }: {
     children?: JSX.Element | null | undefined;
@@ -19,4 +20,4 @@ const Footer = ({ children, theme }: {
     );
 };
 
-export default Footer
+export default Footer;
