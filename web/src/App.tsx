@@ -38,8 +38,8 @@ const App: React.FC = () => {
               <Route exact key={path} path={path} component={page} />
             )
           }
-          <Route path={'/progress/company/details/:step/:companyId'} component={CompanyDetails} />
-          <Route path={'/progress/company/list/:step'} component={IncorporatedCompanies} />
+          <Route path={'/company/details/:step/:companyId'} component={CompanyDetails} />
+          <Route path={'/company/list/:step'} component={IncorporatedCompanies} />
           <Route component={Landing} />
         </Switch>
       </BrowserRouter>

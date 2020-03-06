@@ -59,7 +59,7 @@ const ThankYou: React.FC = () => {
                             </div>
                         </div>
                         <div className="cta-wrapper">
-                            <Link to={'/progress/company/list/0'}>
+                            <Link to={'/company/list/0'}>
                                 <Button className="cta">
                                     Return to Company House
                                 </Button> 

@@ -42,7 +42,7 @@ export default ({ }) => (
                 </div>
             </div>
 
-            <Link to={'/progress/demo/todos'}>
+            <Link to={'/demo/todos'}>
                 <Button className="cta" data-aos="fade-up" data-aos-duration="2000">
                     Try the demo
                 </Button> 

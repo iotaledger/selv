@@ -53,7 +53,7 @@ export default () => {
                         </Link>
                     ))
                 }
-                <Link to={'/progress/demo/todos'}>
+                <Link to={'/demo/todos'}>
                     <Button className="cta">
                         Try the demo
                     </Button> 
@@ -86,7 +86,7 @@ const MobileMenu = ({ onAnchorClick, menuOpenState }: { onAnchorClick: (anchor: 
                         </Link>
                     ))
                 }
-                <Link to={'/progress/demo/todos'}>
+                <Link to={'/demo/todos'}>
                     <Button className="cta">
                         Try the demo
                     </Button> 
