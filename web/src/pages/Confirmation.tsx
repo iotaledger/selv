@@ -1,44 +1,44 @@
-import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import { getCompanyId } from '../utils/helper'
-import useStep from "../utils/useStep";
-import { Layout, RandomGraphicElement } from "../components";
-import selv from '../assets/selvSuccessBordered.svg'
+import { getCompanyId } from '../utils/helper';
+import useStep from '../utils/useStep';
+import { Layout, RandomGraphicElement } from '../components';
+import selv from '../assets/selvSuccessBordered.svg';
 
 /**
  * Component which will display a Confirmation.
  */
 const Confirmation: React.FC = ({ match }: any) => {
     const { nextStep, theme } = useStep(match);
-    const [companyId, setCompanyId] = useState('')
-    const [title, setTitle] = useState('')
+    const [companyId, setCompanyId] = useState('');
+    const [title, setTitle] = useState('');
 
     useEffect(() => {
-        async function determineCompanyId() {
-            setCompanyId(await getCompanyId())
+        async function determineCompanyId () {
+            setCompanyId(await getCompanyId());
             switch (theme) {
-                case 'bank':
-                    setTitle('Your business bank account is now set up!')
-                    break;
-                case 'insurance':
-                    setTitle('Congratulations, your liability insurance is now set up!')
-                    break;
-                case 'company':
-                default:
-                    setTitle('Congratulations, your company is now set up!')
-                    break;
+            case 'bank':
+                setTitle('Your business bank account is now set up!');
+                break;
+            case 'insurance':
+                setTitle('Congratulations, your liability insurance is now set up!');
+                break;
+            case 'company':
+            default:
+                setTitle('Congratulations, your company is now set up!');
+                break;
             }
-        } 
+        }
         determineCompanyId();
-    }, [companyId, theme])
+    }, [companyId, theme]);
 
     return (
         <Layout match={match}>
             <RandomGraphicElement elements={5}>
-                <div className="confirmation-page">
-                    <div className="selv-wrapper">
-                        <img src={selv} alt="Selv app logo" />
+                <div className='confirmation-page'>
+                    <div className='selv-wrapper'>
+                        <img src={selv} alt='Selv app logo' />
                         <h4>Your new credential is sent to Selv</h4>
                     </div>
                     <h2>{title}</h2>
@@ -51,12 +51,12 @@ const Confirmation: React.FC = ({ match }: any) => {
                             {
                                 theme === 'company' ? 'Continue' : 'Return to Company House'
                             }
-                        </Button> 
+                        </Button>
                     </Link>
                 </div>
             </RandomGraphicElement>
         </Layout>
     );
-}
+};
 
 export default Confirmation;

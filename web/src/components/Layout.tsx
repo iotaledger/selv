@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactGA from 'react-ga';
-import Disclaimer from './Disclaimer'
-import Header from './Header'
-import Footer from './Footer'
-import Steps from './Steps'
-import Sidebar from './Sidebar'
-import useStep from "../utils/useStep";
+import Disclaimer from './Disclaimer';
+import Header from './Header';
+import Footer from './Footer';
+import Steps from './Steps';
+import Sidebar from './Sidebar';
+import useStep from '../utils/useStep';
 
 export default ({ children, match, customTheme, customStep, noHeader, noFooter }: {
     children?: JSX.Element | null | undefined;
@@ -21,12 +21,12 @@ export default ({ children, match, customTheme, customStep, noHeader, noFooter }
 
     return (
         <div className={`theme-${theme || customTheme}`}>
-            <div className="page-wrapper">
-                <div className="main-section">
+            <div className='page-wrapper'>
+                <div className='main-section'>
                     {
-                        !noHeader &&  <Header theme={theme || customTheme} />
+                        !noHeader && <Header theme={theme || customTheme} />
                     }
-                    <div className="content">
+                    <div className='content'>
                         {children}
                     </div>
                     {
@@ -36,9 +36,9 @@ export default ({ children, match, customTheme, customStep, noHeader, noFooter }
                 {
                     customStep || step >= 0 ? (
                         <Sidebar>
-                            <Steps 
-                                steps={mainSteps} 
-                                stepId={customStep || step} 
+                            <Steps
+                                steps={mainSteps}
+                                stepId={customStep || step}
                             />
                         </Sidebar>
                     ) : null
@@ -46,5 +46,5 @@ export default ({ children, match, customTheme, customStep, noHeader, noFooter }
             </div>
             <Disclaimer />
         </div>
-    )
-}
+    );
+};

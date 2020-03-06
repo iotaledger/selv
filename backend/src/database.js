@@ -1,6 +1,6 @@
 const path = require('path');
 const sqlite3 = require('sqlite3');
-const { database } = require('../config')
+const { database } = require('../config');
 
 sqlite3.verbose();
 const db = new sqlite3.Database(
@@ -9,7 +9,7 @@ const db = new sqlite3.Database(
             if (error) {
                 return console.error('New database Error', error);
             }
-    
+
             await db.run(`CREATE TABLE IF NOT EXISTS company (
                 CompanyNumber TEXT PRIMARY KEY, 
                 CompanyName TEXT, 
@@ -40,12 +40,12 @@ exports.close = async () => {
 };
 
 exports.createOrUpdateCompany = async ({
-    CompanyNumber, 
-    CompanyName, 
-    CompanyCreationDate, 
-    CompanyType, 
-    CompanyStatus, 
-    CompanyOwner, 
+    CompanyNumber,
+    CompanyName,
+    CompanyCreationDate,
+    CompanyType,
+    CompanyStatus,
+    CompanyOwner,
     CompanyOwners,
     CompanyAddress,
     CompanyBusiness,
@@ -65,12 +65,12 @@ exports.createOrUpdateCompany = async ({
             tangle
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     await db.run(query, [
-        CompanyNumber, 
-        CompanyName, 
-        CompanyCreationDate, 
-        CompanyType, 
-        CompanyStatus, 
-        CompanyOwner, 
+        CompanyNumber,
+        CompanyName,
+        CompanyCreationDate,
+        CompanyType,
+        CompanyStatus,
+        CompanyOwner,
         CompanyOwners,
         CompanyAddress,
         CompanyBusiness,
@@ -78,38 +78,38 @@ exports.createOrUpdateCompany = async ({
     ]);
 };
 
-exports.createDID = async ({ root, privateKey, keyId, seed, next_root, start }) => {
-    const insert = `
-        INSERT INTO did (
-        root, privateKey, keyId, seed, next_root, start)
-        VALUES (?, ?, ?, ?, ?, ?)`;
-    await db.run(insert, [root, privateKey, keyId, seed, next_root, start]);
-};
+// createDID = async ({ root, privateKey, keyId, seed, next_root, start }) => {
+//     const insert = `
+//         INSERT INTO did (
+//         root, privateKey, keyId, seed, next_root, start)
+//         VALUES (?, ?, ?, ?, ?, ?)`;
+//     await db.run(insert, [root, privateKey, keyId, seed, next_root, start]);
+// };
 
-exports.createCredential = async ({ id, credential }) => {
-    await db.run('INSERT INTO credentials (id, credential) VALUES (?, ?)', [id, credential]);
-};
+// createCredential = async ({ id, credential }) => {
+//     await db.run('INSERT INTO credentials (id, credential) VALUES (?, ?)', [id, credential]);
+// };
 
-exports.writeData = async (table, data) => {
-    try {
-        console.log('writeData', table, data);
-        switch (table) {
-            case 'did':
-                await createDID(data);
-                return;
-            case 'credential':
-                await createCredential(data);
-                return;
-            case 'company':
-            default:
-                await createOrUpdateCompany(data);
-                return;
-        }
-    } catch (error) {
-        console.log('writeData', error);
-        return null;
-    }
-};
+// exports.writeData = async (table, data) => {
+//     try {
+//         console.log('writeData', table, data);
+//         switch (table) {
+//         case 'did':
+//             await createDID(data);
+//             return;
+//         case 'credential':
+//             await createCredential(data);
+//             return;
+//         case 'company':
+//         default:
+//             await createOrUpdateCompany(data);
+//             return;
+//         }
+//     } catch (error) {
+//         console.log('writeData', error);
+//         return null;
+//     }
+// };
 
 exports.readData = async (table, searchField = null) => {
     return new Promise((resolve, reject) => {
@@ -127,7 +127,7 @@ exports.readData = async (table, searchField = null) => {
             });
         } catch (error) {
             console.log('readData', error);
-            return reject(null);
+            return reject(error);
         }
     });
 };
@@ -144,7 +144,7 @@ exports.readAllData = async (table) => {
             });
         } catch (error) {
             console.log('readAllData', error);
-            return reject(null);
+            return reject(error);
         }
     });
 };
