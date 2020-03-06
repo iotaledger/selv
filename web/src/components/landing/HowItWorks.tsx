@@ -7,7 +7,7 @@ import howItWorks2 from '../../assets/landing/howItWorks2.png'
 import howItWorks2Mobile from '../../assets/landing/howItWorks2-mobile.png' 
 import circle from '../../assets/backgrounds/circleFrame1.svg'
 
-export default ({ }) => (
+export default () => (
     <RandomGraphicElement elements={10}>
         <div className="how-it-works-section" id="how-it-works">
             <img src={circle} alt="" className="circle" />

@@ -7,7 +7,7 @@ import app from '../../assets/landing/app.png'
 import appMobile from '../../assets/landing/app-mobile.png'
 import circle from '../../assets/backgrounds/circleFrame2.svg'
 
-export default ({ }) => (
+export default () => (
     <RandomGraphicElement elements={5}>
         <div className="app-section" id="the-app">
             <img src={circle} alt="" className="circle" />

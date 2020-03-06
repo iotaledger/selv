@@ -6,7 +6,7 @@ import googlePlay from '../../assets/googlePlay.svg'
 import dots from '../../assets/backgrounds/dots.png'
 import ellipse from '../../assets/backgrounds/ellipse1.svg'
 
-export default ({ }) => {
+export default () => {
     return (
         <RandomGraphicElement elements={5}>
             <div className="heading-section">

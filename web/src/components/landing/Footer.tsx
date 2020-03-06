@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../../assets/landing/logoFooter.svg' 
 
-export default ({ }) => (
+export default () => (
     <div className="footer-section">
         <img src={logo} alt="Selv logo" />
         <h1>Contact us</h1>

@@ -2,7 +2,7 @@ import React from 'react';
 import { RandomGraphicElement } from '../'
 import connected from '../../assets/landing/connected.svg' 
 
-export default ({ }) => (
+export default () => (
     <RandomGraphicElement elements={5}>
         <div className="control-identity-section">
             <div className="content-wrapper">
