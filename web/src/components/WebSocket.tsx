@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SocketIOClient from 'socket.io-client';
 import { notification, message } from 'antd';
-import { getCompanyId } from '../utils/helper';
 import useStep from '../utils/useStep';
 import useInterval from '../utils/useInterval';
 import evaluateCredential from '../utils/did';
-import { flattenObject, encrypt, decrypt } from '../utils/helper';
+import { getCompanyId, flattenObject, encrypt, decrypt } from '../utils/helper';
 import { serverAPI, websocketURL } from '../config.json';
 
 const messages = {

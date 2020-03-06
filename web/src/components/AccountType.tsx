@@ -36,12 +36,12 @@ const RadioGroup = ({ form, onSubmit, accountTypes }: {
                             required: true,
                             message: accountTypes.error
                         }] })(
-                        <Radio.Group>
-                                {
-                                accountTypes.accounts.map((account: string) =>
-                                    <Radio key={account} style={{ display: 'block ' }} value={account}>{account}</Radio>
-                                )
-                            }
+                            <Radio.Group>
+                                    {
+                                        accountTypes.accounts.map((account: string) =>
+                                            <Radio key={account} style={{ display: 'block ' }} value={account}>{account}</Radio>
+                                        )
+                                    }
                             </Radio.Group>
                     )}
                 </Form.Item>
