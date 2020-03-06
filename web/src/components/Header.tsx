@@ -7,11 +7,12 @@ const Header = ({ children, theme }: {
     theme: string | undefined;
 }) => {
     return (
-        <div className="header-wrapper">
-            <div className="logo">
-                { theme === 'company' && <img src={companyHouse} alt="Company House Logo" /> }
-                { theme === 'bank' && <img src={snsBank} alt="SNS Bank Logo" /> }
-                { theme === 'insurance' && <img src={snsBank} alt="SNS Bank Logo" /> }
+        <div className='header-wrapper'>
+            <div className='logo'>
+                <img src={selv} alt='' />
+                {/* { theme === 'company' && <img src={companyHouse} alt='Company House Logo' /> }
+                { theme === 'bank' && <img src={snsBank} alt='SNS Bank Logo' /> }
+                { theme === 'insurance' && <img src={snsBank} alt='SNS Bank Logo' /> } */}
             </div>
             { children }
         </div>

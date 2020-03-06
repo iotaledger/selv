@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import { Button } from 'antd';
-import useStep from "../utils/useStep";
-import { getCompanyId } from '../utils/helper'
-import { RandomGraphicElement } from "../components";
-import image1 from '../assets/greatSuccess/image1.png'
-import image2 from '../assets/greatSuccess/image2.png'
-import image3 from '../assets/greatSuccess/image3.png'
-import checkmark from '../assets/checkmark.svg'
-import dots from '../assets/backgrounds/dots.png'
+import useStep from '../utils/useStep';
+import { getCompanyId } from '../utils/helper';
+import { Disclaimer, RandomGraphicElement } from '../components';
+import image1 from '../assets/greatSuccess/image1.png';
+import image2 from '../assets/greatSuccess/image2.png';
+import image3 from '../assets/greatSuccess/image3.png';
+import checkmark from '../assets/checkmark.svg';
+import dots from '../assets/backgrounds/dots.png';
 
 /**
  * Component which will display a GreatSuccess.
@@ -26,8 +26,8 @@ const GreatSuccess: React.FC = ({ match }: any) => {
 
     return (
         <RandomGraphicElement elements={7}>
-            <div className="theme-demo">
-                <div className="great-success">
+            <div className='theme-demo'>
+                <div className='great-success' id='app'>
                     <h2>Great Success!</h2>
                     <div className="great-success-content-wrapper">
                         <div className="great-success-content">
@@ -74,7 +74,8 @@ const GreatSuccess: React.FC = ({ match }: any) => {
                             </Button> 
                         </Link>
                     </div>
-                    <img src={dots} alt="" className="dots-top" />
+                    <img src={dots} alt='' className='dots-top' />
+                    <Disclaimer />
                 </div>
             </div>
         </RandomGraphicElement>

@@ -7,12 +7,13 @@ const Footer = ({ children, theme }: {
     theme: string | undefined;
 }) => {
     return (
-        <div className="footer-wrapper">
+        <div className='footer-wrapper' id='footer'>
             {children}
-            <div className="logo">
-                { theme === 'company' && <img src={companyHouse} alt="Company House Logo" /> }
-                { theme === 'bank' && <img src={snsBank} alt="SNS Bank Logo" /> }
-                { theme === 'insurance' && <img src={snsBank} alt="SNS Bank Logo" /> }
+            <div className='logo'>
+                <img src={selv} alt='' />
+                {/* { theme === 'company' && <img src={companyHouse} alt='Company House Logo' /> }
+                { theme === 'bank' && <img src={snsBank} alt='SNS Bank Logo' /> }
+                { theme === 'insurance' && <img src={snsBank} alt='SNS Bank Logo' /> } */}
             </div>
         </div>
     );

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Link } from 'react-router-dom'
 import { Button } from 'antd';
-import { RandomGraphicElement } from '../components'
-import useStep from "../utils/useStep";
-import howItWorks from '../assets/landing/howItWorks1.png' 
-import dots from '../assets/backgrounds/dots.png'
+import { Disclaimer, RandomGraphicElement } from '../components';
+import useStep from '../utils/useStep';
+import howItWorks from '../assets/landing/howItWorks1.png';
+import dots from '../assets/backgrounds/dots.png';
 
 /**
  * Component which will display a IntroShowTodos.
@@ -26,10 +26,10 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
 
     return (
         <RandomGraphicElement elements={7}>
-            <div className="theme-demo">
-                <div className="demo-intro">
-                    <div className="todos">
-                        <span className="heading"><h2>Welcome to the</h2>&nbsp;&nbsp;&nbsp;<h2 className="highlight">Selv demo</h2></span>
+            <div className='theme-demo'>
+                <div className='demo-intro' id='app'>
+                    <div className='todos'>
+                        <span className='heading'><h2>Welcome to the</h2>&nbsp;&nbsp;&nbsp;<h2 className='highlight'>Selv demo</h2></span>
                         <h3>Here is <strong>your to-do list</strong> for today:</h3>
                         <ul className="todos">
                             <li>Set up a company</li>
@@ -45,8 +45,9 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                     <div className="image-wrapper">
                         <img src={howItWorks} alt="how It Works" className="howItWorks" />
                     </div>
-                    <img src={dots} alt="" className="dots-top" />
-                    <img src={dots} alt="" className="dots-bottom" />
+                    <img src={dots} alt='' className='dots-top' />
+                    <img src={dots} alt='' className='dots-bottom' />
+                    <Disclaimer />
                 </div>
             </div>
         </RandomGraphicElement>
