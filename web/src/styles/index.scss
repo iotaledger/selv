@@ -10,6 +10,7 @@
 @import './components/buttons';
 @import './components/drawer';
 @import './components/mobileMenu';
+@import './components/disclaimer';
 
 // pages
 @import './pages/landing';
@@ -38,10 +39,6 @@ body {
   width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  &.cookie-bar-bottom-bar {
-    margin-top: 70px;
-  }
 }
 
 .content-stretch {

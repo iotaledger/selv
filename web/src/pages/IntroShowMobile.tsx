@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import useStep from '../utils/useStep';
 import mobile from '../assets/mobile.png';
-import { RandomGraphicElement } from '../components';
+import { Disclaimer, RandomGraphicElement } from '../components';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
 
@@ -24,7 +24,7 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
     return (
         <RandomGraphicElement elements={7}>
             <div className='theme-demo'>
-                <div className='demo-intro app'>
+                <div className='demo-intro app' id='app'>
                     <div className='app-content-wrapper'>
                         <h2>That looks like a lot of work...</h2>
                         <h3>But using IOTA’s Unified Identity Protocol and the Selv app, it will be <strong>​quick and easy​.</strong></h3>
@@ -39,6 +39,7 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                     <img src={dots} alt='' className='dots-top' />
                     <img src={dots} alt='' className='dots-bottom' />
                     <img src={ellipse} alt='' className='ellipse' />
+                    <Disclaimer />
                 </div>
             </div>
         </RandomGraphicElement>

@@ -21,7 +21,7 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
 
     return (
         <Layout match={match} noHeader noFooter>
-            <div className='scan-qr-page-wrapper app-download'>
+            <div className='scan-qr-page-wrapper app-download' id='app'>
                 <RandomGraphicElement elements={5}>
                     <React.Fragment>
                         <h1 className='title'>Download the Selv app</h1>
