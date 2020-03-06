@@ -23,7 +23,7 @@ WebFontLoader.load({
   },
 });
 
-ReactGA.initialize('222308434'); // (trackingID, { debug: true })
+ReactGA.initialize('UA-159929129-1'); // (trackingID, { debug: true })
 ReactGA.set({ anonymizeIp: true });
 
 AOS.init();

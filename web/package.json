@@ -1,7 +1,13 @@
 {
-  "name": "poc-dinaas",
-  "version": "0.1.0",
+  "name": "selv",
+  "version": "1.0.0",
   "private": true,
+  "description": "IOTA Selv App. Claim, Control & Reuse your new Digital Identity.",
+  "author": "Alexey Sobolev <alexey@iota.org>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iotaledger/selv.git"
+  },
   "dependencies": {
     "antd": "^3.26.9",
     "aos": "^3.0.0-beta.6",
@@ -41,6 +47,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "engines": {
+    "node": ">=10.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.1.1",
