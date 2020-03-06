@@ -74,8 +74,8 @@ const GreatSuccess: React.FC = ({ match }: any) => {
                             </Button> 
                         </Link>
                     </div>
+                    <img src={dots} alt="" className="dots-top" />
                 </div>
-                <img src={dots} alt="" className="dots-top" />
             </div>
         </RandomGraphicElement>
     );

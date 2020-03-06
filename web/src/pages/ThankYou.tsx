@@ -68,6 +68,7 @@ const ThankYou: React.FC = () => {
                                 Return home
                             </Link>
                         </div>
+                        <img src={dots} alt="" className="dots-bottom" />
                     </div>
                     <img src={dots} alt="" className="dots-top" />
                     <Footer />
