@@ -5,6 +5,7 @@ import { notification, message } from 'antd';
 import { getCompanyId } from '../utils/helper'
 import useStep from "../utils/useStep";
 import useInterval from "../utils/useInterval";
+import evaluateCredential from "../utils/did";
 import { flattenObject, encrypt, decrypt } from "../utils/helper";
 import { serverAPI, websocketURL } from '../config.json'
 
@@ -15,17 +16,31 @@ const messages = {
 }
 
 const notify = (type: string, message: string, description: string) => {
-    return type === 'error' 
-        ? notification.error({ message, description })
-        : notification.warning({ message, description });
+    switch (type) {
+        case 'success':
+            notification.success({ message, description })
+            break;
+        case 'warning':
+            notification.warning({ message, description })
+            break;
+        case 'info':
+            notification.info({ message, description })
+            break;
+        case 'error':
+        default:
+            notification.error({ message, description })
+            break;
+    }
 };
 
-const WebSocket = ({ history, match, schemaName, setStatus, fields }: {
+const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, generatedChannelId }: {
     history: any;
     match: any;
-    schemaName: string;
+    schemaName?: string;
     setStatus: (status: string) => void;
-    fields: object;
+    setLoading?: (status: boolean) => void;
+    fields: any;
+    generatedChannelId?: string;
 }) => {
     const { nextStep } = useStep(match); 
     const [password, setPassword] = useState();
@@ -47,7 +62,12 @@ const WebSocket = ({ history, match, schemaName, setStatus, fields }: {
                 await setChannel()
             }
         } 
-        getData()
+        if (schemaName) { // Case of Company/Bank/Insurance data
+            getData()
+        } else { // Case of ProveIdentity
+            setChannelId(generatedChannelId)
+            setIsRunning(true)
+        }
 
         // Removing the listener before unmounting the component in order to avoid addition of multiple listener
         return () => {
@@ -72,25 +92,64 @@ const WebSocket = ({ history, match, schemaName, setStatus, fields }: {
 
         ioClient.emit('registerDesktopClient', { channelId })
 
-        const payload = {
-            schemaName: schemaName, 
-            data: await encrypt(password, JSON.stringify(data))
+        if (schemaName) {
+            const payload = {
+                schemaName: schemaName, 
+                data: await encrypt(password, JSON.stringify(data))
+            }
+            ioClient.emit('createCredential', { channelId, payload })
         }
-        ioClient.emit('createCredential', { channelId, payload })
         
         const timeout = setTimeout(() => { 
-            setStatus(messages.connectionError)
-            message.error({ content: messages.connectionError, key: 'status' });
-            notify('error', 'Connection error', 'Please try again!')
+            if (setStatus) {
+                setStatus(messages.connectionError)
+                message.error({ content: messages.connectionError, key: 'status' });
+                notify('error', 'Connection error', 'Please try again!')
+            }
         }, 10000)
     
         ioClient.on('errorMessage', async (error: any) => {
             clearTimeout(timeout)
             console.error('Mobile client', error)
             setIsRunning(false);
+            setLoading && setLoading(false)
             setStatus(messages.connectionError)
             message.error({ content: messages.connectionError, key: 'status' });
             notify('error', 'Mobile client error', error)
+        })
+
+        ioClient.on('verifiablePresentation', async (payload: any) => {
+            try {
+                console.log('password', fields?.password)
+                setIsRunning(false);
+                clearTimeout(timeout)
+                setStatus('Verifying credentials...')
+                message.loading({ content: 'Verifying credentials...', duration: 0 });
+                notify('info', 'Verification', 'Verifying credentials...')
+                let verifiablePresentation = await decrypt(fields?.password, payload)
+                console.log('verifiablePresentation 1 ', verifiablePresentation)
+                verifiablePresentation = JSON.parse(verifiablePresentation)
+                console.log('verifiablePresentation 2 ', verifiablePresentation)
+                const evaluationResult: any = await evaluateCredential(verifiablePresentation, fields?.requestedCredentials, fields?.challenge )
+                console.log('evaluationResult', evaluationResult)
+                const flattenData = flattenObject(evaluationResult)
+                console.log('flattenData', flattenData)
+
+                setStatus(evaluationResult.message)
+                notify(evaluationResult.type, 'Verification result', evaluationResult.message)
+                setLoading && setLoading(false)
+
+                if (evaluationResult?.status === 2) { // DID_TRUSTED
+                    message.destroy()
+                    console.log('Verification completed, redirecting to', nextStep)
+                    await localStorage.setItem('credentials', JSON.stringify(evaluationResult))
+                    history.push(nextStep)
+                }
+            } catch (e) {
+                console.error(e)
+                setLoading && setLoading(false)
+                message.destroy()
+            }
         })
 
         ioClient.on('createCredentialConfirmation', async (encryptedPayload: any) => {
@@ -106,13 +165,17 @@ const WebSocket = ({ history, match, schemaName, setStatus, fields }: {
                 switch (schemaName) {
                     case 'Insurance':
                         await localStorage.setItem('insurance', 'completed')
+                        await localStorage.setItem('insuranceDetails', JSON.stringify({ ...data, ...payload?.payload }))
                         await updateCompanyStatus()
+                        break;
                     case 'BankAccount':
                         await localStorage.setItem('bank', 'completed')
-                        await localStorage.setItem('bankDetails', JSON.stringify({ ...data, ...payload }))
+                        await localStorage.setItem('bankDetails', JSON.stringify({ ...data, ...payload?.payload }))
+                        break;
                     case 'Company':
                         await localStorage.setItem('companyHouse', 'completed')
-                        await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload.payload }))
+                        await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload?.payload }))
+                        break;
                     default:
                         break;
                 }
