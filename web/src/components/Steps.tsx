@@ -7,7 +7,6 @@ const styles = {
     verticalAlign: 'top'
 };
 
-  
 // https://rsuitejs.com/en/components/sidenav
 
 const StepsInstance = ({ steps, stepId }: {
@@ -15,13 +14,13 @@ const StepsInstance = ({ steps, stepId }: {
     stepId: any;
 }) => {
     return (
-        <div className="steps-wrapper">
+        <div className='steps-wrapper'>
             <Steps current={Number(stepId)} vertical style={styles}>
                 {
-                    steps.map((step: any) => 
-                        <Steps.Item 
-                            key={step.title} 
-                            title={step.title} 
+                    steps.map((step: any) =>
+                        <Steps.Item
+                            key={step.title}
+                            title={step.title}
                         />
                     )
                 }
@@ -30,4 +29,4 @@ const StepsInstance = ({ steps, stepId }: {
     );
 };
 
-export default StepsInstance
+export default StepsInstance;

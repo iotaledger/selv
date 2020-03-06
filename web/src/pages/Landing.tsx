@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { 
+import React, { useEffect } from 'react';
+import {
     App,
     ControlIdentity,
     FAQ,
@@ -8,9 +8,8 @@ import {
     HowItWorks,
     Main,
     Selv,
-    Benefits,
-} from '../components/landing'
-
+    Benefits
+} from '../components/landing';
 
 /**
  * Component which will display a Landing page.
@@ -21,11 +20,11 @@ const Landing: React.FC = ({ location }: any) => {
             const target: Element | null = document.querySelector(location.hash);
             target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-    }, [location.hash])
+    }, [location.hash]);
 
     return (
-        <div className="theme-demo">
-            <div className="landing-page-wrapper">
+        <div className='theme-demo'>
+            <div className='landing-page-wrapper'>
                 <Header />
                 <Main />
                 <ControlIdentity />
@@ -38,6 +37,6 @@ const Landing: React.FC = ({ location }: any) => {
             </div>
         </div>
     );
-}
+};
 
 export default Landing;
