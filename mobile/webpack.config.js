@@ -18,7 +18,7 @@ const config = {
             svelte: path.resolve('node_modules', 'svelte'),
             '~': path.resolve('ui')
         },
-        extensions: ['.mjs', '.ts', '.js', '.svelte'],
+        extensions: ['.mjs', '.ts', '.js', '.svelte', '.json'],
         mainFields: ['svelte', 'browser', 'module', 'main']
     },
     output: {
@@ -79,6 +79,7 @@ const config = {
     plugins: [
         new CopyPlugin([
             { from: './ui/assets/*', to: './', flatten: true },
+            { from: './node_modules/qr-scanner/qr-scanner-worker.min.js', to: './scanner.worker.min.js' },
         ]),
         new HtmlWebpackPlugin({
             template: './ui/index.html',

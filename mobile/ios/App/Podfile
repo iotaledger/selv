@@ -10,8 +10,8 @@ def capacitor_pods
   # Automatic Capacitor Pod dependencies, do not delete
   pod 'Capacitor', :path => '../../node_modules/@capacitor/ios'
   pod 'CapacitorCordova', :path => '../../node_modules/@capacitor/ios'
-  
-  # Do not delete
+  pod 'CapacitorCameraPreview', :path => '../../node_modules/capacitor-camera-preview'
+  # Do not delete nee
 end
 
 target 'App' do
