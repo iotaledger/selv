@@ -1,0 +1,105 @@
+.bold {
+    font-weight: 700;
+}
+
+.small {
+    font-size: 12px;
+    line-height: 16px;
+}
+
+a {
+    outline: none !important;
+    font-weight: 400;
+
+    @include themify($themes) {
+      color: themed('linkColor');  
+      font-size: themed('defaultTextSize');
+      line-height: themed('defaultLineHeight');
+      font-family: themed('fontFamily');
+    }
+  
+    &:hover {
+      text-decoration: none;
+    }
+}
+
+h1 {
+    font-weight: 800;
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+        font-size: themed('h1TextSize');
+        line-height: themed('h1LineHeight');
+        font-family: themed('fontFamilyHeadings');
+    }
+    @include breakPoint(small) {
+        @include font-size(24px);
+    }
+}
+  
+h2 {
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+        font-size: themed('h2TextSize');
+        line-height: themed('h2LineHeight');
+        font-family: themed('fontFamilyHeadings');
+    }
+
+    font-weight: bold;
+    @include breakPoint(small) {
+        @include font-size(28px);
+    }
+}
+
+h3 {
+    font-weight: bold;
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+        font-size: themed('h3TextSize');
+        line-height: themed('h3LineHeight');
+        font-family: themed('fontFamilyHeadings');
+    }
+    @include breakPoint(small) {
+        // @include font-size(24px);
+    }
+}
+  
+h4 {
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+        font-size: themed('h4TextSize');
+        line-height: themed('h4LineHeight');
+        font-family: themed('fontFamilyHeadings');
+    }
+
+    // font-weight: bold;
+    @include breakPoint(small) {
+        @include font-size(15px);
+    }
+}
+  
+h5 {
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+        font-size: themed('h5TextSize');
+        line-height: themed('h5LineHeight');
+        font-family: themed('fontFamilyHeadings');
+    }
+
+    // font-weight: bold;
+    @include breakPoint(small) {
+        @include font-size(14px);
+    }
+}
+  
+p, li {
+    font-weight: 400;
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+        font-size: themed('defaultTextSize');
+        line-height: themed('defaultLineHeight');
+        font-family: themed('fontFamily');
+    }
+    @include breakPoint(small) {
+        // @include font-size(24px);
+    }
+}

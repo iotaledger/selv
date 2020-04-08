@@ -1,0 +1,268 @@
+.bank-data-page-wrapper,
+.insurance-data-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-x: auto;
+    width: 610px;
+
+    h1 {
+        font-weight: 900;
+        margin-bottom: 20px;
+        @include themify($themes) {
+            color: themed('trinaryColor');  
+        }
+    }
+
+    .loading {
+        margin: 40px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            margin-bottom: 30px;
+        }
+    }
+
+    .section-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
+        img {
+            height: 48px;
+            width: 46px;
+            margin-right: 30px;
+        }
+
+        span {
+            font-weight: 600;
+            border-radius: 46px;
+            width: 46px;
+            text-align: center;
+            line-height: 39px;
+            height: 45px;
+            margin-right: 30px;
+            @include themify($themes) {
+                color: themed('secondaryColor');  
+                font-size: themed('h1TextSize');
+                border: 2px solid themed('secondaryColor');
+            }
+        }
+        h3 {
+            @include themify($themes) {
+                color: themed('secondaryColor');  
+            }
+        }
+    }
+
+    .notice {
+        text-align: right;
+        max-width: 490px;
+        margin-bottom: 20px;
+        @include themify($themes) {
+            color: themed('noticeColor');  
+        }
+    }
+
+    .ant-collapse-borderless {
+        @include themify($themes) {
+            border-top: 2px solid #FFFFFF;
+        }
+        background-color: #EEF2FA;
+
+        .ant-collapse-item {
+            @include themify($themes) {
+                border-bottom: 2px solid #FFFFFF;
+            }
+
+            &.ant-collapse-item-disabled {
+                .section-header {
+                    span {
+                        @include themify($themes) {
+                            color: themed('primaryFontColor');
+                            border: 2px solid themed('primaryFontColor');
+                            opacity: 0.2;
+                        }
+                    }
+                    h3 {
+                        @include themify($themes) {
+                            color: themed('primaryFontColor');  
+                            opacity: 0.2;
+                        }
+                    }
+                }
+            }
+
+            .ant-collapse-header {
+                padding: 15px 0;
+            }
+
+            .ant-collapse-content {
+                margin-left: 60px;
+            }
+        }
+    }
+
+    .ant-form {
+        display: flex;
+        max-width: 490px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        label {
+            font-weight: 400;
+            @include themify($themes) {
+                color: themed('primaryFontColor');  
+                font-size: themed('defaultTextSize');
+                line-height: themed('defaultLineHeight');
+            }
+        }
+    }
+
+    .ant-form-item-required::before {
+        display: none;
+    }
+
+    .ant-form-item {
+        margin-bottom: 15px;
+        min-width: 490px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        @include breakPoint(small) {
+            min-width: 180px;
+            max-width: 525px;
+            width: 100%;
+        }
+
+        .ant-form-item-label > label {
+            font-weight: 600;
+            @include themify($themes) {
+                color: themed('primaryFontColor');  
+                font-size: themed('defaultTextSize');
+                line-height: themed('defaultLineHeight');
+            }
+        }
+
+        .ant-input {
+            height: 42px;
+            border: 1px solid #A0A0A0;
+            border-radius: 4px;
+            font-weight: 400;
+            @include themify($themes) {
+                color: themed('primaryFontColor');  
+                font-size: themed('h4TextSize');
+                line-height: themed('h4LineHeight');
+            }
+        }
+    }
+
+    .ant-radio-group {
+        .ant-radio-wrapper {
+            height: 30px;
+            margin: 10px 0;
+
+            .ant-radio {
+                vertical-align: middle;
+
+                .ant-radio-inner {
+                    width: 28px;
+                    height: 28px;
+                    @include themify($themes) {
+                        background-color: #ffffff;
+                        border-color: themed('trinaryColor');  
+                    }
+                }
+
+                &.ant-radio-checked {
+                    .ant-radio-inner {
+                        @include themify($themes) {
+                            background-color: themed('formSelectorColor');
+                            border-color: themed('formSelectorColor');   
+                        }
+
+                        &:after {
+                            top: 6px;
+                            left: 6px;
+                            width: 14px;
+                            height: 14px;
+                            background-color: #ffffff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .ant-checkbox {
+        .ant-checkbox-inner {
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            @include themify($themes) {
+                background-color: #ffffff;
+                border-color: themed('trinaryColor');  
+            }
+        }
+
+        &.ant-checkbox-checked {
+
+            &:after {
+                border: none;
+            }
+
+            .ant-checkbox-inner {
+                @include themify($themes) {
+                    background-color: themed('formSelectorColor');
+                    border-color: themed('formSelectorColor');  
+                }
+
+                &:after {
+                    top: 47%;
+                    left: 22%;
+                    width: 8px;
+                    height: 15px;
+                }
+            }
+        }
+    }
+
+    .ant-checkbox-wrapper {
+        display: flex;
+
+        & > span:last-child {
+            margin-left: 5px;
+        }
+    }
+
+    .prefilled-form {
+        .ant-input {
+            background: #F5F6FF;
+            border: 1px solid #9EA0E6;
+        }
+    }
+
+    .short-field {
+        width: 230px;
+        min-width: 230px;
+
+        @include breakPoint(small) {
+            min-width: unset;
+            width: 100%;
+        }
+    }
+
+    button {
+        margin-bottom: 15px;
+
+        &[type=submit] {
+            margin-top: 15px;
+        }
+    }
+}
