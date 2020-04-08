@@ -2,10 +2,16 @@
     "version": 2,
     "name": "covid-19",
     "builds": [
-      { "src": "index.js", "use": "@now/node" }
-    ],
+        {
+          "src": "index.js",
+          "use": "@now/node"
+        }
+      ],
     "routes": [
-      { "src": "/.*", "dest": "index.js" }
+      { "src": "/.*", "dest": "index.js" },
+      { "src": "/(.*)", "dest": "/index.js" },
+      { "src": "/demo/todos", "dest": "index.js" },
+      { "src": "/demo/app", "dest": "index.js" }
     ],
     "env": {
       "USERNAME": "iota",
