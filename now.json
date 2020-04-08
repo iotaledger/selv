@@ -8,10 +8,7 @@
         }
       ],
     "routes": [
-      { "src": "/.*", "dest": "index.js" },
-      { "src": "/(.*)", "dest": "/index.js" },
-      { "src": "/demo/todos", "dest": "index.js" },
-      { "src": "/demo/app", "dest": "index.js" }
+      { "src": "/.*", "dest": "index.js" }
     ],
     "env": {
       "USERNAME": "iota",

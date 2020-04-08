@@ -1,5 +1,4 @@
 import {
-    Landing,
     IntroShowTodos,
     IntroShowMobile,
     AppDownloadQR,
@@ -16,8 +15,7 @@ import {
 } from './pages';
 
 export const routes = [
-    { path: '/', page: Landing },
-    { path: '/demo/todos', page: IntroShowTodos },
+    { path: '/', page: IntroShowTodos },
     { path: '/demo/app', page: IntroShowMobile },
     { path: '/company/list/0', page: IncorporatedCompanies },
     { path: '/demo/app/0', page: AppDownloadQR },
