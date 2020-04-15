@@ -1,12 +1,8 @@
 .rs-table {
-  @include themify($themes) {
-    background: themed('pageBackground');
-  }
+  background: #FFFFFF; 
 
   .rs-table-row-header, .rs-table-row, .rs-table-cell{
-    @include themify($themes) {
-      background: themed('pageBackground'); 
-    }
+    background: #FFFFFF; 
   }
 }
 
@@ -59,3 +55,15 @@
     }
   }
   
+.table-wrapper.details {
+  .rs-table {
+    .rs-table-row {
+      border-bottom: none;
+    }
+
+    .rs-table-row-header {
+      border-bottom: 1px solid #E2E5EC;
+      border-top: 1px solid #E2E5EC;
+    }
+  }
+}
