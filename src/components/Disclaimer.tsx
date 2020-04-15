@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { withCookies } from 'react-cookie';
+import cookies from 'js-cookie';
 import { Button } from 'antd';
 
-const Disclaimer = ({ cookies }: { cookies: any }) => {
-    const [ack, setAck] = useState(true);
+const Disclaimer = () => {
+    const [ack, setAck] = useState(false);
 
     useEffect(() => {
-        const ack = cookies.get('selv-cookie');
-        if (!ack && document) {
+        const ack = cookies.get('covid-cookie');
+        if (ack) {
+            setAck(true);
+        } else if ((!ack || ack !== 'true') && document) {
             const element = document.getElementById('footer') || document.getElementById('app');
             if (element) {
                 element.classList.add('cookie-bar-bottom-bar');
@@ -17,7 +19,7 @@ const Disclaimer = ({ cookies }: { cookies: any }) => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     function dismiss () {
-        cookies.set('selv-cookie', true, { path: '/' });
+        cookies.set('covid-cookie', 'true', { expires: 365 });
         if (document) {
             const element = document.getElementById('footer') || document.getElementById('app');
             if (element) {
@@ -48,4 +50,4 @@ const Disclaimer = ({ cookies }: { cookies: any }) => {
     );
 };
 
-export default withCookies(Disclaimer);
+export default Disclaimer;
