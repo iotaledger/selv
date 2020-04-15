@@ -4,14 +4,18 @@ import AppDownloadQR from './AppDownloadQR';
 import CompanyIntro from './CompanyIntro';
 import ProveIdentity from './ProveIdentity';
 import SingInConfirmation from './SingInConfirmation';
-import CompanyData from './CompanyData';
-import CompanyDetails from './CompanyDetails';
+import Certificate from './Certificate';
+import TestDetails from './TestDetails';
 import Confirmation from './Confirmation';
-import BankData from './BankData';
-import InsuranceData from './InsuranceData';
-import IncorporatedCompanies from './IncorporatedCompaniesList';
-import GreatSuccess from './GreatSuccess';
+import HRData from './HRData';
+import AgencyData from './AgencyData';
+import TestResults from './TestResults';
 import ThankYou from './ThankYou';
+import AccessYourTests from './AccessYourTests';
+import Login from './Login';
+import Step1 from './Step1';
+import Step2 from './Step2';
+import Step3 from './Step3';
 
 export {
     IntroShowTodos,
@@ -20,12 +24,16 @@ export {
     ProveIdentity,
     SingInConfirmation,
     CompanyIntro,
-    CompanyData,
-    CompanyDetails,
+    Certificate,
+    TestDetails,
     Confirmation,
-    BankData,
-    InsuranceData,
-    IncorporatedCompanies,
-    GreatSuccess,
-    ThankYou
+    HRData,
+    AgencyData,
+    TestResults,
+    ThankYou,
+    AccessYourTests,
+    Login,
+    Step1,
+    Step2,
+    Step3,
 };
