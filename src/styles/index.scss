@@ -116,6 +116,10 @@ button {
     background-color: themed('pageBackground');
   }
 
+  &.white-background {
+    background-color: #FFFFFF; 
+  }
+
   .content {
     padding: 50px;
     min-width: 535px;
