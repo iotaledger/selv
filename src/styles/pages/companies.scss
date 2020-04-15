@@ -59,6 +59,7 @@
         word-break: break-word;
         border-top: 1px solid #E2E5EC;
         padding-top: 30px;
+        padding-bottom: 50px;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -70,8 +71,6 @@
         }
 
         .company-details-item {
-            margin-bottom: 30px;
-            width: 45%;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -153,7 +152,7 @@
                 color: #7A869B;
 
                 &:hover {
-                    color: $primary-font-color-companyHouse;
+                    color: $primary-font-color-health;
                 }
             }
         }
@@ -169,11 +168,11 @@
     line-height: 20px;
     letter-spacing: 0.01em;
 
-    &.active {
+    &.immune, &.negative {
       color: #35C0A1;
       background: #DAF9F2;
     }
-    &.pending {
+    &.positive {
       color: #F17105;
       background: #FFEDDE;
     }
