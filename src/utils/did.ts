@@ -7,18 +7,12 @@ import {
 } from 'identity';
 import { provider } from '../config.json';
 import Address from '../schemas/Address.json';
-import BankAccount from '../schemas/BankAccount.json';
-import Company from '../schemas/Company.json';
-import ContactDetails from '../schemas/ContactDetails.json';
-import Insurance from '../schemas/Insurance.json';
+import TestResult from '../schemas/TestResult.json';
 import PersonalData from '../schemas/PersonalData.json';
 
 const schemas: any = {
     Address,
-    BankAccount,
-    Company,
-    ContactDetails,
-    Insurance,
+    TestResult,
     PersonalData
 };
 
