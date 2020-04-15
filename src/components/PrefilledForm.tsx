@@ -9,20 +9,11 @@ const labels: { [ key: string ]: string; } = {
     LastName: 'Last Name',
     Date: 'Date of birth',
     Nationality: 'Nationality',
-    Gender: 'Gender',
-    Birthplace: 'Birthplace',
     Country: 'Country of residence',
-    Phone: 'Phone number',
     Address: 'Address',
-    CompanyName: 'Company name',
-    CompanyAddress: 'Company address',
-    CompanyType: 'Company type',
-    CompanyBusiness: 'Nature of business',
-    CompanyCreationDate: 'Company creation date',
-    CompanyNumber: 'Company number',
-    CompanyOwner: 'Managing director',
-    BankName: 'Name of the bank',
-    AccountType: 'Bank account type'
+    PassportNumber: 'Passport Number',
+    VisaApplicationNumber: 'Visa Application Number',
+    VisaCountry: 'Country'
 };
 
 const Icon = () => <img src={icon} alt='' width={18} />;
@@ -52,7 +43,6 @@ const PrefilledForm = ({ form, dataFields }: {
                     ))
                 }
             </Form>
-            <p className='notice bold small'>Credentials provided by Selv ID</p>
         </div>
     );
 };
