@@ -1,7 +1,7 @@
 import Footer from './Footer';
-import Header from './Header';
+import Benefits from './Benefits';
 
 export {
     Footer,
-    Header,
+    Benefits,
 };
