@@ -1,15 +1,19 @@
 const crypto = require('crypto');
 
 export const decrypt = (key: string, payload: string) => {
-    const textParts: string[] = payload.split(':');
-    const firstElement: string = textParts.shift() || '';
-    const iv: Buffer = Buffer.from(firstElement, 'hex');
-    const encryptedText: Buffer = Buffer.from(textParts.join(':'), 'hex');
-    const decipher: any = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
-    let decrypted = decipher.update(encryptedText);
+    try {
+        const textParts: string[] = payload.split(':');
+        const firstElement: string = textParts.shift() || '';
+        const iv: Buffer = Buffer.from(firstElement, 'hex');
+        const encryptedText: Buffer = Buffer.from(textParts.join(':'), 'hex');
+        const decipher: any = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+        let decrypted = decipher.update(encryptedText);
 
-    decrypted = Buffer.concat([decrypted, decipher.final()]);
-    return decrypted.toString();
+        decrypted = Buffer.concat([decrypted, decipher.final()]);
+        return decrypted.toString();
+    } catch (e) { 
+        console.error('decrypt', e)
+    }
 };
 
 export const encrypt = async (key: string, payload: string) => {
@@ -33,10 +37,10 @@ export const flattenObject = (obj: {[key: string]: any;}, prefix = '') =>
         return acc;
     }, {});
 
-export const getCompanyId = async () => {
-    const companyDetailsString: string | null = await localStorage.getItem('companyDetails');
-    const companyDetails = companyDetailsString && await JSON.parse(companyDetailsString);
-    return companyDetails?.CompanyNumber;
+export const getTestId = async () => {
+    const testDetailsString: string | null = await localStorage.getItem('testDetails');
+    const testDetails = testDetailsString && await JSON.parse(testDetailsString);
+    return testDetails?.TestID;
 };
 
 export const getRandomInt = (max: number) =>
