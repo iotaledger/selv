@@ -1,3 +1,12 @@
+.theme-demo {
+    .logo {
+        position: absolute;
+        top: 30px;
+        left: 40px;
+        z-index: 1;
+    }
+}
+
 .demo-intro {
     position: relative;
     display: flex;
@@ -22,11 +31,12 @@
     h2 {
         font-weight: bold;
         line-height: 40px;
+        display: inline;
     }
 
     h3 {
         font-weight: 500;
-        margin: 20px 0;
+        margin: 20px 25px 20px 0;
     }
 
     @include breakPoint(small) {
@@ -36,12 +46,6 @@
         }
         h2 {
             font-size: 32px;
-
-            &.highlight {
-                line-height: 6px;
-                margin-top: 12px;
-                border-bottom: 20px solid #B5F3D8;
-            }
         }
         h4 {
             font-size: 14px;
@@ -78,37 +82,50 @@
         }
     }
 
-    .todos {
-        width: 65%;
-        min-width: 465px;
+    .heading {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .highlight {
+        font-weight: bold;
+        position: relative;
+        z-index: 3;
+        @include themify($themes) {
+            font-family: themed('fontFamilyHeadings');
+        }
+
+        .line {
+            z-index: -1;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -4px;
+            border-bottom: 20px solid #B5F3D8;
+        }
+    }
+
+    @include breakPoint(small) {
+        min-width: unset;
 
         .heading {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        @include breakPoint(small) {
-            min-width: unset;
-
-            .heading {
-                flex-direction: column;
-                align-items: flex-start;
-
-                .highlight {
-                    margin-top: 0;
-                }
-            }
+        .highlight {
+            font-size: 32px;
+            margin-top: 12px;
         }
+    }
 
-        h2 {
-            &.highlight {
-                border-bottom: 24px solid #B5F3D8;
-                line-height: 6px;
-                margin-top: 24px;
-                font-weight: 900;
-            }
-        }
+    .todos {
+        width: 65%;
+        min-width: 530px;
+        position: relative;
+        z-index: 1;
+        background-color: #FFFFFF;
 
         ul {
             list-style-image: url("data:image/svg+xml,%3Csvg width='17' height='18' viewBox='0 0 22 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.7071 8.70711C17.0976 8.31658 17.0976 7.68342 16.7071 7.29289L10.3431 0.928932C9.95262 0.538408 9.31946 0.538408 8.92893 0.928932C8.53841 1.31946 8.53841 1.95262 8.92893 2.34315L14.5858 8L8.92893 13.6569C8.53841 14.0474 8.53841 14.6805 8.92893 15.0711C9.31946 15.4616 9.95262 15.4616 10.3431 15.0711L16.7071 8.70711ZM0 9H16V7H0V9Z' fill='%234247DC'/%3E%3C/svg%3E");
@@ -148,7 +165,7 @@
         min-height: 500px;
 
         .app-content-wrapper {
-            width: 60%;
+            width: 57%;
             min-width: 450px;
             position: relative;
             align-self: flex-start;
@@ -182,7 +199,7 @@
         }
     
         .note {
-            width: 54%;
+            width: 55%;
             align-self: flex-end;
             font-weight: 500;
             font-size: 14px;
@@ -229,5 +246,57 @@
         @include breakPoint(medium) {
            display: none;
         }
+    }
+
+    &.login {
+        flex-direction: column;
+        min-height: 550px;
+        max-width: 530px;
+
+        .login-content-wrapper {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 350px;
+            width: 100%;
+
+            .ant-form {
+                width: 100%;
+            }
+
+            .ant-form-item {
+                margin-bottom: 50px;
+            }
+
+            .ant-form-explain {
+                text-align: left;
+            }
+
+            .ant-form-item-label > label {
+                font-weight: 600;
+                @include themify($themes) {
+                    color: themed('primaryFontColor');  
+                    font-size: themed('defaultTextSize');
+                    line-height: themed('defaultLineHeight');
+                }
+            }
+    
+            .ant-input {
+                background: #F7FAFF;
+                border: 1px solid #9FBFEC;
+                height: 42px;
+                border-radius: 4px;
+                font-weight: 400;
+                @include themify($themes) {
+                    color: themed('primaryFontColor');  
+                    font-size: themed('h4TextSize');
+                    line-height: themed('h4LineHeight');
+                }
+            }
+        }
+
+
     }
 }
