@@ -3,7 +3,7 @@ import { matchPath } from 'react-router';
 interface MatchResult {
     page: string | undefined;
     step: string | undefined;
-    companyId: string | undefined;
+    testId: string | undefined;
     theme: string | undefined;
 }
 
@@ -13,7 +13,7 @@ interface Match {
 
 export default (path: string): MatchResult | null | undefined => {
     const match: Match | null = matchPath(path, {
-        path: '/:theme/:page/:step?/:companyId?',
+        path: '/:theme/:page/:step?/:testId?',
         exact: true,
         strict: false
     });
