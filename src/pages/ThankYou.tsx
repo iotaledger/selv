@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'antd';
 import { RandomGraphicElement } from '../components';
-import image1 from '../assets/thankYou/image1.svg';
-import image2 from '../assets/thankYou/image2.svg';
-import image3 from '../assets/thankYou/image3.svg';
+import image1 from '../assets/greatSuccess/image1.png';
+import image2 from '../assets/greatSuccess/image2.png';
+import image3 from '../assets/greatSuccess/image3.png';
 import checkmark from '../assets/checkmark.svg';
 import dots from '../assets/backgrounds/dots.png';
-import { Footer, Header } from '../components/landing';
+import logo from '../assets/landing/logoHeader.svg';
+import { Footer, Benefits } from '../components/landing';
 
 /**
  * Component which will display a ThankYou.
@@ -16,10 +16,12 @@ const ThankYou: React.FC = () => {
     return (
         <RandomGraphicElement elements={7}>
             <div className='theme-demo'>
+                <Link to={'/'} className="logo">
+                    <img src={logo} alt="Selv logo" />
+                </Link>
                 <div className='thank-you-page-wrapper'>
-                    <Header />
                     <div className='thank-you-wrapper'>
-                        <h2>Thanks for trying Selv!</h2>
+                        <h2>Demo complete</h2>
                         <div className='great-success-content-wrapper'>
                             <div className='great-success-content'>
                                 <div className='figure-wrapper'>
@@ -28,18 +30,18 @@ const ThankYou: React.FC = () => {
                                 <div className='great-success-text-wrapper'>
                                     <span>
                                         <img src={checkmark} alt='' />
-                                        <h3>Improved experience</h3>
+                                        <h3>You signed in with DID</h3>
                                     </span>
-                                    <p>With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and insurance with very few clicks. Your data was reusable and this saved you x fields of form fields to fill in.</p>
+                                    <p>You managed to sign into a website that didn’t require registration. Account creation has been skipped saving you time and effort. The National Health Provider has safely restricted access to your credential and is also not burdened with saving your password.</p>
                                 </div>
                             </div>
                             <div className='great-success-content' id='middle-item'>
                                 <div className='great-success-text-wrapper'>
                                     <span>
                                         <img src={checkmark} alt='' />
-                                        <h3>Self Sovereignity</h3>
+                                        <h3>Received immunity Credentials</h3>
                                     </span>
-                                    <p>You have taken full control of your data. You decided who you shared your data with. Did you know that you can share them with others manually via QR as well. Try so in the Selv app!</p>
+                                    <p>From this point onwards, you would be able to prove your immunity online, allowing you to choose how you share this status. Over time you can grow your Selv profile by gathering multiple credentials from trusted third parties.</p>
                                 </div>
                                 <div className='figure-wrapper'>
                                     <img className='figure' src={image2} alt='Received new Credentials' />
@@ -52,25 +54,16 @@ const ThankYou: React.FC = () => {
                                 <div className='great-success-text-wrapper'>
                                     <span>
                                         <img src={checkmark} alt='' />
-                                        <h3>More Trust</h3>
+                                        <h3>Received a foreign Visa</h3>
                                     </span>
-                                    <p>The data you shared with the Company House and the SNS Bank was verifiable. This allows to verify your data instantly and freely using IOTA as the trust layer.</p>
+                                    <p>By providing your current immunity status, you are able to minimise the risk posed to others and yourself. Your private medical records are not shared and kept on a separate data layer from your passport information. Selv provides data ownership, trust and improved privacy to the individual.</p>
                                 </div>
                             </div>
-                        </div>
-                        <div className='cta-wrapper'>
-                            <Link to={'/company/list/0'}>
-                                <Button className='cta'>
-                                    Return to Company House
-                                </Button>
-                            </Link>
-                            <Link to={'/'}>
-                                Return home
-                            </Link>
                         </div>
                         <img src={dots} alt='' className='dots-bottom' />
                     </div>
                     <img src={dots} alt='' className='dots-top' />
+                    <Benefits />
                     <Footer />
                 </div>
             </div>
