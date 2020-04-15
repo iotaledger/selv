@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: flex-start;
     overflow-x: auto;
-    width: 610px;
+    width: 700px;
 
     h1 {
         font-weight: 900;
@@ -30,7 +30,13 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: space-between;
+
+        .section-header-title {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
 
         img {
             height: 48px;
@@ -47,14 +53,14 @@
             height: 45px;
             margin-right: 30px;
             @include themify($themes) {
-                color: themed('secondaryColor');  
+                color: themed('primaryColor');  
                 font-size: themed('h1TextSize');
-                border: 2px solid themed('secondaryColor');
+                border: 2px solid themed('primaryColor');
             }
         }
         h3 {
             @include themify($themes) {
-                color: themed('secondaryColor');  
+                color: themed('primaryColor');  
             }
         }
     }
@@ -62,22 +68,18 @@
     .notice {
         text-align: right;
         max-width: 490px;
-        margin-bottom: 20px;
         @include themify($themes) {
             color: themed('noticeColor');  
         }
     }
 
     .ant-collapse-borderless {
-        @include themify($themes) {
-            border-top: 2px solid #FFFFFF;
-        }
-        background-color: #EEF2FA;
+        background-color: transparent;
 
         .ant-collapse-item {
-            @include themify($themes) {
-                border-bottom: 2px solid #FFFFFF;
-            }
+            border-bottom: none;
+            border-top: 2px solid #C9CCD2;
+            padding: 20px 0;
 
             &.ant-collapse-item-disabled {
                 .section-header {
@@ -109,7 +111,7 @@
 
     .ant-form {
         display: flex;
-        max-width: 490px;
+        max-width: 530px;
         flex-wrap: wrap;
         justify-content: space-between;
 
@@ -129,7 +131,7 @@
 
     .ant-form-item {
         margin-bottom: 15px;
-        min-width: 490px;
+        min-width: 530px;
 
         &:last-child {
             margin-bottom: 0;
@@ -152,7 +154,6 @@
 
         .ant-input {
             height: 42px;
-            border: 1px solid #A0A0A0;
             border-radius: 4px;
             font-weight: 400;
             @include themify($themes) {
@@ -243,14 +244,14 @@
 
     .prefilled-form {
         .ant-input {
-            background: #F5F6FF;
-            border: 1px solid #9EA0E6;
+            background: #F7FAFF;
+            border: 1px solid #9FBFEC;
         }
     }
 
     .short-field {
-        width: 230px;
-        min-width: 230px;
+        width: 250px;
+        min-width: 250px;
 
         @include breakPoint(small) {
             min-width: unset;
@@ -259,10 +260,16 @@
     }
 
     button {
-        margin-bottom: 15px;
+        margin-left: 76px;
+    }
+}
 
-        &[type=submit] {
-            margin-top: 15px;
+.insurance-data-page-wrapper {
+    .ant-collapse-borderless {
+        .ant-collapse-item {
+            &:first-child {
+                border-top: none;
+            }
         }
     }
 }
