@@ -1,17 +1,7 @@
 {
     "version": 2,
     "name": "covid-19",
-    "builds": [
-        {
-          "src": "index.js",
-          "use": "@now/node"
-        }
-      ],
-    "routes": [
-      { "src": "/.*", "dest": "index.js" }
-    ],
     "env": {
-      "USERNAME": "iota",
-      "PASSWORD": "tangle"
+      "REACT_APP_PASSWORD": "iota-against-COVID-19"
     }
   }
