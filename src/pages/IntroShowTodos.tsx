@@ -5,6 +5,7 @@ import { Disclaimer, RandomGraphicElement } from '../components';
 import useStep from '../utils/useStep';
 import howItWorks from '../assets/landing/howItWorks1.png';
 import dots from '../assets/backgrounds/dots.png';
+import logo from '../assets/landing/logoHeader.svg';
 
 /**
  * Component which will display a IntroShowTodos.
@@ -14,31 +15,31 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
 
     useEffect(() => {
         const reset = async () => {
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-            });
             await localStorage.clear();
         };
         reset();
     }, []);
 
+    console.log('Todos app')
+
     return (
         <RandomGraphicElement elements={7}>
             <div className='theme-demo'>
+                <Link to={'/'} className="logo">
+                    <img src={logo} alt="Selv logo" />
+                </Link>
                 <div className='demo-intro' id='app'>
                     <div className='todos'>
-                        <span className='heading'><h2>Welcome to the</h2>&nbsp;&nbsp;&nbsp;<h2 className='highlight'>Selv demo</h2></span>
-                        <h3>Here is <strong>your to-do list</strong> for today:</h3>
+                        <div className='heading'><h2>Immunity status management made&nbsp;<span className='highlight'>simple<span className="line" /></span>&nbsp;&&nbsp;<span className='highlight'>private<span className="line" /></span></h2></div>
+                        <h3>Explore this demo to see how you can safely own, share and manage your immunity status</h3>
                         <ul className='todos'>
-                            <li>Set up a company</li>
-                            <li>Get a bank account</li>
-                            <li>Get liability insurance</li>
+                            <li>Acquire immunity certificate</li>
+                            <li>Share your status with your employer</li>
+                            <li>Apply for a visa</li>
                         </ul>
                         <Link to={nextStep}>
                             <Button className='cta'>
-                                Continue
+                                Start the demo
                             </Button>
                         </Link>
                     </div>
