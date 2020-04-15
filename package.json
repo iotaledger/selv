@@ -13,10 +13,11 @@
     "aos": "^3.0.0-beta.6",
     "axios": "^0.19.2",
     "identity": "iotaledger/identity.ts#8a11cb462d356f843af0129ea136f05bff565ebc",
+    "js-cookie": "^2.2.1",
+    "js-sha256": "^0.9.0",
     "qrcode.react": "^1.0.0",
     "randomstring": "^1.1.5",
     "react": "^16.12.0",
-    "react-cookie": "^4.0.3",
     "react-dom": "^16.12.0",
     "react-ga": "^2.7.0",
     "react-router": "^5.1.2",
@@ -29,7 +30,7 @@
     "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_PASSWORD=iota-against-COVID-19 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -58,6 +59,7 @@
     "@testing-library/user-event": "^8.1.0",
     "@types/aos": "^3.0.3",
     "@types/jest": "^25.1.2",
+    "@types/js-cookie": "^2.2.5",
     "@types/node": "^13.7.1",
     "@types/qrcode.react": "^1.0.0",
     "@types/randomstring": "^1.1.6",
