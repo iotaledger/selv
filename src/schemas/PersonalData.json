@@ -50,6 +50,12 @@
 				},
 				"Gender" : {
 					"type" : "string"
+				},
+				"IdentityCardNumber" : {
+					"type" : "string"
+				},
+				"PassportNumber" : {
+					"type" : "string"
 				}
 			}
 		}
