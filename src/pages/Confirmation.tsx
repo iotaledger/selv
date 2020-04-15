@@ -1,37 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import { getCompanyId } from '../utils/helper';
+import { getTestId } from '../utils/helper';
 import useStep from '../utils/useStep';
 import { Layout, RandomGraphicElement } from '../components';
 import selv from '../assets/selvSuccessBordered.svg';
+
+const content: any = {
+    health: {
+        logo: 'Certificate sent to Selv App',
+        title: 'Immunity certificate shared',
+        text: 'Check your Selv app for your new credential. This will be stored safely on your personal device. You can choose to share your immunity credential with trusted authorities or employers to prove your Covid-19 immunity status.'
+    },
+    agency: {
+        logo: 'Credential sent to Selv App',
+        title: 'Travel Visa acquired!',
+        text: 'Your Covid immunity test has been shared, analysed and as a result your visa application has been approved. You are now valid and ready to travel!'
+    }
+}
 
 /**
  * Component which will display a Confirmation.
  */
 const Confirmation: React.FC = ({ match }: any) => {
     const { nextStep, theme } = useStep(match);
-    const [companyId, setCompanyId] = useState('');
-    const [title, setTitle] = useState('');
-
-    useEffect(() => {
-        async function determineCompanyId () {
-            setCompanyId(await getCompanyId());
-            switch (theme) {
-            case 'bank':
-                setTitle('Your business bank account is now set up!');
-                break;
-            case 'insurance':
-                setTitle('Congratulations, your liability insurance is now set up!');
-                break;
-            case 'company':
-            default:
-                setTitle('Congratulations, your company is now set up!');
-                break;
-            }
-        }
-        determineCompanyId();
-    }, [companyId, theme]);
 
     return (
         <Layout match={match}>
@@ -39,18 +31,13 @@ const Confirmation: React.FC = ({ match }: any) => {
                 <div className='confirmation-page'>
                     <div className='selv-wrapper'>
                         <img src={selv} alt='Selv app logo' />
-                        <h4>Your new credential is sent to Selv</h4>
+                        <h4>{theme && content[theme].logo}</h4>
                     </div>
-                    <h2>{title}</h2>
-                    {
-                        theme === 'company' &&
-                            <p>You are now the proud owner of your new company. From now on you’ll be able to prove that you have a directorship position at your newly found company. Open up Selv in order to receive a signed credential you can use to act on behalf of your company.</p>
-                    }
-                    <Link to={nextStep.replace(':companyId', companyId)}>
+                    <h2>{theme && content[theme].title}</h2>
+                    <p>{theme && content[theme].text}</p>
+                    <Link to={nextStep}>
                         <Button>
-                            {
-                                theme === 'company' ? 'Continue' : 'Return to Company House'
-                            }
+                            Continue
                         </Button>
                     </Link>
                 </div>
