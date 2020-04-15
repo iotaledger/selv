@@ -1,16 +1,14 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import WebFontLoader from 'webfontloader';
 import ReactGA from 'react-ga';
 import AOS from 'aos';
-import { IntroShowTodos, IncorporatedCompanies, CompanyDetails } from './pages'
-import GlobalState from './context/globalState'
+import Router from './Router';
+import GlobalState from './context/globalState';
 import 'aos/dist/aos.css';
 import 'antd/dist/antd.css';
 import 'rsuite/lib/styles/index.less';
 import 'rsuite/dist/styles/rsuite-default.css'
 import './styles/index.scss';
-import { routes } from './steps'
 
 WebFontLoader.load({
   google: {
@@ -18,7 +16,8 @@ WebFontLoader.load({
         'Open Sans:300,400,500,600,700,800', 
         'Maven Pro:300,400,500,600,700,800',
         'Inter:300,400,500,600,700,800',
-        'Metropolis:300,400,500,600,700,800,900'
+        'Metropolis:300,400,500,600,700,800,900',
+        'Roboto:300,400,500,600,700,800'
       ],
   },
 });
@@ -28,24 +27,11 @@ ReactGA.set({ anonymizeIp: true });
 
 AOS.init();
 
-const App: React.FC = () => {
-  return (
-    <GlobalState>
-      <BrowserRouter>
-        <Switch>
-          {
-            routes.map(({ path, page }: { path: string; page: any; }) => 
-              <Route exact key={path} path={path} component={page} />
-            )
-          }
-          <Route path={'/company/details/:step/:companyId'} component={CompanyDetails} />
-          <Route path={'/company/list/:step'} component={IncorporatedCompanies} />
-          <Route component={IntroShowTodos} />
-        </Switch>
-      </BrowserRouter>
-    </GlobalState>
-  );
-}
+const App: React.FC = () => (
+  <GlobalState>
+    <Router />
+  </GlobalState>
+);
 
 export default App;
 
