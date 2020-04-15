@@ -29,9 +29,9 @@ const SingInConfirmation: React.FC = ({ history, match }: any) => {
             <RandomGraphicElement elements={5}>
                 <div className='sign-in-confirmation'>
                     <img src={selv} alt='Selv app logo' />
-                    <h2>Hello!</h2>
+                    <h2>Access Authorised</h2>
                     <p>
-                        You have now signed in without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which [business] can use without an expensive verification process. Verifying your data is nearly instant and completely free.
+                        By providing your verified identity credentials you have now signed in and linked your Selv app with your National Health Authority account. No more need for endless account and password creations. Verifying your data in this way is nearly instant and completely free.
                     </p>
                     <Link to={nextStep}>
                         <Button>
