@@ -1,17 +1,20 @@
-.company-data-page-wrapper {
+.certificate-data-page-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    align-items: center;
+    max-width: 745px;
+    width: 100%;
+    margin-top: 30px;
 
-    .section-header {
-        margin: 50px 0 35px;
+    h2 {
+        text-align: center;
     }
 
-    .notice {
-        text-align: right;
-        @include themify($themes) {
-            color: themed('noticeColor');  
-        }
+    .subheader {
+        max-width: 550px;
+        width: 100%;
+        text-align: center;
+        margin: 30px 0 60px;
     }
 
     .loading {
@@ -26,71 +29,7 @@
         }
     }
 
-    .ant-form {
-        display: flex;
-        max-width: 535px;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-
-    .ant-form-item-required::before {
-        display: none;
-    }
-
-    .ant-form-item {
-        margin-bottom: 15px;
-        min-width: 535px;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-
-        @include breakPoint(small) {
-            min-width: 300px;
-            max-width: 535px;
-            width: 100%;
-        }
-
-        .ant-form-item-label > label {
-            font-weight: 600;
-            @include themify($themes) {
-                color: themed('primaryFontColor');  
-                font-size: themed('defaultTextSize');
-                line-height: themed('defaultLineHeight');
-            }
-        }
-
-        .ant-input {
-            height: 42px;
-            border: 1px solid #A0A0A0;
-            border-radius: 4px;
-            font-weight: 400;
-            @include themify($themes) {
-                color: themed('primaryFontColor');  
-                font-size: themed('h4TextSize');
-                line-height: themed('h4LineHeight');
-            }
-        }
-    }
-
-    .prefilled-form {
-        .ant-input {
-            background: #F5F6FF;
-            border: 1px solid #9EA0E6;
-        }
-    }
-
-    .short-field {
-        width: 260px;
-        min-width: 260px;
-
-        @include breakPoint(small) {
-            min-width: unset;
-            width: 100%;
-        }
-    }
-
-    button[type=submit] {
-        margin-top: 30px;
+    button {
+        margin-top: 50px;
     }
 }
