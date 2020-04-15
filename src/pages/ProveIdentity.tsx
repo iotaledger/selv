@@ -10,33 +10,38 @@ interface IChannelDetails {
     requestedCredentials :string[];
 }
 
+const content: any = {
+    health: {
+        title: 'Log in with your Digital Identity credentials',
+    },
+    hr: {
+        title: 'Log in with your Digital Identity credentials',
+    },
+    agency: {
+        title: 'Provide your Covid-19 credential for your travel visa',
+    }
+}
+
 /**
  * Component which will display a ProveIdentity.
  */
 const ProveIdentity: React.FC = ({ history, match }: any) => {
-    const { nextStep } = useStep(match);
+    const { nextStep, theme } = useStep(match);
     const [loading, setLoading] = useState(true);
     const [status, setStatus] = useState('Waiting for login...');
     const [qrContent, setQrContent] = useState('');
     const [channel, setChannel] = useState('');
-    const [channelDetails, setChannelDetails] = useState();
+    const [channelDetails, setChannelDetails] = useState({});
 
     useEffect(() => {
         async function setQR () {
-            const companyHouseStatus = await localStorage.getItem('companyHouse');
-            const bankStatus = await localStorage.getItem('bank');
-            const requestedCredentials = ['Address', 'PersonalData', 'ContactDetails'];
+            const healthAuthorityStatus = await localStorage.getItem('healthAuthority');
+            const requestedCredentials = ['PersonalData', 'Address'];
 
-            if (companyHouseStatus && companyHouseStatus === 'completed') {
-                if (bankStatus && bankStatus === 'completed') {
-                    await localStorage.setItem('insurance', 'pending');
-                    requestedCredentials.push('Company', 'BankAccount');
-                } else {
-                    await localStorage.setItem('bank', 'pending');
-                    requestedCredentials.push('Company');
-                }
+            if (healthAuthorityStatus && healthAuthorityStatus === 'completed') {
+                requestedCredentials.push('TestResult');
             } else {
-                await localStorage.setItem('companyHouse', 'pending');
+                await localStorage.setItem('healthAuthority', 'pending');
             }
 
             const channelId = randomstring.generate(7);
@@ -66,7 +71,7 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
         <Layout match={match}>
             <RandomGraphicElement elements={5}>
                 <div className='scan-qr-page-wrapper'>
-                    <h2>Provide your Digital Identity credentials</h2>
+                    <h2>{theme && content[theme].title}</h2>
                     <p>Scan this QR code with <strong>Selv App</strong> to continue</p>
                     <div className='qr-wrapper'>
                         <QRCode text={qrContent} />
