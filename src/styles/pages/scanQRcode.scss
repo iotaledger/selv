@@ -46,6 +46,25 @@
     }
 }
 
+.cta-section {
+    position: fixed;
+    bottom: 0;
+    height: 165px;
+    width: calc(100% - 320px);
+    left: 0;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    z-index: 2;
+
+    .subtitle {
+        font-weight: 500;
+        font-size: 21px;
+    }
+}
+
 .app-download {
     position: relative;
     width: 100%;
@@ -73,7 +92,7 @@
         justify-content: space-evenly;
         width: 100%;
         max-width: 380px;
-        margin: 30px auto 50px;
+        margin: 40px auto 50px;
 
         a {
             z-index: 3;
@@ -130,6 +149,7 @@
                 width: 280px;
                 height: 280px;
                 z-index: 4;
+                margin: 0 0 100px;
             }
 
             .qr-code {
@@ -140,7 +160,7 @@
 
         .circle {
             position: absolute;
-            bottom: -200px;
+            bottom: -450px;
             z-index: 0;
             width: 800px;
 
