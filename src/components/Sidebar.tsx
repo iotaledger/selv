@@ -24,7 +24,7 @@ const SidebarInstance = ({ children }: {
                 <Sidenav.Body>
                     <h2 className='todo-list'>
                         Your to-do list
-                        <Link to='/'>
+                        <Link to='/demo/app'>
                             <img src={reset} alt='Reset' />
                         </Link>
                     </h2>
