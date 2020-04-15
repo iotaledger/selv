@@ -5,7 +5,7 @@ import { notification, message } from 'antd';
 import useStep from '../utils/useStep';
 import useInterval from '../utils/useInterval';
 import evaluateCredential from '../utils/did';
-import { getCompanyId, flattenObject, encrypt, decrypt } from '../utils/helper';
+import { flattenObject, encrypt, decrypt } from '../utils/helper';
 import { serverAPI, websocketURL } from '../config.json';
 
 const messages = {
@@ -42,8 +42,8 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     generatedChannelId?: string;
 }) => {
     const { nextStep } = useStep(match);
-    const [password, setPassword] = useState();
-    const [channelId, setChannelId] = useState();
+    const [password, setPassword] = useState('');
+    const [channelId, setChannelId] = useState('');
     const [isRunning, setIsRunning] = useState(false);
 
     let ioClient: any;
@@ -61,10 +61,10 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                 await setChannel();
             }
         }
-        if (schemaName) { // Case of Company/Bank/Insurance data
+        if (schemaName) { // Case of HealthAuthority/HR/ForeignBorder data
             getData();
         } else { // Case of ProveIdentity
-            setChannelId(generatedChannelId);
+            generatedChannelId && setChannelId(generatedChannelId);
             setIsRunning(true);
         }
 
@@ -120,6 +120,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         ioClient.on('verifiablePresentation', async (payload: any) => {
             try {
                 console.log('password', fields?.password);
+                console.log('payload', payload);
                 setIsRunning(false);
                 clearTimeout(timeout);
                 setStatus('Verifying credentials...');
@@ -162,21 +163,15 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                 message.destroy();
 
                 switch (schemaName) {
-                case 'Insurance':
-                    await localStorage.setItem('insurance', 'completed');
-                    await localStorage.setItem('insuranceDetails', JSON.stringify({ ...data, ...payload?.payload }));
-                    await updateCompanyStatus();
-                    break;
-                case 'BankAccount':
-                    await localStorage.setItem('bank', 'completed');
-                    await localStorage.setItem('bankDetails', JSON.stringify({ ...data, ...payload?.payload }));
-                    break;
-                case 'Company':
-                    await localStorage.setItem('companyHouse', 'completed');
-                    await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload?.payload }));
-                    break;
-                default:
-                    break;
+                    case 'VisaApplication':
+                        await localStorage.setItem('foreignBorderAgency', 'completed');
+                        break;
+                    case 'TestResult':
+                        await localStorage.setItem('healthAuthority', 'completed');
+                        await localStorage.setItem('testDetails', JSON.stringify({ ...data, ...payload?.payload }));
+                        break;
+                    default:
+                        break;
                 }
                 history.push(nextStep);
             }
@@ -202,12 +197,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         } else {
             notify('error', 'No connection details', 'Please return to the previous page and scan the QR code with your Selv app');
         }
-    }
-
-    async function updateCompanyStatus () {
-        const companyId = await getCompanyId();
-        const response = await axios.get(`${serverAPI}/activate?company=${companyId}`);
-        console.log(`Company ${companyId} activated. Status: ${response?.data?.status}`);
     }
 
     useInterval(async () => {
