@@ -5,7 +5,7 @@ import matchStep from './matchSteps';
 interface MatchResult {
     page: string | undefined;
     step: string | undefined;
-    companyId: string | undefined;
+    testId: string | undefined;
     theme: string | undefined;
 }
 
