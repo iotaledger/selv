@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import { getTestId } from '../utils/helper';
 import useStep from '../utils/useStep';
 import { Layout, RandomGraphicElement } from '../components';
 import selv from '../assets/selvSuccessBordered.svg';

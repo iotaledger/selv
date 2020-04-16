@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useStep from '../utils/useStep';
 import { Layout, NextStepDrawer, TestDetailsTable } from '../components';
 import back from '../assets/back.svg';
 import testResults from '../testResults.json';
