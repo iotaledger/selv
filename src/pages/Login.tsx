@@ -5,6 +5,7 @@ import { Form, Button, Input } from 'antd';
 import { sha256 } from 'js-sha256';
 import Context from '../context/app-context';
 import { Disclaimer } from '../components';
+import { passwordHash } from '../config.json';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
 import logo from '../assets/landing/logoHeader.svg';
@@ -27,9 +28,8 @@ const LoginForm: React.FC = ({ form, match }: any) => {
     }
 
     function compareToHash (rule: any, value: any, callback: any) {
-        const target = sha256(process.env.REACT_APP_PASSWORD || '');
         const candidate = sha256(value);
-        if (value && candidate !== target) {
+        if (value && candidate !== passwordHash) {
           callback('Wrong password!');
         } else {
           callback();

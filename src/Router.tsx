@@ -1,24 +1,20 @@
 import React, { useEffect, useContext } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import cookies from 'js-cookie';
-import { sha256 } from 'js-sha256';
 import { Login, IntroShowTodos, TestResults, TestDetails } from './pages';
 import Context from './context/app-context';
-import { routes } from './steps'
+import { routes } from './steps';
+import { passwordHash } from './config.json';
 
 const Router: React.FC = () => {
   const { requestPassword, setRequestPassword }: any = useContext(Context);
 
   useEffect(() => {
       const ack = cookies.get('password');
-      const hash = sha256(process.env.REACT_APP_PASSWORD || '');
 
-      if ((!ack || ack !== hash)) {
+      if ((!ack || ack !== passwordHash)) {
         setRequestPassword(true);
       }
-      console.log(111, process.env.REACT_APP_PASSWORD || '')
-      console.log(process.env)
-
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

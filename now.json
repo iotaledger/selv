@@ -1,7 +1,4 @@
 {
     "version": 2,
-    "name": "covid-19",
-    "env": {
-      "REACT_APP_PASSWORD": "iota-against-COVID-19"
-    }
+    "name": "covid-19"
   }
