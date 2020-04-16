@@ -20,8 +20,6 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
         reset();
     }, []);
 
-    console.log('Todos app')
-
     return (
         <RandomGraphicElement elements={7}>
             <div className='theme-demo'>
