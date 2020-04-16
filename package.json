@@ -30,7 +30,7 @@
     "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "start": "REACT_APP_PASSWORD=iota-against-COVID-19 react-scripts start",
+    "start": "REACT_APP_PASSWORD=iota-versus-COVID-19 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
