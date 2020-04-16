@@ -11,7 +11,7 @@ export default () => (
     <RandomGraphicElement elements={10}>
         <div className='benefits-section' id='benefits'>
             <h4 data-aos='fade-up' data-aos-duration='2000'>Benefits</h4>
-            <h2 data-aos='fade-up' data-aos-duration='2000'>For users</h2>
+            <h2 data-aos='fade-up' data-aos-duration='2000'>For Individuals</h2>
             <div className='benefits-wrapper'>
                 <div className='benefit' data-aos='fade-up' data-aos-duration='2000'>
                     <img src={control} alt='Control' />
@@ -31,7 +31,7 @@ export default () => (
             </div>
 
             <h4 data-aos='fade-up' data-aos-duration='2000'>Benefits</h4>
-            <h2 data-aos='fade-up' data-aos-duration='2000'>For business</h2>
+            <h2 data-aos='fade-up' data-aos-duration='2000'>For authorities</h2>
             <div className='benefits-wrapper'>
                 <div className='benefit' data-aos='fade-up' data-aos-duration='2000'>
                     <img src={laws} alt='Privacy Laws' />

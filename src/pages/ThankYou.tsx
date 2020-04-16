@@ -21,7 +21,7 @@ const ThankYou: React.FC = () => {
                 </Link>
                 <div className='thank-you-page-wrapper'>
                     <div className='thank-you-wrapper'>
-                        <h2>Demo complete</h2>
+                        <h2 className="no-underline">Demo complete</h2>
                         <div className='great-success-content-wrapper'>
                             <div className='great-success-content'>
                                 <div className='figure-wrapper'>
