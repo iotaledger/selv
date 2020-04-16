@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { Disclaimer, RandomGraphicElement } from '../components';
 import useStep from '../utils/useStep';
-import howItWorks from '../assets/landing/howItWorks1.png';
+import howItWorks from '../assets/howItWorks.png';
 import dots from '../assets/backgrounds/dots.png';
 import logo from '../assets/landing/logoHeader.svg';
 
