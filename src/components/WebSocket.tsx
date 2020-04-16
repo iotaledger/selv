@@ -208,7 +208,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         } else {
             notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app');
         }
-    }, isRunning ? 7000 : null);
+    }, isRunning ? 5000 : null);
 
     return (
         <React.Fragment></React.Fragment>
