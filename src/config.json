@@ -1,6 +1,6 @@
 {
     "websocketURL": "https://selv01.iota.cafe:8888",
     "serverAPI": "https://selv01.iota.cafe",
-    "provider": "https://nodes.devnet.iota.org:443",
+    "provider": "https://iri01.bare01.devnet.iota.cafe",
     "passwordHash": "f012e4c7a79bcef993ab53d18e8486398cc16b19f1505d0654356e371fcfb497"
 }
