@@ -1,5 +1,4 @@
 .next-step {
-
     .cta-section {
         height: 125px;
         background: #FFFFFF;
@@ -22,6 +21,13 @@
     padding-top: 150px;
     background: #F2F7FB;
     position: relative;
+
+    @include breakPoint(medium) {
+        margin-bottom: 50px;
+    }
+    @include breakPoint(small) {
+        margin-bottom: 100px;
+    }
 
     .figure {
         max-width: 275px;

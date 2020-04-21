@@ -69,4 +69,18 @@
         border-top-left-radius: 16px;
         border-bottom-left-radius: 16px;
     }
+
+    @include breakPoint(small) {
+        flex-direction: column;
+
+        .signin-content {
+            align-items: center;
+            text-align: center;
+        }
+
+        img {
+            border-top-left-radius: unset;
+            border-bottom-left-radius: unset;
+        }
+    }
 }

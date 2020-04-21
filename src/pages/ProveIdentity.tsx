@@ -8,6 +8,7 @@ interface IChannelDetails {
     challenge :string;
     password :string;
     requestedCredentials :string[];
+    shareWith?: string;
 }
 
 const content: any = {
@@ -36,9 +37,15 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
     useEffect(() => {
         async function setQR () {
             const healthAuthorityStatus = await localStorage.getItem('healthAuthority');
+            const employerStatus = await localStorage.getItem('employer');
             const requestedCredentials = ['PersonalData', 'Address'];
+            let shareWith = 'healthAuthority';
 
             if (healthAuthorityStatus && healthAuthorityStatus === 'completed') {
+                shareWith = 'employer';
+                if (employerStatus && employerStatus === 'completed') {
+                    shareWith = 'agency';
+                }
                 requestedCredentials.push('TestResult');
             } else {
                 await localStorage.setItem('healthAuthority', 'pending');
@@ -46,13 +53,14 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
 
             const channelId = randomstring.generate(7);
             const challenge = randomstring.generate(10);
-            const payloadPassword = randomstring.generate();
+            const password = randomstring.generate();
 
             const channelDetails: IChannelDetails = {
                 channelId,
                 challenge,
-                password: payloadPassword,
-                requestedCredentials
+                password,
+                shareWith,
+                requestedCredentials,
             };
             setChannelDetails(channelDetails);
             console.log('channelDetails', channelDetails);

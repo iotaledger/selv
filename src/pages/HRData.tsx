@@ -89,7 +89,10 @@ const HRData: React.FC = ({ history, match }: any) => {
                 </Collapse>
                 <div className='cta-wrapper'>
                     <Link to={nextStep}>
-                        <Button className='cta'>
+                        <Button
+                            className='cta' 
+                            onClick={async () => await localStorage.setItem('employer', 'completed')}
+                        >
                             Continue
                         </Button>
                     </Link>

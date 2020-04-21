@@ -62,6 +62,12 @@
     .subtitle {
         font-weight: 500;
         font-size: 21px;
+        width: 90%;
+        text-align: center;
+    }
+
+    @include breakPoint(medium) {
+        width: 100%;
     }
 }
 
@@ -133,6 +139,12 @@
             border-radius: 34px;
             z-index: 3;
             text-align: center;
+
+            @include breakPoint(small) {
+                width: 300px;
+                background: unset;
+                box-shadow: unset;
+            }
 
             .scan-note {
                 font-weight: 600;
