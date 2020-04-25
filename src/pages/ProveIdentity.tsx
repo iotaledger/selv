@@ -94,6 +94,7 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
                             setStatus={status => setStatus(status)}
                             setLoading={status => setLoading(status)}
                             fields={channelDetails}
+                            warningMessage="Scan the QR code with your Selv app"
                         />
                     }
                 </div>

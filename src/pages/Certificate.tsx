@@ -105,6 +105,7 @@ const Certificate: React.FC = ({ history, match }: any) => {
                         schemaName='TestResult'
                         setStatus={setStatusMessage}
                         fields={fields}
+                        warningMessage="Please return 3 pages back and scan the QR code with your Selv app"
                     />
                 }
             </div>

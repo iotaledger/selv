@@ -147,6 +147,7 @@ const AgencyData: React.FC = ({ history, match }: any) => {
                         schemaName='VisaApplication'
                         setStatus={setStatusMessage}
                         fields={prefilledVisaData}
+                        warningMessage="Please return to the previous page and scan the QR code with your Selv app"
                     />
                 }
             </div>
