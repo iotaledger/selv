@@ -15,6 +15,8 @@ const messages = {
     rejectCredentials: 'Credentials rejected by the user'
 };
 
+notification.config({ duration: 4 });
+
 const notify = (type: string, message: string, description: string) => {
     switch (type) {
     case 'success':
