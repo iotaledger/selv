@@ -11,7 +11,8 @@ import { serverAPI, websocketURL } from '../config.json';
 const messages = {
     waiting: 'Waiting for Selv app...',
     connectionError: 'Connection error. Please try again!',
-    missing: 'Credentials missing or not trusted'
+    missing: 'Credentials missing or not trusted',
+    rejectCredentials: 'Credentials rejected by the user'
 };
 
 const notify = (type: string, message: string, description: string) => {
@@ -32,7 +33,7 @@ const notify = (type: string, message: string, description: string) => {
     }
 };
 
-const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, generatedChannelId }: {
+const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, generatedChannelId, warningMessage }: {
     history: any;
     match: any;
     schemaName?: string;
@@ -40,6 +41,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     setLoading?: (status: boolean) => void;
     fields: any;
     generatedChannelId?: string;
+    warningMessage: string;
 }) => {
     const { nextStep } = useStep(match);
     const [password, setPassword] = useState('');
@@ -117,6 +119,16 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             notify('error', 'Mobile client error', error);
         });
 
+        ioClient.on('rejectCredentials', async (message: any) => {
+            clearTimeout(timeout);
+            console.error('Credentials rejected', message);
+            setIsRunning(false);
+            setLoading && setLoading(false);
+            setStatus(messages.rejectCredentials);
+            message.error({ content: messages.rejectCredentials, key: 'status' });
+            notify('error', 'Credentials rejected', message);
+        });
+
         ioClient.on('verifiablePresentation', async (payload: any) => {
             try {
                 console.log('password', fields?.password);
@@ -192,10 +204,10 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             const isMobileConnected = await checkConnectedStatus(channelDetails?.channelId);
             if (!isMobileConnected) {
                 setIsRunning(true);
-                notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app');
+                notify('warning', 'Mobile app not connected', warningMessage);
             }
         } else {
-            notify('error', 'No connection details', 'Please return to the previous page and scan the QR code with your Selv app');
+            notify('error', 'No connection details', warningMessage);
         }
     }
 
@@ -206,7 +218,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             setIsRunning(false);
             await connectWebSocket(channelId, fields);
         } else {
-            notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app');
+            notify('warning', 'Mobile app not connected', warningMessage);
         }
     }, isRunning ? 5000 : null);
 
