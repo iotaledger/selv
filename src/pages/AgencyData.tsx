@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Collapse, notification, message } from 'antd';
+import { Button, Collapse, notification } from 'antd';
 import randomstring from 'randomstring';
 import { flattenObject } from '../utils/helper';
 import { Layout, Loading, PrefilledForm, WebSocket, Certificate } from '../components';
@@ -43,7 +43,6 @@ const AgencyData: React.FC = ({ history, match }: any) => {
             const status = credentials?.status;
             if (!status || Number(status) !== 2) {
                 console.log(messages.missing);
-                message.error({ content: messages.connectionError, key: 'status', duration: 10 });
                 notify('error', 'Error', messages.connectionError);
                 history.goBack();
             }
