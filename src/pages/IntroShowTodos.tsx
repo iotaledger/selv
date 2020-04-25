@@ -29,11 +29,11 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                 <div className='demo-intro' id='app'>
                     <div className='todos'>
                         <div className='heading'><h2>Immunity status management made&nbsp;<span className='highlight'>simple<span className="line" /></span>&nbsp;&&nbsp;<span className='highlight'>private<span className="line" /></span></h2></div>
-                        <h3>Explore this demo to see how you can safely own, share and manage your immunity status</h3>
+                        <h3>This demo explores how you can safely own, manage and share an immunity certificate</h3>
                         <ul className='todos'>
-                            <li>Acquire immunity certificate</li>
-                            <li>Share your status with your employer</li>
-                            <li>Apply for a visa</li>
+                            <li>Acquire your immunity certificate</li>
+                            <li>Share your health status with your employer</li>
+                            <li>Prove fitness for travel and apply for a visa</li>
                         </ul>
                         <Link to={nextStep}>
                             <Button className='cta'>

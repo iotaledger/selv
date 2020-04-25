@@ -31,7 +31,7 @@ const Step1: React.FC = ({ match }: any) => {
                                     <span>
                                         <h3>Collect your immunity credential</h3>
                                     </span>
-                                    <p>You have recently taken a number of immunity tests of which the latest has demonstrated that you have sufficient antibodies to not pose a risk to others.</p>
+                                    <p>You have recently taken an immunity test that shows you do not pose an infection risk to others.</p>
                                     <br />
                                     <p>You are considered immune.</p>
                                     <br />
