@@ -205,8 +205,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         if (isMobileConnected) {
             setIsRunning(false);
             await connectWebSocket(channelId, fields);
-        } else {
-            notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app');
         }
     }, isRunning ? 5000 : null);
 
