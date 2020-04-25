@@ -5,12 +5,12 @@ button {
     font-size: 14px !important;
     line-height: 20px;
     text-align: center;
-    padding: 10px 30px !important;
+    padding: 10px 45px !important;
     letter-spacing: 0.04em;
     border: none !important;
 
     @include themify($themes) {
-        background-color: themed('buttonBackgroundColor') !important;  
+        background-color: themed('buttonBackgroundColor') !important;
         height: themed('buttonHeight');
         border-radius: themed('buttonBorderRadius');
 
@@ -19,8 +19,8 @@ button {
         }
 
         &:disabled {
-            background-color: themed('secondaryFontColor') !important;  
-    
+            background-color: themed('secondaryFontColor') !important;
+
             &:hover {
                 background-color: themed('secondaryFontColor') !important;
             }
