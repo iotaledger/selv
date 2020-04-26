@@ -77,7 +77,7 @@ const Certificate: React.FC = ({ history, match }: any) => {
         <Layout match={match} customClass='white-background'>
             <div className='certificate-data-page-wrapper'>
                 <h2>Your Covid-19 immunity certificate</h2>
-                <p className="subheader">Share your certificate with your employer or relevant authorities via your Selv App.</p>
+                <p className="subheader">Share this certificate with your employer or relevant authorities via your Selv App.</p>
                 <div className="certificate-wrapper">
                     <h3 className='certificate-section-header'>Test {prefilledData?.testId}</h3>
                     <TestData details={prefilledData}/>

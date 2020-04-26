@@ -29,11 +29,9 @@ const Step3: React.FC = ({ match }: any) => {
                                 </div>
                                 <div className='next-step-text-wrapper'>
                                     <span>
-                                        <h3>Finalise your Visa application by sharing your immunity status with border authorities</h3>
+                                        <h3>Apply for a travel visa</h3>
                                     </span>
-                                    <p>Your aid agency needs to send you to a foreign state in order to support overseas relief efforts.</p>
-                                    <br />
-                                    <p>In order to gain a valid travel Visa, you must share your most recent immunity credential with the foreign immigation office to prove you pose a minimum risk of spreading the virus.</p>
+                                    <p>Your employer needs you to travel abroad for work. You must share your immunity certificate with the foreign immigation office to obtain a visa.</p>
                                 </div>
                             </div>
                         </div>

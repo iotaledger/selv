@@ -25,23 +25,23 @@ const ThankYou: React.FC = () => {
                         <div className='great-success-content-wrapper'>
                             <div className='great-success-content'>
                                 <div className='figure-wrapper'>
-                                    <img className='figure' src={image1} alt='You signed in with DID' />
+                                    <img className='figure' src={image1} alt='You signed in with your Digital Identity' />
                                 </div>
                                 <div className='great-success-text-wrapper'>
                                     <span>
                                         <img src={checkmark} alt='' />
-                                        <h3>You signed in with DID</h3>
+                                        <h3>You signed in with your Digital Identity</h3>
                                     </span>
-                                    <p>You managed to sign into a website that didn’t require registration. Account creation has been skipped saving you time and effort. The National Health Provider has safely restricted access to your credential and is also not burdened with saving your password.</p>
+                                    <p>You signed into the National Health Authority website without needing to create an account or password. You saved time by verifying your identity with your Selv app.</p>
                                 </div>
                             </div>
                             <div className='great-success-content' id='middle-item'>
                                 <div className='great-success-text-wrapper'>
                                     <span>
                                         <img src={checkmark} alt='' />
-                                        <h3>Received immunity Credentials</h3>
+                                        <h3>You Acquired Your Immunity Certificate</h3>
                                     </span>
-                                    <p>From this point onwards, you would be able to prove your immunity online, allowing you to choose how you share this status. Over time you can grow your Selv profile by gathering multiple credentials from trusted third parties.</p>
+                                    <p>From this point onwards, you would be able to prove your Covid-19 immunity when needed. Over time you can grow your Selv profile by gathering additional credentials from trusted parties.</p>
                                 </div>
                                 <div className='figure-wrapper'>
                                     <img className='figure' src={image2} alt='Received new Credentials' />
@@ -54,9 +54,9 @@ const ThankYou: React.FC = () => {
                                 <div className='great-success-text-wrapper'>
                                     <span>
                                         <img src={checkmark} alt='' />
-                                        <h3>Received a foreign Visa</h3>
+                                        <h3>You Obtained a Travel Visa</h3>
                                     </span>
-                                    <p>By providing your current immunity status, you are able to minimise the risk posed to others and yourself. Your private medical records are not shared and kept on a separate data layer from your passport information. Selv provides data ownership, trust and improved privacy to the individual.</p>
+                                    <p>By verifiying your immunity status you were granted a travel visa credential. Selv empowers individuals by giving them ownership of their data and improved privacy.</p>
                                 </div>
                             </div>
                         </div>

@@ -48,7 +48,7 @@ const HRData: React.FC = ({ history, match }: any) => {
     return (
         <Layout match={match}>
             <div className='bank-data-page-wrapper'>
-                <h1>Valid for work</h1>
+                <h1>You are able to return to work</h1>
                 <Collapse
                     bordered={false}
                     defaultActiveKey={[1, 2]}
@@ -60,7 +60,7 @@ const HRData: React.FC = ({ history, match }: any) => {
                                     <img src={checkmark} alt='' />
                                     <h3>Test result</h3>
                                 </div>
-                                <p className='notice bold small'>Credentials provided by Selv ID</p>
+                                <p className='notice bold small'>Credentials provided by Selv</p>
                             </div>
                         )}
                         showArrow={false}
@@ -75,7 +75,7 @@ const HRData: React.FC = ({ history, match }: any) => {
                                     <img src={checkmark} alt='' />
                                     <h3>Personal details</h3>
                                 </div>
-                                <p className='notice bold small'>Credentials provided by Selv ID</p>
+                                <p className='notice bold small'>Credentials provided by Selv</p>
                             </div>
                         )}
                         showArrow={false}
@@ -90,7 +90,7 @@ const HRData: React.FC = ({ history, match }: any) => {
                 <div className='cta-wrapper'>
                     <Link to={nextStep}>
                         <Button
-                            className='cta' 
+                            className='cta'
                             onClick={async () => await localStorage.setItem('employer', 'completed')}
                         >
                             Continue
