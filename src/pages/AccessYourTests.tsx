@@ -19,7 +19,7 @@ const AccessYourTests: React.FC = ({ match }: any) => {
                     <div className='signin-content'>
                         <p>Covid-19</p>
                         <h2>Access your Covid-19 immunity certificate</h2>
-                        <p>Log in with your identity credentials to view and download your immunity certificate.</p>
+                        <p>Log in with your Selv app to view and download your immunity certificate.</p>
                         <Link to={nextStep}>
                             <Button>
                                 Sign in

@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 0 50px 30px;
+    padding: 0 50px 0px;
     position: relative;
     z-index: 2;
 
@@ -21,9 +21,9 @@
     }
 
     .certificate-section-header {
-        margin: 50px 0 35px;
+        margin: 30px 0 35px;
     }
-    
+
     .details-section {
         display: flex;
         flex-direction: row;

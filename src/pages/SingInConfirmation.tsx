@@ -31,7 +31,7 @@ const SingInConfirmation: React.FC = ({ history, match }: any) => {
                     <img src={selv} alt='Selv app logo' />
                     <h2>Access Authorised</h2>
                     <p>
-                        By providing your verified identity credentials you have now signed in and linked your Selv app with your National Health Authority account. No more need for endless account and password creations. Verifying your data in this way is nearly instant and completely free.
+                        You don't need to create an account or choose a password. You have signed in to the National Health Authority website with the identity stored in your Selv app.
                     </p>
                     <Link to={nextStep}>
                         <Button>

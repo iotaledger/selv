@@ -33,7 +33,7 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                         <ul className='todos'>
                             <li>Acquire your immunity certificate</li>
                             <li>Share your health status with your employer</li>
-                            <li>Prove fitness for travel and apply for a visa</li>
+                            <li>Prove you are fit for travel and apply for a visa</li>
                         </ul>
                         <Link to={nextStep}>
                             <Button className='cta'>

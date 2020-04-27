@@ -21,32 +21,32 @@ export default () => (
                 <div className='benefit' data-aos='fade-up' data-aos-duration='2000'>
                     <img src={privacy} alt='Privacy' />
                     <h5>Privacy</h5>
-                    <p>Improved privacy by only revealing the minimum amount of information.</p>
+                    <p>Revealing only the minimum required information improves privacy.</p>
                 </div>
                 <div className='benefit' data-aos='fade-up' data-aos-duration='2000'>
-                    <img src={reusability} alt='Reusability' />
-                    <h5>Reusability</h5>
-                    <p>Share as often as you like. No more typing in the same information repeatedly in online forms.</p>
+                    <img src={reusability} alt='Portability' />
+                    <h5>Portability</h5>
+                    <p>Share as often as you like. No more repeatedly entering the same information online.</p>
                 </div>
             </div>
 
             <h4 data-aos='fade-up' data-aos-duration='2000'>Benefits</h4>
-            <h2 data-aos='fade-up' data-aos-duration='2000'>For authorities</h2>
+            <h2 data-aos='fade-up' data-aos-duration='2000'>For Organisations</h2>
             <div className='benefits-wrapper'>
                 <div className='benefit' data-aos='fade-up' data-aos-duration='2000'>
                     <img src={laws} alt='Privacy Laws' />
                     <h5>Privacy Laws</h5>
-                    <p>Complies to the strictest interpretation of the General Data Protection Act (GDPR).</p>
+                    <p>Complies with the General Data Protection Act (GDPR).</p>
                 </div>
                 <div className='benefit' data-aos='fade-up' data-aos-duration='2000'>
                     <img src={responsibility} alt=' Data Responsibility' />
                     <h5>Data Responsibility</h5>
-                    <p>Users can present or consent, removing responsibility on data protection from the company.</p>
+                    <p>Users control their data, reducing data protection responsibilities for organisations.</p>
                 </div>
                 <div className='benefit' data-aos='fade-up' data-aos-duration='2000'>
                     <img src={user} alt='User Experience' />
                     <h5>User Experience</h5>
-                    <p>Retain more customers through an enhanced User Experience. Less manual typing required.</p>
+                    <p>Gain and retain more customers with an enhanced user experience.</p>
                 </div>
             </div>
         </div>

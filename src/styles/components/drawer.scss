@@ -18,10 +18,6 @@
         text-align: center;
     }
 
-    h3 {
-        color: #F17105;  
-    }
-
     p {
         max-width: 570px;
         width: 100%;
@@ -31,11 +27,11 @@
 
     &.completed {
         h3 {
-            color: #35C0A1;  
+            color: #35C0A1;
         }
 
         p {
-            color: #4D4D4D;  
+            color: #4D4D4D;
         }
     }
 }

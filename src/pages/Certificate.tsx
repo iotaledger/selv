@@ -5,7 +5,7 @@ import { Layout, Loading, WebSocket } from '../components';
 import testResults from '../testResults.json';
 import background from '../assets/certificateCheck.svg';
 
-interface IData {    
+interface IData {
     FirstName?: string;
     LastName?: string;
     Date?: string;
@@ -76,7 +76,7 @@ const Certificate: React.FC = ({ history, match }: any) => {
         <Layout match={match} customClass='white-background'>
             <div className='certificate-data-page-wrapper'>
                 <h2>Your Covid-19 immunity certificate</h2>
-                <p className="subheader">This certificate credential is owned and can be shared only by you. Keep it safe and share with trusted authorities and employers via your Selv App.</p>
+                <p className="subheader">Share this certificate with your employer or relevant authorities via your Selv App.</p>
                 <div className="certificate-wrapper">
                     <h3 className='certificate-section-header'>Test {prefilledData?.testId}</h3>
                     <TestData details={prefilledData}/>
@@ -114,7 +114,7 @@ const Certificate: React.FC = ({ history, match }: any) => {
 
 const TestData = ({ details }: { details: IData | undefined }) => {
     const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    
+
     return (
         <div className="details-section">
             <div className='details-item'>

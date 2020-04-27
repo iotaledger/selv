@@ -19,7 +19,7 @@ const content: any = {
         title: 'Log in with your Digital Identity credentials',
     },
     agency: {
-        title: 'Provide your Covid-19 credential for your travel visa',
+        title: 'Share your Immunity Certificate',
     }
 }
 
