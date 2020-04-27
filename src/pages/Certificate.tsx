@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { notification, message, Button } from 'antd';
+import { notification, Button } from 'antd';
 import { flattenObject } from '../utils/helper';
 import { Layout, Loading, WebSocket } from '../components';
 import testResults from '../testResults.json';
@@ -45,7 +45,6 @@ const Certificate: React.FC = ({ history, match }: any) => {
             const status = credentials?.status;
             if (!credentialsString || !credentials || !status || Number(status) !== 2) {
                 console.log(messages.missing);
-                message.error({ content: messages.connectionError, key: 'status', duration: 10 });
                 notify('error', 'Error', messages.connectionError);
                 history.goBack();
             }
@@ -105,6 +104,7 @@ const Certificate: React.FC = ({ history, match }: any) => {
                         schemaName='TestResult'
                         setStatus={setStatusMessage}
                         fields={fields}
+                        warningMessage="Please return 3 pages back and scan the QR code with your Selv app"
                     />
                 }
             </div>
