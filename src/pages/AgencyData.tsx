@@ -15,7 +15,7 @@ const personalDataFields = [
 ];
 
 const messages = {
-    waiting: 'Waiting for Selv app...',
+    waiting: 'Waiting for Selv...',
     connectionError: 'Connection error. Please try again!',
     missing: 'Credentials missing or not trusted'
 };
@@ -86,7 +86,7 @@ const AgencyData: React.FC = ({ history, match }: any) => {
                         header={(
                             <div className='section-header'>
                                 <h4>Test result</h4>
-                                <p className='notice bold small'>Credentials provided by Selv ID</p>
+                                <p className='notice bold small'>Credentials provided by Selv</p>
                             </div>
                         )}
                         showArrow={false}
@@ -98,7 +98,7 @@ const AgencyData: React.FC = ({ history, match }: any) => {
                         header={(
                             <div className='section-header'>
                                 <h4>Personal details</h4>
-                                <p className='notice bold small'>Credentials provided by Selv ID</p>
+                                <p className='notice bold small'>Credentials provided by Selv</p>
                             </div>
                         )}
                         showArrow={false}

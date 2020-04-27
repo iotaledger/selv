@@ -18,8 +18,8 @@ const AccessYourTests: React.FC = ({ match }: any) => {
                     <img src={banner} alt='Sign in' />
                     <div className='signin-content'>
                         <p>Covid-19</p>
-                        <h2>Access and store your Covid-19 certificate of immunity</h2>
-                        <p>Log in with your credentials to safely share your test result with employers and authorities.</p>
+                        <h2>Access your Covid-19 immunity certificate</h2>
+                        <p>Log in with your Selv app to view and download your immunity certificate.</p>
                         <Link to={nextStep}>
                             <Button>
                                 Sign in

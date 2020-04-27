@@ -9,12 +9,12 @@ const content: any = {
     health: {
         logo: 'Certificate sent to Selv App',
         title: 'Immunity certificate shared',
-        text: 'Check your Selv app for your new credential. This will be stored safely on your personal device. You can choose to share your immunity credential with trusted authorities or employers to prove your Covid-19 immunity status.'
+        text: 'Your new credential has been added to the Selv app. The credential is stored locally on your device.'
     },
     agency: {
         logo: 'Credential sent to Selv App',
-        title: 'Travel Visa acquired!',
-        text: 'Your Covid immunity test has been shared, analysed and as a result your visa application has been approved. You are now valid and ready to travel!'
+        title: 'Travel Visa acquired',
+        text: 'Your immunity certificate has been verified and your visa has been granted. You are now ready to travel!'
     }
 }
 

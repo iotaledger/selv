@@ -31,9 +31,7 @@ const Step2: React.FC = ({ match }: any) => {
                                     <span>
                                         <h3>Share your immunity status with your employer</h3>
                                     </span>
-                                    <p>As an Aid Agency worker you will be working in close proximity with many office-based colleagues and off-site with vulnerable individuals.</p>
-                                    <br />
-                                    <p>Your employer has requested that all employees returning to the workplace upload the latest immunity credential to their HR portal in order to return to work with minimal risk to yourself and others.</p>
+                                    <p>Your employer has requested that all employees upload their immunity certificate to the HR portal. Doing so allows you to return to the workplace and minimises risk to yourself and others.</p>
                                 </div>
                             </div>
                         </div>

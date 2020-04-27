@@ -19,7 +19,7 @@ const content: any = {
         title: 'Log in with your Digital Identity credentials',
     },
     agency: {
-        title: 'Provide your Covid-19 credential for your travel visa',
+        title: 'Share your Immunity Certificate',
     }
 }
 
@@ -80,7 +80,7 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
             <RandomGraphicElement elements={5}>
                 <div className='scan-qr-page-wrapper'>
                     <h2>{theme && content[theme].title}</h2>
-                    <p>Scan this QR code with <strong>Selv App</strong> to continue</p>
+                    <p>Scan this QR code with the <strong>Selv</strong> app to continue</p>
                     <div className='qr-wrapper'>
                         <QRCode text={qrContent} />
                     </div>

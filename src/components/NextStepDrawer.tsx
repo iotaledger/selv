@@ -22,7 +22,7 @@ export default ({ link }: { link: string }) => {
 
     return (
         <div className='next-step-drawer'>
-            <h3>You have not added your credential to Selv App</h3>
+            <h3>Add your credential to the Selv App</h3>
             <p>
                 Download your immunity certificate
             </p>

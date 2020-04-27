@@ -214,8 +214,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         if (isMobileConnected) {
             setIsRunning(false);
             await connectWebSocket(channelId, fields);
-        } else {
-            notify('warning', 'Mobile app not connected', warningMessage);
         }
     }, isRunning ? 5000 : null);
 
