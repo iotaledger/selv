@@ -97,7 +97,8 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         if (schemaName) {
             const payload = {
                 schemaName: schemaName,
-                data: await encrypt(password, JSON.stringify(data))
+                data: await encrypt(password, JSON.stringify(data)),
+                url: websocketURL
             };
             ioClient.emit('createCredential', { channelId, payload });
         }
