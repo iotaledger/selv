@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import randomstring from 'randomstring';
 import { Layout, Loading, QRCode, RandomGraphicElement, WebSocket } from '../components';
 import useStep from '../utils/useStep';
+import config from '../config.json';
 
 interface IChannelDetails {
     channelId :string;
     challenge :string;
     password :string;
     requestedCredentials :string[];
+    url: string;
+    shareWith: string;
 }
 
 /**
@@ -26,14 +29,17 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
             const companyHouseStatus = await localStorage.getItem('companyHouse');
             const bankStatus = await localStorage.getItem('bank');
             const requestedCredentials = ['Address', 'PersonalData', 'ContactDetails'];
+            let shareWith = 'company';
 
             if (companyHouseStatus && companyHouseStatus === 'completed') {
                 if (bankStatus && bankStatus === 'completed') {
                     await localStorage.setItem('insurance', 'pending');
                     requestedCredentials.push('Company', 'BankAccount');
+                    shareWith = 'insurance';
                 } else {
                     await localStorage.setItem('bank', 'pending');
                     requestedCredentials.push('Company');
+                    shareWith = 'bank';
                 }
             } else {
                 await localStorage.setItem('companyHouse', 'pending');
@@ -47,7 +53,9 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
                 channelId,
                 challenge,
                 password: payloadPassword,
-                requestedCredentials
+                requestedCredentials,
+                shareWith,
+                url: config.websocketURL
             };
             setChannelDetails(channelDetails);
             console.log('channelDetails', channelDetails);
