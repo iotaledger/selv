@@ -15,7 +15,7 @@ import circle from '../assets/backgrounds/circleFrame6.svg';
  */
 const AppDownloadQR: React.FC = ({ match }: any) => {
     const { nextStep } = useStep(match);
-    const [qrContent] = useState(window.location.host + '/qr-redirect');
+    const [qrContent] = useState(window.location.origin + '/qr-redirect');
 
     return (
         <Layout match={match} noHeader>
