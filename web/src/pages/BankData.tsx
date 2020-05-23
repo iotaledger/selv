@@ -61,7 +61,6 @@ const BankData: React.FC = ({ history, match }: any) => {
             const credentials = credentialsString && await JSON.parse(credentialsString);
             const status = credentials?.status;
             if (!status || Number(status) !== 2) {
-                console.log(messages.missing);
                 message.error({ content: messages.connectionError, key: 'status', duration: 10 });
                 notify('error', 'Error', messages.connectionError);
                 history.goBack();
