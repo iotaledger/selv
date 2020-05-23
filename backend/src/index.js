@@ -229,10 +229,13 @@ app.get('/remove', cors(corsOptions), async (req, res) => {
         if (companyNumber) {
             await removeData('company', companyNumber);
             console.log('Removed company', companyNumber);
-            res.json({
-                status: 'success'
-            });
+           
+        } else {
+            await removeData('company', '');
         }
+        res.json({
+            status: 'success'
+        });
     } catch (e) {
         console.error(e);
         res.json({
