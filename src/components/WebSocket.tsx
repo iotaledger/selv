@@ -97,7 +97,8 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         if (schemaName) {
             const payload = {
                 schemaName: schemaName,
-                data: await encrypt(password, JSON.stringify(data))
+                data: await encrypt(password, JSON.stringify(data)),
+                url: websocketURL
             };
             ioClient.emit('createCredential', { channelId, payload });
         }
@@ -129,20 +130,14 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
 
         ioClient.on('verifiablePresentation', async (payload: any) => {
             try {
-                console.log('password', fields?.password);
-                console.log('payload', payload);
                 setIsRunning(false);
                 clearTimeout(timeout);
                 setStatus('Verifying credentials...');
                 notify('info', 'Verification', 'Verifying credentials...');
                 let verifiablePresentation = await decrypt(fields?.password, payload);
-                console.log('verifiablePresentation 1 ', verifiablePresentation);
                 verifiablePresentation = JSON.parse(verifiablePresentation);
-                console.log('verifiablePresentation 2 ', verifiablePresentation);
                 const evaluationResult: any = await evaluateCredential(verifiablePresentation, fields?.requestedCredentials, fields?.challenge);
-                console.log('evaluationResult', evaluationResult);
                 const flattenData = flattenObject(evaluationResult);
-                console.log('flattenData', flattenData);
 
                 setStatus(evaluationResult.message);
                 notify(evaluationResult.type, 'Verification result', evaluationResult.message);
@@ -150,7 +145,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
 
                 if (evaluationResult?.status === 2) { // DID_TRUSTED
                     notification.destroy();
-                    console.log('Verification completed, redirecting to', nextStep);
                     await localStorage.setItem('credentials', JSON.stringify(evaluationResult));
                     history.push(nextStep);
                 }
@@ -166,9 +160,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             setIsRunning(false);
             let payload = await decrypt(password, encryptedPayload);
             payload = JSON.parse(payload);
-            console.log('createCredentialConfirmation', payload);
             if (payload?.status === 'success') {
-                console.log(`${schemaName} data setup completed, redirecting to ${nextStep}`);
                 notification.destroy();
 
                 switch (schemaName) {
@@ -210,7 +202,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
 
     useInterval(async () => {
         const isMobileConnected = await checkConnectedStatus(channelId);
-        console.log('checkConnectedStatus', channelId, isMobileConnected);
         if (isMobileConnected) {
             setIsRunning(false);
             await connectWebSocket(channelId, fields);

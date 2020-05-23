@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import randomstring from 'randomstring';
 import { Layout, Loading, QRCode, RandomGraphicElement, WebSocket } from '../components';
 import useStep from '../utils/useStep';
+import config from '../config.json';
 
 interface IChannelDetails {
     channelId :string;
@@ -9,6 +10,7 @@ interface IChannelDetails {
     password :string;
     requestedCredentials :string[];
     shareWith?: string;
+    url: string;
 }
 
 const content: any = {
@@ -61,10 +63,9 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
                 password,
                 shareWith,
                 requestedCredentials,
+                url: config.websocketURL
             };
             setChannelDetails(channelDetails);
-            console.log('channelDetails', channelDetails);
-
             const newQrContent = JSON.stringify(channelDetails);
             setQrContent(newQrContent);
             setChannel(channelId);
