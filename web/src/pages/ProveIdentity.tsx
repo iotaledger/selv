@@ -58,7 +58,6 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
                 url: config.websocketURL
             };
             setChannelDetails(channelDetails);
-            console.log('channelDetails', channelDetails);
 
             const newQrContent = JSON.stringify(channelDetails);
             setQrContent(newQrContent);

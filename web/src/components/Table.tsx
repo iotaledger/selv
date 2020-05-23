@@ -60,7 +60,6 @@ const TableInstance = ({
   onRowClick: (rowData: object) => void;
   loading?: boolean;
 }) => {
-  console.log("Data", data);
   const [displayLength, setDisplayLength] = useState(10);
   const [page, setPage] = useState(1);
   const [tableDimensions, setTableDimentions] = useState([
