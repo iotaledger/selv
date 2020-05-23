@@ -11,14 +11,12 @@ import {
     AccessYourTests,
     TestResults,
     ThankYou,
-    Login,
     Step1,
     Step2,
     Step3
 } from './pages';
 
 export const routes = [
-    { path: '/demo/login', page: Login },
     { path: '/demo/app', page: IntroShowMobile },
     { path: '/demo/todos', page: IntroShowTodos },
     { path: '/demo/app/1', page: AppDownloadQR },

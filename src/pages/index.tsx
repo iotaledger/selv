@@ -12,7 +12,6 @@ import AgencyData from './AgencyData';
 import TestResults from './TestResults';
 import ThankYou from './ThankYou';
 import AccessYourTests from './AccessYourTests';
-import Login from './Login';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
@@ -32,7 +31,6 @@ export {
     TestResults,
     ThankYou,
     AccessYourTests,
-    Login,
     Step1,
     Step2,
     Step3,
