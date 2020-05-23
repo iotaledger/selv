@@ -2,7 +2,12 @@ try {
   const server = require('../lib/server')
 
   server.get('/qr-redirect', async (req, res) => {
-    res.json({ test: 'test' });
+      var ua = req.header('user-agent');
+      if (/iphone|ipod|ipad/i.test(ua)){
+          res.redirect('http://apple.com')
+      } else {
+          res.redirect('https://play.google.com/apps/testing/com.iota.selv.demo')
+      }
   })
 
   module.exports = server
