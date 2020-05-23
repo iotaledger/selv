@@ -44,7 +44,6 @@ const Certificate: React.FC = ({ history, match }: any) => {
             const credentials = credentialsString && await JSON.parse(credentialsString);
             const status = credentials?.status;
             if (!credentialsString || !credentials || !status || Number(status) !== 2) {
-                console.log(messages.missing);
                 notify('error', 'Error', messages.connectionError);
                 history.goBack();
             }

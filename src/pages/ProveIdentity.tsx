@@ -63,8 +63,6 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
                 requestedCredentials,
             };
             setChannelDetails(channelDetails);
-            console.log('channelDetails', channelDetails);
-
             const newQrContent = JSON.stringify(channelDetails);
             setQrContent(newQrContent);
             setChannel(channelId);
