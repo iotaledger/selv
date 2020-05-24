@@ -29,11 +29,11 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                 <div className='demo-intro' id='app'>
                     <div className='todos'>
                         <div className='heading'><h2>Credential management made&nbsp;<span className='highlight'>simple<span className="line" /></span>&nbsp;&&nbsp;<span className='highlight'>private<span className="line" /></span></h2></div>
-                        <h3>This demo explores how you can safely own, manage and share personal credentials</h3>
+                        <h3>This demo explores how you can safely own, manage and share personal credentials.</h3>
                         <ul className='todos'>
                             <li>Acquire your health certificate</li>
                             <li>Share your health status with your employer</li>
-                            <li>Prove you are fit for travel and apply for a visa</li>
+                            <li>Apply for a visa and prove you are fit for travel</li>
                         </ul>
                         <Link to={nextStep}>
                             <Button className='cta'>

@@ -33,7 +33,7 @@ const Step1: React.FC = ({ match }: any) => {
                                     </span>
                                     <p>You have recently taken a test that shows you do not pose an infection risk to others.</p>
                                     <br />
-                                    <p>Your National Health Authority has alerted you to collect your digital credential from their portal.</p>
+                                    <p>Your National Health Authority has alerted you to collect your digital health credential from their portal.</p>
                                 </div>
                             </div>
                         </div>
