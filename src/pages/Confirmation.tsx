@@ -7,14 +7,14 @@ import selv from '../assets/selvSuccessBordered.svg';
 
 const content: any = {
     health: {
-        logo: 'Certificate sent to Selv App',
-        title: 'Immunity certificate shared',
+        logo: 'Credential sent to Selv App',
+        title: 'Health credential shared',
         text: 'Your new credential has been added to the Selv app. The credential is stored locally on your device.'
     },
     agency: {
         logo: 'Credential sent to Selv App',
         title: 'Travel Visa acquired',
-        text: 'Your immunity certificate has been verified and your visa has been granted. You are now ready to travel!'
+        text: 'Your health credential has been verified and your visa has been granted. You are now ready to travel!'
     }
 }
 

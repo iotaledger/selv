@@ -39,7 +39,7 @@ export const routes = [
 
 export const mainSteps = [
     { title: 'Get tested' },
-    { title: 'Acquire immunity certificate' },
+    { title: 'Acquire health certificate' },
     { title: 'Share your status with your employer' },
     { title: 'Apply for a visa' }
 ];

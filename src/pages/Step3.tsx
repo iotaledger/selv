@@ -25,13 +25,13 @@ const Step3: React.FC = ({ match }: any) => {
                         <div className='next-step-content-wrapper'>
                             <div className='next-step-content'>
                                 <div className='figure-wrapper'>
-                                    <img className='figure' src={image} alt='Finalise your Visa application by sharing your immunity status with border authorities' />
+                                    <img className='figure' src={image} alt='Finalise your Visa application by sharing your health status with border authorities' />
                                 </div>
                                 <div className='next-step-text-wrapper'>
                                     <span>
                                         <h3>Apply for a travel visa</h3>
                                     </span>
-                                    <p>Your employer needs you to travel abroad for work. You must share your immunity certificate with the foreign immigation office to obtain a visa.</p>
+                                    <p>Your employer needs you to travel abroad for work. You must share your health credential with the foreign immigation office to obtain a visa.</p>
                                 </div>
                             </div>
                         </div>

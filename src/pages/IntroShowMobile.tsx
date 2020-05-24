@@ -23,7 +23,7 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                 <div className='demo-intro app' id='app'>
                     <div className='app-content-wrapper'>
                         <div className='heading'><h2>Welcome to&nbsp;<span className='highlight'>Selv<span className="line" /></span></h2></div>
-                        <h3>Share your immunity status and other personal credentials securely and privately using IOTA </h3>
+                        <h3>Share your health status and other personal credentials securely and privately using IOTA </h3>
                         <p className='note'>This demo website is best experienced on a desktop computer</p>
                         <Link to={nextStep}>
                             <Button className='cta'>

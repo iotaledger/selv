@@ -39,9 +39,9 @@ const ThankYou: React.FC = () => {
                                 <div className='great-success-text-wrapper'>
                                     <span>
                                         <img src={checkmark} alt='' />
-                                        <h3>You Acquired Your Immunity Certificate</h3>
+                                        <h3>You Acquired Your Health Credential</h3>
                                     </span>
-                                    <p>From this point onwards, you would be able to prove your Covid-19 immunity when needed. Over time you can grow your Selv profile by gathering additional credentials from trusted parties.</p>
+                                    <p>From this point onwards, you would be able to prove your Covid-19 health status when needed. Over time you can grow your Selv profile by gathering additional credentials from trusted parties.</p>
                                 </div>
                                 <div className='figure-wrapper'>
                                     <img className='figure' src={image2} alt='Received new Credentials' />
@@ -56,7 +56,7 @@ const ThankYou: React.FC = () => {
                                         <img src={checkmark} alt='' />
                                         <h3>You Obtained a Travel Visa</h3>
                                     </span>
-                                    <p>By verifiying your immunity status you were granted a travel visa credential. Selv empowers individuals by giving them ownership of their data and improved privacy.</p>
+                                    <p>By verifiying your health status you were granted a travel visa credential. Selv empowers individuals by giving them ownership of their data and improved privacy.</p>
                                 </div>
                             </div>
                         </div>

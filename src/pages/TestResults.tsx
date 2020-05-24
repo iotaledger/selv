@@ -22,7 +22,7 @@ const TestResults: React.FC = ({ history, match }: any) => {
                         <h2>My Covid-19 test results</h2>
                         <Link to={nextStep}>
                             <Button>
-                                Download immunity certificate
+                                Download health credential
                             </Button>
                         </Link>
                     </div>

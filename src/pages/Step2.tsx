@@ -25,13 +25,13 @@ const Step2: React.FC = ({ match }: any) => {
                         <div className='next-step-content-wrapper'>
                             <div className='next-step-content'>
                                 <div className='figure-wrapper'>
-                                    <img className='figure' src={image} alt='Share your immunity status with your employer' />
+                                    <img className='figure' src={image} alt='Share your health status with your employer' />
                                 </div>
                                 <div className='next-step-text-wrapper'>
                                     <span>
-                                        <h3>Share your immunity status with your employer</h3>
+                                        <h3>Share your health status with your employer</h3>
                                     </span>
-                                    <p>Your employer has requested that all employees upload their immunity certificate to the HR portal. Doing so allows you to return to the workplace and minimises risk to yourself and others.</p>
+                                    <p>Your employer has requested that all employees upload their health credentials to the HR portal. Doing so allows you to return to the workplace and minimises risk to yourself and others.</p>
                                 </div>
                             </div>
                         </div>

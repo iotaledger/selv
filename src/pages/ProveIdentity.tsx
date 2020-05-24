@@ -21,7 +21,7 @@ const content: any = {
         title: 'Log in with your Digital Identity credentials',
     },
     agency: {
-        title: 'Share your Immunity Certificate',
+        title: 'Share your Health Credential',
     }
 }
 
