@@ -76,7 +76,7 @@ const AgencyData: React.FC = ({ history, match }: any) => {
     return (
         <Layout match={match}>
             <div className='insurance-data-page-wrapper'>
-                <h2>Your Covid-19 immunity proof</h2>
+                <h2>Your Covid-19 health status</h2>
                 <Collapse
                     bordered={false}
                     defaultActiveKey={[1, 2, 3]}

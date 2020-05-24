@@ -25,15 +25,13 @@ const Step1: React.FC = ({ match }: any) => {
                         <div className='next-step-content-wrapper'>
                             <div className='next-step-content'>
                                 <div className='figure-wrapper'>
-                                    <img className='figure' src={image} alt='Collect your immunity credential' />
+                                    <img className='figure' src={image} alt='Collect your health credential' />
                                 </div>
                                 <div className='next-step-text-wrapper'>
                                     <span>
-                                        <h3>Collect your immunity credential</h3>
+                                        <h3>Collect your health certificate</h3>
                                     </span>
-                                    <p>You have recently taken an immunity test that shows you do not pose an infection risk to others.</p>
-                                    <br />
-                                    <p>You are considered immune.</p>
+                                    <p>You have recently taken a test that shows you do not pose an infection risk to others.</p>
                                     <br />
                                     <p>Your National Health Authority has alerted you to collect your digital credential from their portal.</p>
                                 </div>

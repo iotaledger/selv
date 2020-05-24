@@ -24,7 +24,7 @@ export default ({ link }: { link: string }) => {
         <div className='next-step-drawer'>
             <h3>Add your credential to the Selv App</h3>
             <p>
-                Download your immunity certificate
+                Download your health credential
             </p>
             <Link to={link}>
                 <Button>
