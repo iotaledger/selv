@@ -42,7 +42,7 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
                             </div>
                             <div className='scan-wrapper'>
                                 <div className='qr-content-wrapper'>
-                                    <p className='scan-note'>Scan this QR code<br />to download</p>
+                                    <p className='scan-note'>Or scan this QR code<br />to download</p>
                                     <div className='qr-wrapper'>
                                         <QRCode text={qrContent} size={200} />
                                     </div>
