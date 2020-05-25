@@ -26,7 +26,7 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
                             <h1 className='title'>Download the Selv app</h1>
                             <div className='app-cta-wrapper'>
                                 <a
-                                    href='https://apps.apple.com/us/app/trinity-wallet/id1385929472?ls=1'
+                                    href='https://testflight.apple.com/join/3FCosIcj'
                                     target='_blank'
                                     rel='noopener noreferrer'
                                 >

@@ -4,7 +4,7 @@ try {
   server.get('/qr-redirect', async (req, res) => {
       var ua = req.header('user-agent');
       if (/iphone|ipod|ipad/i.test(ua)){
-          res.redirect('http://apple.com')
+          res.redirect('https://testflight.apple.com/join/3FCosIcj')
       } else {
           res.redirect('https://play.google.com/apps/testing/com.iota.selv.demo')
       }
