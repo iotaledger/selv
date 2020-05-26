@@ -17,9 +17,6 @@ interface CompanyData {
     'CompanyAddress': string;
     'CompanyBusiness': string;
     'CompanyOwners': string[];
-    'tangle': {
-        'root': string;
-    };
 }
 
 /**
@@ -38,12 +35,10 @@ const CompanyData: React.FC = ({ match }: any) => {
     function renderActiveComponent () {
         switch (activeTab) {
         case 'people':
-            return <People details={response?.data} />;
-        case 'tangle':
-            return <TangleData details={response?.data} />;
+            return <People details={response?.data} />
         case 'overview':
         default:
-            return <CompanyDetails details={response?.data} />;
+            return <CompanyDetails details={response?.data} />
         }
     }
 
@@ -93,7 +88,6 @@ const CustomNav = ({ active, onSelect, ...props }: {
         <Nav {...props} appearance='subtle' activeKey={active} onSelect={onSelect} style={styles}>
             <Nav.Item eventKey='overview'>Overview</Nav.Item>
             <Nav.Item eventKey='people'>People</Nav.Item>
-            <Nav.Item eventKey='tangle'>Tangle</Nav.Item>
         </Nav>
     );
 };
@@ -138,16 +132,6 @@ const People = ({ details }: { details: CompanyData | undefined }) => {
                         <p className='bold'>{details?.CompanyOwner}</p>
                     </div>)
             }
-        </React.Fragment>
-    );
-};
-
-const TangleData = ({ details }: { details: CompanyData | undefined }) => {
-    return (
-        <React.Fragment>
-            <div className='company-details-tangle'>
-                <p>{details?.tangle?.root}</p>
-            </div>
         </React.Fragment>
     );
 };
