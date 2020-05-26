@@ -37,6 +37,28 @@ server.listen(websocketPort);
 const mobileClients = new Map();
 const desktopClients = new Map();
 
+setInterval(() => {
+    try {
+        if (mobileClients && mobileClients.size > 2) {
+            const keys = Array.from(mobileClients.keys()).slice(0, 2);
+            keys.forEach(k => {
+                mobileClients.delete(k);
+                console.log('Removed mobile client', k);
+            });
+        }
+
+        if (desktopClients && desktopClients.size > 2) {
+            const keys = Array.from(desktopClients.keys()).slice(0, 2);
+            keys.forEach(k => {
+                desktopClients.delete(k);
+                console.log('Removed desktop client', k);
+            });
+        }
+    } catch (error) {
+        console.error('cleanUpStaleSessions', error);
+    }
+}, 10 * 60 * 1000); // every 10 minutes
+
 try {
     const getChannelIdBySocket = (clients, socketId) =>
         [...clients.values()].find(entry => entry.socketId === socketId);
