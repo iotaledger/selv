@@ -9,8 +9,8 @@ import frame from '../assets/backgrounds/circleFrame5.svg';
 // https://rsuitejs.com/en/components/sidenav
 
 const externalPages = [
-    { url: 'https://iota.org', title: 'Home' },
-    { url: 'https://iota.org', title: 'FAQ' },
+    { url: '/', title: 'Home' },
+    { url: 'https://selv.now.sh/#faq', title: 'FAQ' },
     { url: 'https://iota.org', title: 'IOTA.org' }
 ];
 
