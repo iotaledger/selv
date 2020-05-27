@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Nav } from 'rsuite';
 import useStep from '../utils/useStep';
 import useFetch from '../utils/useFetch';
 import { Layout, Loading, NextStepDrawer } from '../components';
@@ -17,9 +16,6 @@ interface CompanyData {
     'CompanyAddress': string;
     'CompanyBusiness': string;
     'CompanyOwners': string[];
-    'tangle': {
-        'root': string;
-    };
 }
 
 /**
@@ -27,25 +23,8 @@ interface CompanyData {
  */
 const CompanyData: React.FC = ({ match }: any) => {
     const companyId = match?.params?.companyId;
-    const [activeTab, setActiveTab] = useState('overview');
     const { nextStep } = useStep(match);
     const { response, loading } = useFetch(`${serverAPI}/company?company=${companyId}`);
-
-    function handleSelect (activeKey: string) {
-        setActiveTab(activeKey);
-    }
-
-    function renderActiveComponent () {
-        switch (activeTab) {
-        case 'people':
-            return <People details={response?.data} />;
-        case 'tangle':
-            return <TangleData details={response?.data} />;
-        case 'overview':
-        default:
-            return <CompanyDetails details={response?.data} />;
-        }
-    }
 
     return (
         <Layout match={match}>
@@ -67,9 +46,8 @@ const CompanyData: React.FC = ({ match }: any) => {
                                 <p className='company-number-wrapper'>
                                     Company number <span className='company-number'>{response?.data?.CompanyNumber}</span>
                                 </p>
-                                <CustomNav active={activeTab} onSelect={handleSelect} />
                                 <div className='company-details'>
-                                    {renderActiveComponent()}
+                                    <CompanyDetails details={response?.data} />
                                 </div>
                             </React.Fragment>
                         )
@@ -78,23 +56,6 @@ const CompanyData: React.FC = ({ match }: any) => {
                 <NextStepDrawer link={nextStep} />
             </React.Fragment>
         </Layout>
-    );
-};
-
-const CustomNav = ({ active, onSelect, ...props }: {
-    active: string;
-    onSelect: (activeKey: string) => void;
-}) => {
-    const styles = {
-        marginBottom: 50
-    };
-
-    return (
-        <Nav {...props} appearance='subtle' activeKey={active} onSelect={onSelect} style={styles}>
-            <Nav.Item eventKey='overview'>Overview</Nav.Item>
-            <Nav.Item eventKey='people'>People</Nav.Item>
-            <Nav.Item eventKey='tangle'>Tangle</Nav.Item>
-        </Nav>
     );
 };
 
@@ -114,39 +75,16 @@ const CompanyDetails = ({ details }: { details: CompanyData | undefined }) => {
                 <p className='bold'>{details?.CompanyCreationDate}</p>
             </div>
             <div className='company-details-item'>
-                <p>Company status</p>
-                <p className={`status ${details?.CompanyStatus.toLowerCase()}`}>{details?.CompanyStatus}</p>
+                <p>Company owner</p>
+                <p className='bold'>{details?.CompanyOwner}</p>
             </div>
             <div className='company-details-item'>
                 <p>Nature of business</p>
                 <p className='bold'>{details?.CompanyBusiness}</p>
             </div>
-        </React.Fragment>
-    );
-};
-
-const People = ({ details }: { details: CompanyData | undefined }) => {
-    return (
-        <React.Fragment>
-            {
-                details?.CompanyOwners?.length
-                    ? details?.CompanyOwners?.map(person =>
-                        <div key={person} className='company-details-item'>
-                            <p className='bold'>{person}</p>
-                        </div>)
-                    : (<div className='company-details-item'>
-                        <p className='bold'>{details?.CompanyOwner}</p>
-                    </div>)
-            }
-        </React.Fragment>
-    );
-};
-
-const TangleData = ({ details }: { details: CompanyData | undefined }) => {
-    return (
-        <React.Fragment>
-            <div className='company-details-tangle'>
-                <p>{details?.tangle?.root}</p>
+            <div className='company-details-item'>
+                <p>Company status</p>
+                <p className={`status ${details?.CompanyStatus.toLowerCase()}`}>{details?.CompanyStatus}</p>
             </div>
         </React.Fragment>
     );
