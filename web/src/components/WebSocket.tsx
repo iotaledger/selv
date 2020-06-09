@@ -50,17 +50,24 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     let ioClient: any;
 
     useEffect(() => {
-        async function getData () {
+        async function connect() {
+            if (channelId) {
+                await connectWebSocket(channelId, fields);
+            }
+        }
+
+        async function getData() {
             if (channelId) {
                 const isMobileConnected = await checkConnectedStatus(channelId);
                 if (isMobileConnected) {
                     setStatus(messages.waiting);
-                    await connectWebSocket(channelId, fields);
                 }
             } else {
                 await setChannel();
             }
         }
+
+        connect();
         if (schemaName) { // Case of Company/Bank/Insurance data
             getData();
         } else { // Case of ProveIdentity
@@ -199,7 +206,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         const isMobileConnected = await checkConnectedStatus(channelId);
         if (isMobileConnected) {
             setIsRunning(false);
-            await connectWebSocket(channelId, fields);
         } else {
             if (counter === 7) {
                 notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app');
