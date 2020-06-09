@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { Disclaimer, RandomGraphicElement } from '../components';
 import useStep from '../utils/useStep';
 import howItWorks from '../assets/landing/howItWorks1.png';
 import dots from '../assets/backgrounds/dots.png';
+import { serverAPI } from '../config.json';
 
 /**
  * Component which will display a IntroShowTodos.
@@ -20,6 +22,7 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                 behavior: 'smooth'
             });
             await localStorage.clear();
+            axios.get(`${serverAPI}/remove`); 
         };
         reset();
     }, []);
