@@ -42,7 +42,7 @@ export default () => (
                 </div>
             </div>
 
-            <Link to='/demo/todos'>
+            <Link to='/demo/select'>
                 <Button className='cta' data-aos='fade-up' data-aos-duration='1000'>
                     Try the demo
                 </Button>

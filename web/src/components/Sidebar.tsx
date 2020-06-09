@@ -18,7 +18,7 @@ const SidebarInstance = ({ children }: {
 }) => {
     return (
         <div className='sidebar-wrapper'>
-            <Link to='/demo/todos'>
+            <Link to='/demo/select'>
                 <img src={logo} alt='Selv logo' className='sidebar-logo' />
             </Link>
 
