@@ -27,14 +27,14 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
 
                         <div className='app-cta-wrapper'>
                             <a
-                                href='https://apps.apple.com/us/app/trinity-wallet/id1385929472?ls=1'
+                                href='https://testflight.apple.com/join/3FCosIcj'
                                 target='_blank'
                                 rel='noopener noreferrer'
                             >
                                 <img src={appStore} alt='Apple AppStore' />
                             </a>
                             <a
-                                href='https://play.google.com/store/apps/details?id=com.iota.trinity'
+                                href='https://play.google.com/apps/testing/com.iota.selv.demo'
                                 target='_blank'
                                 rel='noopener noreferrer'
                             >
