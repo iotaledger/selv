@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { Disclaimer, RandomGraphicElement } from '../components';
@@ -23,7 +22,6 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                 behavior: 'smooth'
             });
             await localStorage.clear();
-            axios.get(`${serverAPI}/remove`); 
         };
         reset();
     }, []);
