@@ -25,7 +25,7 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
     return (
         <RandomGraphicElement elements={7}>
             <div className='theme-demo'>
-                <Link to={'/'} className="logo">
+                <Link to={'/'} className="logo demo-page">
                     <img src={logo} alt="Selv logo" />
                 </Link>
                 <div className='demo-intro app' id='app'>

@@ -1,19 +1,15 @@
-.random-element-wrapper {
-    .theme-demo {
-        .logo {
-            position: absolute;
-            top: 30px;
-            left: 40px;
-            z-index: 1;
+.logo.demo-page {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    z-index: 1;
 
-            @include breakPoint(small) {
-                top: 10px;
-                left: 10px;
+    @include breakPoint(small) {
+        top: 10px;
+        left: 10px;
 
-                img {
-                    width: 80px;
-                }
-            }
+        img {
+            width: 80px;
         }
     }
 }
