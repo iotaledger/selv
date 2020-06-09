@@ -112,7 +112,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                 setStatus(messages.connectionError);
                 notify('error', 'Connection error', 'Please try again!');
             }
-        }, 10000);
+        }, 180000);
 
         ioClient.on('errorMessage', async (error: any) => {
             clearTimeout(timeout);
