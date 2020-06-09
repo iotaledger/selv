@@ -1,3 +1,23 @@
+.random-element-wrapper {
+    .theme-demo {
+        .logo {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            z-index: 1;
+
+            @include breakPoint(small) {
+                top: 10px;
+                left: 10px;
+
+                img {
+                    width: 80px;
+                }
+            }
+        }
+    }
+}
+
 .demo-intro {
     position: relative;
     display: flex;
