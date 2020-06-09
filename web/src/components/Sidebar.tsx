@@ -1,7 +1,6 @@
 import React from 'react';
 import { Sidenav } from 'rsuite';
 import { Link } from 'react-router-dom';
-import reset from '../assets/reset.svg';
 import poweredByIota from '../assets/poweredByIota.svg';
 import logo from '../assets/landing/logoHeader.svg';
 import frame from '../assets/backgrounds/circleFrame5.svg';
@@ -19,14 +18,14 @@ const SidebarInstance = ({ children }: {
 }) => {
     return (
         <div className='sidebar-wrapper'>
-            <img src={logo} alt='Selv logo' className='sidebar-logo' />
+            <Link to='/demo/select'>
+                <img src={logo} alt='Selv logo' className='sidebar-logo' />
+            </Link>
+
             <Sidenav activeKey='0'>
                 <Sidenav.Body>
                     <h2 className='todo-list'>
                         Your to-do list
-                        <Link to='/demo/todos'>
-                            <img src={reset} alt='Reset' />
-                        </Link>
                     </h2>
                     { children }
                 </Sidenav.Body>

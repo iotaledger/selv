@@ -5,6 +5,8 @@ import { Disclaimer, RandomGraphicElement } from '../components';
 import useStep from '../utils/useStep';
 import howItWorks from '../assets/landing/howItWorks1.png';
 import dots from '../assets/backgrounds/dots.png';
+import logo from '../assets/landing/logoHeader.svg';
+import { serverAPI } from '../config.json';
 
 /**
  * Component which will display a IntroShowTodos.
@@ -27,6 +29,9 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
     return (
         <RandomGraphicElement elements={7}>
             <div className='theme-demo'>
+                <Link to={'/'} className="logo demo-page">
+                    <img src={logo} alt="Selv logo" />
+                </Link>
                 <div className='demo-intro' id='app'>
                     <div className='todos'>
                         <span className='heading'><h2>Welcome to the</h2>&nbsp;&nbsp;&nbsp;<h2 className='highlight'>Selv demo</h2></span>

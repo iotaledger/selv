@@ -24,13 +24,13 @@ export default () => (
             <img src={circle} alt="" className="circle" />
             <img src={circleMobile} alt="" className="circle-mobile" />
 
-            <h2 data-aos="fade-up" data-aos-duration="2000">FAQs</h2>
-            <div className="faq-wrapper" data-aos="fade-up" data-aos-duration="2000">
+            <h2 data-aos="fade-up" data-aos-duration="1000">FAQs</h2>
+            <div className="faq-wrapper" data-aos="fade-up" data-aos-duration="1000">
                 <Collapse 
                     bordered={false} 
                     expandIconPosition="right"
                     expandIcon={params => <Icon params={params} />}
-                    data-aos="fade-up" data-aos-duration="2000"
+                    data-aos="fade-up" data-aos-duration="1000"
                 >
                     <Collapse.Panel
                         header={(

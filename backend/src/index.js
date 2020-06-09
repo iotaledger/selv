@@ -185,6 +185,7 @@ Get company details
 app.get('/company', cors(corsOptions), async (req, res) => {
     try {
         const companyNumber = req.query.company;
+        await removeData('company', '');
         if (companyNumber) {
             const data = await readData('company', companyNumber);
             res.json({

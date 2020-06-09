@@ -6,6 +6,7 @@ import mobile from '../assets/mobile.png';
 import { Disclaimer, RandomGraphicElement } from '../components';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
+import logo from '../assets/landing/logoHeader.svg';
 
 /**
  * Component which will display a IntroShowTodos.
@@ -24,6 +25,9 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
     return (
         <RandomGraphicElement elements={7}>
             <div className='theme-demo'>
+                <Link to={'/'} className="logo demo-page">
+                    <img src={logo} alt="Selv logo" />
+                </Link>
                 <div className='demo-intro app' id='app'>
                     <div className='app-content-wrapper'>
                         <h2>That looks like a lot of work...</h2>

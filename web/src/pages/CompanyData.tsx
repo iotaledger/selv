@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { notification, message } from 'antd';
+import { notification } from 'antd';
 import { flattenObject } from '../utils/helper';
 import { Layout, Loading, Form, PrefilledForm, WebSocket } from '../components';
 
@@ -54,7 +54,6 @@ const CompanyData: React.FC = ({ history, match }: any) => {
             const credentials = credentialsString && await JSON.parse(credentialsString);
             const status = credentials?.status;
             if (!status || Number(status) !== 2) {
-                message.error({ content: messages.connectionError, key: 'status', duration: 10 });
                 notify('error', 'Error', messages.connectionError);
                 history.goBack();
             }

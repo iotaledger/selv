@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 50px;
 
     > * {
         z-index: 1;
@@ -50,6 +49,7 @@
     position: relative;
     width: 100%;
     z-index: 2;
+    margin-top: 50px;
 
     h1 {
         font-weight: bold;

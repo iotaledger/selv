@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SocketIOClient from 'socket.io-client';
-import { notification, message } from 'antd';
+import { notification } from 'antd';
 import useStep from '../utils/useStep';
 import useInterval from '../utils/useInterval';
 import evaluateCredential from '../utils/did';
-import { getCompanyId, flattenObject, encrypt, decrypt } from '../utils/helper';
+import { getCompanyId, encrypt, decrypt } from '../utils/helper';
 import { serverAPI, websocketURL } from '../config.json';
 
 const messages = {
@@ -42,29 +42,36 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     generatedChannelId?: string;
 }) => {
     const { nextStep } = useStep(match);
-    const [password, setPassword] = useState();
-    const [channelId, setChannelId] = useState();
+    const [password, setPassword] = useState('');
+    const [channelId, setChannelId] = useState('');
     const [isRunning, setIsRunning] = useState(false);
+    const [counter, setCounter] = useState(0);
 
     let ioClient: any;
 
     useEffect(() => {
-        async function getData () {
+        async function connect() {
+            if (channelId) {
+                await connectWebSocket(channelId, fields);
+            }
+        }
+
+        async function getData() {
             if (channelId) {
                 const isMobileConnected = await checkConnectedStatus(channelId);
                 if (isMobileConnected) {
                     setStatus(messages.waiting);
-                    message.loading({ content: messages.waiting, key: 'status', duration: 0 });
-                    await connectWebSocket(channelId, fields);
                 }
             } else {
                 await setChannel();
             }
         }
+
+        connect();
         if (schemaName) { // Case of Company/Bank/Insurance data
             getData();
         } else { // Case of ProveIdentity
-            setChannelId(generatedChannelId);
+            setChannelId(generatedChannelId || '');
             setIsRunning(true);
         }
 
@@ -103,10 +110,9 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         const timeout = setTimeout(() => {
             if (setStatus) {
                 setStatus(messages.connectionError);
-                message.error({ content: messages.connectionError, key: 'status' });
                 notify('error', 'Connection error', 'Please try again!');
             }
-        }, 10000);
+        }, 180000);
 
         ioClient.on('errorMessage', async (error: any) => {
             clearTimeout(timeout);
@@ -114,7 +120,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             setIsRunning(false);
             setLoading && setLoading(false);
             setStatus(messages.connectionError);
-            message.error({ content: messages.connectionError, key: 'status' });
             notify('error', 'Mobile client error', error);
         });
 
@@ -123,26 +128,23 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                 setIsRunning(false);
                 clearTimeout(timeout);
                 setStatus('Verifying credentials...');
-                message.loading({ content: 'Verifying credentials...', duration: 0 });
+
                 notify('info', 'Verification', 'Verifying credentials...');
                 let verifiablePresentation = await decrypt(fields?.password, payload);
                 verifiablePresentation = JSON.parse(verifiablePresentation);
                 const evaluationResult: any = await evaluateCredential(verifiablePresentation, fields?.requestedCredentials, fields?.challenge);
-                const flattenData = flattenObject(evaluationResult);
 
                 setStatus(evaluationResult.message);
                 notify(evaluationResult.type, 'Verification result', evaluationResult.message);
                 setLoading && setLoading(false);
 
                 if (evaluationResult?.status === 2) { // DID_TRUSTED
-                    message.destroy();
                     await localStorage.setItem('credentials', JSON.stringify(evaluationResult));
                     history.push(nextStep);
                 }
             } catch (e) {
                 console.error(e);
                 setLoading && setLoading(false);
-                message.destroy();
             }
         });
 
@@ -152,24 +154,22 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             let payload = await decrypt(password, encryptedPayload);
             payload = JSON.parse(payload);
             if (payload?.status === 'success') {
-                message.destroy();
-
                 switch (schemaName) {
-                case 'Insurance':
-                    await localStorage.setItem('insurance', 'completed');
-                    await localStorage.setItem('insuranceDetails', JSON.stringify({ ...data, ...payload?.payload }));
-                    await updateCompanyStatus();
-                    break;
-                case 'BankAccount':
-                    await localStorage.setItem('bank', 'completed');
-                    await localStorage.setItem('bankDetails', JSON.stringify({ ...data, ...payload?.payload }));
-                    break;
-                case 'Company':
-                    await localStorage.setItem('companyHouse', 'completed');
-                    await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload?.payload }));
-                    break;
-                default:
-                    break;
+                    case 'Insurance':
+                        await localStorage.setItem('insurance', 'completed');
+                        await localStorage.setItem('insuranceDetails', JSON.stringify({ ...data, ...payload?.payload }));
+                        await updateCompanyStatus();
+                        break;
+                    case 'BankAccount':
+                        await localStorage.setItem('bank', 'completed');
+                        await localStorage.setItem('bankDetails', JSON.stringify({ ...data, ...payload?.payload }));
+                        break;
+                    case 'Company':
+                        await localStorage.setItem('companyHouse', 'completed');
+                        await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload?.payload }));
+                        break;
+                    default:
+                        break;
                 }
                 history.push(nextStep);
             }
@@ -199,18 +199,22 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
 
     async function updateCompanyStatus () {
         const companyId = await getCompanyId();
-        const response = await axios.get(`${serverAPI}/activate?company=${companyId}`);
+        await axios.get(`${serverAPI}/activate?company=${companyId}`);
     }
 
     useInterval(async () => {
         const isMobileConnected = await checkConnectedStatus(channelId);
         if (isMobileConnected) {
             setIsRunning(false);
-            await connectWebSocket(channelId, fields);
         } else {
-            notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app');
+            if (counter === 7) {
+                notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app');
+                setCounter(0);
+            } else {
+                setCounter(counter => counter + 1);
+            }
         }
-    }, isRunning ? 7000 : null);
+    }, isRunning ? 3000 : null);
 
     return (
         <React.Fragment></React.Fragment>
