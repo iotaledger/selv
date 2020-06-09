@@ -1,4 +1,25 @@
 {
     "version": 2,
-    "name": "selv"
+    "name": "selv",
+    "builds": [
+        {
+            "src": "api/routes/**/*.js",
+            "use": "@now/node"
+        },
+        {
+            "src": "package.json",
+            "use": "@now/static-build",
+            "config": { "distDir": "build" }
+        }
+        ],
+        "routes": [
+        {
+            "src": "/qr-redirect",
+            "dest": "/api/routes"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/$1"
+        }
+    ]
 }
