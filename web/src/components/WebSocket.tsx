@@ -42,9 +42,10 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     generatedChannelId?: string;
 }) => {
     const { nextStep } = useStep(match);
-    const [password, setPassword] = useState();
-    const [channelId, setChannelId] = useState();
+    const [password, setPassword] = useState('');
+    const [channelId, setChannelId] = useState('');
     const [isRunning, setIsRunning] = useState(false);
+    const [counter, setCounter] = useState(0);
 
     let ioClient: any;
 
@@ -64,7 +65,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         if (schemaName) { // Case of Company/Bank/Insurance data
             getData();
         } else { // Case of ProveIdentity
-            setChannelId(generatedChannelId);
+            setChannelId(generatedChannelId || '');
             setIsRunning(true);
         }
 
@@ -199,7 +200,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
 
     async function updateCompanyStatus () {
         const companyId = await getCompanyId();
-        const response = await axios.get(`${serverAPI}/activate?company=${companyId}`);
+        await axios.get(`${serverAPI}/activate?company=${companyId}`);
     }
 
     useInterval(async () => {
@@ -208,9 +209,14 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             setIsRunning(false);
             await connectWebSocket(channelId, fields);
         } else {
-            notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app');
+            if (counter === 7) {
+                notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app');
+                setCounter(0);
+            } else {
+                setCounter(counter => counter + 1);
+            }
         }
-    }, isRunning ? 7000 : null);
+    }, isRunning ? 3000 : null);
 
     return (
         <React.Fragment></React.Fragment>
