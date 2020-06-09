@@ -2,6 +2,7 @@ import {
     Landing,
     IntroShowTodos,
     IntroShowMobile,
+    IntroDemoSelection,
     AppDownloadQR,
     ProveIdentity,
     SingInConfirmation,
@@ -17,6 +18,7 @@ import {
 
 export const routes = [
     { path: '/', page: Landing },
+    { path: '/demo/select', page: IntroDemoSelection },
     { path: '/demo/todos', page: IntroShowTodos },
     { path: '/demo/app', page: IntroShowMobile },
     { path: '/company/list/0', page: IncorporatedCompanies },

@@ -1,6 +1,7 @@
 import Landing from './Landing';
 import IntroShowTodos from './IntroShowTodos';
 import IntroShowMobile from './IntroShowMobile';
+import IntroDemoSelection from './IntroDemoSelection';
 import AppDownloadQR from './AppDownloadQR';
 import CompanyIntro from './CompanyIntro';
 import ProveIdentity from './ProveIdentity';
@@ -18,6 +19,7 @@ export {
     Landing,
     IntroShowTodos,
     IntroShowMobile,
+    IntroDemoSelection,
     AppDownloadQR,
     ProveIdentity,
     SingInConfirmation,
