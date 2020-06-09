@@ -15,9 +15,7 @@ import circle from '../assets/backgrounds/circleFrame6.svg';
  */
 const AppDownloadQR: React.FC = ({ match }: any) => {
     const { nextStep } = useStep(match);
-
-    const link = 'https://trinity.iota.org/';
-    const [qrContent] = useState(link);
+    const [qrContent] = useState(window.location.origin + '/qr-redirect');
 
     return (
         <Layout match={match} noHeader noFooter>
