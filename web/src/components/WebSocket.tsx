@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SocketIOClient from 'socket.io-client';
-import { notification, message } from 'antd';
+import { notification } from 'antd';
 import useStep from '../utils/useStep';
 import useInterval from '../utils/useInterval';
 import evaluateCredential from '../utils/did';
@@ -55,7 +55,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                 const isMobileConnected = await checkConnectedStatus(channelId);
                 if (isMobileConnected) {
                     setStatus(messages.waiting);
-                    message.loading({ content: messages.waiting, key: 'status', duration: 0 });
                     await connectWebSocket(channelId, fields);
                 }
             } else {
@@ -104,7 +103,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         const timeout = setTimeout(() => {
             if (setStatus) {
                 setStatus(messages.connectionError);
-                message.error({ content: messages.connectionError, key: 'status' });
                 notify('error', 'Connection error', 'Please try again!');
             }
         }, 10000);
@@ -115,7 +113,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             setIsRunning(false);
             setLoading && setLoading(false);
             setStatus(messages.connectionError);
-            message.error({ content: messages.connectionError, key: 'status' });
             notify('error', 'Mobile client error', error);
         });
 
@@ -124,7 +121,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                 setIsRunning(false);
                 clearTimeout(timeout);
                 setStatus('Verifying credentials...');
-                message.loading({ content: 'Verifying credentials...', duration: 0 });
+
                 notify('info', 'Verification', 'Verifying credentials...');
                 let verifiablePresentation = await decrypt(fields?.password, payload);
                 verifiablePresentation = JSON.parse(verifiablePresentation);
@@ -135,14 +132,12 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                 setLoading && setLoading(false);
 
                 if (evaluationResult?.status === 2) { // DID_TRUSTED
-                    message.destroy();
                     await localStorage.setItem('credentials', JSON.stringify(evaluationResult));
                     history.push(nextStep);
                 }
             } catch (e) {
                 console.error(e);
                 setLoading && setLoading(false);
-                message.destroy();
             }
         });
 
@@ -152,8 +147,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             let payload = await decrypt(password, encryptedPayload);
             payload = JSON.parse(payload);
             if (payload?.status === 'success') {
-                message.destroy();
-
                 switch (schemaName) {
                 case 'Insurance':
                     await localStorage.setItem('insurance', 'completed');

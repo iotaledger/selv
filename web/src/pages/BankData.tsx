@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Collapse, notification, message } from 'antd';
+import { Button, Collapse, notification } from 'antd';
 import { flattenObject } from '../utils/helper';
 import { Layout, Loading, AccountType, PrefilledForm, Checkbox, WebSocket } from '../components';
 import checkmark from '../assets/bankCheckmark.svg';
@@ -61,7 +61,6 @@ const BankData: React.FC = ({ history, match }: any) => {
             const credentials = credentialsString && await JSON.parse(credentialsString);
             const status = credentials?.status;
             if (!status || Number(status) !== 2) {
-                message.error({ content: messages.connectionError, key: 'status', duration: 10 });
                 notify('error', 'Error', messages.connectionError);
                 history.goBack();
             }
