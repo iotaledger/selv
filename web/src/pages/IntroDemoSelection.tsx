@@ -8,6 +8,7 @@ import { Disclaimer, RandomGraphicElement } from '../components';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
 import logo from '../assets/landing/logoHeader.svg';
+import { covidDemo } from '../config.json';
 
 /**
  * Component which will display a IntroDemoSelection.
@@ -36,7 +37,7 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                             <div className="demo-card-content">
                                 <h3>Health status management</h3>
                                 <p>Share trusted credentials and immunity status</p>
-                                <a href='https://covid-19-iota.now.sh/demo/todos' rel='noopener noreferrer'>
+                                <a href={`${covidDemo}/demo/todos`} rel='noopener noreferrer'>
                                     <Button className='cta'>
                                         Try the demo
                                     </Button>

@@ -9,7 +9,7 @@ import avatar1 from '../assets/avatar1.png';
 import avatar2 from '../assets/avatar2.png';
 import dots from '../assets/backgrounds/dots.png';
 import circle from '../assets/backgrounds/circleFrame6.svg';
-import { qrRedirect } from '../config.json';
+import { covidDemo } from '../config.json';
 
 /**
  * Component which will display a AppDownloadQR.
@@ -45,7 +45,7 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
                             <div className='qr-content-wrapper'>
                                 <p className='scan-note'>Scan this QR code<br />to download</p>
                                 <div className='qr-wrapper'>
-                                    <QRCode text={qrRedirect} size={200} />
+                                    <QRCode text={`${covidDemo}//qr-redirect`} size={200} />
                                 </div>
                                 <Link to={nextStep} className='cta'>
                                     <Button>

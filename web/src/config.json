@@ -3,5 +3,5 @@
     "serverAPI": "https://selv01.iota.cafe",
     "provider": "https://nodes.devnet.iota.org:443",
     "keyId": "selv",
-    "qrRedirect": "https://covid-19-iota.now.sh/qr-redirect"
+    "covidDemo": "https://covid-19-iota.now.sh"
 }
