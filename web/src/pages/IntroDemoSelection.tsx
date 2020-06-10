@@ -33,18 +33,6 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                 <div className='demo-intro app' id='app'>
                     <div className='demo-select-wrapper'>
                         <div className='demo-card-wrapper'>
-                            <img src={covid} alt="Covid-19 demo" />
-                            <div className="demo-card-content">
-                                <h3>Health status management</h3>
-                                <p>Share trusted credentials and immunity status</p>
-                                <a href={`${covidDemo}/demo/todos`} rel='noopener noreferrer'>
-                                    <Button className='cta'>
-                                        Try the demo
-                                    </Button>
-                                </a>
-                            </div>
-                        </div>
-                        <div className='demo-card-wrapper'>
                             <img src={selv} alt="Selv demo" />
                             <div className="demo-card-content">
                                 <h3>Digital Identity management</h3>
@@ -54,6 +42,18 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                                         Try the demo
                                     </Button>
                                 </Link>
+                            </div>
+                        </div>
+                        <div className='demo-card-wrapper'>
+                            <img src={covid} alt="Covid-19 demo" />
+                            <div className="demo-card-content">
+                                <h3>Health status management</h3>
+                                <p>Share trusted credentials and immunity status</p>
+                                <a href={`${covidDemo}/demo/app`} rel='noopener noreferrer'>
+                                    <Button className='cta'>
+                                        Try the demo
+                                    </Button>
+                                </a>
                             </div>
                         </div>
                     </div>
