@@ -6,7 +6,6 @@ import useStep from '../utils/useStep';
 import howItWorks from '../assets/landing/howItWorks1.png';
 import dots from '../assets/backgrounds/dots.png';
 import logo from '../assets/landing/logoHeader.svg';
-import { serverAPI } from '../config.json';
 
 /**
  * Component which will display a IntroShowTodos.
