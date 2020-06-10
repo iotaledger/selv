@@ -5,7 +5,7 @@ import { notification } from 'antd';
 import useStep from '../utils/useStep';
 import useInterval from '../utils/useInterval';
 import evaluateCredential from '../utils/did';
-import { flattenObject, encrypt, decrypt } from '../utils/helper';
+import { encrypt, decrypt } from '../utils/helper';
 import { serverAPI, websocketURL } from '../config.json';
 
 const messages = {
@@ -137,7 +137,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                 let verifiablePresentation = await decrypt(fields?.password, payload);
                 verifiablePresentation = JSON.parse(verifiablePresentation);
                 const evaluationResult: any = await evaluateCredential(verifiablePresentation, fields?.requestedCredentials, fields?.challenge);
-                const flattenData = flattenObject(evaluationResult);
 
                 setStatus(evaluationResult.message);
                 notify(evaluationResult.type, 'Verification result', evaluationResult.message);
