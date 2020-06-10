@@ -189,8 +189,8 @@
 
         .phone {
             position: absolute;
-            right: 100px;
-            top: 0;
+            right: 20px;
+            top: 70px;
 
             @include breakPoint(medium) {
                position: static;
@@ -198,12 +198,11 @@
         }
     
         .note {
-            width: 55%;
-            align-self: flex-end;
-            font-weight: 500;
-            font-size: 14px;
+            font-weight: bold;
+            font-size: 17px;
             line-height: 24px;
-            color: #8D99AC;
+            color: #30323D;
+            margin: 20px 0 50px;
 
             @include breakPoint(medium) {
                 margin-top: 50px;

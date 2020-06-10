@@ -45,11 +45,38 @@
     }
 }
 
+.cta-section {
+    position: fixed;
+    bottom: 0;
+    height: 165px;
+    width: calc(100% - 320px);
+    left: 0;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    z-index: 2;
+    -webkit-box-shadow: inset -47px 0px 20px -59px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset -47px 0px 20px -59px rgba(0,0,0,0.75);
+    box-shadow: inset -47px 0px 20px -59px rgba(0,0,0,0.75);
+    .subtitle {
+        font-weight: 500;
+        font-size: 21px;
+        width: 90%;
+        text-align: center;
+    }
+
+    @include breakPoint(medium) {
+        width: 100%;
+    }
+}
+
 .app-download {
     position: relative;
     width: 100%;
     z-index: 2;
-    margin-top: 50px;
+    margin-top: 18px;
 
     h1 {
         font-weight: bold;
@@ -73,7 +100,7 @@
         justify-content: space-evenly;
         width: 100%;
         max-width: 380px;
-        margin: 30px auto 50px;
+        margin: 40px auto 50px;
 
         a {
             z-index: 3;
@@ -115,21 +142,28 @@
             z-index: 3;
             text-align: center;
 
+            @include breakPoint(small) {
+                width: 300px;
+                background: unset;
+                box-shadow: unset;
+            }
+
             .scan-note {
                 font-weight: 600;
-                font-size: 18px;
+                font-size: 20px;
                 line-height: 30px;
                 color: #4247DC;
             }
 
             .qr-wrapper {
                 box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.4);
-                -webkit-box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.3); 
+                -webkit-box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.3);
                 background: #FFFFFF;
                 border-radius: 22px;
                 width: 280px;
                 height: 280px;
                 z-index: 4;
+                margin: 0 0 100px;
             }
 
             .qr-code {
@@ -140,7 +174,7 @@
 
         .circle {
             position: absolute;
-            bottom: -200px;
+            bottom: -250px;
             z-index: 0;
             width: 800px;
 
@@ -159,7 +193,7 @@
                 left: 0;
             }
         }
-    
+
         .avatar1 {
             position: absolute;
             top: 350px;

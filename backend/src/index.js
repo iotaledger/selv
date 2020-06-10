@@ -9,7 +9,7 @@ const { createOrUpdateCompany, readData, readAllData, removeData } = require('./
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://selv.now.sh', 'https://covid-19-iota.now.sh'];
+const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://selv.now.sh', 'https://selv.iota-dev1.now.sh', 'https://covid-19-iota.now.sh'];
 const corsOptions = {
     // methods: ["GET, POST, OPTIONS"],
     // allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
@@ -74,6 +74,16 @@ try {
             const { channelId } = data;
             console.info(`Desktop client connected [id=${socket.id}, channel=${channelId}]`);
             desktopClients.set(channelId, { socket, channelId, socketId: socket.id });
+
+            const isMobileClient = mobileClients.has(channelId);
+            if (isMobileClient) {
+                const mobileClient = mobileClients.get(channelId);
+                if (mobileClient && mobileClient.socket) {
+                    const mobileSocket = mobileClient.socket;
+                    mobileSocket && mobileSocket.emit('desktopConnected', { channelId });
+                    console.info('Connection notification sent to mobile client', channelId);
+                }
+            }
         });
 
         socket.on('disconnect', async () => {
@@ -161,6 +171,32 @@ app.get('/connection', cors(corsOptions), async (req, res) => {
         const mobileClient = mobileClients.has(req.query.channelId);
         console.log('isMobileConnected', req.query.channelId, mobileClient);
         if (mobileClient) {
+            res.json({
+                status: 'success'
+            });
+        } else {
+            res.json({
+                status: 'not connected'
+            });
+        }
+    } catch (e) {
+        console.error(e);
+        res.json({
+            status: 'failure',
+            error: JSON.stringify(e),
+            mobileClient: null
+        });
+    }
+});
+
+/*
+Check if mobile client is connected
+*/
+app.get('/connection-app', cors(corsOptions), async (req, res) => {
+    try {
+        const desktopClient = desktopClients.has(req.query.channelId);
+        console.log('isDesktopConnected', req.query.channelId, desktopClient);
+        if (desktopClient) {
             res.json({
                 status: 'success'
             });

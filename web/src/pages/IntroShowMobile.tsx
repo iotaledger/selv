@@ -32,6 +32,7 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                     <div className='app-content-wrapper'>
                         <h2>That looks like a lot of work...</h2>
                         <h3>But using IOTA’s Unified Identity Protocol and the Selv app, it will be <strong>​quick and easy​.</strong></h3>
+                        <p className='note'>This demo website is best experienced on a desktop computer.</p>
                         <Link to={nextStep}>
                             <Button className='cta'>
                                 Let's do it
@@ -39,7 +40,6 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                         </Link>
                     </div>
                     <img className='phone' src={mobile} alt='Mobile phone' />
-                    <p className='note'>This demo can be best experienced using the browser on a PC in combination with the Selv app on your phone. A full phone experience is possible using the mobile browser and the Selv app.</p>
                     <img src={dots} alt='' className='dots-top' />
                     <img src={dots} alt='' className='dots-bottom' />
                     <img src={ellipse} alt='' className='ellipse' />

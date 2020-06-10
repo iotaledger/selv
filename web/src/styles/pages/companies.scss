@@ -6,6 +6,14 @@
     align-items: flex-start;
     height: 100%;
     word-break: break-word;
+
+    &.drawer {
+        margin-bottom: 120px;
+    
+        @include breakPoint(small) {
+            margin-bottom: 150px;
+        }
+    }
 }
   
 .companies-cta-wrapper {
