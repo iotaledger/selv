@@ -53,17 +53,24 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     let ioClient: any;
 
     useEffect(() => {
+        async function connect() {
+            if (channelId) {
+                await connectWebSocket(channelId, fields);
+            }
+        }
+
         async function getData () {
             if (channelId) {
                 const isMobileConnected = await checkConnectedStatus(channelId);
                 if (isMobileConnected) {
                     setStatus(messages.waiting);
-                    await connectWebSocket(channelId, fields);
                 }
             } else {
                 await setChannel();
             }
         }
+
+        connect();
         if (schemaName) { // Case of HealthAuthority/HR/ForeignBorder data
             getData();
         } else { // Case of ProveIdentity
@@ -108,7 +115,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                 setStatus(messages.connectionError);
                 notify('error', 'Connection error', 'Please try again!');
             }
-        }, 10000);
+        }, 180000);
 
         ioClient.on('errorMessage', async (error: any) => {
             clearTimeout(timeout);
@@ -203,9 +210,8 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         const isMobileConnected = await checkConnectedStatus(channelId);
         if (isMobileConnected) {
             setIsRunning(false);
-            await connectWebSocket(channelId, fields);
         }
-    }, isRunning ? 5000 : null);
+    }, isRunning ? 3000 : null);
 
     return (
         <React.Fragment></React.Fragment>
