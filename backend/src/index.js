@@ -9,7 +9,7 @@ const { createOrUpdateCompany, readData, readAllData, removeData } = require('./
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://selv.now.sh', 'https://covid-19-iota.now.sh'];
+const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://selv.now.sh', 'https://selv.iota-dev1.now.sh', 'https://covid-19-iota.now.sh'];
 const corsOptions = {
     // methods: ["GET, POST, OPTIONS"],
     // allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
