@@ -19,48 +19,51 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
 
     return (
         <Layout match={match} noHeader noFooter>
-            <div className='scan-qr-page-wrapper app-download' id='app'>
-                <RandomGraphicElement elements={5}>
-                    <React.Fragment>
-                        <h1 className='title'>Download the Selv app</h1>
-                        <p className='subtitle'>Press continue below when the Selv app is installed on your phone</p>
-
-                        <div className='app-cta-wrapper'>
-                            <a
-                                href='https://testflight.apple.com/join/3FCosIcj'
-                                target='_blank'
-                                rel='noopener noreferrer'
-                            >
-                                <img src={appStore} alt='Apple AppStore' />
-                            </a>
-                            <a
-                                href='https://play.google.com/apps/testing/com.iota.selv.demo'
-                                target='_blank'
-                                rel='noopener noreferrer'
-                            >
-                                <img src={googlePlay} alt='Google Play Market' />
-                            </a>
-                        </div>
-                        <div className='scan-wrapper'>
-                            <div className='qr-content-wrapper'>
-                                <p className='scan-note'>Scan this QR code<br />to download</p>
-                                <div className='qr-wrapper'>
-                                    <QRCode text={`${covidDemo}//qr-redirect`} size={200} />
-                                </div>
-                                <Link to={nextStep} className='cta'>
-                                    <Button>
-                                        Continue
-                                    </Button>
-                                </Link>
+            <React.Fragment>
+                <div className='scan-qr-page-wrapper app-download' id='app'>
+                    <RandomGraphicElement elements={5}>
+                        <React.Fragment>
+                            <h1 className='title'>Download the Selv app</h1>
+                            <div className='app-cta-wrapper'>
+                                <a
+                                    href='https://testflight.apple.com/join/3FCosIcj'
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                >
+                                    <img src={appStore} alt='Apple AppStore' />
+                                </a>
+                                <a
+                                    href='https://play.google.com/apps/testing/com.iota.selv.demo'
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                >
+                                    <img src={googlePlay} alt='Google Play Market' />
+                                </a>
                             </div>
-                            <img src={avatar1} alt='' className='avatar1' />
-                            <img src={avatar2} alt='' className='avatar2' />
-                            <img src={circle} alt='' className='circle' />
-                        </div>
-                    </React.Fragment>
-                </RandomGraphicElement>
-                <img src={dots} alt='' className='dots' />
-            </div>
+                            <div className='scan-wrapper'>
+                                <div className='qr-content-wrapper'>
+                                    <p className='scan-note'>Or scan this QR code<br />to download</p>
+                                    <div className='qr-wrapper'>
+                                        <QRCode text={`${covidDemo}//qr-redirect`} size={200} />
+                                    </div>
+                                </div>
+                                <img src={avatar1} alt='' className='avatar1' />
+                                <img src={avatar2} alt='' className='avatar2' />
+                                <img src={circle} alt='' className='circle' />
+                            </div>
+                        </React.Fragment>
+                    </RandomGraphicElement>
+                    <img src={dots} alt='' className='dots' />
+                </div>
+                <div className="cta-section">
+                    <p className='subtitle'>Once you’ve downloaded and installed the app, click the button below.</p>
+                    <Link to={nextStep} className='cta'>
+                        <Button>
+                            Continue
+                        </Button>
+                    </Link>
+                </div>
+            </React.Fragment>
         </Layout>
     );
 };
