@@ -1,8 +1,6 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
-import cookies from 'js-cookie';
 import { IntroShowTodos, TestResults, TestDetails } from './pages';
-import Context from './context/app-context';
 import { routes } from './steps';
 
 const Router: React.FC = () => {
