@@ -17,11 +17,12 @@ const IncorporatedCompanies: React.FC = ({ history, match, ...props }: any) => {
     function onRowClick (data: any) {
         history.push(`/company/details/${match?.params?.step || 0}/${data.CompanyNumber}`);
     }
+    const drawer = props?.location?.state?.nextStep ? 'drawer' : '';
 
     return (
         <Layout match={match}>
             <React.Fragment>
-                <div className='companies-page-wrapper'>
+                <div className={`companies-page-wrapper ${drawer}`}>
                     <div className='companies-cta-wrapper'>
                         <h2>Newly Incorporated Companies</h2>
                         {
