@@ -3,6 +3,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    margin-top: 18px;
+    // overflow: hidden;
 
     > * {
         z-index: 1;
@@ -73,10 +75,13 @@
 }
 
 .app-download {
-    position: relative;
+    position: fixed;
     width: 100%;
     z-index: 2;
-    margin-top: 18px;
+
+    @include breakPointHeight(short) {
+        position: relative;
+    }
 
     h1 {
         font-weight: bold;
@@ -109,12 +114,31 @@
 
     .dots {
         position: absolute;
-        right: -200px;
+        right: 0;
         top: -50px;
         z-index: -1;
 
+        @include breakPoint(medium) {
+            right: -210px;
+        }
+
         @include breakPoint(small) {
             display: none;
+        }
+
+        @include breakPointHeight(short) {
+            right: -210px;
+        }
+    }
+
+    .circle {
+        position: absolute;
+        bottom: -450px;
+        z-index: 0;
+        width: 800px;
+
+        @include breakPoint(small) {
+            width: 100vw;
         }
     }
 
@@ -169,17 +193,6 @@
             .qr-code {
                 margin: 40px;
                 z-index: 5;
-            }
-        }
-
-        .circle {
-            position: absolute;
-            bottom: -250px;
-            z-index: 0;
-            width: 800px;
-
-            @include breakPoint(small) {
-                width: 100vw;
             }
         }
 

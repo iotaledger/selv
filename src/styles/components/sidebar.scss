@@ -10,6 +10,7 @@
     position: relative;
     box-shadow: -8px 0px 10px rgba(132, 147, 173, 0.1);
     border-bottom: 8px solid #1B65D0;
+    z-index: 2;
 
     @include breakPoint(medium) {
         display: none;

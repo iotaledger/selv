@@ -49,11 +49,11 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
                                 </div>
                                 <img src={avatar1} alt='' className='avatar1' />
                                 <img src={avatar2} alt='' className='avatar2' />
-                                <img src={circle} alt='' className='circle' />
                             </div>
                         </React.Fragment>
                     </RandomGraphicElement>
                     <img src={dots} alt='' className='dots' />
+                    <img src={circle} alt='' className='circle' />
                 </div>
                 <div className="cta-section">
                     <p className='subtitle'>Once you’ve downloaded and installed the app, click the button below.</p>
