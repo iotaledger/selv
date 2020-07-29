@@ -9,7 +9,7 @@ import frame from '../assets/backgrounds/circleFrame5.svg';
 
 const externalPages = [
     { url: '/', title: 'Home' },
-    { url: 'https://selv.now.sh/#faq', title: 'FAQ' },
+    { url: 'https://selv.vercel.app/#faq', title: 'FAQ' },
     { url: 'https://iota.org', title: 'IOTA.org' }
 ];
 
