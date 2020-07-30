@@ -1,7 +1,7 @@
 
 {
     "version": 2,
-    "name": "covid",
+    "name": "covid-19",
     "functions": {
       "api/routes/*.js": {
         "includeFiles": "api/lib/*.js",
