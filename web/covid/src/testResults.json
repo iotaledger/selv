@@ -1,0 +1,149 @@
+[
+	{
+		"timestamp": 1586863920000,
+		"testId": "03244589",
+		"testResult": "Immune",
+        "testedBy": "Personal Labs Ltd",
+        "testKit": "PowerChek MERS-CoV",
+		"values": [
+			{
+				"test": "% supressor cell (T8)",
+				"result": 19,
+				"reference": "20-30%"
+			},
+			{
+				"test": "T-helper/T-supressor",
+				"result": 2.7,
+				"reference": "1 - 2.5"
+			},
+			{
+				"test": "% B-cell",
+				"result": 17,
+				"reference": "5 - 15%"
+			},
+			{
+				"test": "NK cell activity",
+				"result": 85,
+				"reference": "20 - 50"
+			},
+			{
+				"test": "Concanavalin A",
+				"result": 105,
+				"reference": "75 - 100%"
+			},
+			{
+				"test": "Pokeweed mitogen",
+				"result": 102,
+				"reference": "75 - 100%"
+			},
+			{
+				"test": "Lipofolysaccharide",
+				"result": 112,
+				"reference": "75 - 100%"
+			},
+			{
+				"test": "Covid-19 Antibodies",
+				"result": 148,
+				"reference": "< 100"
+			}
+		]
+	},
+	{
+		"timestamp": 1584876720000,
+		"testId": "02443547",
+		"testResult": "Positive",
+        "testedBy": "Health Labs Ltd",
+        "testKit": "PowerChek MERS-CoV",
+		"values": [
+			{
+				"test": "% supressor cell (T8)",
+				"result": 23,
+				"reference": "20-30%"
+			},
+			{
+				"test": "T-helper/T-supressor",
+				"result": 2.9,
+				"reference": "1 - 2.5"
+			},
+			{
+				"test": "% B-cell",
+				"result": 15,
+				"reference": "5 - 15%"
+			},
+			{
+				"test": "NK cell activity",
+				"result": 88,
+				"reference": "20 - 50"
+			},
+			{
+				"test": "Concanavalin A",
+				"result": 98,
+				"reference": "75 - 100%"
+			},
+			{
+				"test": "Pokeweed mitogen",
+				"result": 78,
+				"reference": "75 - 100%"
+			},
+			{
+				"test": "Lipofolysaccharide",
+				"result": 103,
+				"reference": "75 - 100%"
+			},
+			{
+				"test": "Covid-19 Antibodies",
+				"result": 109,
+				"reference": "< 100"
+			}
+		]
+	},
+	{
+		"timestamp": 1583407920000,
+		"testId": "01745562",
+		"testResult": "Negative",
+        "testedBy": "Lab services Ltd",
+        "testKit": "PowerChek MERS-CoV",
+		"values": [
+			{
+				"test": "% supressor cell (T8)",
+				"result": 20,
+				"reference": "20-30%"
+			},
+			{
+				"test": "T-helper/T-supressor",
+				"result": 2,
+				"reference": "1 - 2.5"
+			},
+			{
+				"test": "% B-cell",
+				"result": 12,
+				"reference": "5 - 15%"
+			},
+			{
+				"test": "NK cell activity",
+				"result": 45,
+				"reference": "20 - 50"
+			},
+			{
+				"test": "Concanavalin A",
+				"result": 93,
+				"reference": "75 - 100%"
+			},
+			{
+				"test": "Pokeweed mitogen",
+				"result": 92,
+				"reference": "75 - 100%"
+			},
+			{
+				"test": "Lipofolysaccharide",
+				"result": 85,
+				"reference": "75 - 100%"
+			},
+			{
+				"test": "Covid-19 Antibodies",
+				"result": 0,
+				"reference": "< 100"
+			}
+		]
+	}
+]

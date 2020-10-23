@@ -1,0 +1,138 @@
+@import './helpers/globals';
+@import './helpers/breakpoints.scss';
+
+// components
+@import './components/text';
+@import './components/table';
+@import './components/sidebar';
+@import './components/header';
+@import './components/footer';
+@import './components/buttons';
+@import './components/drawer';
+@import './components/mobileMenu';
+@import './components/disclaimer';
+@import './components/certificate';
+
+// pages
+@import './pages/landing';
+@import './pages/companies';
+@import './pages/scanQRcode';
+@import './pages/thankYou';
+@import './pages/confirmation';
+@import './pages/companyData';
+@import './pages/bankData';
+@import './pages/signInPage';
+@import './pages/greatSuccess';
+@import './pages/demo';
+@import './pages/nextStep';
+
+
+html {
+  background: none !important;
+  font-size: unset !important;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden !important;
+  height: 100%;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.content-stretch {
+  flex: 1;
+  width: 100%;
+  align-items: flex-start;
+}
+
+div, span, p, label, input, select, section, footer, header, nav, ul, li, button, tr, td, th {
+  @include themify($themes) {
+    font-family: themed('fontFamily');  
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.no-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
+button {
+  outline: none !important;
+}
+
+.hidden-xs-down {
+  @include breakPoint(small) {
+    display: none !important;
+  }
+}
+
+.hidden-sm-down {
+  @include breakPoint(small) {
+    display: none !important;
+  }
+}
+
+.hidden-md-down {
+  @include breakPoint(medium) {
+    display: none !important;
+  }
+}
+
+.hidden-sm-up {
+  @include breakPoint(small) {
+    display: none !important;
+  }
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#root {
+  overflow-x: hidden;
+}
+
+.main-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: auto;
+  height: 100vh;
+
+  @include themify($themes) {
+    background-color: themed('pageBackground');
+  }
+
+  &.white-background {
+    background-color: #FFFFFF; 
+  }
+
+  .content {
+    padding: 50px;
+    min-width: 535px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    @include themify($themes) {
+      margin-top: themed('headerHeight');
+    }
+    @include breakPoint(small) {
+      min-width: unset;
+    }
+  }
+}
+

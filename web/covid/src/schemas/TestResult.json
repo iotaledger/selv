@@ -1,0 +1,21 @@
+{
+	"type" : "object",
+	"required" : [],
+	"properties" : {
+		"TestID" : {
+			"type" : "string"
+		},
+		"TestBy" : {
+			"type" : "string"
+		},
+		"TestTimestamp" : {
+			"type" : "string"
+		},
+		"TestKit" : {
+			"type" : "string"
+		},
+		"TestResult" : {
+			"type" : "string"
+		}
+	}
+}

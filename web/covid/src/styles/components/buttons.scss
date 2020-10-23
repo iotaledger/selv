@@ -1,0 +1,52 @@
+button {
+    border-radius: 4px;
+    color: #ffffff !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    line-height: 20px;
+    text-align: center;
+    padding: 10px 45px !important;
+    letter-spacing: 0.04em;
+    border: none !important;
+
+    @include themify($themes) {
+        background-color: themed('buttonBackgroundColor') !important;
+        height: themed('buttonHeight');
+        border-radius: themed('buttonBorderRadius');
+
+        &:hover {
+            background-color: themed('secondaryColor') !important;
+        }
+
+        &:disabled {
+            background-color: themed('secondaryFontColor') !important;
+
+            &:hover {
+                background-color: themed('secondaryFontColor') !important;
+            }
+        }
+    }
+}
+
+.landing-page-wrapper,
+.thank-you-page-wrapper {
+    .cta {
+        @include themify($themes) {
+            background: themed('primaryColor');
+        }
+        z-index: 10;
+        border-radius: 35px;
+        height: 55px;
+        padding: 10px 40px !important;
+
+        > span {
+            color: #ffffff;
+            @include themify($themes) {
+                font-family: themed('fontFamily');
+            }
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 16px;
+        }
+    }
+}

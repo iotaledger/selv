@@ -1,0 +1,20 @@
+@mixin breakPoint($point) {
+    @if $point == large {
+        @media (max-width: 9990px) { @content; }
+    } 
+    @if $point == medium {
+        @media (max-width: 989px) { @content; }
+    } 
+    @else if $point == small {
+        @media (max-width: 767px) { @content; }
+    }
+}
+
+@mixin breakPointHeight($point) {
+    @if $point == long {
+        @media (max-height: 9990px) { @content; }
+    } 
+    @else if $point == short {
+        @media (max-height: 870px) { @content; }
+    }
+}

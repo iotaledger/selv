@@ -1,0 +1,196 @@
+$font-family-health: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-hr: 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-agency: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-demo: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-demo-headings: 'Metropolis', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+$primary-color-health: #2667FF;
+$secondary-color-health: #4247DC;
+$trinary-color-health: #333333;
+$primary-font-color-health: #142037;
+$secondary-font-color-health: #6F6F6F;
+$page-background-health: #F2F7FB;
+
+$primary-color-hr: #127BBB;
+$secondary-color-hr: #1CADC3;
+$trinary-color-hr: #127BBB;
+$primary-font-color-hr: #142037;
+$secondary-font-color-hr: #BBBBBB;
+$page-background-hr: #FCFFFF;
+
+$primary-color-agency: #142037;
+$secondary-color-agency: #142037;
+$trinary-color-agency: #142037;
+$primary-font-color-agency: #142037;
+$secondary-font-color-agency: #BBBBBB;
+$page-background-agency: #FCFDFF;
+
+$primary-color-demo: #1B65D0;
+$secondary-color-demo: #3B6AC5;
+$trinary-color-demo: #25C1B6;
+$primary-font-color-demo: #142037;
+$secondary-font-color-demo: #BBBBBB;
+$page-background-demo: #EEF2FA;
+
+$link-color: #306ADC;
+$notice-color: #1B65D0;
+$form-selector-color: #339BB6;
+
+$themes: (
+    demo: (
+        fontFamily: $font-family-demo,
+        fontFamilyHeadings: $font-family-demo-headings,
+
+        defaultTextSize: 16px,
+        defaultLineHeight: 27px,
+
+        primaryColor: $primary-color-demo,
+        secondaryColor: $secondary-color-demo,
+        trinaryColor: $trinary-color-demo,
+        primaryFontColor: $primary-font-color-demo,
+        secondaryFontColor: $secondary-font-color-demo,
+        pageBackground: $page-background-demo,
+
+        h1TextSize: 44px,
+        h1LineHeight: 57px,
+        h2TextSize: 36px,
+        h2LineHeight: 57px,
+        h3TextSize: 21px,
+        h3LineHeight: 30px,
+        h4TextSize: 16px,
+        h4LineHeight: 24px,
+        h5TextSize: 21px,
+        h5LineHeight: 24px,
+
+        buttonBackgroundColor: $primary-color-demo,
+        buttonHeight: 48px,
+        buttonBorderRadius: 100px,
+
+    ),
+    health: (
+        fontFamily: $font-family-health,
+        fontFamilyHeadings: $font-family-health,
+
+        defaultTextSize: 16px,
+        defaultLineHeight: 24px,
+
+        primaryColor: $primary-color-health,
+        secondaryColor: $secondary-color-health,
+        trinaryColor: $trinary-color-health,
+        primaryFontColor: $primary-font-color-health,
+        secondaryFontColor: $secondary-font-color-health,
+        linkColor: $link-color,
+        noticeColor: $notice-color,
+        formSelectorColor: $form-selector-color,
+        pageBackground: $page-background-health,
+
+        h1TextSize: 36px,
+        h1LineHeight: 42px,
+        h2TextSize: 24px,
+        h2LineHeight: 30px,
+        h3TextSize: 18px,
+        h3LineHeight: 20px,
+        h4TextSize: 16px,
+        h4LineHeight: 18px,
+        h5TextSize: 14px,
+        h5LineHeight: 15px,
+
+        buttonBackgroundColor: $primary-color-health,
+        buttonHeight: 43px,
+        buttonBorderRadius: 4px,
+
+        headerBackgroundColor: #3953B0,
+        headerHeight: 60px,
+        headerLogoAlign: left,
+        headerLogoHeight: 24px,
+
+        footerBackgroundColor: #FFFFFF,
+        footerHeight: 76px,
+        footerLogoAlign: center,
+        footerLogoHeight: 24px,
+    ),
+    hr: (
+        fontFamily: $font-family-hr,
+        fontFamilyHeadings: $font-family-hr,
+
+        defaultTextSize: 16px,
+        defaultLineHeight: 24px,
+
+        primaryColor: $primary-color-hr,
+        secondaryColor: $secondary-color-hr,
+        trinaryColor: $trinary-color-hr,
+        primaryFontColor: $primary-font-color-hr,
+        secondaryFontColor: $secondary-font-color-hr,
+        linkColor: $link-color,
+        noticeColor: $notice-color,
+        formSelectorColor: $form-selector-color,
+        pageBackground: $page-background-hr,
+
+        h1TextSize: 36px,
+        h1LineHeight: 42px,
+        h2TextSize: 24px,
+        h2LineHeight: 28px,
+        h3TextSize: 24px,
+        h3LineHeight: 28px,
+        h4TextSize: 18px,
+        h4LineHeight: 20px,
+        h5TextSize: 15px,
+        h5LineHeight: 17px,
+
+        buttonBackgroundColor: $primary-color-hr,
+        buttonHeight: 51px,
+        buttonBorderRadius: 4px,
+
+        headerBackgroundColor: #1CADC3,
+        headerHeight: 100px,
+        headerLogoAlign: left,
+        headerLogoHeight: 39px,
+
+        footerBackgroundColor: #562A71,
+        footerHeight: 80px,
+        footerLogoAlign: right,
+        footerLogoHeight: 24px,
+    ),
+    agency: (
+        fontFamily: $font-family-agency,
+        fontFamilyHeadings: $font-family-agency,
+
+        defaultTextSize: 16px,
+        defaultLineHeight: 24px,
+
+        primaryColor: $primary-color-agency,
+        secondaryColor: $secondary-color-agency,
+        trinaryColor: $trinary-color-agency,
+        primaryFontColor: $primary-font-color-agency,
+        secondaryFontColor: $secondary-font-color-agency,
+        linkColor: $link-color,
+        noticeColor: $notice-color,
+        formSelectorColor: $form-selector-color,
+        pageBackground: $page-background-agency,
+
+        h1TextSize: 36px,
+        h1LineHeight: 42px,
+        h2TextSize: 24px,
+        h2LineHeight: 28px,
+        h3TextSize: 24px,
+        h3LineHeight: 28px,
+        h4TextSize: 18px,
+        h4LineHeight: 20px,
+        h5TextSize: 15px,
+        h5LineHeight: 17px,
+
+        buttonBackgroundColor: #1F63E8,
+        buttonHeight: 51px,
+        buttonBorderRadius: 4px,
+
+        headerBackgroundColor: #102E68,
+        headerHeight: 100px,
+        headerLogoAlign: center,
+        headerLogoHeight: 39px,
+
+        footerBackgroundColor: #562A71,
+        footerHeight: 80px,
+        footerLogoAlign: right,
+        footerLogoHeight: 24px,
+    ),
+);
