@@ -1,0 +1,32 @@
+{
+	"type" : "object",
+	"required" : ["DID"],
+	"properties" : {
+		"DID" : {
+			"type" : "string"
+		},
+		"Language" : {
+			"type" : "string"
+		},
+		"Locale" : {
+			"type" : "string"
+		},
+		"Bank" : {
+			"type" : "object",
+			"properties" : {
+				"AccountType" : {
+					"type" : "string"
+				},
+				"AccountNumber" : {
+					"type" : "string"
+				},
+				"AccountIBAN" : {
+					"type" : "string"
+				},
+				"BankName" : {
+					"type" : "string"
+				}
+			}
+		}
+	}
+}

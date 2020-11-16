@@ -1,0 +1,30 @@
+.sign-in-confirmation {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    max-width: 570px;
+    width: 100%;
+    margin-top: 100px;
+
+    h2 {
+        margin: 70px 0 30px;
+    }
+
+    button {
+        margin-top: 70px;
+    }
+
+    .selv-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        background-color: #EEF2FA;
+        border-radius: 16px;
+        padding: 20px 10px;
+        margin: 70px 0;
+        min-width: 490px;
+    }
+}
