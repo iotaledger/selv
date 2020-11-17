@@ -38,8 +38,8 @@ export const routes = [
 ];
 
 export const mainSteps = [
-    { title: 'Set up a company' },
-    { title: 'Get a bank account' },
-    { title: 'Liability insurance' },
-    { title: 'Ready for business' }
+    { title: 'Create your identity' },
+    { title: 'Visit the registry' },
+    { title: 'Start your pledge' },
+    { title: 'Create your legacies' }
 ];
