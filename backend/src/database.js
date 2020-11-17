@@ -78,6 +78,45 @@ exports.createOrUpdateCompany = async ({
     ]);
 };
 
+exports.createOrUpdatePledge = async ({
+    CompanyNumber,
+    CompanyName,
+    CompanyCreationDate,
+    CompanyType,
+    CompanyStatus,
+    CompanyOwner,
+    CompanyOwners,
+    CompanyAddress,
+    CompanyBusiness,
+    tangle
+}) => {
+    const query = `
+        REPLACE INTO pledge (
+            CompanyNumber, 
+            CompanyName, 
+            CompanyCreationDate, 
+            CompanyType, 
+            CompanyStatus, 
+            CompanyOwner, 
+            CompanyOwners,
+            CompanyAddress,
+            CompanyBusiness,
+            tangle
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    await db.run(query, [
+        CompanyNumber,
+        CompanyName,
+        CompanyCreationDate,
+        CompanyType,
+        CompanyStatus,
+        CompanyOwner,
+        CompanyOwners,
+        CompanyAddress,
+        CompanyBusiness,
+        tangle
+    ]);
+};
+
 // createDID = async ({ root, privateKey, keyId, seed, next_root, start }) => {
 //     const insert = `
 //         INSERT INTO did (

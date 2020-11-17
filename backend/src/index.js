@@ -5,7 +5,7 @@ const SocketIO = require('socket.io');
 const { Server } = require('http');
 // const { createIdentity, createAccessCredential } = require('./DID')
 const { websocketPort } = require('../config');
-const { createOrUpdateCompany, readData, readAllData, removeData } = require('./database');
+const { createOrUpdateCompany, createOrUpdatePledge, readData, readAllData, removeData } = require('./database');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -245,6 +245,35 @@ app.get('/company', cors(corsOptions), async (req, res) => {
 });
 
 /*
+Get pledge details
+*/
+app.get('/pledge', cors(corsOptions), async (req, res) => {
+    try {
+        const pledgeNumber = req.query.pledge;
+        await removeData('pledge', '');
+        if (pledgeNumber) {
+            const data = await readData('pledge', pledgeNumber);
+            res.json({
+                status: 'success',
+                data
+            });
+        } else {
+            const data = await readAllData('pledge');
+            res.json({
+                status: 'success',
+                data
+            });
+        }
+    } catch (e) {
+        console.error(e);
+        res.json({
+            status: 'failure',
+            error: JSON.stringify(e)
+        });
+    }
+});
+
+/*
 Activate company
 */
 app.get('/activate', cors(corsOptions), async (req, res) => {
@@ -289,9 +318,53 @@ app.post('/activate', cors(corsOptions), async (req, res) => {
 });
 
 /*
+Activate pledge
+*/
+app.get('/activate_pledge', cors(corsOptions), async (req, res) => {
+    try {
+        const pledgeNumber = req.query.pledge;
+        if (pledgeNumber) {
+            const pledge = await readData('pledge', pledgeNumber);
+            await createOrUpdatePledge({ ...pledge, PledgeStatus: 'Active' });
+            console.log('Activating pledge', pledgeNumber);
+            res.json({
+                status: 'success'
+            });
+        }
+    } catch (e) {
+        console.error(e);
+        res.json({
+            status: 'failure',
+            error: JSON.stringify(e)
+        });
+    }
+});
+
+app.post('/activate_pledge', cors(corsOptions), async (req, res) => {
+    // res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
+    // res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+    try {
+        const pledgeNumber = req.body.pledge;
+        if (pledgeNumber) {
+            const pledge = await readData('pledge', pledgeNumber);
+            await createOrUpdatePledge({ ...pledge, PledgeStatus: 'Active' });
+            res.json({
+                status: 'success'
+            });
+        }
+    } catch (e) {
+        console.error(e);
+        res.json({
+            status: 'failure',
+            error: JSON.stringify(e)
+        });
+    }
+});
+
+/*
 Remove company
 */
-app.get('/remove', cors(corsOptions), async (req, res) => {
+app.get('/remove_company', cors(corsOptions), async (req, res) => {
     try {
         const companyNumber = req.query.company;
         if (companyNumber) {
@@ -300,6 +373,32 @@ app.get('/remove', cors(corsOptions), async (req, res) => {
            
         } else {
             await removeData('company', '');
+        }
+        res.json({
+            status: 'success'
+        });
+    } catch (e) {
+        console.error(e);
+        res.json({
+            status: 'failure',
+            error: JSON.stringify(e)
+        });
+    }
+});
+
+
+/*
+Remove pledge
+*/
+app.get('/remove_pledge', cors(corsOptions), async (req, res) => {
+    try {
+        const pledgeNumber = req.query.pledge;
+        if (pledgeNumber) {
+            await removeData('pledge', pledgeNumber);
+            console.log('Removed pledge', pledgeNumber);
+           
+        } else {
+            await removeData('pledge', '');
         }
         res.json({
             status: 'success'
