@@ -70,10 +70,12 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         // Removing the listener before unmounting the component in order to avoid addition of multiple listener
         return () => {
             setIsRunning(false);
-            ioClient && console.log('WebSocket disconnected');
-            ioClient?.off('createCredentialConfirmation');
-            ioClient?.off('error');
-            ioClient?.disconnect();
+            if (ioClient) {
+                console.log('WebSocket disconnected');
+                ioClient.off('createCredentialConfirmation');
+                ioClient.off('error');
+                ioClient.disconnect();
+            }
         };
     }, [channelId]); // eslint-disable-line react-hooks/exhaustive-deps
 
