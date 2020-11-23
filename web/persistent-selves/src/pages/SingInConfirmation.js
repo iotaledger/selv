@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import useStep from '../utils/useStep';
 import { Layout, RandomGraphicElement } from '../components';
 import selv from '../assets/selvBordered.svg';
+import image from '../assets/greatSuccess/image1.png';
 
 /**
  * Component which will display a SingInConfirmation.
@@ -27,16 +28,24 @@ const SingInConfirmation = ({ history, match }) => {
         <Layout match={match}>
             <RandomGraphicElement elements={5}>
                 <div className='sign-in-confirmation'>
-                    <img src={selv} alt='Selv app logo' />
-                    <h2>Hello!</h2>
-                    <p>
-                        You have now signed in without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which [business] can use without an expensive verification process. Verifying your data is nearly instant and completely free.
-                    </p>
-                    <Link to={nextStep}>
-                        <Button>
-                            Continue
-                        </Button>
-                    </Link>
+                    <div className='sign-in-confirmation-logo-wrapper'>
+                        <img src={selv} alt='Selv app logo' />
+                        <h2>Access Authorised</h2>
+                    </div>
+                    <div className='sign-in-confirmation-content-wrapper'>
+                        <img className='image' src={image} alt='Access Authorised' />
+                        <div className='sign-in-confirmation-content'>
+                            <h2>You have now signed in to the registry without ever creating an account.</h2>
+                            <p>
+                                No more need for endless account and password creations. Verifying your data is nearly instant and completely free.
+                            </p>
+                            <Link to={nextStep}>
+                                <Button>
+                                    Continue
+                                </Button>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </RandomGraphicElement>
         </Layout>

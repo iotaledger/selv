@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import useStep from '../utils/useStep';
-import mobile from '../assets/mobile.png';
+import image from '../assets/greatSuccess/image3.png';
 import { Disclaimer, RandomGraphicElement } from '../components';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
@@ -31,7 +31,7 @@ const IntroLifeSpan = ({ match }) => {
                 <div className='demo-intro app' id='app'>
                     <div className='app-content-wrapper'>
                         <h2>This is the span of your grandparents</h2>
-                        <img className='phone' src={mobile} alt='Mobile phone' />
+                        <img className='life-span' src={image} alt='Life span' />
                         <Link to={nextStep}>
                             <Button className='cta'>
                                 Continue

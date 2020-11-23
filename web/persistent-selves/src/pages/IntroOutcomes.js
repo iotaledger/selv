@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import useStep from '../utils/useStep';
-import mobile from '../assets/mobile.png';
+import image from '../assets/greatSuccess/image2.png';
 import { Disclaimer, RandomGraphicElement } from '../components';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
@@ -29,7 +29,7 @@ const IntroOutcomes = ({ match }) => {
                     <img src={logo} alt="Selv logo" />
                 </Link>
                 <div className='demo-intro app' id='app'>
-                    <img className='phone' src={mobile} alt='Mobile phone' />
+                    <img className='image' src={image} alt='Outcomes' />
                     <div className='app-content-wrapper'>
                         <h2>Create your outcomes</h2>
                         <p>

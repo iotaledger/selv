@@ -4,6 +4,7 @@ import QRCode from './QRCode';
 import Table from './Table';
 import Layout from './Layout';
 import Loading from './Loading';
+import FAQ from './FAQ';
 import NextStepDrawer from './NextStepDrawer';
 import Form from './Form';
 import PrefilledForm from './PrefilledForm';
@@ -27,5 +28,6 @@ export {
     AccountType,
     RandomGraphicElement,
     WebSocket,
-    Disclaimer
+    Disclaimer,
+    FAQ
 };
