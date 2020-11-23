@@ -23,7 +23,6 @@
     "react-scripts": "3.4.1",
     "rsuite": "^4.8.4",
     "socket.io-client": "^2.3.1",
-    "typescript": "~3.7.5",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
@@ -48,19 +47,9 @@
     ]
   },
   "engines": {
-    "node": ">=10.0"
+    "node": ">=14.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.1.2",
-    "@testing-library/user-event": "^12.2.2",
-    "@types/node": "^14.14.7",
-    "@types/qrcode.react": "^1.0.1",
-    "@types/randomstring": "^1.1.6",
-    "@types/react": "^16.9.56",
-    "@types/react-dom": "^16.9.9",
-    "@types/react-router-dom": "^5.1.6",
-    "@types/socket.io-client": "^1.4.34",
-    "@types/webfontloader": "^1.6.32",
     "node-sass": "^4.14.1"
   }
 }
