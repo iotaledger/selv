@@ -1,6 +1,7 @@
-import IntroShowTodos from './IntroShowTodos';
-import IntroShowMobile from './IntroShowMobile';
-import IntroDemoSelection from './IntroDemoSelection';
+import IntroTodos from './IntroTodos';
+import IntroWelcome from './IntroWelcome';
+import IntroOutcomes from './IntroOutcomes';
+import IntroLifeSpan from './IntroLifeSpan';
 import AppDownloadQR from './AppDownloadQR';
 import CompanyIntro from './CompanyIntro';
 import ProveIdentity from './ProveIdentity';
@@ -10,14 +11,15 @@ import CompanyDetails from './CompanyDetails';
 import Confirmation from './Confirmation';
 import BankData from './BankData';
 import InsuranceData from './InsuranceData';
-import IncorporatedCompanies from './IncorporatedCompaniesList';
+import PledgeRegistry from './PledgeRegistry';
 import GreatSuccess from './GreatSuccess';
 import ThankYou from './ThankYou';
 
 export {
-    IntroShowTodos,
-    IntroShowMobile,
-    IntroDemoSelection,
+    IntroTodos,
+    IntroWelcome,
+    IntroOutcomes,
+    IntroLifeSpan,
     AppDownloadQR,
     ProveIdentity,
     SingInConfirmation,
@@ -27,7 +29,7 @@ export {
     Confirmation,
     BankData,
     InsuranceData,
-    IncorporatedCompanies,
+    PledgeRegistry,
     GreatSuccess,
     ThankYou
 };

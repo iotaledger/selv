@@ -8,9 +8,9 @@ import { Layout, Table, NextStepDrawer } from '../components';
 import { serverAPI } from '../config.json';
 
 /**
- * Component which will display a IncorporatedCompanies.
+ * Component which will display a PledgeRegistry.
  */
-const IncorporatedCompanies: React.FC = ({ history, match, ...props }: any) => {
+const PledgeRegistry: React.FC = ({ history, match, ...props }: any) => {
     const { nextStep } = useStep(match);
     const { response, loading } = useFetch(`${serverAPI}/company`);
 
@@ -42,7 +42,7 @@ const IncorporatedCompanies: React.FC = ({ history, match, ...props }: any) => {
                         }
                     </div>
                     <Table
-                        data={response && response.data}
+                        data={response && response?.data}
                         onRowClick={onRowClick}
                         loading={loading}
                     />
@@ -53,4 +53,4 @@ const IncorporatedCompanies: React.FC = ({ history, match, ...props }: any) => {
     );
 };
 
-export default IncorporatedCompanies;
+export default PledgeRegistry;

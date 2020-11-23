@@ -8,9 +8,9 @@ import dots from '../assets/backgrounds/dots.png';
 import logo from '../assets/landing/logoHeader.svg';
 
 /**
- * Component which will display a IntroShowTodos.
+ * Component which will display a Intro Todos.
  */
-const IntroShowTodos: React.FC = ({ match }: any) => {
+const IntroTodos: React.FC = ({ match }: any) => {
     const { nextStep } = useStep(match);
 
     useEffect(() => {
@@ -33,16 +33,17 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                 </Link>
                 <div className='demo-intro' id='app'>
                     <div className='todos'>
-                        <span className='heading'><h2>Welcome to the</h2>&nbsp;&nbsp;&nbsp;<h2 className='highlight'>Selv demo</h2></span>
-                        <h3>Here is <strong>your to-do list</strong> for today:</h3>
+                        <span className='heading'><h2>Start your</h2>&nbsp;&nbsp;<h2 className='highlight'>legacy</h2>&nbsp;&nbsp;<h2>for future</h2><br /><h2>generations</h2>&nbsp;&nbsp;<h2 className='highlight'>today</h2></span>
+                        <p>Explore this demo to see how you can safely own, share and manage your pledge to the future beyond your lifetime</p>
                         <ul className='todos'>
-                            <li>Set up a company</li>
-                            <li>Get a bank account</li>
-                            <li>Get liability insurance</li>
+                            <li>Create your identity</li>
+                            <li>Visit the registry</li>
+                            <li>Start your pledge</li>
+                            <li>Create your legacies</li>
                         </ul>
                         <Link to={nextStep}>
                             <Button className='cta'>
-                                Continue
+                                Start the demo
                             </Button>
                         </Link>
                     </div>
@@ -58,4 +59,4 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
     );
 };
 
-export default IntroShowTodos;
+export default IntroTodos;

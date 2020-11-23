@@ -1,7 +1,8 @@
 import {
-    IntroShowTodos,
-    IntroShowMobile,
-    IntroDemoSelection,
+    IntroTodos,
+    IntroWelcome,
+    IntroOutcomes,
+    IntroLifeSpan,
     AppDownloadQR,
     ProveIdentity,
     SingInConfirmation,
@@ -10,16 +11,18 @@ import {
     Confirmation,
     BankData,
     InsuranceData,
-    IncorporatedCompanies,
+    PledgeRegistry,
     GreatSuccess,
     ThankYou
 } from './pages';
 
 export const routes = [
-    { path: '/demo/todos', page: IntroShowTodos },
-    { path: '/demo/app', page: IntroShowMobile },
-    { path: '/company/list/0', page: IncorporatedCompanies },
+    { path: '/demo/welcome', page: IntroWelcome },
+    { path: '/demo/outcomes', page: IntroOutcomes },
+    { path: '/demo/lifespan', page: IntroLifeSpan },
+    { path: '/demo/todos', page: IntroTodos },
     { path: '/demo/app/0', page: AppDownloadQR },
+    { path: '/company/list/0', page: PledgeRegistry },
     { path: '/company/prove/0', page: ProveIdentity },
     { path: '/company/signin/0', page: SingInConfirmation },
     { path: '/company/data/0', page: CompanyData },

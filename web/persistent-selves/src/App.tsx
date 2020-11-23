@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import WebFontLoader from 'webfontloader';
 import ReactGA from 'react-ga';
-import { IntroShowTodos, IncorporatedCompanies, CompanyDetails } from './pages'
+import { IntroWelcome, PledgeRegistry, CompanyDetails } from './pages'
 import GlobalState from './context/globalState'
 import 'antd/dist/antd.css';
 import 'rsuite/lib/styles/index.less';
@@ -30,7 +30,7 @@ const App: React.FC = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Redirect to='/demo/todos' />
+            <Redirect to='/demo/welcome' />
           </Route>
           {
             routes.map(({ path, page }: { path: string; page: any; }) => 
@@ -38,9 +38,9 @@ const App: React.FC = () => {
             )
           }
           <Route path={'/company/details/:step/:companyId'} component={CompanyDetails} />
-          <Route path={'/company/list/:step'} component={IncorporatedCompanies} />
+          <Route path={'/company/list/:step'} component={PledgeRegistry} />
           <Route render={() => (
-           <IntroShowTodos />
+           <IntroWelcome />
           )} />
         </Switch>
       </BrowserRouter>
