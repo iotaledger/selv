@@ -5,19 +5,15 @@ import {
 } from 'identity';
 import { provider } from '../config.json';
 import Address from '../schemas/Address.json';
-import BankAccount from '../schemas/BankAccount.json';
-import Company from '../schemas/Company.json';
 import ContactDetails from '../schemas/ContactDetails.json';
-import Insurance from '../schemas/Insurance.json';
+import Commitments from '../schemas/Commitments.json';
 import PersonalData from '../schemas/PersonalData.json';
 
 const schemas = {
     Address,
-    BankAccount,
-    Company,
     ContactDetails,
-    Insurance,
-    PersonalData
+    PersonalData,
+    Commitments
 };
 
 const VERIFICATION_LEVEL = {
