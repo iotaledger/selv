@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import WebFontLoader from 'webfontloader';
 import ReactGA from 'react-ga';
-import { IntroWelcome, PledgeRegistry, CompanyDetails } from './pages'
+import { IntroWelcome } from './pages'
 import GlobalState from './context/globalState'
 import 'antd/dist/antd.css';
 import 'rsuite/lib/styles/index.less';
@@ -37,8 +37,6 @@ const App = () => {
               <Route exact key={path} path={path} component={page} />
             )
           }
-          <Route path={'/company/details/:step/:companyId'} component={CompanyDetails} />
-          <Route path={'/company/list/:step'} component={PledgeRegistry} />
           <Route render={() => (
            <IntroWelcome />
           )} />
