@@ -24,8 +24,8 @@ export default () => (
         <h4>Frequently Asked Questions</h4>
         <div className='faq-content'>
             {
-                faqs.map(({ question, answer}) => (
-                    <div className='faq'>
+                faqs.map(({ question, answer}, index) => (
+                    <div className='faq' key={`faq-${index}`}>
                         <div className='faq-question'>{question}</div>
                         <div className='faq-answer'>{answer}</div>
                     </div>
