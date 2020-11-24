@@ -1,0 +1,6 @@
+{
+    "websocketURL": "https://selv01.iota.cafe:8888",
+    "apiURL": "https://selv01.iota.cafe",
+    "provider": "https://nodes.devnet.iota.org:443",
+    "keyId": "selv"
+}

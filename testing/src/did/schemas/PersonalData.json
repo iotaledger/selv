@@ -1,0 +1,57 @@
+{
+	"type" : "object",
+	"required" : ["DID"],
+	"properties" : {
+		"DID" : {
+			"type" : "string"
+		},
+		"Language" : {
+			"type" : "string"
+		},
+		"Locale" : {
+			"type" : "string"
+		},
+		"TimezoneOffset" : {
+			"type" : "string"
+		},
+		"UserPersonalData" : {
+			"type" : "object",
+			"properties" : {
+				"UserName" : {
+					"type" : "object",
+					"properties" : {
+						"Title" : {
+							"type" : "string"
+						},
+						"FirstName" : {
+							"type" : "string"
+						},
+						"LastName" : {
+							"type" : "string"
+						}
+					}
+				},
+				"UserDOB" : {
+					"type" : "object",
+					"properties" : {
+						"Date" : {
+							"type" : "string"
+						},
+						"Age" : {
+							"type" : "number"
+						}
+					}
+				},
+				"Birthplace" : {
+					"type" : "string"
+				},
+				"Nationality" : {
+					"type" : "string"
+				},
+				"Gender" : {
+					"type" : "string"
+				}
+			}
+		}
+	}
+}

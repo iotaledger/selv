@@ -1,0 +1,32 @@
+{
+	"type" : "object",
+	"required" : ["DID", "Commitments"],
+	"properties" : {
+		"DID" : {
+			"type" : "string"
+		},
+		"Commitments" : { 
+			"type" : "array",
+			"Commitment" : {
+				"type" : "object",
+				"properties" : {
+					"CommitmentType" : {
+						"type" : "string"
+					},
+					"CommitmentTitle" : {
+						"type" : "string"
+					},
+					"CommitmentPercentage" : {
+						"type" : "number"
+					},
+					"CommitmentSupport" : {
+						"type" : "string"
+					},
+					"CommitmentSupportValue" : {
+						"type" : "number"
+					}
+				}
+			}
+		}
+	}
+}
