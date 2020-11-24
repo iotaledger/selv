@@ -10,7 +10,6 @@ const labels = {
     Date: 'Date of birth',
     Nationality: 'Nationality',
     Gender: 'Gender',
-    Birthplace: 'Birthplace',
     Country: 'Country of residence',
     Phone: 'Phone number',
     Address: 'Address',
