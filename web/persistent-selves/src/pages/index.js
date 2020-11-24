@@ -6,11 +6,11 @@ import AppDownloadQR from './AppDownloadQR';
 import CompanyIntro from './CompanyIntro';
 import ProveIdentity from './ProveIdentity';
 import SingInConfirmation from './SingInConfirmation';
-import CompanyData from './CompanyData';
-import CompanyDetails from './CompanyDetails';
+import SelectCommitmentCategory from './SelectCommitmentCategory';
+import SelectCommitments from './SelectCommitments';
+import PersonalizeCommitments from './PersonalizeCommitments';
+import PledgeData from './PledgeData';
 import Confirmation from './Confirmation';
-import BankData from './BankData';
-import InsuranceData from './InsuranceData';
 import PledgeRegistry from './PledgeRegistry';
 import GreatSuccess from './GreatSuccess';
 import ThankYou from './ThankYou';
@@ -23,12 +23,12 @@ export {
     AppDownloadQR,
     ProveIdentity,
     SingInConfirmation,
+    SelectCommitmentCategory,
+    SelectCommitments,
+    PersonalizeCommitments,
     CompanyIntro,
-    CompanyData,
-    CompanyDetails,
+    PledgeData,
     Confirmation,
-    BankData,
-    InsuranceData,
     PledgeRegistry,
     GreatSuccess,
     ThankYou
