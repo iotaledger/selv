@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import useStep from '../utils/useStep';
-import { Layout, RandomGraphicElement } from '../components';
-import selv from '../assets/selvBordered.svg';
-import image from '../assets/greatSuccess/image1.png';
+import { Layout } from '../components';
+import future from '../assets/futureCategory.svg';
+import present from '../assets/presentCategory.svg';
+import arrow from '../assets/arrow.svg';
 
 /**
  * Component which will display a SelectCommitmentCategory.
  */
 const SelectCommitmentCategory = ({ history, match }) => {
-    const { nextStep } = useStep(match);
+    const [disabled, updateDisabled] = useState('disabled');
 
     useEffect(() => {
         async function getData () {
@@ -26,28 +26,44 @@ const SelectCommitmentCategory = ({ history, match }) => {
 
     return (
         <Layout match={match}>
-            <RandomGraphicElement elements={5}>
-                <div className='sign-in-confirmation'>
-                    <div className='sign-in-confirmation-logo-wrapper'>
-                        <img src={selv} alt='Selv app logo' />
-                        <h2>Access Authorised</h2>
+            <div className='select-commitment-category-wrapper'>
+                <div className='commitment-category'>
+                    <div className='commitment-category-image-wrapper'>
+                        <img className='commitment-category-image' src={future} alt='Far Future Foundation' />
+                        <h2>Far Future Foundation</h2>
                     </div>
-                    <div className='sign-in-confirmation-content-wrapper'>
-                        <img className='image' src={image} alt='Access Authorised' />
-                        <div className='sign-in-confirmation-content'>
-                            <h2>You have now signed in to the registry without ever creating an account.</h2>
-                            <p>
-                                No more need for endless account and password creations. Verifying your data is nearly instant and completely free.
-                            </p>
-                            <Link to={nextStep}>
-                                <Button>
-                                    Continue
-                                </Button>
-                            </Link>
-                        </div>
+                    <div className='commitment-category-content'>
+                        <h2>Future Commitment</h2>
+                        <p>
+                            The far future commitment allows you to make conditional choices about a far-away future based on oracles and smart contracts.
+                        </p>
+                        <Link to='/future/select/1'>
+                            <Button className='category-future'>
+                                Visit Now
+                                <img className='arrow' src={arrow} alt='' />
+                            </Button>
+                        </Link>
                     </div>
                 </div>
-            </RandomGraphicElement>
+                <div className={`commitment-category ${disabled}`}>
+                    <div className='commitment-category-image-wrapper'>
+                        <img className='commitment-category-image' src={present} alt='Act Right Now Foundation' />
+                        <h2>Act Right Now Foundation</h2>
+                    </div>
+                    <div className='commitment-category-content'>
+                        <h2>Present Commitment</h2>
+                        <p>
+                            The present commitment let´s you make pledges to get involved and shaping the future yourself.
+                        </p>
+                        <Link to='/present/select/2'>
+                            <Button className='category-future'>
+                                Visit Now
+                                <img className='arrow' src={arrow} alt='' />
+                            </Button>
+                        </Link>
+                    </div>
+                </div>
+            </div>
         </Layout>
     );
 };
