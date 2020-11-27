@@ -53,6 +53,7 @@ const SelectCommitments = ({ history, match }) => {
                                         hoverable 
                                         className='commitment-item'
                                         key={commitment?.commitmentId}
+                                        onClick={() => onSelect(commitment?.commitmentId)}
                                     >
                                         <div className='commitment-image-wrapper'>
                                             <img 
@@ -89,7 +90,7 @@ const SelectCommitments = ({ history, match }) => {
                     }
                     <Link to={{
                         pathname: nextStep,
-                        state: { commitments: selected }
+                        state: { commitments: selected, category }
                     }}>
                         <Button disabled={selected.length < 2}>
                             Continue
