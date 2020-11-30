@@ -14,39 +14,69 @@ const percentages = Array.from({ length: 11 }, (x, i) => i * 10);
 
 const PersonalizeCommitments = ({ history, match }) => {
     const { nextStep } = useStep(match);
-    const [percentage, updatePercentage] = useState([50, 50]);
-
     const category = history?.location?.state?.category;
-    const selectedCommitments = history?.location?.state?.commitments;
-    const selected = commitments[category]?.commitments?.filter(commitment =>
-        selectedCommitments.includes(commitment?.commitmentId)
-    )
+    const [percentage, updatePercentage] = useState([50, 50]);
+    const [storedCommitments, updateStoredCommitments] = useState({});
+    const [selected, setSelected] = useState([]);
+
+
+    useEffect(() => {
+        const selectedCommitments = history?.location?.state?.commitments;
+        const selected = commitments[category]?.commitments?.filter(commitment =>
+            selectedCommitments.includes(commitment?.commitmentId)
+        );
+
+        const storedCommitments = selected.map((commitment, index) => {
+            const object = {
+                commitmentId: commitment?.commitmentId,
+                title: commitment?.title,
+                condition: commitment?.condition?.if,
+                percentage: index === 0 ? percentages[3] : percentages[1],
+                support: commitment?.condition?.support?.[0],
+                walletPercentage: 50
+            }
+            updateStoredCommitments(storedCommitments => ({ ...storedCommitments, [commitment?.commitmentId]: object }));
+
+        })
+
+        setSelected(selected);
+
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const marks = {
         0: selected[0]?.title,
         100: selected[1]?.title,
     };
 
-    const onChange = value => updatePercentage([value, 100 - value])
+    const onChange = value => {
+        updatePercentage([value, 100 - value]);
+
+        selected.forEach((item, index) => {
+            const commitment = storedCommitments[item?.commitmentId];
+            commitment.walletPercentage = index === 0 ? Number(value) : Number(100 - value);
+            updateStoredCommitments(storedCommitments => ({ ...storedCommitments, [commitment?.commitmentId]: commitment }));
+        })
+    }
     
     const handleConditionChange = (id, value) => {
-        console.log('handleConditionChange', id, value)
+        const commitment = storedCommitments[id];
+        commitment.percentage = Number(value);
+        updateStoredCommitments(storedCommitments => ({ ...storedCommitments, [id]: commitment }));
     }
 
     const handleSupportChange = (id, value) => {
-        console.log('handleSupportChange', id, value)
+        const commitment = storedCommitments[id];
+        commitment.support = value;
+        updateStoredCommitments(storedCommitments => ({ ...storedCommitments, [id]: commitment }));
     }
-    // useEffect(() => {
-    //     async function getData () {
-    //         const credentialsString = await localStorage.getItem('credentials');
-    //         const credentials = credentialsString && await JSON.parse(credentialsString);
-    //         const status = credentials?.status;
-    //         if (!status || Number(status) !== 2) {
-    //             history.goBack();
-    //         }
-    //     }
-    //     getData();
-    // }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const storeCommitments = async () => {
+        await localStorage.setItem(category, JSON.stringify(storedCommitments));
+        await localStorage.setItem(`${category}Commitment`, 'pending');
+        console.log(category, storedCommitments);
+    }
+
+    console.log('storedCommitments', storedCommitments);
 
     return (
         <Layout match={match}>
@@ -117,7 +147,7 @@ const PersonalizeCommitments = ({ history, match }) => {
                     <br/>
                     <p>{percentage[1]}%</p>
                     <Link to={nextStep}>
-                        <Button>
+                        <Button onClick={storeCommitments}>
                             Continue
                         </Button>
                     </Link>
