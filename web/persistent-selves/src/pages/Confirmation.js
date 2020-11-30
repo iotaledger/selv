@@ -11,46 +11,37 @@ import selv from '../assets/selvSuccessBordered.svg';
  */
 const Confirmation = ({ match }) => {
     const { nextStep, theme } = useStep(match);
-    const [companyId, setCompanyId] = useState('');
     const [title, setTitle] = useState('');
 
     useEffect(() => {
-        async function determineCompanyId () {
-            setCompanyId(await getCompanyId());
-            switch (theme) {
-            case 'bank':
-                setTitle('Your business bank account is now set up!');
+        switch (theme) {
+            case 'future':
+                setTitle('Your future commitment is created');
                 break;
-            case 'insurance':
-                setTitle('Congratulations, your liability insurance is now set up!');
+            case 'present':
+                setTitle('Your present commitment is created');
                 break;
-            case 'company':
             default:
-                setTitle('Congratulations, your company is now set up!');
+                setTitle('Congratulations');
                 break;
             }
-        }
-        determineCompanyId();
-    }, [companyId, theme]);
+    }, [theme]);
 
     return (
         <Layout match={match}>
             <RandomGraphicElement elements={5}>
                 <div className='confirmation-page'>
+                    <h2>{title}</h2>
+                    <p>Thank you for your pledge</p>
+
                     <div className='selv-wrapper'>
                         <img src={selv} alt='Selv app logo' />
                         <h4>Your new credential is sent to Selv</h4>
                     </div>
-                    <h2>{title}</h2>
-                    {
-                        theme === 'company' &&
-                            <p>You are now the proud owner of your new company. From now on you’ll be able to prove that you have a directorship position at your newly found company. Open up Selv in order to receive a signed credential you can use to act on behalf of your company.</p>
-                    }
-                    <Link to={nextStep.replace(':companyId', companyId)}>
+
+                    <Link to={nextStep}>
                         <Button>
-                            {
-                                theme === 'company' ? 'Continue' : 'Return to Company House'
-                            }
+                            Continue
                         </Button>
                     </Link>
                 </div>
