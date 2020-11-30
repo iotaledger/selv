@@ -20,7 +20,7 @@ const ProveIdentity = ({ history, match }) => {
             const companyHouseStatus = await localStorage.getItem('companyHouse');
             const bankStatus = await localStorage.getItem('bank');
             const requestedCredentials = ['Address', 'PersonalData', 'ContactDetails'];
-            let shareWith = 'company';
+            let shareWith = '';
 
             if (companyHouseStatus && companyHouseStatus === 'completed') {
                 if (bankStatus && bankStatus === 'completed') {
@@ -45,7 +45,7 @@ const ProveIdentity = ({ history, match }) => {
                 challenge,
                 password: payloadPassword,
                 requestedCredentials,
-                shareWith,
+                shareWith: '',
                 url: config.websocketURL
             };
             setChannelDetails(channelDetails);
@@ -60,6 +60,8 @@ const ProveIdentity = ({ history, match }) => {
         }
     }, [nextStep]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    console.log(qrContent);
+    
     return (
         <Layout match={match}>
             <RandomGraphicElement elements={5}>
