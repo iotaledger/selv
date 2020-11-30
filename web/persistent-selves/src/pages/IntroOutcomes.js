@@ -31,10 +31,9 @@ const IntroOutcomes = ({ match }) => {
                 <div className='demo-intro app' id='app'>
                     <img className='image' src={image} alt='Outcomes' />
                     <div className='app-content-wrapper'>
-                        <h2>Create your outcomes</h2>
+                        <h2>Create your Persistent Selv</h2>
                         <p>
-                            Using your decentralised digital identity, you will create lasting actions.<br /><br />
-                            With emerging technology on IOTA, it is possible to carry out your wishes + desires beyond your lifetime.<br /><br />
+                            Using your decentralised digital identity, you will create lasting actions and explore different lenses of viewing the future. With emerging technology it is possible to.<br /><br />
                             In doing so, you create your Persistent Selves.
                         </p>
                         <Link to={nextStep}>

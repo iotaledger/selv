@@ -33,7 +33,7 @@ const IntroTodos = ({ match }) => {
                 </Link>
                 <div className='demo-intro' id='app'>
                     <div className='todos'>
-                        <span className='heading'><h2>Start your</h2>&nbsp;&nbsp;<h2 className='highlight'>legacy</h2>&nbsp;&nbsp;<h2>for future</h2><br /><h2>generations</h2>&nbsp;&nbsp;<h2 className='highlight'>today</h2></span>
+                        <span className='heading'><h2>Imagine your</h2>&nbsp;&nbsp;<h2 className='highlight'>legacy</h2>&nbsp;&nbsp;<h2>as a good</h2><br /><h2>ancestor</h2>&nbsp;&nbsp;<h2 className='highlight'>today</h2></span>
                         <p>Explore this demo to see how you can safely own, share and manage your pledge to the future beyond your lifetime</p>
                         <ul className='todos'>
                             <li>Create your identity</li>
