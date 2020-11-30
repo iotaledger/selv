@@ -10,7 +10,7 @@
 			"Commitment" : {
 				"type" : "object",
 				"properties" : {
-					"CommitmentType" : {
+					"CommitmentId" : {
 						"type" : "string"
 					},
 					"CommitmentTitle" : {
@@ -22,7 +22,7 @@
 					"CommitmentSupport" : {
 						"type" : "string"
 					},
-					"CommitmentSupportValue" : {
+					"CommitmentWalletPercentage" : {
 						"type" : "number"
 					}
 				}
