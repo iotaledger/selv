@@ -16,7 +16,7 @@ const externalPages = [
 const SidebarInstance = ({ children }) => {
     return (
         <div className='sidebar-wrapper'>
-            <Link to='/demo/select'>
+            <Link to='/demo/welcome'>
                 <img src={logo} alt='Selv logo' className='sidebar-logo' />
             </Link>
 
