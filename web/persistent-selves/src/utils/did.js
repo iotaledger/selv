@@ -6,14 +6,16 @@ import {
 import { provider } from '../config.json';
 import Address from '../schemas/Address.json';
 import ContactDetails from '../schemas/ContactDetails.json';
-import Commitments from '../schemas/Commitments.json';
 import PersonalData from '../schemas/PersonalData.json';
+import FutureCommitments from '../schemas/FutureCommitments.json';
+import PresentCommitments from '../schemas/PresentCommitments.json';
 
 const schemas = {
     Address,
     ContactDetails,
     PersonalData,
-    Commitments
+    FutureCommitments,
+    PresentCommitments
 };
 
 const VERIFICATION_LEVEL = {
