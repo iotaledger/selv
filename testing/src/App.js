@@ -20,7 +20,7 @@ const App = () => {
     return () => {
       ioClient.disconnect();
     }
-  }, [])
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function setChannel(channelId) {
     console.log('setChannel', channelId);

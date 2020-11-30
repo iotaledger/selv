@@ -16,7 +16,6 @@ import {
 import { storeCredential, storeIdentity, retrieveIdentity, retrieveCredential } from '../helper'
 import { keyId, provider } from '../config.json'
 import Address from './schemas/Address.json'
-import Commitments from './schemas/Commitments.json'
 import FutureCommitments from './schemas/FutureCommitments.json'
 import PresentCommitments from './schemas/PresentCommitments.json'
 import ContactDetails from './schemas/ContactDetails.json'
@@ -26,7 +25,6 @@ const schemas = {
   Address,
   ContactDetails,
   PersonalData,
-  Commitments,
   FutureCommitments,
   PresentCommitments
 }
