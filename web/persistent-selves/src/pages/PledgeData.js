@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { notification } from 'antd';
+import { Button, Card, notification } from 'antd';
 import { flattenObject } from '../utils/helper';
-import { Layout, Loading, Form, PrefilledForm, WebSocket } from '../components';
+import useStep from '../utils/useStep';
+import { Layout, Loading, PrefilledForm, WebSocket } from '../components';
 
 const prefilledFields = [
     'FirstName',
@@ -11,20 +12,6 @@ const prefilledFields = [
     'Country',
     'Phone'
 ];
-
-const emptyFields = [
-    'CompanyName',
-    'CompanyAddress',
-    'CompanyType',
-    'CompanyBusiness'
-];
-
-const labels = {
-    CompanyName: 'Company name',
-    CompanyAddress: 'Company address',
-    CompanyType: 'Company type',
-    CompanyBusiness: 'Nature of business'
-};
 
 const messages = {
     waiting: 'Waiting for Selv app...',
@@ -46,6 +33,23 @@ const PledgeData = ({ history, match }) => {
     const [fields, setFields] = useState();
     const [status, setStatus] = useState('');
     const [prefilledData, setPrefilledData] = useState({});
+    const [commitments, setCommitments] = useState({});
+    const { theme } = useStep(match);
+
+    useEffect(() => {
+        async function loadCommitments() {
+            try {
+                if (theme) {
+                    const storedCommitments = await localStorage.getItem(theme);
+                    storedCommitments && setCommitments(JSON.parse(storedCommitments));
+                }
+            } catch (err) {
+                console.error('Error while loading commitments', err);
+            }
+        }
+    
+        loadCommitments();
+    }, [theme]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         async function getData () {
@@ -66,30 +70,64 @@ const PledgeData = ({ history, match }) => {
         getData();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    async function processValues (fields) {
-        setFields(fields);
+    const processValues = () => {
+        const fields = Object.values(commitments).map(commitment => ({
+            CommitmentId: commitment?.commitmentId,
+            CommitmentTitle: commitment?.title,
+            CommitmentPercentage: commitment?.percentage,
+            CommitmentSupport: commitment?.support,
+            CommitmentWalletPercentage: commitment?.walletPercentage
+        }))
+        setFields({ Commitments: fields });
         setWebSocket(true);
     }
 
-    function setStatusMessage (message) {
+    const setStatusMessage  = message => {
         setStatus(message);
     }
 
     const prefilledFormData = { dataFields: prefilledData };
-    const emptyFormData = { dataFields: emptyFields, labels, processValues, status, messages };
 
     return (
         <Layout match={match}>
             <div className='company-data-page-wrapper'>
-                <h2>Set up a private limited company</h2>
-                <h3 className='section-header'>Business owner</h3>
+                <h2>Summary</h2>
+
+                <div className='commitments-wrapper'>
+                    {
+                        console.log(Object.values(commitments))
+                    }
+                    {
+                        Object.values(commitments).map(commitment => (
+                            <div 
+                                className='form-commitment-wrapper' 
+                                key={commitment?.commitmentId}
+                            >
+                                <h4>{commitment?.title}</h4>
+                                <Card 
+                                    bordered
+                                    hoverable={false}
+                                    className='form-commitment-card'
+                                >
+                                    <div className='form-commitment-content'>
+                                        <p>
+                                            {commitment?.condition} <span className='custom-value'>{commitment?.percentage} </span>
+                                            THEN donate <span className='custom-value'>{commitment?.walletPercentage}%</span> of my wallet balance
+                                            TO support <span className='custom-value'>{commitment?.support}</span>
+                                        </p>
+                                    </div>
+                                </Card>
+                            </div>
+                        ))
+                    }
+                </div>
                 {
                     Object.keys(prefilledFormData.dataFields).length &&
                     <PrefilledForm {...prefilledFormData} />
                 }
-
-                <h3 className='section-header'>Company Details</h3>
-                <Form {...emptyFormData} />
+                <Button onClick={processValues}>
+                    Confirm my legacy
+                </Button>
                 {
                     status && (
                         <div className='loading'>
@@ -104,7 +142,7 @@ const PledgeData = ({ history, match }) => {
                     webSocket && <WebSocket
                         history={history}
                         match={match}
-                        schemaName='Company'
+                        schemaName={theme === 'future' ? 'FutureCommitments' : 'PresentCommitments'}
                         setStatus={setStatusMessage}
                         fields={fields}
                     />
