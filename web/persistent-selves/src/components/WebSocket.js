@@ -147,24 +147,20 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             setIsRunning(false);
             let payload = await decrypt(password, encryptedPayload);
             payload = JSON.parse(payload);
+            // console.log('Credential', payload, schemaName);
             if (payload?.status === 'success') {
                 switch (schemaName) {
-                    case 'Insurance':
-                        await localStorage.setItem('insurance', 'completed');
-                        await localStorage.setItem('insuranceDetails', JSON.stringify({ ...data, ...payload?.payload }));
-                        await updateCompanyStatus();
+                    case 'FutureCommitments':
+                        await localStorage.setItem('futureCommitment', 'completed');
                         break;
-                    case 'BankAccount':
-                        await localStorage.setItem('bank', 'completed');
-                        await localStorage.setItem('bankDetails', JSON.stringify({ ...data, ...payload?.payload }));
-                        break;
-                    case 'Company':
-                        await localStorage.setItem('companyHouse', 'completed');
-                        await localStorage.setItem('companyDetails', JSON.stringify({ ...data, ...payload?.payload }));
+                    case 'PresentCommitments':
+                        await localStorage.setItem('presentCommitment', 'completed');
                         break;
                     default:
                         break;
                 }
+                await localStorage.setItem(schemaName, JSON.stringify({ ...data, ...payload?.payload }));
+                // await updateCompanyStatus();
                 history.push(nextStep);
             }
         });
