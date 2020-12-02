@@ -90,7 +90,7 @@ const PledgeData = ({ history, match }) => {
 
     return (
         <Layout match={match}>
-            <div className='company-data-page-wrapper'>
+            <div className='commitments-data-page-wrapper'>
                 <h2>Summary</h2>
 
                 <div className='commitments-wrapper'>

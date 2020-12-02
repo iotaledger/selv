@@ -17,25 +17,7 @@ const ProveIdentity = ({ history, match }) => {
 
     useEffect(() => {
         async function setQR () {
-            const companyHouseStatus = await localStorage.getItem('companyHouse');
-            const bankStatus = await localStorage.getItem('bank');
             const requestedCredentials = ['Address', 'PersonalData', 'ContactDetails'];
-            let shareWith = '';
-
-            if (companyHouseStatus && companyHouseStatus === 'completed') {
-                if (bankStatus && bankStatus === 'completed') {
-                    await localStorage.setItem('insurance', 'pending');
-                    requestedCredentials.push('Company', 'BankAccount');
-                    shareWith = 'insurance';
-                } else {
-                    await localStorage.setItem('bank', 'pending');
-                    requestedCredentials.push('Company');
-                    shareWith = 'bank';
-                }
-            } else {
-                await localStorage.setItem('companyHouse', 'pending');
-            }
-
             const channelId = randomstring.generate(7);
             const challenge = randomstring.generate(10);
             const payloadPassword = randomstring.generate();

@@ -11,9 +11,6 @@ import image1 from '../assets/greatSuccess/image1.png';
 const PledgeRegistry = ({ history, match, ...props }) => {
     const { nextStep } = useStep(match);
 
-    function onRowClick (data) {
-        history.push(`/company/details/${match?.params?.step || 0}/${data.CompanyNumber}`);
-    }
     const drawer = props?.location?.state?.nextStep ? 'drawer' : '';
 
     return (

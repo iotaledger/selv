@@ -60,7 +60,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         }
 
         connect();
-        if (schemaName) { // Case of Company/Bank/Insurance data
+        if (schemaName) { // Case of Commitment
             getData();
         } else { // Case of ProveIdentity
             setChannelId(generatedChannelId || '');
@@ -147,7 +147,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             setIsRunning(false);
             let payload = await decrypt(password, encryptedPayload);
             payload = JSON.parse(payload);
-            // console.log('Credential', payload, schemaName);
             if (payload?.status === 'success') {
                 switch (schemaName) {
                     case 'FutureCommitments':
@@ -160,7 +159,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                         break;
                 }
                 await localStorage.setItem(schemaName, JSON.stringify({ ...data, ...payload?.payload }));
-                // await updateCompanyStatus();
+                // await updateStatus();
                 history.push(nextStep);
             }
         });

@@ -3,7 +3,6 @@ import IntroWelcome from './IntroWelcome';
 import IntroOutcomes from './IntroOutcomes';
 import IntroLifeSpan from './IntroLifeSpan';
 import AppDownloadQR from './AppDownloadQR';
-import CompanyIntro from './CompanyIntro';
 import ProveIdentity from './ProveIdentity';
 import SingInConfirmation from './SingInConfirmation';
 import SelectCommitmentCategory from './SelectCommitmentCategory';
@@ -26,7 +25,6 @@ export {
     SelectCommitmentCategory,
     SelectCommitments,
     PersonalizeCommitments,
-    CompanyIntro,
     PledgeData,
     Confirmation,
     PledgeRegistry,
