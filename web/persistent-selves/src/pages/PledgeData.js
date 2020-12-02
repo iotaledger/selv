@@ -95,9 +95,6 @@ const PledgeData = ({ history, match }) => {
 
                 <div className='commitments-wrapper'>
                     {
-                        console.log(Object.values(commitments))
-                    }
-                    {
                         Object.values(commitments).map(commitment => (
                             <div 
                                 className='form-commitment-wrapper' 
@@ -111,7 +108,7 @@ const PledgeData = ({ history, match }) => {
                                 >
                                     <div className='form-commitment-content'>
                                         <p>
-                                            {commitment?.condition} <span className='custom-value'>{commitment?.percentage} </span>
+                                            {commitment?.condition} <span className='custom-value'>{commitment?.percentage}% </span>
                                             THEN donate <span className='custom-value'>{commitment?.walletPercentage}%</span> of my wallet balance
                                             TO support <span className='custom-value'>{commitment?.support}</span>
                                         </p>
