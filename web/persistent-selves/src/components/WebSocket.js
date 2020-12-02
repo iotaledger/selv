@@ -5,7 +5,7 @@ import { notification } from 'antd';
 import useStep from '../utils/useStep';
 import useInterval from '../utils/useInterval';
 import evaluateCredential from '../utils/did';
-import { getCompanyId, encrypt, decrypt } from '../utils/helper';
+import { encrypt, decrypt } from '../utils/helper';
 import { serverAPI, websocketURL } from '../config.json';
 
 const messages = {
@@ -185,11 +185,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         } else {
             notify('error', 'No connection details', 'Please return to the previous page and scan the QR code with your Selv app');
         }
-    }
-
-    async function updateCompanyStatus () {
-        const companyId = await getCompanyId();
-        await axios.get(`${serverAPI}/activate?company=${companyId}`);
     }
 
     useInterval(async () => {
