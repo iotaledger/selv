@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import useStep from '../utils/useStep';
-import { Layout, NextStepDrawer, FAQ } from '../components';
+import { Layout, FAQ } from '../components';
 import image1 from '../assets/greatSuccess/image1.png';
 
 /**
@@ -46,7 +46,6 @@ const PledgeRegistry = ({ history, match, ...props }) => {
                         </Link>
                     </div>
                 </div>
-                <NextStepDrawer link={props?.location?.state?.nextStep} />
             </React.Fragment>
         </Layout>
     );
