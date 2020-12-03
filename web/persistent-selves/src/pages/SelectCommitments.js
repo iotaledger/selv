@@ -53,7 +53,7 @@ const SelectCommitments = ({ history, match }) => {
                                         hoverable 
                                         className='commitment-item'
                                         key={commitment?.commitmentId}
-                                        onClick={() => onSelect(commitment?.commitmentId)}
+                                        onClick={() => !isDisabled && onSelect(commitment?.commitmentId)}
                                     >
                                         <div className='commitment-image-wrapper'>
                                             <img 

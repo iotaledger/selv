@@ -1,8 +1,8 @@
-.companies-page-wrapper {
+.registry-page-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    max-width: 840px;
+    width: 100%;
     align-items: flex-start;
     height: 100%;
     word-break: break-word;
@@ -15,24 +15,101 @@
         }
     }
 }
-  
-.companies-cta-wrapper {
+
+.create-pledge-header-cta {
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    padding: 30px 7%;
+
+    @include themify($themes) {
+        background: themed('secondaryPageBackground');  
+    }
+
+    @include breakPoint(small) {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .text-wrapper {
+        height: 100%;
+        padding-left: 70px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        @include breakPoint(small) {
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+
+            h2 {
+                padding: 10px 0;
+            }
+        }
+
+    }
+}
+
+.create-pledge-footer-cta {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+
+    @include themify($themes) {
+        background: themed('secondaryPageBackground');  
+        height: themed('footerHeight');
+    }
+}
+
+.faq-question {
+    padding-bottom: 10px;
+    @include themify($themes) {
+        color: themed('primaryFontColor');
+        font-size: themed('defaultTextSize');
+        font-weight: themed('h3TextWeight');
+    }
+}
+ 
+.registry-cta-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     margin: 50px 0;
 
     @include breakPoint(small) {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         justify-content: space-evenly;
 
         h2 {
             margin-bottom: 30px;
         }
     }
+
+    .content-wrapper {
+        align-self: flex-start;
+        width: 100%;
+        padding: 50px 7% 20px 7%;
+    }
 }
+
+.registry-faq-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 7% 50px 7%;
+
+    h4 {
+        margin-bottom: 30px;
+    }
+} 
 
 .company-details-wrapper {
     display: flex;
@@ -161,7 +238,7 @@
                 color: #7A869B;
 
                 &:hover {
-                    color: $primary-font-color-companyHouse;
+                    color: $primary-font-color-registry;
                 }
             }
         }

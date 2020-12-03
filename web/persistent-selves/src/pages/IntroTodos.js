@@ -11,29 +11,32 @@ import logo from '../assets/landing/logoHeader.svg';
  * Component which will display a Intro Todos.
  */
 const IntroTodos = ({ match }) => {
-    const { nextStep } = useStep(match);
+	const { nextStep } = useStep(match);
 
-    useEffect(() => {
-        const reset = async () => {
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-            });
-            await localStorage.clear();
-        };
-        reset();
-    }, []);
+	useEffect(() => {
+		const reset = async () => {
+			window.scrollTo({
+				top: 0,
+				left: 0,
+				behavior: 'smooth'
+			});
+			await localStorage.clear();
+		};
+		reset();
+	}, []);
 
-    return (
-        <RandomGraphicElement elements={7}>
-            <div className='theme-demo'>
+	return (
+		<RandomGraphicElement elements={7}>
+			{/* prettier-ignore */}
+			<div className='theme-demo'>
                 <Link to={'/'} className="logo demo-page">
                     <img src={logo} alt="Selv logo" />
                 </Link>
                 <div className='demo-intro' id='app'>
                     <div className='todos'>
-                        <span className='heading'><h2>Imagine your</h2>&nbsp;&nbsp;<h2 className='highlight'>legacy</h2>&nbsp;&nbsp;<h2>as a good</h2><br /><h2>ancestor</h2>&nbsp;&nbsp;<h2 className='highlight'>today</h2></span>
+                        <span className='heading'><h2>Imagine your</h2>&nbsp;&nbsp;<h2 className='highlight'>legacy</h2>&nbsp;&nbsp;<h2>as a good</h2></span>
+                        <span className='heading'><h2>ancestor</h2>&nbsp;&nbsp;<h2 className='highlight'>today</h2></span>
+                        <br/>
                         <p>Explore this demo to see how you can safely own, share and manage your pledge to the future beyond your lifetime</p>
                         <ul className='todos'>
                             <li>Create your identity</li>
@@ -55,8 +58,8 @@ const IntroTodos = ({ match }) => {
                     <Disclaimer />
                 </div>
             </div>
-        </RandomGraphicElement>
-    );
+		</RandomGraphicElement>
+	);
 };
 
 export default IntroTodos;

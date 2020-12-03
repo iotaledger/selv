@@ -2,7 +2,7 @@ import { matchPath } from 'react-router';
 
 export default (path) => {
     const match = matchPath(path, {
-        path: '/:theme/:page/:step?/:companyId?',
+        path: '/:theme/:page/:step?',
         exact: true,
         strict: false
     });

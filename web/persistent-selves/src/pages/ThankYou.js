@@ -58,11 +58,6 @@ const ThankYou = () => {
                             </div>
                         </div>
                         <div className='cta-wrapper'>
-                            <Link to={'/company/list/0'}>
-                                <Button className='cta'>
-                                    Return to Company House
-                                </Button>
-                            </Link>
                             <Link to={'/'}>
                                 Return home
                             </Link>

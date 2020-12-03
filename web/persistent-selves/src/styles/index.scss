@@ -14,7 +14,7 @@
 
 // pages
 @import './pages/landing';
-@import './pages/companies';
+@import './pages/registry';
 @import './pages/scanQRcode';
 @import './pages/thankYou';
 @import './pages/confirmation';
@@ -126,6 +126,11 @@ button {
     @include breakPoint(small) {
       min-width: unset;
     }
+  }
+
+  .content-stretch {
+    @extend .content;
+    padding: 0;
   }
 }
 

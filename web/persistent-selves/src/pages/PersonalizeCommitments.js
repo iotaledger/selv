@@ -26,7 +26,7 @@ const PersonalizeCommitments = ({ history, match }) => {
             selectedCommitments.includes(commitment?.commitmentId)
         );
 
-        const storedCommitments = selected.map((commitment, index) => {
+        selected.forEach((commitment, index) => {
             const object = {
                 commitmentId: commitment?.commitmentId,
                 title: commitment?.title,
@@ -36,7 +36,6 @@ const PersonalizeCommitments = ({ history, match }) => {
                 walletPercentage: 50
             }
             updateStoredCommitments(storedCommitments => ({ ...storedCommitments, [commitment?.commitmentId]: object }));
-
         })
 
         setSelected(selected);
