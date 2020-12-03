@@ -109,6 +109,18 @@
     h4 {
         margin-bottom: 30px;
     }
+
+    .faq-content{
+        display: flex;
+        flex-wrap: wrap;
+
+        .faq {
+            box-sizing: border-box;
+            width: 50%;
+            padding: 0 30px 30px 10px;
+            text-align: start;
+          }
+    }
 } 
 
 .company-details-wrapper {

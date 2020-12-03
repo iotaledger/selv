@@ -1,5 +1,4 @@
 import React from 'react';
-import { Row, Col } from 'antd';
 
 const faqs = [
 	{
@@ -25,20 +24,10 @@ export default () => (
 		<h4>Frequently Asked Questions</h4>
 		<div className='faq-content'>
 			{faqs.slice(0, 4).map(({ question, answer }, index) => (
-				<Row key={`faq-${index}`} gutter={[24, 24]}>
-					<Col span={12}>
-						<div className='faq'>
-							<div className='faq-question'>{question}</div>
-							<div className='faq-answer'>{answer}</div>
-						</div>
-					</Col>
-                    <Col span={12}>
-						<div className='faq'>
-							<div className='faq-question'>{question}</div>
-							<div className='faq-answer'>{answer}</div>
-						</div>
-					</Col>
-				</Row>
+				<div key={`faq-${index}`} className='faq'>
+					<div className='faq-question'>{question}</div>
+					<div className='faq-answer'>{answer}</div>
+				</div>
 			))}
 		</div>
 	</div>
