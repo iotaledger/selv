@@ -1,277 +1,283 @@
 .registry-page-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 100%;
-    align-items: flex-start;
-    height: 100%;
-    word-break: break-word;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 100%;
+	align-items: flex-start;
+	height: 100%;
+	word-break: break-word;
 
-    &.drawer {
-        margin-bottom: 120px;
-    
-        @include breakPoint(small) {
-            margin-bottom: 150px;
-        }
-    }
+	&.drawer {
+		margin-bottom: 120px;
+
+		@include breakPoint(small) {
+			margin-bottom: 150px;
+		}
+	}
 }
 
 .create-pledge-header-cta {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    padding: 30px 7%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	padding: 30px 7%;
 
-    @include themify($themes) {
-        background: themed('secondaryPageBackground');  
-    }
+	@include themify($themes) {
+		background: themed('secondaryPageBackground');
+	}
 
-    @include breakPoint(small) {
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-    }
+	@include breakPoint(small) {
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-evenly;
+	}
 
-    .text-wrapper {
-        height: 100%;
-        padding-left: 70px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+	.text-wrapper {
+		height: 100%;
+		padding-left: 70px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
 
-        @include breakPoint(small) {
-            flex-direction: column;
-            align-items: center;
-            padding: 0;
+		@include breakPoint(small) {
+			flex-direction: column;
+			align-items: center;
+			padding: 0;
 
-            h2 {
-                padding: 10px 0;
-            }
-        }
-
-    }
+			h2 {
+				padding: 10px 0;
+			}
+		}
+	}
 }
 
 .create-pledge-footer-cta {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
 
-    @include themify($themes) {
-        background: themed('secondaryPageBackground');  
-        height: themed('footerHeight');
-    }
+	@include themify($themes) {
+		background: themed('secondaryPageBackground');
+		height: themed('footerHeight');
+	}
 }
 
 .faq-question {
-    padding-bottom: 10px;
-    @include themify($themes) {
-        color: themed('primaryFontColor');
-        font-size: themed('defaultTextSize');
-        font-weight: themed('h3TextWeight');
-    }
+	padding-bottom: 10px;
+	@include themify($themes) {
+		color: themed('primaryFontColor');
+		font-size: themed('defaultTextSize');
+		font-weight: themed('h3TextWeight');
+	}
 }
- 
+
 .registry-cta-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin: 50px 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	margin: 50px 0;
 
-    @include breakPoint(small) {
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
+	@include breakPoint(small) {
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-evenly;
 
-        h2 {
-            margin-bottom: 30px;
-        }
-    }
+		h2 {
+			margin-bottom: 30px;
+		}
+	}
 
-    .content-wrapper {
-        align-self: flex-start;
-        width: 100%;
-        padding: 50px 7% 20px 7%;
-    }
+	.content-wrapper {
+		align-self: flex-start;
+		width: 100%;
+		padding: 50px 7% 20px 7%;
+	}
 }
 
 .registry-faq-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 0 7% 50px 7%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	padding: 0 7% 50px 7%;
 
-    h4 {
-        margin-bottom: 30px;
-    }
+	h4 {
+		margin-bottom: 30px;
+	}
 
-    .faq-content{
-        display: flex;
-        flex-wrap: wrap;
+	.faq-content {
+		display: flex;
+		flex-wrap: wrap;
 
-        .faq {
-            box-sizing: border-box;
-            width: 50%;
-            padding: 0 30px 30px 10px;
-            text-align: start;
-          }
-    }
-} 
+		@include breakPoint(small) {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.faq {
+			box-sizing: border-box;
+			width: 50%;
+			padding: 0 30px 30px 10px;
+			text-align: start;
+
+			@include breakPoint(small) {
+				width: 100%;
+			}
+		}
+	}
+}
 
 .company-details-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-    width: 900px;
-    padding: 5% 10%; 
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	height: 100%;
+	width: 900px;
+	padding: 5% 10%;
 
-    @include breakPoint(medium) {
-        padding-bottom: 100px;
-    }
+	@include breakPoint(medium) {
+		padding-bottom: 100px;
+	}
 
-    @include breakPoint(small) {
-        width: 100%;
-    }
+	@include breakPoint(small) {
+		width: 100%;
+	}
 
-    .company-details-back {
-        position: relative;
-        top: 30px;
-        display: flex;
-        align-self: flex-start;
+	.company-details-back {
+		position: relative;
+		top: 30px;
+		display: flex;
+		align-self: flex-start;
 
-        @include breakPoint(small) {
-            top: -10px;
-        }
-    }
+		@include breakPoint(small) {
+			top: -10px;
+		}
+	}
 
-    .company-details {
-        width: 100%;
-        word-break: break-word;
-        border-top: 1px solid #E2E5EC;
-        padding-top: 30px;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
+	.company-details {
+		width: 100%;
+		word-break: break-word;
+		border-top: 1px solid #e2e5ec;
+		padding-top: 30px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
 
-        @include breakPoint(small) {
-            flex-direction: column;
-            flex-wrap: unset;
-        }
+		@include breakPoint(small) {
+			flex-direction: column;
+			flex-wrap: unset;
+		}
 
-        .company-details-item {
-            margin-bottom: 30px;
-            width: 45%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+		.company-details-item {
+			margin-bottom: 30px;
+			width: 45%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
 
-            & .status {
-                width: auto;
-                margin-top: 8px;
-            }
-        }
-    }
+			& .status {
+				width: auto;
+				margin-top: 8px;
+			}
+		}
+	}
 
-    .company-number-wrapper {
-        font-weight: 600;
-        margin: 15px 0 25px;
-        .company-number {
-            font-weight: bold;
-        }
-    }
+	.company-number-wrapper {
+		font-weight: 600;
+		margin: 15px 0 25px;
+		.company-number {
+			font-weight: bold;
+		}
+	}
 
-    .rs-nav {
-        width: 450px;
-        margin-bottom: 30px !important;
+	.rs-nav {
+		width: 450px;
+		margin-bottom: 30px !important;
 
-        @include breakPoint(small) {
-            max-width: 400px;
-            width: auto;
-        }
+		@include breakPoint(small) {
+			max-width: 400px;
+			width: auto;
+		}
 
-        & > ul {
-            display: flex;
-            justify-content: space-evenly;
+		& > ul {
+			display: flex;
+			justify-content: space-evenly;
 
-            @include breakPoint(small) {
-                flex-direction: column;
-            }
-        }
+			@include breakPoint(small) {
+				flex-direction: column;
+			}
+		}
 
-        .rs-nav-waterline {
-            display: none;
-        }
+		.rs-nav-waterline {
+			display: none;
+		}
 
-        .rs-nav-item {
-            background: #FFFFFF;
-            border-radius: 100px;
-            width: 120px;
-            height: 32px;
+		.rs-nav-item {
+			background: #ffffff;
+			border-radius: 100px;
+			width: 120px;
+			height: 32px;
 
-            @include breakPoint(small) {
-                margin-bottom: 20px;
-            }
+			@include breakPoint(small) {
+				margin-bottom: 20px;
+			}
 
-            &.rs-nav-item-active {
-                background: #306ADC;
-                 
-                .rs-nav-item-content {
-                    color: #ffffff;
+			&.rs-nav-item-active {
+				background: #306adc;
 
-                    &:hover {
-                        color: #ffffff;
-                    }
-                }
-            }
+				.rs-nav-item-content {
+					color: #ffffff;
 
-            .rs-nav-item-content {
-                &:before {
-                    content: none;
-                }
-            }
-    
-            .rs-nav-item-content {
-                display: flex;
-                justify-content: center;
-                letter-spacing: 0.02em;
-                text-transform: uppercase;
-                font-weight: bold;
-                font-size: 13px;
-                line-height: 20px;
-                padding-top: 6px;
-                color: #7A869B;
+					&:hover {
+						color: #ffffff;
+					}
+				}
+			}
 
-                &:hover {
-                    color: $primary-font-color-registry;
-                }
-            }
-        }
-    }
+			.rs-nav-item-content {
+				&:before {
+					content: none;
+				}
+			}
 
+			.rs-nav-item-content {
+				display: flex;
+				justify-content: center;
+				letter-spacing: 0.02em;
+				text-transform: uppercase;
+				font-weight: bold;
+				font-size: 13px;
+				line-height: 20px;
+				padding-top: 6px;
+				color: #7a869b;
+
+				&:hover {
+					color: $primary-font-color-registry;
+				}
+			}
+		}
+	}
 }
 
 .status {
-    padding: 2px 12px 4px;
-    border-radius: 100px;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0.01em;
+	padding: 2px 12px 4px;
+	border-radius: 100px;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 20px;
+	letter-spacing: 0.01em;
 
-    &.active {
-      color: #35C0A1;
-      background: #DAF9F2;
-    }
-    &.pending {
-      color: #F17105;
-      background: #FFEDDE;
-    }
+	&.active {
+		color: #35c0a1;
+		background: #daf9f2;
+	}
+	&.pending {
+		color: #f17105;
+		background: #ffedde;
+	}
 }
