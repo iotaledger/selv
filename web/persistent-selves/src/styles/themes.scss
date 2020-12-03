@@ -7,6 +7,7 @@ $font-family-demo-headings: 'Metropolis', -apple-system, BlinkMacSystemFont, 'Se
 $primary-color-registry: #6FCF97;
 $secondary-color-registry: #60b684;
 $trinary-color-registry: #333333;
+$card-background-color-registry: #E1E1E1;
 $primary-font-color-registry: #142037;
 $secondary-font-color-registry: #6F6F6F;
 $page-background-registry: white;
@@ -86,6 +87,7 @@ $themes: (
         formSelectorColor: $form-selector-color,
         pageBackground: $page-background-registry,
         secondaryPageBackground: $secondary-page-background-registry,
+        cardBackground: $card-background-color-registry,
 
         h1TextSize: 36px,
         h1LineHeight: 42px,

@@ -117,7 +117,7 @@
         .faq {
             box-sizing: border-box;
             width: 50%;
-            padding: 0 30px 30px 10px;
+            padding: 0 10px 30px 10px;
             text-align: start;
 
             @include breakPoint(small) {
@@ -125,7 +125,33 @@
             }
           }
     }
-} 
+}
+
+.registry-card-wrapper {
+    @extend .registry-faq-wrapper;
+
+.card-content{
+    display: flex;
+    flex-wrap: wrap;
+
+    .card {
+        box-sizing: border-box;
+        width: 47%;
+        margin: 15px 15px 15px 0;
+        padding: 10px 10px;
+        text-align: start;
+
+        @include themify($themes) {
+            background: themed('cardBackground');  
+        }
+
+        @include breakPoint(small) {
+            width: 100%;
+        }
+      }
+      
+    }
+}
 
 .company-details-wrapper {
     display: flex;
