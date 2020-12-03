@@ -119,6 +119,10 @@
             width: 50%;
             padding: 0 30px 30px 10px;
             text-align: start;
+
+            @include breakPoint(small) {
+                width: 100%;
+            }
           }
     }
 } 
