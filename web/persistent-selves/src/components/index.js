@@ -10,7 +10,9 @@ import Checkbox from './Checkbox';
 import AccountType from './AccountType';
 import RandomGraphicElement from './RandomGraphicElement';
 import WebSocket from './WebSocket';
-import Disclaimer from './Disclaimer'
+import Disclaimer from './Disclaimer';
+import Credentials from './Credentials';
+import Commitments from './Commitments';
 
 export {
     Sidebar,
@@ -25,5 +27,7 @@ export {
     RandomGraphicElement,
     WebSocket,
     Disclaimer,
-    FAQ
+    FAQ,
+    Credentials,
+    Commitments
 };

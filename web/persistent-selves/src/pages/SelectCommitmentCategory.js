@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Card } from 'antd';
+import { Tabs } from 'antd';
 import useStep from '../utils/useStep';
-import { Layout, NextStepDrawer } from '../components';
-import future from '../assets/futureCategory.svg';
-import present from '../assets/presentCategory.svg';
-import arrow from '../assets/arrow.svg';
-import selv from '../assets/selv.svg';
-import commitments from '../assets/commitments';
+import { Commitments, Credentials, Layout, NextStepDrawer } from '../components';
+
+const { TabPane } = Tabs;
 
 /**
  * Component which will display a SelectCommitmentCategory.
@@ -17,6 +13,7 @@ const SelectCommitmentCategory = ({ match }) => {
     const [disabled, updateDisabled] = useState('disabled');
     const [futureCommitment, setFutureCommitment] = useState();
     const [presentCommitment, setPresentCommitment] = useState();
+    const [userName, setUserName] = useState('');
 
     // useEffect(() => {
     //     async function getData () {
@@ -34,7 +31,9 @@ const SelectCommitmentCategory = ({ match }) => {
             const future = await localStorage.getItem('futureCommitment');
             const futureCommitment = await localStorage.getItem('FutureCommitments');
             const presentCommitment = await localStorage.getItem('PresentCommitments');
-
+            const credentials = await localStorage.getItem('credentials');
+            
+            credentials && setUserName(JSON.parse(credentials)?.data?.UserPersonalData?.UserName?.FirstName);
             futureCommitment && setFutureCommitment(JSON.parse(futureCommitment));
             presentCommitment && setPresentCommitment(JSON.parse(presentCommitment));
             
@@ -45,149 +44,33 @@ const SelectCommitmentCategory = ({ match }) => {
         getData();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const getCondition = (category, commitmentId) => {
-        const commitment = commitments[category]?.commitments?.find(item => 
-            item?.commitmentId === commitmentId
-        );
-
-        return commitment?.condition?.if;
-    }
-
     return (
         <Layout match={match}>
-            <div className='select-commitment-category-wrapper'>
-                {
-                    futureCommitment 
-                        ? (
-                            <Card 
-                                bordered
-                                hoverable 
-                                className='commitment-category-completed'
-                            >
-                                <div className='commitment-category-completed-image-wrapper'>
-                                    <div className='commitment-category-image-container'>
-                                        <img className='commitment-category-image' src={future} alt='Far Future Foundation' />
-                                        <h2>Far Future Foundation</h2>
-                                    </div>
-                                    <img src={selv} alt='Selv app logo' />
-                                </div>
-                                <div className='commitment-category-completed-content'>
-                                    {
-                                        futureCommitment?.Commitments?.map(commitment => (
-                                            <div 
-                                                className='completed-commitment-wrapper' 
-                                                key={commitment?.CommitmentId}
-                                            >
-                                                <div className='completed-commitment-card'>
-                                                    <div className='completed-commitment-content'>
-                                                        <p>
-                                                            {getCondition('future', commitment?.CommitmentId)} <span className='custom-value'>{commitment?.CommitmentPercentage}% </span>
-                                                            THEN donate <span className='custom-value'>{commitment?.CommitmentWalletPercentage}%</span> of my wallet balance
-                                                            TO support <span className='custom-value'>{commitment?.CommitmentSupport}</span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </Card>
-                        ) : (
-                            <Card 
-                                bordered
-                                hoverable 
-                                className='commitment-category'
-                            >
-                                <div className='commitment-category-image-wrapper'>
-                                    <img className='commitment-category-image' src={future} alt='Far Future Foundation' />
-                                    <h2>Far Future Foundation</h2>
-                                </div>
-                                <div className='commitment-category-content'>
-                                    <h2>Future Commitment</h2>
-                                    <p>
-                                        The far future commitment allows you to make conditional choices about a far-away future based on oracles and smart contracts.
-                                    </p>
-                                    <Link to={{
-                                        pathname: '/future/select/1',
-                                        state: { category: 'future' }
-                                    }}>
-                                        <Button className='category-future'>
-                                            Visit Now
-                                            <img className='arrow' src={arrow} alt='' />
-                                        </Button>
-                                    </Link>
-                                </div>
-                            </Card>
-                        )
-                }
-                {
-                    presentCommitment 
-                        ? (
-                            <Card 
-                                bordered
-                                hoverable 
-                                className='commitment-category-completed'
-                            >
-                                <div className='commitment-category-completed-image-wrapper'>
-                                    <div className='commitment-category-image-container'>
-                                        <img className='commitment-category-image' src={present} alt='Act Right Now Foundation' />
-                                        <h2>Act Right Now Foundation</h2>
-                                    </div>
-                                    <img src={selv} alt='Selv app logo' />
-                                </div>
-                                <div className='commitment-category-completed-content'>
-                                    {
-                                        presentCommitment?.Commitments?.map(commitment => (
-                                            <div 
-                                                className='completed-commitment-wrapper' 
-                                                key={commitment?.CommitmentId}
-                                            >
-                                                <div className='completed-commitment-card'>
-                                                    <div className='completed-commitment-content'>
-                                                        <p>
-                                                            {getCondition(('present'), commitment?.CommitmentId)} <span className='custom-value'>{commitment?.CommitmentPercentage}% </span>
-                                                            THEN donate <span className='custom-value'>{commitment?.CommitmentWalletPercentage}%</span> of my wallet balance
-                                                            TO support <span className='custom-value'>{commitment?.CommitmentSupport}</span>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                            </Card>
-                        ) : (
-                            <Card 
-                                bordered
-                                hoverable={!disabled} 
-                                className={`commitment-category ${disabled}`}
-                            >
-                                <div className='commitment-category-image-wrapper'>
-                                    <img className='commitment-category-image' src={present} alt='Act Right Now Foundation' />
-                                    <h2>Act Right Now Foundation</h2>
-                                </div>
-                                <div className='commitment-category-content'>
-                                    <h2>Present Commitment</h2>
-                                    <p>
-                                        The present commitment let´s you make pledges to get involved and shaping the present yourself.
-                                    </p>
-                                    <Link to={{
-                                        pathname: '/present/select/2',
-                                        state: { category: 'present' }
-                                    }}>
-                                        <Button disabled={disabled} className='category-present'>
-                                            Visit Now
-                                            <img className='arrow' src={arrow} alt='' />
-                                        </Button>
-                                    </Link>
-                                </div>
-                            </Card>
-                        )
-                }
+            <React.Fragment>
+                <div className='content-header'>
+                    {
+                        userName && <h3 className='user-name'>{userName}'s Pledge</h3>
+                    }
+                </div>
+                <div className='tabs-wrapper'>
+                    <Tabs tabBarGutter={50} defaultActiveKey='1'>
+                        <TabPane tab='Overview' key='1'>
+                            <Commitments 
+                                futureCommitment={futureCommitment} 
+                                presentCommitment={presentCommitment} 
+                                disabled={disabled}
+                                nextStep={nextStep}
+                            />
+                        </TabPane>
+                        <TabPane tab='Identity' key='2'>
+                            <Credentials />
+                        </TabPane>
+                    </Tabs>
+                </div>
                 {
                     futureCommitment && presentCommitment && <NextStepDrawer nextStep={nextStep} />
                 }
-            </div>
+            </React.Fragment>
         </Layout>
     );
 };
