@@ -259,9 +259,11 @@
 }
 
 .tabs-wrapper {
-    .ant-tabs-bar {
-        margin: 0 7% 20px 7%;
-    }
+    width: 100%;
+    .ant-tabs-top > .ant-tabs-nav::before {
+    margin: 0 7%;
+    border: 1px solid $card-background-color-registry;
+}
 }
 
 .company-details-wrapper {

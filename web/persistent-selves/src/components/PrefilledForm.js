@@ -44,6 +44,4 @@ const PrefilledForm = ({ form, dataFields }) => {
     );
 };
 
-const WrappedPrefilledForm = Form.create()(PrefilledForm);
-
-export default WrappedPrefilledForm;
+export default PrefilledForm;
