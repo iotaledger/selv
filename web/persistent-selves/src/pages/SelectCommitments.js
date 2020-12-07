@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Checkbox, Card } from 'antd';
+import { Button, Checkbox, Card, Space } from 'antd';
 import useStep from '../utils/useStep';
 import { Layout } from '../components';
 import commitments from '../assets/commitments';
@@ -35,8 +35,8 @@ const SelectCommitments = ({ history, match }) => {
     }
 
     return (
-        <Layout match={match}>
-            <React.Fragment>
+        <Layout match={match} noFooter>
+            <div className='select-commitment-page-wrapper'>
                 <div className='select-commitment-wrapper'>
                     <div className='text-wrapper'>
                         <h2>{commitmentObject?.title}</h2>
@@ -81,23 +81,25 @@ const SelectCommitments = ({ history, match }) => {
                         }
                     </div>
                 </div>
-                <div className='commitments-drawer'>
-                    <h2>Choose two {category} commitments</h2>
-                    {
-                        selected.length === 1
-                        ? <p>You have 1 remaining commitment left to choose</p>
-                        : <p>You have {2 - selected.length} remaining commitments left to choose</p>
-                    }
-                    <Link to={{
-                        pathname: nextStep,
-                        state: { commitments: selected, category }
-                    }}>
-                        <Button disabled={selected.length < 2}>
-                            Continue
-                        </Button>
-                    </Link>
+                    <div className='commitments-drawer'>
+                        <Space direction="vertical" size="middle" align="center">
+                            <h2>Choose two {category} commitments</h2>
+                            {
+                                selected.length === 1
+                                ? <p>You have 1 remaining commitment left to choose</p>
+                                : <p>You have {2 - selected.length} remaining commitments left to choose</p>
+                            }
+                            <Link to={{
+                                pathname: nextStep,
+                                state: { commitments: selected, category }
+                            }}>
+                                <Button disabled={selected.length < 2}>
+                                    Continue
+                                </Button>
+                            </Link>
+                        </Space>   
+                    </div>
                 </div>
-            </React.Fragment>
         </Layout>
     );
 };

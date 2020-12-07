@@ -6,11 +6,9 @@ import present from '../assets/presentFoundation.svg'
 const Header = ({ children, theme }) => {
     return (
         <div className='header-wrapper'>
-            <div className='logo'>
-                { theme === 'registry' && <img src={registry} alt='Good Ancestor Registry' /> }
-                { theme === 'future' && <img src={future} alt='Far Future Foundation' /> }
+                { theme === 'registry' && <span className='logo-bg-registry'> <img src={registry} alt='Good Ancestor Registry' /></span> }
+                { theme === 'future' && <span className='logo-bg-future'> <img src={future} alt='Far Future Foundation' /></span> }
                 { theme === 'present' && <img src={present} alt='Act Right Now Foundation' /> }
-            </div>
             { children }
         </div>
     );
