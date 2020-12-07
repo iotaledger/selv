@@ -57,7 +57,7 @@ const SelectCommitmentCategory = ({ match }) => {
 					</dir>
 				)}
 				<div className='tabs-wrapper'>
-					<Tabs centered defaultActiveKey='1'>
+					<Tabs centered tabBarGutter={50} defaultActiveKey='1'>
 						<TabPane tab='OVERVIEW' key='1'>
 							<Commitments
 								futureCommitment={futureCommitment}

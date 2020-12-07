@@ -29,6 +29,7 @@
 .ant-tabs-tab {
     width: 110px;
     justify-content: center;
+    font-weight: 600;
     @include themify($themes) {
         color: themed('secondaryFontColor');
     }
