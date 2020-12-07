@@ -47,7 +47,7 @@ const SelectCommitmentCategory = ({ match }) => {
 	return (
 		<Layout match={match} noFooter>
 			<div className='category-page-wrapper'>
-				{!userName && (
+				{userName && (
 					<dir className='content-header'>
 						<h2 className='user-name'>{userName}'s Pledge</h2>
 						<br />
