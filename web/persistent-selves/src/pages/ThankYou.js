@@ -59,7 +59,9 @@ const ThankYou = () => {
                         </div>
                         <div className='cta-wrapper'>
                             <Link to={'/'}>
-                                Return home
+                                <Button className='cta'>
+                                    Return home
+                                </Button>
                             </Link>
                         </div>
                         <img src={dots} alt='' className='dots-bottom' />

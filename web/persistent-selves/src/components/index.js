@@ -12,6 +12,8 @@ import RandomGraphicElement from './RandomGraphicElement';
 import WebSocket from './WebSocket';
 import Disclaimer from './Disclaimer'
 import PledgeCards from './PledgeCards'
+import Credentials from './Credentials';
+import Commitments from './Commitments';
 
 export {
     Sidebar,
@@ -27,5 +29,7 @@ export {
     WebSocket,
     Disclaimer,
     FAQ,
-    PledgeCards
+    PledgeCards,
+    Credentials,
+    Commitments
 };

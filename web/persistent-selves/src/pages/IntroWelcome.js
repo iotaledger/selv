@@ -24,52 +24,44 @@ const IntroWelcome = ({ match }) => {
 
 	return (
 		<RandomGraphicElement elements={7}>
-			<div className="theme-demo">
-				<Link to={'/'} className="logo demo-page">
-					<img src={logo} alt="Selv logo" />
+			<div className='theme-demo'>
+				<Link to={'/'} className='logo demo-page'>
+					<img src={logo} alt='Selv logo' />
 				</Link>
-				<div className="demo-intro app" id="app">
-					<img className="phone" src={mobile} alt="Mobile phone" />
-					<div className="app-content-wrapper">
-						<span className="heading">
-							<h2>Welcome to</h2>&nbsp;&nbsp;<h2 className="highlight">Persistent Selves</h2>
+				<div className='demo-intro app' id='app'>
+					<img className='phone' src={mobile} alt='Mobile phone' />
+					<div className='app-content-wrapper'>
+						<span className='heading'>
+							<h2>Welcome to</h2>&nbsp;&nbsp;<h2 className='highlight'>Persistent Selves</h2>
 						</span>
 						<br />
 						<br />
+						<p>Your digital testament to a positive environmental inheritance for future generations.</p>
 						<p>
-							Your digital testament to a positive environmental inheritance for future
-							generations.
-						</p>
-						<p>
-							Persistent Selv is an exploratory demo, empowering people to plan their
-							environmental legacy. By using their self-sovereign digital identities (SSIDs),
-							individuals are encouraged to improve their ecological footprints and establish
-							trusted connections with future generations.
+							Persistent Selv is an exploratory demo, empowering people to plan their environmental legacy. By using
+							their self-sovereign digital identities (SSIDs), individuals are encouraged to improve their ecological
+							footprints and establish trusted connections with future generations.
 							<br />
 							<br /> Your legacy is now...
 							<br />
 							<br />
 						</p>
-						{/* prettier-ignore */}
 						<Link to={nextStep}>
-                            <Button className='cta'>
-                                Continue
-                            </Button>
-                        </Link>
-						<p className="note">
+							<Button className='cta'>Continue</Button>
+						</Link>
+						<p className='note'>
 							<br />
-							This demo can be best experienced using a browser on a PC or Mac in combination
-							with the Selv app on your phone. A full phone experience is possible using a
-							mobile browser and the Selv app.
+							This demo can be best experienced using a browser on a PC or Mac in combination with the Selv app on your
+							phone. A full phone experience is possible using a mobile browser and the Selv app.
 							<br />
 							<br />
-							The demo has been developed by the IOTA Foundation and Dark Matter Labs, as part
-							of EIT Climate-KIC’s Deep Demonstration on Long-termism.
+							The demo has been developed by the IOTA Foundation and Dark Matter Labs, as part of EIT Climate-KIC’s Deep
+							Demonstration on Long-termism.
 						</p>
 					</div>
-					<img src={dots} alt="" className="dots-top" />
-					<img src={dots} alt="" className="dots-bottom" />
-					<img src={ellipse} alt="" className="ellipse" />
+					<img src={dots} alt='' className='dots-top' />
+					<img src={dots} alt='' className='dots-bottom' />
+					<img src={ellipse} alt='' className='ellipse' />
 					<Disclaimer />
 				</div>
 			</div>

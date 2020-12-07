@@ -27,7 +27,6 @@ const IntroTodos = ({ match }) => {
 
 	return (
 		<RandomGraphicElement elements={7}>
-			{/* prettier-ignore */}
 			<div className='theme-demo'>
                 <Link to={'/'} className="logo demo-page">
                     <img src={logo} alt="Selv logo" />

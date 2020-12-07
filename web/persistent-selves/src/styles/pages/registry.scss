@@ -16,6 +16,108 @@
     }
 }
 
+.category-page-wrapper {
+    @extend .registry-page-wrapper;
+
+    .content-header {
+        width: 100%;
+        height: 180px;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    
+        h3 {
+            font-weight: 600;
+        }
+    }
+
+    @include themify($themes) {
+        background: themed('trinaryPageBackground');  
+    }
+}
+
+.select-commitment-category-wrapper {
+    margin-top: 20px;
+
+    .commitment-category {
+        display: flex;
+        flex-direction: row;
+        margin: 20px 7%;
+        height: 220px;
+    
+        @include themify($themes) {
+        filter: themed('boxShadow');  
+        }
+    
+        .ant-card-body {
+        display: flex;
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+        }
+
+        .commitment-category-image-wrapper {
+            height: 100%;
+            width: 247px;
+            padding: 10px;
+            background: #92CAFF;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            h3 {
+                text-align: center;
+                color: white;
+                margin-top: 10px;
+            }
+        }
+
+        .commitment-category-content {
+            margin-left: 30px;
+            width: 80%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .category-future {
+            background: #92CAFF !important;
+            margin-bottom: 10px;
+            &:hover {
+                background: #72b1ec !important;
+            }
+            .arrow {
+                padding-left: 8px;
+            }
+        }
+    
+    }
+
+    .commitment-category-present {
+        @extend .commitment-category;
+
+        .commitment-category-image-wrapper {
+            @extend .commitment-category-image-wrapper;
+            background: #B4A7D9;
+        }
+
+        .category-present {
+            margin-bottom: 10px;
+            .arrow {
+                padding-left: 8px;
+            }
+        }
+    }
+}
+
+
+
 .create-pledge-header-cta {
     width: 100%;
     display: flex;
@@ -74,7 +176,7 @@
         font-weight: themed('h3TextWeight');
     }
 }
- 
+
 .registry-cta-wrapper {
     display: flex;
     flex-direction: column;
@@ -113,17 +215,19 @@
     .faq-content{
         display: flex;
         flex-wrap: wrap;
+        justify-content: space-between;
 
         .faq {
             box-sizing: border-box;
-            width: 50%;
-            padding: 0 10px 30px 10px;
+            width: 49%;
+            margin: 15px 0;
+            padding: 10px 10px 10px 0;
             text-align: start;
 
             @include breakPoint(small) {
                 width: 100%;
             }
-          }
+        }
     }
 }
 
@@ -133,11 +237,12 @@
 .card-content{
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 
     .card {
         box-sizing: border-box;
-        width: 47%;
-        margin: 15px 15px 15px 0;
+        width: 49%;
+        margin: 15px 0;
         padding: 10px 10px;
         text-align: start;
 
@@ -148,8 +253,14 @@
         @include breakPoint(small) {
             width: 100%;
         }
-      }
-      
+    }
+    
+    }
+}
+
+.tabs-wrapper {
+    .ant-tabs-bar {
+        margin: 0 7% 20px 7%;
     }
 }
 

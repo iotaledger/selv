@@ -1,0 +1,38 @@
+// Ant Card
+.ant-card {
+    border-radius: 20px;
+}
+
+// Ant Tabs
+.ant-tabs-tab.ant-tabs-tab-active {
+    font-weight: 600;
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+    }
+}
+
+.ant-tabs-tab-btn:focus,
+.ant-tabs-tab-btn:active {
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+    }
+}
+
+.ant-tabs-ink-bar {
+    border-bottom: 2px $primary-color-registry;
+}
+
+.ant-tabs-top > .ant-tabs-nav::before {
+    border: 1px solid $primary-color-registry;
+}
+
+.ant-tabs-tab {
+    @include themify($themes) {
+        color: themed('secondaryFontColor');  
+    }
+    &:hover {
+    @include themify($themes) {
+        color: themed('primaryFontColor');  
+    }
+    }
+}

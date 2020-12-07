@@ -11,7 +11,6 @@ import logo from '../assets/landing/logoHeader.svg';
 /**
  * Component which will display a Intro LifeSpan.
  */
-{/* prettier-ignore */}
 const IntroLifeSpan = ({ match }) => {
 	const { nextStep } = useStep(match);
 

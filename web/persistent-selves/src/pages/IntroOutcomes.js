@@ -37,9 +37,8 @@ const IntroOutcomes = ({ match }) => {
 						<br />
 						<br />
 						<p>
-							Using your decentralised digital identity, you will create lasting actions and
-							explore different lenses of viewing the future. With emerging technology it is
-							possible to.
+							Using your decentralised digital identity, you will create lasting actions and explore different lenses of
+							viewing the future. With emerging technology it is possible to.
 							<br />
 							<br />
 							In doing so, you create your Persistent Selves.
