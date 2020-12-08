@@ -14,7 +14,7 @@ import {
     PledgeRegistry,
     GreatSuccess,
     ThankYou,
-    // Stats
+    Stats
 } from './pages';
 
 export const routes = [
@@ -27,29 +27,30 @@ export const routes = [
     { path: '/registry/prove/1', page: ProveIdentity },
     { path: '/registry/signin/1', page: SingInConfirmation },
 
-    { path: '/registry/category/1', page: SelectCommitmentCategory },
-    { path: '/future/select/1', page: SelectCommitments },
+    { path: '/registry/category/2', page: SelectCommitmentCategory },
+    { path: '/future/select/2', page: SelectCommitments },
     { path: '/future/personalize/2', page: PersonalizeCommitments },
     { path: '/future/prove/2', page: ProveIdentity },
     { path: '/future/data/2', page: PledgeData },
     { path: '/future/confirm/2', page: Confirmation },
     { path: '/demo/success', page: GreatSuccess },
 
-    { path: '/registry/category/2', page: SelectCommitmentCategory },
-    { path: '/present/select/2', page: SelectCommitments },
-    { path: '/present/personalize/2', page: PersonalizeCommitments },
-    { path: '/present/prove/2', page: ProveIdentity },
-    { path: '/present/data/2', page: PledgeData },
-    { path: '/present/confirm/3', page: Confirmation },
     { path: '/registry/category/3', page: SelectCommitmentCategory },
-
-    // { path: '/demo/stats', page: Stats },
+    { path: '/present/select/3', page: SelectCommitments },
+    { path: '/present/personalize/3', page: PersonalizeCommitments },
+    { path: '/present/prove/3', page: ProveIdentity },
+    { path: '/present/data/3', page: PledgeData },
+    { path: '/present/confirm/3', page: Confirmation },
+    
+    { path: '/registry/category/4', page: SelectCommitmentCategory },
+    { path: '/registry/stats/4', page: Stats },
     { path: '/demo/thankyou', page: ThankYou }
 ];
 
 export const mainSteps = [
     { title: 'Create your identity' },
-    { title: 'Visit the registry' },
-    { title: 'Start your pledge' },
-    { title: 'Create your legacies' }
+    { title: 'Visit the Good Ancestor Registry' },
+    { title: 'Choose your Future Commitment' },
+    { title: 'Choose your Present Commitment' },
+    { title: 'Complete your Pledge' }
 ];
