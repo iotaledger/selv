@@ -19,6 +19,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "identity_ts": "iotaledger/identity.ts",
+    "randomstring": "^1.1.5",
     "socket.io": "2.3.0",
     "sqlite3": "^4.1.1"
   },
