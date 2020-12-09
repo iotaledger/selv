@@ -143,24 +143,29 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         });
 
         ioClient.on('createCredentialConfirmation', async (encryptedPayload) => {
-            clearTimeout(timeout);
-            setIsRunning(false);
-            let payload = await decrypt(password, encryptedPayload);
-            payload = JSON.parse(payload);
-            if (payload?.status === 'success') {
-                switch (schemaName) {
-                    case 'FutureCommitments':
-                        await localStorage.setItem('futureCommitment', 'completed');
-                        break;
-                    case 'PresentCommitments':
-                        await localStorage.setItem('presentCommitment', 'completed');
-                        break;
-                    default:
-                        break;
+            try {
+                clearTimeout(timeout);
+                setIsRunning(false);
+                let payload = await decrypt(password, encryptedPayload);
+                payload = JSON.parse(payload);
+                if (payload?.status === 'success') {
+                    switch (schemaName) {
+                        case 'FutureCommitments':
+                            await localStorage.setItem('futureCommitment', 'completed');
+                            break;
+                        case 'PresentCommitments':
+                            await localStorage.setItem('presentCommitment', 'completed');
+                            break;
+                        default:
+                            break;
+                    }
+                    await localStorage.setItem(schemaName, JSON.stringify({ ...data, ...payload?.payload }));
+                    await shareCommitment(payload?.payload?.Commitments, schemaName);
+                    history.push(nextStep);
                 }
-                await localStorage.setItem(schemaName, JSON.stringify({ ...data, ...payload?.payload }));
-                // await updateStatus();
-                history.push(nextStep);
+            } catch (e) {
+                console.error(e);
+                setLoading && setLoading(false);
             }
         });
     }
@@ -168,6 +173,14 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     async function checkConnectedStatus (channelId) {
         const response = await axios.get(`${serverAPI}/connection?channelId=${channelId}`);
         return response && response?.data?.status === 'success';
+    }
+
+    async function shareCommitment (commitments, type) {
+        try {
+            await axios.post(`${serverAPI}/commitment`, { commitments, type });
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     async function setChannel () {
