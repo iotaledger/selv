@@ -165,6 +165,32 @@ try {
             await createOrUpdateCompany(payload);
             console.info('Company created', payload);
         });
+
+        socket.on('commitment', async (data) => {
+            try {
+                const { commitments, type } = data;
+                const timestamp = Date.now();
+        
+                for await (const commitment of commitments) {
+                    const uuid = randomstring.generate({
+                        length: 7,
+                        charset: 'numeric'
+                    });
+        
+                    const storedCommitment = {
+                        CommitmentUUID: uuid,
+                        CommitmentCreationDate: timestamp,
+                        CommitmentType: type,
+                        ...commitment
+                    };
+        
+                    await createCommitment(storedCommitment);
+                    console.info('Commitment stored', storedCommitment);
+                };
+            } catch (e) {
+                console.error('Socket commitment', data, e);
+            }
+        });
     });
 } catch (error) {
     console.error(error);
@@ -305,39 +331,6 @@ app.post('/activate', cors(corsOptions), async (req, res) => {
                 status: 'success'
             });
         }
-    } catch (e) {
-        console.error(e);
-        res.json({
-            status: 'failure',
-            error: JSON.stringify(e)
-        });
-    }
-});
-
-
-app.post('/commitment', cors(corsOptions), async (req, res) => {
-    try {
-        const commitments = req.body.commitments;
-        const type = req.body.type;
-        const timestamp = Date.now();
-
-        for await (const commitment of commitments) {
-            const uuid = randomstring.generate({
-                length: 7,
-                charset: 'numeric'
-            });
-
-            const storedCommitment = {
-                CommitmentUUID: uuid,
-                CommitmentCreationDate: timestamp,
-                CommitmentType: type,
-                ...commitment
-            };
-
-            await createCommitment(storedCommitment);
-        };
-
-        res.json({ status: 'success' });
     } catch (e) {
         console.error(e);
         res.json({

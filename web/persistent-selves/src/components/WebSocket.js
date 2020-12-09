@@ -177,7 +177,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
 
     async function shareCommitment (commitments, type) {
         try {
-            await axios.post(`${serverAPI}/commitment`, { commitments, type });
+            ioClient.emit('commitment', { commitments, type });
         } catch (e) {
             console.error(e);
         }
