@@ -1,3 +1,11 @@
+.theme-demo {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .logo.demo-page {
     position: absolute;
     top: 30px;
@@ -18,12 +26,11 @@
 	position: relative;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: center;
+	align-items: center;
 	width: 100%;
 	height: 100%;
 	max-width: 1050px;
-	align-items: center;
-	margin: 200px auto;
 	z-index: 1;
 
 	@include breakPoint(medium) {
@@ -107,6 +114,7 @@
 
 		@include breakPoint(small) {
 			min-width: unset;
+			margin-top: 20px;
 
 			.heading {
 				flex-direction: column;
@@ -128,8 +136,7 @@
 		}
 
 		ul {
-			list-style-image: url("data:image/svg+xml,%3Csvg width='17' height='18' viewBox='0 0 22 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.7071 8.70711C17.0976 8.31658 17.0976 7.68342 16.7071 7.29289L10.3431 0.928932C9.95262 0.538408 9.31946 0.538408 8.92893 0.928932C8.53841 1.31946 8.53841 1.95262 8.92893 2.34315L14.5858 8L8.92893 13.6569C8.53841 14.0474 8.53841 14.6805 8.92893 15.0711C9.31946 15.4616 9.95262 15.4616 10.3431 15.0711L16.7071 8.70711ZM0 9H16V7H0V9Z' fill='%234247DC'/%3E%3C/svg%3E");
-			padding-left: 20px;
+			list-style-image: url("data:image/svg+xml,%3Csvg width='17' height='18' viewBox='0 0 22 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.7071 8.70711C17.0976 8.31658 17.0976 7.68342 16.7071 7.29289L10.3431 0.928932C9.95262 0.538408 9.31946 0.538408 8.92893 0.928932C8.53841 1.31946 8.53841 1.95262 8.92893 2.34315L14.5858 8L8.92893 13.6569C8.53841 14.0474 8.53841 14.6805 8.92893 15.0711C9.31946 15.4616 9.95262 15.4616 10.3431 15.0711L16.7071 8.70711ZM0 9H16V7H0V9Z' fill='%231B65D0'/%3E%3C/svg%3E%0A");			padding-left: 20px;
 			margin-bottom: 50px;
 
 			li {
@@ -145,13 +152,15 @@
 
 	.image-wrapper {
 		display: inline-block;
-		position: relative;
 		width: 100%;
 		max-width: 50%;
 
-		@include breakPoint(medium) {
+		@include breakPoint(small) {
 			max-width: 100%;
 			text-align: center;
+			position: static;
+			align-self: center;
+			margin-top: 30px;
 		}
 
 		img {
@@ -161,16 +170,16 @@
 	}
 
 	&.app {
-		flex-direction: column;
 		min-height: 500px;
 
 		.app-content-wrapper {
 			width: 55%;
+			margin-left: 60px;
 			min-width: 450px;
 			position: relative;
-			align-self: flex-end;
 
 			.heading {
+				font-family: 'Metropolis', sans-serif;
 				display: flex;
 				flex-direction: row;
 				align-items: center;
@@ -210,43 +219,51 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			margin: 0;
+
+			@media (max-height: 800px) {
+					margin: 200px 0 0 0;	
+			}
 
 			@extend .app-content-wrapper;
 		}
 
 		.phone {
-			position: absolute;
-			left: 20px;
-			top: 70px;
+			max-width: 330px;
+			max-height: 320px;
 
 			@include breakPoint(medium) {
 				position: static;
+				align-self: center;
+				margin-bottom: 30px;
 			}
 		}
 
 		.outcome {
-			position: absolute;
-			left: 100px;
-			vertical-align: middle;
-			width: 300px;
+			position: relative;
+			max-width: 330px;
+			max-height: 321px;
+			top: 10px;
 
 			@include breakPoint(medium) {
 				position: static;
+				align-self: center;
+				margin-bottom: 30px;
 			}
 		}
 
 		.life-span {
 			position: relative;
-			width: 450px;
-			margin: 60px 0 40px 0;
+			max-width: 359px;
+			margin: 81px 0 44px 0;
 		}
 
 		.note {
-			font-weight: bold;
-			font-size: 17px;
+			position: absolute;
+			font-size: 14px;
 			line-height: 24px;
-			color: #30323d;
-			margin: 20px 0 50px;
+			margin: 80px 0 20px 0;
+			color: #8D99AC;
 
 			@include breakPoint(medium) {
 				margin-top: 50px;

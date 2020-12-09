@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button, Space } from 'antd';
 import useStep from '../utils/useStep';
 import mobile from '../assets/mobile.png';
 import { Disclaimer, RandomGraphicElement } from '../components';
@@ -31,26 +31,21 @@ const IntroWelcome = ({ match }) => {
 				<div className='demo-intro app' id='app'>
 					<img className='phone' src={mobile} alt='Mobile phone' />
 					<div className='app-content-wrapper'>
+						<Space size={20} direction='vertical'>
 						<span className='heading'>
-							<h2>Welcome to</h2>&nbsp;&nbsp;<h2 className='highlight'>Persistent Selves</h2>
+							<h2>Welcome to</h2>&nbsp;&nbsp;<h2 className='highlight'>Persistent Selv</h2>
 						</span>
-						<br />
-						<br />
 						<p>Your digital testament to a positive environmental inheritance for future generations.</p>
 						<p>
 							Persistent Selv is an exploratory demo, empowering people to plan their environmental legacy. By using
 							their self-sovereign digital identities (SSIDs), individuals are encouraged to improve their ecological
 							footprints and establish trusted connections with future generations.
-							<br />
-							<br /> Your legacy is now...
-							<br />
-							<br />
 						</p>
 						<Link to={nextStep}>
 							<Button className='cta'>Continue</Button>
 						</Link>
+						</Space>
 						<p className='note'>
-							<br />
 							This demo can be best experienced using a browser on a PC or Mac in combination with the Selv app on your
 							phone. A full phone experience is possible using a mobile browser and the Selv app.
 							<br />

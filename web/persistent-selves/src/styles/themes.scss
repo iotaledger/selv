@@ -1,4 +1,4 @@
-$font-family-registry: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-registry: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 $font-family-snsBank: 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 $font-family-insurance: 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 $font-family-demo: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -29,10 +29,10 @@ $primary-font-color-insurance: #142037;
 $secondary-font-color-insurance: #BBBBBB;
 $page-background-insurance: #EEF2FA;
 
-$primary-color-demo: #4247DC;
-$secondary-color-demo: #3B6AC5;
-$trinary-color-demo: #25C1B6;
-$primary-font-color-demo: #142037;
+$primary-color-demo: #2C80FC;
+$secondary-color-demo: #5C9EFF;
+$trinary-color-demo: #B5F3D8;
+$primary-font-color-demo: #000000;
 $secondary-font-color-demo: #BBBBBB;
 $page-background-demo: #EEF2FA;
 
@@ -76,7 +76,7 @@ $themes: (
         fontFamily: $font-family-registry,
         fontFamilyHeadings: $font-family-registry,
 
-        defaultTextSize: 16px,
+        defaultTextSize: 14px,
         defaultLineHeight: 24px,
 
         primaryColor: $primary-color-registry,
