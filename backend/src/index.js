@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const SocketIO = require('socket.io');
@@ -6,6 +7,10 @@ const { Server } = require('http');
 // const { createIdentity, createAccessCredential } = require('./DID')
 const { websocketPort } = require('../config');
 const { createOrUpdateCompany, createOrUpdatePledge, readData, readAllData, removeData } = require('./database');
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../swagger.json');
+const customCss = fs.readFileSync((process.cwd() + '/swagger.css'), 'utf8');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -28,6 +33,7 @@ const app = express();
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json());
+app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
 
 console.log('Websocket server starting', websocketPort);
 
