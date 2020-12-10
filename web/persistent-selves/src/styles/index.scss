@@ -42,12 +42,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.content-stretch {
-  flex: 1;
-  width: 100%;
-  align-items: flex-start;
-}
-
 div, span, p, label, input, select, section, footer, header, nav, ul, li, button, tr, td, th {
   @include themify($themes) {
     font-family: themed('fontFamily');  
@@ -119,6 +113,7 @@ button {
     padding: 50px;
     min-width: 535px;
     width: 100%;
+    height: 100vh;
     display: flex;
     justify-content: center;
 
