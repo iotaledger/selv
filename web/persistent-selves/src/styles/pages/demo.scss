@@ -153,6 +153,8 @@
 		width: 100%;
 		display: flex;
 		align-items: center;
+		position: relative;
+		left: 40px; // to center wrapper as the image has a a right shadow
 
 		@include breakPoint(medium) {
 			flex-direction: column;

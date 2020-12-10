@@ -103,7 +103,7 @@ button {
   justify-content: space-between;
   align-items: center;
   overflow-x: auto;
-  height: 100vh;
+  height: 100%;
 
   @include themify($themes) {
     background-color: themed('pageBackground');
