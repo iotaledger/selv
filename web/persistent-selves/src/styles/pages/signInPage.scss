@@ -2,6 +2,11 @@
 .sign-in-confirmation-page-wrapper {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
 
     @include themify($themes) {
         background: themed('trinaryPageBackground');
@@ -21,7 +26,7 @@
         text-align: start;
         width: 100%;
         height: 100%;
-        padding: 120px 7% 0 7%;
+        padding: 50px 7%;
     
         h2 {
             margin: 40px 0 30px;
