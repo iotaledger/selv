@@ -45,6 +45,21 @@
     }
 }
 
+.scan-qr-page-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+
+    @include themify($themes) {
+        background: themed('trinaryPageBackground');  
+    }
+    
+}
+
 .cta-section {
     position: fixed;
     bottom: 0;
@@ -77,13 +92,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    margin: 50px 0;
 }
 
 .app-download {
     position: fixed;
     width: 100%;
     z-index: 2;
-    margin-top: 18px;
 
     @include breakPointHeight(short) {
         position: relative;
