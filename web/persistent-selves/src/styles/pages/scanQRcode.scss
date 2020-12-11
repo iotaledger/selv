@@ -4,6 +4,10 @@
     justify-content: flex-start;
     align-items: center;
 
+    @include themify($themes) {
+        background: themed('trinaryPageBackground');  
+    }
+
     > * {
         z-index: 1;
     }
@@ -53,10 +57,6 @@
     justify-content: center;
     align-items: center;
     z-index: 0;
-
-    @include themify($themes) {
-        background: themed('trinaryPageBackground');  
-    }
     
 }
 

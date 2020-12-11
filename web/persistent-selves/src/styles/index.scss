@@ -89,6 +89,7 @@ button {
   display: flex;
   flex-direction: row;
   width: 100%;
+  height: 100%;
   justify-content: space-between;
 }
 
@@ -103,7 +104,7 @@ button {
   justify-content: space-between;
   align-items: center;
   overflow-x: auto;
-  height: 100%;
+  height: 100vh;
 
   @include themify($themes) {
     background-color: themed('pageBackground');
@@ -113,7 +114,7 @@ button {
     padding: 50px;
     min-width: 535px;
     width: 100%;
-    height: 100vh;
+    // height: 100%;
     display: flex;
     justify-content: center;
 
