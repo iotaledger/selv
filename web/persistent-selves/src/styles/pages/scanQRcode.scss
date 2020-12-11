@@ -37,6 +37,16 @@
         }
     }
 
+    p {
+        @include themify($themes) {
+            font-size: themed('defaultTextSize');
+        }
+    }
+
+    .bold {
+        color: #656565;
+    }
+
     .qr-wrapper {
         box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.4);
         -webkit-box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.3); 
