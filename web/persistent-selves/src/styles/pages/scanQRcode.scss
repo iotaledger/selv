@@ -168,8 +168,8 @@
     }
 
     .circle {
-        position: fixed;
-        bottom: -250px;
+        position: absolute;
+        bottom: 0;
         z-index: 0;
         width: 800px;
 
