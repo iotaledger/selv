@@ -37,6 +37,8 @@ const IntroLifeSpan = ({ match }) => {
 						<Link to={nextStep}>
 							<Button className="cta">Continue</Button>
 						</Link>
+						<br />
+						<br />
 					</div>
 					<img src={dots} alt="" className="dots-top" />
 					<img src={dots} alt="" className="dots-bottom" />

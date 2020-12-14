@@ -1,10 +1,10 @@
 .registry-page-wrapper {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    width: 100%;
     align-items: flex-start;
-    height: 100vh;
     word-break: break-word;
 
     &.drawer {
@@ -18,6 +18,7 @@
 
 .category-page-wrapper {
     @extend .registry-page-wrapper;
+    margin-bottom: 60px;
 
     .content-header {
         width: 100%;

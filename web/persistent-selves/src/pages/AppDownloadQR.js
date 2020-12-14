@@ -22,7 +22,7 @@ const AppDownloadQR = ({ match }) => {
             <React.Fragment>
                 <div className='scan-qr-page-wrapper app-download' id='app'>
                     <RandomGraphicElement elements={5}>
-                        <div className='scan-qr-content-wrapper'>
+                        <div className='scan-qr-content-wrapper-app'>
                             <h1 className='title'>Download the Selv app</h1>
                             <div className='app-cta-wrapper'>
                                 <a
