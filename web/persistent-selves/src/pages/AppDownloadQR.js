@@ -22,7 +22,7 @@ const AppDownloadQR = ({ match }) => {
             <React.Fragment>
                 <div className='scan-qr-page-wrapper app-download' id='app'>
                     <RandomGraphicElement elements={5}>
-                        <React.Fragment>
+                        <div className='scan-qr-content-wrapper-app'>
                             <h1 className='title'>Download the Selv app</h1>
                             <div className='app-cta-wrapper'>
                                 <a
@@ -50,7 +50,7 @@ const AppDownloadQR = ({ match }) => {
                                 <img src={avatar1} alt='' className='avatar1' />
                                 <img src={avatar2} alt='' className='avatar2' />
                             </div>
-                        </React.Fragment>
+                        </div>
                     </RandomGraphicElement>
                     <img src={dots} alt='' className='dots' />
                     <img src={circle} alt='' className='circle' />

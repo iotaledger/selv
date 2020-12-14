@@ -50,10 +50,6 @@ const SelectCommitmentCategory = ({ match }) => {
 				{userName && (
 					<dir className='content-header'>
 						<h2 className='user-name'>{userName}'s Pledge</h2>
-						<br />
-						<h3>
-							Pledge number <b>03244589</b>
-						</h3>
 					</dir>
 				)}
 				<div className='tabs-wrapper'>

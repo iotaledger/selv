@@ -4,6 +4,10 @@
     justify-content: flex-start;
     align-items: center;
 
+    @include themify($themes) {
+        background: themed('trinaryPageBackground');  
+    }
+
     > * {
         z-index: 1;
     }
@@ -33,6 +37,16 @@
         }
     }
 
+    p {
+        @include themify($themes) {
+            font-size: themed('defaultTextSize');
+        }
+    }
+
+    .bold {
+        color: #656565;
+    }
+
     .qr-wrapper {
         box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.4);
         -webkit-box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.3); 
@@ -43,6 +57,17 @@
         z-index: 4;
         margin: 50px 0;
     }
+}
+
+.scan-qr-page-wrapper {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+    
 }
 
 .cta-section {
@@ -72,11 +97,23 @@
     }
 }
 
+.scan-qr-content-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 120px 0;
+}
+
+.scan-qr-content-wrapper-app {
+    margin-top: 50px;
+}
+
 .app-download {
     position: fixed;
     width: 100%;
     z-index: 2;
-    margin-top: 18px;
 
     @include breakPointHeight(short) {
         position: relative;
@@ -131,7 +168,7 @@
     }
 
     .circle {
-        position: absolute;
+        position: fixed;
         bottom: -250px;
         z-index: 0;
         width: 800px;
@@ -175,7 +212,10 @@
                 font-weight: 600;
                 font-size: 20px;
                 line-height: 30px;
-                color: #4247DC;
+
+                @include themify($themes) {
+                    color: themed('primaryColor');
+                }
             }
 
             .qr-wrapper {

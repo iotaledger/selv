@@ -95,6 +95,8 @@ button {
 .page-wrapper {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  height: 100%;
   justify-content: space-between;
 }
 
@@ -119,6 +121,7 @@ button {
     padding: 50px;
     min-width: 535px;
     width: 100%;
+    // height: 100%;
     display: flex;
     justify-content: center;
 
