@@ -324,3 +324,101 @@
     }
 }
 
+.commitments-data-page-wrapper {
+    height: 100%;
+    width: 100%;
+
+    @include themify($themes) {
+        background: themed('pageBackground');
+    }
+
+    .commitments-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0 50px;
+        padding: 50px;
+
+        @include themify($themes) {
+            background: themed('trinaryPageBackground');
+        }
+
+        h2 {
+            margin-bottom: 52px;
+        }
+
+        .commitments-cards-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            padding: 0 30px 64px 30px;
+
+            .form-commitment-wrapper {
+                margin: 0 10px;
+
+                h4 {
+                    margin-bottom: 20px;
+                    font-family: 'Roboto', sans-serif;
+                }
+
+                .form-commitment-card {
+                    border-radius: 0;
+                    box-shadow: 5px 5px 0px #4D4D4D;
+
+                    .form-commitment-content p {
+                        font-weight: 600;
+
+                        .custom-value {
+                            @include themify($themes) {
+                                color: themed('primaryColor');
+                            } 
+                        }
+                    }
+                }
+            }
+        }
+
+        .form-wrapper {
+            width: 100%;
+            padding: 0 120px;
+
+            .btn-wrapper {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 61px;
+
+                button {
+                    width: 210px; 
+                }
+
+            }
+
+            .round-input {
+                border-radius: 6px;
+                height: 48px;
+                border: 1px solid #9EA0E6;
+            }
+
+            .ant-form-vertical .ant-form-item-label > label {
+                font-weight: 600;
+
+                @include themify($themes) {
+                    color: themed('trinaryColor');
+                } 
+            }           
+            
+            .notice {
+                position: relative;
+                display: flex;
+                justify-content: flex-end;
+                font-size: 14px;
+                bottom: 10px;
+
+                @include themify($themes) {
+                    color: themed('noticeColor');
+                } 
+            }
+        }
+    }
+}
+

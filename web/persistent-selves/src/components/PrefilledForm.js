@@ -17,14 +17,16 @@ const labels = {
 
 const Icon = () => <img src={icon} alt='' width={18} />;
 
-const PrefilledForm = ({ form, dataFields }) => {
+const PrefilledForm = ({ dataFields }) => {
+    const [form] = Form.useForm();
+
     useEffect(() => {
         form.setFieldsValue(dataFields);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className='prefilled-form'>
-            <Form layout='vertical'>
+            <Form form={form} layout='vertical'>
                 {
                     Object.keys(dataFields).map((field) => (
                         <Form.Item
@@ -32,9 +34,7 @@ const PrefilledForm = ({ form, dataFields }) => {
                             key={field}
                             className={shortFields.includes(field) ? 'short-field' : ''}
                         >
-                            { form.getFieldDecorator(field, {})(
-                                <Input disabled suffix={<Icon />} />
-                            ) }
+                            <Input className='round-input' disabled suffix={<Icon />} />
                         </Form.Item>
                     ))
                 }
