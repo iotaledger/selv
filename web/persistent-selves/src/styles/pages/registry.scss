@@ -104,15 +104,88 @@
 
         .commitment-category-image-wrapper {
             @extend .commitment-category-image-wrapper;
-            background: #B4A7D9;
+            background: $primary-color-present;
         }
 
         .category-present {
+            background: $primary-color-present !important;
+
+            &:hover {
+                background: $secondary-color-present !important;
+            }
+
             .arrow {
                 padding-left: 8px;
             }
         }
     }
+
+    .commitment-category-completed {
+            display: flex;
+            flex-direction: row;
+            margin: 20px 7%;
+            height: 273px;
+            background: $primary-color-future;
+        
+            @include themify($themes) {
+                filter: themed('boxShadow');  
+            }
+        
+            .ant-card-body {
+                display: flex;
+                flex-direction: column;
+                padding: 20px;
+                width: 100%;
+                height: 100%;
+            }
+
+        .commitment-category-completed-image-wrapper {
+            display: flex;
+            justify-content: space-between;
+
+            h3 {
+                color: $secondary-font-color-future;
+            }
+
+            .selv-logo-completed {
+                filter: brightness(0) invert(1);
+                width: 28px;
+            }
+        }
+    }
+
+    .commitment-category-completed-content {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            margin: 20px 0;
+
+            .completed-commitment-wrapper {
+                margin: 0 10px;
+            
+                h4 {
+                    margin-bottom: 20px;
+                    font-family: 'Roboto', sans-serif;
+                }
+
+                .completed-commitment-card {
+                    border-radius: 3px;
+                    padding: 35px;
+                    background: white;
+                    box-shadow: 5px 5px 0px #4D4D4D;
+
+                    .completed-commitment-content p {
+                        font-weight: 600;
+                        font-size: 16px;
+
+                        .custom-value {
+                            color: $primary-color-future;
+                        }
+                    }
+                }
+            }
+    }
+
 }
 
 

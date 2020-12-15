@@ -14,6 +14,12 @@
         margin: 0 50px;
         padding: 50px;
 
+        // position: relative;
+        // bottom: 90px;
+        // z-index: 5;
+        // overflow-y: hidden;
+
+
         @include themify($themes) {
             background: themed('trinaryPageBackground');
         }
@@ -362,7 +368,7 @@
                 }
 
                 .form-commitment-card {
-                    border-radius: 0;
+                    border-radius: 3px;
                     box-shadow: 5px 5px 0px #4D4D4D;
 
                     .form-commitment-content p {

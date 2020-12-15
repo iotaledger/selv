@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card } from 'antd';
+import { Button, Card, Space } from 'antd';
 import future from '../assets/futureCategory.svg';
 import present from '../assets/presentCategory.svg';
 import arrow from '../assets/arrow.svg';
@@ -25,11 +25,11 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                             className='commitment-category-completed'
                         >
                             <div className='commitment-category-completed-image-wrapper'>
-                                <div className='commitment-category-image-container'>
+                                <Space size={20} align="center">
                                     <img className='commitment-category-image' src={future} alt='Far Future Foundation' />
-                                    <h3>Far Future <br/> Foundation</h3>
-                                </div>
-                                <img src={selv} alt='Selv app logo' />
+                                    <h3>Far Future Foundation</h3>
+                                </Space>
+                                <img className='selv-logo-completed' src={selv} alt='Selv app logo' />
                             </div>
                             <div className='commitment-category-completed-content'>
                                 {
@@ -41,7 +41,9 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                                             <div className='completed-commitment-card'>
                                                 <div className='completed-commitment-content'>
                                                     <p>
-                                                        {getCondition('future', commitment?.CommitmentId)} <span className='custom-value'>{commitment?.CommitmentPercentage}% </span>
+                                                        <b>{getCondition('future', commitment?.CommitmentId).replace(/ .*/, '')} </b>
+                                                        {getCondition('future', commitment?.CommitmentId).split(' ').slice(1).join(' ')}
+                                                        <span className='custom-value'> {commitment?.CommitmentPercentage}% </span>
                                                         THEN donate <span className='custom-value'>{commitment?.CommitmentWalletPercentage}%</span> of my wallet balance
                                                         TO support <span className='custom-value'>{commitment?.CommitmentSupport}</span>
                                                     </p>
