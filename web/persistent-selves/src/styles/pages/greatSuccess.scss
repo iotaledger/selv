@@ -5,9 +5,9 @@
     align-items: center;
     overflow-x: auto;
     width: 100%;
-    padding-top: 100px;
+    height: 100%;
     background: #EEF2FA;
-    position: relative;
+    overflow-y: scroll;
 
     .figure {
         max-width: 275px;
@@ -25,15 +25,30 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+        z-index: 3;
+        padding: 30px 0;
     }
 
     .great-success-content-wrapper {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: center !important;
+        align-items: space-around;
         width: 100%;
-        max-width: 900px;
-        margin: 40px 0;
+        max-width: 1000px;
+        padding: 400px 0 50px 0;
+
+        @include breakPointHeight(short) {
+            padding: 700px 0 50px 0;
+        }
+
+        @include breakPoint(small) {
+            margin-top: 700px;
+        }
+
+        h2 {
+            align-self: center;
+        }
 
         .great-success-content {
             display: flex;
@@ -61,7 +76,7 @@
                     margin: 20px 0;
                     width: 100%;
                 }
-             }
+            }
 
             .figure-wrapper {
                 align-items: center;

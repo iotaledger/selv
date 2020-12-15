@@ -19,8 +19,8 @@ const GreatSuccess = ({ match }) => {
         <RandomGraphicElement elements={7}>
             <div className='theme-demo'>
                 <div className='great-success' id='app'>
-                    <h2>Great Success!</h2>
                     <div className='great-success-content-wrapper'>
+                        <h2>Great Success!</h2>
                         <div className='great-success-content'>
                             <div className='figure-wrapper'>
                                 <img className='figure' src={image1} alt='You signed in with DID' />
