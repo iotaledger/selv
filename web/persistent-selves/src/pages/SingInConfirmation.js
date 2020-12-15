@@ -39,8 +39,7 @@ const SingInConfirmation = ({ history, match }) => {
 									<h2>Access Authorised</h2>
 									<h2>You have now signed in to the registry without ever creating an account.</h2>
 									<p>
-										No more need for endless account and password creations. Verifying your data is nearly instant and
-										completely free.
+										You have now signed in to the registry without ever creating an account. Your data is part of your legacy. Your legacy, your control. No more need for endless account and password creations. Verifying your data is nearly instant and completely free.
 									</p>
 									<Link to={nextStep}>
 										<Button>Continue</Button>

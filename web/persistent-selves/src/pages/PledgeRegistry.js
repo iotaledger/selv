@@ -33,8 +33,6 @@ const PledgeRegistry = ({ history, match, ...props }) => {
 					<h4>Future outcomes that you can impact today</h4>
 					<div className='content-wrapper'>
 						<h4>Environmental Ceiling</h4>
-						<br />
-						<br />
 					</div>
 					<PledgeCards />
 				</div>

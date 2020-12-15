@@ -21,7 +21,7 @@ const faqs = [
 
 export default () => (
 	<div className='registry-faq-wrapper'>
-		<h4>Frequently Asked Questions</h4>
+		<h3>Frequently Asked Questions</h3>
 		<div className='faq-content'>
 			{faqs.slice(0, 4).map(({ question, answer }, index) => (
 				<div key={`faq-${index}`} className='faq'>

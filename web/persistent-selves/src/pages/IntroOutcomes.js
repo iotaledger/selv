@@ -32,7 +32,7 @@ const IntroOutcomes = ({ match }) => {
 					<img className='outcome' src={image} alt='Outcomes' />
 					<div className='app-content-wrapper'>
 						<span className='heading'>
-							<h2>Create your</h2>&nbsp;&nbsp;<h2 className='highlight'>Persistent Selves</h2>
+							<h2>Create your</h2>&nbsp;&nbsp;<h2 className='highlight'>Persistent Selv</h2>
 						</span>
 						<br />
 						<br />

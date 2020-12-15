@@ -1,6 +1,6 @@
 .registry-page-wrapper {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -177,12 +177,18 @@
     }
 }
 
+.faq-answer {
+    @include themify($themes) {
+        color: themed('primaryFontColor');
+    }
+}
+
 .registry-cta-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin: 50px 0;
+    margin: 60px 0 40px 0;
 
     @include breakPoint(small) {
         flex-direction: column;
@@ -208,8 +214,9 @@
     width: 100%;
     padding: 0 7% 50px 7%;
 
-    h4 {
+    h3 {
         margin-bottom: 30px;
+        font-weight: 600;
     }
 
     .faq-content{
@@ -220,7 +227,7 @@
         .faq {
             box-sizing: border-box;
             width: 49%;
-            margin: 15px 0;
+            margin: 10px 0;
             padding: 10px 10px 10px 0;
             text-align: start;
 
@@ -234,27 +241,27 @@
 .registry-card-wrapper {
     @extend .registry-faq-wrapper;
 
-.card-content{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    .card-content{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
 
-    .card {
-        box-sizing: border-box;
-        width: 49%;
-        margin: 15px 0;
-        padding: 10px 10px;
-        text-align: start;
+        .card {
+            box-sizing: border-box;
+            width: 49%;
+            margin: 15px 0;
+            padding: 15px 10px;
+            text-align: start;
 
-        @include themify($themes) {
-            background: themed('cardBackground');  
+            @include themify($themes) {
+                background: themed('cardBackground');  
+            }
+
+            @include breakPoint(small) {
+                width: 100%;
+            }
         }
-
-        @include breakPoint(small) {
-            width: 100%;
-        }
-    }
-    
+        
     }
 }
 

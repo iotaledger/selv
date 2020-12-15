@@ -5,11 +5,11 @@
     justify-content: space-between;
     width: 320px;
     padding: 60px 25px 40px 50px;
-    height: 100vh;
+    // height: 100vh;
     background-color: #FFFFFF;
     position: relative;
     box-shadow: -8px 0px 10px rgba(132, 147, 173, 0.1);
-    border-bottom: 8px solid #4140DF;
+    border-bottom: 8px solid #1B65D0;
     z-index: 2;
 
     @include breakPoint(medium) {
@@ -129,8 +129,8 @@
 
 .rs-steps-item-status-process {
     .rs-steps-item-icon-wrapper:not(.rs-steps-item-custom-icon) {
-        color: #4140DF;
-        border-color: #4140DF;
+        color: #1B65D0;
+        border-color: #1B65D0;
         background: #FFFFFF;
     }
 }
@@ -161,6 +161,6 @@
 }
 
 .rs-steps-item-status-process > .rs-steps-item-content > .rs-steps-item-title {
-    color: #4140DF;
+    color: #1B65D0;
     font-weight: 700;
 }

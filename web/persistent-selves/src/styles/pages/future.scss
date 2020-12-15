@@ -50,12 +50,7 @@
             button {
                 background: themed('primaryColor');
 
-                &:hover {
-                    background: themed('trinaryColor') !important;
-                }
-
                 &:disabled {
-                    background: #EEECEC;
                     color: #BBBBBB !important;
                 }
             }
@@ -69,6 +64,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+
     .commitment-item {
         display: flex;
         flex-direction: row;
@@ -106,7 +102,7 @@
     
             .ant-checkbox-wrapper {
                 border: 1px solid #DADADA;
-                width: 111px;
+                width: 114px;
                 border-radius: 6px;
                 padding: 8px 10px;
                 transition: all 0.3s;
@@ -124,7 +120,7 @@
                     @include themify($themes) {
                         background: themed('primaryColor');
                         border: 1px solid themed('primaryColor');
-                        transition: all 0.3s;
+                        transition: all 0.3s ;
                     }
                 }
             }
@@ -142,6 +138,189 @@
                 }
             }
         }
+    }
+}
+
+.personalize-commitment-page-wrapper {
+    height: 100%;
+    width: 100%;
+
+    @include themify($themes) {
+        background: themed('pageBackground');
+    }
+
+    .personalize-commitment-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0 50px;
+        padding: 50px;
+
+        @include themify($themes) {
+            background: themed('trinaryPageBackground');
+        }
+
+        .text-wrapper {
+            margin-bottom: 30px;
+
+            h2 {
+                margin-bottom: 20px;
+            }
+        }
+
+        .commitments-drawer {
+            width: 100%;
+            margin: 52px 0 30px 0;
+
+            h2 {
+                font-family: 'Roboto', sans-serif;;
+            }
+
+            .percentages-wrapper {
+                display: flex;
+                justify-content: space-between;
+
+                span {
+                    font-size: 20px;
+                    font-weight: 500;
+                    font-family: "Roboto", sans-serif;
+                }
+            }
+
+            .ant-slider-with-marks{
+                margin: 80px 0 15px 0;
+            }
+
+            .ant-slider-mark-text {
+                width: fit-content;
+                font-weight: 600;
+                font-size: 16px;
+                position: absolute;
+                bottom: 30px;
+            }
+
+            .mark-0 {
+                position: relative;
+                left: 50%;
+            }
+
+            .mark-100 {
+                position: relative;
+                right: 50%;
+            }
+
+            .ant-slider-step {
+                height: 12px;
+                border-radius: 18px;
+            }
+
+            .ant-slider-track {
+                height: 12px;
+                border-radius: 18px;
+
+                @include themify($themes) {
+                    background: themed('primaryColor');  
+                }
+            }
+
+            .ant-slider-rail { 
+                height: 12px;
+                border-radius: 18px;
+            }
+
+            .ant-slider-handle {
+                width: 30px;
+                height: 30px;
+                margin-top: -8px;
+
+                @include themify($themes) {
+                    border: solid 6px themed('secondaryColor');  
+                }
+            }
+
+            .ant-slider-dot {
+                top: 1px;
+                width: 10px;
+                height: 10px;
+            }
+
+            .drawer-btn-wrapper {
+                display: flex;
+                justify-content: center;
+
+                button {
+                    width: 210px;
+                }
+            }
+        } 
+    }
+
+    .personalize-commitments-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .commitment-item {
+            display: flex;
+            flex-direction: column;
+            margin: 15px 0;
+            
+            @include themify($themes) {
+            filter: themed('boxShadow');  
+            }
+            
+            .ant-card-body {
+            display: flex;
+            padding: 20px;
+            width: 100%;
+            height: 100%;
+            }
+
+            h4 {
+                margin-bottom: 22px;
+            }
+        }
+
+            .condition-wrapper {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin: 25px;
+
+                p {
+                    margin-right: 15px;
+                    font-size: 21px;
+                    font-weight: 500;
+                    font-family: "Roboto", sans-serif;
+                }
+                
+
+                .ant-select:not(.ant-select-customize-input) .ant-select-selector {
+                    height: 32px;
+                    color: white;
+                    font-size: 21px;
+                    font-weight: 700;
+                    border: none;
+                    padding: 0 14px;
+
+                    @include themify($themes) {
+                        background: themed('primaryColor');
+                    }
+                }
+
+                .ant-select-single.ant-select-open .ant-select-selection-item {
+                    color: white;
+                }
+
+                .ant-select-single .ant-select-selector .ant-select-selection-item{
+                    line-height: 32px;
+                }
+
+                .ant-select-arrow {
+                    color: white;
+                }
+            }
     }
 }
 

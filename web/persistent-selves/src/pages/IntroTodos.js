@@ -32,10 +32,13 @@ const IntroTodos = ({ match }) => {
                     <img src={logo} alt="Selv logo" />
                 </Link>
                 <div className='demo-intro' id='app'>
+                <div className='todos-wrapper'>
                     <div className='todos'>
-                        <span className='heading'><h2>Imagine your</h2>&nbsp;&nbsp;<h2 className='highlight'>legacy</h2>&nbsp;&nbsp;<h2>as a good</h2></span>
-                        <span className='heading'><h2>ancestor</h2>&nbsp;&nbsp;<h2 className='highlight'>today</h2></span>
-                        <br/>
+                        <div className='heading-wrapper'>
+                            <span className='heading'><h2>Imagine your</h2>&nbsp;&nbsp;<h2 className='highlight'>legacy</h2>&nbsp;&nbsp;<h2>as a good</h2></span>
+                            <span className='heading'><h2>ancestor</h2>&nbsp;&nbsp;<h2 className='highlight'>today</h2></span>
+                            <br/>
+                        </div>
                         <p>Explore this demo to see how you can safely own, share and manage your pledge to the future beyond your lifetime</p>
                         <ul className='todos'>
                             <li>Create your identity</li>
@@ -50,8 +53,9 @@ const IntroTodos = ({ match }) => {
                         </Link>
                     </div>
                     <div className='image-wrapper'>
-                        <img src={howItWorks} alt='how It Works' className='howItWorks' />
+                        <img src={howItWorks} alt='how It Works' />
                     </div>
+                </div>
                     <img src={dots} alt='' className='dots-top' />
                     <img src={dots} alt='' className='dots-bottom' />
                     <Disclaimer />
