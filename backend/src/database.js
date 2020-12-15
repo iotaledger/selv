@@ -22,6 +22,16 @@ const db = new sqlite3.Database(
                 CompanyBusiness TEXT, 
                 tangle TEXT
                 )`);
+            await db.run(`CREATE TABLE IF NOT EXISTS commitments (
+                CommitmentUUID TEXT PRIMARY KEY,
+                CommitmentId TEXT,
+                CommitmentTitle TEXT, 
+                CommitmentCreationDate TEXT, 
+                CommitmentType TEXT, 
+                CommitmentPercentage INTEGER,
+                CommitmentSupport TEXT, 
+                CommitmentWalletPercentage INTEGER
+                )`);
             await db.run('CREATE TABLE IF NOT EXISTS did (root TEXT, privateKey TEXT, keyId TEXT, seed TEXT, mamState TEXT)');
             await db.run('CREATE TABLE IF NOT EXISTS credentials (id TEXT, credential TEXT)');
         } catch (error) {
@@ -78,42 +88,36 @@ exports.createOrUpdateCompany = async ({
     ]);
 };
 
-exports.createOrUpdatePledge = async ({
-    CompanyNumber,
-    CompanyName,
-    CompanyCreationDate,
-    CompanyType,
-    CompanyStatus,
-    CompanyOwner,
-    CompanyOwners,
-    CompanyAddress,
-    CompanyBusiness,
-    tangle
+exports.createCommitment = async ({
+    CommitmentUUID,
+    CommitmentId,
+    CommitmentTitle, 
+    CommitmentCreationDate, 
+    CommitmentType, 
+    CommitmentPercentage,
+    CommitmentSupport, 
+    CommitmentWalletPercentage
 }) => {
     const query = `
-        REPLACE INTO pledge (
-            CompanyNumber, 
-            CompanyName, 
-            CompanyCreationDate, 
-            CompanyType, 
-            CompanyStatus, 
-            CompanyOwner, 
-            CompanyOwners,
-            CompanyAddress,
-            CompanyBusiness,
-            tangle
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        INSERT INTO commitments (
+            CommitmentUUID,
+            CommitmentId,
+            CommitmentTitle, 
+            CommitmentCreationDate, 
+            CommitmentType, 
+            CommitmentPercentage,
+            CommitmentSupport, 
+            CommitmentWalletPercentage
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
     await db.run(query, [
-        CompanyNumber,
-        CompanyName,
-        CompanyCreationDate,
-        CompanyType,
-        CompanyStatus,
-        CompanyOwner,
-        CompanyOwners,
-        CompanyAddress,
-        CompanyBusiness,
-        tangle
+        CommitmentUUID,
+        CommitmentId,
+        CommitmentTitle, 
+        CommitmentCreationDate, 
+        CommitmentType, 
+        CommitmentPercentage,
+        CommitmentSupport, 
+        CommitmentWalletPercentage
     ]);
 };
 

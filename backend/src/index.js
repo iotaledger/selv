@@ -1,11 +1,17 @@
 const express = require('express');
+const fs = require('fs');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const SocketIO = require('socket.io');
 const { Server } = require('http');
-// const { createIdentity, createAccessCredential } = require('./DID')
+const randomstring = require('randomstring');
+
 const { websocketPort } = require('../config');
-const { createOrUpdateCompany, createOrUpdatePledge, readData, readAllData, removeData } = require('./database');
+const { createOrUpdateCompany, createCommitment, readData, readAllData, removeData } = require('./database');
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../swagger.json');
+const customCss = fs.readFileSync((process.cwd() + '/swagger.css'), 'utf8');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
@@ -28,6 +34,7 @@ const app = express();
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json());
+app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
 
 console.log('Websocket server starting', websocketPort);
 
@@ -158,6 +165,32 @@ try {
             await createOrUpdateCompany(payload);
             console.info('Company created', payload);
         });
+
+        socket.on('commitment', async (data) => {
+            try {
+                const { commitments, type } = data;
+                const timestamp = Date.now();
+        
+                for await (const commitment of commitments) {
+                    const uuid = randomstring.generate({
+                        length: 7,
+                        charset: 'numeric'
+                    });
+        
+                    const storedCommitment = {
+                        CommitmentUUID: uuid,
+                        CommitmentCreationDate: timestamp,
+                        CommitmentType: type,
+                        ...commitment
+                    };
+        
+                    await createCommitment(storedCommitment);
+                    console.info('Commitment stored', storedCommitment);
+                };
+            } catch (e) {
+                console.error('Socket commitment', data, e);
+            }
+        });
     });
 } catch (error) {
     console.error(error);
@@ -247,23 +280,13 @@ app.get('/company', cors(corsOptions), async (req, res) => {
 /*
 Get pledge details
 */
-app.get('/pledge', cors(corsOptions), async (req, res) => {
+app.get('/commitments', cors(corsOptions), async (req, res) => {
     try {
-        const pledgeNumber = req.query.pledge;
-        await removeData('pledge', '');
-        if (pledgeNumber) {
-            const data = await readData('pledge', pledgeNumber);
-            res.json({
-                status: 'success',
-                data
-            });
-        } else {
-            const data = await readAllData('pledge');
-            res.json({
-                status: 'success',
-                data
-            });
-        }
+        const data = await readAllData('commitments');
+        res.json({
+            status: 'success',
+            data
+        });
     } catch (e) {
         console.error(e);
         res.json({
@@ -318,50 +341,6 @@ app.post('/activate', cors(corsOptions), async (req, res) => {
 });
 
 /*
-Activate pledge
-*/
-app.get('/activate_pledge', cors(corsOptions), async (req, res) => {
-    try {
-        const pledgeNumber = req.query.pledge;
-        if (pledgeNumber) {
-            const pledge = await readData('pledge', pledgeNumber);
-            await createOrUpdatePledge({ ...pledge, PledgeStatus: 'Active' });
-            console.log('Activating pledge', pledgeNumber);
-            res.json({
-                status: 'success'
-            });
-        }
-    } catch (e) {
-        console.error(e);
-        res.json({
-            status: 'failure',
-            error: JSON.stringify(e)
-        });
-    }
-});
-
-app.post('/activate_pledge', cors(corsOptions), async (req, res) => {
-    // res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
-    // res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-    try {
-        const pledgeNumber = req.body.pledge;
-        if (pledgeNumber) {
-            const pledge = await readData('pledge', pledgeNumber);
-            await createOrUpdatePledge({ ...pledge, PledgeStatus: 'Active' });
-            res.json({
-                status: 'success'
-            });
-        }
-    } catch (e) {
-        console.error(e);
-        res.json({
-            status: 'failure',
-            error: JSON.stringify(e)
-        });
-    }
-});
-
-/*
 Remove company
 */
 app.get('/remove_company', cors(corsOptions), async (req, res) => {
@@ -373,32 +352,6 @@ app.get('/remove_company', cors(corsOptions), async (req, res) => {
            
         } else {
             await removeData('company', '');
-        }
-        res.json({
-            status: 'success'
-        });
-    } catch (e) {
-        console.error(e);
-        res.json({
-            status: 'failure',
-            error: JSON.stringify(e)
-        });
-    }
-});
-
-
-/*
-Remove pledge
-*/
-app.get('/remove_pledge', cors(corsOptions), async (req, res) => {
-    try {
-        const pledgeNumber = req.query.pledge;
-        if (pledgeNumber) {
-            await removeData('pledge', pledgeNumber);
-            console.log('Removed pledge', pledgeNumber);
-           
-        } else {
-            await removeData('pledge', '');
         }
         res.json({
             status: 'success'
