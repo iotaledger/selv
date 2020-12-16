@@ -3,9 +3,12 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    text-align: center;
 
     @include themify($themes) {
-        background: themed('trinaryPageBackground');  
+        background: themed('trinaryPageBackground');
+        margin-top: themed('pageMarginTop');
+        z-index: themed('pageZIndex');
     }
 
     > * {
@@ -62,12 +65,7 @@
 .scan-qr-page-wrapper {
     height: 100%;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 0;
-    
+    margin: 0 50px;
 }
 
 .cta-section {
@@ -103,7 +101,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 120px 0;
+    padding-top: 90px;
+    position: relative;
 }
 
 .scan-qr-content-wrapper-app {

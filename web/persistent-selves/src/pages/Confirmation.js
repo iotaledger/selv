@@ -30,19 +30,21 @@ const Confirmation = ({ match }) => {
         <Layout match={match} noFooter>
             <div className='confirmation-page'>
                 <RandomGraphicElement elements={5}>
-                    <h2>{title}</h2>
-                    <p>Thank you for your pledge</p>
-                    
-                    <div className='selv-wrapper'>
-                        <img src={selv} alt='Selv app logo' />
-                        <h4>Your new credential is sent to Selv</h4>
-                    </div>
+                    <div className='confirmation-content-wrapper'>
+                        <h2>{title}</h2>
+                        <p>Thank you for your pledge</p>
+                        
+                        <div className='selv-wrapper'>
+                            <img src={selv} alt='Selv app logo' />
+                            <h4>Your new credential is sent to Selv</h4>
+                        </div>
 
-                    <Link to={nextStep}>
-                        <Button>
-                            Continue
-                        </Button>
-                    </Link>
+                        <Link to={nextStep}>
+                            <Button>
+                                Continue
+                            </Button>
+                        </Link>
+                    </div>
                 </RandomGraphicElement>
             </div>
         </Layout>

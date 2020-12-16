@@ -46,9 +46,10 @@ const ProveIdentity = ({ history, match }) => {
     
     return (
         <Layout match={match} noFooter>
-            <div className='scan-qr-page-wrapper app-download'>
-                <RandomGraphicElement elements={5}>
+            <div className='scan-qr-page-wrapper'>
+            <RandomGraphicElement elements={5}>
                     <div className='scan-qr-content-wrapper'>
+                    
                         <h2>Provide your Digital Identity credentials</h2>
                         <p>Scan this QR code with <strong>Selv App</strong> to continue</p>
                         <div className='qr-wrapper'>
