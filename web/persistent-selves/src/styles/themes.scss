@@ -117,6 +117,7 @@ $themes: (
         buttonBorderRadius: 4px,
 
         boxShadow: $card-box-shadow-registry,
+        pageHorizontalMargin: 0,
 
         headerBackgroundColor: #FFFFFF,
         headerHeight: 60px,
@@ -163,6 +164,8 @@ $themes: (
         buttonHeight: 51px,
         buttonBorderRadius: 4px,
 
+        pageHorizontalMargin: 0 50px,
+
         headerBackgroundColor: $trinary-color-future,
         headerHeight: 100px,
         headerLogoAlign: left,
@@ -206,6 +209,7 @@ $themes: (
 
         pageMarginTop: -95px,
         pageZIndex: 5,
+        pageHorizontalMargin: 0 50px,
 
         buttonBackgroundColor: $primary-color-present,
         buttonHeight: 51px,

@@ -1,9 +1,6 @@
 .theme-demo {
 	height: 100vh;
 	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
 }
 
 .logo.demo-page {
@@ -30,7 +27,6 @@
 	align-items: center;
 	width: 100%;
 	height: 100%;
-	max-width: 1050px;
 	z-index: 1;
 
 	@include breakPoint(medium) {
@@ -103,8 +99,8 @@
 	}
 
 	.todos {
-		width: 65%;
 		min-width: 485px;
+		max-width: 585px;
 
 		.heading {
 			display: flex;
@@ -153,6 +149,7 @@
 		width: 100%;
 		display: flex;
 		align-items: center;
+		justify-content: center;
 		position: relative;
 		left: 40px; // to center wrapper as the image has a a right shadow
 
@@ -162,8 +159,7 @@
 	}
 
 	.image-wrapper {
-		width: 100%;
-		max-width: 50%;
+		width: fit-content;
 		position: relative;
 		top: 30px;
 
@@ -187,6 +183,7 @@
 			width: 55%;
 			margin-left: 60px;
 			min-width: 450px;
+			max-width: 650px;
 			position: relative;
 
 			.heading {
@@ -269,7 +266,8 @@
 			position: absolute;
 			font-size: 14px;
 			line-height: 24px;
-			margin: 80px 0 20px 0;
+			margin-top: 80px;
+			padding-bottom: 50px;
 			color: #8D99AC;
 
 			@include breakPoint(medium) {
@@ -317,7 +315,7 @@
 
 .demo-intro-vertical {
 	@extend .demo-intro;
-	margin: 130px auto;
+	margin: 50px auto;
 }
 
 .demo-select-wrapper {

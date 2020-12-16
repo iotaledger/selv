@@ -427,6 +427,17 @@
                     color: themed('noticeColor');
                 } 
             }
+
+            .loading {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+        
+                p {
+                    margin-bottom: 30px;
+                }
+            }
         }
     }
 }

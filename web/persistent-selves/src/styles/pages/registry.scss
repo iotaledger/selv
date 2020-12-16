@@ -114,6 +114,10 @@
                 background: $secondary-color-present !important;
             }
 
+            &:disabled {
+                background: #9b9b9b !important;
+            }
+
             .arrow {
                 padding-left: 8px;
             }

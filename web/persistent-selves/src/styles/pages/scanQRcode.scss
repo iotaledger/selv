@@ -65,7 +65,10 @@
 .scan-qr-page-wrapper {
     height: 100%;
     width: 100%;
-    margin: 0 50px;
+
+    @include themify($themes) {
+        margin: themed('pageHorizontalMargin');
+    }
 }
 
 .cta-section {

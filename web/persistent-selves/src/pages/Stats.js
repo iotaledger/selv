@@ -12,7 +12,7 @@ const Stats = ({ match }) => {
 
     return (
         <Layout match={match}>
-            <div className='statistics'>
+            <div className='stats-page-wrapper'>
                 <h2>Your legacy for the future</h2>
                 <Link to={nextStep}>
                     <Button>
