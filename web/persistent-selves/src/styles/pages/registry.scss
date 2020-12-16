@@ -41,7 +41,7 @@
 }
 
 .select-commitment-category-wrapper {
-    margin-top: 20px;
+    margin: 20px 0;
 
     .commitment-category {
         display: flex;
@@ -151,6 +151,15 @@
                 filter: brightness(0) invert(1);
                 width: 28px;
             }
+        }
+    }
+
+    .commitment-category-completed-present {
+        @extend .commitment-category-completed;
+        background: $primary-color-present;
+
+        .custom-value {
+            color: $primary-color-present !important;
         }
     }
 

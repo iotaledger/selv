@@ -86,14 +86,14 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                     ? (
                         <Card
                             hoverable 
-                            className='commitment-category-completed'
+                            className='commitment-category-completed-present'
                         >
                             <div className='commitment-category-completed-image-wrapper'>
-                                <div className='commitment-category-image-container'>
+                                <Space size={20} align="center">
                                     <img className='commitment-category-image' src={present} alt='Act Right Now Foundation' />
                                     <h3>Act Right Now Foundation</h3>
-                                </div>
-                                <img src={selv} alt='Selv app logo' />
+                                </Space>
+                                <img className='selv-logo-completed' src={selv} alt='Selv app logo' />
                             </div>
                             <div className='commitment-category-completed-content'>
                                 {
