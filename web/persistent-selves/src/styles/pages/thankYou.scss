@@ -33,9 +33,18 @@
     }
 
     .thank-you-wrapper {
-        padding: 20px 30px 0;
+        padding: 100px 30px 0;
         position: relative;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+
+        h2 {
+            align-self: center;
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 700;
+        }
 
         .dots-bottom {
             position: absolute;
