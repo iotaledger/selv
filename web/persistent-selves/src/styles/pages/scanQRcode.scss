@@ -7,7 +7,7 @@
 
     @include themify($themes) {
         background: themed('trinaryPageBackground');
-        margin-top: themed('pageMarginTop');
+        margin-top: themed('pageMarginTop') !important;
         z-index: themed('pageZIndex');
     }
 
@@ -106,6 +106,7 @@
     align-items: center;
     padding-top: 90px;
     position: relative;
+    z-index: 2;
 }
 
 .scan-qr-content-wrapper-app {
