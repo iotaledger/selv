@@ -11,7 +11,7 @@ import logo from '../assets/landing/logoHeader.svg';
  * Component which will display a Intro Todos.
  */
 const IntroTodos = ({ match }) => {
-    const { nextStep } = useStep(match);
+	const { mainSteps, nextStep } = useStep(match);
 
     useEffect(() => {
         const reset = async () => {
@@ -36,10 +36,9 @@ const IntroTodos = ({ match }) => {
                         <span className='heading'><h2>Imagine your</h2>&nbsp;&nbsp;<h2 className='highlight'>legacy</h2>&nbsp;&nbsp;<h2>as a good</h2><br /><h2>ancestor</h2>&nbsp;&nbsp;<h2 className='highlight'>today</h2></span>
                         <p>Explore this demo to see how you can safely own, share and manage your pledge to the future beyond your lifetime</p>
                         <ul className='todos'>
-                            <li>Create your identity</li>
-                            <li>Visit the registry</li>
-                            <li>Start your pledge</li>
-                            <li>Create your legacies</li>
+                            {
+                                mainSteps.map(({ title }) => <li key={title}>{title}</li>)
+                            }
                         </ul>
                         <Link to={nextStep}>
                             <Button className='cta'>
