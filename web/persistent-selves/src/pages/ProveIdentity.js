@@ -22,12 +22,26 @@ const ProveIdentity = ({ history, match }) => {
             const challenge = randomstring.generate(10);
             const payloadPassword = randomstring.generate();
 
+            let shareWith = 'ancestorRegistry';
+            const ancestorRegistry = await localStorage.getItem('ancestorRegistry');
+            const futureCommitment = await localStorage.getItem('futureCommitment');
+            
+            if (ancestorRegistry && ancestorRegistry === 'completed') {
+                if (futureCommitment && futureCommitment === 'completed') {
+                    shareWith = 'presentCommitment';
+                } else {
+                    shareWith = 'futureCommitment';
+                }
+            } else {
+                await localStorage.setItem('ancestorRegistry', 'pending');
+            }
+
             const channelDetails = {
                 channelId,
                 challenge,
                 password: payloadPassword,
                 requestedCredentials,
-                shareWith: '',
+                shareWith,
                 url: config.websocketURL
             };
             setChannelDetails(channelDetails);
