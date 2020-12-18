@@ -102,8 +102,7 @@
 	}
 
 	.todos {
-		min-width: 485px;
-		max-width: 585px;
+		max-width: 485px;
 
 		.heading {
 			display: flex;
@@ -124,10 +123,14 @@
 			}
 		}
 
+		p {
+			margin: 20px 0;
+		}
+
 		h2 {
 			&.highlight {
-				border-bottom: 24px solid #b5f3d8;
-				line-height: 6px;
+				border-bottom: 20px solid #b5f3d8;
+				line-height: 0;
 				margin-top: 18px;
 				font-weight: 800;
 			}
@@ -142,7 +145,7 @@
 					font-family: themed('fontFamilyHeadings');
 				}
 				font-weight: bold;
-				line-height: 48px;
+				line-height: 38px;
 				margin-top: 2px;
 			}
 		}
@@ -226,8 +229,8 @@
 
 			h2 {
 				&.highlight {
-					border-bottom: 24px solid #b5f3d8;
-					line-height: 6px;
+					border-bottom: 20px solid #B5F3D8;
+					line-height: 0;
 					margin-top: 24px;
 					font-weight: 700;
 				}
