@@ -134,6 +134,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
 
                 if (evaluationResult?.status === 2) { // DID_TRUSTED
                     await localStorage.setItem('credentials', JSON.stringify(evaluationResult));
+                    await localStorage.setItem('ancestorRegistry', 'completed');
                     history.push(nextStep);
                 }
             } catch (e) {
