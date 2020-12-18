@@ -94,6 +94,7 @@ const IntroLifeSpan = ({ history, match }) => {
 		darkGreenGradientColor = p5.color(164,214,222);
 		white = p5.color(255);
 		black = p5.color(0);
+		p5.noLoop();
 	}
 
 	const draw = p5 => {
@@ -115,6 +116,8 @@ const IntroLifeSpan = ({ history, match }) => {
 			p5.clear();
 			if (size < parentsRadius) {
 				size +=5;
+			} else {
+                p5.noLoop();
 			}
 
 			drawRadialGradient(p5, white,blueGradientColor,40);
@@ -133,6 +136,8 @@ const IntroLifeSpan = ({ history, match }) => {
 
 			if (size < yourRadius) {
 				size +=5;
+			} else {
+                p5.noLoop();
 			}
 			p5.noStroke();
 
@@ -153,6 +158,8 @@ const IntroLifeSpan = ({ history, match }) => {
 
 			if (size < nextGenRadius) {
 				size +=5;
+			} else {
+                p5.noLoop();
 			}
 			p5.noStroke();
 
@@ -175,6 +182,8 @@ const IntroLifeSpan = ({ history, match }) => {
 
 			if (size < treesRadius) {
 				size +=5;
+			} else {
+                p5.noLoop();
 			}
 			p5.noStroke();
 			drawRadialGradient(p5, white,greenGradientColor,40);
@@ -199,6 +208,8 @@ const IntroLifeSpan = ({ history, match }) => {
 
 			if (size < forestRadius) {
 				size +=5;
+			} else {
+                p5.noLoop();
 			}
 			p5.noStroke();
 			drawRadialGradient(p5, white,greenGradientColor,40);
@@ -226,7 +237,9 @@ const IntroLifeSpan = ({ history, match }) => {
 			p5.text('of the forest it belongs to.', p5.width/2-150, p5.height/2+45);
 		} else if (state === 6) {
 			console.log(6666);
-
+			if (size > 1400) {
+                p5.noLoop();
+            }
 			p5.noStroke();
 
 			p5.fill(forestLifeColor);
@@ -275,7 +288,9 @@ const IntroLifeSpan = ({ history, match }) => {
 	const mouseClicked = p5 => {
 		if (state < 6) {
 			state++;
+			p5.loop();
 		} else {
+			p5.noLoop();
 			p5.clear();
 			history.push(nextStep);
 		}
