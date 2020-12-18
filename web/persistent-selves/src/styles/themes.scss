@@ -4,8 +4,8 @@ $font-family-present: 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI'
 $font-family-demo: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 $font-family-demo-headings: 'Metropolis', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
-$primary-color-registry: #6FCF97;
-$secondary-color-registry: #60b684;
+$primary-color-registry: #000000;
+$secondary-color-registry: #142037;
 $trinary-color-registry: #535664;
 $card-background-color-registry: #E1E1E1;
 $primary-font-color-registry: #142037;
@@ -102,8 +102,8 @@ $themes: (
         cardBackground: $card-background-color-registry,
         logoHeaderBackground: $header-logo-background-registry,
 
-        h1TextSize: 36px,
-        h1LineHeight: 42px,
+        h1TextSize: 28px,
+        h1LineHeight: 30px,
         h2TextSize: 24px,
         h2LineHeight: 30px,
         h3TextSize: 18px,
@@ -122,14 +122,14 @@ $themes: (
         pageHorizontalMargin: 0,
 
         headerBackgroundColor: #FFFFFF,
-        headerHeight: 60px,
+        headerHeight: 70px,
         headerLogoAlign: left,
-        headerLogoHeight: 30px,
+        headerLogoHeight: 44px,
 
         footerBackgroundColor: #FFFFFF,
-        footerHeight: 220px,
+        footerHeight: 170px,
         footerLogoAlign: center,
-        footerLogoHeight: 24px,
+        footerLogoHeight: 0,
     ),
     future: (
         fontFamily: $font-family-future,

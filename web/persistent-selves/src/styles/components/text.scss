@@ -24,7 +24,6 @@ a {
 }
 
 h1 {
-    font-weight: 800;
     @include themify($themes) {
         color: themed('primaryFontColor');  
         font-size: themed('h1TextSize');
