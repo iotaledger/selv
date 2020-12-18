@@ -1,34 +1,39 @@
 import React from 'react';
+import { PanelGroup, Panel } from 'rsuite';
 
 const faqs = [
 	{
-		question: 'Sed ut perspiciatis unde omnis iste natus errorus sit ipsum itos?',
-		answer: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui offici.'
+		question: 'What is Good Ancestor Registry?',
+		answer: 'Good Ancestor Registry is a repository of commitments, by individuals around the world, for creating a positive environmental inheritance for future generations. These personal commitments are a public testament to one’s values and actions for a better future.'
 	},
 	{
-		question: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut?',
-		answer: 'Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.'
+		question: 'How is my digital identity connected to Good Ancestor Registry?',
+		answer: ''
 	},
 	{
-		question: 'Sed ut perspiciatis unde omnis iste natus errorus sit ipsum itos?',
-		answer: 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui offici.'
+		question: 'How will my digital commitments impact future generations?',
+		answer: 'Your digital commitments for a positive environmental inheritance will be recorded and stored in Good Ancestor Registry. Your pledges will be public and shared with future generations as a testament to the legacies you have helped to build.'
 	},
 	{
-		question: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut?',
-		answer: 'Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.'
+		question: 'What is the Earth System and its boundaries?',
+		answer: 'There are nine planetary boundaries within which humans can continue to develop and thrive for generations to come. These nine processes (Climate change, Freshwater use, Land use change, Biodiversity loss, Ocean acidification, Chemical pollution, Nitrogen and Phosphorus loading, Air pollution, and Ozone layer depletion) regulate the stability and resilience of the Earth system. Crossing these boundaries increases the risk of generating large-scale abrupt or irreversible environmental changes.'
 	}
 ];
 
 export default () => (
 	<div className='registry-faq-wrapper'>
 		<h3>Frequently Asked Questions</h3>
-		<div className='faq-content'>
-			{faqs.slice(0, 4).map(({ question, answer }, index) => (
-				<div key={`faq-${index}`} className='faq'>
-					<div className='faq-question'>{question}</div>
+		<PanelGroup className='faq-content' accordion>
+			{faqs.map(({ question, answer }, index) => (
+				<Panel 
+					key={`faq-${index}`} 
+					className='faq' 
+					bordered={false}
+					defaultExpanded={index === 0}
+					header={question}>
 					<div className='faq-answer'>{answer}</div>
-				</div>
+				</Panel>
 			))}
-		</div>
+		</PanelGroup>
 	</div>
 );
