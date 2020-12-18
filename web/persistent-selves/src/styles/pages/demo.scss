@@ -181,32 +181,36 @@
 
 	&.app {
 		min-height: 500px;
-		margin: 200px auto 20px;
 
 		.app-content-wrapper {
+			margin: 200px auto 20px;
 			min-width: 450px;
 			position: relative;
 			flex-direction: column;
+
+			&.legacy {
+				margin-top: 0;
+			}
 
 			.content-row {
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
 				align-items: center;
+			}
 
-				.content-wrap {
-					display: flex;
-					flex-direction: column;
-					justify-content: flex-start;
-					align-items: flex-start;
-					max-width: 640px;
-				}
+			.content-wrap {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: flex-start;
+				max-width: 640px;
+			}
 
-				.content-wrap-image {
-					display: flex;
-					flex-direction: row;
-					justify-content: center;
-				}
+			.content-wrap-image {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
 			}
 
 			.heading {
@@ -269,8 +273,8 @@
 
 		.outcome {
 			position: relative;
-			max-width: 330px;
-			max-height: 321px;
+			max-width: 573px;
+			max-height: 542px;
 			top: 10px;
 
 			@include breakPoint(medium) {
@@ -313,7 +317,7 @@
 			font-size: 12px;
 			line-height: 16px;
 			color: #8D99AC;
-			margin: 20px 0 0;
+			margin: 30px 0 50px;
 
 			@include breakPoint(medium) {
 				margin-top: 50px;
@@ -345,6 +349,10 @@
 		@include breakPoint(medium) {
 			display: none;
 		}
+
+		&.legacy {
+			bottom: -250px;
+		}
 	}
 
 	.ellipse {
@@ -354,6 +362,11 @@
 		z-index: -1;
 		@include breakPoint(medium) {
 			display: none;
+		}
+		&.legacy {
+			bottom: -150px;
+			right: 200px;
+			left: unset;
 		}
 	}
 }

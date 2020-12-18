@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import useStep from '../utils/useStep';
-import image from '../assets/greatSuccess/image2.png';
 import { Disclaimer, RandomGraphicElement } from '../components';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
 import logo from '../assets/landing/logoHeader.svg';
+import legacy from '../assets/legacy.svg';
 
 /**
  * Component which will display a Intro Outcomes.
  */
-const IntroOutcomes = ({ match }) => {
+const IntroLegacy = ({ match }) => {
 	const { nextStep } = useStep(match);
 
 	useEffect(() => {
@@ -29,29 +29,26 @@ const IntroOutcomes = ({ match }) => {
 					<img src={logo} alt='Selv logo' />
 				</Link>
 				<div className='demo-intro app' id='app'>
-					<img className='outcome' src={image} alt='Outcomes' />
-					<div className='app-content-wrapper'>
-						<span className='heading'>
-							<h2>Create your</h2>&nbsp;&nbsp;<h2 className='highlight'>Persistent Selv</h2>
-						</span>
-						<br />
-						<br />
-						<p>
-							Using your decentralised digital identity, you will create lasting actions and explore different lenses of
-							viewing the future. With emerging technology it is possible to.
+					<img className='outcome' src={legacy} alt='Legacy' />
+					<div className='app-content-wrapper legacy'>
+						<div className='content-wrap'>
+							<span className='heading'>
+								<h2>Plan your</h2>&nbsp;&nbsp;<h2 className='highlight'>legacy</h2>
+							</span>
+							<br />
+							<p>
+								Using your decentralised digital identity, you will explore the marks you leave into the future, understanding how your legacy might impact future generations.
+							</p>
 							<br />
 							<br />
-							In doing so, you create your Persistent Selves.
-						</p>
-						<br />
-						<br />
-						<Link to={nextStep}>
-							<Button className='cta'>Continue</Button>
-						</Link>
+							<Link to={nextStep}>
+								<Button className='cta'>Continue</Button>
+							</Link>
+						</div>
 					</div>
 					<img src={dots} alt='' className='dots-top' />
-					<img src={dots} alt='' className='dots-bottom' />
-					<img src={ellipse} alt='' className='ellipse' />
+					<img src={dots} alt='' className='dots-bottom legacy' />
+					<img src={ellipse} alt='' className='ellipse legacy' />
 					<Disclaimer />
 				</div>
 			</div>
@@ -59,4 +56,4 @@ const IntroOutcomes = ({ match }) => {
 	);
 };
 
-export default IntroOutcomes;
+export default IntroLegacy;

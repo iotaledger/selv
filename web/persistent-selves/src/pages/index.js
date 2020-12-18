@@ -1,6 +1,6 @@
 import IntroTodos from './IntroTodos';
 import IntroWelcome from './IntroWelcome';
-import IntroOutcomes from './IntroOutcomes';
+import IntroLegacy from './IntroLegacy';
 import IntroLifeSpan from './IntroLifeSpan';
 import AppDownloadQR from './AppDownloadQR';
 import ProveIdentity from './ProveIdentity';
@@ -18,7 +18,7 @@ import ThankYou from './ThankYou';
 export {
     IntroTodos,
     IntroWelcome,
-    IntroOutcomes,
+    IntroLegacy,
     IntroLifeSpan,
     AppDownloadQR,
     ProveIdentity,

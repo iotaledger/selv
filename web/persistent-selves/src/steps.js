@@ -1,7 +1,7 @@
 import {
     IntroTodos,
     IntroWelcome,
-    IntroOutcomes,
+    IntroLegacy,
     IntroLifeSpan,
     AppDownloadQR,
     ProveIdentity,
@@ -19,7 +19,7 @@ import {
 
 export const routes = [
     { path: '/demo/welcome', page: IntroWelcome },
-    { path: '/demo/outcomes', page: IntroOutcomes },
+    { path: '/demo/legacy', page: IntroLegacy },
     { path: '/demo/lifespan', page: IntroLifeSpan },
     { path: '/demo/todos', page: IntroTodos },
     { path: '/demo/app/0', page: AppDownloadQR },
