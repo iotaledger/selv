@@ -43,7 +43,6 @@ export const routes = [
     { path: '/present/confirm/3', page: Confirmation },
     
     { path: '/registry/category/4', page: SelectCommitmentCategory },
-    { path: '/registry/stats/4', page: Stats },
     { path: '/demo/thankyou', page: ThankYou }
 ];
 
