@@ -1,6 +1,9 @@
 .theme-demo {
 	height: 100vh;
 	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .logo.demo-page {
@@ -178,13 +181,33 @@
 
 	&.app {
 		min-height: 500px;
+		margin: 200px auto 20px;
 
 		.app-content-wrapper {
-			width: 55%;
-			margin-left: 60px;
 			min-width: 450px;
-			max-width: 650px;
 			position: relative;
+			flex-direction: column;
+
+			.content-row {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+
+				.content-wrap {
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-start;
+					align-items: flex-start;
+					max-width: 640px;
+				}
+
+				.content-wrap-image {
+					display: flex;
+					flex-direction: row;
+					justify-content: center;
+				}
+			}
 
 			.heading {
 				font-family: 'Metropolis', sans-serif;
@@ -233,8 +256,9 @@
 		}
 
 		.phone {
-			max-width: 330px;
-			max-height: 320px;
+			width: 233px;
+			height: 455px;
+			margin-right: 130px;
 
 			@include breakPoint(medium) {
 				position: static;
@@ -262,13 +286,34 @@
 			margin: 81px 0 44px 0;
 		}
 
+		.partners {
+			display: flex;
+			flex-direction: row;
+			align-items: baseline;
+			justify-content: space-evenly;
+			margin-top: 50px;
+
+			img {
+				margin-right: 40px;
+
+				&.climateKIC {
+					height: 40px;
+				}
+				&.foundation {
+					height: 32px;
+				}
+				&.dm {
+					height: 48px;
+				}
+			}
+		}
+
 		.note {
-			position: absolute;
-			font-size: 14px;
-			line-height: 24px;
-			margin-top: 80px;
-			padding-bottom: 50px;
+			font-weight: 500;
+			font-size: 12px;
+			line-height: 16px;
 			color: #8D99AC;
+			margin: 20px 0 0;
 
 			@include breakPoint(medium) {
 				margin-top: 50px;
@@ -285,7 +330,7 @@
 
 	.dots-top {
 		position: fixed;
-		top: -250px;
+		top: -300px;
 		left: 100px;
 		z-index: -1;
 		transform: rotate(270deg);
@@ -293,7 +338,7 @@
 
 	.dots-bottom {
 		position: fixed;
-		bottom: -210px;
+		bottom: -150px;
 		left: -210px;
 		z-index: 0;
 		transform: rotate(90deg);
@@ -304,8 +349,8 @@
 
 	.ellipse {
 		position: fixed;
-		bottom: -120px;
-		left: 50px;
+		bottom: -250px;
+		left: 10px;
 		z-index: -1;
 		@include breakPoint(medium) {
 			display: none;
@@ -315,7 +360,7 @@
 
 .demo-intro-vertical {
 	@extend .demo-intro;
-	margin: 50px auto;
+	margin: 130px auto;
 }
 
 .demo-select-wrapper {
