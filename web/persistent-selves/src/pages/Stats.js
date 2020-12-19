@@ -16,9 +16,11 @@ const Stats = () => {
 	const [commitments, setCommitments] = useState([]);
 	const [loading, setLoading] = useState(false);
 
-	const sameCommitmentsPercent = myCommitment => {
-		const commitmentsSum = commitments?.filter(commitment => commitment?.CommitmentTitle === myCommitment)?.length;
-		const commitmentsPercent = (commitmentsSum / commitments?.length) * 100;
+	const sameCommitmentsPercent = (myCommitment, category) => {
+		const commitmentsSum = commitments?.filter(commitment => commitment?.CommitmentTitle === myCommitment?.CommitmentTitle)
+			?.length;
+		const categoryCommitments = commitments?.filter(commitment => commitment?.CommitmentType === category);
+		const commitmentsPercent = (commitmentsSum / categoryCommitments?.length) * 100;
 		return commitmentsPercent.toFixed(1);
 	};
 
@@ -54,30 +56,31 @@ const Stats = () => {
 				commitments = json?.data;
 				setCommitments(commitments);
 
+				const futureCommitments = commitments?.filter(commitment => commitment?.CommitmentType === 'FutureCommitments');
+
+				const presentCommitments = commitments?.filter(commitment => commitment?.CommitmentType === 'PresentCommitments');
+
 				// Future commitments
 				const LUC = commitments.filter(commitment => commitment.CommitmentTitle === 'Land Use Change').length;
-				const LUCPercent = (LUC / commitments.length) * 100;
+				const LUCPercent = (LUC / futureCommitments.length) * 100;
 
 				const CC = commitments.filter(commitment => commitment.CommitmentTitle === 'Climate Change').length;
-				const CCPercent = (CC / commitments.length) * 100;
-
-				// const freshWater = commitments.filter(commitment => commitment.CommitmentTitle === 'Fresh Water').length;
-				// const freshWaterPercent = (freshWater / commitments.length) * 100;
+				const CCPercent = (CC / futureCommitments.length) * 100;
 
 				const BL = commitments.filter(commitment => commitment.CommitmentTitle === 'Biodiversity Loss').length;
-				const BLPercent = (BL / commitments.length) * 100;
+				const BLPercent = (BL / futureCommitments.length) * 100;
 
 				setFutureSeries([LUCPercent, CCPercent, BLPercent]);
 
 				// Present commitments
 				const education = commitments.filter(commitment => commitment.CommitmentTitle === 'Education').length;
-				const educationPercent = (education / commitments.length) * 100;
+				const educationPercent = (education / presentCommitments.length) * 100;
 
 				const energy = commitments.filter(commitment => commitment.CommitmentTitle === 'Energy').length;
-				const energyPercent = (energy / commitments.length) * 100;
+				const energyPercent = (energy / presentCommitments.length) * 100;
 
 				const networks = commitments.filter(commitment => commitment.CommitmentTitle === 'Networks').length;
-				const networksPercent = (networks / commitments.length) * 100;
+				const networksPercent = (networks / presentCommitments.length) * 100;
 
 				setPresentSeries([educationPercent, energyPercent, networksPercent]);
 
@@ -89,9 +92,14 @@ const Stats = () => {
 		loadChartData();
 	}, []);
 
-	const marks = {
+	const futureSliderMarks = {
 		0: <span className='mark-0'>{myFutureCommitments.Commitments?.[0].CommitmentTitle}</span>,
 		100: <span className='mark-100'>{myFutureCommitments.Commitments?.[1].CommitmentTitle}</span>
+	};
+
+	const presentSliderMarks = {
+		0: <span className='mark-0'>{myPresentCommitments.Commitments?.[0].CommitmentTitle}</span>,
+		100: <span className='mark-100'>{myPresentCommitments.Commitments?.[1].CommitmentTitle}</span>
 	};
 
 	const futureChartOptions = {
@@ -191,11 +199,11 @@ const Stats = () => {
 							<Space direction='vertical' align='start'>
 								<p>Your choices</p>
 								<p className='bold'>
-									{sameCommitmentsPercent(myFutureCommitments.Commitments?.[0].CommitmentTitle)}% also chose&nbsp;
+									{sameCommitmentsPercent(myFutureCommitments.Commitments?.[0], 'FutureCommitments')}% also chose&nbsp;
 									{myFutureCommitments.Commitments?.[0].CommitmentTitle}
 								</p>
 								<p className='bold'>
-									{sameCommitmentsPercent(myFutureCommitments.Commitments?.[1].CommitmentTitle)}% also chose&nbsp;
+									{sameCommitmentsPercent(myFutureCommitments.Commitments?.[1], 'FutureCommitments')}% also chose&nbsp;
 									{myFutureCommitments.Commitments?.[1].CommitmentTitle}
 								</p>
 							</Space>
@@ -217,10 +225,20 @@ const Stats = () => {
 						</div>
 						<div className='slider-wrapper'>
 							<h5>Average financial commitment</h5>
-							<Slider marks={marks} defaultValue={50} tooltipVisible={false} disabled />
+							<br />
+							<br />
+							<Slider
+								marks={futureSliderMarks}
+								defaultValue={Math.max(
+									sameCommitmentsPercent(myFutureCommitments.Commitments?.[0], 'PresentCommitments'),
+									sameCommitmentsPercent(myFutureCommitments.Commitments?.[1], 'PresentCommitments')
+								)}
+								tooltipVisible={false}
+								disabled
+							/>
 							<div className='percentages-wrapper'>
-								{/* <span>{myFutureCommitments.Commitments?.[0]}</span>
-								<span>{myFutureCommitments.Commitments?.[1]}</span> */}
+								<span>{(sameCommitmentsPercent(myFutureCommitments.Commitments?.[0]), 'PresentCommitments')}</span>
+								<span>{(sameCommitmentsPercent(myFutureCommitments.Commitments?.[1]), 'PresentCommitments')}</span>
 							</div>
 						</div>
 					</div>
@@ -234,13 +252,12 @@ const Stats = () => {
 							<Space direction='vertical' align='start'>
 								<p>Your choices</p>
 								<p className='bold'>
-									{sameCommitmentsPercent(myPresentCommitments.Commitments?.[0].CommitmentTitle)}% also chose&nbsp;
+									{sameCommitmentsPercent(myPresentCommitments.Commitments?.[0], 'PresentCommitments')}% also chose&nbsp;
 									{myPresentCommitments.Commitments?.[0].CommitmentTitle}
 								</p>
 								<p className='bold'>
-									{sameCommitmentsPercent(myPresentCommitments.Commitments?.[1].CommitmentTitle)}% also chose&nbsp;
+									{sameCommitmentsPercent(myPresentCommitments.Commitments?.[1], 'PresentCommitments')}% also chose&nbsp;
 									{myPresentCommitments.Commitments?.[1].CommitmentTitle}
-									{console.log('myPresentCommitments', myPresentCommitments)}
 								</p>
 							</Space>
 							<div className='chart-body'>
@@ -249,13 +266,11 @@ const Stats = () => {
 							<Space direction='vertical' align='start'>
 								<p>Others chose</p>
 								<p className='bold'>
-									{
-										othersCommitments(
-											myPresentCommitments.Commitments?.[0].CommitmentTitle,
-											myPresentCommitments.Commitments?.[1].CommitmentTitle,
-											'PresentCommitments'
-										)?.[0].CommitmentTitle
-									}
+									{othersCommitments(
+										myPresentCommitments.Commitments?.[0].CommitmentTitle,
+										myPresentCommitments.Commitments?.[1].CommitmentTitle,
+										'PresentCommitments'
+									)}
 									% also chose
 									{/* {myPresentCommitments.Commitments?.[0].CommitmentTitle} */}
 								</p>
@@ -263,7 +278,17 @@ const Stats = () => {
 						</div>
 						<div className='slider-wrapper'>
 							<h5>Average financial commitment</h5>
-							<Slider marks={marks} defaultValue={50} tooltipVisible={false} disabled />
+							<br />
+							<br />
+							<Slider
+								marks={presentSliderMarks}
+								defaultValue={Math.max(
+									sameCommitmentsPercent(myPresentCommitments.Commitments?.[0], 'PresentCommitments'),
+									sameCommitmentsPercent(myPresentCommitments.Commitments?.[1], 'PresentCommitments')
+								)}
+								tooltipVisible={false}
+								disabled
+							/>
 							<div className='percentages-wrapper'>
 								{/* <span>{myPresentCommitments.Commitments?.[0]}</span>
 								<span>{myPresentCommitments.Commitments?.[1]}</span> */}

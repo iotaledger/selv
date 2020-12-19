@@ -14,7 +14,6 @@ import {
     PledgeRegistry,
     GreatSuccess,
     ThankYou,
-    Stats
 } from './pages';
 
 export const routes = [
