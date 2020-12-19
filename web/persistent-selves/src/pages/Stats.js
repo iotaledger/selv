@@ -21,14 +21,14 @@ const Stats = () => {
 			?.length;
 		const categoryCommitments = commitments?.filter(commitment => commitment?.CommitmentType === category);
 		const commitmentsPercent = (commitmentsSum / categoryCommitments?.length) * 100;
-		return commitmentsPercent.toFixed(1);
+		return Number(commitmentsPercent.toFixed(1));
 	};
 
 	const othersCommitments = (myCommitment, myCommitment2, category) => {
 		const others = commitments?.filter(
 			commitment =>
-				commitment?.CommitmentTitle !== myCommitment &&
-				commitment?.CommitmentTitle !== myCommitment2 &&
+				commitment?.CommitmentTitle !== myCommitment?.CommitmentTitle &&
+				commitment?.CommitmentTitle !== myCommitment2?.CommitmentTitle &&
 				commitment?.CommitmentType === category
 		);
 		console.log('others', others[0]);
@@ -214,8 +214,8 @@ const Stats = () => {
 								<p>Others chose</p>
 								<p className='bold'>
 									{othersCommitments(
-										myFutureCommitments.Commitments?.[0].CommitmentTitle,
-										myFutureCommitments.Commitments?.[1].CommitmentTitle,
+										myFutureCommitments.Commitments?.[0],
+										myFutureCommitments.Commitments?.[1],
 										'FutureCommitments'
 									)}
 									% also chose
@@ -225,21 +225,25 @@ const Stats = () => {
 						</div>
 						<div className='slider-wrapper'>
 							<h5>Average financial commitment</h5>
-							<br />
-							<br />
 							<Slider
 								marks={futureSliderMarks}
 								defaultValue={Math.max(
-									sameCommitmentsPercent(myFutureCommitments.Commitments?.[0], 'PresentCommitments'),
-									sameCommitmentsPercent(myFutureCommitments.Commitments?.[1], 'PresentCommitments')
+									sameCommitmentsPercent(myFutureCommitments.Commitments?.[0], 'FutureCommitments'),
+									sameCommitmentsPercent(myFutureCommitments.Commitments?.[1], 'FutureCommitments')
 								)}
 								tooltipVisible={false}
 								disabled
 							/>
 							<div className='percentages-wrapper'>
-								<span>{(sameCommitmentsPercent(myFutureCommitments.Commitments?.[0]), 'PresentCommitments')}</span>
-								<span>{(sameCommitmentsPercent(myFutureCommitments.Commitments?.[1]), 'PresentCommitments')}</span>
+								<span>You chose {sameCommitmentsPercent(myFutureCommitments.Commitments?.[0], 'FutureCommitments')}%</span>
+								<span>You chose {sameCommitmentsPercent(myFutureCommitments.Commitments?.[1], 'FutureCommitments')}%</span>
 							</div>
+							<br />
+							<br />
+							<p>
+								You commitment level is based around the ongoing financial support you will give each of your chosen
+								commitments as a gift to future generations past your lifetime.
+							</p>
 						</div>
 					</div>
 
@@ -267,32 +271,14 @@ const Stats = () => {
 								<p>Others chose</p>
 								<p className='bold'>
 									{othersCommitments(
-										myPresentCommitments.Commitments?.[0].CommitmentTitle,
-										myPresentCommitments.Commitments?.[1].CommitmentTitle,
+										myPresentCommitments.Commitments?.[0],
+										myPresentCommitments.Commitments?.[1],
 										'PresentCommitments'
 									)}
 									% also chose
 									{/* {myPresentCommitments.Commitments?.[0].CommitmentTitle} */}
 								</p>
 							</Space>
-						</div>
-						<div className='slider-wrapper'>
-							<h5>Average financial commitment</h5>
-							<br />
-							<br />
-							<Slider
-								marks={presentSliderMarks}
-								defaultValue={Math.max(
-									sameCommitmentsPercent(myPresentCommitments.Commitments?.[0], 'PresentCommitments'),
-									sameCommitmentsPercent(myPresentCommitments.Commitments?.[1], 'PresentCommitments')
-								)}
-								tooltipVisible={false}
-								disabled
-							/>
-							<div className='percentages-wrapper'>
-								{/* <span>{myPresentCommitments.Commitments?.[0]}</span>
-								<span>{myPresentCommitments.Commitments?.[1]}</span> */}
-							</div>
 						</div>
 					</div>
 				</div>
