@@ -17,8 +17,7 @@ const Stats = () => {
 	const [loading, setLoading] = useState(false);
 
 	const sameCommitmentsPercent = (myCommitment, category) => {
-		const commitmentsSum = commitments?.filter(commitment => commitment?.CommitmentTitle === myCommitment?.CommitmentTitle)
-			?.length;
+		const commitmentsSum = commitments?.filter(commitment => commitment?.CommitmentTitle === myCommitment?.CommitmentTitle)?.length;
 		const categoryCommitments = commitments?.filter(commitment => commitment?.CommitmentType === category);
 		const commitmentsPercent = (commitmentsSum / categoryCommitments?.length) * 100;
 		return Number(commitmentsPercent.toFixed(1));
