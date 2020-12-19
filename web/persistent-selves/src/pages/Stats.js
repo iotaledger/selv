@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Space, Slider } from 'antd';
+import { Space, Slider, Progress } from 'antd';
 import { Loading } from '../components';
 import PieChart from 'react-apexcharts';
 import future from '../assets/futureCategory.svg';
@@ -278,6 +278,50 @@ const Stats = () => {
 									% also chose
 									{/* {myPresentCommitments.Commitments?.[0].CommitmentTitle} */}
 								</p>
+							</Space>
+						</div>
+						<div className='commitment-info-wrapper'>
+							<Space direction='vertical' size='large'>
+								<h3>{myPresentCommitments.Commitments?.[0].CommitmentTitle}</h3>
+								<div>
+									<p className='bold'>You commited to</p>
+									<span className='medium'>buying sustainable-label products</span>
+								</div>
+								<div>
+									<p className='small'>
+										<span className='medium'>
+											{sameCommitmentsPercent(myPresentCommitments.Commitments?.[0], 'PresentCommitments')}%
+										</span>
+										&nbsp;of participants also chose this option
+									</p>
+									<Progress
+										strokeWidth={13}
+										trailColor='#FFFFFF'
+										showInfo={false}
+										percent={sameCommitmentsPercent(myPresentCommitments.Commitments?.[0], 'PresentCommitments')}
+									/>
+								</div>
+							</Space>
+							<Space direction='vertical' size='large'>
+								<h3>{myPresentCommitments.Commitments?.[1].CommitmentTitle}</h3>
+								<div>
+									<p className='bold'>You commited to</p>
+									<span className='medium'>rewilding my garden/balcony/roof</span>
+								</div>
+								<div>
+									<p className='small'>
+										<span className='medium'>
+											{sameCommitmentsPercent(myPresentCommitments.Commitments?.[1], 'PresentCommitments')}%
+										</span>
+										&nbsp;of participants also chose this option
+									</p>
+									<Progress
+										strokeWidth={13}
+										trailColor='#FFFFFF'
+										showInfo={false}
+										percent={sameCommitmentsPercent(myPresentCommitments.Commitments?.[1], 'PresentCommitments')}
+									/>
+								</div>
 							</Space>
 						</div>
 					</div>

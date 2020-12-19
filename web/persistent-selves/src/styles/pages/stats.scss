@@ -78,8 +78,11 @@
 
                 span {
                     font-size: 20px;
-                    font-weight: 500;
                     font-family: "Roboto", sans-serif;
+
+                    @include themify($themes) {
+                        color: themed('primaryFontColor');  
+                    }
                 }
             }
 
@@ -160,6 +163,31 @@
                     width: 210px;
                 }
             }
+        }
+
+        .commitment-info-wrapper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+
+            .bold {
+                font-weight: 500;
+            }
+
+            .small {
+                font-size: 14px;
+                font-weight: 500;
+            }
+
+            .medium {
+                font-size: 20px;
+                font-weight: 500;
+
+                @include themify($themes) {
+                    color: themed('primaryFontColor');  
+                }
+            }
+            
         }
     }
 }
