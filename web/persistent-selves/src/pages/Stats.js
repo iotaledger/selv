@@ -10,17 +10,20 @@ import '../utils/legendColorHelper';
  * Component which will display a Stats.
  */
 const Stats = () => {
+	const commitmentsColors = {
+		'Land Use Change': '#5C9EFF',
+		'Climate Change': '#4181F4',
+		'Biodiversity Loss': '#B5F3D8',
+		Education: '#5C9EFF',
+		Energy: '#4181F4',
+		Networks: '#B5F3D8'
+	};
+
 	const [futureSeries, setFutureSeries] = useState([]);
 	const [presentSeries, setPresentSeries] = useState([]);
 	const [myFutureCommitments, setMyFutureCommitments] = useState([]);
 	const [myPresentCommitments, setMyPresentCommitments] = useState([]);
 	const [commitments, setCommitments] = useState([]);
-	const [myFutureCommitmentColor, setMyFutureCommitmentColor] = useState('');
-	const [myFutureCommitment2Color, setMyFutureCommitment2Color] = useState('');
-	const [othersFutureCommitmentColor, setOthersFutureCommitmentColor] = useState('');
-	const [myPresentCommitmentColor, setMyPresentCommitmentColor] = useState('');
-	const [myPresentCommitment2Color, setMyPresentCommitment2Color] = useState('');
-	const [othersPresentCommitmentColor, setOthersPresentCommitmentColor] = useState('');
 	const [loading, setLoading] = useState(false);
 
 	const sameCommitmentsPercent = (myCommitment, category) => {
@@ -76,21 +79,6 @@ const Stats = () => {
 
 				setFutureSeries([LUCPercent, CCPercent, BLPercent]);
 
-				setMyFutureCommitmentColor(
-					myFutureCommitments.Commitments?.[0].CommitmentTitle?.replace(/\s/g, '').toLowerCase().toColor()
-				);
-				setMyFutureCommitment2Color(
-					myFutureCommitments.Commitments?.[1].CommitmentTitle?.replace(/\s/g, '').toLowerCase().toColor()
-				);
-
-				const othersFutureCommitments = commitments?.filter(
-					commitment =>
-						commitment?.CommitmentTitle !== myFutureCommitments.Commitments?.[0].CommitmentTitle &&
-						commitment?.CommitmentTitle !== myFutureCommitments.Commitments?.[1].CommitmentTitle &&
-						commitment?.CommitmentType === 'FutureCommitments'
-				);
-				setOthersFutureCommitmentColor(othersFutureCommitments?.[0].CommitmentTitle?.toColor());
-
 				// Present commitments
 				const education = commitments.filter(commitment => commitment.CommitmentTitle === 'Education').length;
 				const educationPercent = (education / presentCommitments.length) * 100;
@@ -102,17 +90,6 @@ const Stats = () => {
 				const networksPercent = (networks / presentCommitments.length) * 100;
 
 				setPresentSeries([educationPercent, energyPercent, networksPercent]);
-
-				setMyPresentCommitmentColor(myPresentCommitments.Commitments?.[0].CommitmentTitle?.toColor());
-				setMyPresentCommitment2Color(myPresentCommitments.Commitments?.[1].CommitmentTitle?.toColor());
-
-				const othersPresentCommitments = commitments?.filter(
-					commitment =>
-						commitment?.CommitmentTitle !== myPresentCommitments.Commitments?.[0].CommitmentTitle &&
-						commitment?.CommitmentTitle !== myPresentCommitments.Commitments?.[1].CommitmentTitle &&
-						commitment?.CommitmentType === 'PresentCommitments'
-				);
-				setOthersPresentCommitmentColor(othersPresentCommitments?.[0].CommitmentTitle?.toColor());
 
 				setLoading(false);
 			} else {
@@ -132,18 +109,14 @@ const Stats = () => {
 			height: 300,
 			type: 'pie'
 		},
-		colors: [myFutureCommitmentColor, myFutureCommitment2Color, othersFutureCommitmentColor],
+		colors: ['#5C9EFF', '#4181F4', '#B5F3D8'],
 		stroke: {
 			width: 0
 		},
 		dataLabels: {
 			enabled: false
 		},
-		labels: [
-			myFutureCommitments.Commitments?.[0].CommitmentTitle,
-			myFutureCommitments.Commitments?.[1].CommitmentTitle,
-			othersCommitments(myFutureCommitments.Commitments?.[0], myFutureCommitments.Commitments?.[1], 'FutureCommitments')
-		],
+		labels: ['Land Use Change', 'Climate Change', 'Biodiversity Loss'],
 		responsive: [
 			{
 				breakpoint: 767,
@@ -171,18 +144,14 @@ const Stats = () => {
 			height: 300,
 			type: 'pie'
 		},
-		colors: [myPresentCommitmentColor, myPresentCommitment2Color, othersPresentCommitmentColor],
+		colors: ['#5C9EFF', '#4181F4', '#B5F3D8'],
 		stroke: {
 			width: 0
 		},
 		dataLabels: {
 			enabled: false
 		},
-		labels: [
-			myPresentCommitments.Commitments?.[0].CommitmentTitle,
-			myPresentCommitments.Commitments?.[1].CommitmentTitle,
-			othersCommitments(myPresentCommitments.Commitments?.[0], myPresentCommitments.Commitments?.[1], 'PresentCommitments')
-		],
+		labels: ['Education', 'Energy', 'Networks'],
 		responsive: [
 			{
 				breakpoint: 767,
@@ -232,7 +201,11 @@ const Stats = () => {
 							<Space direction='vertical' align='start'>
 								<p>Your choices</p>
 								<Space align='center'>
-									<span className='legend-icon' style={{ backgroundColor: myFutureCommitmentColor }}></span>
+									<span
+										className='legend-icon'
+										style={{
+											backgroundColor: commitmentsColors[myFutureCommitments.Commitments?.[0]?.CommitmentTitle]
+										}}></span>
 									<p className='bold'>
 										{sameCommitmentsPercent(myFutureCommitments.Commitments?.[0]?.CommitmentTitle, 'FutureCommitments')}%
 										also chose&nbsp;
@@ -240,7 +213,11 @@ const Stats = () => {
 									</p>
 								</Space>
 								<Space align='center'>
-									<span className='legend-icon' style={{ backgroundColor: myFutureCommitment2Color }}></span>
+									<span
+										className='legend-icon'
+										style={{
+											backgroundColor: commitmentsColors[myFutureCommitments.Commitments?.[1]?.CommitmentTitle]
+										}}></span>
 									<p className='bold'>
 										{sameCommitmentsPercent(myFutureCommitments.Commitments?.[1]?.CommitmentTitle, 'FutureCommitments')}%
 										also chose&nbsp;
@@ -257,7 +234,14 @@ const Stats = () => {
 									<span
 										className='legend-icon'
 										style={{
-											backgroundColor: othersFutureCommitmentColor
+											backgroundColor:
+												commitmentsColors[
+													othersCommitments(
+														myFutureCommitments.Commitments?.[0],
+														myFutureCommitments.Commitments?.[1],
+														'FutureCommitments'
+													)
+												]
 										}}></span>
 									<p className='bold'>
 										{sameCommitmentsPercent(
@@ -317,7 +301,11 @@ const Stats = () => {
 							<Space direction='vertical' align='start'>
 								<p>Your choices</p>
 								<Space align='center'>
-									<span className='legend-icon' style={{ backgroundColor: myPresentCommitmentColor }}></span>
+									<span
+										className='legend-icon'
+										style={{
+											backgroundColor: commitmentsColors[myPresentCommitments.Commitments?.[0]?.CommitmentTitle]
+										}}></span>
 									<p className='bold'>
 										{sameCommitmentsPercent(myPresentCommitments.Commitments?.[0]?.CommitmentTitle, 'PresentCommitments')}%
 										also chose&nbsp;
@@ -325,7 +313,11 @@ const Stats = () => {
 									</p>
 								</Space>
 								<Space align='center'>
-									<span className='legend-icon' style={{ backgroundColor: myPresentCommitment2Color }}></span>
+									<span
+										className='legend-icon'
+										style={{
+											backgroundColor: commitmentsColors[myPresentCommitments.Commitments?.[1]?.CommitmentTitle]
+										}}></span>
 									<p className='bold'>
 										{sameCommitmentsPercent(myPresentCommitments.Commitments?.[1]?.CommitmentTitle, 'PresentCommitments')}%
 										also chose&nbsp;
@@ -339,7 +331,18 @@ const Stats = () => {
 							<Space direction='vertical' align='start'>
 								<p>Others chose</p>
 								<Space align='center'>
-									<span className='legend-icon' style={{ backgroundColor: othersPresentCommitmentColor }}></span>
+									<span
+										className='legend-icon'
+										style={{
+											backgroundColor:
+												commitmentsColors[
+													othersCommitments(
+														myPresentCommitments.Commitments?.[0],
+														myPresentCommitments.Commitments?.[1],
+														'PresentCommitments'
+													)
+												]
+										}}></span>
 									<p className='bold'>
 										{sameCommitmentsPercent(
 											othersCommitments(
@@ -376,7 +379,7 @@ const Stats = () => {
 									<Progress
 										strokeWidth={13}
 										trailColor='#FFFFFF'
-										strokeColor={myPresentCommitmentColor}
+										strokeColor={commitmentsColors[myPresentCommitments.Commitments?.[0]?.CommitmentTitle]}
 										showInfo={false}
 										percent={sameCommitmentsPercent(
 											myPresentCommitments.Commitments?.[0]?.CommitmentTitle,
@@ -400,7 +403,7 @@ const Stats = () => {
 									</p>
 									<Progress
 										strokeWidth={13}
-										strokeColor={myPresentCommitment2Color}
+										strokeColor={commitmentsColors[myPresentCommitments.Commitments?.[1]?.CommitmentTitle]}
 										trailColor='#FFFFFF'
 										showInfo={false}
 										percent={sameCommitmentsPercent(
