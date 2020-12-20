@@ -56,6 +56,7 @@
 
                 &.bold{
                     font-weight: 600;
+                    margin-bottom: 5px;
                 }
             }
 
@@ -63,6 +64,14 @@
                 height: 350px;
                 width: 50%;
             }
+        }
+
+        .legend-icon {
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            display: inline-block;
+            background: #5C9EFF;
         }
 
         .slider-wrapper {
@@ -168,6 +177,7 @@
         .commitment-info-wrapper {
             display: flex;
             justify-content: space-between;
+            position: relative;
             margin-bottom: 30px;
 
             .bold {

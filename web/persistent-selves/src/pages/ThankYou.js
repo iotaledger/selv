@@ -44,16 +44,15 @@ const ThankYou = () => {
 								<Space direction='vertical' size='large'>
 									<h3>Thank you.</h3>
 									<p>
-										Being a Good Ancestor, you have made a commitment to act according to the values you think are best
-										in the present moment.
+										Being a Good Ancestor, you have made a commitment to act according to the values you think are best in
+										the present moment.
 									</p>
 									<p>
 										Your digital commitments will be public to future generations as a testament of the legacy you have
 										created.
 									</p>
 									<p>
-										Your environmental footprint will contribute towards a healthier environment for generations to
-										come.
+										Your environmental footprint will contribute towards a healthier environment for generations to come.
 									</p>
 								</Space>
 							</div>
@@ -75,51 +74,43 @@ const ThankYou = () => {
 								<div className='card-logo-wrapper'>
 									<img className='figure' src={futures} alt='futures' />
 								</div>
-								<Space direction='vertical' size='small'>
-									<div className='commentary-card-content'>
-										<h5>Futures Literacy</h5>
-										<p>
-											Futures Literacy is the skill that allows people to better understand the role of the future in
-											what they see and do.
-										</p>
-									</div>
+								<div className='commentary-card-content'>
+									<h5>Futures Literacy</h5>
+									<p>
+										Futures Literacy is the skill that allows people to better understand the role of the future in what they
+										see and do.
+									</p>
 									<div className='btn-wrapper'>
 										<Button>Read commentary</Button>
 									</div>
-								</Space>
+								</div>
 							</div>
 							<div className='commentary-card'>
 								<div className='card-logo-wrapper'>
 									<img className='figure' src={goodAncestor} alt='good Ancestor' />
 								</div>
-								<Space direction='vertical' size='small'>
-									<Space direction='vertical' size='large'>
-										<div className='commentary-card-content'>
-											<h5>Good Ancestor</h5>
-											<p>The Good Ancestor: How to think long-term in a short-term world</p>
-										</div>
-										<div className='btn-wrapper'>
-											<Button>Read commentary</Button>
-										</div>
-									</Space>
-								</Space>
+								<div className='commentary-card-content'>
+									<h5>Good Ancestor</h5>
+									<p>The Good Ancestor: How to think long-term in a short-term world</p>
+									<div className='btn-wrapper'>
+										<Button>Read commentary</Button>
+									</div>
+								</div>
 							</div>
 							<div className='commentary-card'>
 								<div className='card-logo-wrapper'>
 									<img className='figure' src={inheritance} alt='inheritance' />
 								</div>
-								<Space direction='vertical' size='large'>
-									<div className='commentary-card-content'>
-										<h5>Inheritance</h5>
-										<p>
-											Dark Matter Labs explores the future institutional infrastructure to respond to the technological
-											revolution and climate breakdown.
-										</p>
-									</div>
+								<div className='commentary-card-content'>
+									<h5>Inheritance</h5>
+									<p>
+										Dark Matter Labs explores the future institutional infrastructure to respond to the technological
+										revolution and climate breakdown.
+									</p>
 									<div className='btn-wrapper'>
 										<Button>Read commentary</Button>
 									</div>
-								</Space>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -139,9 +130,8 @@ const ThankYou = () => {
 										<h3>Improved experience</h3>
 									</span>
 									<p>
-										With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and
-										insurance with very few clicks. Your data was reusable and this saved you x fields of form fields to
-										fill in.
+										With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and insurance
+										with very few clicks. Your data was reusable and this saved you x fields of form fields to fill in.
 									</p>
 								</div>
 							</div>
@@ -152,8 +142,8 @@ const ThankYou = () => {
 										<h3>Self Sovereignity</h3>
 									</span>
 									<p>
-										You have taken full control of your data. You decided who you shared your data with. Did you know
-										that you can share them with others manually via QR as well. Try so in the Selv app!
+										You have taken full control of your data. You decided who you shared your data with. Did you know that
+										you can share them with others manually via QR as well. Try so in the Selv app!
 									</p>
 								</div>
 								<div className='figure-wrapper'>
@@ -170,8 +160,8 @@ const ThankYou = () => {
 										<h3>More Trust</h3>
 									</span>
 									<p>
-										The data you shared with the Company House and the SNS Bank was verifiable. This allows to verify
-										your data instantly and freely using IOTA as the trust layer.
+										The data you shared with the Company House and the SNS Bank was verifiable. This allows to verify your
+										data instantly and freely using IOTA as the trust layer.
 									</p>
 								</div>
 							</div>

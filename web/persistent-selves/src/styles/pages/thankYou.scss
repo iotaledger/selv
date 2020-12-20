@@ -40,6 +40,18 @@
         position: relative;
         z-index: 2;
 
+        @include breakPoint(small) {
+            display: flex;
+            flex-direction: column;
+            margin: 100px 50px;
+        }
+
+        @include breakPoint(medium) {
+            display: flex;
+            flex-direction: column;
+            margin: 200px 50px;
+        }
+
         .heading {
             display: flex;
             flex-direction: column;
@@ -138,7 +150,7 @@
 
             .commentary-card {
                 width: 340px;
-                padding: 0 43px 20px 43px;
+                padding: 0 43px 30px 43px;
                 margin: 0 25px;
                 border-radius: 10px;
                 background: #FFFFFF;
@@ -147,14 +159,11 @@
                 .commentary-card-content {
                     display: flex;
                     flex-direction: column;
-                    justify-content: space-around;
+                    justify-content: space-between;
                     align-items: center;
                     position: relative;
+                    height: 70%;
                     bottom: 50px;
-
-                    h5 {
-                        margin-bottom: 20px;
-                    }
 
                     p {
                         font-size: 14px;
@@ -167,7 +176,7 @@
                 
                 .card-logo-wrapper {
                     position: relative;
-                    bottom: 80px;
+                    bottom: 70px;
                 }
             }
         }
@@ -176,7 +185,7 @@
     }
 
     .thank-you-wrapper {
-        padding: 100px 100px 0 100px;
+        padding: 70px 100px 0 100px;
         position: relative;
         display: flex;
         flex-direction: column;
