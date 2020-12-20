@@ -246,7 +246,7 @@ const Stats = () => {
 											),
 											'FutureCommitments'
 										)}
-										% also chose&nbsp;
+										% chose&nbsp;
 										{othersCommitments(
 											myFutureCommitments.Commitments?.[0],
 											myFutureCommitments.Commitments?.[1],
@@ -347,7 +347,7 @@ const Stats = () => {
 											),
 											'PresentCommitments'
 										)}
-										% also chose&nbsp;
+										% chose&nbsp;
 										{othersCommitments(
 											myPresentCommitments.Commitments?.[0],
 											myPresentCommitments.Commitments?.[1],
