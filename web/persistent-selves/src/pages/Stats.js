@@ -157,7 +157,7 @@ const Stats = () => {
 		tooltip: {
 			y: {
 				formatter: function (value) {
-					return value + '%';
+					return value.toFixed(1) + '%';
 				}
 			}
 		},
@@ -196,7 +196,7 @@ const Stats = () => {
 		tooltip: {
 			y: {
 				formatter: function (value) {
-					return value + '%';
+					return value.toFixed(1) + '%';
 				}
 			}
 		},
