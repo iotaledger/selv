@@ -4,7 +4,6 @@ import { Loading } from '../components';
 import PieChart from 'react-apexcharts';
 import future from '../assets/futureCategory.svg';
 import present from '../assets/presentCategory.svg';
-import '../utils/legendColorHelper';
 
 /**
  * Component which will display a Stats.
