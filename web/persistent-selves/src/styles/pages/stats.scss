@@ -81,9 +81,26 @@
             text-align: center;
             padding: 0 250px;
 
+            .slider-titles-wrapper {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+
+                span {
+                    font-size: 18px;
+                    font-family: "Roboto", sans-serif;
+                    font-weight: 600;
+
+                    @include themify($themes) {
+                        color: themed('primaryFontColor');
+                    }
+                }
+            }
+
             .percentages-wrapper {
                 display: flex;
                 justify-content: space-between;
+                margin-top: 10px;
 
                 span {
                     font-size: 20px;
@@ -93,75 +110,6 @@
                         color: themed('primaryFontColor');  
                     }
                 }
-            }
-
-            .ant-slider-with-marks{
-                margin: 70px 0 15px 0;
-            }
-
-            .ant-slider-mark-text {
-                width: fit-content;
-                font-weight: 600;
-                font-size: 16px;
-                position: absolute;
-                bottom: 30px;
-            }
-
-            .mark-0 {
-                position: relative;
-                left: 50%;
-            }
-
-            .mark-100 {
-                position: relative;
-                right: 50%;
-            }
-
-            .ant-slider-step {
-                height: 12px;
-                border-radius: 18px;
-            }
-
-            .ant-slider-track {
-                height: 12px;
-                border-radius: 18px;
-
-                @include themify($themes) {
-                    background: themed('primaryColor');  
-                }
-            }
-
-            .ant-slider-rail { 
-                height: 12px;
-                border-radius: 18px;
-            }
-
-            .ant-slider-handle {
-                width: 30px;
-                height: 30px;
-                margin-top: -8px;
-
-                @include themify($themes) {
-                    border: solid 6px themed('secondaryColor');  
-                }
-
-                &:focus {
-                    @include themify($themes) {
-                        box-shadow: themed('shadowColor');
-                    }
-                }
-            }
-
-            .ant-slider-dot-active {
-                @include themify($themes) {
-                    border-color: themed('primaryColor');  
-                }
-            }
-
-            .ant-slider-dot {
-                top: 1px;
-                width: 10px;
-                height: 10px;
             }
 
             .drawer-btn-wrapper {

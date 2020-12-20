@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Space, Slider, Progress } from 'antd';
+import { Space, Progress } from 'antd';
 import { Loading } from '../components';
 import PieChart from 'react-apexcharts';
 import future from '../assets/futureCategory.svg';
@@ -97,11 +97,6 @@ const Stats = () => {
 		}
 		loadChartData();
 	}, []);
-
-	const futureSliderMarks = {
-		0: <span className='mark-0'>{myFutureCommitments.Commitments?.[0].CommitmentTitle}</span>,
-		100: <span className='mark-100'>{myFutureCommitments.Commitments?.[1].CommitmentTitle}</span>
-	};
 
 	const futureChartOptions = {
 		chart: {
@@ -263,24 +258,25 @@ const Stats = () => {
 						</div>
 						<div className='slider-wrapper'>
 							<h5>Average financial commitment</h5>
-							<Slider
-								marks={futureSliderMarks}
-								defaultValue={Math.max(
-									sameCommitmentsPercent(myFutureCommitments.Commitments?.[0]?.CommitmentTitle, 'FutureCommitments'),
-									sameCommitmentsPercent(myFutureCommitments.Commitments?.[1]?.CommitmentTitle, 'FutureCommitments')
+							<br />
+							<br />
+							<div className='slider-titles-wrapper'>
+								<span>{myFutureCommitments.Commitments?.[0]?.CommitmentTitle}</span>
+								<span>{myFutureCommitments.Commitments?.[1]?.CommitmentTitle}</span>
+							</div>
+							<Progress
+								strokeWidth={13}
+								strokeColor={commitmentsColors[myFutureCommitments.Commitments?.[0]?.CommitmentTitle]}
+								trailColor={commitmentsColors[myFutureCommitments.Commitments?.[1]?.CommitmentTitle]}
+								showInfo={false}
+								percent={Math.max(
+									myFutureCommitments.Commitments?.[0].CommitmentWalletPercentage,
+									myFutureCommitments.Commitments?.[1].CommitmentWalletPercentage
 								)}
-								tooltipVisible={false}
-								disabled
 							/>
 							<div className='percentages-wrapper'>
-								<span>
-									You chose{' '}
-									{sameCommitmentsPercent(myFutureCommitments.Commitments?.[0]?.CommitmentTitle, 'FutureCommitments')}%
-								</span>
-								<span>
-									You chose{' '}
-									{sameCommitmentsPercent(myFutureCommitments.Commitments?.[1]?.CommitmentTitle, 'FutureCommitments')}%
-								</span>
+								<span>You chose {myFutureCommitments.Commitments?.[0]?.CommitmentWalletPercentage}%</span>
+								<span>You chose {myFutureCommitments.Commitments?.[1]?.CommitmentWalletPercentage}%</span>
 							</div>
 							<br />
 							<br />
