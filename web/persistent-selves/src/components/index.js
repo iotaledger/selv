@@ -12,6 +12,7 @@ import Disclaimer from './Disclaimer'
 import PledgeCards from './PledgeCards'
 import Credentials from './Credentials';
 import Commitments from './Commitments';
+import Popup from './Popup';
 
 export {
     Sidebar,
@@ -27,5 +28,6 @@ export {
     FAQ,
     PledgeCards,
     Credentials,
-    Commitments
+    Commitments,
+    Popup
 };

@@ -4,6 +4,7 @@ import biodiversity from '../assets/registry/biodiversity-loss.jpg';
 import climate_change from '../assets/registry/climate-change.jpg';
 import fresh_water from '../assets/registry/freshwater.jpg';
 import land_use from '../assets/registry/land-use-change.jpg';
+import Popup from './Popup';
 
 const cardsContent = [
 	{
@@ -62,22 +63,3 @@ export default () => (
 	    </div>
     </div>
 );
-
-const Popup = ({ card }) => (
-	<div className='popup-wrapper'>
-		<div className='popup-content'>
-			<p className='title bold'>Boundary {card?.status}</p>
-			<div className='placeholder' />
-		</div>
-		<div className='popup-content'>
-			<p className='title'>Planetary boundary:</p>
-			<div className='placeholder' />
-			<p className='value bold'>{card?.boundary}</p>
-		</div>
-		<div className='popup-content'>
-			<p className='title'>Current value:</p>
-			<div className='placeholder' />
-			<p className='value bold'>{card?.value}</p>
-		</div>
-	</div>
-)
