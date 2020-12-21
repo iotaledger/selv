@@ -15,7 +15,7 @@ button {
         border-radius: themed('buttonBorderRadius');
 
         &:hover {
-            background-color: themed('secondaryColor') !important;
+            background-color: themed('secondaryColor');
         }
 
         &:disabled {

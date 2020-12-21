@@ -43,3 +43,13 @@
 .ant-tabs-content-holder {
     margin-bottom: 30px;
 }
+
+.ant-input-affix-wrapper-disabled {
+    background-color: #FFFFFF;
+}
+
+.ant-input[disabled] {
+    @include themify($themes) {
+        color: themed('trinaryColor');
+    }
+}
