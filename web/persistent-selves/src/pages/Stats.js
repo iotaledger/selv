@@ -198,24 +198,24 @@ const Stats = () => {
 									<span
 										className='legend-icon'
 										style={{
-											backgroundColor: commitmentsColors[myFutureCommitments.Commitments?.[0]?.CommitmentTitle]
+											backgroundColor: commitmentsColors[myFutureCommitments?.Commitments?.[0]?.CommitmentTitle]
 										}}></span>
 									<p className='bold'>
-										{sameCommitmentsPercent(myFutureCommitments.Commitments?.[0]?.CommitmentTitle, 'FutureCommitments')}%
+										{sameCommitmentsPercent(myFutureCommitments?.Commitments?.[0]?.CommitmentTitle, 'FutureCommitments')}%
 										also chose&nbsp;
-										{myFutureCommitments.Commitments?.[0].CommitmentTitle}
+										{myFutureCommitments?.Commitments?.[0].CommitmentTitle}
 									</p>
 								</Space>
 								<Space align='center'>
 									<span
 										className='legend-icon'
 										style={{
-											backgroundColor: commitmentsColors[myFutureCommitments.Commitments?.[1]?.CommitmentTitle]
+											backgroundColor: commitmentsColors[myFutureCommitments?.Commitments?.[1]?.CommitmentTitle]
 										}}></span>
 									<p className='bold'>
-										{sameCommitmentsPercent(myFutureCommitments.Commitments?.[1]?.CommitmentTitle, 'FutureCommitments')}%
+										{sameCommitmentsPercent(myFutureCommitments?.Commitments?.[1]?.CommitmentTitle, 'FutureCommitments')}%
 										also chose&nbsp;
-										{myFutureCommitments.Commitments?.[1].CommitmentTitle}
+										{myFutureCommitments?.Commitments?.[1].CommitmentTitle}
 									</p>
 								</Space>
 							</Space>
@@ -231,8 +231,8 @@ const Stats = () => {
 											backgroundColor:
 												commitmentsColors[
 													othersCommitments(
-														myFutureCommitments.Commitments?.[0],
-														myFutureCommitments.Commitments?.[1],
+														myFutureCommitments?.Commitments?.[0],
+														myFutureCommitments?.Commitments?.[1],
 														'FutureCommitments'
 													)
 												]
@@ -240,16 +240,16 @@ const Stats = () => {
 									<p className='bold'>
 										{sameCommitmentsPercent(
 											othersCommitments(
-												myFutureCommitments.Commitments?.[0],
-												myFutureCommitments.Commitments?.[1],
+												myFutureCommitments?.Commitments?.[0],
+												myFutureCommitments?.Commitments?.[1],
 												'FutureCommitments'
 											),
 											'FutureCommitments'
 										)}
 										% chose&nbsp;
 										{othersCommitments(
-											myFutureCommitments.Commitments?.[0],
-											myFutureCommitments.Commitments?.[1],
+											myFutureCommitments?.Commitments?.[0],
+											myFutureCommitments?.Commitments?.[1],
 											'FutureCommitments'
 										)}
 									</p>
@@ -261,22 +261,22 @@ const Stats = () => {
 							<br />
 							<br />
 							<div className='slider-titles-wrapper'>
-								<span>{myFutureCommitments.Commitments?.[0]?.CommitmentTitle}</span>
-								<span>{myFutureCommitments.Commitments?.[1]?.CommitmentTitle}</span>
+								<span>{myFutureCommitments?.Commitments?.[0]?.CommitmentTitle}</span>
+								<span>{myFutureCommitments?.Commitments?.[1]?.CommitmentTitle}</span>
 							</div>
 							<Progress
 								strokeWidth={13}
-								strokeColor={commitmentsColors[myFutureCommitments.Commitments?.[0]?.CommitmentTitle]}
-								trailColor={commitmentsColors[myFutureCommitments.Commitments?.[1]?.CommitmentTitle]}
+								strokeColor={commitmentsColors[myFutureCommitments?.Commitments?.[0]?.CommitmentTitle]}
+								trailColor={commitmentsColors[myFutureCommitments?.Commitments?.[1]?.CommitmentTitle]}
 								showInfo={false}
 								percent={Math.max(
-									myFutureCommitments.Commitments?.[0].CommitmentWalletPercentage,
-									myFutureCommitments.Commitments?.[1].CommitmentWalletPercentage
+									myFutureCommitments?.Commitments?.[0].CommitmentWalletPercentage,
+									myFutureCommitments?.Commitments?.[1].CommitmentWalletPercentage
 								)}
 							/>
 							<div className='percentages-wrapper'>
-								<span>You chose {myFutureCommitments.Commitments?.[0]?.CommitmentWalletPercentage}%</span>
-								<span>You chose {myFutureCommitments.Commitments?.[1]?.CommitmentWalletPercentage}%</span>
+								<span>You chose {myFutureCommitments?.Commitments?.[0]?.CommitmentWalletPercentage}%</span>
+								<span>You chose {myFutureCommitments?.Commitments?.[1]?.CommitmentWalletPercentage}%</span>
 							</div>
 							<br />
 							<br />
@@ -299,24 +299,24 @@ const Stats = () => {
 									<span
 										className='legend-icon'
 										style={{
-											backgroundColor: commitmentsColors[myPresentCommitments.Commitments?.[0]?.CommitmentTitle]
+											backgroundColor: commitmentsColors[myPresentCommitments?.Commitments?.[0]?.CommitmentTitle]
 										}}></span>
 									<p className='bold'>
-										{sameCommitmentsPercent(myPresentCommitments.Commitments?.[0]?.CommitmentTitle, 'PresentCommitments')}%
+										{sameCommitmentsPercent(myPresentCommitments?.Commitments?.[0]?.CommitmentTitle, 'PresentCommitments')}%
 										also chose&nbsp;
-										{myPresentCommitments.Commitments?.[0].CommitmentTitle}
+										{myPresentCommitments?.Commitments?.[0].CommitmentTitle}
 									</p>
 								</Space>
 								<Space align='center'>
 									<span
 										className='legend-icon'
 										style={{
-											backgroundColor: commitmentsColors[myPresentCommitments.Commitments?.[1]?.CommitmentTitle]
+											backgroundColor: commitmentsColors[myPresentCommitments?.Commitments?.[1]?.CommitmentTitle]
 										}}></span>
 									<p className='bold'>
-										{sameCommitmentsPercent(myPresentCommitments.Commitments?.[1]?.CommitmentTitle, 'PresentCommitments')}%
+										{sameCommitmentsPercent(myPresentCommitments?.Commitments?.[1]?.CommitmentTitle, 'PresentCommitments')}%
 										also chose&nbsp;
-										{myPresentCommitments.Commitments?.[1].CommitmentTitle}
+										{myPresentCommitments?.Commitments?.[1].CommitmentTitle}
 									</p>
 								</Space>
 							</Space>
@@ -332,8 +332,8 @@ const Stats = () => {
 											backgroundColor:
 												commitmentsColors[
 													othersCommitments(
-														myPresentCommitments.Commitments?.[0],
-														myPresentCommitments.Commitments?.[1],
+														myPresentCommitments?.Commitments?.[0],
+														myPresentCommitments?.Commitments?.[1],
 														'PresentCommitments'
 													)
 												]
@@ -341,16 +341,16 @@ const Stats = () => {
 									<p className='bold'>
 										{sameCommitmentsPercent(
 											othersCommitments(
-												myPresentCommitments.Commitments?.[0],
-												myPresentCommitments.Commitments?.[1],
+												myPresentCommitments?.Commitments?.[0],
+												myPresentCommitments?.Commitments?.[1],
 												'PresentCommitments'
 											),
 											'PresentCommitments'
 										)}
 										% chose&nbsp;
 										{othersCommitments(
-											myPresentCommitments.Commitments?.[0],
-											myPresentCommitments.Commitments?.[1],
+											myPresentCommitments?.Commitments?.[0],
+											myPresentCommitments?.Commitments?.[1],
 											'PresentCommitments'
 										)}
 									</p>
@@ -359,7 +359,7 @@ const Stats = () => {
 						</div>
 						<div className='commitment-info-wrapper'>
 							<Space direction='vertical' size='large'>
-								<h3>{myPresentCommitments.Commitments?.[0].CommitmentTitle}</h3>
+								<h3>{myPresentCommitments?.Commitments?.[0].CommitmentTitle}</h3>
 								<div>
 									<p className='bold'>You commited to</p>
 									<span className='medium'>buying sustainable-label products</span>
@@ -367,24 +367,24 @@ const Stats = () => {
 								<div>
 									<p className='small'>
 										<span className='medium'>
-											{sameCommitmentsPercent(myPresentCommitments.Commitments?.[0]?.CommitmentTitle, 'PresentCommitments')}%
+											{sameCommitmentsPercent(myPresentCommitments?.Commitments?.[0]?.CommitmentTitle, 'PresentCommitments')}%
 										</span>
 										&nbsp;of participants also chose this option
 									</p>
 									<Progress
 										strokeWidth={13}
 										trailColor='#FFFFFF'
-										strokeColor={commitmentsColors[myPresentCommitments.Commitments?.[0]?.CommitmentTitle]}
+										strokeColor={commitmentsColors[myPresentCommitments?.Commitments?.[0]?.CommitmentTitle]}
 										showInfo={false}
 										percent={sameCommitmentsPercent(
-											myPresentCommitments.Commitments?.[0]?.CommitmentTitle,
+											myPresentCommitments?.Commitments?.[0]?.CommitmentTitle,
 											'PresentCommitments'
 										)}
 									/>
 								</div>
 							</Space>
 							<Space direction='vertical' size='large'>
-								<h3>{myPresentCommitments.Commitments?.[1].CommitmentTitle}</h3>
+								<h3>{myPresentCommitments?.Commitments?.[1].CommitmentTitle}</h3>
 								<div>
 									<p className='bold'>You commited to</p>
 									<span className='medium'>rewilding my garden/balcony/roof</span>
@@ -392,17 +392,17 @@ const Stats = () => {
 								<div>
 									<p className='small'>
 										<span className='medium'>
-											{sameCommitmentsPercent(myPresentCommitments.Commitments?.[1]?.CommitmentTitle, 'PresentCommitments')}%
+											{sameCommitmentsPercent(myPresentCommitments?.Commitments?.[1]?.CommitmentTitle, 'PresentCommitments')}%
 										</span>
 										&nbsp;of participants also chose this option
 									</p>
 									<Progress
 										strokeWidth={13}
-										strokeColor={commitmentsColors[myPresentCommitments.Commitments?.[1]?.CommitmentTitle]}
+										strokeColor={commitmentsColors[myPresentCommitments?.Commitments?.[1]?.CommitmentTitle]}
 										trailColor='#FFFFFF'
 										showInfo={false}
 										percent={sameCommitmentsPercent(
-											myPresentCommitments.Commitments?.[1]?.CommitmentTitle,
+											myPresentCommitments?.Commitments?.[1]?.CommitmentTitle,
 											'PresentCommitments'
 										)}
 									/>
