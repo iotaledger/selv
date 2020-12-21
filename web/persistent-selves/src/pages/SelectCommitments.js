@@ -59,7 +59,7 @@ const SelectCommitments = ({ history, match }) => {
                                             <img 
                                                 className='commitment-image' 
                                                 src={commitment?.image} 
-                                                alt={commitment?.title}
+                                                alt=''
                                             />
                                         </div>
                                         <div className='commitment-content'>

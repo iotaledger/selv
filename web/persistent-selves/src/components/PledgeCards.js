@@ -46,7 +46,7 @@ export default () => (
 			{cardsContent.slice(0, 4).map((card, index) => (
 				<div key={`card-${index}`} className='card'>
 					<h3 className='card-title'>{card?.title}</h3>
-					<img src={card?.image} alt={card?.title} />
+					<img src={card?.image} alt='' />
 					<Popover
 						content={<Popup card={card} />}
 						placement='bottom'
