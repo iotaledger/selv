@@ -64,7 +64,7 @@ const ProveIdentity = ({ history, match }) => {
             <RandomGraphicElement elements={5}>
                     <div className='scan-qr-content-wrapper'>
                     
-                        <h2>Provide your Digital Identity credentials</h2>
+                        <h2>Log in with your Identity Credentials</h2>
                         <p>Scan this QR code with <strong>Selv App</strong> to continue</p>
                         <div className='qr-wrapper'>
                             <QRCode text={qrContent} />
