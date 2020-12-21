@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Checkbox, Card, Popover, Space } from 'antd';
+import { Button, Checkbox, Card, Space } from 'antd';
 import useStep from '../utils/useStep';
-import { Layout, Popup } from '../components';
+import { Layout, Popover } from '../components';
 import commitments from '../assets/commitments';
 
 /**
@@ -66,15 +66,7 @@ const SelectCommitments = ({ history, match }) => {
                                                     src={commitment?.image} 
                                                     alt=''
                                                 />
-                                                <Popover
-                                                    content={<Popup card={commitment} />}
-                                                    placement='bottom'
-                                                    trigger={['click', 'hover', 'focus']}>
-                                                    <div className='boundary'>
-                                                        <div className={`fill ${commitment?.status}`} />
-                                                        <div className='border' />
-                                                    </div>
-                                                </Popover>
+                                                <Popover commitment={commitment} />
                                             </div>
                                             <div className='commitment-content'>
                                                 <h4>{commitment?.title}</h4>

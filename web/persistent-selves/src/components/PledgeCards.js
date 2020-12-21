@@ -1,16 +1,15 @@
 import React from 'react';
-import { Popover } from 'antd';
 import biodiversity from '../assets/registry/biodiversity-loss.jpg';
 import climate_change from '../assets/registry/climate-change.jpg';
 import fresh_water from '../assets/registry/freshwater.jpg';
 import land_use from '../assets/registry/land-use-change.jpg';
-import Popup from './Popup';
+import Popover from './Popover';
 
 const cardsContent = [
 	{
 		image: climate_change,
 		status: 'exceeded',
-		boundary: '350-450ppm',
+		boundary: '350-450 ppm',
 		value: '410 and rising',
 		title: 'Climate change',
 		body: 'Human activities, like fossil-fuel energy production, release greenhouse gases into the air. This results in global warming, effects of which include rising temperatures, more frequent extremes of weather, and sea level rise.'
@@ -18,7 +17,7 @@ const cardsContent = [
     {
 		image: fresh_water,
 		status: 'unsafe',
-		boundary: '4,000-6,000km3 per year',
+		boundary: '4,000-6,000 km3 per year',
 		value: 'Around 2,600 per year and rising',
 		title: 'Freshwater use',
 		body: 'Water is essential for life and is widely used by agriculture, industry and households. Excessive withdrawals of water, however, impair or even dry up lakes, rivers and aquifers, damaging ecosystems and altering the hydrological cycle.'
@@ -48,15 +47,7 @@ export default () => (
 				<div key={`card-${index}`} className='card'>
 					<h3 className='card-title'>{card?.title}</h3>
 					<img src={card?.image} alt='' />
-					<Popover
-						content={<Popup card={card} />}
-						placement='bottom'
-						trigger={['click', 'hover', 'focus']}>
-						<div className='boundary'>
-							<div className={`fill ${card?.status}`} />
-							<div className='border' />
-						</div>
-					</Popover>
+					<Popover commitment={card} />
 					<p className='card-body'>{card?.body}</p>
 				</div>
 			))}

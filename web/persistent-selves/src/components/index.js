@@ -13,6 +13,7 @@ import PledgeCards from './PledgeCards'
 import Credentials from './Credentials';
 import Commitments from './Commitments';
 import Popup from './Popup';
+import Popover from './Popover';
 
 export {
     Sidebar,
@@ -29,5 +30,6 @@ export {
     PledgeCards,
     Credentials,
     Commitments,
-    Popup
+    Popup,
+    Popover
 };
