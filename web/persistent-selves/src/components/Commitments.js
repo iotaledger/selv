@@ -22,6 +22,7 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                     ? (
                         <Card
                             hoverable 
+                            bordered={false}
                             className='commitment-category-completed'
                         >
                             <div className='commitment-category-completed-image-wrapper'>
@@ -57,6 +58,7 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                     ) : (
                         <Card
                             hoverable 
+                            bordered={false}
                             className='commitment-category'
                         >
                             <div className='commitment-category-image-wrapper'>
@@ -85,6 +87,7 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                     ? (
                         <Card
                             hoverable 
+                            bordered={false}
                             className='commitment-category-completed-present'
                         >
                             <div className='commitment-category-completed-image-wrapper'>
@@ -118,6 +121,7 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                     ) : (
                         <Card
                             hoverable={!disabled} 
+                            bordered={false}
                             className={`commitment-category-present ${disabled}`}
                         >
                             <div className='commitment-category-image-wrapper'>
