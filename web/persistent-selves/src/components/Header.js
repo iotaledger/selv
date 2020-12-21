@@ -1,7 +1,7 @@
 import React from 'react';
 import registry from '../assets/registry.svg'
-import future from '../assets/futureFoundation.svg'
-import present from '../assets/presentFoundation.svg'
+import future from '../assets/futureCategory.svg'
+import present from '../assets/presentCategory.svg'
 
 const Header = ({ children, theme }) => {
     return (
