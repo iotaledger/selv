@@ -15,10 +15,10 @@ const Confirmation = ({ match }) => {
     useEffect(() => {
         switch (theme) {
             case 'future':
-                setTitle('Your future commitment is created');
+                setTitle('You have created a Future Commitment');
                 break;
             case 'present':
-                setTitle('Your present commitment is created');
+                setTitle('You have created a Present Commitment');
                 break;
             default:
                 setTitle('Congratulations');
@@ -32,16 +32,16 @@ const Confirmation = ({ match }) => {
                 <RandomGraphicElement elements={5}>
                     <div className='confirmation-content-wrapper'>
                         <h2>{title}</h2>
-                        <p>Thank you for your pledge</p>
+                        <p>Thank you.</p>
                         
                         <div className='selv-wrapper'>
                             <img src={selv} alt='Selv app logo' />
-                            <h4>Your new credential is sent to Selv</h4>
+                            <h4>Your credential has been sent to Selv.</h4>
                         </div>
 
                         <Link to={nextStep}>
                             <Button>
-                                Continue
+                                <h4>Continue</h4>
                             </Button>
                         </Link>
                     </div>
