@@ -28,18 +28,18 @@ const GreatSuccess = ({ match }) => {
                                 <div className='great-success-text-wrapper'>
                                     <span>
                                         <img src={checkmark} alt='' />
-                                        <h3>You signed in with DID</h3>
+                                        <h3>You created your future commitment</h3>
                                     </span>
-                                    <p>You managed to sign into a website you never signed up for. Account creation has been skipped saving you time and effort. The company house is also not burdened with saving your password.</p>
+                                    <p>You imagined future possibilities and created a commitment to support future generations. Your donation is an important promise for generations to come. Your legacy will be stored in your Selv wallet and will be passed on to the next generation to support their decisions.</p>
                                 </div>
                             </div>
                             <div className='great-success-content' id='middle-item'>
                                 <div className='great-success-text-wrapper'>
                                     <span>
                                         <img src={checkmark} alt='' />
-                                        <h3>Received new Credentials</h3>
+                                        <h3>You received your legacy credential</h3>
                                     </span>
-                                    <p>You became the owner of a company. From this point onwards, you would be able to prove your directorship position online, allowing you to act on behalf of the company. Overtime you can grow your Selv profile by gathering such credentials from trusted third parties.</p>
+                                    <p>You became the owner of a commitment and created a new legacy. From this point onward, you will be able to prove your commitments. Over time you can grow your Selv profile by gathering more credentials from trusted third parties.</p>
                                 </div>
                                 <div className='figure-wrapper'>
                                     <img className='figure' src={image2} alt='Received new Credentials' />
@@ -52,9 +52,9 @@ const GreatSuccess = ({ match }) => {
                                 <div className='great-success-text-wrapper'>
                                     <span>
                                         <img src={checkmark} alt='' />
-                                        <h3>Re-used Selv Credentials</h3>
+                                        <h3>You signed in with DID</h3>
                                     </span>
-                                    <p>By controlling your personal data, you shared verifiable data without having to type it into a form. You can use these same credentials in other processes. Imagine never having to type in your name, address, email etc...</p>
+                                    <p>You managed to sign in to a website without needing to create an account saving you time and effort. Far Future Foundation is also not burdened with saving your password and personal information.</p>
                                 </div>
                             </div>
                         </div>
