@@ -14,7 +14,6 @@ import {
     PledgeRegistry,
     GreatSuccess,
     ThankYou,
-    Stats
 } from './pages';
 
 export const routes = [
@@ -43,7 +42,6 @@ export const routes = [
     { path: '/present/confirm/3', page: Confirmation },
     
     { path: '/registry/category/4', page: SelectCommitmentCategory },
-    { path: '/registry/stats/4', page: Stats },
     { path: '/demo/thankyou', page: ThankYou }
 ];
 

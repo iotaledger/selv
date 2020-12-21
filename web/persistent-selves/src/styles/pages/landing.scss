@@ -16,11 +16,16 @@
     }
 
     h2 {
-        border-bottom: 24px solid #B5F3D8;
         line-height: 6px;
-        margin-top: 50px;
+        margin-bottom: 20px;
         font-weight: 800;
-        padding: 0 15px;
+
+        &.highlight {
+            border-bottom: 24px solid #b5f3d8;
+            line-height: 6px;
+            margin-top: 20px;
+            font-weight: 700;
+        }
     }
 
     h4 {
