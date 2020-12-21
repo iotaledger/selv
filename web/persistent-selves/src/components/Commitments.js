@@ -61,10 +61,9 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                         >
                             <div className='commitment-category-image-wrapper'>
                                 <img className='commitment-category-image' src={future} alt='Far Future Foundation' />
-                                <h3>Far Future <br/> Foundation</h3> 
                             </div>
                             <div className='commitment-category-content'>
-                                <h2>Future Commitment</h2>
+                                <h3>Future Commitment</h3>
                                 <p>
                                     The far future commitment allows you to make conditional choices about a far-away future based on oracles and smart contracts.
                                 </p>
@@ -123,10 +122,9 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                         >
                             <div className='commitment-category-image-wrapper'>
                                 <img className='commitment-category-image' src={present} alt='Act Right Now Foundation' />
-                                <h3>Act Right Now Foundation</h3>
                             </div>
                             <div className='commitment-category-content'>
-                                <h2>Present Commitment</h2>
+                                <h3>Present Commitment</h3>
                                 <p>
                                     The present commitment let's you make pledges to get involved and shaping the present yourself.
                                 </p>
