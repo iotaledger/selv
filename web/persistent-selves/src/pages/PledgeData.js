@@ -121,12 +121,12 @@ const PledgeData = ({ history, match }) => {
                     </div>
                     <div className='form-wrapper'>
                         {
-                        Object.keys(prefilledFormData.dataFields).length &&
-                        <PrefilledForm {...prefilledFormData} />
+                            Object.keys(prefilledFormData.dataFields).length &&
+                            <PrefilledForm {...prefilledFormData} />
                         }
                         <div className='btn-wrapper'>
                             <Button onClick={processValues}>
-                                Confirm my legacy
+                                <h4>Confirm my legacy</h4>
                             </Button>
                         </div>
                         {
