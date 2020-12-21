@@ -1,34 +1,47 @@
-$font-family-companyHouse: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-$font-family-snsBank: 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-$font-family-insurance: 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-registry: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-future: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-present: 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 $font-family-demo: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-$font-family-demo-headings: 'Metropolis', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-demo-headings: 'Metropolis', sans-serif, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
-$primary-color-companyHouse: #3B6AC5;
-$secondary-color-companyHouse: #4247DC;
-$trinary-color-companyHouse: #333333;
-$primary-font-color-companyHouse: #142037;
-$secondary-font-color-companyHouse: #6F6F6F;
-$page-background-companyHouse: #EEF2FA;
+$primary-color-registry: #000000;
+$secondary-color-registry: #142037;
+$trinary-color-registry: #535664;
+$card-background-color-registry: #E1E1E1;
+$primary-font-color-registry: #142037;
+$secondary-font-color-registry: #7A869B;
+$page-background-registry: white;
+$secondary-page-background-registry: rgba(111, 207, 151, 0.2);
+$trinary-page-background-registry: #F2F7FB;
+$card-box-shadow-registry: drop-shadow(0px 2px 4px rgba(35, 54, 58, 0.08));
+$header-logo-background-registry: #FFFFFF;
 
-$primary-color-snsBank: #64CDF5;
-$secondary-color-snsBank: #562A71;
-$trinary-color-snsBank: #64CDF5;
-$primary-font-color-snsBank: #142037;
-$secondary-font-color-snsBank: #BBBBBB;
-$page-background-snsBank: #EEF2FA;
+$primary-color-future: #92caff;
+$secondary-color-future: #72b1ec;
+$trinary-color-future: #535664;
+$primary-font-color-future: #142037;
+$secondary-font-color-future: #FFFFFF;
+$page-background-future: #FFFFFF;
+$secondary-page-background-future: #535664;
+$trinary-page-background-future: #F2F7FB;
+$header-logo-background-future: #92CAFF;
+$shadow-color-future: 0 0 0 5px rgba(24, 144, 255, 0.3);
 
-$primary-color-insurance: #F39B26;
-$secondary-color-insurance: #562A71;
-$trinary-color-insurance: #64CDF5;
-$primary-font-color-insurance: #142037;
-$secondary-font-color-insurance: #BBBBBB;
-$page-background-insurance: #EEF2FA;
+$primary-color-present: #b4a7d9;
+$secondary-color-present: #c7b6fa;
+$trinary-color-present: #535664;
+$primary-font-color-present: #142037;
+$secondary-font-color-present: #FFFFFF;
+$page-background-present: #EEF2FA;
+$secondary-page-background-present: #535664;
+$trinary-page-background-present: #EEF2FA;
+$header-logo-background-present: #B4A7D9;
+$shadow-color-present: 0 0 0 5px rgba(180, 167, 217, 0.3);
 
-$primary-color-demo: #4247DC;
-$secondary-color-demo: #3B6AC5;
-$trinary-color-demo: #25C1B6;
-$primary-font-color-demo: #142037;
+$primary-color-demo: #2C80FC;
+$secondary-color-demo: #5C9EFF;
+$trinary-color-demo: #B5F3D8;
+$primary-font-color-demo: #000000;
 $secondary-font-color-demo: #BBBBBB;
 $page-background-demo: #EEF2FA;
 
@@ -37,12 +50,13 @@ $notice-color: #4247DC;
 $form-selector-color: #339BB6;
 
 $themes: (
+
     demo: (
         fontFamily: $font-family-demo,
         fontFamilyHeadings: $font-family-demo-headings,
 
-        defaultTextSize: 16px,
-        defaultLineHeight: 27px,
+        defaultTextSize: 15px,
+        defaultLineHeight: 24px,
 
         primaryColor: $primary-color-demo,
         secondaryColor: $secondary-color-demo,
@@ -54,7 +68,7 @@ $themes: (
         h1TextSize: 44px,
         h1LineHeight: 57px,
         h2TextSize: 36px,
-        h2LineHeight: 57px,
+        h2LineHeight: 40px,
         h3TextSize: 21px,
         h3LineHeight: 30px,
         h4TextSize: 16px,
@@ -68,63 +82,75 @@ $themes: (
 
     ),
     registry: (
-        fontFamily: $font-family-companyHouse,
-        fontFamilyHeadings: $font-family-companyHouse,
+        fontFamily: $font-family-registry,
+        fontFamilyHeadings: $font-family-registry,
 
-        defaultTextSize: 16px,
+        defaultTextSize: 14px,
         defaultLineHeight: 24px,
 
-        primaryColor: $primary-color-companyHouse,
-        secondaryColor: $secondary-color-companyHouse,
-        trinaryColor: $trinary-color-companyHouse,
-        primaryFontColor: $primary-font-color-companyHouse,
-        secondaryFontColor: $secondary-font-color-companyHouse,
+        primaryColor: $primary-color-registry,
+        secondaryColor: $secondary-color-registry,
+        trinaryColor: $trinary-color-registry,
+        primaryFontColor: $primary-font-color-registry,
+        secondaryFontColor: $secondary-font-color-registry,
         linkColor: $link-color,
         noticeColor: $notice-color,
         formSelectorColor: $form-selector-color,
-        pageBackground: $page-background-companyHouse,
+        pageBackground: $page-background-registry,
+        secondaryPageBackground: $secondary-page-background-registry,
+        trinaryPageBackground: $trinary-page-background-registry,
+        cardBackground: $card-background-color-registry,
+        logoHeaderBackground: $header-logo-background-registry,
 
-        h1TextSize: 36px,
-        h1LineHeight: 42px,
+        h1TextSize: 28px,
+        h1LineHeight: 30px,
         h2TextSize: 24px,
         h2LineHeight: 30px,
         h3TextSize: 18px,
         h3LineHeight: 20px,
+        h3TextWeight: 600,
         h4TextSize: 16px,
         h4LineHeight: 18px,
         h5TextSize: 14px,
         h5LineHeight: 15px,
 
-        buttonBackgroundColor: $primary-color-companyHouse,
+        buttonBackgroundColor: $primary-color-registry,
         buttonHeight: 43px,
         buttonBorderRadius: 4px,
 
-        headerBackgroundColor: #032F5D,
-        headerHeight: 60px,
+        boxShadow: $card-box-shadow-registry,
+        pageHorizontalMargin: 0,
+
+        headerBackgroundColor: #FFFFFF,
+        headerHeight: 70px,
         headerLogoAlign: left,
-        headerLogoHeight: 24px,
+        headerLogoHeight: 44px,
 
         footerBackgroundColor: #FFFFFF,
-        footerHeight: 76px,
+        footerHeight: 170px,
         footerLogoAlign: center,
-        footerLogoHeight: 24px,
+        footerLogoHeight: 0,
     ),
     future: (
-        fontFamily: $font-family-snsBank,
-        fontFamilyHeadings: $font-family-snsBank,
+        fontFamily: $font-family-future,
+        fontFamilyHeadings: $font-family-future,
 
         defaultTextSize: 16px,
         defaultLineHeight: 24px,
 
-        primaryColor: $primary-color-snsBank,
-        secondaryColor: $secondary-color-snsBank,
-        trinaryColor: $trinary-color-snsBank,
-        primaryFontColor: $primary-font-color-snsBank,
-        secondaryFontColor: $secondary-font-color-snsBank,
+        primaryColor: $primary-color-future,
+        secondaryColor: $secondary-color-future,
+        trinaryColor: $trinary-color-future,
+        primaryFontColor: $primary-font-color-future,
+        secondaryFontColor: $secondary-font-color-future,
         linkColor: $link-color,
         noticeColor: $notice-color,
         formSelectorColor: $form-selector-color,
-        pageBackground: $page-background-snsBank,
+        pageBackground: $page-background-future,
+        secondaryPageBackground: $secondary-page-background-future,
+        trinaryPageBackground: $trinary-page-background-future,
+        logoHeaderBackground: $header-logo-background-future,
+        shadowColor: $shadow-color-future,
 
         h1TextSize: 36px,
         h1LineHeight: 42px,
@@ -137,36 +163,42 @@ $themes: (
         h5TextSize: 15px,
         h5LineHeight: 17px,
 
-        buttonBackgroundColor: $primary-color-snsBank,
+        buttonBackgroundColor: $primary-color-future,
         buttonHeight: 51px,
         buttonBorderRadius: 4px,
 
-        headerBackgroundColor: #562A71,
+        pageHorizontalMargin: 0 50px,
+
+        headerBackgroundColor: $trinary-color-future,
         headerHeight: 100px,
         headerLogoAlign: left,
         headerLogoHeight: 39px,
 
-        footerBackgroundColor: #562A71,
-        footerHeight: 80px,
+        footerBackgroundColor: $primary-color-future,
+        footerHeight: 182px,
         footerLogoAlign: right,
         footerLogoHeight: 24px,
     ),
     present: (
-        fontFamily: $font-family-insurance,
-        fontFamilyHeadings: $font-family-insurance,
+        fontFamily: $font-family-present,
+        fontFamilyHeadings: $font-family-present,
 
         defaultTextSize: 16px,
         defaultLineHeight: 24px,
 
-        primaryColor: $primary-color-insurance,
-        secondaryColor: $secondary-color-insurance,
-        trinaryColor: $trinary-color-insurance,
-        primaryFontColor: $primary-font-color-insurance,
-        secondaryFontColor: $secondary-font-color-insurance,
+        primaryColor: $primary-color-present,
+        secondaryColor: $secondary-color-present,
+        trinaryColor: $trinary-color-present,
+        primaryFontColor: $primary-font-color-present,
+        secondaryFontColor: $secondary-font-color-present,
         linkColor: $link-color,
         noticeColor: $notice-color,
         formSelectorColor: $form-selector-color,
-        pageBackground: $page-background-insurance,
+        pageBackground: $page-background-present,
+        secondaryPageBackground: $secondary-page-background-present,
+        trinaryPageBackground: $trinary-page-background-present,
+        logoHeaderBackground: $header-logo-background-present,
+        shadowColor: $shadow-color-present,
 
         h1TextSize: 36px,
         h1LineHeight: 42px,
@@ -179,17 +211,21 @@ $themes: (
         h5TextSize: 15px,
         h5LineHeight: 17px,
 
-        buttonBackgroundColor: $primary-color-insurance,
+        pageMarginTop: -95px,
+        pageZIndex: 5,
+        pageHorizontalMargin: 0 50px,
+
+        buttonBackgroundColor: $primary-color-present,
         buttonHeight: 51px,
         buttonBorderRadius: 4px,
 
-        headerBackgroundColor: #562A71,
-        headerHeight: 100px,
+        headerBackgroundColor: $primary-color-present,
+        headerHeight: 240px,
         headerLogoAlign: left,
         headerLogoHeight: 39px,
 
-        footerBackgroundColor: #562A71,
-        footerHeight: 80px,
+        footerBackgroundColor: $primary-color-present,
+        footerHeight: 182px,
         footerLogoAlign: right,
         footerLogoHeight: 24px,
     ),

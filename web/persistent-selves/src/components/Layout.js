@@ -19,7 +19,7 @@ export default ({ children, match, customTheme, customStep, noHeader, noFooter }
                     {
                         !noHeader && <Header theme={theme || customTheme} />
                     }
-                    <div className='content'>
+                    <div className='content-stretch'>
                         {children}
                     </div>
                     {

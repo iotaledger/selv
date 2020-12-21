@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card } from 'antd';
+import { Button, Card, Space } from 'antd';
 import future from '../assets/futureCategory.svg';
 import present from '../assets/presentCategory.svg';
 import arrow from '../assets/arrow.svg';
@@ -14,23 +14,22 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
         );
         return commitment?.condition?.if;
     }
-
+    
     return (
         <div className='select-commitment-category-wrapper'>
             {
                 futureCommitment 
                     ? (
-                        <Card 
-                            bordered
+                        <Card
                             hoverable 
                             className='commitment-category-completed'
                         >
                             <div className='commitment-category-completed-image-wrapper'>
-                                <div className='commitment-category-image-container'>
+                                <Space size={20} align="center">
                                     <img className='commitment-category-image' src={future} alt='Far Future Foundation' />
-                                    <h2>Far Future Foundation</h2>
-                                </div>
-                                <img src={selv} alt='Selv app logo' />
+                                    <h3>Far Future Foundation</h3>
+                                </Space>
+                                <img className='selv-logo-completed' src={selv} alt='Selv app logo' />
                             </div>
                             <div className='commitment-category-completed-content'>
                                 {
@@ -42,7 +41,9 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                                             <div className='completed-commitment-card'>
                                                 <div className='completed-commitment-content'>
                                                     <p>
-                                                        {getCondition('future', commitment?.CommitmentId)} <span className='custom-value'>{commitment?.CommitmentPercentage}% </span>
+                                                        <b>{getCondition('future', commitment?.CommitmentId).replace(/ .*/, '')} </b>
+                                                        {getCondition('future', commitment?.CommitmentId).split(' ').slice(1).join(' ')}
+                                                        <span className='custom-value'> {commitment?.CommitmentPercentage}% </span>
                                                         THEN donate <span className='custom-value'>{commitment?.CommitmentWalletPercentage}%</span> of my wallet balance
                                                         TO support <span className='custom-value'>{commitment?.CommitmentSupport}</span>
                                                     </p>
@@ -54,14 +55,13 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                             </div>
                         </Card>
                     ) : (
-                        <Card 
-                            bordered
+                        <Card
                             hoverable 
                             className='commitment-category'
                         >
                             <div className='commitment-category-image-wrapper'>
                                 <img className='commitment-category-image' src={future} alt='Far Future Foundation' />
-                                <h2>Far Future Foundation</h2>
+                                <h3>Far Future <br/> Foundation</h3> 
                             </div>
                             <div className='commitment-category-content'>
                                 <h2>Future Commitment</h2>
@@ -73,7 +73,7 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                                     state: { category: 'future' }
                                 }}>
                                     <Button className='category-future'>
-                                        Visit Now
+                                        Visit Now    
                                         <img className='arrow' src={arrow} alt='' />
                                     </Button>
                                 </Link>
@@ -84,17 +84,16 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
             {
                 presentCommitment 
                     ? (
-                        <Card 
-                            bordered
+                        <Card
                             hoverable 
-                            className='commitment-category-completed'
+                            className='commitment-category-completed-present'
                         >
                             <div className='commitment-category-completed-image-wrapper'>
-                                <div className='commitment-category-image-container'>
+                                <Space size={20} align="center">
                                     <img className='commitment-category-image' src={present} alt='Act Right Now Foundation' />
-                                    <h2>Act Right Now Foundation</h2>
-                                </div>
-                                <img src={selv} alt='Selv app logo' />
+                                    <h3>Act Right Now Foundation</h3>
+                                </Space>
+                                <img className='selv-logo-completed' src={selv} alt='Selv app logo' />
                             </div>
                             <div className='commitment-category-completed-content'>
                                 {
@@ -118,26 +117,25 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                             </div>
                         </Card>
                     ) : (
-                        <Card 
-                            bordered
+                        <Card
                             hoverable={!disabled} 
-                            className={`commitment-category ${disabled}`}
+                            className={`commitment-category-present ${disabled}`}
                         >
                             <div className='commitment-category-image-wrapper'>
                                 <img className='commitment-category-image' src={present} alt='Act Right Now Foundation' />
-                                <h2>Act Right Now Foundation</h2>
+                                <h3>Act Right Now Foundation</h3>
                             </div>
                             <div className='commitment-category-content'>
                                 <h2>Present Commitment</h2>
                                 <p>
-                                    The present commitment let´s you make pledges to get involved and shaping the present yourself.
+                                    The present commitment let's you make pledges to get involved and shaping the present yourself.
                                 </p>
                                 <Link to={{
                                     pathname: nextStep,
                                     state: { category: 'present' }
                                 }}>
                                     <Button disabled={disabled} className='category-present'>
-                                        Visit Now
+                                        Visit Now 
                                         <img className='arrow' src={arrow} alt='' />
                                     </Button>
                                 </Link>

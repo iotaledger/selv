@@ -27,24 +27,26 @@ const Confirmation = ({ match }) => {
     }, [theme]);
 
     return (
-        <Layout match={match}>
-            <RandomGraphicElement elements={5}>
-                <div className='confirmation-page'>
-                    <h2>{title}</h2>
-                    <p>Thank you for your pledge</p>
+        <Layout match={match} noFooter>
+            <div className='confirmation-page'>
+                <RandomGraphicElement elements={5}>
+                    <div className='confirmation-content-wrapper'>
+                        <h2>{title}</h2>
+                        <p>Thank you for your pledge</p>
+                        
+                        <div className='selv-wrapper'>
+                            <img src={selv} alt='Selv app logo' />
+                            <h4>Your new credential is sent to Selv</h4>
+                        </div>
 
-                    <div className='selv-wrapper'>
-                        <img src={selv} alt='Selv app logo' />
-                        <h4>Your new credential is sent to Selv</h4>
+                        <Link to={nextStep}>
+                            <Button>
+                                Continue
+                            </Button>
+                        </Link>
                     </div>
-
-                    <Link to={nextStep}>
-                        <Button>
-                            Continue
-                        </Button>
-                    </Link>
-                </div>
-            </RandomGraphicElement>
+                </RandomGraphicElement>
+            </div>
         </Layout>
     );
 };

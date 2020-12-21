@@ -1,13 +1,14 @@
-.great-success, .thank-you-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.great-success {
     overflow-x: auto;
-    width: 100%;
-    padding-top: 100px;
+    height: 100%;
     background: #EEF2FA;
     position: relative;
+
+    .random-element-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
 
     .figure {
         max-width: 275px;
@@ -25,20 +26,26 @@
         justify-content: center;
         align-items: center;
         width: 100%;
+        z-index: 2;
+        position: relative;
+        padding: 30px 0;
     }
 
     .great-success-content-wrapper {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        max-width: 900px;
-        margin: 40px 0;
+        justify-content: center !important;
+        position: relative;
+        margin: 100px 250px;
+
+        h2 {
+            align-self: center;
+        }
 
         .great-success-content {
             display: flex;
             flex-direction: row;
-            justify-content: space-around;
+            justify-content: space-evenly;
             margin: 40px 0;
 
             .figure-wrapper, .great-success-text-wrapper {
@@ -50,7 +57,7 @@
                 z-index: 2;
             }
 
-            @include breakPoint(small) {
+            @include breakPoint(medium) {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
@@ -60,14 +67,16 @@
                 .figure-wrapper, .great-success-text-wrapper {
                     margin: 20px 0;
                     width: 100%;
+                    min-width: 400px;
                 }
-             }
+            }
 
             .figure-wrapper {
                 align-items: center;
             }
 
             .great-success-text-wrapper {
+                
                 span {
                     display: flex;
                     flex-direction: row;
@@ -78,8 +87,8 @@
                     }
 
                     h3 {
-                        margin-left: 18px;
-                        font-weight: bold;
+                        margin-left: 21px;
+                        font-weight: 700;
                     }
                 }
 

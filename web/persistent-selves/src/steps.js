@@ -1,7 +1,7 @@
 import {
     IntroTodos,
     IntroWelcome,
-    IntroOutcomes,
+    IntroLegacy,
     IntroLifeSpan,
     AppDownloadQR,
     ProveIdentity,
@@ -14,12 +14,11 @@ import {
     PledgeRegistry,
     GreatSuccess,
     ThankYou,
-    Stats
 } from './pages';
 
 export const routes = [
     { path: '/demo/welcome', page: IntroWelcome },
-    { path: '/demo/outcomes', page: IntroOutcomes },
+    { path: '/demo/legacy', page: IntroLegacy },
     { path: '/demo/lifespan', page: IntroLifeSpan },
     { path: '/demo/todos', page: IntroTodos },
     { path: '/demo/app/0', page: AppDownloadQR },
@@ -43,7 +42,6 @@ export const routes = [
     { path: '/present/confirm/3', page: Confirmation },
     
     { path: '/registry/category/4', page: SelectCommitmentCategory },
-    { path: '/registry/stats/4', page: Stats },
     { path: '/demo/thankyou', page: ThankYou }
 ];
 

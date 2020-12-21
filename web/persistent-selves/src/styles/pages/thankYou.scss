@@ -1,8 +1,16 @@
 .thank-you-page-wrapper {
+    height: 100%;
+    width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    .random-element-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
 
     .header-section {
         padding: 70px;
@@ -24,10 +32,169 @@
         z-index: 5;
     }
 
-    .thank-you-wrapper {
-        padding: 20px 30px 0;
+    .thank-you-wrapper-2 {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin: 200px 50px;
         position: relative;
-        overflow: hidden;
+        z-index: 2;
+
+        @include breakPoint(small) {
+            display: flex;
+            flex-direction: column;
+            margin: 100px 50px;
+        }
+
+        @include breakPoint(medium) {
+            display: flex;
+            flex-direction: column;
+            margin: 200px 50px;
+        }
+
+        .heading {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+        
+        .thank-you-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+
+            .figure-wrapper, .thank-you-text-wrapper {
+                width: 50%;
+                max-width: 450px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                z-index: 2;
+            }
+
+            @include breakPoint(medium) {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin: 30px;
+                display: flex;
+
+                .figure-wrapper, .thank-you-text-wrapper {
+                    margin: 20px 0;
+                    width: 100%;
+                    min-width: 400px;
+                }
+            }
+
+            .figure-wrapper {
+                align-items: center;
+            }
+
+            .thank-you-text-wrapper {
+                margin-left: 53px;
+                
+                span {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+
+                    h3 {
+                        margin-left: 21px;
+                        font-weight: 700;
+                    }
+                }
+
+                p {
+                    max-width: 515px;
+
+                    @include themify($themes) {
+                        color: themed('fontFamilyHeadings');
+                    }
+                }
+            }
+        }
+    }
+
+    .commentary-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 70px 50px;
+        background: #EEF2FA;
+
+        .heading {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: baseline;
+        }
+        
+        h3 {
+            color: #9DA5B2; 
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.58em;
+            text-transform: uppercase;
+        }
+
+        p {
+            max-width: 815px;
+        }
+
+        .commentary-cards-wrapper {
+            display: flex;
+            flex-direction: row;
+            margin: 120px 0 30px 0;
+
+            .commentary-card {
+                width: 340px;
+                padding: 0 43px 30px 43px;
+                margin: 0 25px;
+                border-radius: 10px;
+                background: #FFFFFF;
+                position: relative;
+
+                .commentary-card-content {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    position: relative;
+                    height: 70%;
+                    bottom: 50px;
+
+                    p {
+                        font-size: 14px;
+                    }
+                }
+
+                .btn-wrapper {
+                    justify-self: flex-end;
+                }
+                
+                .card-logo-wrapper {
+                    position: relative;
+                    bottom: 70px;
+                }
+            }
+        }
+        
+
+    }
+
+    .thank-you-wrapper {
+        padding: 0 100px 50px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        z-index: -1;
+
+        h2 {
+            align-self: center;
+            font-weight: 700;
+        }
 
         .dots-bottom {
             position: absolute;
@@ -36,19 +203,99 @@
             z-index: 0;
             transform: rotate(90deg);
             @include breakPoint(medium) {
-               display: none;
+                display: none;
+            }
+        }
+
+        .heading-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 0 50px;
+
+            .heading {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: baseline;
+            }
+            
+            h3 {
+                color: #9DA5B2; 
+                font-weight: 600;
+                font-size: 16px;
+                letter-spacing: 0.58em;
+                text-transform: uppercase;
+            }
+        }
+
+        .thank-you-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            margin: 40px 0;
+
+            .figure-wrapper, .thank-you-text-wrapper {
+                width: 50%;
+                max-width: 450px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                z-index: 2;
+            }
+
+            @include breakPoint(medium) {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin: 30px;
+                display: flex;
+
+                .figure-wrapper, .thank-you-text-wrapper {
+                    margin: 20px 0;
+                    width: 100%;
+                    min-width: 400px;
+                }
+            }
+
+            .figure-wrapper {
+                align-items: center;
+            }
+
+            .thank-you-text-wrapper {
+                
+                span {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+
+                    img {
+                        width: 21px;
+                    }
+
+                    h3 {
+                        margin-left: 21px;
+                        font-weight: 700;
+                    }
+                }
+
+                p {
+                    margin: 15px 0 0 40px;
+                    max-width: 415px;
+                    font-weight: 500;
+                }
             }
         }
 
         .cta-wrapper {
-            height: 230px;
-            background: #EEF2FA;
+            height: 300px;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
             width: 100%;
-            padding-bottom: 70px;
+            padding: 50px 0 30px;
 
             a {
                 @include themify($themes) {

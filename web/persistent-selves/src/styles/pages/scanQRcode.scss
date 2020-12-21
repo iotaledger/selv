@@ -3,6 +3,13 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    text-align: center;
+
+    @include themify($themes) {
+        background: themed('trinaryPageBackground');
+        margin-top: themed('pageMarginTop') !important;
+        z-index: themed('pageZIndex');
+    }
 
     > * {
         z-index: 1;
@@ -33,6 +40,16 @@
         }
     }
 
+    p {
+        @include themify($themes) {
+            font-size: themed('defaultTextSize');
+        }
+    }
+
+    .bold {
+        color: #656565;
+    }
+
     .qr-wrapper {
         box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.4);
         -webkit-box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.3); 
@@ -42,6 +59,15 @@
         height: 370px;
         z-index: 4;
         margin: 50px 0;
+    }
+}
+
+.scan-qr-page-wrapper {
+    height: 100%;
+    width: 100%;
+
+    @include themify($themes) {
+        margin: themed('pageHorizontalMargin');
     }
 }
 
@@ -72,11 +98,25 @@
     }
 }
 
+.scan-qr-content-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 90px;
+    position: relative;
+    z-index: 2;
+}
+
+.scan-qr-content-wrapper-app {
+    margin-top: 50px;
+}
+
 .app-download {
     position: fixed;
     width: 100%;
     z-index: 2;
-    margin-top: 18px;
 
     @include breakPointHeight(short) {
         position: relative;
@@ -132,7 +172,7 @@
 
     .circle {
         position: absolute;
-        bottom: -250px;
+        bottom: 0;
         z-index: 0;
         width: 800px;
 
@@ -175,7 +215,10 @@
                 font-weight: 600;
                 font-size: 20px;
                 line-height: 30px;
-                color: #4247DC;
+
+                @include themify($themes) {
+                    color: themed('primaryColor');
+                }
             }
 
             .qr-wrapper {

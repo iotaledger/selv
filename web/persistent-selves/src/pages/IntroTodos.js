@@ -13,28 +13,32 @@ import logo from '../assets/landing/logoHeader.svg';
 const IntroTodos = ({ match }) => {
 	const { mainSteps, nextStep } = useStep(match);
 
-    useEffect(() => {
-        const reset = async () => {
-            window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-            });
-            await localStorage.clear();
-        };
-        reset();
-    }, []);
+	useEffect(() => {
+		const reset = async () => {
+			window.scrollTo({
+				top: 0,
+				left: 0,
+				behavior: 'smooth'
+			});
+			await localStorage.clear();
+		};
+		reset();
+	}, []);
 
-    return (
-        <RandomGraphicElement elements={7}>
-            <div className='theme-demo'>
+	return (
+		<RandomGraphicElement elements={7}>
+			<div className='theme-demo'>
                 <Link to={'/'} className="logo demo-page">
                     <img src={logo} alt="Selv logo" />
                 </Link>
                 <div className='demo-intro' id='app'>
+                <div className='todos-wrapper'>
                     <div className='todos'>
-                        <span className='heading'><h2>Imagine your</h2>&nbsp;&nbsp;<h2 className='highlight'>legacy</h2>&nbsp;&nbsp;<h2>as a good</h2><br /><h2>ancestor</h2>&nbsp;&nbsp;<h2 className='highlight'>today</h2></span>
-                        <p>Explore this demo to see how you can safely own, share and manage your pledge to the future beyond your lifetime</p>
+                        <div className='heading-wrapper'>
+                            <span className='heading'><h2>Becoming a</h2>&nbsp;&nbsp;<h2 className='highlight'>good ancestor</h2></span>
+                            <br/>
+                        </div>
+                        <p>Explore this demo to discover how you can create an  environmental legacy for future generations.</p>
                         <ul className='todos'>
                             {
                                 mainSteps.map(({ title }) => <li key={title}>{title}</li>)
@@ -47,15 +51,16 @@ const IntroTodos = ({ match }) => {
                         </Link>
                     </div>
                     <div className='image-wrapper'>
-                        <img src={howItWorks} alt='how It Works' className='howItWorks' />
+                        <img src={howItWorks} alt='how It Works' />
                     </div>
+                </div>
                     <img src={dots} alt='' className='dots-top' />
                     <img src={dots} alt='' className='dots-bottom' />
                     <Disclaimer />
                 </div>
             </div>
-        </RandomGraphicElement>
-    );
+		</RandomGraphicElement>
+	);
 };
 
 export default IntroTodos;

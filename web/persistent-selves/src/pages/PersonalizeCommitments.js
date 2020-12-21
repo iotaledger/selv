@@ -43,8 +43,8 @@ const PersonalizeCommitments = ({ history, match }) => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const marks = {
-        0: selected[0]?.title,
-        100: selected[1]?.title,
+        0: <span className='mark-0'>{selected[0]?.title}</span>,
+        100: <span className='mark-100'>{selected[1]?.title}</span>,
     };
 
     const onChange = value => {
@@ -78,8 +78,8 @@ const PersonalizeCommitments = ({ history, match }) => {
     console.log('storedCommitments', storedCommitments);
 
     return (
-        <Layout match={match}>
-            <React.Fragment>
+        <Layout match={match} noFooter>
+            <div className='personalize-commitment-page-wrapper'>
                 <div className='personalize-commitment-wrapper'>
                     <div className='text-wrapper'>
                         <h2>Personalise your commitment</h2>
@@ -89,7 +89,7 @@ const PersonalizeCommitments = ({ history, match }) => {
                             You can choose two pledges to help the future as part of your legacy.
                         </p>
                     </div>
-                    <div className='commitments-list'>
+                    <div className='personalize-commitments-list'>
                         {
                             selected?.map((commitment, index) => (
                                 <div 
@@ -103,8 +103,11 @@ const PersonalizeCommitments = ({ history, match }) => {
                                         className='commitment-card'
                                     >
                                         <div className='commitment-content'>
-                                            <div>
-                                                <p>{commitment?.condition?.if}</p>
+                                            <div className='condition-wrapper'>
+                                                <p>
+                                                    <b>{commitment?.condition?.if.replace(/ .*/,'')} </b> 
+                                                    {commitment?.condition?.if.split(' ').slice(1).join(' ')}
+                                                </p>
                                                 <Select 
                                                     defaultValue={`${index === 0 ? percentages[3] : percentages[1]}%`} 
                                                     onChange={value => handleConditionChange(commitment?.commitmentId, value)}
@@ -114,9 +117,9 @@ const PersonalizeCommitments = ({ history, match }) => {
                                                     ))}
                                                 </Select>
                                             </div>
-                                            <div><p>THEN donate {percentage[index]}% of my wallet balance</p></div>
-                                            <div>
-                                                <p>TO support</p>
+                                            <div className='condition-wrapper'><p><strong>THEN</strong>  donate {percentage[index]}% of my wallet balance</p></div>
+                                            <div className='condition-wrapper'>
+                                                <p><strong>TO</strong> support</p>
                                                 <Select 
                                                     defaultValue={commitment?.condition?.support?.[0]} 
                                                     onChange={value => handleSupportChange(commitment?.commitmentId, value)}
@@ -132,26 +135,31 @@ const PersonalizeCommitments = ({ history, match }) => {
                             ))
                         }
                     </div>
+                    <div className='commitments-drawer'>
+                        <h2>Choose your commitment level</h2>
+                        <Slider 
+                            marks={marks} 
+                            step={5} 
+                            defaultValue={50} 
+                            tooltipVisible={false}
+                            onChange={onChange}
+                        />
+                        <div className='percentages-wrapper'>
+                            <span>{percentage[0]}%</span>
+                            <span>{percentage[1]}%</span>
+                        </div>
+                        <br />
+                        <br />
+                        <div className='drawer-btn-wrapper'>
+                            <Link to={nextStep}>
+                                <Button onClick={storeCommitments}>
+                                    Continue
+                                </Button>
+                            </Link>
+                        </div>                     
                 </div>
-                <div className='commitments-drawer'>
-                    <h2>Choose your commitment level</h2>
-                    <Slider 
-                        marks={marks} 
-                        step={5} 
-                        defaultValue={50} 
-                        tooltipVisible={false}
-                        onChange={onChange}
-                    />
-                    <p>{percentage[0]}%</p>
-                    <br/>
-                    <p>{percentage[1]}%</p>
-                    <Link to={nextStep}>
-                        <Button onClick={storeCommitments}>
-                            Continue
-                        </Button>
-                    </Link>
-                </div>
-            </React.Fragment>
+            </div>
+        </div>
         </Layout>
     );
 };

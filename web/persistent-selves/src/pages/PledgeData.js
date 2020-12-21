@@ -3,7 +3,6 @@ import { Button, Card, notification } from 'antd';
 import { flattenObject } from '../utils/helper';
 import useStep from '../utils/useStep';
 import { Layout, Loading, PrefilledForm, WebSocket } from '../components';
-
 const prefilledFields = [
     'FirstName',
     'LastName',
@@ -89,11 +88,11 @@ const PledgeData = ({ history, match }) => {
     const prefilledFormData = { dataFields: prefilledData };
 
     return (
-        <Layout match={match}>
+        <Layout match={match} noFooter>
             <div className='commitments-data-page-wrapper'>
-                <h2>Summary</h2>
-
                 <div className='commitments-wrapper'>
+                    <h2>Summary</h2>
+                    <div className='commitments-cards-wrapper'>
                     {
                         Object.values(commitments).map(commitment => (
                             <div 
@@ -107,43 +106,50 @@ const PledgeData = ({ history, match }) => {
                                     className='form-commitment-card'
                                 >
                                     <div className='form-commitment-content'>
-                                        <p>
-                                            {commitment?.condition} <span className='custom-value'>{commitment?.percentage}% </span>
-                                            THEN donate <span className='custom-value'>{commitment?.walletPercentage}%</span> of my wallet balance
-                                            TO support <span className='custom-value'>{commitment?.support}</span>
-                                        </p>
+                                    <p>
+										<b>{commitment?.condition?.replace(/ .*/, '')} </b>
+										{commitment?.condition?.split(' ').slice(1).join(' ')}
+										<span className='custom-value'> {commitment?.percentage}% </span>
+										THEN donate <span className='custom-value'>{commitment?.walletPercentage}%</span> of my wallet
+										balance TO support <span className='custom-value'>{commitment?.support}</span>
+										</p>
                                     </div>
                                 </Card>
                             </div>
                         ))
                     }
-                </div>
-                {
-                    Object.keys(prefilledFormData.dataFields).length &&
-                    <PrefilledForm {...prefilledFormData} />
-                }
-                <Button onClick={processValues}>
-                    Confirm my legacy
-                </Button>
-                {
-                    status && (
-                        <div className='loading'>
-                            <p className='bold'>{status}</p>
-                            {
-                                status === messages.waiting && <Loading />
-                            }
+                    </div>
+                    <div className='form-wrapper'>
+                        {
+                        Object.keys(prefilledFormData.dataFields).length &&
+                        <PrefilledForm {...prefilledFormData} />
+                        }
+                        <div className='btn-wrapper'>
+                            <Button onClick={processValues}>
+                                Confirm my legacy
+                            </Button>
                         </div>
-                    )
-                }
-                {
-                    webSocket && <WebSocket
-                        history={history}
-                        match={match}
-                        schemaName={theme === 'future' ? 'FutureCommitments' : 'PresentCommitments'}
-                        setStatus={setStatusMessage}
-                        fields={fields}
-                    />
-                }
+                        {
+                            status && (
+                                <div className='loading'>
+                                    <p className='bold'>{status}</p>
+                                    {
+                                        status === messages.waiting && <Loading />
+                                    }
+                                </div>
+                            )
+                        }
+                        {
+                            webSocket && <WebSocket
+                                history={history}
+                                match={match}
+                                schemaName={theme === 'future' ? 'FutureCommitments' : 'PresentCommitments'}
+                                setStatus={setStatusMessage}
+                                fields={fields}
+                            />
+                        }
+                    </div>
+                </div>
             </div>
         </Layout>
     );

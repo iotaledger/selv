@@ -59,28 +59,31 @@ const ProveIdentity = ({ history, match }) => {
     console.log(qrContent);
     
     return (
-        <Layout match={match}>
+        <Layout match={match} noFooter>
+            <div className='scan-qr-page-wrapper'>
             <RandomGraphicElement elements={5}>
-                <div className='scan-qr-page-wrapper'>
-                    <h2>Provide your Digital Identity credentials</h2>
-                    <p>Scan this QR code with <strong>Selv App</strong> to continue</p>
-                    <div className='qr-wrapper'>
-                        <QRCode text={qrContent} />
+                    <div className='scan-qr-content-wrapper'>
+                    
+                        <h2>Provide your Digital Identity credentials</h2>
+                        <p>Scan this QR code with <strong>Selv App</strong> to continue</p>
+                        <div className='qr-wrapper'>
+                            <QRCode text={qrContent} />
+                        </div>
+                        <p className='bold'>{status}</p>
+                        { loading && <Loading /> }
+                        {
+                            channel && <WebSocket
+                                history={history}
+                                match={match}
+                                generatedChannelId={channel}
+                                setStatus={status => setStatus(status)}
+                                setLoading={status => setLoading(status)}
+                                fields={channelDetails}
+                            />
+                        }
                     </div>
-                    <p className='bold'>{status}</p>
-                    { loading && <Loading /> }
-                    {
-                        channel && <WebSocket
-                            history={history}
-                            match={match}
-                            generatedChannelId={channel}
-                            setStatus={status => setStatus(status)}
-                            setLoading={status => setLoading(status)}
-                            fields={channelDetails}
-                        />
-                    }
-                </div>
-            </RandomGraphicElement>
+                </RandomGraphicElement>
+            </div>
         </Layout>
     );
 };
