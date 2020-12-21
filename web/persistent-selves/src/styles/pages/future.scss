@@ -7,21 +7,6 @@
         background: themed('pageBackground');
     }
 
-    .select-commitment-text-wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-
-        h2 {
-            max-width: 212px;
-            width: 100%;
-        }
-
-        span {
-            width: 100%;
-        }
-    }
-
     .select-commitment-wrapper {
         display: flex;
         flex-direction: column;
@@ -82,6 +67,21 @@
     }
 }
 
+.select-commitment-text-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    h2 {
+        max-width: 212px;
+        width: 100%;
+    }
+
+    span {
+        width: 100%;
+    }
+}
+
 .commitments-list {
     width: 100%;
     display: flex;
@@ -91,46 +91,46 @@
     .commitment-card-wrap {
         position: relative;
     }
+}
 
-    .commitment-item {
+.commitment-item {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0;
+    height: 220px;
+
+    @include themify($themes) {
+        background: themed('secondaryColor');
+    }
+    
+    .ant-card-body {
         display: flex;
-        flex-direction: row;
-        margin: 15px 0;
-        height: 220px;
+        padding: 20px 37px;
+        width: 100%;
+        height: 100%;
+    }
 
-        @include themify($themes) {
-            background: themed('secondaryColor');
-        }
-        
-        .ant-card-body {
-            display: flex;
-            padding: 20px 37px;
-            width: 100%;
-            height: 100%;
-        }
-    
-        .commitment-image-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+    .commitment-image-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 145px;
+
+        img {
             width: 145px;
-
-            img {
-                width: 145px;
-            }
         }
-    
-        .commitment-content {
-            margin-left: 30px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
+    }
 
-            h4 {
-                color: #000000;
-            }
+    .commitment-content {
+        margin-left: 30px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        h4 {
+            color: #000000;
         }
     }
 }
@@ -147,7 +147,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        margin: 0 50px;
+        margin: 0 28px;
         padding: 50px 50px 0 50px;
         position: relative;
 
@@ -167,10 +167,18 @@
 
         .commitments-drawer {
             width: 100%;
-            margin: 52px 0 30px 0;
+            display: flex;
+            flex-direction: column;
+            margin: 15px 0;
+            padding: 40px;
+            border-radius: 20px;
+        
+            @include themify($themes) {
+                background: themed('secondaryColor');
+            }
 
-            h2 {
-                font-family: 'Roboto', sans-serif;;
+            & > h4 {
+                margin-bottom: 20px;
             }
 
             .percentages-wrapper {
@@ -194,6 +202,7 @@
                 font-size: 16px;
                 position: absolute;
                 bottom: 30px;
+                color: unset;
             }
 
             .mark-0 {
@@ -207,31 +216,29 @@
             }
 
             .ant-slider-step {
-                height: 12px;
-                border-radius: 18px;
+                display: none;
             }
 
             .ant-slider-track {
                 height: 12px;
                 border-radius: 18px;
-
-                @include themify($themes) {
-                    background: themed('primaryColor');  
-                }
+                background: #E3E5E6;
             }
 
             .ant-slider-rail { 
                 height: 12px;
                 border-radius: 18px;
+                color: #E3E5E6;
+                background-color: #E3E5E6;
             }
 
             .ant-slider-handle {
-                width: 30px;
-                height: 30px;
-                margin-top: -8px;
+                width: 36px;
+                height: 36px;
+                margin-top: -10px;
 
                 @include themify($themes) {
-                    border: solid 6px themed('secondaryColor');  
+                    border: solid 8px themed('primaryColor');  
                 }
 
                 &:focus {
@@ -259,6 +266,17 @@
 
                 button {
                     width: 210px;
+
+                    &:hover {
+                        opacity: 0.85;
+                        @include themify($themes) {
+                            background: themed('primaryColor') !important;
+                        }
+                    }
+
+                    h4 {
+                        color: #FFFFFF;
+                    }
                 }
             }
         } 
@@ -274,20 +292,37 @@
             display: flex;
             flex-direction: column;
             margin: 15px 0;
+            padding: 40px;
+            border-radius: 20px;
             
-            @include themify($themes) {
-            filter: themed('boxShadow');  
+            .commitment-item-header {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                .boundary {
+                    width: 50%;
+                }
             }
-            
+
+            .ant-card {
+                background: unset;
+            }
+
             .ant-card-body {
-            display: flex;
-            padding: 20px;
-            width: 100%;
-            height: 100%;
+                display: flex;
+                width: 100%;
+                height: 100%;
+                padding: unset;
             }
 
             h4 {
                 margin-bottom: 22px;
+            }
+
+            .commitment-content {
+                margin-left: 0;
             }
         }
 
@@ -295,13 +330,13 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                margin: 25px;
+                margin: 3px 0;
 
                 p {
                     margin-right: 15px;
-                    font-size: 21px;
+                    font-size: 19px;
                     font-weight: 500;
-                    font-family: "Roboto", sans-serif;
+                    font-family: "Open Sans", sans-serif;
                 }
                 
 
