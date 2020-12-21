@@ -7,11 +7,26 @@
         background: themed('pageBackground');
     }
 
+    .select-commitment-text-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+
+        h2 {
+            max-width: 212px;
+            width: 100%;
+        }
+
+        span {
+            width: 100%;
+        }
+    }
+
     .select-commitment-wrapper {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        margin: 0 50px;
+        margin: 0 28px;
         padding: 50px;
         position: relative;
 
@@ -36,14 +51,18 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-top: 40px;
         
         @include themify($themes) {
             background: themed('secondaryPageBackground');  
             height: themed('footerHeight');
             
-            h2 {
+            h3 {
                 color: themed('secondaryFontColor');
+            }
+
+            h4 {
+                font-weight: bold;
+                color: #FFFFFF;
             }
 
             p {
@@ -54,7 +73,8 @@
                 background: themed('primaryColor');
 
                 &:disabled {
-                    color: #BBBBBB !important;
+                    opacity: 0.5;
+                    background: themed('primaryColor') !important;
                 }
             }
             
@@ -68,32 +88,37 @@
     flex-direction: column;
     justify-content: center;
 
+    .commitment-card-wrap {
+        position: relative;
+    }
+
     .commitment-item {
         display: flex;
         flex-direction: row;
         margin: 15px 0;
         height: 220px;
-        
+
         @include themify($themes) {
-        filter: themed('boxShadow');  
+            background: themed('secondaryColor');
         }
         
         .ant-card-body {
-        display: flex;
-        padding: 20px;
-        width: 100%;
-        height: 100%;
+            display: flex;
+            padding: 20px 37px;
+            width: 100%;
+            height: 100%;
         }
     
         .commitment-image-wrapper {
-            height: 100%;
-            width: 247px;
-            padding: 10px;
-            border-radius: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            width: 145px;
+
+            img {
+                width: 145px;
+            }
         }
     
         .commitment-content {
@@ -102,43 +127,9 @@
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
-    
-            .ant-checkbox-wrapper {
-                border: 1px solid #DADADA;
-                width: 114px;
-                border-radius: 6px;
-                padding: 8px 10px;
-                transition: all 0.3s;
-                font-weight: 600;
-    
-                .ant-checkbox-checked .ant-checkbox-inner {
-                    @include themify($themes) {
-                        background-color: themed('secondaryFontColor');
-                        border-color: themed('secondaryFontColor');
-                    }
-                    
-                }
-    
-                &:hover {
-                    @include themify($themes) {
-                        background: themed('primaryColor');
-                        border: 1px solid themed('primaryColor');
-                        transition: all 0.3s ;
-                    }
-                }
-            }
-    
-            .ant-checkbox-wrapper-checked {
-                @include themify($themes) {
-                    background: themed('primaryColor');
-                    border: 1px solid themed('primaryColor');
-                    color: themed('secondaryFontColor');
-                    font-weight: 600;
-    
-                    .ant-checkbox-inner:after {
-                        border-color: themed('primaryColor');
-                    }
-                }
+
+            h4 {
+                color: #000000;
             }
         }
     }
@@ -460,3 +451,59 @@
     }
 }
 
+.ant-checkbox-wrapper {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    border: none;
+    width: 138px;
+    height: 57px;
+    border-radius: 6px;
+    padding: 8px 0 8px 25px;
+    transition: all 0.3s;
+    font-weight: 600;
+    border-radius: 0px 20px;
+
+    @include themify($themes) {
+        background-color: themed('nonSelectedColor');
+        
+    }
+
+    .ant-checkbox-checked .ant-checkbox-inner {
+        @include themify($themes) {
+            background-color: themed('secondaryFontColor');
+        }
+        border-color: transparent;
+        &:hover {
+            border-color: transparent;
+        }
+    }
+
+    &:hover {
+        @include themify($themes) {
+            background: themed('primaryColor');
+            transition: all 0.3s ;
+        }
+        border-color: transparent;
+    }
+
+    .ant-checkbox + span {
+        padding-bottom: 3px;
+    }
+}
+
+.ant-checkbox-wrapper-checked {
+    @include themify($themes) {
+        background: themed('primaryColor');
+        color: themed('secondaryFontColor');
+        font-weight: 600;
+
+        .ant-checkbox-inner:after {
+            border-color: themed('primaryColor');
+        }
+    }
+}

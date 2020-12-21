@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Checkbox, Card, Space } from 'antd';
+import { Button, Checkbox, Card, Popover, Space } from 'antd';
 import useStep from '../utils/useStep';
-import { Layout } from '../components';
+import { Layout, Popup } from '../components';
 import commitments from '../assets/commitments';
 
 /**
@@ -27,9 +27,14 @@ const SelectCommitments = ({ history, match }) => {
     // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSelect = commitmentId => {
+        console.log(333, commitmentId);
         if (selected.includes(commitmentId)) {
+        console.log(444, [...selected].filter(id => id !== commitmentId));
+
             updateSelected(selected => [...selected].filter(id => id !== commitmentId));
         } else {
+        console.log(555, [...selected, commitmentId]);
+
             updateSelected(selected => [...selected, commitmentId]);
         }
     }
@@ -38,9 +43,9 @@ const SelectCommitments = ({ history, match }) => {
         <Layout match={match} noFooter>
             <div className='select-commitment-page-wrapper'>
                 <div className='select-commitment-wrapper'>
-                    <div className='text-wrapper'>
+                    <div className='text-wrapper select-commitment-text-wrapper'>
                         <h2>{commitmentObject?.title}</h2>
-                        <p>{commitmentObject?.description}</p>
+                        <span>{commitmentObject?.description}</span>
                     </div>
                     <div className='commitments-list'>
                         {
@@ -48,34 +53,45 @@ const SelectCommitments = ({ history, match }) => {
                                 const isChecked = selected.includes(commitment?.commitmentId);
                                 const isDisabled = !isChecked && selected.length === 2;
                                 return (
-                                    <Card 
-                                        bordered
-                                        hoverable 
-                                        className='commitment-item'
-                                        key={commitment?.commitmentId}
-                                        onClick={() => !isDisabled && onSelect(commitment?.commitmentId)}
-                                    >
-                                        <div className='commitment-image-wrapper'>
-                                            <img 
-                                                className='commitment-image' 
-                                                src={commitment?.image} 
-                                                alt=''
-                                            />
-                                        </div>
-                                        <div className='commitment-content'>
-                                            <h2>{commitment?.title}</h2>
-                                            <p>{commitment?.description}</p>
-                                            <Checkbox
-                                                checked={isChecked}
-                                                disabled={isDisabled}
-                                                onChange={() => onSelect(commitment?.commitmentId)}
-                                            >
-                                                {
-                                                    isChecked ? 'Selected' : 'Select'
-                                                }
-                                            </Checkbox>
-                                        </div>
-                                    </Card>
+                                    <div className='commitment-card-wrap' key={commitment?.commitmentId}>
+                                        <Card 
+                                            bordered={false}
+                                            hoverable 
+                                            className='commitment-item'
+                                            onClick={() => !isDisabled && onSelect(commitment?.commitmentId)}
+                                        >
+                                            <div className='commitment-image-wrapper'>
+                                                <img 
+                                                    className='commitment-image' 
+                                                    src={commitment?.image} 
+                                                    alt=''
+                                                />
+                                                <Popover
+                                                    content={<Popup card={commitment} />}
+                                                    placement='bottom'
+                                                    trigger={['click', 'hover', 'focus']}>
+                                                    <div className='boundary'>
+                                                        <div className={`fill ${commitment?.status}`} />
+                                                        <div className='border' />
+                                                    </div>
+                                                </Popover>
+                                            </div>
+                                            <div className='commitment-content'>
+                                                <h4>{commitment?.title}</h4>
+                                                <p>{commitment?.description}</p>
+                                            </div>
+
+                                        </Card>
+                                        <Checkbox
+                                            checked={isChecked}
+                                            disabled={isDisabled}
+                                            onChange={() => onSelect(commitment?.commitmentId)}
+                                        >
+                                            {
+                                                isChecked ? 'Selected' : 'Select'
+                                            }
+                                        </Checkbox>
+                                    </div>
                                 )
                             })
                         }
@@ -83,7 +99,7 @@ const SelectCommitments = ({ history, match }) => {
                 </div>
                     <div className='commitments-drawer'>
                         <Space direction="vertical" size="middle" align="center">
-                            <h2>Choose two {category} commitments</h2>
+                            <h3>Choose two {category} commitments</h3>
                             {
                                 selected.length === 1
                                 ? <p>You have 1 remaining commitment left to choose</p>
@@ -94,7 +110,7 @@ const SelectCommitments = ({ history, match }) => {
                                 state: { commitments: selected, category }
                             }}>
                                 <Button disabled={selected.length < 2}>
-                                    Continue
+                                    <h4>Continue</h4>
                                 </Button>
                             </Link>
                         </Space>   
