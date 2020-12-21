@@ -91,7 +91,7 @@ const ThankYou = () => {
 								</div>
 								<div className='commentary-card-content'>
 									<h5>Good Ancestor</h5>
-									<p>The Good Ancestor: How to think long-term in a short-term world</p>
+									<p>“The Good Ancestor” is a guide by Roman Krznaric on how to think long-term in a short-term world.</p>
 									<div className='btn-wrapper'>
 										<Button>Read commentary</Button>
 									</div>
@@ -104,8 +104,7 @@ const ThankYou = () => {
 								<div className='commentary-card-content'>
 									<h5>Inheritance</h5>
 									<p>
-										Dark Matter Labs explores the future institutional infrastructure to respond to the technological
-										revolution and climate breakdown.
+										Dark Matter Labs explores the institutional infrastructure to respond to the technological revolution.
 									</p>
 									<div className='btn-wrapper'>
 										<Button>Read commentary</Button>
@@ -116,9 +115,12 @@ const ThankYou = () => {
 					</div>
 					<Stats />
 					<div className='thank-you-wrapper'>
-						<span className='heading'>
-							<h2>Thanks for trying</h2>&nbsp;&nbsp;<h2 className='highlight'>Selv!</h2>
-						</span>
+						<Space direction='vertical' size='large' className='heading-wrapper'>
+							<h3>Demo complete</h3>
+							<span className='heading'>
+								<h2>Thanks for trying</h2>&nbsp;&nbsp;<h2 className='highlight'>Selv!</h2>
+							</span>
+						</Space>
 						<div className='thank-you-content-wrapper'>
 							<div className='thank-you-content'>
 								<div className='figure-wrapper'>
@@ -130,8 +132,7 @@ const ThankYou = () => {
 										<h3>Improved experience</h3>
 									</span>
 									<p>
-										With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and insurance
-										with very few clicks. Your data was reusable and this saved you x fields of form fields to fill in.
+										Powered by IOTA, you managed to set up your Persistent Selv with very few clicks. Your data was reusable and this saved you time from filling forms online.
 									</p>
 								</div>
 							</div>
@@ -142,8 +143,7 @@ const ThankYou = () => {
 										<h3>Self Sovereignity</h3>
 									</span>
 									<p>
-										You have taken full control of your data. You decided who you shared your data with. Did you know that
-										you can share them with others manually via QR as well. Try so in the Selv app!
+										You have taken full control of your data. You decided who you share your data with. Did you know that you can share them with others manually via QR code as well? Try it in the Selv app!
 									</p>
 								</div>
 								<div className='figure-wrapper'>
@@ -160,8 +160,7 @@ const ThankYou = () => {
 										<h3>More Trust</h3>
 									</span>
 									<p>
-										The data you shared with the Company House and the SNS Bank was verifiable. This allows to verify your
-										data instantly and freely using IOTA as the trust layer.
+										The data you shared with both the Far Future Foundation and The Act Now Foundation was verifiable. This allows you to verify your data instantly and freely using IOTA as the trust layer.
 									</p>
 								</div>
 							</div>
@@ -169,9 +168,16 @@ const ThankYou = () => {
 						<br />
 						<div className='cta-wrapper'>
 							<h5>Share the demo with your friends to improve the future</h5>
+							<a 
+								target='_blank'
+                    			rel='noopener noreferrer'
+								href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.origin)}`}
+							>
+								<Button className='cta'>Share on Twitter</Button>
+							</a>
 							<Link to={'/'}>
-								<Button className='cta'>Return home</Button>
-							</Link>
+                                Return home
+                            </Link>
 						</div>
 						<img src={dots} alt='' className='dots-bottom' />
 					</div>

@@ -185,10 +185,11 @@
     }
 
     .thank-you-wrapper {
-        padding: 70px 100px 0 100px;
+        padding: 0 100px 50px;
         position: relative;
         display: flex;
         flex-direction: column;
+        z-index: -1;
 
         h2 {
             align-self: center;
@@ -206,11 +207,27 @@
             }
         }
 
-        .heading {
+        .heading-wrapper {
             display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: baseline;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 0 50px;
+
+            .heading {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: baseline;
+            }
+            
+            h3 {
+                color: #9DA5B2; 
+                font-weight: 600;
+                font-size: 16px;
+                letter-spacing: 0.58em;
+                text-transform: uppercase;
+            }
         }
 
         .thank-you-content {
@@ -272,13 +289,13 @@
         }
 
         .cta-wrapper {
-            height: 230px;
+            height: 300px;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
             align-items: center;
             width: 100%;
-            padding-bottom: 30px;
+            padding: 50px 0 30px;
 
             a {
                 @include themify($themes) {
