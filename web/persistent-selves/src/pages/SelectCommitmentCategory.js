@@ -49,11 +49,11 @@ const SelectCommitmentCategory = ({ match }) => {
 			<div className='category-page-wrapper'>
 				{userName && (
 					<dir className='content-header'>
-						<h2 className='user-name'>{userName}'s Pledge</h2>
+						<h2 className='user-name'>{userName}'s Commitments</h2>
 					</dir>
 				)}
 				<div className='tabs-wrapper'>
-					<Tabs centered tabBarGutter={50} defaultActiveKey='1'>
+					<Tabs centered tabBarGutter={0} defaultActiveKey='1'>
 						<TabPane tab='OVERVIEW' key='1'>
 							<Commitments
 								futureCommitment={futureCommitment}
