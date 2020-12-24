@@ -1,6 +1,6 @@
 button {
     border-radius: 4px;
-    color: #ffffff !important;
+    color: #ffffff;
     font-weight: bold !important;
     font-size: 14px !important;
     line-height: 20px;
@@ -10,7 +10,7 @@ button {
     border: none !important;
 
     @include themify($themes) {
-        background-color: themed('buttonBackgroundColor') !important;  
+        background-color: themed('buttonBackgroundColor');  
         height: themed('buttonHeight');
         border-radius: themed('buttonBorderRadius');
 

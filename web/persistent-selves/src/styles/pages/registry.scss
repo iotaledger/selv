@@ -159,47 +159,53 @@
         }
     }
 
+    .commitment-category-completed-content {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin: 20px 0;
+
+        .completed-commitment-wrapper {
+            margin: 0 10px;
+            width: 50%;
+        
+            h4 {
+                margin-bottom: 20px;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .completed-commitment-card {
+                border-radius: 3px;
+                padding: 35px;
+                background: $secondary-color-future;
+                box-shadow: 5px 5px 0px #4D4D4D;
+
+                .completed-commitment-content p {
+                    font-weight: 600;
+                    font-size: 16px;
+
+                    .custom-value {
+                        color: $primary-color-future;
+                    }
+                }
+            }
+        }
+    }
+
     .commitment-category-completed-present {
         @extend .commitment-category-completed;
-        background: $primary-color-present;
 
         .custom-value {
             color: $primary-color-present !important;
         }
-    }
 
-    .commitment-category-completed-content {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            margin: 20px 0;
-
-            .completed-commitment-wrapper {
-                margin: 0 10px;
-            
-                h4 {
-                    margin-bottom: 20px;
-                    font-family: 'Roboto', sans-serif;
-                }
-
-                .completed-commitment-card {
-                    border-radius: 3px;
-                    padding: 35px;
-                    background: $secondary-color-future;
-                    box-shadow: 5px 5px 0px #4D4D4D;
-
-                    .completed-commitment-content p {
-                        font-weight: 600;
-                        font-size: 16px;
-
-                        .custom-value {
-                            color: $primary-color-future;
-                        }
-                    }
-                }
+        .completed-commitment-wrapper {
+            .completed-commitment-card {
+                background: $secondary-color-present;
+                min-height: 142px;
             }
+        }
     }
-
 }
 
 .create-pledge-header-cta-wrapper {
