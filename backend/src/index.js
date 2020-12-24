@@ -15,7 +15,7 @@ const customCss = fs.readFileSync((process.cwd() + '/swagger.css'), 'utf8');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://covid-19.iota.org', 'https://selv.vercel.app', 'https://selv.iota1.vercel.app', 'https://covid-19.iota1.vercel.app'];
+const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://covid-19.iota.org', 'https://selv.vercel.app', 'https://selv.iota1.vercel.app', 'https://covid-19.iota1.vercel.app', 'https://persistent-selves.vercel.app'];
 const corsOptions = {
     // methods: ["GET, POST, OPTIONS"],
     // allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
@@ -352,6 +352,31 @@ app.get('/remove_company', cors(corsOptions), async (req, res) => {
            
         } else {
             await removeData('company', '');
+        }
+        res.json({
+            status: 'success'
+        });
+    } catch (e) {
+        console.error(e);
+        res.json({
+            status: 'failure',
+            error: JSON.stringify(e)
+        });
+    }
+});
+
+/*
+Remove commitment
+*/
+app.get('/remove_commitment', cors(corsOptions), async (req, res) => {
+    try {
+        const commitment = req.query.commitment;
+        if (commitment) {
+            await removeData('commitments', commitment);
+            console.log('Removed commitment', commitment);
+           
+        } else {
+            await removeData('commitments', '');
         }
         res.json({
             status: 'success'

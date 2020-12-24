@@ -194,8 +194,15 @@ exports.readAllData = async (table) => {
 
 exports.removeData = (table, value) => {
     return new Promise(async resolve => {
-        await db.run(`DELETE FROM ${table} WHERE (CompanyNumber = '${value}') OR CompanyNumber IS NULL`);
-        resolve();
+        if (table === 'company') {
+            await db.run(`DELETE FROM company WHERE (CompanyNumber = '${value}') OR CompanyNumber IS NULL`);
+            resolve();
+        } else if (table === 'commitments') {
+            await db.run(`DELETE FROM commitments WHERE (CommitmentUUID = '${value}') OR CommitmentUUID IS NULL`);
+            resolve();
+        } else {
+            resolve();
+        }
     });
 };
 
