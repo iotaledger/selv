@@ -1,26 +1,44 @@
-.theme-future {
+.theme-present {
     div {
-        button {
-            width: 210px;
 
-            &:hover {
-                opacity: 0.85;
+        .content-stretch {
+            button {
+                width: 210px;
+
                 @include themify($themes) {
-                    background-color: themed('primaryColor') !important;
+                    background: themed('primaryColor');
+
+                    &:hover {
+                        opacity: 0.85;
+                        background-color: themed('primaryColor') !important;
+
+                    }
+
+                    &:disabled {
+                        opacity: 0.5;
+                        background-color: themed('primaryColor') !important;
+                    }
                 }
 
+                h4 {
+                    color: #FFFFFF;
+                }
             }
 
-            h4 {
-                color: #FFFFFF;
+            .btn-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
         }
+    }
 
-        .btn-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    .header-wrapper {
+        z-index: 10;
+    }
+
+    .content-stretch {
+        max-width: 850px;
     }
 }
 
@@ -36,12 +54,12 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        margin: 0 28px;
+        margin: 0;
         padding: 50px;
         position: relative;
 
         @include themify($themes) {
-            background: themed('trinaryPageBackground');
+            background: themed('pageBackground');
             margin-top: themed('pageMarginTop');
             z-index: themed('pageZIndex');
         }
@@ -77,24 +95,14 @@
 
             p {
                 color: themed('secondaryFontColor');
-            }
-
-            button {
-                background: themed('primaryColor');
-
-                &:disabled {
-                    opacity: 0.5;
-                    background: themed('primaryColor') !important;
-                }
-            }
-            
+            }            
         }
     }
 }
 
 .select-commitment-text-wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: flex-start;
 
     h2 {
@@ -125,7 +133,7 @@
     height: 220px;
 
     @include themify($themes) {
-        background: themed('secondaryColor');
+        background: themed('trinaryColor');
     }
     
     .ant-card-body {
@@ -171,13 +179,13 @@
     .personalize-commitment-wrapper {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         margin: 0 28px;
         padding: 50px 50px 0 50px;
         position: relative;
 
         @include themify($themes) {
-            background: themed('trinaryPageBackground');
+            background: themed('pageBackground');
             margin-top: themed('pageMarginTop');
             z-index: themed('pageZIndex');
         }
@@ -290,6 +298,21 @@
                 justify-content: center;
             }
         } 
+
+        button {
+            @include themify($themes) {
+                &:hover {
+                    opacity: 0.85;
+                    background-color: themed('primaryColor') !important;
+
+                }
+
+                &:disabled {
+                    opacity: 0.5;
+                    background-color: themed('primaryColor') !important;
+                }
+            }
+        }
     }
 
     .personalize-commitments-list {
@@ -297,6 +320,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        margin-bottom: 30px;
 
         .commitment-item {
             display: flex;
@@ -340,12 +364,11 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                margin: 3px 0;
 
                 p {
-                    margin-right: 15px;
-                    font-size: 19px;
-                    font-weight: 500;
+                    margin: 25px 0 10px 0;
+                    font-size: 18px;
+                    font-weight: 600;
                     font-family: "Open Sans", sans-serif;
                 }
                 

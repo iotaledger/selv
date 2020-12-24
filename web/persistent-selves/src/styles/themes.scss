@@ -18,7 +18,7 @@ $header-logo-background-registry: #FFFFFF;
 
 $primary-color-future: #4DB6AC;
 $secondary-color-future: #ECF9F9;
-$trinary-color-future: #585858;
+$trinary-color-future: #ECF9F9;
 $primary-font-color-future: #142037;
 $secondary-font-color-future: #FFFFFF;
 $page-background-future: #F6F6F6;
@@ -27,15 +27,15 @@ $trinary-page-background-future: #FFFFFF;
 $header-logo-background-future: #E1F0F0;
 $shadow-color-future: 0 0 0 5px rgba(24, 144, 255, 0.3);
 
-$primary-color-present: #b4a7d9;
-$secondary-color-present: #c7b6fa;
-$trinary-color-present: #535664;
+$primary-color-present: #FF7A4C;
+$secondary-color-present: #F9F7F4;
+$trinary-color-present: #FFFFFF;
 $primary-font-color-present: #142037;
 $secondary-font-color-present: #FFFFFF;
-$page-background-present: #EEF2FA;
+$page-background-present: #F9F7F4;
 $secondary-page-background-present: #535664;
 $trinary-page-background-present: #EEF2FA;
-$header-logo-background-present: #B4A7D9;
+$header-logo-background-present: #FFF2DC;
 $shadow-color-present: 0 0 0 5px rgba(180, 167, 217, 0.3);
 
 $primary-color-demo: #2C80FC;
@@ -160,7 +160,7 @@ $themes: (
         h3TextSize: 24px,
         h3LineHeight: 28px,
         h4TextSize: 18px,
-        h4LineHeight: 20px,
+        h4LineHeight: 18px,
         h5TextSize: 15px,
         h5LineHeight: 17px,
 
@@ -209,11 +209,11 @@ $themes: (
         h3TextSize: 24px,
         h3LineHeight: 28px,
         h4TextSize: 18px,
-        h4LineHeight: 20px,
+        h4LineHeight: 18px,
         h5TextSize: 15px,
         h5LineHeight: 17px,
 
-        pageMarginTop: -95px,
+        pageMarginTop: 0px,
         pageZIndex: 5,
         pageHorizontalMargin: 0 28px,
 
@@ -221,14 +221,14 @@ $themes: (
         buttonHeight: 51px,
         buttonBorderRadius: 4px,
 
-        headerBackgroundColor: $primary-color-present,
-        headerHeight: 240px,
-        headerLogoAlign: left,
-        headerLogoHeight: 39px,
+        headerBackgroundColor: $trinary-color-present,
+        headerHeight: 136px,
+        headerLogoAlign: center,
+        headerLogoHeight: 85px,
 
         footerBackgroundColor: $primary-color-present,
         footerHeight: 182px,
         footerLogoAlign: right,
-        footerLogoHeight: 24px,
+        footerLogoHeight: 0px,
     ),
 );
