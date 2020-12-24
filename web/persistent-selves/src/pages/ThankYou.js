@@ -10,6 +10,7 @@ import image4 from '../assets/thankYou/image4.svg';
 import futures from '../assets/thankYou/futures-literacy.svg';
 import goodAncestor from '../assets/thankYou/good-ancestor.svg';
 import inheritance from '../assets/thankYou/inheritance.svg';
+import deep from '../assets/thankYou/deep.svg';
 import checkmark from '../assets/checkmark.svg';
 import logo from '../assets/landing/logoHeader.svg';
 import dots from '../assets/backgrounds/dots.png';
@@ -29,12 +30,17 @@ const ThankYou = () => {
 					<div className='thank-you-wrapper-2'>
 						<span className='heading'>
 							<Space size='small'>
-								<h2>It’s</h2>
-								<h2 className='highlight'>your</h2>
+								<h2 className='highlight'>Your</h2>
+								<h2>legacy</h2>
 							</Space>
-							<h2>legacy for</h2>
-							<h2 className='highlight'>future</h2>
-							<h2>generations</h2>
+							<Space size='small'>
+								<h2>for</h2>
+								<h2 className='highlight'>future</h2>
+							</Space>
+							<Space size='small'>
+								<h2>generations</h2>
+								<h2 className='highlight' />
+							</Space>
 						</span>
 						<div className='thank-you-content'>
 							<div className='figure-wrapper'>
@@ -72,14 +78,11 @@ const ThankYou = () => {
 						<div className='commentary-cards-wrapper'>
 							<div className='commentary-card'>
 								<div className='card-logo-wrapper'>
-									<img className='figure' src={futures} alt='futures' />
+									<img className='figure' src={goodAncestor} alt='good Ancestor' />
 								</div>
 								<div className='commentary-card-content'>
-									<h5>Futures Literacy</h5>
-									<p>
-										Futures Literacy is the skill that allows people to better understand the role of the future in what they
-										see and do.
-									</p>
+									<h5>Good Ancestor</h5>
+									<p>“The Good Ancestor” is a guide by Roman Krznaric on how to think long-term in a short-term world.</p>
 									<div className='btn-wrapper'>
 										<Button>Read commentary</Button>
 									</div>
@@ -87,11 +90,13 @@ const ThankYou = () => {
 							</div>
 							<div className='commentary-card'>
 								<div className='card-logo-wrapper'>
-									<img className='figure' src={goodAncestor} alt='good Ancestor' />
+									<img className='figure' src={deep} alt='Deep Demonstration' />
 								</div>
 								<div className='commentary-card-content'>
-									<h5>Good Ancestor</h5>
-									<p>“The Good Ancestor” is a guide by Roman Krznaric on how to think long-term in a short-term world.</p>
+									<h5>Deep Demonstration</h5>
+									<p>
+										Climate KIC is Europe's leading climate innovation initiative.
+									</p>
 									<div className='btn-wrapper'>
 										<Button>Read commentary</Button>
 									</div>
@@ -105,6 +110,21 @@ const ThankYou = () => {
 									<h5>Inheritance</h5>
 									<p>
 										Dark Matter Labs explores the institutional infrastructure to respond to the technological revolution.
+									</p>
+									<div className='btn-wrapper'>
+										<Button>Read commentary</Button>
+									</div>
+								</div>
+							</div>
+							<div className='commentary-card'>
+								<div className='card-logo-wrapper'>
+									<img className='figure' src={futures} alt='futures' />
+								</div>
+								<div className='commentary-card-content'>
+									<h5>Futures Literacy</h5>
+									<p>
+										Futures Literacy is the skill that allows people to better understand the role of the future in what they
+										see and do.
 									</p>
 									<div className='btn-wrapper'>
 										<Button>Read commentary</Button>
