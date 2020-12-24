@@ -4,7 +4,7 @@ import { Button, Card, Space } from 'antd';
 import future from '../assets/futureCategory.svg';
 import present from '../assets/presentCategory.svg';
 import arrow from '../assets/arrow.svg';
-import selv from '../assets/selv.svg';
+import selv from '../assets/selv_black.svg';
 import commitments from '../assets/commitments';
 
 const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }) => {
@@ -21,7 +21,7 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                 futureCommitment 
                     ? (
                         <Card
-                            hoverable 
+                            hoverable={false}
                             bordered={false}
                             className='commitment-category-completed'
                         >
@@ -86,14 +86,13 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                 presentCommitment 
                     ? (
                         <Card
-                            hoverable 
+                            hoverable={false}
                             bordered={false}
                             className='commitment-category-completed-present'
                         >
                             <div className='commitment-category-completed-image-wrapper'>
                                 <Space size={20} align="center">
                                     <img className='commitment-category-image' src={present} alt='Act Right Now Foundation' />
-                                    <h3>Act Right Now Foundation</h3>
                                 </Space>
                                 <img className='selv-logo-completed' src={selv} alt='Selv app logo' />
                             </div>
@@ -107,9 +106,8 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                                             <div className='completed-commitment-card'>
                                                 <div className='completed-commitment-content'>
                                                     <p>
-                                                        {getCondition(('present'), commitment?.CommitmentId)} <span className='custom-value'>{commitment?.CommitmentPercentage}% </span>
-                                                        THEN donate <span className='custom-value'>{commitment?.CommitmentWalletPercentage}%</span> of my wallet balance
-                                                        TO support <span className='custom-value'>{commitment?.CommitmentSupport}</span>
+                                                        <b>I commit to </b>
+                                                        <span className='custom-value'>{commitment?.CommitmentSupport}</span>
                                                     </p>
                                                 </div>
                                             </div>
@@ -130,7 +128,7 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                             <div className='commitment-category-content'>
                                 <h3>Present Commitment</h3>
                                 <p>
-                                    The present commitment let's you make pledges to get involved and shaping the present yourself.
+                                Make pledges today to actively shape the present and contribute to your future legacy.
                                 </p>
                                 <Link to={{
                                     pathname: nextStep,

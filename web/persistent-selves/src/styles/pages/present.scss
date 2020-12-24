@@ -451,7 +451,7 @@
                     border-radius: 3px;
                     box-shadow: 5px 5px 0px #4D4D4D;
                     @include themify($themes) {
-                        background-color: themed('secondaryColor');
+                        background-color: themed('trinaryColor');
                     } 
 
                     .form-commitment-content p {
