@@ -14,6 +14,7 @@ import Credentials from './Credentials';
 import Commitments from './Commitments';
 import Popup from './Popup';
 import Popover from './Popover';
+import Modal from './Modal';
 
 export {
     Sidebar,
@@ -31,5 +32,6 @@ export {
     Credentials,
     Commitments,
     Popup,
-    Popover
+    Popover,
+    Modal
 };
