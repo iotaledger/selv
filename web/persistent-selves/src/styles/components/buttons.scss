@@ -19,10 +19,10 @@ button {
         }
 
         &:disabled {
-            background-color: themed('secondaryFontColor') !important;  
+            background-color: themed('secondaryFontColor');  
     
             &:hover {
-                background-color: themed('secondaryFontColor') !important;
+                background-color: themed('secondaryFontColor');
             }
         }
     }

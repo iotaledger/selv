@@ -60,7 +60,7 @@
             height: 172px;
             width: 172px;
             padding: 16px;
-            background: #ECF9F9;
+            background: $secondary-color-future;
             border-radius: 10px;
             display: flex;
             flex-direction: column;
@@ -110,7 +110,7 @@
 
         .commitment-category-image-wrapper {
             @extend .commitment-category-image-wrapper;
-            background: $primary-color-present;
+            background: $secondary-color-present;
         }
 
         .category-present {
@@ -134,17 +134,13 @@
             display: flex;
             flex-direction: row;
             margin: 20px 7%;
-            height: 273px;
-            background: $primary-color-future;
-        
-            @include themify($themes) {
-                filter: themed('boxShadow');  
-            }
+            background: #FFFFFF;
+            cursor: default;
         
             .ant-card-body {
                 display: flex;
                 flex-direction: column;
-                padding: 20px;
+                padding: 24px;
                 width: 100%;
                 height: 100%;
             }
@@ -158,7 +154,6 @@
             }
 
             .selv-logo-completed {
-                filter: brightness(0) invert(1);
                 width: 28px;
             }
         }
@@ -190,7 +185,7 @@
                 .completed-commitment-card {
                     border-radius: 3px;
                     padding: 35px;
-                    background: white;
+                    background: $secondary-color-future;
                     box-shadow: 5px 5px 0px #4D4D4D;
 
                     .completed-commitment-content p {
