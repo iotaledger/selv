@@ -115,7 +115,9 @@ const PersonalizeCommitments = ({ history, match }) => {
                                                     ))}
                                                 </Select>
                                             </div>
-                                            <div className='condition-wrapper'><p><strong>THEN</strong>  donate {percentage[index]}% of my wallet balance</p></div>
+                                            <div className='condition-wrapper'>
+                                                <p><strong>THEN</strong>  donate {percentage[index]}% of my wallet balance</p>
+                                            </div>
                                             <div className='condition-wrapper'>
                                                 <p><strong>TO</strong> support</p>
                                                 <Select 
@@ -158,9 +160,9 @@ const PersonalizeCommitments = ({ history, match }) => {
                                 </Button>
                             </Link>
                         </div>                     
+                    </div>
                 </div>
             </div>
-        </div>
         </Layout>
     );
 };
