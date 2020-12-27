@@ -1,25 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Space } from 'antd';
-import { RandomGraphicElement } from '../components';
+import { Modal, RandomGraphicElement } from '../components';
 import { Stats } from '.';
 import image1 from '../assets/thankYou/image1.svg';
 import image2 from '../assets/thankYou/image2.svg';
 import image3 from '../assets/thankYou/image3.svg';
 import image4 from '../assets/thankYou/image4.svg';
-import futures from '../assets/thankYou/futures-literacy.svg';
-import goodAncestor from '../assets/thankYou/good-ancestor.svg';
-import inheritance from '../assets/thankYou/inheritance.svg';
-import deep from '../assets/thankYou/deep.svg';
 import checkmark from '../assets/checkmark.svg';
 import logo from '../assets/landing/logoHeader.svg';
 import dots from '../assets/backgrounds/dots.png';
 import { Footer } from '../components/landing';
+import { cards } from '../assets/commentary';
 
 /**
  * Component which will display a ThankYou.
  */
 const ThankYou = () => {
+	const [commentary, setCommentary] = useState(null);
+
+	console.log(333, commentary);
 	return (
 		<div className='theme-demo'>
 			<Link to={'/'} className='logo demo-page'>
@@ -76,61 +76,22 @@ const ThankYou = () => {
 							</p>
 						</Space>
 						<div className='commentary-cards-wrapper'>
-							<div className='commentary-card'>
-								<div className='card-logo-wrapper'>
-									<img className='figure' src={goodAncestor} alt='good Ancestor' />
-								</div>
-								<div className='commentary-card-content'>
-									<h5>Good Ancestor</h5>
-									<p>“The Good Ancestor” is a guide by Roman Krznaric on how to think long-term in a short-term world.</p>
-									<div className='btn-wrapper'>
-										<Button>Read commentary</Button>
+							{
+								cards.map(card => (
+									<div className='commentary-card' key={card?.id}>
+										<div className='card-logo-wrapper'>
+											<img className='figure' src={card?.image} alt={card?.title} />
+										</div>
+										<div className='commentary-card-content'>
+											<h5>{card?.title}</h5>
+											<p>{card?.body}</p>
+											<div className='btn-wrapper'>
+												<Button onClick={() => setCommentary(card?.id)}>Read commentary</Button>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-							<div className='commentary-card'>
-								<div className='card-logo-wrapper'>
-									<img className='figure' src={deep} alt='Deep Demonstration' />
-								</div>
-								<div className='commentary-card-content'>
-									<h5>Deep Demonstration</h5>
-									<p>
-										Climate KIC is Europe's leading climate innovation initiative.
-									</p>
-									<div className='btn-wrapper'>
-										<Button>Read commentary</Button>
-									</div>
-								</div>
-							</div>
-							<div className='commentary-card'>
-								<div className='card-logo-wrapper'>
-									<img className='figure' src={inheritance} alt='inheritance' />
-								</div>
-								<div className='commentary-card-content'>
-									<h5>Inheritance</h5>
-									<p>
-										Dark Matter Labs explores the institutional infrastructure to respond to the technological revolution.
-									</p>
-									<div className='btn-wrapper'>
-										<Button>Read commentary</Button>
-									</div>
-								</div>
-							</div>
-							<div className='commentary-card'>
-								<div className='card-logo-wrapper'>
-									<img className='figure' src={futures} alt='futures' />
-								</div>
-								<div className='commentary-card-content'>
-									<h5>Futures Literacy</h5>
-									<p>
-										Futures Literacy is the skill that allows people to better understand the role of the future in what they
-										see and do.
-									</p>
-									<div className='btn-wrapper'>
-										<Button>Read commentary</Button>
-									</div>
-								</div>
-							</div>
+								))
+							}
 						</div>
 					</div>
 					<Stats />
@@ -204,6 +165,7 @@ const ThankYou = () => {
 					<img src={dots} alt='' className='dots-top' />
 					<Footer />
 				</RandomGraphicElement>
+				<Modal commentaryId={commentary} callback={() => setCommentary(null)} />
 			</div>
 		</div>
 	);
