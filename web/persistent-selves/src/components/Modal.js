@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal } from 'rsuite';
-import { commentary } from '../assets/commentary';
+import commentary from '../assets/commentary';
 
-export default ({ commitment }) => (
-	<Popover
-		content={<Popup card={commitment} />}
-		placement='bottom'
-		trigger={['click', 'hover', 'focus']}>
-		<div className='boundary'>
-			<div className={`fill ${commitment?.status}`} />
-			<div className='border' />
-		</div>
-	</Popover>
-)
+export default ({ commentaryId, callback }) => {
+	const [open, setOpen] = useState(!!commentaryId);
+	const content = commentary[commentaryId];
+
+	const close = () => {
+		setOpen(false);
+		console.log('Modal close')
+		callback();
+	}
+
+	console.log('Modal', commentaryId, content)
+	return (
+		<Modal overflow={true} show={open} onHide={close}>
+			{ content }
+			<Modal.Footer>
+				<button onClick={close} className='modal-close'>
+					Close
+				</button>
+			</Modal.Footer>
+        </Modal>
+	)
+}
