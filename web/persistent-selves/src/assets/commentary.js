@@ -1,5 +1,36 @@
 import React from 'react';
 import { Modal } from 'rsuite';
+import futures from '../assets/thankYou/futures-literacy.svg';
+import goodAncestor from '../assets/thankYou/good-ancestor.svg';
+import inheritance from '../assets/thankYou/inheritance.svg';
+import deep from '../assets/thankYou/deep.svg';
+
+export const cards = [
+    {
+        id: 'GoodAncestor',
+        title: 'Good Ancestor',
+        body: '“The Good Ancestor” is a guide by Roman Krznaric on how to think long-term in a short-term world.',
+        image: goodAncestor
+    },
+    {
+        id: 'DeepDemonstration',
+        title: 'Deep Demonstration',
+        body: "Climate KIC is Europe's leading climate innovation initiative.",
+        image: deep
+    },
+    {
+        id: 'Inheritance',
+        title: 'Inheritance',
+        body: 'Dark Matter Labs explores the institutional infrastructure to respond to the technological revolution.',
+        image: inheritance
+    },
+    {
+        id: 'FuturesLiteracy',
+        title: 'Futures Literacy',
+        body: 'Futures Literacy is the skill that allows people to better understand the role of the future in what they see and do.',
+        image: futures
+    }
+];
 
 export default {
     FuturesLiteracy: (<React.Fragment>
@@ -52,7 +83,7 @@ export default {
             <Modal.Title>Climate Kic Deep Demonstration</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <Paragraph rows={10} />
+            ...
         </Modal.Body>
     </React.Fragment>)
 }
