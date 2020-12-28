@@ -1,26 +1,16 @@
 .theme-future {
-    div {
-        button {
-            width: 210px;
+    button {
+        width: 210px;
 
-            &:hover {
-                opacity: 0.85;
-                @include themify($themes) {
-                    background-color: themed('primaryColor') !important;
-                }
-
-            }
-
-            h4 {
-                color: #FFFFFF;
-            }
+        h4 {
+            color: #FFFFFF;
         }
+    }
 
-        .btn-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    .btn-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 

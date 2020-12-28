@@ -76,3 +76,9 @@
 .ant-progress-inner {
     background-color: #B5F3D8;
 }
+
+.ant-btn {
+    &:hover {
+        color: #FFFFFF;
+    }
+}

@@ -90,12 +90,13 @@
         }
 
         .category-future {
-            background: #4DB6AC !important;
+            background: $primary-color-future !important;
             &:hover {
                 opacity: 0.85;
             }
             .arrow {
                 padding-left: 8px;
+                padding-bottom: 2px;
             }
         }
     
@@ -116,16 +117,13 @@
         .category-present {
             background: $primary-color-present !important;
 
-            &:hover {
-                background: $secondary-color-present !important;
-            }
-
             &:disabled {
                 background: #9b9b9b !important;
             }
 
             .arrow {
                 padding-left: 8px;
+                padding-bottom: 2px;
             }
         }
     }

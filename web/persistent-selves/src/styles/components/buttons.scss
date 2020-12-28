@@ -15,8 +15,8 @@ button, .ant-btn {
         border-radius: themed('buttonBorderRadius');
 
         &:hover {
-            color: #ffffff;
-            background-color: themed('secondaryColor');
+            opacity: 0.85;
+            background-color: themed('primaryColor') !important;
         }
 
         &:disabled {
