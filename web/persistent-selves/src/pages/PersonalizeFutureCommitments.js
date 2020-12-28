@@ -20,6 +20,15 @@ const PersonalizeCommitments = ({ history, match }) => {
     const commitmentObject = commitments[category];
 
     useEffect(() => {
+        async function getData() {
+			const credentialsString = await localStorage.getItem('credentials');
+			const credentials = credentialsString && (await JSON.parse(credentialsString));
+			const status = credentials?.status;
+			if (!status || Number(status) !== 2) {
+				history.goBack();
+			}
+        }
+        
         const selectedCommitments = history?.location?.state?.commitments;
         const selected = commitments[category]?.commitments?.filter(commitment =>
             selectedCommitments.includes(commitment?.commitmentId)
@@ -37,8 +46,8 @@ const PersonalizeCommitments = ({ history, match }) => {
             updateStoredCommitments(storedCommitments => ({ ...storedCommitments, [commitment?.commitmentId]: object }));
         })
 
+		getData();
         setSelected(selected);
-
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const marks = {

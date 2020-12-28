@@ -14,17 +14,17 @@ const SelectCommitments = ({ history, match }) => {
     const category = history?.location?.state?.category;
     const commitmentObject = commitments[category];
 
-    // useEffect(() => {
-    //     async function getData () {
-    //         const credentialsString = await localStorage.getItem('credentials');
-    //         const credentials = credentialsString && await JSON.parse(credentialsString);
-    //         const status = credentials?.status;
-    //         if (!status || Number(status) !== 2) {
-    //             history.goBack();
-    //         }
-    //     }
-    //     getData();
-    // }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    useEffect(() => {
+        async function getData () {
+            const credentialsString = await localStorage.getItem('credentials');
+            const credentials = credentialsString && await JSON.parse(credentialsString);
+            const status = credentials?.status;
+            if (!status || Number(status) !== 2) {
+                history.goBack();
+            }
+        }
+        getData();
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSelect = commitmentId => {
         console.log(333, commitmentId);

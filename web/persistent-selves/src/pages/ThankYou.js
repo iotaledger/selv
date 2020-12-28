@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Space } from 'antd';
 import { Modal, RandomGraphicElement } from '../components';
@@ -16,10 +16,21 @@ import { cards } from '../assets/commentary';
 /**
  * Component which will display a ThankYou.
  */
-const ThankYou = () => {
+const ThankYou = ({ history }) => {
 	const [commentary, setCommentary] = useState(null);
 
-	console.log(333, commentary);
+	useEffect(() => {
+        async function getData () {
+            const credentialsString = await localStorage.getItem('credentials');
+            const credentials = credentialsString && await JSON.parse(credentialsString);
+            const status = credentials?.status;
+            if (!status || Number(status) !== 2) {
+                history.goBack();
+            }
+        }
+        getData();
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
 	return (
 		<div className='theme-demo'>
 			<Link to={'/'} className='logo demo-page'>
@@ -80,13 +91,13 @@ const ThankYou = () => {
 								cards.map(card => (
 									<div className='commentary-card' key={card?.id}>
 										<div className='card-logo-wrapper'>
-											<img className='figure' src={card?.image} alt={card?.title} />
+											<img className='figure' src={card?.image} alt='' />
 										</div>
 										<div className='commentary-card-content'>
 											<h5>{card?.title}</h5>
 											<p>{card?.body}</p>
 											<div className='btn-wrapper'>
-												<Button onClick={() => setCommentary(card?.id)}>Read commentary</Button>
+												<button onClick={() => setCommentary(card?.id)}>Read commentary</button>
 											</div>
 										</div>
 									</div>

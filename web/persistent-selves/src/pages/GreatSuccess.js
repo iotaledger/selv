@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import useStep from '../utils/useStep';
@@ -12,8 +12,20 @@ import dots from '../assets/backgrounds/dots.png';
 /**
  * Component which will display a GreatSuccess.
  */
-const GreatSuccess = ({ match }) => {
+const GreatSuccess = ({ history, match }) => {
     const { nextStep } = useStep(match);
+
+    useEffect(() => {
+        async function getData () {
+            const credentialsString = await localStorage.getItem('credentials');
+            const credentials = credentialsString && await JSON.parse(credentialsString);
+            const status = credentials?.status;
+            if (!status || Number(status) !== 2) {
+                history.goBack();
+            }
+        }
+        getData();
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
             <div className='theme-demo'>

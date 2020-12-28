@@ -8,9 +8,21 @@ import selv from '../assets/selvSuccessBordered.svg';
 /**
  * Component which will display a Confirmation.
  */
-const Confirmation = ({ match }) => {
+const Confirmation = ({ history, match }) => {
     const { nextStep, theme } = useStep(match);
     const [title, setTitle] = useState('');
+
+    useEffect(() => {
+        async function getData () {
+            const credentialsString = await localStorage.getItem('credentials');
+            const credentials = credentialsString && await JSON.parse(credentialsString);
+            const status = credentials?.status;
+            if (!status || Number(status) !== 2) {
+                history.goBack();
+            }
+        }
+        getData();
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         switch (theme) {
