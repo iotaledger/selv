@@ -6,7 +6,7 @@
   "author": "Alexey Sobolev <alexey@iota.org>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/iotaledger/selv.git"
+    "url": "https://github.com/iotaledger/selv-web.git"
   },
   "dependencies": {
     "antd": "^3.26.9",
