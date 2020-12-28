@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Space, Progress } from 'antd';
 import { Loading } from '../components';
 import PieChart from 'react-apexcharts';
 import future from '../assets/futureCategory.svg';
 import present from '../assets/presentCategory.svg';
+import { serverAPI } from '../config.json';
+
+const commitmentsColors = {
+	'Land use change': '#5C9EFF',
+	'Climate change': '#4181F4',
+	'Biodiversity loss': '#B5F3D8',
+	'Freshwater use': '#8793AB',
+};
 
 /**
  * Component which will display a Stats.
  */
 const Stats = () => {
-	const commitmentsColors = {
-		'Land Use Change': '#5C9EFF',
-		'Climate Change': '#4181F4',
-		'Biodiversity Loss': '#B5F3D8',
-		Education: '#5C9EFF',
-		Energy: '#4181F4',
-		Networks: '#B5F3D8'
-	};
-
 	const [futureSeries, setFutureSeries] = useState([]);
 	const [presentSeries, setPresentSeries] = useState([]);
 	const [myFutureCommitments, setMyFutureCommitments] = useState([]);
 	const [myPresentCommitments, setMyPresentCommitments] = useState([]);
 	const [commitments, setCommitments] = useState([]);
+	const [averageWalletCommitment, setAverageWalletCommitment] = useState(0);
 	const [loading, setLoading] = useState(false);
 
 	const sameCommitmentsPercent = (myCommitment, category) => {
@@ -44,7 +45,6 @@ const Stats = () => {
 
 	useEffect(() => {
 		async function loadChartData() {
-			let commitments;
 			setLoading(true);
 
 			let myFutureCommitments = await localStorage.getItem('FutureCommitments');
@@ -56,43 +56,34 @@ const Stats = () => {
 			myPresentCommitments = myPresentCommitments && (await JSON.parse(myPresentCommitments));
 			setMyPresentCommitments(myPresentCommitments);
 
-			const res = await fetch('https://selv01.iota.cafe/commitments');
-			const json = await res.json();
-			if (!json?.error) {
-				commitments = json?.data;
+			const json = await axios.get(`${serverAPI}/commitments`);
+			console.log(777, json);
+			if (!json?.data?.error) {
+				const commitments = json?.data?.data;
 				setCommitments(commitments);
 
 				const futureCommitments = commitments?.filter(commitment => commitment?.CommitmentType === 'FutureCommitments');
-
 				const presentCommitments = commitments?.filter(commitment => commitment?.CommitmentType === 'PresentCommitments');
+				console.log(33, futureCommitments);
+				console.log(44, presentCommitments);
 
 				// Future commitments
-				const LUC = commitments.filter(commitment => commitment.CommitmentTitle === 'Land Use Change').length;
-				const LUCPercent = (LUC / futureCommitments.length) * 100;
-
-				const CC = commitments.filter(commitment => commitment.CommitmentTitle === 'Climate Change').length;
-				const CCPercent = (CC / futureCommitments.length) * 100;
-
-				const BL = commitments.filter(commitment => commitment.CommitmentTitle === 'Biodiversity Loss').length;
-				const BLPercent = (BL / futureCommitments.length) * 100;
-
-				setFutureSeries([LUCPercent, CCPercent, BLPercent]);
+				const futureSeries = Object.keys(commitmentsColors).map(commitmentTitle => {
+					const commitmentsPerTitle = futureCommitments.filter(commitment => commitment?.CommitmentTitle === commitmentTitle);
+					return (commitmentsPerTitle?.length * 100) / futureCommitments.length;
+				})
+				setFutureSeries(futureSeries);
 
 				// Present commitments
-				const education = commitments.filter(commitment => commitment.CommitmentTitle === 'Education').length;
-				const educationPercent = (education / presentCommitments.length) * 100;
-
-				const energy = commitments.filter(commitment => commitment.CommitmentTitle === 'Energy').length;
-				const energyPercent = (energy / presentCommitments.length) * 100;
-
-				const networks = commitments.filter(commitment => commitment.CommitmentTitle === 'Networks').length;
-				const networksPercent = (networks / presentCommitments.length) * 100;
-
-				setPresentSeries([educationPercent, energyPercent, networksPercent]);
+				const presentSeries = Object.keys(commitmentsColors).map(commitmentTitle => {
+					const commitmentsPerTitle = presentCommitments.filter(commitment => commitment?.CommitmentTitle === commitmentTitle);
+					return (commitmentsPerTitle?.length * 100) / presentCommitments.length;
+				})
+				setPresentSeries(presentSeries);
 
 				setLoading(false);
 			} else {
-				console.error('Error loading commitments', json?.error);
+				console.error('Error loading commitments', json?.data?.error);
 			}
 		}
 		loadChartData();
@@ -103,14 +94,14 @@ const Stats = () => {
 			height: 300,
 			type: 'pie'
 		},
-		colors: ['#5C9EFF', '#4181F4', '#B5F3D8'],
+		colors: Object.values(commitmentsColors),
 		stroke: {
 			width: 0
 		},
 		dataLabels: {
 			enabled: false
 		},
-		labels: ['Land Use Change', 'Climate Change', 'Biodiversity Loss'],
+		labels: Object.keys(commitmentsColors),
 		responsive: [
 			{
 				breakpoint: 767,
@@ -123,9 +114,7 @@ const Stats = () => {
 		],
 		tooltip: {
 			y: {
-				formatter: function (value) {
-					return value.toFixed(1) + '%';
-				}
+				formatter: value => value.toFixed(1) + '%'
 			}
 		},
 		legend: {
@@ -138,14 +127,14 @@ const Stats = () => {
 			height: 300,
 			type: 'pie'
 		},
-		colors: ['#5C9EFF', '#4181F4', '#B5F3D8'],
+		colors: Object.values(commitmentsColors),
 		stroke: {
 			width: 0
 		},
 		dataLabels: {
 			enabled: false
 		},
-		labels: ['Education', 'Energy', 'Networks'],
+		labels: Object.keys(commitmentsColors),
 		responsive: [
 			{
 				breakpoint: 767,
@@ -158,9 +147,7 @@ const Stats = () => {
 		],
 		tooltip: {
 			y: {
-				formatter: function (value) {
-					return value.toFixed(1) + '%';
-				}
+				formatter: value => value.toFixed(1) + '%'
 			}
 		},
 		legend: {
@@ -269,10 +256,7 @@ const Stats = () => {
 								strokeColor={commitmentsColors[myFutureCommitments?.Commitments?.[0]?.CommitmentTitle]}
 								trailColor={commitmentsColors[myFutureCommitments?.Commitments?.[1]?.CommitmentTitle]}
 								showInfo={false}
-								percent={Math.max(
-									myFutureCommitments?.Commitments?.[0].CommitmentWalletPercentage,
-									myFutureCommitments?.Commitments?.[1].CommitmentWalletPercentage
-								)}
+								percent={myFutureCommitments?.Commitments?.[0].CommitmentWalletPercentage}
 							/>
 							<div className='percentages-wrapper'>
 								<span>You chose {myFutureCommitments?.Commitments?.[0]?.CommitmentWalletPercentage}%</span>
@@ -362,7 +346,7 @@ const Stats = () => {
 								<h3>{myPresentCommitments?.Commitments?.[0].CommitmentTitle}</h3>
 								<div>
 									<p className='bold'>You commited to</p>
-									<span className='medium'>buying sustainable-label products</span>
+									<span className='medium'>{myPresentCommitments?.Commitments?.[0].CommitmentSupport}</span>
 								</div>
 								<div>
 									<p className='small'>
@@ -387,7 +371,7 @@ const Stats = () => {
 								<h3>{myPresentCommitments?.Commitments?.[1].CommitmentTitle}</h3>
 								<div>
 									<p className='bold'>You commited to</p>
-									<span className='medium'>rewilding my garden/balcony/roof</span>
+									<span className='medium'>{myPresentCommitments?.Commitments?.[1].CommitmentSupport}</span>
 								</div>
 								<div>
 									<p className='small'>

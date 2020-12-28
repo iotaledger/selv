@@ -108,7 +108,7 @@ export default {
         commitments: [
             {
                 image: climate_change2,
-                title: 'Climate Change',
+                title: 'Climate change',
                 status: 'exceeded',
                 boundary: '350-450 ppm',
                 value: '410 and rising',
