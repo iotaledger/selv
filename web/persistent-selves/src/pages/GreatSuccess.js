@@ -8,6 +8,7 @@ import image2 from '../assets/greatSuccess/image2.svg';
 import image3 from '../assets/greatSuccess/image3.svg';
 import checkmark from '../assets/checkmark.svg';
 import dots from '../assets/backgrounds/dots.png';
+import logo from '../assets/landing/logoHeader.svg';
 
 /**
  * Component which will display a GreatSuccess.
@@ -29,6 +30,9 @@ const GreatSuccess = ({ history, match }) => {
 
     return (
             <div className='theme-demo'>
+            	<Link to={'/'} className='logo demo-page'>
+                    <img src={logo} alt='Selv logo' />
+                </Link>
                 <div className='great-success' id='app'>
                     <RandomGraphicElement elements={7}>
                         <div className='great-success-content-wrapper'>
