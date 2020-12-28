@@ -8,17 +8,29 @@ import selv from '../assets/selvSuccessBordered.svg';
 /**
  * Component which will display a Confirmation.
  */
-const Confirmation = ({ match }) => {
+const Confirmation = ({ history, match }) => {
     const { nextStep, theme } = useStep(match);
     const [title, setTitle] = useState('');
 
     useEffect(() => {
+        async function getData () {
+            const credentialsString = await localStorage.getItem('credentials');
+            const credentials = credentialsString && await JSON.parse(credentialsString);
+            const status = credentials?.status;
+            if (!status || Number(status) !== 2) {
+                history.goBack();
+            }
+        }
+        getData();
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
         switch (theme) {
             case 'future':
-                setTitle('Your future commitment is created');
+                setTitle('You have created a Future Commitment');
                 break;
             case 'present':
-                setTitle('Your present commitment is created');
+                setTitle('You have created a Present Commitment');
                 break;
             default:
                 setTitle('Congratulations');
@@ -32,16 +44,16 @@ const Confirmation = ({ match }) => {
                 <RandomGraphicElement elements={5}>
                     <div className='confirmation-content-wrapper'>
                         <h2>{title}</h2>
-                        <p>Thank you for your pledge</p>
+                        <p>Thank you.</p>
                         
                         <div className='selv-wrapper'>
                             <img src={selv} alt='Selv app logo' />
-                            <h4>Your new credential is sent to Selv</h4>
+                            <h4>Your credential has been sent to Selv.</h4>
                         </div>
 
                         <Link to={nextStep}>
                             <Button>
-                                Continue
+                                <h4>Continue</h4>
                             </Button>
                         </Link>
                     </div>

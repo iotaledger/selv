@@ -1,24 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Space } from 'antd';
-import { RandomGraphicElement } from '../components';
-import { Stats } from '.';
+import { Modal, RandomGraphicElement, Stats } from '../components';
 import image1 from '../assets/thankYou/image1.svg';
 import image2 from '../assets/thankYou/image2.svg';
 import image3 from '../assets/thankYou/image3.svg';
 import image4 from '../assets/thankYou/image4.svg';
-import futures from '../assets/thankYou/futures-literacy.svg';
-import goodAncestor from '../assets/thankYou/good-ancestor.svg';
-import inheritance from '../assets/thankYou/inheritance.svg';
 import checkmark from '../assets/checkmark.svg';
 import logo from '../assets/landing/logoHeader.svg';
 import dots from '../assets/backgrounds/dots.png';
 import { Footer } from '../components/landing';
+import { cards } from '../assets/commentary';
 
 /**
  * Component which will display a ThankYou.
  */
-const ThankYou = () => {
+const ThankYou = ({ history }) => {
+	const [commentary, setCommentary] = useState(null);
+
+	useEffect(() => {
+        async function getData () {
+            const credentialsString = await localStorage.getItem('credentials');
+            const credentials = credentialsString && await JSON.parse(credentialsString);
+            const status = credentials?.status;
+            if (!status || Number(status) !== 2) {
+                history.goBack();
+            }
+        }
+        getData();
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
 	return (
 		<div className='theme-demo'>
 			<Link to={'/'} className='logo demo-page'>
@@ -29,12 +40,17 @@ const ThankYou = () => {
 					<div className='thank-you-wrapper-2'>
 						<span className='heading'>
 							<Space size='small'>
-								<h2>It’s</h2>
-								<h2 className='highlight'>your</h2>
+								<h2 className='highlight'>Your</h2>
+								<h2>legacy</h2>
 							</Space>
-							<h2>legacy for</h2>
-							<h2 className='highlight'>future</h2>
-							<h2>generations</h2>
+							<Space size='small'>
+								<h2>for</h2>
+								<h2 className='highlight'>future</h2>
+							</Space>
+							<Space size='small'>
+								<h2>generations</h2>
+								<h2 className='highlight' />
+							</Space>
 						</span>
 						<div className='thank-you-content'>
 							<div className='figure-wrapper'>
@@ -70,47 +86,22 @@ const ThankYou = () => {
 							</p>
 						</Space>
 						<div className='commentary-cards-wrapper'>
-							<div className='commentary-card'>
-								<div className='card-logo-wrapper'>
-									<img className='figure' src={futures} alt='futures' />
-								</div>
-								<div className='commentary-card-content'>
-									<h5>Futures Literacy</h5>
-									<p>
-										Futures Literacy is the skill that allows people to better understand the role of the future in what they
-										see and do.
-									</p>
-									<div className='btn-wrapper'>
-										<Button>Read commentary</Button>
+							{
+								cards.map(card => (
+									<div className='commentary-card' key={card?.id}>
+										<div className='card-logo-wrapper'>
+											<img className='figure' src={card?.image} alt='' />
+										</div>
+										<div className='commentary-card-content'>
+											<h5>{card?.title}</h5>
+											<p>{card?.body}</p>
+											<div className='btn-wrapper'>
+												<button onClick={() => setCommentary(card?.id)}>Read commentary</button>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-							<div className='commentary-card'>
-								<div className='card-logo-wrapper'>
-									<img className='figure' src={goodAncestor} alt='good Ancestor' />
-								</div>
-								<div className='commentary-card-content'>
-									<h5>Good Ancestor</h5>
-									<p>“The Good Ancestor” is a guide by Roman Krznaric on how to think long-term in a short-term world.</p>
-									<div className='btn-wrapper'>
-										<Button>Read commentary</Button>
-									</div>
-								</div>
-							</div>
-							<div className='commentary-card'>
-								<div className='card-logo-wrapper'>
-									<img className='figure' src={inheritance} alt='inheritance' />
-								</div>
-								<div className='commentary-card-content'>
-									<h5>Inheritance</h5>
-									<p>
-										Dark Matter Labs explores the institutional infrastructure to respond to the technological revolution.
-									</p>
-									<div className='btn-wrapper'>
-										<Button>Read commentary</Button>
-									</div>
-								</div>
-							</div>
+								))
+							}
 						</div>
 					</div>
 					<Stats />
@@ -179,11 +170,12 @@ const ThankYou = () => {
                                 Return home
                             </Link>
 						</div>
-						<img src={dots} alt='' className='dots-bottom' />
+						{/* <img src={dots} alt='' className='dots-bottom' /> */}
 					</div>
 					<img src={dots} alt='' className='dots-top' />
 					<Footer />
 				</RandomGraphicElement>
+				<Modal commentaryId={commentary} callback={() => setCommentary(null)} />
 			</div>
 		</div>
 	);

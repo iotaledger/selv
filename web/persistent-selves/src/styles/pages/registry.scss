@@ -22,15 +22,15 @@
 
     .content-header {
         width: 100%;
-        height: 200px;
+        height: 150px;
         padding: 0;
-        margin: 90px 0 50px 0;
+        margin: 0;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     
-        h3 {
+        h2 {
             font-weight: 600;
         }
     }
@@ -49,32 +49,26 @@
         margin: 20px 7%;
         height: 220px;
     
-        @include themify($themes) {
-        filter: themed('boxShadow');  
-        }
-    
         .ant-card-body {
-        display: flex;
-        padding: 20px;
-        width: 100%;
-        height: 100%;
+            display: flex;
+            padding: 24px;
+            width: 100%;
+            height: 100%;
         }
 
         .commitment-category-image-wrapper {
-            height: 100%;
-            width: 247px;
-            padding: 10px;
-            background: #92CAFF;
+            height: 172px;
+            width: 172px;
+            padding: 16px;
+            background: $secondary-color-future;
             border-radius: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
 
-            h3 {
-                text-align: center;
-                color: white;
-                margin-top: 10px;
+            img {
+                width: 140px;
             }
         }
 
@@ -85,15 +79,24 @@
             display: flex;
             flex-direction: column;
             justify-content: space-around;
+
+            h3 {
+                font-weight: 600;
+            }
+
+            button > span {
+                font-size: 16px;
+            }
         }
 
         .category-future {
-            background: #92CAFF !important;
+            background: $primary-color-future !important;
             &:hover {
-                background: #72b1ec !important;
+                opacity: 0.85;
             }
             .arrow {
                 padding-left: 8px;
+                padding-bottom: 2px;
             }
         }
     
@@ -102,17 +105,17 @@
     .commitment-category-present {
         @extend .commitment-category;
 
+        &.disabled {
+            opacity: 0.5;
+        }
+
         .commitment-category-image-wrapper {
             @extend .commitment-category-image-wrapper;
-            background: $primary-color-present;
+            background: $secondary-color-present;
         }
 
         .category-present {
             background: $primary-color-present !important;
-
-            &:hover {
-                background: $secondary-color-present !important;
-            }
 
             &:disabled {
                 background: #9b9b9b !important;
@@ -120,6 +123,7 @@
 
             .arrow {
                 padding-left: 8px;
+                padding-bottom: 2px;
             }
         }
     }
@@ -128,17 +132,13 @@
             display: flex;
             flex-direction: row;
             margin: 20px 7%;
-            height: 273px;
-            background: $primary-color-future;
-        
-            @include themify($themes) {
-                filter: themed('boxShadow');  
-            }
+            background: #FFFFFF;
+            cursor: default;
         
             .ant-card-body {
                 display: flex;
                 flex-direction: column;
-                padding: 20px;
+                padding: 24px;
                 width: 100%;
                 height: 100%;
             }
@@ -152,53 +152,58 @@
             }
 
             .selv-logo-completed {
-                filter: brightness(0) invert(1);
                 width: 28px;
+            }
+        }
+    }
+
+    .commitment-category-completed-content {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        margin: 20px 0;
+
+        .completed-commitment-wrapper {
+            margin: 0 10px;
+            width: 50%;
+        
+            h4 {
+                margin-bottom: 20px;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .completed-commitment-card {
+                border-radius: 3px;
+                padding: 35px;
+                background: $secondary-color-future;
+                box-shadow: 5px 5px 0px #4D4D4D;
+
+                .completed-commitment-content p {
+                    font-weight: 600;
+                    font-size: 16px;
+
+                    .custom-value {
+                        color: $primary-color-future;
+                    }
+                }
             }
         }
     }
 
     .commitment-category-completed-present {
         @extend .commitment-category-completed;
-        background: $primary-color-present;
 
         .custom-value {
             color: $primary-color-present !important;
         }
-    }
 
-    .commitment-category-completed-content {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            margin: 20px 0;
-
-            .completed-commitment-wrapper {
-                margin: 0 10px;
-            
-                h4 {
-                    margin-bottom: 20px;
-                    font-family: 'Roboto', sans-serif;
-                }
-
-                .completed-commitment-card {
-                    border-radius: 3px;
-                    padding: 35px;
-                    background: white;
-                    box-shadow: 5px 5px 0px #4D4D4D;
-
-                    .completed-commitment-content p {
-                        font-weight: 600;
-                        font-size: 16px;
-
-                        .custom-value {
-                            color: $primary-color-future;
-                        }
-                    }
-                }
+        .completed-commitment-wrapper {
+            .completed-commitment-card {
+                background: $secondary-color-present;
+                min-height: 142px;
             }
+        }
     }
-
 }
 
 .create-pledge-header-cta-wrapper {
@@ -439,37 +444,7 @@
 					color: themed('primaryColor');
 				}
             }
-
-            .boundary {
-                width: 100%;
-                height: 16px;
-                background-color: #E3E5E6;
-                position: relative;
-                cursor: pointer;
-
-                .fill {
-                    height: 16px;
-
-                    &.exceeded {
-                        width: 306px;
-                        background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(90deg, #FEE34D 0%, #FC3B32 100%);
-                    }
-                    &.unsafe {
-                        width: 226px;
-                        background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 87.93%), linear-gradient(90deg, #FEE34D 0%, #FC6739 100%);
-                    }
-                }
-                .border {
-                    width: calc(100% - 55px);
-                    height: 16px;
-                    border-right: 2px solid #444444;
-                    background-color: transparent;
-                    position: absolute;
-                    top: 0;
-                }
-            }
         }
-        
     }
 }
 

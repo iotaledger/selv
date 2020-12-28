@@ -82,9 +82,6 @@
 	}
 
 	.cta {
-		@include themify($themes) {
-			background: themed('primaryColor');
-		}
 		z-index: 10;
 		border-radius: 35px;
 		height: 55px;

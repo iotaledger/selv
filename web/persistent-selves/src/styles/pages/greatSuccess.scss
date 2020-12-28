@@ -1,6 +1,7 @@
 .great-success {
     overflow-x: auto;
     height: 100%;
+    width: 100%;
     background: #EEF2FA;
     position: relative;
 
@@ -81,7 +82,8 @@
                     display: flex;
                     flex-direction: row;
                     justify-content: flex-start;
-
+                    align-items: baseline;
+                    
                     img {
                         width: 21px;
                     }
@@ -117,8 +119,8 @@
 .great-success, .thank-you-page-wrapper {
     .dots-top {
         position: absolute;
-        top: -300px;
-        left: 130px;
+        top: -400px;
+        left: 100px;
         z-index: 1;
         transform: rotate(270deg);
     }

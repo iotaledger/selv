@@ -22,6 +22,9 @@
 					"CommitmentSupport" : {
 						"type" : "string"
 					},
+					"CommitmentCondition" : {
+						"type" : "string"
+					},
 					"CommitmentWalletPercentage" : {
 						"type" : "number"
 					}

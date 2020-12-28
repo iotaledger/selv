@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Select, Card, Slider } from 'antd';
 import useStep from '../utils/useStep';
-import { Layout } from '../components';
+import { Layout, Popover } from '../components';
 import commitments from '../assets/commitments';
 
 /**
@@ -10,7 +10,6 @@ import commitments from '../assets/commitments';
  */
 
 const { Option } = Select;
-const percentages = Array.from({ length: 11 }, (x, i) => i * 10);
 
 const PersonalizeCommitments = ({ history, match }) => {
     const { nextStep } = useStep(match);
@@ -18,9 +17,18 @@ const PersonalizeCommitments = ({ history, match }) => {
     const [percentage, updatePercentage] = useState([50, 50]);
     const [storedCommitments, updateStoredCommitments] = useState({});
     const [selected, setSelected] = useState([]);
-
+    const commitmentObject = commitments[category];
 
     useEffect(() => {
+        async function getData() {
+			const credentialsString = await localStorage.getItem('credentials');
+			const credentials = credentialsString && (await JSON.parse(credentialsString));
+			const status = credentials?.status;
+			if (!status || Number(status) !== 2) {
+				history.goBack();
+			}
+        }
+        
         const selectedCommitments = history?.location?.state?.commitments;
         const selected = commitments[category]?.commitments?.filter(commitment =>
             selectedCommitments.includes(commitment?.commitmentId)
@@ -31,15 +39,15 @@ const PersonalizeCommitments = ({ history, match }) => {
                 commitmentId: commitment?.commitmentId,
                 title: commitment?.title,
                 condition: commitment?.condition?.if,
-                percentage: index === 0 ? percentages[3] : percentages[1],
+                percentage: commitment?.condition?.values?.[1],
                 support: commitment?.condition?.support?.[0],
                 walletPercentage: 50
             }
             updateStoredCommitments(storedCommitments => ({ ...storedCommitments, [commitment?.commitmentId]: object }));
         })
 
+		getData();
         setSelected(selected);
-
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const marks = {
@@ -59,7 +67,7 @@ const PersonalizeCommitments = ({ history, match }) => {
     
     const handleConditionChange = (id, value) => {
         const commitment = storedCommitments[id];
-        commitment.percentage = Number(value);
+        commitment.percentage = value;
         updateStoredCommitments(storedCommitments => ({ ...storedCommitments, [id]: commitment }));
     }
 
@@ -81,13 +89,9 @@ const PersonalizeCommitments = ({ history, match }) => {
         <Layout match={match} noFooter>
             <div className='personalize-commitment-page-wrapper'>
                 <div className='personalize-commitment-wrapper'>
-                    <div className='text-wrapper'>
+                    <div className='text-wrapper select-commitment-text-wrapper'>
                         <h2>Personalise your commitment</h2>
-                        <p>
-                            Choose from a number of future commitments you wish to support. Future generations will have to deal with a number of environmental issues if we continue 'business as usual'. 
-                            <br /><br /><br />
-                            You can choose two pledges to help the future as part of your legacy.
-                        </p>
+                        <span>{commitmentObject?.personalise}</span>
                     </div>
                     <div className='personalize-commitments-list'>
                         {
@@ -96,9 +100,12 @@ const PersonalizeCommitments = ({ history, match }) => {
                                     className='commitment-item' 
                                     key={commitment?.commitmentId}
                                 >
-                                    <h4>{commitment?.title}</h4>
+                                    <div className='commitment-item-header'>
+                                        <h4>{commitment?.title}</h4>
+                                        <Popover commitment={commitment} />
+                                    </div> 
                                     <Card 
-                                        bordered
+                                        bordered={false}
                                         hoverable={false}
                                         className='commitment-card'
                                     >
@@ -109,15 +116,17 @@ const PersonalizeCommitments = ({ history, match }) => {
                                                     {commitment?.condition?.if.split(' ').slice(1).join(' ')}
                                                 </p>
                                                 <Select 
-                                                    defaultValue={`${index === 0 ? percentages[3] : percentages[1]}%`} 
+                                                    defaultValue={commitment?.condition?.values?.[1]} 
                                                     onChange={value => handleConditionChange(commitment?.commitmentId, value)}
                                                 >
-                                                    {percentages?.map(item => (
-                                                        <Option key={item}>{item}%</Option>
+                                                    {commitment?.condition?.values?.map(item => (
+                                                        <Option key={item}>{item}</Option>
                                                     ))}
                                                 </Select>
                                             </div>
-                                            <div className='condition-wrapper'><p><strong>THEN</strong>  donate {percentage[index]}% of my wallet balance</p></div>
+                                            <div className='condition-wrapper'>
+                                                <p><strong>THEN</strong>  donate {percentage[index]}% of my wallet balance</p>
+                                            </div>
                                             <div className='condition-wrapper'>
                                                 <p><strong>TO</strong> support</p>
                                                 <Select 
@@ -136,7 +145,10 @@ const PersonalizeCommitments = ({ history, match }) => {
                         }
                     </div>
                     <div className='commitments-drawer'>
-                        <h2>Choose your commitment level</h2>
+                        <h4>Choose how you want to distribute your donation</h4>
+                        <p>
+                            Your commitment level is based around the ongoing financial support you will give each of your chosen commitments as a gift to future generations past your lifetime.
+                        </p>
                         <Slider 
                             marks={marks} 
                             step={5} 
@@ -153,13 +165,13 @@ const PersonalizeCommitments = ({ history, match }) => {
                         <div className='drawer-btn-wrapper'>
                             <Link to={nextStep}>
                                 <Button onClick={storeCommitments}>
-                                    Continue
+                                    <h4>Continue</h4>
                                 </Button>
                             </Link>
                         </div>                     
+                    </div>
                 </div>
             </div>
-        </div>
         </Layout>
     );
 };

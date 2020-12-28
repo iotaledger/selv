@@ -4,7 +4,7 @@ import { Button, Space } from 'antd';
 import useStep from '../utils/useStep';
 import { Layout, RandomGraphicElement } from '../components';
 import selvSuccess from '../assets/selvSuccessBordered.svg';
-import image from '../assets/greatSuccess/image1.png';
+import image from '../assets/greatSuccess/image1.svg';
 
 /**
  * Component which will display a SingInConfirmation.

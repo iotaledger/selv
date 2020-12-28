@@ -11,11 +11,7 @@
     bottom: 0;
     width: 100%;
     left: 0;
-
-    @include themify($themes) {
-        background: themed('trinaryColor'); 
-    }
-    
+    background: #535664; 
 
     @include breakPoint(medium) {
         width: 100%;
@@ -40,6 +36,16 @@
 
         p {
             color: white;  
+        }
+
+        button {
+            background-color: white;
+            color: #535664; 
+
+            &:hover {
+                background-color: white;
+                color: #000000; 
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Space } from 'antd';
+import { Button } from 'antd';
 import useStep from '../utils/useStep';
 import welcome from '../assets/welcome.png';
 import { Disclaimer, RandomGraphicElement } from '../components';

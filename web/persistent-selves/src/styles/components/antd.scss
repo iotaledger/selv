@@ -43,3 +43,42 @@
 .ant-tabs-content-holder {
     margin-bottom: 30px;
 }
+
+.ant-input-affix-wrapper-disabled {
+    background-color: #FFFFFF;
+}
+
+.ant-input[disabled] {
+    color: #585858;
+}
+
+.ant-radio-wrapper {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 36px;
+    color: #999999;
+}
+
+.ant-radio-wrapper-checked {
+    @include themify($themes) {
+        color: themed('primaryColor');  
+
+        .ant-radio-inner {
+            border-color: themed('primaryColor'); 
+            
+            &:after {
+                background-color: themed('primaryColor'); 
+            }
+        }
+    }
+}
+
+.ant-progress-inner {
+    background-color: #B5F3D8;
+}
+
+.ant-btn {
+    &:hover {
+        color: #FFFFFF;
+    }
+}

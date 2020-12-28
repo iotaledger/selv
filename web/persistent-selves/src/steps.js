@@ -8,7 +8,8 @@ import {
     SingInConfirmation,
     SelectCommitmentCategory,
     SelectCommitments,
-    PersonalizeCommitments,
+    PersonalizeFutureCommitments,
+    PersonalizePresentCommitments,
     PledgeData,
     Confirmation,
     PledgeRegistry,
@@ -28,7 +29,7 @@ export const routes = [
 
     { path: '/registry/category/2', page: SelectCommitmentCategory },
     { path: '/future/select/2', page: SelectCommitments },
-    { path: '/future/personalize/2', page: PersonalizeCommitments },
+    { path: '/future/personalize/2', page: PersonalizeFutureCommitments },
     { path: '/future/prove/2', page: ProveIdentity },
     { path: '/future/data/2', page: PledgeData },
     { path: '/future/confirm/2', page: Confirmation },
@@ -36,7 +37,7 @@ export const routes = [
 
     { path: '/registry/category/3', page: SelectCommitmentCategory },
     { path: '/present/select/3', page: SelectCommitments },
-    { path: '/present/personalize/3', page: PersonalizeCommitments },
+    { path: '/present/personalize/3', page: PersonalizePresentCommitments },
     { path: '/present/prove/3', page: ProveIdentity },
     { path: '/present/data/3', page: PledgeData },
     { path: '/present/confirm/3', page: Confirmation },

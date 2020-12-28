@@ -10,8 +10,8 @@ import { encrypt, decrypt, retrieveCredential } from './helper'
 
 // https://randomuser.me/api/
 const App = () => {
-  const [password] = useState("XjdgWKRPr2GFyrNXE0FNDrdHWuFDzP1A")
-  const [challengeNonce] = useState("DUaJVoGwJD")
+  const [password, setPassword] = useState("")
+  const [challengeNonce, setChannelNonce] = useState("")
   const [channelId, setChannelId] = useState(null)
   const [ioClient, setIoClient] = useState(null)
 
@@ -22,10 +22,13 @@ const App = () => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  async function setChannel(channelId) {
-    console.log('setChannel', channelId);
-    setChannelId(channelId)
-    connectWebSocket(channelId)
+  async function setChannel(dataString) {
+    const data = JSON.parse(dataString);
+    console.log('setChannel', data);
+    setChannelId(data?.channelId);
+    setPassword(data?.password);
+    setChannelNonce(data?.challenge);
+    connectWebSocket(data?.channelId);
   }
 
   async function connectWebSocket(channelId) {

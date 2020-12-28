@@ -7,13 +7,13 @@ import ProveIdentity from './ProveIdentity';
 import SingInConfirmation from './SingInConfirmation';
 import SelectCommitmentCategory from './SelectCommitmentCategory';
 import SelectCommitments from './SelectCommitments';
-import PersonalizeCommitments from './PersonalizeCommitments';
 import PledgeData from './PledgeData';
 import Confirmation from './Confirmation';
 import PledgeRegistry from './PledgeRegistry';
 import GreatSuccess from './GreatSuccess';
-import Stats from './Stats';
 import ThankYou from './ThankYou';
+import PersonalizeFutureCommitments from './PersonalizeFutureCommitments';
+import PersonalizePresentCommitments from './PersonalizePresentCommitments';
 
 export {
     IntroTodos,
@@ -25,11 +25,11 @@ export {
     SingInConfirmation,
     SelectCommitmentCategory,
     SelectCommitments,
-    PersonalizeCommitments,
+    PersonalizeFutureCommitments,
+    PersonalizePresentCommitments,
     PledgeData,
     Confirmation,
     PledgeRegistry,
     GreatSuccess,
-    Stats,
     ThankYou
 };

@@ -1,6 +1,6 @@
-button {
+button, .ant-btn {
     border-radius: 4px;
-    color: #ffffff !important;
+    color: #ffffff;
     font-weight: bold !important;
     font-size: 14px !important;
     line-height: 20px;
@@ -10,20 +10,18 @@ button {
     border: none !important;
 
     @include themify($themes) {
-        background-color: themed('buttonBackgroundColor') !important;  
+        background-color: themed('buttonBackgroundColor');  
         height: themed('buttonHeight');
         border-radius: themed('buttonBorderRadius');
 
         &:hover {
-            background-color: themed('secondaryColor') !important;
+            opacity: 0.85;
+            background-color: themed('primaryColor');
         }
 
         &:disabled {
-            background-color: themed('secondaryFontColor') !important;  
-    
-            &:hover {
-                background-color: themed('secondaryFontColor') !important;
-            }
+            opacity: 0.5;
+            background-color: themed('primaryColor');
         }
     }
 }

@@ -32,14 +32,6 @@
         text-align: center;
     }
 
-    h2 {
-        @include themify($themes) {
-            color: themed('trinaryColor');  
-            font-size: themed('h2TextSize');
-            line-height: themed('h2LineHeight');
-        }
-    }
-
     p {
         @include themify($themes) {
             font-size: themed('defaultTextSize');

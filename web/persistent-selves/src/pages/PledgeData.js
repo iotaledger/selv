@@ -106,13 +106,23 @@ const PledgeData = ({ history, match }) => {
                                     className='form-commitment-card'
                                 >
                                     <div className='form-commitment-content'>
-                                    <p>
-										<b>{commitment?.condition?.replace(/ .*/, '')} </b>
-										{commitment?.condition?.split(' ').slice(1).join(' ')}
-										<span className='custom-value'> {commitment?.percentage}% </span>
-										THEN donate <span className='custom-value'>{commitment?.walletPercentage}%</span> of my wallet
-										balance TO support <span className='custom-value'>{commitment?.support}</span>
-										</p>
+                                        {
+                                            theme === 'future' ? (
+                                                <p>
+                                                    <b>{commitment?.condition?.replace(/ .*/, '')} </b>
+                                                    {commitment?.condition?.split(' ').slice(1).join(' ')}
+                                                    <span className='custom-value'> {commitment?.percentage} </span>
+                                                    THEN donate <span className='custom-value'>{commitment?.walletPercentage}%</span> of my wallet
+                                                    balance TO support <span className='custom-value'>{commitment?.support}</span>
+                                                </p>
+                                            ) : (
+                                                <p>
+                                                    <b>I commit to </b>
+                                                    <span className='custom-value'>{commitment?.support}</span>
+                                                </p>
+                                            )
+                                        }
+
                                     </div>
                                 </Card>
                             </div>
@@ -121,12 +131,12 @@ const PledgeData = ({ history, match }) => {
                     </div>
                     <div className='form-wrapper'>
                         {
-                        Object.keys(prefilledFormData.dataFields).length &&
-                        <PrefilledForm {...prefilledFormData} />
+                            Object.keys(prefilledFormData.dataFields).length &&
+                            <PrefilledForm {...prefilledFormData} />
                         }
                         <div className='btn-wrapper'>
                             <Button onClick={processValues}>
-                                Confirm my legacy
+                                <h4>Confirm my legacy</h4>
                             </Button>
                         </div>
                         {
