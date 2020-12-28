@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from 'rsuite';
 import commentary from '../assets/commentary';
 
 export default ({ commentaryId, callback }) => {
-	const [open, setOpen] = useState(!!commentaryId);
+	const [isOpen, setOpen] = useState(!!commentaryId);
 	const content = commentary[commentaryId];
+
+    useEffect(() => {
+		setOpen(!!commentaryId);
+    }, [commentaryId]); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const close = () => {
 		setOpen(false);
-		console.log('Modal close')
 		callback();
 	}
 
-	console.log('Modal', commentaryId, content)
 	return (
-		<Modal overflow={true} show={open} onHide={close}>
+		<Modal overflow={true} show={isOpen} onHide={close}>
 			{ content }
 			<Modal.Footer>
 				<button onClick={close} className='modal-close'>
