@@ -38,6 +38,8 @@
         height: 100%;
         padding: 50px 50px 20px;
         margin: 30px 0;
+        display: flex;
+        flex-direction: column;
 
         .card-header-wrapper{
             display: flex;
@@ -78,13 +80,15 @@
             width: 100%;
             display: flex;
             flex-direction: column;
+            align-self: center;
             text-align: center;
-            padding: 0 250px;
+            max-width: 670px;
+            position: relative;
 
             .slider-titles-wrapper {
                 display: flex;
                 justify-content: space-between;
-                margin-bottom: 10px;
+                margin: 30px 0 10px;
 
                 span {
                     font-size: 18px;
@@ -118,6 +122,30 @@
 
                 button {
                     width: 210px;
+                }
+            }
+
+            .average-commitment-header {
+                position: absolute;
+            }
+
+            .average-commitment {
+                position: absolute;
+                top: 25px;
+
+                span {
+                    font-size: 18px;
+                    font-family: "Roboto", sans-serif;
+                    font-weight: 600;
+                    color: #000000;
+                }
+
+                .pointer {
+                    height: 60px;
+                    border-right: 3px solid $primary-color-demo;
+                    position: absolute;
+                    left: 45px;
+                    top: 35px;
                 }
             }
         }

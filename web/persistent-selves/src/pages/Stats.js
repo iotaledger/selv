@@ -23,7 +23,7 @@ const Stats = () => {
 	const [myFutureCommitments, setMyFutureCommitments] = useState([]);
 	const [myPresentCommitments, setMyPresentCommitments] = useState([]);
 	const [commitments, setCommitments] = useState([]);
-	const [averageWalletCommitment, setAverageWalletCommitment] = useState([0,0]);
+	const [averageWalletCommitments, setAverageWalletCommitments] = useState([0, 0]);
 	const [loading, setLoading] = useState(false);
 
 	const sameCommitmentsPercent = (myCommitment, category) => {
@@ -63,7 +63,6 @@ const Stats = () => {
 
 				const futureCommitments = commitments?.filter(commitment => commitment?.CommitmentType === 'FutureCommitments');
 				const presentCommitments = commitments?.filter(commitment => commitment?.CommitmentType === 'PresentCommitments');
-				console.log(33, futureCommitments, myFutureCommitments);
 
 				// Future commitments
 				const futureSeries = Object.keys(commitmentsColors).map(commitmentTitle => {
@@ -79,7 +78,15 @@ const Stats = () => {
 				})
 				setPresentSeries(presentSeries);
 
-				// const averageWalletCommitment = 
+				const averageWalletCommitments = myFutureCommitments?.Commitments?.map(myCommitment => {
+					const similarCommitments = futureCommitments.filter(commitment =>
+						commitment?.CommitmentId === myCommitment?.CommitmentId	
+					);
+					let acc = 0;
+					similarCommitments.forEach(commitment => { acc += commitment?.CommitmentWalletPercentage});
+					return similarCommitments?.length ? acc / similarCommitments?.length : 0;
+				});
+				setAverageWalletCommitments(averageWalletCommitments);
 				setLoading(false);
 			} else {
 				console.error('Error loading commitments', json?.data?.error);
@@ -221,9 +228,20 @@ const Stats = () => {
 							</Space>
 						</div>
 						<div className='slider-wrapper'>
-							<h5>Average financial commitment</h5>
+							<h5 
+								className='average-commitment-header'
+								style={{ 'left': `calc(${averageWalletCommitments?.[0]}% - 160px)`}}>
+								Average financial commitment
+							</h5>
 							<br />
-							<br />
+							<div 
+								className='average-commitment' 
+								style={{ 'left': `calc(${averageWalletCommitments?.[0]}% - 45px)`}}>
+								<span>{averageWalletCommitments?.[0]}% vs {averageWalletCommitments?.[1]}%</span>
+								<br />
+								<br />
+								<div className='pointer' />
+							</div>
 							<div className='slider-titles-wrapper'>
 								<span>{myFutureCommitments?.[0]?.CommitmentTitle}</span>
 								<span>{myFutureCommitments?.[1]?.CommitmentTitle}</span>
