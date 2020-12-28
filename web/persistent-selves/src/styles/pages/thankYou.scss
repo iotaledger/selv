@@ -335,3 +335,19 @@
         }
     }
 }
+
+.rs-modal-wrapper {
+    .rs-modal-footer {
+        margin-top: 20px;
+    
+        .modal-close {
+            background-color: $primary-color-demo;  
+            height: 48px;
+            border-radius: 100px;
+
+            &:hover {
+                background-color: $secondary-color-demo;
+            }
+        }
+    }
+}
