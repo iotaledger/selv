@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import useStep from '../utils/useStep';
 import { Disclaimer, RandomGraphicElement } from '../components';
-import image1 from '../assets/greatSuccess/image1.png';
-import image2 from '../assets/greatSuccess/image2.png';
-import image3 from '../assets/greatSuccess/image3.png';
+import image1 from '../assets/greatSuccess/image1.svg';
+import image2 from '../assets/greatSuccess/image2.svg';
+import image3 from '../assets/greatSuccess/image3.svg';
 import checkmark from '../assets/checkmark.svg';
 import dots from '../assets/backgrounds/dots.png';
 
