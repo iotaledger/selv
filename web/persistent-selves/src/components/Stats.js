@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Space, Progress } from 'antd';
-import { Loading } from '../components';
+import { Loading } from '.';
 import PieChart from 'react-apexcharts';
 import future from '../assets/futureCategory.svg';
 import present from '../assets/presentCategory.svg';

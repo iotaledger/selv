@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Space } from 'antd';
-import { Modal, RandomGraphicElement } from '../components';
-import { Stats } from '.';
+import { Modal, RandomGraphicElement, Stats } from '../components';
 import image1 from '../assets/thankYou/image1.svg';
 import image2 from '../assets/thankYou/image2.svg';
 import image3 from '../assets/thankYou/image3.svg';

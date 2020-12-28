@@ -15,6 +15,7 @@ import Commitments from './Commitments';
 import Popup from './Popup';
 import Popover from './Popover';
 import Modal from './Modal';
+import Stats from './Stats';
 
 export {
     Sidebar,
@@ -33,5 +34,6 @@ export {
     Commitments,
     Popup,
     Popover,
-    Modal
+    Modal,
+    Stats
 };

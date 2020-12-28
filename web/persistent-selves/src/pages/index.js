@@ -11,7 +11,6 @@ import PledgeData from './PledgeData';
 import Confirmation from './Confirmation';
 import PledgeRegistry from './PledgeRegistry';
 import GreatSuccess from './GreatSuccess';
-import Stats from './Stats';
 import ThankYou from './ThankYou';
 import PersonalizeFutureCommitments from './PersonalizeFutureCommitments';
 import PersonalizePresentCommitments from './PersonalizePresentCommitments';
@@ -32,6 +31,5 @@ export {
     Confirmation,
     PledgeRegistry,
     GreatSuccess,
-    Stats,
     ThankYou
 };
