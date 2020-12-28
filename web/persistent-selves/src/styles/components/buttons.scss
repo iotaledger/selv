@@ -1,4 +1,4 @@
-button {
+button, .ant-btn {
     border-radius: 4px;
     color: #ffffff;
     font-weight: bold !important;
@@ -15,6 +15,7 @@ button {
         border-radius: themed('buttonBorderRadius');
 
         &:hover {
+            color: #ffffff;
             background-color: themed('secondaryColor');
         }
 
