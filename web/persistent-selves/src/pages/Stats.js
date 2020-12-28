@@ -27,20 +27,20 @@ const Stats = () => {
 	const [loading, setLoading] = useState(false);
 
 	const sameCommitmentsPercent = (myCommitment, category) => {
-		const commitmentsSum = commitments?.filter(commitment => commitment?.CommitmentTitle === myCommitment)?.length;
-		const categoryCommitments = commitments?.filter(commitment => commitment?.CommitmentType === category);
-		const commitmentsPercent = (commitmentsSum / categoryCommitments?.length) * 100;
+		const possibleCommitments = commitments?.filter(commitment => commitment?.CommitmentType === category);
+		const commitmentsSum = possibleCommitments?.filter(commitment => commitment?.CommitmentTitle === myCommitment);
+		const commitmentsPercent = (commitmentsSum?.length * 100) / possibleCommitments?.length;
 		return Number(commitmentsPercent.toFixed(1));
 	};
 
-	const othersCommitments = (myCommitment, myCommitment2, category) => {
-		const others = commitments?.filter(
-			commitment =>
-				commitment?.CommitmentTitle !== myCommitment?.CommitmentTitle &&
-				commitment?.CommitmentTitle !== myCommitment2?.CommitmentTitle &&
-				commitment?.CommitmentType === category
+	const othersCommitments = (category) => {
+		const possibleCommitments = commitments?.filter(commitment => commitment?.CommitmentType === category);
+		const myCommitmentsObject = category === 'FutureCommitments' ? myFutureCommitments : myPresentCommitments;
+		const myCommitments = myCommitmentsObject?.Commitments?.map(commitment => commitment?.CommitmentTitle);
+		const others = possibleCommitments?.filter(commitment =>
+			!myCommitments.includes(commitment?.CommitmentTitle) 
 		);
-		return others[0]?.CommitmentTitle;
+		return others;
 	};
 
 	useEffect(() => {
@@ -57,7 +57,6 @@ const Stats = () => {
 			setMyPresentCommitments(myPresentCommitments);
 
 			const json = await axios.get(`${serverAPI}/commitments`);
-			console.log(777, json);
 			if (!json?.data?.error) {
 				const commitments = json?.data?.data;
 				setCommitments(commitments);
@@ -181,66 +180,44 @@ const Stats = () => {
 						<div className='chart-wrapper'>
 							<Space direction='vertical' align='start'>
 								<p>Your choices</p>
-								<Space align='center'>
-									<span
-										className='legend-icon'
-										style={{
-											backgroundColor: commitmentsColors[myFutureCommitments?.Commitments?.[0]?.CommitmentTitle]
-										}}></span>
-									<p className='bold'>
-										{sameCommitmentsPercent(myFutureCommitments?.Commitments?.[0]?.CommitmentTitle, 'FutureCommitments')}%
-										also chose&nbsp;
-										{myFutureCommitments?.Commitments?.[0].CommitmentTitle}
-									</p>
-								</Space>
-								<Space align='center'>
-									<span
-										className='legend-icon'
-										style={{
-											backgroundColor: commitmentsColors[myFutureCommitments?.Commitments?.[1]?.CommitmentTitle]
-										}}></span>
-									<p className='bold'>
-										{sameCommitmentsPercent(myFutureCommitments?.Commitments?.[1]?.CommitmentTitle, 'FutureCommitments')}%
-										also chose&nbsp;
-										{myFutureCommitments?.Commitments?.[1].CommitmentTitle}
-									</p>
-								</Space>
+								{
+									myFutureCommitments?.Commitments?.map(commitment => (
+										<Space align='center' key={commitment?.CommitmentTitle}>
+											<span
+												className='legend-icon'
+												style={{
+													backgroundColor: commitmentsColors[commitment?.CommitmentTitle]
+												}}></span>
+											<p className='bold'>
+												{sameCommitmentsPercent(commitment?.CommitmentTitle, 'FutureCommitments')}%
+												also chose&nbsp;
+												{commitment?.CommitmentTitle}
+											</p>
+										</Space>
+									))
+								}
 							</Space>
 							<div className='chart-body'>
 								<PieChart height='100%' options={futureChartOptions} series={futureSeries} type='pie' />
 							</div>
 							<Space direction='vertical' align='start'>
 								<p>Others chose</p>
-								<Space align='center'>
-									<span
-										className='legend-icon'
-										style={{
-											backgroundColor:
-												commitmentsColors[
-													othersCommitments(
-														myFutureCommitments?.Commitments?.[0],
-														myFutureCommitments?.Commitments?.[1],
-														'FutureCommitments'
-													)
-												]
-										}}></span>
-									<p className='bold'>
-										{sameCommitmentsPercent(
-											othersCommitments(
-												myFutureCommitments?.Commitments?.[0],
-												myFutureCommitments?.Commitments?.[1],
-												'FutureCommitments'
-											),
-											'FutureCommitments'
-										)}
-										% chose&nbsp;
-										{othersCommitments(
-											myFutureCommitments?.Commitments?.[0],
-											myFutureCommitments?.Commitments?.[1],
-											'FutureCommitments'
-										)}
-									</p>
-								</Space>
+								{
+									othersCommitments('FutureCommitments')?.map(commitment => (
+										<Space align='center' key={commitment?.CommitmentTitle}>
+											<span
+												className='legend-icon'
+												style={{
+													backgroundColor: commitmentsColors[commitment?.CommitmentTitle]
+												}}></span>
+											<p className='bold'>
+												{sameCommitmentsPercent(commitment?.CommitmentTitle, 'FutureCommitments')}%
+												chose&nbsp;
+												{commitment?.CommitmentTitle}
+											</p>
+										</Space>
+									))
+								}
 							</Space>
 						</div>
 						<div className='slider-wrapper'>
@@ -279,66 +256,44 @@ const Stats = () => {
 						<div className='chart-wrapper'>
 							<Space direction='vertical' align='start'>
 								<p>Your choices</p>
-								<Space align='center'>
-									<span
-										className='legend-icon'
-										style={{
-											backgroundColor: commitmentsColors[myPresentCommitments?.Commitments?.[0]?.CommitmentTitle]
-										}}></span>
-									<p className='bold'>
-										{sameCommitmentsPercent(myPresentCommitments?.Commitments?.[0]?.CommitmentTitle, 'PresentCommitments')}%
-										also chose&nbsp;
-										{myPresentCommitments?.Commitments?.[0].CommitmentTitle}
-									</p>
-								</Space>
-								<Space align='center'>
-									<span
-										className='legend-icon'
-										style={{
-											backgroundColor: commitmentsColors[myPresentCommitments?.Commitments?.[1]?.CommitmentTitle]
-										}}></span>
-									<p className='bold'>
-										{sameCommitmentsPercent(myPresentCommitments?.Commitments?.[1]?.CommitmentTitle, 'PresentCommitments')}%
-										also chose&nbsp;
-										{myPresentCommitments?.Commitments?.[1].CommitmentTitle}
-									</p>
-								</Space>
+								{
+									myPresentCommitments?.Commitments?.map(commitment => (
+										<Space align='center' key={commitment?.CommitmentTitle}>
+											<span
+												className='legend-icon'
+												style={{
+													backgroundColor: commitmentsColors[commitment?.CommitmentTitle]
+												}}></span>
+											<p className='bold'>
+												{sameCommitmentsPercent(commitment?.CommitmentTitle, 'PresentCommitments')}%
+												also chose&nbsp;
+												{commitment?.CommitmentTitle}
+											</p>
+										</Space>
+									))
+								}
 							</Space>
 							<div className='chart-body'>
 								<PieChart height='100%' options={presentChartOptions} series={presentSeries} type='pie' />
 							</div>
 							<Space direction='vertical' align='start'>
 								<p>Others chose</p>
-								<Space align='center'>
-									<span
-										className='legend-icon'
-										style={{
-											backgroundColor:
-												commitmentsColors[
-													othersCommitments(
-														myPresentCommitments?.Commitments?.[0],
-														myPresentCommitments?.Commitments?.[1],
-														'PresentCommitments'
-													)
-												]
-										}}></span>
-									<p className='bold'>
-										{sameCommitmentsPercent(
-											othersCommitments(
-												myPresentCommitments?.Commitments?.[0],
-												myPresentCommitments?.Commitments?.[1],
-												'PresentCommitments'
-											),
-											'PresentCommitments'
-										)}
-										% chose&nbsp;
-										{othersCommitments(
-											myPresentCommitments?.Commitments?.[0],
-											myPresentCommitments?.Commitments?.[1],
-											'PresentCommitments'
-										)}
-									</p>
-								</Space>
+								{
+									othersCommitments('PresentCommitments')?.map(commitment => (
+										<Space align='center' key={commitment?.CommitmentTitle}>
+											<span
+												className='legend-icon'
+												style={{
+													backgroundColor: commitmentsColors[commitment?.CommitmentTitle]
+												}}></span>
+											<p className='bold'>
+												{sameCommitmentsPercent(commitment?.CommitmentTitle, 'PresentCommitments')}%
+												chose&nbsp;
+												{commitment?.CommitmentTitle}
+											</p>
+										</Space>
+									))
+								}
 							</Space>
 						</div>
 						<div className='commitment-info-wrapper'>
