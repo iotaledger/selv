@@ -236,8 +236,8 @@ const Stats = () => {
 							<br />
 							<div 
 								className='average-commitment' 
-								style={{ 'left': `calc(${averageWalletCommitments?.[0]}% - 45px)`}}>
-								<span>{averageWalletCommitments?.[0]}% vs {averageWalletCommitments?.[1]}%</span>
+								style={{ 'left': `calc(${averageWalletCommitments?.[0]}% - 60px)`}}>
+								<span>{averageWalletCommitments?.[0]?.toFixed(1)}% vs {averageWalletCommitments?.[1]?.toFixed(1)}%</span>
 								<br />
 								<br />
 								<div className='pointer' />

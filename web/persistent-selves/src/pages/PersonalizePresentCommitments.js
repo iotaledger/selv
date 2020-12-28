@@ -97,7 +97,7 @@ const PersonalizeCommitments = ({ history, match }) => {
                                                 <Radio.Group onChange={event => onChange(commitment?.commitmentId, event)}>
                                                     {
                                                         commitment?.options?.map(option => (
-                                                            <Radio value={option} key={option}>
+                                                            <Radio value={option} key={option} className='commitment-option'>
                                                                 {option}
                                                             </Radio>
                                                         ))

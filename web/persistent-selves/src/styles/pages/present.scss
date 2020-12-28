@@ -301,11 +301,7 @@
             margin-bottom: 30px;
 
             .commitment-item {
-                display: flex;
-                flex-direction: column;
-                margin: 15px 0;
-                padding: 40px;
-                border-radius: 20px;
+                height: auto;
                 
                 .commitment-item-header {
                     width: 100%;
@@ -548,5 +544,10 @@
                 border-color: themed('primaryColor');
             }
         }
+    }
+
+    .commitment-option {
+        max-width: 600px;
+        white-space: normal;
     }
 }

@@ -81,4 +81,12 @@
     &:hover {
         color: #FFFFFF;
     }
+
+    &:disabled {
+        color: #FFFFFF;
+
+        &:hover {
+            color: #FFFFFF;
+        }
+    }
 }
