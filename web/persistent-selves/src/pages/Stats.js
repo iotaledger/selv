@@ -23,7 +23,7 @@ const Stats = () => {
 	const [myFutureCommitments, setMyFutureCommitments] = useState([]);
 	const [myPresentCommitments, setMyPresentCommitments] = useState([]);
 	const [commitments, setCommitments] = useState([]);
-	const [averageWalletCommitment, setAverageWalletCommitment] = useState(0);
+	const [averageWalletCommitment, setAverageWalletCommitment] = useState([0,0]);
 	const [loading, setLoading] = useState(false);
 
 	const sameCommitmentsPercent = (myCommitment, category) => {
@@ -36,7 +36,7 @@ const Stats = () => {
 	const othersCommitments = (category) => {
 		const possibleCommitments = commitments?.filter(commitment => commitment?.CommitmentType === category);
 		const myCommitmentsObject = category === 'FutureCommitments' ? myFutureCommitments : myPresentCommitments;
-		const myCommitments = myCommitmentsObject?.Commitments?.map(commitment => commitment?.CommitmentTitle);
+		const myCommitments = myCommitmentsObject?.map(commitment => commitment?.CommitmentTitle);
 		const others = possibleCommitments?.filter(commitment =>
 			!myCommitments.includes(commitment?.CommitmentTitle) 
 		);
@@ -51,10 +51,10 @@ const Stats = () => {
 			let myPresentCommitments = await localStorage.getItem('PresentCommitments');
 
 			myFutureCommitments = myFutureCommitments && (await JSON.parse(myFutureCommitments));
-			setMyFutureCommitments(myFutureCommitments);
+			setMyFutureCommitments(myFutureCommitments?.Commitments);
 
 			myPresentCommitments = myPresentCommitments && (await JSON.parse(myPresentCommitments));
-			setMyPresentCommitments(myPresentCommitments);
+			setMyPresentCommitments(myPresentCommitments?.Commitments);
 
 			const json = await axios.get(`${serverAPI}/commitments`);
 			if (!json?.data?.error) {
@@ -63,8 +63,7 @@ const Stats = () => {
 
 				const futureCommitments = commitments?.filter(commitment => commitment?.CommitmentType === 'FutureCommitments');
 				const presentCommitments = commitments?.filter(commitment => commitment?.CommitmentType === 'PresentCommitments');
-				console.log(33, futureCommitments);
-				console.log(44, presentCommitments);
+				console.log(33, futureCommitments, myFutureCommitments);
 
 				// Future commitments
 				const futureSeries = Object.keys(commitmentsColors).map(commitmentTitle => {
@@ -80,6 +79,7 @@ const Stats = () => {
 				})
 				setPresentSeries(presentSeries);
 
+				// const averageWalletCommitment = 
 				setLoading(false);
 			} else {
 				console.error('Error loading commitments', json?.data?.error);
@@ -181,7 +181,7 @@ const Stats = () => {
 							<Space direction='vertical' align='start'>
 								<p>Your choices</p>
 								{
-									myFutureCommitments?.Commitments?.map(commitment => (
+									myFutureCommitments?.map(commitment => (
 										<Space align='center' key={commitment?.CommitmentTitle}>
 											<span
 												className='legend-icon'
@@ -225,19 +225,19 @@ const Stats = () => {
 							<br />
 							<br />
 							<div className='slider-titles-wrapper'>
-								<span>{myFutureCommitments?.Commitments?.[0]?.CommitmentTitle}</span>
-								<span>{myFutureCommitments?.Commitments?.[1]?.CommitmentTitle}</span>
+								<span>{myFutureCommitments?.[0]?.CommitmentTitle}</span>
+								<span>{myFutureCommitments?.[1]?.CommitmentTitle}</span>
 							</div>
 							<Progress
 								strokeWidth={13}
-								strokeColor={commitmentsColors[myFutureCommitments?.Commitments?.[0]?.CommitmentTitle]}
-								trailColor={commitmentsColors[myFutureCommitments?.Commitments?.[1]?.CommitmentTitle]}
+								strokeColor={commitmentsColors[myFutureCommitments?.[0]?.CommitmentTitle]}
+								trailColor={commitmentsColors[myFutureCommitments?.[1]?.CommitmentTitle]}
 								showInfo={false}
-								percent={myFutureCommitments?.Commitments?.[0].CommitmentWalletPercentage}
+								percent={myFutureCommitments?.[0]?.CommitmentWalletPercentage}
 							/>
 							<div className='percentages-wrapper'>
-								<span>You chose {myFutureCommitments?.Commitments?.[0]?.CommitmentWalletPercentage}%</span>
-								<span>You chose {myFutureCommitments?.Commitments?.[1]?.CommitmentWalletPercentage}%</span>
+								<span>You chose {myFutureCommitments?.[0]?.CommitmentWalletPercentage}%</span>
+								<span>You chose {myFutureCommitments?.[1]?.CommitmentWalletPercentage}%</span>
 							</div>
 							<br />
 							<br />
@@ -257,7 +257,7 @@ const Stats = () => {
 							<Space direction='vertical' align='start'>
 								<p>Your choices</p>
 								{
-									myPresentCommitments?.Commitments?.map(commitment => (
+									myPresentCommitments?.map(commitment => (
 										<Space align='center' key={commitment?.CommitmentTitle}>
 											<span
 												className='legend-icon'
@@ -298,50 +298,50 @@ const Stats = () => {
 						</div>
 						<div className='commitment-info-wrapper'>
 							<Space direction='vertical' size='large'>
-								<h3>{myPresentCommitments?.Commitments?.[0].CommitmentTitle}</h3>
+								<h3>{myPresentCommitments?.[0]?.CommitmentTitle}</h3>
 								<div>
-									<p className='bold'>You commited to</p>
-									<span className='medium'>{myPresentCommitments?.Commitments?.[0].CommitmentSupport}</span>
+									<p className='bold'>You committed to</p>
+									<span className='medium'>{myPresentCommitments?.[0]?.CommitmentSupport}</span>
 								</div>
 								<div>
 									<p className='small'>
 										<span className='medium'>
-											{sameCommitmentsPercent(myPresentCommitments?.Commitments?.[0]?.CommitmentTitle, 'PresentCommitments')}%
+											{sameCommitmentsPercent(myPresentCommitments?.[0]?.CommitmentTitle, 'PresentCommitments')}%
 										</span>
 										&nbsp;of participants also chose this option
 									</p>
 									<Progress
 										strokeWidth={13}
 										trailColor='#FFFFFF'
-										strokeColor={commitmentsColors[myPresentCommitments?.Commitments?.[0]?.CommitmentTitle]}
+										strokeColor={commitmentsColors[myPresentCommitments?.[0]?.CommitmentTitle]}
 										showInfo={false}
 										percent={sameCommitmentsPercent(
-											myPresentCommitments?.Commitments?.[0]?.CommitmentTitle,
+											myPresentCommitments?.[0]?.CommitmentTitle,
 											'PresentCommitments'
 										)}
 									/>
 								</div>
 							</Space>
 							<Space direction='vertical' size='large'>
-								<h3>{myPresentCommitments?.Commitments?.[1].CommitmentTitle}</h3>
+								<h3>{myPresentCommitments?.[1]?.CommitmentTitle}</h3>
 								<div>
-									<p className='bold'>You commited to</p>
-									<span className='medium'>{myPresentCommitments?.Commitments?.[1].CommitmentSupport}</span>
+									<p className='bold'>You committed to</p>
+									<span className='medium'>{myPresentCommitments?.[1]?.CommitmentSupport}</span>
 								</div>
 								<div>
 									<p className='small'>
 										<span className='medium'>
-											{sameCommitmentsPercent(myPresentCommitments?.Commitments?.[1]?.CommitmentTitle, 'PresentCommitments')}%
+											{sameCommitmentsPercent(myPresentCommitments?.[1]?.CommitmentTitle, 'PresentCommitments')}%
 										</span>
 										&nbsp;of participants also chose this option
 									</p>
 									<Progress
 										strokeWidth={13}
-										strokeColor={commitmentsColors[myPresentCommitments?.Commitments?.[1]?.CommitmentTitle]}
+										strokeColor={commitmentsColors[myPresentCommitments?.[1]?.CommitmentTitle]}
 										trailColor='#FFFFFF'
 										showInfo={false}
 										percent={sameCommitmentsPercent(
-											myPresentCommitments?.Commitments?.[1]?.CommitmentTitle,
+											myPresentCommitments?.[1]?.CommitmentTitle,
 											'PresentCommitments'
 										)}
 									/>
