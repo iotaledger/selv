@@ -41,6 +41,11 @@
         button {
             background-color: white;
             color: #535664; 
+
+            &:hover {
+                background-color: white;
+                color: #000000; 
+            }
         }
     }
 }

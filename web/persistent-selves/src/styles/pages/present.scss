@@ -3,13 +3,6 @@
         button {
             width: 210px;
 
-            @include themify($themes) {
-                &:disabled {
-                    opacity: 0.5;
-                    background-color: themed('primaryColor') !important;
-                }
-            }
-
             h4 {
                 color: #FFFFFF;
             }
@@ -435,9 +428,7 @@
                     .form-commitment-card {
                         border-radius: 3px;
                         box-shadow: 5px 5px 0px #4D4D4D;
-                        @include themify($themes) {
-                            background-color: themed('trinaryColor');
-                        } 
+                        background-color: #FFFFFF;
 
                         .form-commitment-content p {
                             font-weight: 600;

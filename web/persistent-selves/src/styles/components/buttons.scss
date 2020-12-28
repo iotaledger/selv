@@ -16,15 +16,12 @@ button, .ant-btn {
 
         &:hover {
             opacity: 0.85;
-            background-color: themed('primaryColor') !important;
+            background-color: themed('primaryColor');
         }
 
         &:disabled {
-            background-color: themed('secondaryFontColor');  
-    
-            &:hover {
-                background-color: themed('secondaryFontColor');
-            }
+            opacity: 0.5;
+            background-color: themed('primaryColor');
         }
     }
 }
