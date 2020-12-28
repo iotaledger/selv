@@ -67,7 +67,7 @@ const PersonalizeCommitments = ({ history, match }) => {
     
     const handleConditionChange = (id, value) => {
         const commitment = storedCommitments[id];
-        commitment.percentage = Number(value);
+        commitment.percentage = value;
         updateStoredCommitments(storedCommitments => ({ ...storedCommitments, [id]: commitment }));
     }
 

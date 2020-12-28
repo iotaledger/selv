@@ -111,7 +111,7 @@ const PledgeData = ({ history, match }) => {
                                                 <p>
                                                     <b>{commitment?.condition?.replace(/ .*/, '')} </b>
                                                     {commitment?.condition?.split(' ').slice(1).join(' ')}
-                                                    <span className='custom-value'> {commitment?.percentage}% </span>
+                                                    <span className='custom-value'> {commitment?.percentage} </span>
                                                     THEN donate <span className='custom-value'>{commitment?.walletPercentage}%</span> of my wallet
                                                     balance TO support <span className='custom-value'>{commitment?.support}</span>
                                                 </p>

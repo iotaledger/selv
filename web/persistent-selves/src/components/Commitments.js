@@ -44,7 +44,7 @@ const Commitments = ({ futureCommitment, presentCommitment, disabled, nextStep }
                                                     <p>
                                                         <b>{getCondition('future', commitment?.CommitmentId).replace(/ .*/, '')} </b>
                                                         {getCondition('future', commitment?.CommitmentId).split(' ').slice(1).join(' ')}
-                                                        <span className='custom-value'> {commitment?.CommitmentPercentage}% </span>
+                                                        <span className='custom-value'> {commitment?.CommitmentPercentage} </span>
                                                         THEN donate <span className='custom-value'>{commitment?.CommitmentWalletPercentage}%</span> of my wallet balance
                                                         TO support <span className='custom-value'>{commitment?.CommitmentSupport}</span>
                                                     </p>
