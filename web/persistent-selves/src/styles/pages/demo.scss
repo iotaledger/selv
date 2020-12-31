@@ -273,8 +273,10 @@
 
 		.outcome {
 			position: relative;
-			max-width: 573px;
-			max-height: 542px;
+			max-width: 509px;
+			max-height: 544px;
+			width: 509px;
+			height: 544px;
 			top: 10px;
 
 			@include breakPoint(medium) {
