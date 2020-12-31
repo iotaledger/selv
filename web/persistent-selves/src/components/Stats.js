@@ -162,6 +162,8 @@ const Stats = () => {
 		}
 	};
 
+	if (!myFutureCommitments || !myPresentCommitments) return <div />
+
 	return (
 		<React.Fragment>
 			{loading ? (
