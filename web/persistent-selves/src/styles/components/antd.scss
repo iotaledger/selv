@@ -90,3 +90,14 @@
         }
     }
 }
+
+.ant-select-item-option-content {
+    display: flex;
+    flex-direction: row;
+    
+    .color-code {
+        width: 6px;
+        height: 20px;
+        margin-right: 20px;
+    }
+}

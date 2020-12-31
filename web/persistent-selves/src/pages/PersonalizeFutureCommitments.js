@@ -11,6 +11,8 @@ import commitments from '../assets/commitments';
 
 const { Option } = Select;
 
+const colorCodes = ['#FFFF00', '#FEE266', '#FDD45A', '#FDBE57', '#FC9E5B', '#FC9054', '#FC784B', '#FC6B4B', '#FC4B4B', '#FF0000'];
+
 const PersonalizeCommitments = ({ history, match }) => {
     const { nextStep } = useStep(match);
     const category = history?.location?.state?.category;
@@ -117,8 +119,13 @@ const PersonalizeCommitments = ({ history, match }) => {
                                                     defaultValue={commitment?.condition?.values?.[1]} 
                                                     onChange={value => handleConditionChange(commitment?.commitmentId, value)}
                                                 >
-                                                    {commitment?.condition?.values?.map(item => (
-                                                        <Option key={item}>{item}</Option>
+                                                    {commitment?.condition?.values?.map((item, idx) => (
+                                                        <Option key={item} className='option'>
+                                                            <div 
+                                                                className='color-code' 
+                                                                style={{ 'backgroundColor': colorCodes[idx] }} />
+                                                            {item}
+                                                        </Option>
                                                     ))}
                                                 </Select>
                                                 {
