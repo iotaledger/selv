@@ -24,10 +24,7 @@ export default {
         personalise: (<React.Fragment>
             <p>
                 Far Future Foundation will register your commitment and safeguard your donation as a gift to future generations. 
-            </p>
-            <br />
-            <p>
-            Now decide the conditions for how and when you would like your donation to be distributed.
+                Now decide the conditions for how and when you would like your donation to be distributed.
             </p>
         </React.Fragment>),
         commitments: [
