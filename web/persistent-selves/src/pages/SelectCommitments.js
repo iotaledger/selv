@@ -89,14 +89,9 @@ const SelectCommitments = ({ history, match }) => {
                         }
                     </div>
                 </div>
-                    <div className='commitments-drawer'>
+                    <div className='commitments-drawer fixed'>
                         <Space direction="vertical" size="middle" align="center">
-                            <h3>Choose two {category} commitments</h3>
-                            {
-                                selected.length === 1
-                                ? <p>You have 1 remaining commitment left to choose</p>
-                                : <p>You have {2 - selected.length} remaining commitments left to choose</p>
-                            }
+                            <h4>{selected.length} out of 2 {category} commitments selected</h4>
                             <Link to={{
                                 pathname: nextStep,
                                 state: { commitments: selected, category }
