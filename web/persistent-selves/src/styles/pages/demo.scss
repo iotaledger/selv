@@ -42,6 +42,10 @@
 		height: 100%;
 	}
 
+	&.cookie-bar-bottom-bar {
+		height: calc(100vh + 300px);
+	}
+
 	h2 {
 		font-weight: bold;
 		line-height: 40px;
