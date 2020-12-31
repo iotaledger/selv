@@ -89,20 +89,20 @@ const SelectCommitments = ({ history, match }) => {
                         }
                     </div>
                 </div>
-                    <div className='commitments-drawer fixed'>
-                        <Space direction="vertical" size="middle" align="center">
-                            <h4>{selected.length} out of 2 {category} commitments selected</h4>
-                            <Link to={{
-                                pathname: nextStep,
-                                state: { commitments: selected, category }
-                            }}>
-                                <Button disabled={selected.length < 2}>
-                                    <h4>Continue</h4>
-                                </Button>
-                            </Link>
-                        </Space>   
-                    </div>
+                <div className='commitments-drawer drawer fixed'>
+                    <Space direction="vertical" size="middle" align="center">
+                        <h4>{selected.length} out of 2 {category} commitments selected</h4>
+                        <Link to={{
+                            pathname: nextStep,
+                            state: { commitments: selected, category }
+                        }}>
+                            <Button disabled={selected.length < 2}>
+                                <h4>Continue</h4>
+                            </Button>
+                        </Link>
+                    </Space>   
                 </div>
+            </div>
         </Layout>
     );
 };
