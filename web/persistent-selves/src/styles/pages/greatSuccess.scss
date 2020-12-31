@@ -2,7 +2,6 @@
     overflow-x: auto;
     height: 100%;
     width: 100%;
-    background: #EEF2FA;
     position: relative;
 
     .random-element-wrapper {
@@ -13,10 +12,6 @@
 
     .figure {
         max-width: 275px;
-    }
-
-    button {
-        text-transform: uppercase;
     }
 
     .cta-wrapper {
@@ -37,7 +32,7 @@
         flex-direction: column;
         justify-content: center !important;
         position: relative;
-        margin: 100px 250px;
+        margin: 100px 250px 20px;
 
         h2 {
             align-self: center;
