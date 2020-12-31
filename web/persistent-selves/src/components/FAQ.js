@@ -4,11 +4,11 @@ import { PanelGroup, Panel } from 'rsuite';
 const faqs = [
 	{
 		question: 'What is Good Ancestor Registry?',
-		answer: 'Good Ancestor Registry is a repository of commitments, by individuals around the world, for creating a positive environmental inheritance for future generations. These personal commitments are a public testament to one’s values and actions for a better future.'
+		answer: 'The good ancestor registry is a imaginary, decentralized repository of commitments, create by people across the globe that want to preserve their values and intentions for a better society with future generations and create their own sustainable heritage.'
 	},
 	{
 		question: 'How is my digital identity connected to Good Ancestor Registry?',
-		answer: ''
+		answer: 'This demonstration explores how a self-sovereign digital identity can help humans to create peer-to-peer networks of value without granting any one or centralized entity control over highly personal data.'
 	},
 	{
 		question: 'How will my digital commitments impact future generations?',
