@@ -44,7 +44,7 @@ const IntroWelcome = ({ match }) => {
 								<br />
 								<br />
 								<p>
-									Your digital testament to a positive environmental inheritance for future generations.
+									This is your digital testament to a positive environmental inheritance for future generations.
 								</p>
 								<br />
 								<p>
