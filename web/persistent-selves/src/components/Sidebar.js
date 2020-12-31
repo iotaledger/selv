@@ -9,7 +9,6 @@ import frame from '../assets/backgrounds/circleFrame5.svg';
 
 const externalPages = [
     { url: '/', title: 'Home' },
-    { url: '/#faq', title: 'FAQ' },
     { url: 'https://iota.org', title: 'IOTA.org' }
 ];
 
