@@ -38,7 +38,7 @@ export default {
                 commitmentId: 'climate_change',
                 condition: {
                     if: 'IF atmospheric carbon dioxide concentration exceeds',
-                    values: ['410 ppm', '500 ppm', '600 ppm', '700 ppm', '800 ppm', '900 ppm', '1000 ppm', '1100 ppm', '1200 ppm', '1260 ppm', '500 ppm'],
+                    values: ['410 ppm', '500 ppm', '600 ppm', '700 ppm', '800 ppm', '900 ppm', '1000 ppm', '1100 ppm', '1200 ppm', '1260 ppm'],
                     support: ['carbon sequestration', 'climate adaptation'],
                     valueInfo: "The concentration of carbon dioxide in Earth's atmosphere is currently at nearly 412 parts per million (ppm) and rising. This represents a 47 percent increase since the beginning of the Industrial Age, when the concentration was near 280 ppm",
                     supportInfo: {
