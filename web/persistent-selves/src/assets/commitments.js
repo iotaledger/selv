@@ -39,7 +39,12 @@ export default {
                 condition: {
                     if: 'IF atmospheric carbon dioxide concentration exceeds',
                     values: ['410 ppm', '500 ppm', '600 ppm', '700 ppm', '800 ppm', '900 ppm', '1000 ppm', '1100 ppm', '1200 ppm', '1260 ppm', '500 ppm'],
-                    support: ['carbon sequestration projects', 'climate-induced migration']
+                    support: ['carbon sequestration', 'climate adaptation'],
+                    valueInfo: "The concentration of carbon dioxide in Earth's atmosphere is currently at nearly 412 parts per million (ppm) and rising. This represents a 47 percent increase since the beginning of the Industrial Age, when the concentration was near 280 ppm",
+                    supportInfo: {
+                        'carbon sequestration': 'Carbon sequestration is the process of capturing and storing atmospheric carbon dioxide. It is one method of reducing the amount of carbon dioxide in the atmosphere with the goal of reducing global climate change.',
+                        'climate adaptation': 'Climate change adaptation is the process of adjusting to current or expected climate change and its effects.'
+                    }
                 }
             },
             {
@@ -53,7 +58,11 @@ export default {
                 condition: {
                     if: 'IF blue water consumption exceeds',
                     values: ['2,600 km3 per year', '3,000 km3 per year', '4,000 km3 per year', '5,000 km3 per year', '6,000 km3 per year', '7,000 km3 per year', '8,000 km3 per year', '9,000 km3 per year', '10,000 km3 per year'],
-                    support: ['water body conservation/restoration', 'improved agricultural water management']
+                    support: ['water body restoration', 'improved agricultural management'],
+                    supportInfo: {
+                        'water body restoration': 'The aim of river restoration is to return rivers and streams to their natural state and to improve their ecological status.',
+                        'improved agricultural management': 'Changes in the agriculture sector are essential to mitigate and adapt to climate change, ensure food security for the growing population, and improve the livelihoods of poor smallholder producers.'
+                    }
                 }
             },
             {
@@ -67,7 +76,11 @@ export default {
                 condition: {
                     if: 'IF the area of forested land as a proportion of forest-covered land prior to human alteration decreases to',
                     values: ['62%', '55%', '50%', '45%', '40%'],
-                    support: ['deforestation reduction', 'indigenous land management practices']
+                    support: ['afforestation and reforestation', 'indigenous land management techniques'],
+                    supportInfo: {
+                        'afforestation and reforestation': 'Afforestation is the process of introducing trees and tree seedlings to an area that has previously not been forested. Reforestation is the re-growing of forests that have previously been cut down using tree species that are native to the geographic area.',
+                        'indigenous land management techniques': "Indigenous land and sea management, also referred to as 'caring for country', includes a wide range of environmental, natural resource and cultural heritage management activities undertaken by Indigenous individuals, families, groups and organisations."
+                    }
                 }
             },
             {
@@ -81,7 +94,11 @@ export default {
                 condition: {
                     if: 'IF the rate of species extinction per million species per year rises to',
                     values: ['1,000', '1,500', '2,000', '2,500', '3,000', '3,500', '4,000', '4,500', '5,000'],
-                    support: ['species restoration', 'subsistence-based rural populations']
+                    support: ['species restoration', 'nature based solutions'],
+                    supportInfo: {
+                        'species restoration': 'Rewilding is a form of ecological restoration where the emphases is on humans stepping back and leaving an area to nature, as opposed to more active forms of natural resource management.',
+                        'nature based solutions': 'Nature based solutions are also defined by site-specific natural and cultural contexts. They not only seek to protect nature, but also aspire to produce societal benefits in a fair way, building a sustainable and equitable future rather than just seeking immediate economic returns.'
+                    }
                 }
             }
         ]
