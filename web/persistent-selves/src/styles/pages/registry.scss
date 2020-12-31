@@ -629,6 +629,23 @@
         flex-wrap: nowrap;
         width: 100%;
 
+        &.info {
+            flex-direction: column;
+
+            .title {
+                text-transform: capitalize;
+            }
+
+            .placeholder {
+                height: 10px;
+            }
+
+            .value {
+                max-width: 100%;
+                text-align: left;
+            }
+        }
+
         padding: 5px 0;
         @include themify($themes) {
             color: themed('primaryColor');

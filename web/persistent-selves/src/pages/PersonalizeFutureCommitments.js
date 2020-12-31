@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Select, Card, Slider, Space } from 'antd';
 import useStep from '../utils/useStep';
-import { Layout, Popover } from '../components';
+import { Layout, Popover, Info } from '../components';
 import commitments from '../assets/commitments';
 
 /**
@@ -83,8 +83,6 @@ const PersonalizeCommitments = ({ history, match }) => {
         console.log(category, storedCommitments);
     }
 
-    console.log('storedCommitments', storedCommitments);
-
     return (
         <Layout match={match} noFooter>
             <div className='personalize-commitment-page-wrapper'>
@@ -123,6 +121,13 @@ const PersonalizeCommitments = ({ history, match }) => {
                                                         <Option key={item}>{item}</Option>
                                                     ))}
                                                 </Select>
+                                                {
+							                        commitment?.condition?.valueInfo ? (
+                                                        <Info 
+                                                            info={commitment?.condition?.valueInfo} 
+                                                        />
+                                                    ) : null
+                                                }
                                             </div>
                                             <div className='condition-wrapper'>
                                                 <p><strong>THEN</strong>  donate {percentage[index]}% of my wallet balance</p>
@@ -137,6 +142,10 @@ const PersonalizeCommitments = ({ history, match }) => {
                                                         <Option key={item}>{item}</Option>
                                                     ))}
                                                 </Select>
+                                                <Info 
+                                                    info={commitment?.condition?.supportInfo?.[storedCommitments?.[commitment?.commitmentId]?.support]}
+                                                    title={storedCommitments?.[commitment?.commitmentId]?.support}
+                                                />
                                             </div>
                                         </div>
                                     </Card>
