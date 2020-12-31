@@ -162,7 +162,7 @@ const ThankYou = ({ history }) => {
 							<a 
 								target='_blank'
                     			rel='noopener noreferrer'
-								href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.origin)}`}
+								href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.origin)}&text=Together%20with%20%40DarkMatterLabs%20we%20have%20built%20an%20interactive%20demo%20of%20what%20long-term%20self-sovereign%20identities%20could%20look%20like.%20Try%20the%20demo%20to%20learn%20about%20%23FuturesLiteracy%20and%20make%20some%20good%20resolutions%20for%20the%20new%20year%20and%20a%20green%20future!`}
 							>
 								<Button className='cta'>Share on Twitter</Button>
 							</a>
