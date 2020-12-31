@@ -6,7 +6,6 @@ export default function sketch(s) {
   s.state = {};
   s.dispatch = () => {};
 
-  let completed = false;
   let size = 0;
   let fade = 0;
   let metro_font, inter_font, open_font;
@@ -363,9 +362,7 @@ export default function sketch(s) {
   };
 
   s.mouseClicked = () => {
-    if (completed) {
-      window.location = '/demo/thankyou';
-    } else if (s.state.endAnimationState < 2) {
+  if (s.state.endAnimationState < 2) {
       s.state.endAnimationState++;
       s.dispatch({
         type: "SET_ANIMATION_STATE",
@@ -373,9 +370,9 @@ export default function sketch(s) {
       });
       s.loop();
     } else {
+      window.location = '/demo/thankyou';
       s.noLoop();
       s.clear();
-      completed = true;
     }
   };
 
