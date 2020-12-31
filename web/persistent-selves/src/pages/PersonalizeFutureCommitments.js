@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Select, Card, Slider } from 'antd';
+import { Button, Select, Card, Slider, Space } from 'antd';
 import useStep from '../utils/useStep';
 import { Layout, Popover } from '../components';
 import commitments from '../assets/commitments';
@@ -101,7 +101,7 @@ const PersonalizeCommitments = ({ history, match }) => {
                                     key={commitment?.commitmentId}
                                 >
                                     <div className='commitment-item-header'>
-                                        <h4>{commitment?.title}</h4>
+                                        <h4>{index + 1}. {commitment?.title}</h4>
                                         <Popover commitment={commitment} />
                                     </div> 
                                     <Card 
@@ -160,16 +160,16 @@ const PersonalizeCommitments = ({ history, match }) => {
                             <span>{percentage[0]}%</span>
                             <span>{percentage[1]}%</span>
                         </div>
-                        <br />
-                        <br />
-                        <div className='drawer-btn-wrapper'>
+                    </div>
+                    <div className='cta-wrapper'>
+                        <Space direction="vertical" size="middle" align="center">
                             <Link to={nextStep}>
                                 <Button onClick={storeCommitments}>
                                     <h4>Continue</h4>
                                 </Button>
                             </Link>
-                        </div>                     
-                    </div>
+                        </Space>   
+                    </div> 
                 </div>
             </div>
         </Layout>
