@@ -31,7 +31,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 20px 20px 100px 0;
+        padding: 20px 20px 35px 0;
 
         font-weight: bold;
         font-size: 24px;
@@ -106,6 +106,12 @@
     font-weight: 600;
     font-size: 15px;
     line-height: 23px;
+}
+
+.rs-steps-vertical {
+    .rs-steps-item {
+        padding-bottom: 10px;
+    }
 }
 
 .rs-steps-item-icon-wrapper {

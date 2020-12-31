@@ -14,6 +14,7 @@ import Credentials from './Credentials';
 import Commitments from './Commitments';
 import Popup from './Popup';
 import Popover from './Popover';
+import Info from './Info';
 import Modal from './Modal';
 import Stats from './Stats';
 
@@ -34,6 +35,7 @@ export {
     Commitments,
     Popup,
     Popover,
+    Info,
     Modal,
     Stats
 };

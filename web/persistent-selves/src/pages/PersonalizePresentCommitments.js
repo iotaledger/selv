@@ -68,7 +68,7 @@ const PersonalizeCommitments = ({ history, match }) => {
         <Layout match={match} noFooter>
             <div className='personalize-commitment-page-wrapper'>
                 <div className='personalize-commitment-wrapper'>
-                    <div className='text-wrapper select-commitment-text-wrapper'>
+                    <div className='text-wrapper select-commitment-text-wrapper personalize'>
                         <h2>Personalise your commitment</h2>
                         <span>{commitmentObject?.personalise}</span>
                     </div>
@@ -97,7 +97,7 @@ const PersonalizeCommitments = ({ history, match }) => {
                                                 <Radio.Group onChange={event => onChange(commitment?.commitmentId, event)}>
                                                     {
                                                         commitment?.options?.map(option => (
-                                                            <Radio value={option} key={option}>
+                                                            <Radio value={option} key={option} className='commitment-option'>
                                                                 {option}
                                                             </Radio>
                                                         ))

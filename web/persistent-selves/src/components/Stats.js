@@ -37,10 +37,11 @@ const Stats = () => {
 		const possibleCommitments = commitments?.filter(commitment => commitment?.CommitmentType === category);
 		const myCommitmentsObject = category === 'FutureCommitments' ? myFutureCommitments : myPresentCommitments;
 		const myCommitments = myCommitmentsObject?.map(commitment => commitment?.CommitmentTitle);
+		const othersSet = new Set();
 		const others = possibleCommitments?.filter(commitment =>
-			!myCommitments.includes(commitment?.CommitmentTitle) 
-		);
-		return others;
+			!myCommitments.includes(commitment?.CommitmentTitle));
+		others.forEach(commitment => othersSet.add(commitment?.CommitmentTitle));
+		return othersSet;
 	};
 
 	useEffect(() => {
@@ -161,6 +162,8 @@ const Stats = () => {
 		}
 	};
 
+	if (!myFutureCommitments || !myPresentCommitments) return <div />
+
 	return (
 		<React.Fragment>
 			{loading ? (
@@ -210,17 +213,17 @@ const Stats = () => {
 							<Space direction='vertical' align='start'>
 								<p>Others chose</p>
 								{
-									othersCommitments('FutureCommitments')?.map(commitment => (
-										<Space align='center' key={commitment?.CommitmentTitle}>
+									Array.from(othersCommitments('FutureCommitments'))?.map(commitment => (
+										<Space align='center' key={commitment}>
 											<span
 												className='legend-icon'
 												style={{
-													backgroundColor: commitmentsColors[commitment?.CommitmentTitle]
+													backgroundColor: commitmentsColors[commitment]
 												}}></span>
 											<p className='bold'>
-												{sameCommitmentsPercent(commitment?.CommitmentTitle, 'FutureCommitments')}%
+												{sameCommitmentsPercent(commitment, 'FutureCommitments')}%
 												chose&nbsp;
-												{commitment?.CommitmentTitle}
+												{commitment}
 											</p>
 										</Space>
 									))
@@ -236,8 +239,8 @@ const Stats = () => {
 							<br />
 							<div 
 								className='average-commitment' 
-								style={{ 'left': `calc(${averageWalletCommitments?.[0]}% - 45px)`}}>
-								<span>{averageWalletCommitments?.[0]}% vs {averageWalletCommitments?.[1]}%</span>
+								style={{ 'left': `calc(${averageWalletCommitments?.[0]}% - 60px)`}}>
+								<span>{averageWalletCommitments?.[0]?.toFixed(1)}% vs {averageWalletCommitments?.[1]?.toFixed(1)}%</span>
 								<br />
 								<br />
 								<div className='pointer' />
@@ -297,17 +300,17 @@ const Stats = () => {
 							<Space direction='vertical' align='start'>
 								<p>Others chose</p>
 								{
-									othersCommitments('PresentCommitments')?.map(commitment => (
-										<Space align='center' key={commitment?.CommitmentTitle}>
+									Array.from(othersCommitments('PresentCommitments'))?.map(commitment => (
+										<Space align='center' key={commitment}>
 											<span
 												className='legend-icon'
 												style={{
-													backgroundColor: commitmentsColors[commitment?.CommitmentTitle]
+													backgroundColor: commitmentsColors[commitment]
 												}}></span>
 											<p className='bold'>
-												{sameCommitmentsPercent(commitment?.CommitmentTitle, 'PresentCommitments')}%
+												{sameCommitmentsPercent(commitment, 'PresentCommitments')}%
 												chose&nbsp;
-												{commitment?.CommitmentTitle}
+												{commitment}
 											</p>
 										</Space>
 									))

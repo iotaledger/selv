@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Select, Card, Slider } from 'antd';
+import { Button, Select, Card, Slider, Space } from 'antd';
 import useStep from '../utils/useStep';
-import { Layout, Popover } from '../components';
+import { Layout, Popover, Info } from '../components';
 import commitments from '../assets/commitments';
 
 /**
@@ -10,6 +10,8 @@ import commitments from '../assets/commitments';
  */
 
 const { Option } = Select;
+
+const colorCodes = ['#FFFF00', '#FEE266', '#FDD45A', '#FDBE57', '#FC9E5B', '#FC9054', '#FC784B', '#FC6B4B', '#FC4B4B', '#FF0000'];
 
 const PersonalizeCommitments = ({ history, match }) => {
     const { nextStep } = useStep(match);
@@ -83,8 +85,6 @@ const PersonalizeCommitments = ({ history, match }) => {
         console.log(category, storedCommitments);
     }
 
-    console.log('storedCommitments', storedCommitments);
-
     return (
         <Layout match={match} noFooter>
             <div className='personalize-commitment-page-wrapper'>
@@ -101,7 +101,7 @@ const PersonalizeCommitments = ({ history, match }) => {
                                     key={commitment?.commitmentId}
                                 >
                                     <div className='commitment-item-header'>
-                                        <h4>{commitment?.title}</h4>
+                                        <h4>{index + 1}. {commitment?.title}</h4>
                                         <Popover commitment={commitment} />
                                     </div> 
                                     <Card 
@@ -119,10 +119,22 @@ const PersonalizeCommitments = ({ history, match }) => {
                                                     defaultValue={commitment?.condition?.values?.[1]} 
                                                     onChange={value => handleConditionChange(commitment?.commitmentId, value)}
                                                 >
-                                                    {commitment?.condition?.values?.map(item => (
-                                                        <Option key={item}>{item}</Option>
+                                                    {commitment?.condition?.values?.map((item, idx) => (
+                                                        <Option key={item} className='option'>
+                                                            <div 
+                                                                className='color-code' 
+                                                                style={{ 'backgroundColor': colorCodes[idx] }} />
+                                                            {item}
+                                                        </Option>
                                                     ))}
                                                 </Select>
+                                                {
+							                        commitment?.condition?.valueInfo ? (
+                                                        <Info 
+                                                            info={commitment?.condition?.valueInfo} 
+                                                        />
+                                                    ) : null
+                                                }
                                             </div>
                                             <div className='condition-wrapper'>
                                                 <p><strong>THEN</strong>  donate {percentage[index]}% of my wallet balance</p>
@@ -137,6 +149,10 @@ const PersonalizeCommitments = ({ history, match }) => {
                                                         <Option key={item}>{item}</Option>
                                                     ))}
                                                 </Select>
+                                                <Info 
+                                                    info={commitment?.condition?.supportInfo?.[storedCommitments?.[commitment?.commitmentId]?.support]}
+                                                    title={storedCommitments?.[commitment?.commitmentId]?.support}
+                                                />
                                             </div>
                                         </div>
                                     </Card>
@@ -160,16 +176,16 @@ const PersonalizeCommitments = ({ history, match }) => {
                             <span>{percentage[0]}%</span>
                             <span>{percentage[1]}%</span>
                         </div>
-                        <br />
-                        <br />
-                        <div className='drawer-btn-wrapper'>
+                    </div>
+                    <div className='cta-wrapper'>
+                        <Space direction="vertical" size="middle" align="center">
                             <Link to={nextStep}>
                                 <Button onClick={storeCommitments}>
                                     <h4>Continue</h4>
                                 </Button>
                             </Link>
-                        </div>                     
-                    </div>
+                        </Space>   
+                    </div> 
                 </div>
             </div>
         </Layout>

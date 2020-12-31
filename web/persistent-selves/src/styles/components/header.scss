@@ -27,9 +27,9 @@
 
     .logo-bg-future {
         @extend .logo-bg-registry;
-        height: 74px;
+        height: 124px;
         margin-top: 25px;
-        padding: 0 50px;
+        padding: 25px 50px 20px;
         display: flex;
         align-items: center;
         z-index: 100;
