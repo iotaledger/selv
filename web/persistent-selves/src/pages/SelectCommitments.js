@@ -27,14 +27,9 @@ const SelectCommitments = ({ history, match }) => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSelect = commitmentId => {
-        console.log(333, commitmentId);
         if (selected.includes(commitmentId)) {
-        console.log(444, [...selected].filter(id => id !== commitmentId));
-
             updateSelected(selected => [...selected].filter(id => id !== commitmentId));
         } else {
-        console.log(555, [...selected, commitmentId]);
-
             updateSelected(selected => [...selected, commitmentId]);
         }
     }

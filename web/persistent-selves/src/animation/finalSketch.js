@@ -14,10 +14,7 @@ export default function sketch(s) {
     nextGenLifeColor,
     treesLifeColor,
     forestLifeColor;
-  let blueGradientColor,
-    greenGradientColor,
-    white,
-    black;
+  let blueGradientColor, greenGradientColor, white, black;
   let brandRectangle, brandButton, btnColor, btnHover, fadeBtnColor;
   const parentsRadius = 50;
   const yourRadius = 100;
@@ -36,51 +33,51 @@ export default function sketch(s) {
   }
 
   function drawButton(s) {
-    s.noStroke();
-    s.fill(btnColor);
-    s.rect(s.width / 2 - 40, s.height / 2 + 80, 134, 52, 100);
-    s.textFont(inter_font);
-    s.textSize(18);
-    s.noStroke();
-    s.fill(white);
-    s.text("Commit", s.width / 2 - 10, s.height / 2 + 113);
+    try {
+      s.noStroke();
+      s.fill(btnColor);
+      s.rect(s.width / 2 - 40, s.height / 2 + 80, 134, 52, 100);
+      s.textFont(inter_font);
+      s.textSize(18);
+      s.noStroke();
+      s.fill(white);
+      s.text("Commit", s.width / 2 - 10, s.height / 2 + 113);
+    } catch {}
   }
 
   function drawFinalText(s) {
-    s.fill(brandRectangle);
-    s.noStroke();
-    s.rect(s.width / 2 + 2, s.height / 2 - 12, 235, 20);
-    s.fill(black);
-    s.textFont(metro_font);
-    s.textSize(30);
-    s.text(
-      "This is your Persistent Selv",
-      s.width / 2 - 170,
-      s.height / 2
-    );
-    s.fill(0, 0, 0, fade);
-    s.textFont(open_font);
-    s.textSize(20);
-    s.text(
-      "Your pledges are now taking care of future",
-      s.width / 2 - 160,
-      s.height / 2 + 40
-    );
-    s.text(
-      "generations by protecting their environment",
-      s.width / 2 - 170,
-      s.height / 2 + 60
-    );
+    try {
+      s.fill(brandRectangle);
+      s.noStroke();
+      s.rect(s.width / 2 + 2, s.height / 2 - 12, 235, 20);
+      s.fill(black);
+      s.textFont(metro_font);
+      s.textSize(30);
+      s.text("This is your Persistent Selv", s.width / 2 - 170, s.height / 2);
+      s.fill(0, 0, 0, fade);
+      s.textFont(open_font);
+      s.textSize(20);
+      s.text(
+        "Your pledges are now taking care of future",
+        s.width / 2 - 160,
+        s.height / 2 + 40
+      );
+      s.text(
+        "generations by protecting their environment",
+        s.width / 2 - 170,
+        s.height / 2 + 60
+      );
 
-    s.fill(fadeBtnColor);
-    
-    s.noStroke();
-    s.rect(s.width / 2 - 40, s.height / 2 + 80, 134, 52, 100);
-    s.textFont(inter_font);
-    s.textSize(18);
-    s.noStroke();
-    s.fill(255, 255, 255, fade);
-    s.text("Finish", s.width / 2 , s.height / 2 + 113);
+      s.fill(fadeBtnColor);
+
+      s.noStroke();
+      s.rect(s.width / 2 - 40, s.height / 2 + 80, 134, 52, 100);
+      s.textFont(inter_font);
+      s.textSize(18);
+      s.noStroke();
+      s.fill(255, 255, 255, fade);
+      s.text("Finish", s.width / 2, s.height / 2 + 113);
+    } catch {}
   }
 
   function setGradient(s, x, y, w, h, c1, c2, axis) {
@@ -103,7 +100,7 @@ export default function sketch(s) {
   }
 
   function drawRadialGradient(s, to, from, unit) {
-    const radius = s.width + unit * 10 + size;
+    const radius = s.width + unit * 10;
     for (let x = radius; x > 0; x -= unit) {
       let inter = s.map(x, 0, radius, 0, 1.0);
       let colorHue = s.lerpColor(from, to, inter);
@@ -161,11 +158,7 @@ export default function sketch(s) {
       s.fill(black);
       s.textFont(metro_font);
       s.textSize(30);
-      s.text(
-        "Your pledges are complete",
-        s.width / 2 - 170,
-        s.height / 2
-      );
+      s.text("Your pledges are complete", s.width / 2 - 170, s.height / 2);
       s.fill(white);
       s.textFont(open_font);
       s.textSize(20);
@@ -174,29 +167,24 @@ export default function sketch(s) {
         s.width / 2 - 140,
         s.height / 2 + 40
       );
-      s.text(
-        "to generations",
-        s.width / 2 - 42,
-        s.height / 2 + 60
-      );
+      s.text("to generations", s.width / 2 - 42, s.height / 2 + 60);
       drawButton(s);
     } else if (s.state.endAnimationState === 1) {
-      s.clear();
-      if (size < parentsRadius) {
+      if (size === 0) {
+        drawRadialGradient(s, white, greenGradientColor, 40);
+        size += 5;
+      } else if (size < parentsRadius) {
         size += 5;
       } else {
         s.state.endAnimationState++;
       }
       s.noStroke();
 
-      drawRadialGradient(s, white, blueGradientColor, 40);
-
       s.fill(parentsLifeColor);
       s.arc(0, s.height / 2, size, size, -s.HALF_PI, s.HALF_PI, s.OPEN);
 
       drawTimeline(s);
       drawFinalText(s);
-     
     } else if (s.state.endAnimationState === 2) {
       if (size < yourRadius) {
         size += 5;
@@ -204,8 +192,6 @@ export default function sketch(s) {
         s.state.endAnimationState++;
       }
       s.noStroke();
-
-      drawRadialGradient(s, white, blueGradientColor, 40);
 
       s.fill(yourLifeColor);
       s.arc(0, s.height / 2, size, size, -s.HALF_PI, s.HALF_PI, s.OPEN);
@@ -230,8 +216,6 @@ export default function sketch(s) {
         s.state.endAnimationState++;
       }
       s.noStroke();
-
-      drawRadialGradient(s, white, blueGradientColor, 40);
 
       s.fill(nextGenLifeColor);
       s.arc(0, s.height / 2, size, size, -s.HALF_PI, s.HALF_PI, s.OPEN);
@@ -266,7 +250,6 @@ export default function sketch(s) {
         s.state.endAnimationState++;
       }
       s.noStroke();
-      drawRadialGradient(s, white, greenGradientColor, 40);
 
       s.fill(treesLifeColor);
       s.arc(0, s.height / 2, size, size, -s.HALF_PI, s.HALF_PI, s.OPEN);
@@ -311,7 +294,6 @@ export default function sketch(s) {
         s.state.endAnimationState++;
       }
       s.noStroke();
-      drawRadialGradient(s, white, greenGradientColor, 40);
 
       s.fill(forestLifeColor);
       s.arc(0, s.height / 2, size, size, -s.HALF_PI, s.HALF_PI, s.OPEN);
@@ -362,10 +344,11 @@ export default function sketch(s) {
   };
 
   s.mouseClicked = () => {
-  if (s.state.endAnimationState < 2) {
+    s.clear();
+    if (s.state.endAnimationState < 2) {
       s.state.endAnimationState++;
       s.dispatch({
-        type: "SET_ANIMATION_STATE",
+        type: "SET_END_ANIMATION_STATE",
         payload: s.state.endAnimationState,
       });
       s.loop();
@@ -377,20 +360,25 @@ export default function sketch(s) {
   };
 
   s.mouseMoved = () => {
-    if((s.width / 2 - 40 < s.mouseX) && (s.width / 2 - 40 + 109 > s.mouseX) && (s.height / 2 + 80 < s.mouseY) && (s.height / 2 + 80 + 52>s.mouseY)){
-      btnColor = btnHover;
-      fadeBtnColor = s.color(60, 106, 197, fade);
-    }
-    else{
-      btnColor = brandButton;
-      fadeBtnColor = s.color(44, 128, 252, fade);
-    }
+    try {
+      if (
+        s.width / 2 - 40 < s.mouseX &&
+        s.width / 2 - 40 + 109 > s.mouseX &&
+        s.height / 2 + 80 < s.mouseY &&
+        s.height / 2 + 80 + 52 > s.mouseY
+      ) {
+        btnColor = btnHover;
+        fadeBtnColor = s.color(60, 106, 197, fade);
+      } else {
+        btnColor = brandButton;
+        fadeBtnColor = s.color(44, 128, 252, fade);
+      }
 
-    if(s.state.endAnimationState === 0){
-      drawButton(s);
-    } else {
-      drawFinalText(s);
-    }
-    
-  }
+      if (s.state.endAnimationState === 0) {
+        drawButton(s);
+      } else {
+        drawFinalText(s);
+      }
+    } catch {}
+  };
 }

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { generate } from "shortid";
-import sketch from "./initialSketch";
+import initialSketch from "./initialSketch";
 import { AppDispatchContext, AppStateContext } from "./App/AppStateProvider";
 import p5Wrapper from "./P5Wrapper";
 
@@ -15,7 +15,7 @@ export default function Initial() {
       {sketch1L && (
         <P5Wrapper
           dispatch={dispatch}
-          sketch={sketch}
+          sketch={initialSketch}
           state={{ animationState }}
         />
       )}

@@ -82,7 +82,6 @@ const PersonalizeCommitments = ({ history, match }) => {
     const storeCommitments = async () => {
         await localStorage.setItem(category, JSON.stringify(storedCommitments));
         await localStorage.setItem(`${category}Commitment`, 'pending');
-        console.log(category, storedCommitments);
     }
 
     return (
