@@ -105,6 +105,7 @@
     max-width: 900px;
 
     h2 {
+        max-width: 212px;
         width: 100%;
     }
 
@@ -419,9 +420,9 @@
     .commitments-wrapper {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         margin: 0 28px;
-        padding: 50px;
+        padding: 50px 0;
         position: relative;
 
         @include themify($themes) {
@@ -430,8 +431,16 @@
             z-index: themed('pageZIndex');
         }
 
+        .commitments-wrapper-content {
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         h2 {
             padding: 0 40px 50px;
+            align-self: start;
         }
 
         .commitments-cards-wrapper {
