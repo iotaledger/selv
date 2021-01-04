@@ -56,8 +56,6 @@ const ProveIdentity = ({ history, match }) => {
         }
     }, [nextStep]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    console.log(qrContent);
-    
     return (
         <Layout match={match} noFooter>
             <div className='scan-qr-page-wrapper'>

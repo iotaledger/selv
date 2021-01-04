@@ -62,8 +62,6 @@ const PersonalizeCommitments = ({ history, match }) => {
         await localStorage.setItem(`${category}Commitment`, 'pending');
     }
 
-    console.log('storedCommitments', storedCommitments);
-
     return (
         <Layout match={match} noFooter>
             <div className='personalize-commitment-page-wrapper'>
