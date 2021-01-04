@@ -25,7 +25,7 @@
     .select-commitment-wrapper {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         margin: 0 28px;
         padding: 50px 50px 220px;
         position: relative;
@@ -102,6 +102,7 @@
     flex-direction: row;
     align-items: flex-start;
     width: 100%;
+    max-width: 900px;
 
     h2 {
         max-width: 212px;
@@ -114,6 +115,7 @@
 }
 
 .commitments-list {
+    max-width: 900px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -182,7 +184,7 @@
     .personalize-commitment-wrapper {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         margin: 0 28px;
         padding: 50px 50px 0 50px;
         position: relative;
@@ -213,6 +215,7 @@
 
         .commitments-drawer {
             width: 100%;
+            max-width: 900px;
             display: flex;
             flex-direction: column;
             margin: 15px 0;
@@ -315,6 +318,7 @@
 
     .personalize-commitments-list {
         width: 100%;
+        max-width: 900px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -439,6 +443,7 @@
 
             .form-commitment-wrapper {
                 margin: 0 10px;
+                width: 100%;
 
                 h4 {
                     margin-bottom: 20px;
@@ -447,6 +452,7 @@
 
                 .form-commitment-card {
                     border-radius: 3px;
+                    height: 80%;
                     box-shadow: 5px 5px 0px #4D4D4D;
                     @include themify($themes) {
                         background-color: themed('secondaryColor');
