@@ -32,7 +32,6 @@
         padding: 25px 50px 20px;
         display: flex;
         align-items: center;
-        justify-content: center;
         z-index: 100;
 
         @include themify($themes) {
