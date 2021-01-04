@@ -33,47 +33,51 @@ export default function sketch(s) {
   }
 
   function drawButton(s) {
-    s.noStroke();
-    s.fill(btnColor);
-    s.rect(s.width / 2 - 40, s.height / 2 + 80, 134, 52, 100);
-    s.textFont(inter_font);
-    s.textSize(18);
-    s.noStroke();
-    s.fill(white);
-    s.text("Commit", s.width / 2 - 10, s.height / 2 + 113);
+    try {
+      s.noStroke();
+      s.fill(btnColor);
+      s.rect(s.width / 2 - 40, s.height / 2 + 80, 134, 52, 100);
+      s.textFont(inter_font);
+      s.textSize(18);
+      s.noStroke();
+      s.fill(white);
+      s.text("Commit", s.width / 2 - 10, s.height / 2 + 113);
+    } catch {}
   }
 
   function drawFinalText(s) {
-    s.fill(brandRectangle);
-    s.noStroke();
-    s.rect(s.width / 2 + 2, s.height / 2 - 12, 235, 20);
-    s.fill(black);
-    s.textFont(metro_font);
-    s.textSize(30);
-    s.text("This is your Persistent Selv", s.width / 2 - 170, s.height / 2);
-    s.fill(0, 0, 0, fade);
-    s.textFont(open_font);
-    s.textSize(20);
-    s.text(
-      "Your pledges are now taking care of future",
-      s.width / 2 - 160,
-      s.height / 2 + 40
-    );
-    s.text(
-      "generations by protecting their environment",
-      s.width / 2 - 170,
-      s.height / 2 + 60
-    );
+    try {
+      s.fill(brandRectangle);
+      s.noStroke();
+      s.rect(s.width / 2 + 2, s.height / 2 - 12, 235, 20);
+      s.fill(black);
+      s.textFont(metro_font);
+      s.textSize(30);
+      s.text("This is your Persistent Selv", s.width / 2 - 170, s.height / 2);
+      s.fill(0, 0, 0, fade);
+      s.textFont(open_font);
+      s.textSize(20);
+      s.text(
+        "Your pledges are now taking care of future",
+        s.width / 2 - 160,
+        s.height / 2 + 40
+      );
+      s.text(
+        "generations by protecting their environment",
+        s.width / 2 - 170,
+        s.height / 2 + 60
+      );
 
-    s.fill(fadeBtnColor);
+      s.fill(fadeBtnColor);
 
-    s.noStroke();
-    s.rect(s.width / 2 - 40, s.height / 2 + 80, 134, 52, 100);
-    s.textFont(inter_font);
-    s.textSize(18);
-    s.noStroke();
-    s.fill(255, 255, 255, fade);
-    s.text("Finish", s.width / 2, s.height / 2 + 113);
+      s.noStroke();
+      s.rect(s.width / 2 - 40, s.height / 2 + 80, 134, 52, 100);
+      s.textFont(inter_font);
+      s.textSize(18);
+      s.noStroke();
+      s.fill(255, 255, 255, fade);
+      s.text("Finish", s.width / 2, s.height / 2 + 113);
+    } catch {}
   }
 
   function setGradient(s, x, y, w, h, c1, c2, axis) {
@@ -356,23 +360,25 @@ export default function sketch(s) {
   };
 
   s.mouseMoved = () => {
-    if (
-      s.width / 2 - 40 < s.mouseX &&
-      s.width / 2 - 40 + 109 > s.mouseX &&
-      s.height / 2 + 80 < s.mouseY &&
-      s.height / 2 + 80 + 52 > s.mouseY
-    ) {
-      btnColor = btnHover;
-      fadeBtnColor = s.color(60, 106, 197, fade);
-    } else {
-      btnColor = brandButton;
-      fadeBtnColor = s.color(44, 128, 252, fade);
-    }
+    try {
+      if (
+        s.width / 2 - 40 < s.mouseX &&
+        s.width / 2 - 40 + 109 > s.mouseX &&
+        s.height / 2 + 80 < s.mouseY &&
+        s.height / 2 + 80 + 52 > s.mouseY
+      ) {
+        btnColor = btnHover;
+        fadeBtnColor = s.color(60, 106, 197, fade);
+      } else {
+        btnColor = brandButton;
+        fadeBtnColor = s.color(44, 128, 252, fade);
+      }
 
-    if (s.state.endAnimationState === 0) {
-      drawButton(s);
-    } else {
-      drawFinalText(s);
-    }
+      if (s.state.endAnimationState === 0) {
+        drawButton(s);
+      } else {
+        drawFinalText(s);
+      }
+    } catch {}
   };
 }

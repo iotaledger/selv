@@ -40,14 +40,16 @@ export default function sketch(s) {
   }
 
   function drawButton(s) {
-    s.noStroke();
-    s.fill(btnColor);
-    s.rect(s.width / 2 - 60, s.height / 2 + 80, 134, 52, 100);
-    s.textFont(inter_font);
-    s.textSize(18);
-    s.noStroke();
-    s.fill(white);
-    s.text("Next", s.width / 2 - 16, s.height / 2 + 113);
+    try {
+      s.noStroke();
+      s.fill(btnColor);
+      s.rect(s.width / 2 - 60, s.height / 2 + 80, 134, 52, 100);
+      s.textFont(inter_font);
+      s.textSize(18);
+      s.noStroke();
+      s.fill(white);
+      s.text("Next", s.width / 2 - 16, s.height / 2 + 113);
+    } catch {}
   }
 
   function setGradient(s, x, y, w, h, c1, c2, axis) {
@@ -831,7 +833,6 @@ export default function sketch(s) {
   };
 
   s.mouseClicked = () => {
-    s.clear();
     if (s.state.animationState < 6) {
       s.state.animationState++;
       s.dispatch({

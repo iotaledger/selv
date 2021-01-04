@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { generate } from "shortid";
-import sketch from "./finalSketch";
+import finalSketch from "./finalSketch";
 import { AppDispatchContext, AppStateContext } from "./App/AppStateProvider";
 import p5Wrapper from "./P5Wrapper";
 
@@ -15,7 +15,7 @@ export default function Final() {
       {sketch2L && (
         <P5Wrapper
           dispatch={dispatch}
-          sketch={sketch}
+          sketch={finalSketch}
           state={{ endAnimationState }}
         />
       )}
