@@ -58,7 +58,7 @@ const IntroWelcome = ({ match }) => {
 						</div>
 						<div className='content-row'>
 							<div />
-							<div className='content-wrap'>
+							<div className='ctas-wrap'>
 								<div className='partners'>
 									<img src={climateKIC} alt='' className='climateKIC' />
 									<img src={foundation} alt='' className='foundation' />

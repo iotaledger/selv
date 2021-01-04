@@ -204,6 +204,10 @@
 			}
 
 			.content-wrap {
+				max-width: 640px;
+			}
+
+			.ctas-wrap {
 				display: flex;
 				flex-direction: column;
 				justify-content: flex-start;
