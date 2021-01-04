@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Space } from 'antd';
 import { Modal, RandomGraphicElement, Stats } from '../components';
@@ -15,20 +15,8 @@ import { cards } from '../assets/commentary';
 /**
  * Component which will display a ThankYou.
  */
-const ThankYou = ({ history }) => {
+const ThankYou = () => {
 	const [commentary, setCommentary] = useState(null);
-
-	useEffect(() => {
-        async function getData () {
-            const credentialsString = await localStorage.getItem('credentials');
-            const credentials = credentialsString && await JSON.parse(credentialsString);
-            const status = credentials?.status;
-            if (!status || Number(status) !== 2) {
-                history.goBack();
-            }
-        }
-        getData();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
 		<div className='theme-demo'>
