@@ -139,6 +139,7 @@ const PledgeData = ({ history, match }) => {
                                 <h4>Confirm my legacy</h4>
                             </Button>
                         </div>
+                        <br />
                         {
                             status && (
                                 <div className='loading'>
