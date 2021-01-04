@@ -99,7 +99,7 @@ export default function sketch(s) {
   s.setup = () => {
     s.disableFriendlyErrors = true;
     s.frameRate(30);
-    s.createCanvas(s.windowWidth, s.windowHeight); //👀 edit here to change size of the canvas
+    s.createCanvas(window.innerWidth, window.innerHeight); //👀 edit here to change size of the canvas
 
     parentsLifeColorSaf = s.color(94, 157, 255, 255);
     yourLifeColorSaf = s.color(117, 173, 253, 150);
