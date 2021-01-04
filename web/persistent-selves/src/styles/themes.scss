@@ -1,6 +1,6 @@
 $font-family-registry: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 $font-family-future: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-$font-family-present: 'Maven Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$font-family-present: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 $font-family-demo: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 $font-family-demo-headings: 'Metropolis', sans-serif, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
@@ -176,7 +176,7 @@ $themes: (
         headerLogoHeight: 58px,
 
         footerBackgroundColor: $primary-color-future,
-        footerHeight: 182px,
+        footerHeight: 125px,
         footerLogoAlign: right,
         footerLogoHeight: 24px,
     ),
@@ -227,7 +227,7 @@ $themes: (
         headerLogoHeight: 85px,
 
         footerBackgroundColor: $primary-color-present,
-        footerHeight: 182px,
+        footerHeight: 125px,
         footerLogoAlign: right,
         footerLogoHeight: 0px,
     ),

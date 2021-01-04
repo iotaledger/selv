@@ -91,73 +91,76 @@ const PledgeData = ({ history, match }) => {
         <Layout match={match} noFooter>
             <div className='commitments-data-page-wrapper'>
                 <div className='commitments-wrapper'>
-                    <h2>Summary</h2>
-                    <div className='commitments-cards-wrapper'>
-                    {
-                        Object.values(commitments).map(commitment => (
-                            <div 
-                                className='form-commitment-wrapper' 
-                                key={commitment?.commitmentId}
-                            >
-                                <h4>{commitment?.title}</h4>
-                                <Card 
-                                    bordered
-                                    hoverable={false}
-                                    className='form-commitment-card'
+                    <div className='commitments-wrapper-content'>
+                        <h2>Summary</h2>
+                        <div className='commitments-cards-wrapper'>
+                        {
+                            Object.values(commitments).map(commitment => (
+                                <div 
+                                    className='form-commitment-wrapper' 
+                                    key={commitment?.commitmentId}
                                 >
-                                    <div className='form-commitment-content'>
-                                        {
-                                            theme === 'future' ? (
-                                                <p>
-                                                    <b>{commitment?.condition?.replace(/ .*/, '')} </b>
-                                                    {commitment?.condition?.split(' ').slice(1).join(' ')}
-                                                    <span className='custom-value'> {commitment?.percentage} </span>
-                                                    THEN donate <span className='custom-value'>{commitment?.walletPercentage}%</span> of my wallet
-                                                    balance TO support <span className='custom-value'>{commitment?.support}</span>
-                                                </p>
-                                            ) : (
-                                                <p>
-                                                    <b>I commit to </b>
-                                                    <span className='custom-value'>{commitment?.support}</span>
-                                                </p>
-                                            )
-                                        }
+                                    <h4>{commitment?.title}</h4>
+                                    <Card 
+                                        bordered
+                                        hoverable={false}
+                                        className='form-commitment-card'
+                                    >
+                                        <div className='form-commitment-content'>
+                                            {
+                                                theme === 'future' ? (
+                                                    <p>
+                                                        <b>{commitment?.condition?.replace(/ .*/, '')} </b>
+                                                        {commitment?.condition?.split(' ').slice(1).join(' ')}
+                                                        <span className='custom-value'> {commitment?.percentage} </span>
+                                                        THEN donate <span className='custom-value'>{commitment?.walletPercentage}%</span> of my wallet
+                                                        balance TO support <span className='custom-value'>{commitment?.support}</span>
+                                                    </p>
+                                                ) : (
+                                                    <p>
+                                                        <b>I commit to </b>
+                                                        <span className='custom-value'>{commitment?.support}</span>
+                                                    </p>
+                                                )
+                                            }
 
-                                    </div>
-                                </Card>
-                            </div>
-                        ))
-                    }
-                    </div>
-                    <div className='form-wrapper'>
-                        {
-                            Object.keys(prefilledFormData.dataFields).length &&
-                            <PrefilledForm {...prefilledFormData} />
-                        }
-                        <div className='btn-wrapper'>
-                            <Button onClick={processValues}>
-                                <h4>Confirm my legacy</h4>
-                            </Button>
-                        </div>
-                        {
-                            status && (
-                                <div className='loading'>
-                                    <p className='bold'>{status}</p>
-                                    {
-                                        status === messages.waiting && <Loading />
-                                    }
+                                        </div>
+                                    </Card>
                                 </div>
-                            )
+                            ))
                         }
-                        {
-                            webSocket && <WebSocket
-                                history={history}
-                                match={match}
-                                schemaName={theme === 'future' ? 'FutureCommitments' : 'PresentCommitments'}
-                                setStatus={setStatusMessage}
-                                fields={fields}
-                            />
-                        }
+                        </div>
+                        <div className='form-wrapper'>
+                            {
+                                Object.keys(prefilledFormData.dataFields).length &&
+                                <PrefilledForm {...prefilledFormData} />
+                            }
+                            <div className='btn-wrapper'>
+                                <Button onClick={processValues}>
+                                    <h4>Confirm my legacy</h4>
+                                </Button>
+                            </div>
+                            <br />
+                            {
+                                status && (
+                                    <div className='loading'>
+                                        <p className='bold'>{status}</p>
+                                        {
+                                            status === messages.waiting && <Loading />
+                                        }
+                                    </div>
+                                )
+                            }
+                            {
+                                webSocket && <WebSocket
+                                    history={history}
+                                    match={match}
+                                    schemaName={theme === 'future' ? 'FutureCommitments' : 'PresentCommitments'}
+                                    setStatus={setStatusMessage}
+                                    fields={fields}
+                                />
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

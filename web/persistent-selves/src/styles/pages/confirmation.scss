@@ -36,15 +36,17 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-evenly;
-            background-color: #EEF2FA;
             border-radius: 16px;
             padding: 0 20px 10px;
             margin: 38px 0 52px 0;
             width: 100%;
             min-height: 234px;
-            background: #FFFFFF;
             border-radius: 16px;
             z-index: 2;
+
+            @include themify($themes) {
+                background: themed('trinaryColor');  
+            }
     
             img {
                 width: 143px;
