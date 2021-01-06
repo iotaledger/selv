@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom'
-import { Button } from 'antd';
-import logo from '../../assets/landing/logoHeader.svg' 
+import { Button, Icon } from 'antd';
+import DropSelector from '../DropSelector';
+import Context from '../../context/app-context';
+import logo from '../../assets/landing/logoHeader.svg'
 
 const links = [
     {
@@ -23,6 +25,7 @@ const links = [
 ]
 export default () => {
     const [menuOpenState, setMenuState] = useState(false);
+    const { language, setLanguage }: any = useContext(Context);
 
     function onAnchorClick(anchor: string) {
         setMenuState(false)
@@ -46,28 +49,35 @@ export default () => {
         <div className="header-section">
             <img src={logo} alt="Selv logo" className="logo" />
             <div className="menu-links">
+
+                <DropSelector
+                    // items={['en', 'de']}
+                />
+                <img className="cta" alt="USA" src="http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" onClick={() => setLanguage('en')} style={{ borderWidth: 100, borderColor: '#FFF' }} />
+                {/* <Button className='cta' onClick={}>
+                </Button> */}
                 {
                     links.map(link => (
                         <Link to={link.anchor} key={link.title} className="menu-link" onClick={() => onAnchorClick(link.anchor)}>
-                            { link.title }
+                            { link.title}
                         </Link>
                     ))
                 }
                 <Link to={'/demo/select'}>
                     <Button className="cta">
                         Try the demo
-                    </Button> 
+                    </Button>
                 </Link>
             </div>
             <MobileMenu menuOpenState={menuOpenState} onAnchorClick={onAnchorClick} />
             <div className="burger-icon-wrapper">
-                <span 
+                <span
                     className={`mobile-menu-icon ${menuOpenState ? 'toggled' : ''}`}
                     onClick={handleMenu}
                 >
-                <span></span>
-                <span></span>
-                <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </span>
             </div>
         </div>
@@ -82,14 +92,14 @@ const MobileMenu = ({ onAnchorClick, menuOpenState }: { onAnchorClick: (anchor: 
                 {
                     links.map(link => (
                         <Link to={link.anchor} key={link.title} className="menu-link" onClick={() => onAnchorClick(link.anchor)}>
-                            { link.title }
+                            { link.title}
                         </Link>
                     ))
                 }
                 <Link to={'/demo/select'}>
                     <Button className="cta">
                         Try the demo
-                    </Button> 
+                    </Button>
                 </Link>
             </div>
         </div>
