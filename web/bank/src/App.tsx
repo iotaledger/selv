@@ -12,6 +12,7 @@ import 'rsuite/dist/styles/rsuite-default.css'
 import './styles/index.scss';
 import { routes } from './steps'
 
+
 WebFontLoader.load({
   google: {
       families: [

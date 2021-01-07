@@ -1,0 +1,26 @@
+{
+  "How it works": "translated how it works",
+  "views": {
+    "How it works": "translated how it works",
+    "landing": {
+      "app": {
+        "asdf":"Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity."
+
+      },
+      "how": "asd",
+      "header": {
+        "How it works": "translated how it works"
+      }
+
+    }
+
+  },
+  "actions": {
+
+  },
+  "general": {
+    "Self Sovereign Identity": "Self Sovereign Identity",
+    "Demo": "Translated Demo",
+    "The App": "The App"
+  }
+}
