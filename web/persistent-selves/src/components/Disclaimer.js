@@ -10,7 +10,7 @@ const Disclaimer = ({ cookies }) => {
         if (!ack && document) {
             const element = document.getElementById('footer') || document.getElementById('app');
             if (element) {
-                element.classList.add('cookie-bar-bottom-bar');
+                element.classList.add('cta-section-extended');
                 setAck(false);
             }
         }
@@ -21,7 +21,8 @@ const Disclaimer = ({ cookies }) => {
         if (document) {
             const element = document.getElementById('footer') || document.getElementById('app');
             if (element) {
-                element.classList.remove('cookie-bar-bottom-bar');
+                element.classList.remove('cta-section-extended');
+                element.classList.add('cta-section');
                 setAck(true);
             }
         }

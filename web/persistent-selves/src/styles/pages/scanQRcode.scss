@@ -54,6 +54,10 @@
     }
 }
 
+#app {
+
+}
+
 .scan-qr-page-wrapper {
     height: 100%;
     width: 100%;
@@ -88,6 +92,11 @@
     @include breakPoint(medium) {
         width: 100%;
     }
+}
+
+.cta-section-extended {
+    @extend .cta-section;
+    bottom: 80px;    
 }
 
 .scan-qr-content-wrapper {
