@@ -208,7 +208,7 @@ export default function sketch(s) {
           s.fill(black);
           s.textFont(metro_font);
           s.textSize(30);
-          s.text("This is your lifetime.", s.width / 2 - 9040, s.height / 2 + 35);
+          s.text("This is your lifetime.", s.width / 2 - 140, s.height / 2 + 35);
           size += 5;
         } else if (size < yourRadius) {
           s.fill(parentsLifeColorSaf);
