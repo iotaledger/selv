@@ -7,8 +7,8 @@ const Disclaimer = ({ cookies }) => {
 
     useEffect(() => {
         const ack = cookies.get('persistent-selves-cookie');
-        if (!ack && document) {
-            const element = document.getElementById('footer') || document.getElementById('app');
+        if (ack && document) {
+            const element = document.getElementById('app');
             if (element) {
                 element.classList.add('cta-section-extended');
                 setAck(false);
@@ -19,7 +19,7 @@ const Disclaimer = ({ cookies }) => {
     function dismiss () {
         cookies.set('persistent-selves-cookie', true, { path: '/' });
         if (document) {
-            const element = document.getElementById('footer') || document.getElementById('app');
+            const element = document.getElementById('app');
             if (element) {
                 element.classList.remove('cta-section-extended');
                 element.classList.add('cta-section');
