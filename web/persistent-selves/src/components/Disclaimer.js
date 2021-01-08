@@ -2,16 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { withCookies } from 'react-cookie';
 import { Button } from 'antd';
 
-const Disclaimer = ({ cookies }) => {
+const Disclaimer = ({ cookies, qrCode }) => {
     const [ack, setAck] = useState(true);
 
     useEffect(() => {
         const ack = cookies.get('persistent-selves-cookie');
         if (ack && document) {
-            const element = document.getElementById('app');
+            const element = document.getElementById('footer') || document.getElementById('app');
             if (element) {
-                element.classList.add('cta-section-extended');
-                setAck(false);
+                if(qrCode) {
+                    element.classList.add('cta-section-extended');
+                    setAck(false);
+                } else {
+                    setAck(false);
+                }
+                
             }
         }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -19,11 +24,15 @@ const Disclaimer = ({ cookies }) => {
     function dismiss () {
         cookies.set('persistent-selves-cookie', true, { path: '/' });
         if (document) {
-            const element = document.getElementById('app');
+            const element = document.getElementById('footer') || document.getElementById('app');
             if (element) {
-                element.classList.remove('cta-section-extended');
-                element.classList.add('cta-section');
-                setAck(true);
+                if(qrCode) {
+                    element.classList.remove('cta-section-extended');
+                    element.classList.add('cta-section');
+                    setAck(true);
+                } else {
+                    setAck(true);
+                }
             }
         }
     }

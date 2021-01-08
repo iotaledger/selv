@@ -10,7 +10,7 @@ const Disclaimer = () => {
 		if (ack) {
 			setAck(true);
 		} else if ((!ack || ack !== 'true') && document) {
-			const element = document.getElementById('app');
+			const element = document.getElementById('footer') || document.getElementById('app');
 			if (element) {
 				element.classList.add('cta-section-extended');
 				setAck(false);
@@ -21,7 +21,7 @@ const Disclaimer = () => {
 	function dismiss() {
 		cookies.set('covid-cookie', 'true', { expires: 365 });
 		if (document) {
-			const element = document.getElementById('app');
+			const element = document.getElementById('footer') || document.getElementById('app');
 			if (element) {
 				element.classList.remove('cta-section-extended');
 				element.classList.add('cta-section');

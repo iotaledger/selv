@@ -36,7 +36,7 @@ export default ({ children, match, customTheme, customStep, noHeader, noFooter }
                         </Sidebar>
                     ) : null
                 }
-                <Disclaimer />
+                <Disclaimer qrCode />
             </div>
         </div>
     );
