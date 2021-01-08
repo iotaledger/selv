@@ -1,26 +1,51 @@
 {
-  "How it works": "translated how it works",
-  "views": {
-    "How it works": "translated how it works",
-    "landing": {
-      "app": {
-        "asdf":"Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity."
-
-      },
-      "how": "asd",
-      "header": {
-        "How it works": "translated how it works"
-      }
-
+  "landing": {
+    "app": {
+      "One App – One Protocol": "One App – One Protocol",
+      "Easy GDPR compliance": "This solution provides an easy and cheap way to comply with GDPR and similar privacy laws.",
+      "asdf": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
+      "Unified Identity Protocol enables devices": "The Unified Identity Protocol not only enables people and organisations to have the benefits of identity, but devices, opening up a whole new world of business models and use cases."
+    },
+    "benefits": {
+      "benefits": "Benefits",
+      "forUsers": "For Users",
+      "control": "Control",
+      "benefitsControl": "Anything related to your identity and your personal data remains in your control.",
+      "privacy": "Privacy",
+      "benefitsPrivacy": "Improved privacy by only revealing the minimum amount of information.",
+      "reusability": "Reusability",
+      "benefitsReusability": "Share as often as you like. No more typing in the same information repeatedly in online forms.",
+      "forBusiness": "For Business",
+      "privacyLaws": "Privacy Laws",
+      "benefitsPrivacyLaws": "Complies to the strictest interpretation of the General Data Protection Act (GDPR).",
+      "dataResponsibility": "Data Responsibility",
+      "benefitsDataResponsibility": "Users can present or consent, removing responsibility on data protection from the company.",
+      "userExperience": "User Experience",
+      "benefitsUserExperience" : "Retain more customers through an enhanced User Experience. Less manual typing required."
+    },
+    "controlIdentity": {
+      "youControlYour": "You control your",
+      "ownIdentity": "own identity",
+      "whatItIsDetailed": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity. This increased privacy and control enables a “Bring Your Own Identity” (BYOI) style of engagement with corporations, removing the need to perform expensive data collection."
+    },
+    "header": {
+      "How it works": "How it works",
+      "Benefits": "Benefits",
+      "The App": "The App",
+      "FAQs": "FAQs"
     }
-
+  },
+  "views": {
+    "How it works": "translated how it works"
   },
   "actions": {
-
+    "Try the demo": "Try the demo"
   },
   "general": {
     "Self Sovereign Identity": "Self Sovereign Identity",
-    "Demo": "Translated Demo",
-    "The App": "The App"
+    "Demo": "Demo",
+    "The App": "The App",
+    "What it is": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
+    "A Unified Identity": "A Unified Identity"
   }
 }
