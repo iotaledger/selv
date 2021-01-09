@@ -55,7 +55,7 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
                     <img src={dots} alt='' className='dots' />
                     <img src={circle} alt='' className='circle' />
                 </div>
-                <div className="cta-section" id='app'>
+                <div className="cta-section" id='app-download'>
                     <p className='subtitle'>Once you’ve downloaded and installed the app, click the button below.</p>
                     <Link to={nextStep} className='cta'>
                         <Button>

@@ -2,21 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { withCookies } from 'react-cookie';
 import { Button } from 'antd';
 
-const Disclaimer = ({ cookies, qrCode }) => {
+const Disclaimer = ({ cookies }) => {
     const [ack, setAck] = useState(true);
 
     useEffect(() => {
         const ack = cookies.get('persistent-selves-cookie');
-        if (ack && document) {
+        if (!ack && document) {
             const element = document.getElementById('footer') || document.getElementById('app');
-            if (element) {
-                if(qrCode) {
-                    element.classList.add('cta-section-extended');
-                    setAck(false);
-                } else {
-                    setAck(false);
-                }
-                
+			const elementDownloadApp = document.getElementById('app-download');
+			if (element || elementDownloadApp) {
+                elementDownloadApp && elementDownloadApp.classList.add('cta-section-extended');
+                setAck(false);   
             }
         }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -25,14 +21,11 @@ const Disclaimer = ({ cookies, qrCode }) => {
         cookies.set('persistent-selves-cookie', true, { path: '/' });
         if (document) {
             const element = document.getElementById('footer') || document.getElementById('app');
-            if (element) {
-                if(qrCode) {
-                    element.classList.remove('cta-section-extended');
-                    element.classList.add('cta-section');
-                    setAck(true);
-                } else {
-                    setAck(true);
-                }
+			const elementDownloadApp = document.getElementById('app-download');
+			if (element || elementDownloadApp) {
+                elementDownloadApp && elementDownloadApp.classList.remove('cta-section-extended');
+                elementDownloadApp && elementDownloadApp.classList.add('cta-section');
+                setAck(true);
             }
         }
     }

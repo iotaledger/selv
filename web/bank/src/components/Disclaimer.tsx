@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { withCookies } from 'react-cookie';
 import { Button } from 'antd';
 
-const Disclaimer = ({ cookies }: { cookies: any }) => {
+const Disclaimer = ({ cookies }: { cookies: any; }) => {
 	const [ack, setAck] = useState(true);
 
 	useEffect(() => {
 		const ack = cookies.get('selv-cookie');
 		if (!ack && document) {
 			const element = document.getElementById('footer') || document.getElementById('app');
-			if (element) {
-				element.classList.add('cta-section-extended');
-				setAck(false);
-			}
+			const elementDownloadApp = document.getElementById('app-download');
+			if (element || elementDownloadApp) {
+                elementDownloadApp && elementDownloadApp.classList.add('cta-section-extended');
+                setAck(false);   
+            }
 		}
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -20,11 +21,12 @@ const Disclaimer = ({ cookies }: { cookies: any }) => {
 		cookies.set('selv-cookie', true, { path: '/' });
 		if (document) {
 			const element = document.getElementById('footer') || document.getElementById('app');
-			if (element) {
-				element.classList.remove('cta-section-extended');
-				element.classList.add('cta-section');
-				setAck(true);
-			}
+			const elementDownloadApp = document.getElementById('app-download');
+			if (element || elementDownloadApp) {
+                elementDownloadApp && elementDownloadApp.classList.remove('cta-section-extended');
+                elementDownloadApp && elementDownloadApp.classList.add('cta-section');
+                setAck(true);
+            }
 		}
 	}
 
