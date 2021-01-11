@@ -9,6 +9,7 @@ import image2 from '../assets/greatSuccess/image2.png';
 import image3 from '../assets/greatSuccess/image3.png';
 import checkmark from '../assets/checkmark.svg';
 import dots from '../assets/backgrounds/dots.png';
+import { useTranslation, Trans } from 'react-i18next';
 
 /**
  * Component which will display a GreatSuccess.
@@ -17,8 +18,10 @@ const GreatSuccess: React.FC = ({ match }: any) => {
     const { nextStep } = useStep(match);
     const [companyId, setCompanyId] = useState('');
 
+    const { t, i18n } = useTranslation();
+
     useEffect(() => {
-        async function determineCompanyId () {
+        async function determineCompanyId() {
             setCompanyId(await getCompanyId());
         }
         determineCompanyId();
@@ -28,7 +31,7 @@ const GreatSuccess: React.FC = ({ match }: any) => {
         <RandomGraphicElement elements={7}>
             <div className='theme-demo'>
                 <div className='great-success' id='app'>
-                    <h2>Great Success!</h2>
+                    <h2>{t("general.greatSuccess")}</h2>
                     <div className='great-success-content-wrapper'>
                         <div className='great-success-content'>
                             <div className='figure-wrapper'>
@@ -37,18 +40,18 @@ const GreatSuccess: React.FC = ({ match }: any) => {
                             <div className='great-success-text-wrapper'>
                                 <span>
                                     <img src={checkmark} alt='' />
-                                    <h3>You signed in with DID</h3>
+                                    <h3>{t("general.signedInDID")}</h3>
                                 </span>
-                                <p>You managed to sign into a website you never signed up for. Account creation has been skipped saving you time and effort. The company house is also not burdened with saving your password.</p>
+                                <p>{t("pages.demo.greatSuccess.signedInDIDText")}</p>
                             </div>
                         </div>
                         <div className='great-success-content' id='middle-item'>
                             <div className='great-success-text-wrapper'>
                                 <span>
                                     <img src={checkmark} alt='' />
-                                    <h3>Received new Credentials</h3>
+                                    <h3>{t("general.receivedNewCredentials")}</h3>
                                 </span>
-                                <p>You became the owner of a company. From this point onwards, you would be able to prove your directorship position online, allowing you to act on behalf of the company. Overtime you can grow your Selv profile by gathering such credentials from trusted third parties.</p>
+                                <p>{t("pages.demo.greatSuccess.receivedNewCredentialsText")}</p>
                             </div>
                             <div className='figure-wrapper'>
                                 <img className='figure' src={image2} alt='Received new Credentials' />
@@ -61,16 +64,16 @@ const GreatSuccess: React.FC = ({ match }: any) => {
                             <div className='great-success-text-wrapper'>
                                 <span>
                                     <img src={checkmark} alt='' />
-                                    <h3>Re-used Selv Credentials</h3>
+                                    <h3>{t("general.reusedSelvCredentials")}</h3>
                                 </span>
-                                <p>By controlling your personal data, you shared verifiable data without having to type it into a form. You can use these same credentials in other processes. Imagine never having to type in your name, address, email etc...</p>
+                                <p>{t("pages.demo.greatSuccess.reusedSelvCredentialsText")}</p>
                             </div>
                         </div>
                     </div>
                     <div className='cta-wrapper'>
                         <Link to={nextStep.replace(':companyId', companyId)}>
                             <Button className='cta'>
-                                Continue
+                                {t("actions.continue")}
                             </Button>
                         </Link>
                     </div>

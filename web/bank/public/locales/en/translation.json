@@ -96,6 +96,11 @@
   "actions": {
     "tryTheDemo": "Try the demo",
     "continue": "Continue",
+    "letsDoIt": "Let's do it",
+    "continueNextStep": "Continue to next step",
+    "registerNewCompany": "Register new Company",
+    "downloadTheSelvApp": "Download the Selv app",
+    "orScanCode": "Or scan this QR code<1/>to download"
   },
   "general": {
     "Self Sovereign Identity": "Self Sovereign Identity",
@@ -104,7 +109,12 @@
     "What it is": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
     "A Unified Identity": "A Unified Identity",
     "digitalIdentityManagement": "Digital Identity Management",
-    "claimControlReuse": "Claim, Control & Reuse your Digital Identity"
+    "claimControlReuse": "Claim, Control & Reuse your Digital Identity",
+    "hello": "Hello!",
+    "greatSuccess": "Great Success!",
+    "signedInDID": "You signed in with DID",
+    "receivedNewCredentials": "Received new Credentials",
+    "reusedSelvCredentials": "Re-used Selv Credentials"
   },
   "pages": {
     "demo": {
@@ -121,13 +131,18 @@
         "getLiabilityInsurance": "Get liability insurance"
       },
       "introShowMobile": {
-        
+        "looksLikeWork": "That looks like a lot of work...",
+        "advantage": "<0>But using IOTA’s Unified Identity Protocol and the Selv app, it will be <1>​quick and easy​.</1></0>",
+        "noteDesktop": "This demo website is best experienced on a desktop computer."
       },
       "appDownloadQR": {
+        "onceDownloaded": "Once you’ve downloaded and installed the app, click the button below."
       
       },
       "greatSuccess": {
-      
+        "signedInDIDText": "You managed to sign into a website you never signed up for. Account creation has been skipped saving you time and effort. The company house is also not burdened with saving your password.",
+        "receivedNewCredentialsText": "You became the owner of a company. From this point onwards, you would be able to prove your directorship position online, allowing you to act on behalf of the company. Overtime you can grow your Selv profile by gathering such credentials from trusted third parties.",
+        "reusedSelvCredentialsText": "By controlling your personal data, you shared verifiable data without having to type it into a form. You can use these same credentials in other processes. Imagine never having to type in your name, address, email etc..."
       },
       "thankYou": {
       
@@ -135,6 +150,7 @@
     },
     "company": {
       "incorporatedCompanies": {
+        "newlyIncorporatedCompanies": "Newly Incorporated Companies"
       
       },
       "singInConfirmation": {
@@ -159,7 +175,8 @@
 
       },
       "proveIdentity": {
-
+        "provideCredentials": "Provide your Digital Identity credentials",
+        "scanToContinue": "Scan this QR code with <1>Selv App</1> to continue"
       },
       "companyDetails": {
 

@@ -10,6 +10,7 @@ import avatar2 from '../assets/avatar2.png';
 import dots from '../assets/backgrounds/dots.png';
 import circle from '../assets/backgrounds/circleFrame6.svg';
 import { covidDemo } from '../config.json';
+import { useTranslation, Trans } from 'react-i18next';
 
 /**
  * Component which will display a AppDownloadQR.
@@ -17,13 +18,15 @@ import { covidDemo } from '../config.json';
 const AppDownloadQR: React.FC = ({ match }: any) => {
     const { nextStep } = useStep(match);
 
+    const { t, i18n } = useTranslation();
+
     return (
         <Layout match={match} noHeader noFooter>
             <React.Fragment>
                 <div className='scan-qr-page-wrapper app-download' id='app'>
                     <RandomGraphicElement elements={5}>
                         <React.Fragment>
-                            <h1 className='title'>Download the Selv app</h1>
+                            <h1 className='title'>{t("actions.downloadTheSelvApp")}</h1>
                             <div className='app-cta-wrapper'>
                                 <a
                                     href='https://testflight.apple.com/join/3FCosIcj'
@@ -42,7 +45,11 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
                             </div>
                             <div className='scan-wrapper'>
                                 <div className='qr-content-wrapper'>
-                                    <p className='scan-note'>Or scan this QR code<br />to download</p>
+                                    <p className='scan-note'>
+                                        <Trans i18nKey="actions.orScanCode">
+                                            Or scan this QR code<br />to download
+                                        </Trans>
+                                    </p>
                                     <div className='qr-wrapper'>
                                         <QRCode text={`${covidDemo}//qr-redirect`} size={200} />
                                     </div>
@@ -56,10 +63,10 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
                     <img src={circle} alt='' className='circle' />
                 </div>
                 <div className="cta-section">
-                    <p className='subtitle'>Once you’ve downloaded and installed the app, click the button below.</p>
+                    <p className='subtitle'>{t("pages.demo.appDownloadQR.onceDownloaded")}</p>
                     <Link to={nextStep} className='cta'>
                         <Button>
-                            Continue
+                            {t("actions.continue")}
                         </Button>
                     </Link>
                 </div>
