@@ -1,12 +1,12 @@
 import React from 'react';
 import { RandomGraphicElement } from '../';
 import connected from '../../assets/landing/connected.svg';
-import { Translation, Trans } from 'react-i18next';
+import { Translation } from 'react-i18next';
 
 export default () => (
     <Translation>
         {
-            (t, { i18n }) =>
+            (t) =>
 
                 <RandomGraphicElement elements={5}>
                     <div className='control-identity-section'>

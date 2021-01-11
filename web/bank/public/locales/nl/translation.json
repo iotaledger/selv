@@ -1,20 +1,123 @@
 {
-  "views": {
-    "landing": {
-      "app": {
-        "asdf":"Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity."
-
+  "landing": {
+    "app": {
+      "demo": "Translated Demo",
+      "theApp": "Translated The App",
+      "selfSovereignIdentity": "Translated Self Sovereign Identity",
+      "whatItIs": "Translated Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
+      "oneAppOneProtocol": "Translated One App – One Protocol",
+      "easyGDPRcompliance": "Translated This solution provides an easy and cheap way to comply with GDPR and similar privacy laws.",
+      "unifiedIdentity": "Translated A Unified Identity",
+      "protocolEnablesDevices": "Translated The Unified Identity Protocol not only enables people and organisations to have the benefits of identity, but devices, opening up a whole new world of business models and use cases.",
+      "tryTheDemo": "Translated Try the demo"
+    },
+    "benefits": {
+      "benefits": "Translated Benefits",
+      "forUsers": "Translated For Users",
+      "control": "Translated Control",
+      "benefitsControl": "Translated Anything related to your identity and your personal data remains in your control.",
+      "privacy": "Translated Privacy",
+      "benefitsPrivacy": "Translated Improved privacy by only revealing the minimum amount of information.",
+      "reusability": "Translated Reusability",
+      "benefitsReusability": "Translated Share as often as you like. No more typing in the same information repeatedly in online forms.",
+      "forBusiness": "Translated For Business",
+      "privacyLaws": "Translated Privacy Laws",
+      "benefitsPrivacyLaws": "Translated Complies to the strictest interpretation of the General Data Protection Act (GDPR).",
+      "dataResponsibility": "Translated Data Responsibility",
+      "benefitsDataResponsibility": "Translated Users can present or consent, removing responsibility on data protection from the company.",
+      "userExperience": "Translated User Experience",
+      "benefitsUserExperience": "Translated Retain more customers through an enhanced User Experience. Less manual typing required."
+    },
+    "controlIdentity": {
+      "youControlYour": "Translated You control your",
+      "ownIdentity": "Translated own identity",
+      "whatItIsDetailed": "Translated Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity. This increased privacy and control enables a “Bring Your Own Identity” (BYOI) style of engagement with corporations, removing the need to perform expensive data collection."
+    },
+    "FAQ": {
+      "question1": "Translated Does the IOTA Foundation track my data and usage?",
+      "answer1": "Translated We can’t! This solution puts data control in your hands. We have no way of accessing the data on your phone. Whenever you share data in the demo environment, you communicate this information to our servers, but it will be removed as soon as you complete the demo or close the connection. Once companies run demo’s or applications on their own servers, the IOTA Foundation, and other parties, will not be aware of the usage or data. For peer-to-peer sharing via QR codes, no information leaves the two communicating phones.",
+      "question2": "Translated Can I restore my data if I lose my phone?",
+      "answer2": "Translated Not yet. This is currently a demonstration application, which means it doesn’t have all the features that a full release would have. The application is using (mostly) fake data, therefore recovery is not on top of mind. Backups will be available in a future update.",
+      "question3": "Translated Does my personal data get uploaded to the Tangle?",
+      "answer3": "Translated No, absolutely no personal information is uploaded to the Tangle in accordance with GDPR regulations. Not even in a (pseudo)anonymized state. Any personal data uploaded to the Tangle would be in violation of \"the right to be forgotten\" as Tangle data is immutable.",
+      "question4": "Translated How does this application benefit from IOTA and DLT in general?",
+      "answer4": "Translated Organisations sign credentials for the users, but how do we identify the organisations? Their digital identities are uploaded to the Tangle via 0-value transactions and are signed using asymmetric encryption methods. In addition, retraction of credentials are put on the Tangle as evidence that the credential can no longer be used.",
+      "question5": "Translated On what IOTA network does this application run?",
+      "answer5": "Translated The mainnet! IOTA has zero fees, so it isn’t any more difficult to run this demo on the mainnet then on the devnet.",
+      "question6": "Translated How can I learn more?",
+      "answer6": {
+        "part1": "Translated We released a whitepaper called:",
+        "part2": "Translated The Case for a Unified Identity",
+        "part3": "Translated It is a relatively easy introduction to the subject and explains what the benefits are of a Unified Identity Protocol."
       }
-
+    },
+    "footer": {
+      "contactUs": "Translated Contact us",
+      "contactUsLowerText1": "Translated Would you like to know how Self Sovereign Identity can positively influence",
+      "contactUsLowerText2": "Translated your business or would you like to experiment with the technology?",
+      "contactUsAt": "Translated Contact us at",
+      "visit": "Translated Visit",
+      "privacyPolicy": "Translated Privacy Policy"
+    },
+    "howItWorks": {
+      "inBrief": "Translated In brief",
+      "howItWorks": "Translated How it works",
+      "create": "Translated Create",
+      "createText": "Translated Download a SSI app and create a unique identifier, representing you online. This profile remains in your control and doesn’t leave the app without your consent.",
+      "share": "Translated Share",
+      "shareText": "Translated Decide who and what others get to see from your personal profile. You can share your data peer-to-peer or on request. Controlled data flow allows you to always get something in return for your data.",
+      "grow": "Translated Grow",
+      "growText": "Translated Gather statements, or credentials, about yourself, verified by others, to grow your personal identity. Fully under your control and not stored in any database.",
+      "accept": "Translated Accept",
+      "acceptText": "Translated By accepting BYOI, companies can verify customer data, instantly and for free. This allows you to speed up processes such as onboarding and reduce the amount of typing your customers have to do."
+    },
+    "header": {
+      "How it works": "Translated How it works",
+      "Benefits": "Translated Benefits",
+      "The App": "Translated The App",
+      "FAQs": "Translated FAQs",
+      "menu": "Translated Menu"
+    },
+    "main": {
+      "claimControl": "Translated Claim, Control",
+      "reuseYourNew": "Translated Reuse your new",
+      "digitalIdentity": "Translated Digital Identity",
+      "mainText": "Translated Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity."
+    },
+    "selv": {
+      "selvText": "Uw gegevens mogen niet openbaar zijn, maar ze mogen ook niet worden vergrendeld. <1 /> We beloven een oplossing die <3> gegevensstroom mogelijk maakt </3>, volledig in uw <5> controle </5>.",
+      "text1": "Uw gegevens mogen niet openbaar zijn, maar ze mogen ook niet worden vergrendeld.",
+      "text2": "We beloven een oplossing die",
+      "text3": "gegevensstroom mogelijk maakt",
+      "text4": "volledig in uw",
+      "text5": "controle"
     }
-
+  },
+  "views": {
+    "How it works": "Translated translated how it works"
   },
   "actions": {
-
+    "Try the demo": "Translated Try the demo"
   },
   "general": {
-    "Self Sovereign Identity": "Self Sovereign Identity",
-    "Demo": "Demoasdf",
-    "The App": "The App"
+    "Self Sovereign Identity": "Translated Self Sovereign Identity",
+    "Demo": "Translated Demo",
+    "The App": "Translated The App",
+    "What it is": "Translated Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
+    "A Unified Identity": "Translated A Unified Identity",
+    "continue": "Continue"
+  },
+  "pages": {
+    "demo": {
+      "introDemoSelection": {
+        "healthStatusManagement": "Health status management",
+        "shareTrustedCredentials": "Share trusted credentials and immunity status"
+      },
+      "introShowTodos": {
+        "welcomeToThe": "Welcome to the",
+        "selvDemo": "Selv Demo",
+        "hereIsTodo": "<0>Translated Here is <1>your to-do list</1> for today:</0>"
+      }
+    }
   }
 }

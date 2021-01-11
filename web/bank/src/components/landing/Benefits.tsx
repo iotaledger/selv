@@ -11,7 +11,7 @@ import { Translation } from 'react-i18next';
 export default () => (
     <Translation>
         {
-            (t, { i18n }) =>
+            (t) =>
                 <RandomGraphicElement elements={10}>
                     <div className='benefits-section' id='benefits'>
                         <h4 data-aos='fade-up' data-aos-duration='1000'>{t("landing.benefits.benefits")}</h4>

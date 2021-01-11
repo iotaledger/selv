@@ -9,12 +9,14 @@ import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
 import logo from '../assets/landing/logoHeader.svg';
 import { covidDemo } from '../config.json';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Component which will display a IntroDemoSelection.
  */
 const IntroDemoSelection: React.FC = ({ match }: any) => {
     const { nextStep } = useStep(match);
+    const { t, i18n } = useTranslation();
 
     useEffect(() => {
         window.scrollTo({
@@ -35,11 +37,11 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                         <div className='demo-card-wrapper'>
                             <img src={selv} alt="Selv demo" />
                             <div className="demo-card-content">
-                                <h3>Digital Identity management</h3>
-                                <p>Claim, Control & Reuse your Digital Identity</p>
+                                <h3>{t("general.digitalIdentityManagement")}</h3>
+                                <p>{t("general.claimControlReuse")}</p>
                                 <Link to={nextStep}>
                                     <Button className='cta'>
-                                        Try the demo
+                                        {t("actions.tryTheDemo")}
                                     </Button>
                                 </Link>
                             </div>
@@ -47,11 +49,11 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                         <div className='demo-card-wrapper'>
                             <img src={covid} alt="Covid-19 demo" />
                             <div className="demo-card-content">
-                                <h3>Health status management</h3>
-                                <p>Share trusted credentials and immunity status</p>
+                                <h3>{t("pages.demo.introDemoSelection.healthStatusManagement")}</h3>
+                                <p>{t("pages.demo.introDemoSelection.shareTrustedCredentials")}</p>
                                 <a href={`${covidDemo}/demo/app`} rel='noopener noreferrer'>
                                     <Button className='cta'>
-                                        Try the demo
+                                        {t("actions.tryTheDemo")}
                                     </Button>
                                 </a>
                             </div>

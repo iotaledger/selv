@@ -12,13 +12,13 @@ import { Translation } from 'react-i18next';
 export default () => (
     <Translation>
         {
-            (t, { i18n }) =>
+            (t) =>
 
                 <RandomGraphicElement elements={5}>
                     <div className='app-section' id='the-app'>
                         <img src={circle} alt='' className='circle' />
-                        <h4 data-aos='fade-up' data-aos-duration='1000'>{t("general.Demo")}</h4>
-                        <h2 data-aos='fade-up' data-aos-duration='1000'>{t("general.The App")}</h2>
+                        <h4 data-aos='fade-up' data-aos-duration='1000'>{t("landing.app.demo")}</h4>
+                        <h2 data-aos='fade-up' data-aos-duration='1000'>{t("landing.app.theApp")}</h2>
 
                         <div className='content-wrapper'>
                             <img data-aos='fade-right' data-aos-duration='1000' src={app} alt='App' className='desktop' />
@@ -27,30 +27,30 @@ export default () => (
                                 <div className='content-item' data-aos='fade-left' data-aos-duration='1000'>
                                     <span className='content-header-wrapper'>
                                         <img src={selv} alt='' className='logo' />
-                                        <h5>{t("general.Self Sovereign Identity")}</h5>
+                                        <h5>{t("landing.app.selfSovereignIdentity")}</h5>
                                     </span>
-                                    <p>{t("general.What it is")}</p>
+                                    <p>{t("landing.app.whatItIs")}</p>
                                 </div>
                                 <div className='content-item' data-aos='fade-left' data-aos-duration='1000'>
                                     <span className='content-header-wrapper'>
                                         <img src={selv} alt='' className='logo' />
-                                        <h5>{t("views.landing.app.One App – One Protocol")}</h5>
+                                        <h5>{t("landing.app.oneAppOneProtocol")}</h5>
                                     </span>
-                                    <p>{t("views.landing.app.Easy GDPR compliance")}</p>
+                                    <p>{t("landing.app.easyGDPRcompliance")}</p>
                                 </div>
                                 <div className='content-item' data-aos='fade-left' data-aos-duration='1000'>
                                     <span className='content-header-wrapper'>
                                         <img src={selv} alt='' className='logo' />
-                                        <h5>{t("general.A Unified Identity")}</h5>
+                                        <h5>{t("landing.app.unifiedIdentity")}</h5>
                                     </span>
-                                    <p>{t("views.landing.app.Unified Identity Protocol enables devices")}</p>
+                                    <p>{t("landing.app.protocolEnablesDevices")}</p>
                                 </div>
                             </div>
                         </div>
 
                         <Link to='/demo/select'>
                             <Button className='cta' data-aos='fade-up' data-aos-duration='1000'>
-                                {t("actions.Try the demo")}
+                                {t("landing.app.tryTheDemo")}
                 </Button>
                         </Link>
                     </div>

@@ -4,9 +4,8 @@ import { Button, Icon } from 'antd';
 import DropSelector from '../DropSelector';
 import Context from '../../context/app-context';
 import logo from '../../assets/landing/logoHeader.svg'
-import { useTranslation, withTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
-// const { t, i18n } = useTranslation();
 
 const links = [
     {
@@ -27,7 +26,7 @@ const links = [
     },
 ]
 export default () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [menuOpenState, setMenuState] = useState(false);
     const { language, setLanguage }: any = useContext(Context);
 
@@ -54,28 +53,20 @@ export default () => {
             <img src={logo} alt="Selv logo" className="logo" />
             <div className="menu-links">
 
-                <DropSelector
-                // items={['en', 'de']}
-                />
-                {/* <Button className="cta"> */}
-                    {/* <Trans i18nKey="title">
-                    </Trans> */}
-                    {/* <h2>{t('title')}</h2>; */}
-                    {/* {t('title')} */}
-                {/* </Button> */}
-                <img className="cta" alt="USA" src="http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" onClick={() => setLanguage('en')} style={{ borderWidth: 100, borderColor: '#FFF' }} />
+                <DropSelector/>
+                {/* <img className="cta" alt="USA" src="http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" onClick={() => setLanguage('en')} style={{ borderWidth: 100, borderColor: '#FFF' }} /> */}
                 {/* <Button className='cta' onClick={}>
                 </Button> */}
                 {
                     links.map(link => (
                         <Link to={link.anchor} key={link.title} className="menu-link" onClick={() => onAnchorClick(link.anchor)}>
-                            { t("views.landing.header."+ link.title)}
+                            { t("landing.header." + link.title)}
                         </Link>
                     ))
                 }
                 <Link to={'/demo/select'}>
                     <Button className="cta">
-                        Try the demo
+                        {t("landing.app.tryTheDemo")}
                     </Button>
                 </Link>
             </div>
@@ -95,22 +86,21 @@ export default () => {
 }
 
 const MobileMenu = ({ onAnchorClick, menuOpenState }: { onAnchorClick: (anchor: string) => void; menuOpenState: boolean; }) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <div className={`mobile-menu-wrapper ${menuOpenState ? 'open' : ''}`}>
-            <h1>Menu</h1>
+            <h1>{t("landing.header.menu")}</h1>
             <div className="mobile-menu-links">
                 {
                     links.map(link => (
                         <Link to={link.anchor} key={link.title} className="menu-link" onClick={() => onAnchorClick(link.anchor)}>
-                            { link.title}
+                            { t("landing.header." + link.title)}
                         </Link>
                     ))
                 }
-                <h1>{t('Welcome to React')}</h1>
                 <Link to={'/demo/select'}>
                     <Button className="cta">
-                        Try the demo
+                        {t("landing.app.tryTheDemo")}
                     </Button>
                 </Link>
             </div>

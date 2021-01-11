@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Button, Checkbox, Radio } from 'antd';
+import {Trans} from 'react-i18next';
 
 interface IAccountType {
     label: string;
@@ -56,7 +57,9 @@ const RadioGroup = ({ form, onSubmit, accountTypes }: {
                 </Form.Item>
                 <Form.Item>
                     <Button htmlType='submit' disabled={hasErrors(getFieldsError())}>
+                    <Trans i18nKey="actions.continue">
                         Continue
+                    </Trans>
                     </Button>
                 </Form.Item>
             </Form>

@@ -18,8 +18,8 @@ import {
 
 export const routes = [
     { path: '/', page: Landing },
-    { path: '/demo/select', page: IntroDemoSelection },
-    { path: '/demo/todos', page: IntroShowTodos },
+    { path: '/demo/select', page: IntroDemoSelection }, //translation done
+    { path: '/demo/todos', page: IntroShowTodos }, //translation done
     { path: '/demo/app', page: IntroShowMobile },
     { path: '/company/list/0', page: IncorporatedCompanies },
     { path: '/demo/app/0', page: AppDownloadQR },

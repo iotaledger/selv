@@ -24,14 +24,15 @@ i18n
     .use(Backend)
     .use(initReactI18next)
     .init({
-        lng: 'en',
+        debug:true,
+        lng: 'nl',
         fallbackLng: 'en',
         // resources: resources,
         //keySeparator: false, // we do not use keys in form messages.welcome
         keySeparator: '.',
 
         interpolation: {
-            // escapeValue: false // react already safes from xss
+            //escapeValue: false // react already safes from xss
         },
         react: {
             useSuspense: false

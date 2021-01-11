@@ -5,6 +5,7 @@ import appStore from '../../assets/appStore.svg';
 import googlePlay from '../../assets/googlePlay.svg';
 import dots from '../../assets/backgrounds/dots.png';
 import ellipse from '../../assets/backgrounds/ellipse1.svg';
+import { Translation } from 'react-i18next';
 
 export default () => {
     return (
@@ -36,10 +37,15 @@ export default () => {
 };
 
 const Content = () => (
-    <>
-        <h1>Claim, Control &<br />Reuse your new<br />Digital Identity</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </>
+    <Translation>
+        {
+            (t) =>
+                <>
+                    <h1>{t("landing.main.claimControl")} &<br />{t("landing.main.reuseYourNew")}<br />{t("landing.main.digitalIdentity")}</h1>
+                    <p>{t("landing.main.mainText")}</p>
+                </>
+        }
+    </Translation>
 );
 
 const Buttons = () => (
