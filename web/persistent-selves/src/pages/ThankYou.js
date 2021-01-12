@@ -23,7 +23,7 @@ const ThankYou = () => {
 			<Link to={'/'} className='logo demo-page'>
 				<img src={logo} alt='Selv logo' />
 			</Link>
-			<div className='thank-you-page-wrapper'>
+			<div className='thank-you-page-wrapper' id='app'>
 				<RandomGraphicElement elements={7}>
 					<div className='thank-you-wrapper-2'>
 						<span className='heading'>

@@ -11,6 +11,7 @@ const Disclaimer = ({ cookies }) => {
             const element = document.getElementById('footer') || document.getElementById('app');
 			const elementDownloadApp = document.getElementById('app-download');
 			if (element || elementDownloadApp) {
+                element.classList.add('cookie-bar-bottom-bar');
                 elementDownloadApp && elementDownloadApp.classList.add('cta-section-extended');
                 setAck(false);   
             }
