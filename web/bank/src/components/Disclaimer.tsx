@@ -11,6 +11,7 @@ const Disclaimer = ({ cookies }: { cookies: any; }) => {
 			const element = document.getElementById('footer') || document.getElementById('app');
 			const elementDownloadApp = document.getElementById('app-download');
 			if (element || elementDownloadApp) {
+				element && element.classList.add('cookie-bar-bottom-bar');
                 elementDownloadApp && elementDownloadApp.classList.add('cta-section-extended');
                 setAck(false);   
             }
@@ -23,6 +24,7 @@ const Disclaimer = ({ cookies }: { cookies: any; }) => {
 			const element = document.getElementById('footer') || document.getElementById('app');
 			const elementDownloadApp = document.getElementById('app-download');
 			if (element || elementDownloadApp) {
+				element && element.classList.remove('cookie-bar-bottom-bar');
                 elementDownloadApp && elementDownloadApp.classList.remove('cta-section-extended');
                 elementDownloadApp && elementDownloadApp.classList.add('cta-section');
                 setAck(true);
