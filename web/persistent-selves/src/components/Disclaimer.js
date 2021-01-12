@@ -9,9 +9,11 @@ const Disclaimer = ({ cookies }) => {
         const ack = cookies.get('persistent-selves-cookie');
         if (!ack && document) {
             const element = document.getElementById('footer') || document.getElementById('app');
-            if (element) {
-                element.classList.add('cookie-bar-bottom-bar');
-                setAck(false);
+			const elementDownloadApp = document.getElementById('app-download');
+			if (element || elementDownloadApp) {
+                element && element.classList.add('cookie-bar-bottom-bar');
+                elementDownloadApp && elementDownloadApp.classList.add('cta-section-extended');
+                setAck(false);   
             }
         }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -20,8 +22,11 @@ const Disclaimer = ({ cookies }) => {
         cookies.set('persistent-selves-cookie', true, { path: '/' });
         if (document) {
             const element = document.getElementById('footer') || document.getElementById('app');
-            if (element) {
-                element.classList.remove('cookie-bar-bottom-bar');
+			const elementDownloadApp = document.getElementById('app-download');
+			if (element || elementDownloadApp) {
+                element && element.classList.remove('cookie-bar-bottom-bar');
+                elementDownloadApp && elementDownloadApp.classList.remove('cta-section-extended');
+                elementDownloadApp && elementDownloadApp.classList.add('cta-section');
                 setAck(true);
             }
         }

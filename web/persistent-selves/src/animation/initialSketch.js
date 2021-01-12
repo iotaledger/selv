@@ -182,13 +182,13 @@ export default function sketch(s) {
         if (size === 0) {
           drawRadialGradient(s, blueGradientColor, white, 40);
           s.fill(brandRectangle);
-          s.rect(s.width / 2 + 15, s.height / 2 - 12, 120, 20);
-          s.rect(s.width / 2 - 70, s.height / 2 + 23, 190, 20);
+          s.rect(s.width / 2, s.height / 2 - 12, 120, 20);
+          s.rect(s.width / 2 - 85, s.height / 2 + 23, 190, 20);
           s.fill(black);
           s.textFont(metro_font);
           s.textSize(30);
-          s.text("This is the lifetime of", s.width / 2 - 140, s.height / 2);
-          s.text("your parents.", s.width / 2 - 70, s.height / 2 + 35);
+          s.text("This is the lifetime of", s.width / 2 - 155, s.height / 2);
+          s.text("your parents.", s.width / 2 - 90, s.height / 2 + 35);
           size += 5;
         } else if (size < parentsRadius) {
           s.fill(parentsLifeColorSaf);
@@ -204,11 +204,11 @@ export default function sketch(s) {
           drawRadialGradient(s, blueGradientColor, white, 40);
           s.fill(brandRectangle);
           s.noStroke();
-          s.rect(s.width / 2 - 40, s.height / 2 - 12, 190, 20);
+          s.rect(s.width / 2 - 40, s.height / 2 + 25, 190, 20);
           s.fill(black);
           s.textFont(metro_font);
           s.textSize(30);
-          s.text("This is your lifetime.", s.width / 2 - 140, s.height / 2);
+          s.text("This is your lifetime.", s.width / 2 - 140, s.height / 2 + 35);
           size += 5;
         } else if (size < yourRadius) {
           s.fill(parentsLifeColorSaf);
@@ -234,15 +234,15 @@ export default function sketch(s) {
           drawRadialGradient(s, blueGradientColor, white, 40);
           s.fill(brandRectangle);
           s.noStroke();
-          s.rect(s.width / 2 - 70, s.height / 2 - 12, 270, 20);
-          s.rect(s.width / 2 - 40, s.height / 2 + 23, 245, 20);
+          s.rect(s.width / 2 - 85, s.height / 2 - 12, 270, 20);
+          s.rect(s.width / 2 - 52, s.height / 2 + 23, 232, 20);
           s.fill(black);
           s.textFont(metro_font);
           s.textSize(30);
-          s.text("This will be the lifetime", s.width / 2 - 140, s.height / 2);
+          s.text("This will be the lifetime", s.width / 2 - 160, s.height / 2);
           s.text(
             "of the next generation.",
-            s.width / 2 - 130,
+            s.width / 2 - 150,
             s.height / 2 + 35
           );
           size += 5;
@@ -332,15 +332,15 @@ export default function sketch(s) {
           s.noStroke();
           drawRadialGradient(s, white, greenGradientColor, 40);
           s.fill(brandRectangle);
-          s.rect(s.width / 2 + 20, s.height / 2 - 12, 180, 20);
-          s.rect(s.width / 2 - 55, s.height / 2 + 23, 245, 20);
+          s.rect(s.width / 2, s.height / 2 - 12, 180, 20);
+          s.rect(s.width / 2 - 90, s.height / 2 + 23, 245, 20);
           s.fill(black);
           s.textFont(metro_font);
           s.textSize(30);
-          s.text("And this is the lifetime", s.width / 2 - 140, s.height / 2);
+          s.text("And this is the lifetime", s.width / 2 - 160, s.height / 2);
           s.text(
             "of the forest it belongs to.",
-            s.width / 2 - 150,
+            s.width / 2 - 185,
             s.height / 2 + 35
           );
 
@@ -467,13 +467,13 @@ export default function sketch(s) {
         s.textSize(30);
         s.text(
           "Persistent Selv will help you take care",
-          s.width / 2 - 240,
+          s.width / 2 - 275,
           s.height / 2 - 20
         );
-        s.text("of future generations", s.width / 2 - 110, s.height / 2 + 10);
+        s.text("of future generations", s.width / 2 - 145, s.height / 2 + 10);
         s.text(
           "by protecting their environment.",
-          s.width / 2 - 200,
+          s.width / 2 - 235,
           s.height / 2 + 40
         );
 
