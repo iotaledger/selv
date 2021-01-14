@@ -97,7 +97,18 @@
     "How it works": "Translated translated how it works"
   },
   "actions": {
-    "Try the demo": "Translated Try the demo"
+    "tryTheDemo": "Try the demo",
+    "continue": "Continue",
+    "letsDoIt": "Let's do it",
+    "continueNextStep": "Continue to next step",
+    "registerNewCompany": "Register new Company",
+    "downloadTheSelvApp": "Download the Selv app",
+    "orScanCode": "Or scan this QR code<1/>to download",
+    "back": "Back",
+    "setUpCompany": "Translated Set up a company",
+    "getBankAccount": "Get a bank account",
+    "liabilityInsurance": "Liability insurance",
+    "readyForBusiness": "Ready for business"
   },
   "general": {
     "Self Sovereign Identity": "Translated Self Sovereign Identity",

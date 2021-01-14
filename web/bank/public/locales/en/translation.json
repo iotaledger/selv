@@ -100,10 +100,16 @@
     "continueNextStep": "Continue to next step",
     "registerNewCompany": "Register new Company",
     "downloadTheSelvApp": "Download the Selv app",
-    "orScanCode": "Or scan this QR code<1/>to download"
+    "orScanCode": "Or scan this QR code<1/>to download",
+    "back": "Back",
+    "setUpCompany": "Set up a company",
+    "getBankAccount": "Get a bank account",
+    "liabilityInsurance": "Liability insurance",
+    "readyForBusiness": "Ready for business"
   },
   "general": {
     "Self Sovereign Identity": "Self Sovereign Identity",
+    "selfSovereignity": "Self Sovereignity",
     "Demo": "Demo",
     "The App": "The App",
     "What it is": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
@@ -137,7 +143,6 @@
       },
       "appDownloadQR": {
         "onceDownloaded": "Once you’ve downloaded and installed the app, click the button below."
-      
       },
       "greatSuccess": {
         "signedInDIDText": "You managed to sign into a website you never signed up for. Account creation has been skipped saving you time and effort. The company house is also not burdened with saving your password.",
@@ -145,6 +150,14 @@
         "reusedSelvCredentialsText": "By controlling your personal data, you shared verifiable data without having to type it into a form. You can use these same credentials in other processes. Imagine never having to type in your name, address, email etc..."
       },
       "thankYou": {
+        "thanksForTryingSelv": "Thanks for trying Selv!",
+        "improvedExperience": "Improved experience",
+        "savedTime": "With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and insurance with very few clicks. Your data was reusable and this saved you x fields of form fields to fill in.",
+        "sovereignityText": "You have taken full control of your data. You decided who you shared your data with. Did you know that you can share them with others manually via QR as well. Try so in the Selv app!",
+        "moreTrust": "More Trust",
+        "trustText": "The data you shared with the Company House and the SNS Bank was verifiable. This allows to verify your data instantly and freely using IOTA as the trust layer.",
+        "returnCompanyHouse": "Return to Company House",
+        "returnHome": "Return Home"
       
       }
     },
@@ -172,6 +185,12 @@
     },
     "general": {
       "confirmation": {
+        "titleBank": "Your business bank account is now set up!",
+        "titleInsurance": "Congratulations, your liability insurance is now set up!",
+        "titleCompany": "Congratulations, your company is now set up!",
+        "credentialsToSelv": "Your new  is sent to Selv",
+        "proudOwnerOfCompany": "You are now the proud owner of your new company. From now on you’ll be able to prove that you have a directorship position at your newly found company. Open up Selv in order to receive a signed credential you can use to act on behalf of your company.",
+        "returnToCompany": "Return to Company House"
 
       },
       "proveIdentity": {
@@ -179,6 +198,14 @@
         "scanToContinue": "Scan this QR code with <1>Selv App</1> to continue"
       },
       "companyDetails": {
+        "companyNumber": "Company Number",
+        "officeAddress": "Registered office address",
+        "companyType": "Company Type",
+        "incorporatedOn": "Incorporated on",
+        "companyOwner": "Company owner",
+        "natureOfBusiness": "Nature of business",
+        "companyStatus": "Company status"
+
 
       }
     }

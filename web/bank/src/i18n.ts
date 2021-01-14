@@ -25,7 +25,7 @@ i18n
     .use(initReactI18next)
     .init({
         debug:true,
-        lng: 'nl',
+        lng: 'en',
         fallbackLng: 'en',
         // resources: resources,
         //keySeparator: false, // we do not use keys in form messages.welcome

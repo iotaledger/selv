@@ -6,6 +6,8 @@ const GlobalState = ({ children }: any) => {
     const [language, setLanguage] = useState("en");
     const languages: string[] = ['en, nl']
 
+    
+
     return (
         <AppContext.Provider value={{
             mainSteps,
