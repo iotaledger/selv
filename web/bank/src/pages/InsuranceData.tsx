@@ -3,6 +3,7 @@ import { Button, Collapse, notification } from 'antd';
 import { flattenObject } from '../utils/helper';
 import { Layout, Loading, AccountType, PrefilledForm, Checkbox, WebSocket } from '../components';
 import checkmark from '../assets/bankCheckmark.svg';
+import { useTranslation } from 'react-i18next';
 
 const personalDataFields = [
     'FirstName',
@@ -62,7 +63,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
     const [prefilledBankData, setPrefilledBankData] = useState({});
 
     useEffect(() => {
-        async function getData () {
+        async function getData() {
             const credentialsString: string | null = await localStorage.getItem('credentials');
             const credentials = credentialsString && await JSON.parse(credentialsString);
             const status = credentials?.status;
@@ -87,16 +88,16 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
         getData();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    async function processValues (fields: object) {
+    async function processValues(fields: object) {
         setFields(fields);
         setWebSocket(true);
     }
 
-    function setStatusMessage (message: string) {
+    function setStatusMessage(message: string) {
         setStatus(message);
     }
 
-    async function continueNextStep (params: any) {
+    async function continueNextStep(params: any) {
         if (accountStep < 5) {
             setAccountStep(accountStep => accountStep + 1);
             if (params.accountType) {
@@ -110,7 +111,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
         }
     }
 
-    function onChange (step: any) {
+    function onChange(step: any) {
         accountStep > step && setAccountStep(Number(step));
     }
 
@@ -119,10 +120,12 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
     const prefilledBankFormData: any = { dataFields: prefilledBankData };
     const formData: any = { onSubmit: continueNextStep, status, messages, accountTypes, buttonText: 'Get liability insurance' };
 
+    const { t } = useTranslation();
+
     return (
         <Layout match={match}>
             <div className='insurance-data-page-wrapper'>
-                <h1>Open an account</h1>
+                <h1>{t("pages.insurance.insuranceData.openAnAccount")}</h1>
                 <Collapse
                     onChange={onChange}
                     bordered={false}
@@ -136,7 +139,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                                 {
                                     accountStep > 1 ? <img src={checkmark} alt='' /> : <span>1</span>
                                 }
-                                <h3>Account type</h3>
+                                <h3>{t("pages.insurance.insuranceData.accountType")}</h3>
                             </div>
                         )}
                         showArrow={false}
@@ -150,7 +153,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                                 {
                                     accountStep > 2 ? <img src={checkmark} alt='' /> : <span>2</span>
                                 }
-                                <h3>Business owner</h3>
+                                <h3>{t("pages.insurance.insuranceData.businessOwner")}</h3>
                             </div>
                         )}
                         showArrow={false}
@@ -162,7 +165,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                             <PrefilledForm {...prefilledPersonalFormData} />
                         }
                         <Button onClick={continueNextStep}>
-                            Continue
+                            {t("actions.continue")}
                         </Button>
                     </Collapse.Panel>
                     <Collapse.Panel
@@ -171,7 +174,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                                 {
                                     accountStep > 3 ? <img src={checkmark} alt='' /> : <span>3</span>
                                 }
-                                <h3>Company Details</h3>
+                                <h3>{t("pages.insurance.insuranceData.companyDetails")}</h3>
                             </div>
                         )}
                         showArrow={false}
@@ -183,7 +186,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                             <PrefilledForm {...prefilledCompanyFormData} />
                         }
                         <Button onClick={continueNextStep}>
-                            Continue
+                            {t("actions.continue")}
                         </Button>
                     </Collapse.Panel>
                     <Collapse.Panel
@@ -192,7 +195,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                                 {
                                     accountStep > 4 ? <img src={checkmark} alt='' /> : <span>4</span>
                                 }
-                                <h3>Bank Account Details</h3>
+                                <h3>{t("pages.insurance.insuranceData.bankAccountDetails")}</h3>
                             </div>
                         )}
                         showArrow={false}
@@ -204,7 +207,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                             <PrefilledForm {...prefilledBankFormData} />
                         }
                         <Button onClick={continueNextStep}>
-                            Continue
+                            {t("actions.continue")}
                         </Button>
                     </Collapse.Panel>
 
@@ -212,7 +215,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                         header={(
                             <div className='section-header'>
                                 <span>5</span>
-                                <h3>Confirm</h3>
+                                <h3>{t("actions.confirm")}</h3>
                             </div>
                         )}
                         showArrow={false}

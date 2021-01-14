@@ -28,7 +28,6 @@ const links = [
 export default () => {
     const { t } = useTranslation();
     const [menuOpenState, setMenuState] = useState(false);
-    const { language, setLanguage }: any = useContext(Context);
 
     function onAnchorClick(anchor: string) {
         setMenuState(false)

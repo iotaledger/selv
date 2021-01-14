@@ -1,4 +1,3 @@
-import i18n from 'i18next';
 import {
     Landing,
     IntroShowTodos,
@@ -25,7 +24,7 @@ export const routes = [
     { path: '/company/list/0', page: IncorporatedCompanies }, //translation done
     { path: '/demo/app/0', page: AppDownloadQR }, //translation done
     { path: '/company/prove/0', page: ProveIdentity }, //translation done
-    { path: '/company/signin/0', page: SingInConfirmation },
+    { path: '/company/signin/0', page: SingInConfirmation }, //translation done
     { path: '/company/data/0', page: CompanyData },
     { path: '/company/confirm/1', page: Confirmation }, //translation done
     { path: '/demo/success/1', page: GreatSuccess }, //translation done
@@ -34,7 +33,7 @@ export const routes = [
     { path: '/bank/data/1', page: BankData },
     { path: '/bank/confirm/2', page: Confirmation }, //translation done
     { path: '/company/details/2/:companyId', page: CompanyDetails }, //translation done
-    { path: '/insurance/prove/2', page: ProveIdentity },
+    { path: '/insurance/prove/2', page: ProveIdentity }, //translation done
     { path: '/insurance/data/2', page: InsuranceData },
     { path: '/insurance/confirm/3', page: Confirmation },//translation done
     { path: '/company/details/3/:companyId', page: CompanyDetails },//translation done

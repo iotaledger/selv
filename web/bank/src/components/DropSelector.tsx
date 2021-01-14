@@ -1,6 +1,5 @@
 import classNames from 'classnames';
-import React, { useContext, useState } from 'react';
-import Context from '../context/app-context';
+import React, { useState } from 'react';
 import '../styles/components/dropSelector.scss';
 import { useTranslation } from 'react-i18next';
 
@@ -8,13 +7,8 @@ import { useTranslation } from 'react-i18next';
 //TODO: currently only works properly with two items due to some scss-bug
 const DropSelector = () => {
     const [isExpanded, handleExpand] = useState(false);
-    // const { language, setLanguage }: any = useContext(Context);
-    // const languages: string[] = useContext(Context);
     const { t, i18n } = useTranslation();
     const languages: string[] = ['en', 'nl']
-
-
-    console.log(i18n.languages)
 
     function changeLanguage(lng: any){
         i18n.changeLanguage(lng);

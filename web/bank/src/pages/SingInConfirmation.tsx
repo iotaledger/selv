@@ -15,7 +15,7 @@ const SingInConfirmation: React.FC = ({ history, match }: any) => {
     const { t, i18n } = useTranslation();
 
     useEffect(() => {
-        async function getData () {
+        async function getData() {
             const credentialsString: string | null = await localStorage.getItem('credentials');
             const credentials = credentialsString && await JSON.parse(credentialsString);
             const status = credentials?.status;
@@ -33,7 +33,7 @@ const SingInConfirmation: React.FC = ({ history, match }: any) => {
                     <img src={selv} alt='Selv app logo' />
                     <h2>{t("general.hello")}</h2>
                     <p>
-                        You have now signed in without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which [business] can use without an expensive verification process. Verifying your data is nearly instant and completely free.
+                        {t("pages.company.signInConfirmation.signInSuccess")}
                     </p>
                     <Link to={nextStep}>
                         <Button>
