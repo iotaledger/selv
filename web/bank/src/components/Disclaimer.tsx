@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { withCookies } from 'react-cookie';
 import { Button } from 'antd';
-
+import { useTranslation } from 'react-i18next';
+//Translation done
 const Disclaimer = ({ cookies }: { cookies: any }) => {
     const [ack, setAck] = useState(true);
 
@@ -27,23 +28,24 @@ const Disclaimer = ({ cookies }: { cookies: any }) => {
         }
     }
 
+    const { t } = useTranslation();
     if (ack) return null;
+
 
     return (
         <div className='disclaimer-wrapper'>
             <span className='disclaimer-text'>
-                This website uses cookies to ensure you get the best experience on our
-                website.&nbsp;
+                {t("components.disclaimer.usesCookies")}&nbsp;
                 <a
                     className='disclaimer-link'
                     target='_blank'
                     rel='noopener noreferrer'
                     href='https://www.iota.org/research/privacy-policy'
                 >
-                    Learn more
+                    {t("actions.learnMore")}
                 </a>
             </span>
-            <Button className='cta' onClick={dismiss}>Dismiss</Button>
+            <Button className='cta' onClick={dismiss}>{t("actions.dismiss")}</Button>
         </div>
     );
 };

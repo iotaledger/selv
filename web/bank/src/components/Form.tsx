@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Button, Input } from 'antd';
-
+import { useTranslation } from 'react-i18next';
+//translation done
 const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }: {
     form: any;
     dataFields: string[];
@@ -10,6 +11,8 @@ const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }
     messages: { [ key: string ]: string; };
 }) => {
     const { getFieldDecorator, getFieldsError, validateFields } = form;
+
+    const {t} = useTranslation();
 
     function handleSubmit (e: any) {
         e.preventDefault();
@@ -31,7 +34,7 @@ const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }
                     dataFields.map((field: string) => (
                         <Form.Item label={labels[field]} key={field}>
                             { getFieldDecorator(field, {
-                                rules: [{ required: true, message: 'Please provide required information!' }]
+                                rules: [{ required: true, message: t("components.form.error") }]
                             })(<Input />)}
                         </Form.Item>
                     ))
@@ -39,9 +42,9 @@ const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }
                 <Form.Item>
                     <Button
                         htmlType='submit'
-                        disabled={hasErrors(getFieldsError()) || status === messages.waiting}
+                        disabled={hasErrors(getFieldsError()) || status === t(messages.waiting)}
                     >
-                        Register new Company
+                        {t("actions.registerNewCompany")}
                     </Button>
                 </Form.Item>
             </Form>

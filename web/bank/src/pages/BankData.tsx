@@ -3,6 +3,7 @@ import { Button, Collapse, notification } from 'antd';
 import { flattenObject } from '../utils/helper';
 import { Layout, Loading, AccountType, PrefilledForm, Checkbox, WebSocket } from '../components';
 import checkmark from '../assets/bankCheckmark.svg';
+import { useTranslation } from 'react-i18next';
 
 const personalDataFields = [
     'FirstName',
@@ -55,6 +56,8 @@ const BankData: React.FC = ({ history, match }: any) => {
     const [prefilledPersonalData, setPrefilledPersonalData] = useState({});
     const [prefilledCompanyData, setPrefilledCompanyData] = useState({});
 
+    const { t } = useTranslation();
+
     useEffect(() => {
         async function getData () {
             const credentialsString: string | null = await localStorage.getItem('credentials');
@@ -83,7 +86,7 @@ const BankData: React.FC = ({ history, match }: any) => {
     }
 
     function setStatusMessage (message: string) {
-        setStatus(message);
+        setStatus(message); //TODO: Translate important here
     }
 
     async function continueNextStep (params: any) {
@@ -107,7 +110,7 @@ const BankData: React.FC = ({ history, match }: any) => {
 
     const prefilledPersonalFormData: any = { dataFields: prefilledPersonalData };
     const prefilledCompanyFormData: any = { dataFields: prefilledCompanyData };
-    const formData: any = { onSubmit: continueNextStep, status, messages, accountTypes, buttonText: 'Open bank account' };
+    const formData: any = { onSubmit: continueNextStep, status, messages, accountTypes, buttonText: t("pages.demo.introShowTodos.getBankAccount") };
 
     return (
         <Layout match={match}>

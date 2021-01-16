@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Button, Checkbox } from 'antd';
-
+import { useTranslation } from 'react-i18next';
+//translation done
 const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
     form: any;
     onSubmit: (values: object) => void;
@@ -9,6 +10,8 @@ const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
     buttonText: string;
 }) => {
     const { getFieldDecorator, getFieldsError, validateFields } = form;
+
+    const { t } = useTranslation();
 
     function handleSubmit (e: any) {
         e.preventDefault();
@@ -34,18 +37,18 @@ const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
                             required: true,
                             transform: (value: boolean) => (value || undefined),
                             type: 'boolean',
-                            message: 'Please agree the terms and conditions.'
+                            message: t("components.checkBox.errorMessage")
                         }]
                     })(
                         <Checkbox>
-                            I confirm everything and agree to any terms
+                            {t("components.checkBox.confirm")}
                         </Checkbox>
                     )}
                 </Form.Item>
                 <Form.Item>
                     <Button
                         htmlType='submit'
-                        disabled={hasErrors(getFieldsError()) || status === messages.waiting}
+                        disabled={hasErrors(getFieldsError()) || status === t(messages.waiting)}
                     >
                         {buttonText}
                     </Button>

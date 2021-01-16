@@ -10,7 +10,6 @@ export default () => (
             (t) =>
                 <div className='selv-section'>
                     <img data-aos='fade-up' data-aos-duration='1000' src={logo} alt='Selv logo' />
-                    {/* <p data-aos='fade-up' data-aos-duration='1000'>{t("landing.selv.text1")}<br />{t("landing.selv.text2")} <strong>{t("landing.selv.text3")}</strong> {t("landing.selv.text4")} <strong>{t("landing.selv.text5")}</strong>.</p> */}
                     <p data-aos='fade-up' data-aos-duration='1000'>
                         <Trans i18nKey="landing.selv.selvText">
                             Your data shouldn’t be public, but it shouldn’t be locked up either.<br />We promise a solution that <strong>enables data flow</strong>, completely in your <strong>control</strong>.

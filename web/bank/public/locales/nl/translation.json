@@ -85,50 +85,172 @@
       "mainText": "Translated Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity."
     },
     "selv": {
-      "selvText": "Uw gegevens mogen niet openbaar zijn, maar ze mogen ook niet worden vergrendeld. <1 /> We beloven een oplossing die <3> gegevensstroom mogelijk maakt </3>, volledig in uw <5> controle </5>.",
-      "text1": "Uw gegevens mogen niet openbaar zijn, maar ze mogen ook niet worden vergrendeld.",
-      "text2": "We beloven een oplossing die",
-      "text3": "gegevensstroom mogelijk maakt",
-      "text4": "volledig in uw",
-      "text5": "controle"
+      "selvText": "Uw gegevens mogen niet openbaar zijn, maar ze mogen ook niet worden vergrendeld. <1 /> We beloven een oplossing die <3> gegevensstroom mogelijk maakt </3>, volledig in uw <5> controle </5>."
     }
   },
-  "views": {
-    "How it works": "Translated translated how it works"
-  },
   "actions": {
-    "tryTheDemo": "Try the demo",
-    "continue": "Continue",
-    "letsDoIt": "Let's do it",
-    "continueNextStep": "Continue to next step",
-    "registerNewCompany": "Register new Company",
-    "downloadTheSelvApp": "Download the Selv app",
-    "orScanCode": "Or scan this QR code<1/>to download",
-    "back": "Back",
+    "tryTheDemo": "Translated Try the demo",
+    "continue": "Translated Continue",
+    "letsDoIt": "Translated Let's do it",
+    "continueNextStep": "Translated Continue to next step",
+    "registerNewCompany": "Translated Register new Company",
+    "downloadTheSelvApp": "Translated Download the Selv app",
+    "orScanCode": "Translated Or scan this QR code<1/>to download",
+    "back": "Translated Back",
     "setUpCompany": "Translated Set up a company",
-    "getBankAccount": "Get a bank account",
-    "liabilityInsurance": "Liability insurance",
-    "readyForBusiness": "Ready for business"
+    "getBankAccount": "Translated Get a bank account",
+    "liabilityInsurance": "Translated Liability insurance",
+    "readyForBusiness": "Translated Ready for business",
+    "confirm": "Translated Confirm",
+    "learnMore": "Translated Learn more",
+    "dismiss": "Translated Dismiss",
+    "finishDemo": "Translated Finish demo",
+    "getInsurance": "Translated Get insurance",
+    "openBankAccount": "Translated Open bank account"
   },
   "general": {
     "Self Sovereign Identity": "Translated Self Sovereign Identity",
+    "selfSovereignity": "Translated Self Sovereignity",
     "Demo": "Translated Demo",
     "The App": "Translated The App",
     "What it is": "Translated Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
     "A Unified Identity": "Translated A Unified Identity",
-    "continue": "Continue"
+    "digitalIdentityManagement": "Translated Digital Identity Management",
+    "claimControlReuse": "Translated Claim, Control & Reuse your Digital Identity",
+    "hello": "Translated Hello!",
+    "greatSuccess": "Translated Great Success!",
+    "signedInDID": "Translated You signed in with DID",
+    "receivedNewCredentials": "Translated Received new Credentials",
+    "reusedSelvCredentials": "Translated Re-used Selv Credentials"
   },
   "pages": {
     "demo": {
       "introDemoSelection": {
-        "healthStatusManagement": "Health status management",
-        "shareTrustedCredentials": "Share trusted credentials and immunity status"
+        "healthStatusManagement": "Translated Health status management",
+        "shareTrustedCredentials": "Translated Share trusted credentials and immunity status"
       },
       "introShowTodos": {
-        "welcomeToThe": "Welcome to the",
-        "selvDemo": "Selv Demo",
-        "hereIsTodo": "<0>Translated Here is <1>your to-do list</1> for today:</0>"
+        "welcomeToThe": "Translated Welcome to the",
+        "selvDemo": "Translated Selv Demo",
+        "hereIsTodo": "Translated <0>Here is <1>your to-do list</1> for today:</0>",
+        "setUpCompany": "Translated Set up a company",
+        "getBankAccount": "Translated Get a bank account",
+        "getLiabilityInsurance": "Translated Get liability insurance"
+      },
+      "introShowMobile": {
+        "looksLikeWork": "Translated That looks like a lot of work...",
+        "advantage": "Translated <0>But using IOTA’s Unified Identity Protocol and the Selv app, it will be <1>​quick and easy​.</1></0>",
+        "noteDesktop": "Translated This demo website is best experienced on a desktop computer."
+      },
+      "appDownloadQR": {
+        "onceDownloaded": "Translated Once you’ve downloaded and installed the app, click the button below."
+      },
+      "greatSuccess": {
+        "signedInDIDText": "Translated You managed to sign into a website you never signed up for. Account creation has been skipped saving you time and effort. The company house is also not burdened with saving your password.",
+        "receivedNewCredentialsText": "Translated You became the owner of a company. From this point onwards, you would be able to prove your directorship position online, allowing you to act on behalf of the company. Overtime you can grow your Selv profile by gathering such credentials from trusted third parties.",
+        "reusedSelvCredentialsText": "Translated By controlling your personal data, you shared verifiable data without having to type it into a form. You can use these same credentials in other processes. Imagine never having to type in your name, address, email etc..."
+      },
+      "thankYou": {
+        "thanksForTryingSelv": "Translated Thanks for trying Selv!",
+        "improvedExperience": "Translated Improved experience",
+        "savedTime": "Translated With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and insurance with very few clicks. Your data was reusable and this saved you x fields of form fields to fill in.",
+        "sovereignityText": "Translated You have taken full control of your data. You decided who you shared your data with. Did you know that you can share them with others manually via QR as well. Try so in the Selv app!",
+        "moreTrust": "Translated More Trust",
+        "trustText": "Translated The data you shared with the Company House and the SNS Bank was verifiable. This allows to verify your data instantly and freely using IOTA as the trust layer.",
+        "returnCompanyHouse": "Translated Return to Company House",
+        "returnHome": "Translated Return Home"
+      
       }
+    },
+    "company": {
+      "incorporatedCompanies": {
+        "newlyIncorporatedCompanies": "Translated Newly Incorporated Companies"
+      
+      },
+      "signInConfirmation": {
+        "signInSuccess": "Translated You have now signed in without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which [business] can use without an expensive verification process. Verifying your data is nearly instant and completely free."
+
+        
+      },
+      "companyData": {
+        
+      }
+    },
+    "bank": {
+      "bankData": {
+
+      }
+    },
+    "insurance": {
+      "insuranceData": {
+        "openAnAccount": "Translated Open an account",
+        "accountType": "Translated Account type",
+        "businessOwner": "Translated Business owner",
+        "companyDetails": "Translated Company Details",
+        "bankAccountDetails": "Translated Bank Account Details",
+        "accountTypes":  {
+          "label": "Translated Choose liability insurance type",
+          "error": "Translated Please choose a type of liability insurance",
+          "accounts": ["General liability", "Professional liability", "Employer liability"],
+          "accounts1": "Translated General liability",
+          "accounts2": "Translated Professional liability",
+          "accounts3": "Translated Employer liability",
+          "special": "Translated Business liability"
+        },
+        "messages": {
+          "waiting": "Translated Waiting for Selv app...",
+          "connectionError": "Translated Connection error. Please try again!",
+          "missing": "Translated Credentials missing or not trusted" 
+        }
+      }
+    },
+    "general": {
+      "confirmation": {
+        "titleBank": "Translated Your business bank account is now set up!",
+        "titleInsurance": "Translated Congratulations, your liability insurance is now set up!",
+        "titleCompany": "Translated Congratulations, your company is now set up!",
+        "credentialsToSelv": "Translated Your new  is sent to Selv",
+        "proudOwnerOfCompany": "Translated You are now the proud owner of your new company. From now on you’ll be able to prove that you have a directorship position at your newly found company. Open up Selv in order to receive a signed credential you can use to act on behalf of your company.",
+        "returnToCompany": "Translated Return to Company House"
+
+      },
+      "proveIdentity": {
+        "provideCredentials": "Translated Provide your Digital Identity credentials",
+        "scanToContinue": "Translated Scan this QR code with <1>Selv App</1> to continue"
+      },
+      "companyDetails": {
+        "companyNumber": "Translated Company Number",
+        "officeAddress": "Translated Registered office address",
+        "companyType": "Translated Company Type",
+        "incorporatedOn": "Translated Incorporated on",
+        "companyOwner": "Translated Company owner",
+        "natureOfBusiness": "Translated Nature of business",
+        "companyStatus": "Translated Company status"
+
+
+      }
+    }
+  },
+  "components": {
+    "accountType": {
+      "specialFeature": "Translated Special feature"
+    },
+    "checkBox": {
+      "errorMessage": "Translated Please agree the terms and conditions.",
+      "confirm": "Translated I confirm everything and agree to any terms"
+    },
+    "disclaimer": {
+      "usesCookies": "Translated This website uses cookies to ensure you get the best experience on our website."
+    },
+    "form": {
+      "error": "Translated Please provide required information!"
+    },
+    "nextStepDrawer": {
+      "companyNowActive": "Translated Your company is now Active",
+      "businessSetUp": "Translated You have successfully set up your entire business. This is the end of this demo and we thank you for participating. Selv will be updated with more demonstrations and will be updated with more features",
+      "companyNotActive": "Translated Your company is not Active yet",
+      "needLiabilityInsurance": "Translated You need to add Liability Insurance to finish this process",
+      "needBankAndInsurance": "Translated You need to add Bank Account and Liability Insurance to finish this process"
     }
   }
 }

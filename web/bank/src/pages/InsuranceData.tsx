@@ -31,13 +31,23 @@ const bankFields = [
 ];
 
 const accountTypes = {
-    label: 'Choose liability insurance type',
-    error: 'Please choose a type of liability insurance',
-    accounts: ['General liability', 'Professional liability', 'Employer liability'],
-    special: 'Business liability'
-};
+    label: 'pages.insurance.insuranceData.accountTypes.label',
+    error: 'pages.insurance.insuranceData.accountTypes.error',
+    accounts: [
+        'pages.insurance.insuranceData.accountTypes.accounts1',
+        'pages.insurance.insuranceData.accountTypes.accounts2',
+        'pages.insurance.insuranceData.accountTypes.accounts3'
+    ],
+    special: 'pages.insurance.insuranceData.accountTypes.special',
+}
 
 const messages = {
+    waiting: 'pages.insurance.insuranceData.messages.waiting',
+    connectionError: 'pages.insurance.insuranceData.messages.connectionError',
+    missing: 'pages.insurance.insuranceData.messages.missing'
+};
+
+const messages2 = {
     waiting: 'Waiting for Selv app...',
     connectionError: 'Connection error. Please try again!',
     missing: 'Credentials missing or not trusted'
@@ -68,8 +78,9 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
             const credentials = credentialsString && await JSON.parse(credentialsString);
             const status = credentials?.status;
             if (!status || Number(status) !== 2) {
-                notify('error', 'Error', messages.connectionError);
-                history.goBack();
+                console.log(Number(status));
+                notify('error', 'Error', t(messages.connectionError));
+                // history.goBack();
             }
             const flattenData = flattenObject(credentials?.data);
             const address = { Address: `${flattenData.Street} ${flattenData.House}, ${flattenData.City}, ${flattenData.Country}, ${flattenData.Postcode}` };
@@ -94,7 +105,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
     }
 
     function setStatusMessage(message: string) {
-        setStatus(message);
+        setStatus(t(message)); //TODO does this work?
     }
 
     async function continueNextStep(params: any) {
@@ -115,12 +126,13 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
         accountStep > step && setAccountStep(Number(step));
     }
 
+    const { t } = useTranslation();
+
     const prefilledPersonalFormData: any = { dataFields: prefilledPersonalData };
     const prefilledCompanyFormData: any = { dataFields: prefilledCompanyData };
     const prefilledBankFormData: any = { dataFields: prefilledBankData };
-    const formData: any = { onSubmit: continueNextStep, status, messages, accountTypes, buttonText: 'Get liability insurance' };
+    const formData: any = { onSubmit: continueNextStep, status, messages, accountTypes, buttonText: t("pages.demo.introShowTodos.getLiabilityInsurance") };
 
-    const { t } = useTranslation();
 
     return (
         <Layout match={match}>
@@ -230,7 +242,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                         <div className='loading'>
                             <p className='bold'>{status}</p>
                             {
-                                status === messages.waiting && <Loading />
+                                status === t(messages.waiting) && <Loading />
                             }
                         </div>
                     )

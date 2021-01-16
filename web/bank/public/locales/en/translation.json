@@ -105,7 +105,13 @@
     "setUpCompany": "Set up a company",
     "getBankAccount": "Get a bank account",
     "liabilityInsurance": "Liability insurance",
-    "readyForBusiness": "Ready for business"
+    "readyForBusiness": "Ready for business",
+    "confirm": "Confirm",
+    "learnMore": "Learn more",
+    "dismiss": "Dismiss",
+    "finishDemo": "Finish demo",
+    "getInsurance": "Get insurance",
+    "openBankAccount": "Open bank account"
   },
   "general": {
     "Self Sovereign Identity": "Self Sovereign Identity",
@@ -166,7 +172,9 @@
         "newlyIncorporatedCompanies": "Newly Incorporated Companies"
       
       },
-      "singInConfirmation": {
+      "signInConfirmation": {
+        "signInSuccess": "You have now signed in without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which [business] can use without an expensive verification process. Verifying your data is nearly instant and completely free."
+
         
       },
       "companyData": {
@@ -180,7 +188,25 @@
     },
     "insurance": {
       "insuranceData": {
-
+        "openAnAccount": "Open an account",
+        "accountType": "Account type",
+        "businessOwner": "Business owner",
+        "companyDetails": "Company Details",
+        "bankAccountDetails": "Bank Account Details",
+        "accountTypes":  {
+          "label": "Choose liability insurance type",
+          "error": "Please choose a type of liability insurance",
+          "accounts": ["General liability", "Professional liability", "Employer liability"],
+          "accounts1": "General liability",
+          "accounts2": "Professional liability",
+          "accounts3": "Employer liability",
+          "special": "Business liability"
+        },
+        "messages": {
+          "waiting": "Waiting for Selv app...",
+          "connectionError": "Connection error. Please try again!",
+          "missing": "Credentials missing or not trusted" 
+        }
       }
     },
     "general": {
@@ -208,6 +234,28 @@
 
 
       }
+    }
+  },
+  "components": {
+    "accountType": {
+      "specialFeature": "Special feature"
+    },
+    "checkBox": {
+      "errorMessage": "Please agree the terms and conditions.",
+      "confirm": "I confirm everything and agree to any terms"
+    },
+    "disclaimer": {
+      "usesCookies": "This website uses cookies to ensure you get the best experience on our website."
+    },
+    "form": {
+      "error": "Please provide required information!"
+    },
+    "nextStepDrawer": {
+      "companyNowActive": "Your company is now Active",
+      "businessSetUp": "You have successfully set up your entire business. This is the end of this demo and we thank you for participating. Selv will be updated with more demonstrations and will be updated with more features",
+      "companyNotActive": "Your company is not Active yet",
+      "needLiabilityInsurance": "You need to add Liability Insurance to finish this process",
+      "needBankAndInsurance": "You need to add Bank Account and Liability Insurance to finish this process"
     }
   }
 }
