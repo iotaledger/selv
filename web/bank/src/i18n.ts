@@ -7,18 +7,6 @@ import Backend from 'i18next-http-backend';
 //
 // setI18n(i18n);
 
-const resources = {
-    en: {
-        title: {
-            "Welcome to React": "Welcome to React and react-i18next"
-        }
-    },
-    fr: {
-        title: {
-            "Welcome to React": "Bienvenue à React et react-i18next"
-        }
-    }
-};
 
 i18n
     .use(Backend)

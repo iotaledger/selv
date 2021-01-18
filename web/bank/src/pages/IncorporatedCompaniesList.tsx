@@ -6,7 +6,7 @@ import useStep from '../utils/useStep';
 import useFetch from '../utils/useFetch';
 import { Layout, Table, NextStepDrawer } from '../components';
 import { serverAPI } from '../config.json';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Component which will display a IncorporatedCompanies.

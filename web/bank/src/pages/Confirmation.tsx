@@ -29,6 +29,7 @@ const Confirmation: React.FC = ({ match }: any) => {
                 break;
             case 'company':
                 setTitle("pages.general.confirmation.titleCompany");
+                break;
             default:
                 setTitle("pages.general.confirmation.titleCompany");
                 break;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AppContext from './app-context';
 import { routes, mainSteps } from '../steps';
 

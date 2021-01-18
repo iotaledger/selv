@@ -9,7 +9,7 @@ import image2 from '../assets/greatSuccess/image2.png';
 import image3 from '../assets/greatSuccess/image3.png';
 import checkmark from '../assets/checkmark.svg';
 import dots from '../assets/backgrounds/dots.png';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Component which will display a GreatSuccess.

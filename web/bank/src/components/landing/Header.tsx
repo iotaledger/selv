@@ -1,8 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-import { Button, Icon } from 'antd';
+import { Button } from 'antd';
 import DropSelector from '../DropSelector';
-import Context from '../../context/app-context';
 import logo from '../../assets/landing/logoHeader.svg'
 import { useTranslation } from 'react-i18next';
 
