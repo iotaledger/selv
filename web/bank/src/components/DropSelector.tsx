@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 //TODO: currently only works properly with two items due to some scss-bug
 const DropSelector = () => {
     const [isExpanded, handleExpand] = useState(false);
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
     const languages: string[] = ['en', 'nl']
 
     function changeLanguage(lng: any){

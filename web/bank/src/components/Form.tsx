@@ -32,7 +32,7 @@ const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }
             <Form layout='vertical' onSubmit={handleSubmit}>
                 {
                     dataFields.map((field: string) => (
-                        <Form.Item label={labels[field]} key={field}>
+                        <Form.Item label={t(labels[field])} key={field}>
                             { getFieldDecorator(field, {
                                 rules: [{ required: true, message: t("components.form.error") }]
                             })(<Input />)}

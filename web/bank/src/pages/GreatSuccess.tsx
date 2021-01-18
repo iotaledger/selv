@@ -18,7 +18,7 @@ const GreatSuccess: React.FC = ({ match }: any) => {
     const { nextStep } = useStep(match);
     const [companyId, setCompanyId] = useState('');
 
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     useEffect(() => {
         async function determineCompanyId() {

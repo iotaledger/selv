@@ -22,15 +22,15 @@ const Confirmation: React.FC = ({ match }: any) => {
             setCompanyId(await getCompanyId());
             switch (theme) {
             case 'bank':
-                setTitle(t("pages.general.confirmation.titleBank"));
+                setTitle("pages.general.confirmation.titleBank");
                 break;
             case 'insurance':
-                setTitle(t("pages.general.confirmation.titleInsurance"));
+                setTitle("pages.general.confirmation.titleInsurance");
                 break;
             case 'company':
-                setTitle(t("pages.general.confirmation.titleCompany"));
+                setTitle("pages.general.confirmation.titleCompany");
             default:
-                setTitle(t("pages.general.confirmation.titleCompany"));
+                setTitle("pages.general.confirmation.titleCompany");
                 break;
             }
         }
@@ -45,7 +45,7 @@ const Confirmation: React.FC = ({ match }: any) => {
                         <img src={selv} alt='Selv app logo' />
                         <h4>{t("pages.general.confirmation.credentialsToSelv")}</h4>
                     </div>
-                    <h2>{title}</h2>
+                    <h2>{t(title)}</h2>
                     {
                         theme === 'company' &&
                             <p>{t("pages.general.confirmation.proudOwnerOfCompany")}</p>

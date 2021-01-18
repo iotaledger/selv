@@ -39,12 +39,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     schemaName?: string;
     setStatus: (status: string) => void;
     setLoading?: (status: boolean) => void;
-    messages: {
-        waiting: string,
-        connectionError: string,
-        missing: string,
-        verifying: string
-    };
+    messages: { [ key: string ]: string; };
     fields: any;
     generatedChannelId?: string;
 }) => {

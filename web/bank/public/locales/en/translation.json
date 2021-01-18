@@ -85,12 +85,7 @@
       "mainText": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity."
     },
     "selv": {
-      "selvText": "Your data shouldn’t be public, but it shouldn’t be locked up either.<1/>We promise a solution that <3>enables data flow</3>, completely in your <5>control</5>.",
-      "text1": "Your data shouldn’t be public, but it shouldn’t be locked up either.",
-      "text2": "We promise a solution that",
-      "text3": "enables data flow",
-      "text4": "completely in your",
-      "text5": "control"
+      "selvText": "Your data shouldn’t be public, but it shouldn’t be locked up either.<1/>We promise a solution that <3>enables data flow</3>, completely in your <5>control</5>."
     }
   },
   "actions": {
@@ -179,10 +174,25 @@
       "signInConfirmation": {
         "signInSuccess": "You have now signed in without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which [business] can use without an expensive verification process. Verifying your data is nearly instant and completely free."
       },
-      "companyData": {}
+      "companyData": {
+        "companyName": "Company name",
+        "companyAddress": "Company address",
+        "companyType": "Company type",
+        "companyBusiness": "Nature of business",
+        "setUpPrivateCompany": "Set up a private limited company"
+
+      }
     },
     "bank": {
-      "bankData": {}
+      "bankData": {
+        "accountTypes": {
+          "label": "Choose bank account type",
+          "error": "Please choose an account type",
+          "accounts1": "Business checking account",
+          "accounts2": "Business savings account",
+          "special": "Brokerage account"
+        }
+      }
     },
     "insurance": {
       "insuranceData": {
@@ -211,11 +221,12 @@
         "titleBank": "Your business bank account is now set up!",
         "titleInsurance": "Congratulations, your liability insurance is now set up!",
         "titleCompany": "Congratulations, your company is now set up!",
-        "credentialsToSelv": "Your new  is sent to Selv",
+        "credentialsToSelv": "Your new business is sent to Selv",
         "proudOwnerOfCompany": "You are now the proud owner of your new company. From now on you’ll be able to prove that you have a directorship position at your newly found company. Open up Selv in order to receive a signed credential you can use to act on behalf of your company.",
         "returnToCompany": "Return to Company House"
       },
       "proveIdentity": {
+        "waitingForLogin": "Waiting for login",
         "provideCredentials": "Provide your Digital Identity credentials",
         "scanToContinue": "Scan this QR code with <1>Selv App</1> to continue"
       },
@@ -285,6 +296,9 @@
       "connectionErrorDescription": "Please try again!",
       "verification": "Verification",
       "verificationResult": "Verification result",
+      "warningInfo": "Mobile app not connected",
+      "warningDescription": "Please return to the previous page and scan the QR code with your Selv app",
+      "errorInfo": "No connection details",
       "didLibraryResults": {
         "Credentials could not be verified": "Credentials could not be verified",
         "Missing credential of type": "Missing credential of type",
@@ -292,5 +306,4 @@
       }
     }
   }
-}
 }

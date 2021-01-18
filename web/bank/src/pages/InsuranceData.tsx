@@ -76,7 +76,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
             if (!status || Number(status) !== 2) {
                 console.log(Number(status));
                 notify('error', 'Error', t(messages.connectionError));
-                // history.goBack();
+                history.goBack();
             }
             const flattenData = flattenObject(credentials?.data);
             const address = { Address: `${flattenData.Street} ${flattenData.House}, ${flattenData.City}, ${flattenData.Country}, ${flattenData.Postcode}` };

@@ -28,8 +28,6 @@ const shortFields: string[] = ['Date', 'Nationality'];
 
 const Icon = () => <img src={icon} alt='' width={18} />;
 
-const { t } = useTranslation();
-
 const PrefilledForm = ({ form, dataFields }: {
     form: any;
     dataFields: any;
@@ -37,7 +35,9 @@ const PrefilledForm = ({ form, dataFields }: {
     useEffect(() => {
         form.setFieldsValue(dataFields);
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
+    
+    const { t } = useTranslation();
+    
     return (
         <div className='prefilled-form'>
             <Form layout='vertical'>

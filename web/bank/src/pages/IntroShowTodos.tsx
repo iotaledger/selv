@@ -14,7 +14,7 @@ import { useTranslation, Trans } from 'react-i18next';
 const IntroShowTodos: React.FC = ({ match }: any) => {
     const { nextStep } = useStep(match);
 
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     useEffect(() => {
         const reset = async () => {

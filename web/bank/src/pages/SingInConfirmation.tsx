@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import useStep from '../utils/useStep';
 import { Layout, RandomGraphicElement } from '../components';
 import selv from '../assets/selvBordered.svg';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Component which will display a SingInConfirmation.
@@ -12,7 +12,7 @@ import { useTranslation, Trans } from 'react-i18next';
 const SingInConfirmation: React.FC = ({ history, match }: any) => {
     const { nextStep } = useStep(match);
 
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     useEffect(() => {
         async function getData() {

@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
  */
 const IntroDemoSelection: React.FC = ({ match }: any) => {
     const { nextStep } = useStep(match);
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     useEffect(() => {
         window.scrollTo({

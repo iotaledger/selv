@@ -121,7 +121,13 @@
     "greatSuccess": "Translated Great Success!",
     "signedInDID": "Translated You signed in with DID",
     "receivedNewCredentials": "Translated Received new Credentials",
-    "reusedSelvCredentials": "Translated Re-used Selv Credentials"
+    "reusedSelvCredentials": "Translated Re-used Selv Credentials",
+    "messages": {
+      "waiting": "Translated Waiting for Selv app...",
+      "connectionError": "Translated Connection error. Please try again!",
+      "missing": "Translated Credentials missing or not trusted",
+      "verifying": "Translated Verifying credentials..."
+    }
   },
   "pages": {
     "demo": {
@@ -132,14 +138,14 @@
       "introShowTodos": {
         "welcomeToThe": "Translated Welcome to the",
         "selvDemo": "Translated Selv Demo",
-        "hereIsTodo": "Translated <0>Here is <1>your to-do list</1> for today:</0>",
+        "hereIsTodo": "<0>Translated Here is <1>your to-do list</1> for today:</0>",
         "setUpCompany": "Translated Set up a company",
         "getBankAccount": "Translated Get a bank account",
         "getLiabilityInsurance": "Translated Get liability insurance"
       },
       "introShowMobile": {
         "looksLikeWork": "Translated That looks like a lot of work...",
-        "advantage": "Translated <0>But using IOTA’s Unified Identity Protocol and the Selv app, it will be <1>​quick and easy​.</1></0>",
+        "advantage": "<0>Translated But using IOTA’s Unified Identity Protocol and the Selv app, it will be <1>​quick and easy​.</1></0>",
         "noteDesktop": "Translated This demo website is best experienced on a desktop computer."
       },
       "appDownloadQR": {
@@ -159,26 +165,33 @@
         "trustText": "Translated The data you shared with the Company House and the SNS Bank was verifiable. This allows to verify your data instantly and freely using IOTA as the trust layer.",
         "returnCompanyHouse": "Translated Return to Company House",
         "returnHome": "Translated Return Home"
-      
       }
     },
     "company": {
       "incorporatedCompanies": {
         "newlyIncorporatedCompanies": "Translated Newly Incorporated Companies"
-      
       },
       "signInConfirmation": {
         "signInSuccess": "Translated You have now signed in without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which [business] can use without an expensive verification process. Verifying your data is nearly instant and completely free."
-
-        
       },
       "companyData": {
+        "companyName": "Translated Company name",
+        "companyAddress": "Translated Company address",
+        "companyType": "Translated Company type",
+        "companyBusiness": "Translated Nature of business",
+        "setUpPrivateCompany": "Translated Set up a private limited company"
         
       }
     },
     "bank": {
       "bankData": {
-
+        "accountTypes": {
+          "label": "Translated Choose bank account type",
+          "error": "Translated Please choose an account type",
+          "accounts1": "Translated Business checking account",
+          "accounts2": "Translated Business savings account",
+          "special": "Translated Brokerage account"
+        }
       }
     },
     "insurance": {
@@ -188,19 +201,18 @@
         "businessOwner": "Translated Business owner",
         "companyDetails": "Translated Company Details",
         "bankAccountDetails": "Translated Bank Account Details",
-        "accountTypes":  {
+        "accountTypes": {
           "label": "Translated Choose liability insurance type",
           "error": "Translated Please choose a type of liability insurance",
-          "accounts": ["General liability", "Professional liability", "Employer liability"],
+          "accounts": [
+            "General liability",
+            "Professional liability",
+            "Employer liability"
+          ],
           "accounts1": "Translated General liability",
           "accounts2": "Translated Professional liability",
           "accounts3": "Translated Employer liability",
           "special": "Translated Business liability"
-        },
-        "messages": {
-          "waiting": "Translated Waiting for Selv app...",
-          "connectionError": "Translated Connection error. Please try again!",
-          "missing": "Translated Credentials missing or not trusted" 
         }
       }
     },
@@ -209,12 +221,12 @@
         "titleBank": "Translated Your business bank account is now set up!",
         "titleInsurance": "Translated Congratulations, your liability insurance is now set up!",
         "titleCompany": "Translated Congratulations, your company is now set up!",
-        "credentialsToSelv": "Translated Your new  is sent to Selv",
+        "credentialsToSelv": "Translated Your new business is sent to Selv",
         "proudOwnerOfCompany": "Translated You are now the proud owner of your new company. From now on you’ll be able to prove that you have a directorship position at your newly found company. Open up Selv in order to receive a signed credential you can use to act on behalf of your company.",
         "returnToCompany": "Translated Return to Company House"
-
       },
       "proveIdentity": {
+        "waitingForLogin": "Translated Waiting for login",
         "provideCredentials": "Translated Provide your Digital Identity credentials",
         "scanToContinue": "Translated Scan this QR code with <1>Selv App</1> to continue"
       },
@@ -226,8 +238,6 @@
         "companyOwner": "Translated Company owner",
         "natureOfBusiness": "Translated Nature of business",
         "companyStatus": "Translated Company status"
-
-
       }
     }
   },
@@ -251,6 +261,49 @@
       "companyNotActive": "Translated Your company is not Active yet",
       "needLiabilityInsurance": "Translated You need to add Liability Insurance to finish this process",
       "needBankAndInsurance": "Translated You need to add Bank Account and Liability Insurance to finish this process"
+    },
+    "prefilledForm": {
+      "FirstName": "Translated First Name",
+      "LastName": "Translated Last Name",
+      "Date": "Translated Date of birth",
+      "Nationality": "Translated Nationality",
+      "Gender": "Translated Gender",
+      "Birthplace": "Translated Birthplace",
+      "Country": "Translated Country of residence",
+      "Phone": "Translated Phone number",
+      "Address": "Translated Address",
+      "CompanyName": "Translated Company name",
+      "CompanyAddress": "Translated Company address",
+      "CompanyType": "Translated Company type",
+      "CompanyBusiness": "Translated Nature of business",
+      "CompanyCreationDate": "Translated Company creation date",
+      "CompanyNumber": "Translated Company number",
+      "CompanyOwner": "Translated Managing director",
+      "BankName": "Translated Name of the bank",
+      "AccountType": "Translated Bank account type",
+      "credentialsBySelv": "Translated Credentials provided by Selv ID"
+    },
+    "sideBar": {
+      "yourTodoList": "Translated Your to-do list"
+    },
+    "table": {
+      "companyName": "Translated Company Name",
+      "incorporatedOn": "Translated Incorporated on",
+      "status": "Translated Status"
+    },
+    "websocket": {
+      "connectionError": "Translated Connection error. Please try again!",
+      "connectionErrorDescription": "Translated Please try again!",
+      "verification": "Translated Verification",
+      "verificationResult": "Translated Verification result",
+      "warningInfo": "Translated Mobile app not connected",
+      "warningDescription": "Translated Please return to the previous page and scan the QR code with your Selv app",
+      "errorInfo": "Translated No connection details",
+      "didLibraryResults": {
+        "Credentials could not be verified": "Translated Credentials could not be verified",
+        "Missing credential of type": "Translated Missing credential of type",
+        "Credentials successfully verified": "Translated Credentials successfully verified"
+      }
     }
   }
 }

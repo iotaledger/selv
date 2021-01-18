@@ -18,14 +18,26 @@ interface IChannelDetails {
  * Component which will display a ProveIdentity.
  */
 const ProveIdentity: React.FC = ({ history, match }: any) => {
+    const { t } = useTranslation();
+
     const { nextStep } = useStep(match);
     const [loading, setLoading] = useState(true);
-    const [status, setStatus] = useState('Waiting for login...');
+    const [status, setStatus] = useState("pages.general.proveIdentity.waitingForLogin");
     const [qrContent, setQrContent] = useState('');
     const [channel, setChannel] = useState('');
     const [channelDetails, setChannelDetails] = useState();
 
-    const { t, i18n } = useTranslation();
+    const messages = {
+        waiting: 'general.messages.waiting',
+        connectionError: 'general.messages.connectionError',
+        missing: 'general.messages.missing',
+        verifying: 'general.messages.verifying'
+    };
+
+    function setStatusMessage(message: string) {
+        console.log("TRANSLATION: " + t(message));
+        setStatus(t(message));
+    }
 
     useEffect(() => {
         async function setQR() {
@@ -85,16 +97,17 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
                     <div className='qr-wrapper'>
                         <QRCode text={qrContent} />
                     </div>
-                    <p className='bold'>{status}</p>
+                    <p className='bold'>{t(status)}</p>
                     {loading && <Loading />}
                     {
                         channel && <WebSocket
                             history={history}
                             match={match}
                             generatedChannelId={channel}
-                            setStatus={status => setStatus(status)}
+                            setStatus={status => setStatusMessage(status)}
                             setLoading={status => setLoading(status)}
                             fields={channelDetails}
+                            messages={messages}
                         />
                     }
                 </div>

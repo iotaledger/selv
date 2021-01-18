@@ -4,7 +4,7 @@ import { RandomGraphicElement } from '../'
 import ellipse from '../../assets/backgrounds/ellipse2.svg'
 import circle from '../../assets/backgrounds/circleFrame3.svg'
 import circleMobile from '../../assets/backgrounds/circleFrame4.svg'
-import { Translation, Trans } from 'react-i18next';
+import { Translation } from 'react-i18next';
 
 const Icon = ({ params }: any) => {
     const fill = params?.isActive ? '#142037' : '#FFFFFF';
