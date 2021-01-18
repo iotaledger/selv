@@ -88,8 +88,8 @@
       "selvText": "Your data shouldn’t be public, but it shouldn’t be locked up either.<1/>We promise a solution that <3>enables data flow</3>, completely in your <5>control</5>.",
       "text1": "Your data shouldn’t be public, but it shouldn’t be locked up either.",
       "text2": "We promise a solution that",
-      "text3": "enables data flow", 
-      "text4":"completely in your" ,
+      "text3": "enables data flow",
+      "text4": "completely in your",
       "text5": "control"
     }
   },
@@ -126,7 +126,13 @@
     "greatSuccess": "Great Success!",
     "signedInDID": "You signed in with DID",
     "receivedNewCredentials": "Received new Credentials",
-    "reusedSelvCredentials": "Re-used Selv Credentials"
+    "reusedSelvCredentials": "Re-used Selv Credentials",
+    "messages": {
+      "waiting": "Waiting for Selv app...",
+      "connectionError": "Connection error. Please try again!",
+      "missing": "Credentials missing or not trusted",
+      "verifying": "Verifying credentials..."
+    }
   },
   "pages": {
     "demo": {
@@ -164,27 +170,19 @@
         "trustText": "The data you shared with the Company House and the SNS Bank was verifiable. This allows to verify your data instantly and freely using IOTA as the trust layer.",
         "returnCompanyHouse": "Return to Company House",
         "returnHome": "Return Home"
-      
       }
     },
     "company": {
       "incorporatedCompanies": {
         "newlyIncorporatedCompanies": "Newly Incorporated Companies"
-      
       },
       "signInConfirmation": {
         "signInSuccess": "You have now signed in without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which [business] can use without an expensive verification process. Verifying your data is nearly instant and completely free."
-
-        
       },
-      "companyData": {
-        
-      }
+      "companyData": {}
     },
     "bank": {
-      "bankData": {
-
-      }
+      "bankData": {}
     },
     "insurance": {
       "insuranceData": {
@@ -193,19 +191,18 @@
         "businessOwner": "Business owner",
         "companyDetails": "Company Details",
         "bankAccountDetails": "Bank Account Details",
-        "accountTypes":  {
+        "accountTypes": {
           "label": "Choose liability insurance type",
           "error": "Please choose a type of liability insurance",
-          "accounts": ["General liability", "Professional liability", "Employer liability"],
+          "accounts": [
+            "General liability",
+            "Professional liability",
+            "Employer liability"
+          ],
           "accounts1": "General liability",
           "accounts2": "Professional liability",
           "accounts3": "Employer liability",
           "special": "Business liability"
-        },
-        "messages": {
-          "waiting": "Waiting for Selv app...",
-          "connectionError": "Connection error. Please try again!",
-          "missing": "Credentials missing or not trusted" 
         }
       }
     },
@@ -217,7 +214,6 @@
         "credentialsToSelv": "Your new  is sent to Selv",
         "proudOwnerOfCompany": "You are now the proud owner of your new company. From now on you’ll be able to prove that you have a directorship position at your newly found company. Open up Selv in order to receive a signed credential you can use to act on behalf of your company.",
         "returnToCompany": "Return to Company House"
-
       },
       "proveIdentity": {
         "provideCredentials": "Provide your Digital Identity credentials",
@@ -231,8 +227,6 @@
         "companyOwner": "Company owner",
         "natureOfBusiness": "Nature of business",
         "companyStatus": "Company status"
-
-
       }
     }
   },
@@ -256,6 +250,47 @@
       "companyNotActive": "Your company is not Active yet",
       "needLiabilityInsurance": "You need to add Liability Insurance to finish this process",
       "needBankAndInsurance": "You need to add Bank Account and Liability Insurance to finish this process"
+    },
+    "prefilledForm": {
+      "FirstName": "First Name",
+      "LastName": "Last Name",
+      "Date": "Date of birth",
+      "Nationality": "Nationality",
+      "Gender": "Gender",
+      "Birthplace": "Birthplace",
+      "Country": "Country of residence",
+      "Phone": "Phone number",
+      "Address": "Address",
+      "CompanyName": "Company name",
+      "CompanyAddress": "Company address",
+      "CompanyType": "Company type",
+      "CompanyBusiness": "Nature of business",
+      "CompanyCreationDate": "Company creation date",
+      "CompanyNumber": "Company number",
+      "CompanyOwner": "Managing director",
+      "BankName": "Name of the bank",
+      "AccountType": "Bank account type",
+      "credentialsBySelv": "Credentials provided by Selv ID"
+    },
+    "sideBar": {
+      "yourTodoList": "Your to-do list"
+    },
+    "table": {
+      "companyName": "Company Name",
+      "incorporatedOn": "Incorporated on",
+      "status": "Status"
+    },
+    "websocket": {
+      "connectionError": "Connection error. Please try again!",
+      "connectionErrorDescription": "Please try again!",
+      "verification": "Verification",
+      "verificationResult": "Verification result",
+      "didLibraryResults": {
+        "Credentials could not be verified": "Credentials could not be verified",
+        "Missing credential of type": "Missing credential of type",
+        "Credentials successfully verified": "Credentials successfully verified"
+      }
     }
   }
+}
 }

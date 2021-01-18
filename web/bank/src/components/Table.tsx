@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table } from "rsuite";
 import useWindowSize from "../utils/useWindowSize";
+import { useTranslation } from 'react-i18next';
 const { Column, HeaderCell, Cell, Pagination } = Table;
 
 // https://rsuitejs.com/en/components/table#%3CTable%3E
@@ -106,6 +107,8 @@ const TableInstance = ({
     });
   }
 
+  const { t } = useTranslation();
+
   return (
     <div>
       <div className="table-wrapper">
@@ -118,12 +121,12 @@ const TableInstance = ({
           loading={loading}
         >
           <Column width={tableDimensions[1]} fixed>
-            <HeaderCell>Company Name</HeaderCell>
+            <HeaderCell>{t("components.table.companyName")}</HeaderCell>
             <CompanyCell />
           </Column>
 
           <Column width={tableDimensions[2]} fixed>
-            <HeaderCell>Incorporated on</HeaderCell>
+            <HeaderCell>{t("components.table.incorporatedOn")}</HeaderCell>
             <Cell
               dataKey="CompanyCreationDate"
               style={{
@@ -135,7 +138,7 @@ const TableInstance = ({
           </Column>
 
           <Column width={tableDimensions[3]} fixed>
-            <HeaderCell>Status</HeaderCell>
+            <HeaderCell>{t("components.table.status")}</HeaderCell>
             <StatusCell />
           </Column>
 

@@ -42,16 +42,12 @@ const accountTypes = {
 }
 
 const messages = {
-    waiting: 'pages.insurance.insuranceData.messages.waiting',
-    connectionError: 'pages.insurance.insuranceData.messages.connectionError',
-    missing: 'pages.insurance.insuranceData.messages.missing'
+    waiting: 'general.messages.waiting',
+    connectionError: 'general.messages.connectionError',
+    missing: 'general.messages.missing',
+    verifying: 'general.messages.verifying'
 };
 
-const messages2 = {
-    waiting: 'Waiting for Selv app...',
-    connectionError: 'Connection error. Please try again!',
-    missing: 'Credentials missing or not trusted'
-};
 
 const notify = (type: string, message: string, description: string) => {
     return type === 'error'
@@ -254,6 +250,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                         schemaName='Insurance'
                         setStatus={setStatusMessage}
                         fields={fields}
+                        messages={messages}
                     />
                 }
             </div>

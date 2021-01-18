@@ -30,7 +30,8 @@ const labels = {
 const messages = {
     waiting: 'Waiting for Selv app...',
     connectionError: 'Connection error. Please try again!',
-    missing: 'Credentials missing or not trusted'
+    missing: 'Credentials missing or not trusted',
+    verifying: "todo"
 };
 
 const notify = (type: string, message: string, description: string) => {

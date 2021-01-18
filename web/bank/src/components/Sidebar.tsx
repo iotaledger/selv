@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import poweredByIota from '../assets/poweredByIota.svg';
 import logo from '../assets/landing/logoHeader.svg';
 import frame from '../assets/backgrounds/circleFrame5.svg';
+import { useTranslation } from 'react-i18next';
 
 // https://rsuitejs.com/en/components/sidenav
 
@@ -16,6 +17,8 @@ const externalPages = [
 const SidebarInstance = ({ children }: {
     children?: JSX.Element | null | undefined;
 }) => {
+    const { t } = useTranslation();
+
     return (
         <div className='sidebar-wrapper'>
             <Link to='/demo/select'>
@@ -25,7 +28,7 @@ const SidebarInstance = ({ children }: {
             <Sidenav activeKey='0'>
                 <Sidenav.Body>
                     <h2 className='todo-list'>
-                        Your to-do list
+                        {t("components.sideBar.yourTodoList")}
                     </h2>
                     { children }
                 </Sidenav.Body>
