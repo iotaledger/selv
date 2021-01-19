@@ -35,8 +35,7 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
     };
 
     function setStatusMessage(message: string) {
-        setStatus(t(message));
-        console.log("TRANSLATION: " + status);
+        setStatus(message);
     }
 
     useEffect(() => {

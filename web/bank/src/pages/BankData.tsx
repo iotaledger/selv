@@ -90,8 +90,7 @@ const BankData: React.FC = ({ history, match }: any) => {
     }
 
     function setStatusMessage(message: string) {
-        setStatus(t(message));
-        console.log("Translation" +status);
+        setStatus(message);
     }
 
     async function continueNextStep(params: any) {
@@ -181,7 +180,7 @@ const BankData: React.FC = ({ history, match }: any) => {
                             <PrefilledForm {...prefilledCompanyFormData} />
                         }
                         <Button onClick={continueNextStep}>
-                        {t("actions.continue")}
+                            {t("actions.continue")}
                         </Button>
                     </Collapse.Panel>
                     <Collapse.Panel
@@ -201,9 +200,9 @@ const BankData: React.FC = ({ history, match }: any) => {
                 {
                     status && (
                         <div className='loading'>
-                            <p className='bold'>{status}</p>
+                            <p className='bold'>{t(status)}</p>
                             {
-                                status === t(messages.waiting) && <Loading />
+                                status === messages.waiting && <Loading />
                             }
                         </div>
                     )

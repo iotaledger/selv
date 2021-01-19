@@ -6,14 +6,14 @@ const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
     form: any;
     onSubmit: (values: object) => void;
     status: string;
-    messages: { [ key: string ]: string; };
+    messages: { [key: string]: string; };
     buttonText: string;
 }) => {
     const { getFieldDecorator, getFieldsError, validateFields } = form;
 
     const { t } = useTranslation();
 
-    function handleSubmit (e: any) {
+    function handleSubmit(e: any) {
         e.preventDefault();
         validateFields((err: any, values: string[]) => {
             if (!err) {
@@ -22,7 +22,7 @@ const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
         });
     }
 
-    function hasErrors (fieldsError: any) {
+    function hasErrors(fieldsError: any) {
         return Object.keys(fieldsError).some(field => fieldsError[field]);
     }
 
@@ -48,7 +48,7 @@ const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
                 <Form.Item>
                     <Button
                         htmlType='submit'
-                        disabled={hasErrors(getFieldsError()) || status === t(messages.waiting)}
+                        disabled={hasErrors(getFieldsError()) || status === messages.waiting}
                     >
                         {buttonText}
                     </Button>

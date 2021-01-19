@@ -12,34 +12,16 @@ i18n
     .use(Backend)
     .use(initReactI18next)
     .init({
-        debug:false,
-        lng: 'nl',
+        debug: false,
+        lng: 'en',
         fallbackLng: 'nl',
-        // resources: resources,
-        //keySeparator: false, // we do not use keys in form messages.welcome
         keySeparator: '.',
-
         interpolation: {
             //escapeValue: false // react already safes from xss
         },
         react: {
-            useSuspense: false
+            useSuspense: true,
         }
-
-
-        // interpolation: {
-        //     formatSeparator: ',',
-        //     format(value, format) {
-        //         if (format === 'uppercase') return value.toUpperCase();
-        //         return value;
-        //     },
-        // },
-
-        // react: {
-        //     defaultTransParent: 'div',
-        //     transSupportBasicHtmlNodes: true,
-        //     transKeepBasicHtmlNodesFor: ['br', 'strong', 'i'],
-        // },
     });
 
 export default i18n;

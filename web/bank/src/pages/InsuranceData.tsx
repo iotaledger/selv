@@ -101,7 +101,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
     }
 
     function setStatusMessage(message: string) {
-        setStatus(t(message)); //TODO does this work?
+        setStatus(message);
     }
 
     async function continueNextStep(params: any) {
@@ -236,9 +236,9 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                 {
                     status && (
                         <div className='loading'>
-                            <p className='bold'>{status}</p>
+                            <p className='bold'>{t(status)}</p>
                             {
-                                status === t(messages.waiting) && <Loading />
+                                status === messages.waiting && <Loading />
                             }
                         </div>
                     )

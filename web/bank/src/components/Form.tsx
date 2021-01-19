@@ -5,16 +5,16 @@ import { useTranslation } from 'react-i18next';
 const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }: {
     form: any;
     dataFields: string[];
-    labels: { [ key: string ]: string; };
+    labels: { [key: string]: string; };
     processValues: (values: object) => void;
     status: string;
-    messages: { [ key: string ]: string; };
+    messages: { [key: string]: string; };
 }) => {
     const { getFieldDecorator, getFieldsError, validateFields } = form;
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
-    function handleSubmit (e: any) {
+    function handleSubmit(e: any) {
         e.preventDefault();
         validateFields((err: any, values: string[]) => {
             if (!err) {
@@ -23,7 +23,7 @@ const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }
         });
     }
 
-    function hasErrors (fieldsError: any) {
+    function hasErrors(fieldsError: any) {
         return Object.keys(fieldsError).some(field => fieldsError[field]);
     }
 
@@ -42,7 +42,7 @@ const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }
                 <Form.Item>
                     <Button
                         htmlType='submit'
-                        disabled={hasErrors(getFieldsError()) || status === t(messages.waiting)}
+                        disabled={hasErrors(getFieldsError()) || status === messages.waiting}
                     >
                         {t("actions.registerNewCompany")}
                     </Button>

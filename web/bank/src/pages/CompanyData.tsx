@@ -77,7 +77,7 @@ const CompanyData: React.FC = ({ history, match }: any) => {
     }
 
     function setStatusMessage (message: string) {
-        setStatus(t(message));
+        setStatus(message);
     }
 
     const prefilledFormData: any = { dataFields: prefilledData };
@@ -98,9 +98,9 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                 {
                     status && (
                         <div className='loading'>
-                            <p className='bold'>{status}</p>
+                            <p className='bold'>{t(status)}</p>
                             {
-                                status === t(messages.waiting) && <Loading />
+                                status === messages.waiting && <Loading />
                             }
                         </div>
                     )
