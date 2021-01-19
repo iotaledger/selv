@@ -114,7 +114,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         const timeout = setTimeout(() => {
             if (setStatus) {
                 setStatus(messages.connectionError);
-                notify('error', t("components.websocket.connectionError"), t("components.websocket.connectionErrorDescription"));
+                notify('error', t("general.messages.connectionError"), t("components.websocket.connectionErrorDescription"));
             }
         }, 180000);
 

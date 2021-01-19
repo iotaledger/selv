@@ -9,7 +9,7 @@
       "easyGDPRcompliance": "This solution provides an easy and cheap way to comply with GDPR and similar privacy laws.",
       "unifiedIdentity": "A Unified Identity",
       "protocolEnablesDevices": "The Unified Identity Protocol not only enables people and organisations to have the benefits of identity, but devices, opening up a whole new world of business models and use cases.",
-      "tryTheDemo": "Try the demo"
+      "tryTheDemo": "Try the Demo"
     },
     "benefits": {
       "benefits": "Benefits",
@@ -52,7 +52,7 @@
       }
     },
     "footer": {
-      "contactUs": "Contact us",
+      "contactUs": "Contact Us",
       "contactUsLowerText1": "Would you like to know how Self Sovereign Identity can positively influence",
       "contactUsLowerText2": "your business or would you like to experiment with the technology?",
       "contactUsAt": "Contact us at",
@@ -60,8 +60,8 @@
       "privacyPolicy": "Privacy Policy"
     },
     "howItWorks": {
-      "inBrief": "In brief",
-      "howItWorks": "How it works",
+      "inBrief": "In Brief",
+      "howItWorks": "How It Works",
       "create": "Create",
       "createText": "Download a SSI app and create a unique identifier, representing you online. This profile remains in your control and doesn’t leave the app without your consent.",
       "share": "Share",
@@ -72,7 +72,7 @@
       "acceptText": "By accepting BYOI, companies can verify customer data, instantly and for free. This allows you to speed up processes such as onboarding and reduce the amount of typing your customers have to do."
     },
     "header": {
-      "How it works": "How it works",
+      "How it works": "How It Works",
       "Benefits": "Benefits",
       "The App": "The App",
       "FAQs": "FAQs",
@@ -80,7 +80,7 @@
     },
     "main": {
       "claimControl": "Claim, Control",
-      "reuseYourNew": "Reuse your new",
+      "reuseYourNew": "Reuse Your New",
       "digitalIdentity": "Digital Identity",
       "mainText": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity."
     },
@@ -89,24 +89,24 @@
     }
   },
   "actions": {
-    "tryTheDemo": "Try the demo",
+    "tryTheDemo": "Try the Demo",
     "continue": "Continue",
-    "letsDoIt": "Let's do it",
-    "continueNextStep": "Continue to next step",
-    "registerNewCompany": "Register new Company",
-    "downloadTheSelvApp": "Download the Selv app",
+    "letsDoIt": "Let's Do It",
+    "continueNextStep": "Continue to Next Step",
+    "registerNewCompany": "Register New Company",
+    "downloadTheSelvApp": "Download the Selv App",
     "orScanCode": "Or scan this QR code<1/>to download",
     "back": "Back",
-    "setUpCompany": "Set up a company",
-    "getBankAccount": "Get a bank account",
-    "liabilityInsurance": "Liability insurance",
-    "readyForBusiness": "Ready for business",
+    "setUpCompany": "Set up a Company",
+    "getBankAccount": "Get a Bank Account",
+    "liabilityInsurance": "Liability Insurance",
+    "readyForBusiness": "Ready for Business",
     "confirm": "Confirm",
-    "learnMore": "Learn more",
+    "learnMore": "Learn More",
     "dismiss": "Dismiss",
-    "finishDemo": "Finish demo",
-    "getInsurance": "Get insurance",
-    "openBankAccount": "Open bank account"
+    "finishDemo": "Finish Demo",
+    "getInsurance": "Get Insurance",
+    "openBankAccount": "Open Bank Account"
   },
   "general": {
     "Self Sovereign Identity": "Self Sovereign Identity",
@@ -119,32 +119,32 @@
     "claimControlReuse": "Claim, Control & Reuse your Digital Identity",
     "hello": "Hello!",
     "greatSuccess": "Great Success!",
-    "signedInDID": "You signed in with DID",
-    "receivedNewCredentials": "Received new Credentials",
+    "signedInDID": "You Signed in With DID",
+    "receivedNewCredentials": "Received New Credentials",
     "reusedSelvCredentials": "Re-used Selv Credentials",
     "messages": {
-      "waiting": "Waiting for Selv app...",
-      "connectionError": "Connection error. Please try again!",
-      "missing": "Credentials missing or not trusted",
-      "verifying": "Verifying credentials..."
+      "waiting": "Waiting for Selv App...",
+      "connectionError": "Connection Error. Please Try Again!",
+      "missing": "Credentials Missing or not Trusted",
+      "verifying": "Verifying Credentials..."
     }
   },
   "pages": {
     "demo": {
       "introDemoSelection": {
-        "healthStatusManagement": "Health status management",
+        "healthStatusManagement": "Health Status Management",
         "shareTrustedCredentials": "Share trusted credentials and immunity status"
       },
       "introShowTodos": {
         "welcomeToThe": "Welcome to the",
         "selvDemo": "Selv Demo",
         "hereIsTodo": "<0>Here is <1>your to-do list</1> for today:</0>",
-        "setUpCompany": "Set up a company",
-        "getBankAccount": "Get a bank account",
-        "getLiabilityInsurance": "Get liability insurance"
+        "setUpCompany": "Set up a Company",
+        "getBankAccount": "Get a Bank Account",
+        "getLiabilityInsurance": "Get Liability Insurance"
       },
       "introShowMobile": {
-        "looksLikeWork": "That looks like a lot of work...",
+        "looksLikeWork": "That Looks Like a Lot of Work...",
         "advantage": "<0>But using IOTA’s Unified Identity Protocol and the Selv app, it will be <1>​quick and easy​.</1></0>",
         "noteDesktop": "This demo website is best experienced on a desktop computer."
       },
@@ -157,8 +157,8 @@
         "reusedSelvCredentialsText": "By controlling your personal data, you shared verifiable data without having to type it into a form. You can use these same credentials in other processes. Imagine never having to type in your name, address, email etc..."
       },
       "thankYou": {
-        "thanksForTryingSelv": "Thanks for trying Selv!",
-        "improvedExperience": "Improved experience",
+        "thanksForTryingSelv": "Thanks for Trying Selv!",
+        "improvedExperience": "Improved Experience",
         "savedTime": "With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and insurance with very few clicks. Your data was reusable and this saved you x fields of form fields to fill in.",
         "sovereignityText": "You have taken full control of your data. You decided who you shared your data with. Did you know that you can share them with others manually via QR as well. Try so in the Selv app!",
         "moreTrust": "More Trust",
@@ -175,75 +175,70 @@
         "signInSuccess": "You have now signed in without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which [business] can use without an expensive verification process. Verifying your data is nearly instant and completely free."
       },
       "companyData": {
-        "companyName": "Company name",
-        "companyAddress": "Company address",
-        "companyType": "Company type",
-        "companyBusiness": "Nature of business",
-        "setUpPrivateCompany": "Set up a private limited company"
+        "companyName": "Company Name",
+        "companyAddress": "Company Address",
+        "companyType": "Company Type",
+        "companyBusiness": "Nature of Business",
+        "setUpPrivateCompany": "Set up a Private Limited Company"
 
       }
     },
     "bank": {
       "bankData": {
         "accountTypes": {
-          "label": "Choose bank account type",
+          "label": "Choose Bank Account Type",
           "error": "Please choose an account type",
-          "accounts1": "Business checking account",
-          "accounts2": "Business savings account",
-          "special": "Brokerage account"
+          "accounts1": "Business Checking Account",
+          "accounts2": "Business Savings Account",
+          "special": "Brokerage Account"
         }
       }
     },
     "insurance": {
       "insuranceData": {
-        "openAnAccount": "Open an account",
-        "accountType": "Account type",
-        "businessOwner": "Business owner",
+        "openAnAccount": "Open an Account",
+        "accountType": "Account Type",
+        "businessOwner": "Business Owner",
         "companyDetails": "Company Details",
         "bankAccountDetails": "Bank Account Details",
         "accountTypes": {
-          "label": "Choose liability insurance type",
+          "label": "Choose Liability Insurance Type",
           "error": "Please choose a type of liability insurance",
-          "accounts": [
-            "General liability",
-            "Professional liability",
-            "Employer liability"
-          ],
-          "accounts1": "General liability",
-          "accounts2": "Professional liability",
-          "accounts3": "Employer liability",
-          "special": "Business liability"
+          "accounts1": "General Liability",
+          "accounts2": "Professional Liability",
+          "accounts3": "Employer Liability",
+          "special": "Business Liability"
         }
       }
     },
     "general": {
       "confirmation": {
-        "titleBank": "Your business bank account is now set up!",
-        "titleInsurance": "Congratulations, your liability insurance is now set up!",
-        "titleCompany": "Congratulations, your company is now set up!",
-        "credentialsToSelv": "Your new business is sent to Selv",
+        "titleBank": "Your Business Bank Account Is Now Set Up!",
+        "titleInsurance": "Congratulations, Your Liability Insurance Is Now Set Up!",
+        "titleCompany": "Congratulations, Your Company Is Now Set Up!",
+        "credentialsToSelv": "Your New Business Is Sent to Selv",
         "proudOwnerOfCompany": "You are now the proud owner of your new company. From now on you’ll be able to prove that you have a directorship position at your newly found company. Open up Selv in order to receive a signed credential you can use to act on behalf of your company.",
         "returnToCompany": "Return to Company House"
       },
       "proveIdentity": {
-        "waitingForLogin": "Waiting for login",
-        "provideCredentials": "Provide your Digital Identity credentials",
+        "waitingForLogin": "Waiting for Login",
+        "provideCredentials": "Provide Your Digital Identity Credentials",
         "scanToContinue": "Scan this QR code with <1>Selv App</1> to continue"
       },
       "companyDetails": {
         "companyNumber": "Company Number",
-        "officeAddress": "Registered office address",
+        "officeAddress": "Registered Office Address",
         "companyType": "Company Type",
         "incorporatedOn": "Incorporated on",
-        "companyOwner": "Company owner",
-        "natureOfBusiness": "Nature of business",
-        "companyStatus": "Company status"
+        "companyOwner": "Company Owner",
+        "natureOfBusiness": "Nature of Business",
+        "companyStatus": "Company Status"
       }
     }
   },
   "components": {
     "accountType": {
-      "specialFeature": "Special feature"
+      "specialFeature": "Special Feature"
     },
     "checkBox": {
       "errorMessage": "Please agree the terms and conditions.",
@@ -256,35 +251,35 @@
       "error": "Please provide required information!"
     },
     "nextStepDrawer": {
-      "companyNowActive": "Your company is now Active",
+      "companyNowActive": "Your Company Is Now Active",
       "businessSetUp": "You have successfully set up your entire business. This is the end of this demo and we thank you for participating. Selv will be updated with more demonstrations and will be updated with more features",
-      "companyNotActive": "Your company is not Active yet",
+      "companyNotActive": "Your Company Is Not Active Yet",
       "needLiabilityInsurance": "You need to add Liability Insurance to finish this process",
       "needBankAndInsurance": "You need to add Bank Account and Liability Insurance to finish this process"
     },
     "prefilledForm": {
       "FirstName": "First Name",
       "LastName": "Last Name",
-      "Date": "Date of birth",
+      "Date": "Date of Birth",
       "Nationality": "Nationality",
       "Gender": "Gender",
       "Birthplace": "Birthplace",
-      "Country": "Country of residence",
-      "Phone": "Phone number",
+      "Country": "Country of Residence",
+      "Phone": "Phone Number",
       "Address": "Address",
-      "CompanyName": "Company name",
-      "CompanyAddress": "Company address",
-      "CompanyType": "Company type",
-      "CompanyBusiness": "Nature of business",
-      "CompanyCreationDate": "Company creation date",
-      "CompanyNumber": "Company number",
-      "CompanyOwner": "Managing director",
-      "BankName": "Name of the bank",
-      "AccountType": "Bank account type",
-      "credentialsBySelv": "Credentials provided by Selv ID"
+      "CompanyName": "Company Name",
+      "CompanyAddress": "Company Address",
+      "CompanyType": "Company Type",
+      "CompanyBusiness": "Nature of Business",
+      "CompanyCreationDate": "Company Creation Date",
+      "CompanyNumber": "Company Number",
+      "CompanyOwner": "Managing Director",
+      "BankName": "Name of the Bank",
+      "AccountType": "Bank Account Type",
+      "credentialsBySelv": "Credentials Provided by Selv ID"
     },
     "sideBar": {
-      "yourTodoList": "Your to-do list"
+      "yourTodoList": "Your To-Do List"
     },
     "table": {
       "companyName": "Company Name",
@@ -292,13 +287,12 @@
       "status": "Status"
     },
     "websocket": {
-      "connectionError": "Connection error. Please try again!",
       "connectionErrorDescription": "Please try again!",
       "verification": "Verification",
-      "verificationResult": "Verification result",
-      "warningInfo": "Mobile app not connected",
+      "verificationResult": "Verification Result",
+      "warningInfo": "Mobile App Not Connected",
       "warningDescription": "Please return to the previous page and scan the QR code with your Selv app",
-      "errorInfo": "No connection details",
+      "errorInfo": "No Connection Details",
       "didLibraryResults": {
         "Credentials could not be verified": "Credentials could not be verified",
         "Missing credential of type": "Missing credential of type",

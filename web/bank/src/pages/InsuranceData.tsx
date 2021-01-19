@@ -60,7 +60,7 @@ const notify = (type: string, message: string, description: string) => {
  */
 const InsuranceData: React.FC = ({ history, match }: any) => {
     const [webSocket, setWebSocket] = useState(false);
-    const [fields, setFields] = useState();
+    const [fields, setFields] = useState<object>();
     const [accountType, setAccountType] = useState();
     const [status, setStatus] = useState('');
     const [accountStep, setAccountStep] = useState(1);
@@ -74,7 +74,6 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
             const credentials = credentialsString && await JSON.parse(credentialsString);
             const status = credentials?.status;
             if (!status || Number(status) !== 2) {
-                console.log(Number(status));
                 notify('error', 'Error', t(messages.connectionError));
                 history.goBack();
             }

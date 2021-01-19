@@ -46,14 +46,14 @@ const notify = (type: string, message: string, description: string) => {
  */
 const CompanyData: React.FC = ({ history, match }: any) => {
     const [webSocket, setWebSocket] = useState(false);
-    const [fields, setFields] = useState();
+    const [fields, setFields] = useState<object>();
     const [status, setStatus] = useState('');
     const [prefilledData, setPrefilledData] = useState({});
 
     const { t } = useTranslation();
 
     useEffect(() => {
-        async function getData () {
+        async function getData() {
             const credentialsString: string | null = await localStorage.getItem('credentials');
             const credentials = credentialsString && await JSON.parse(credentialsString);
             const status = credentials?.status;
@@ -71,12 +71,12 @@ const CompanyData: React.FC = ({ history, match }: any) => {
         getData();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    async function processValues (fields: object) {
+    async function processValues(fields: object) {
         setFields(fields);
         setWebSocket(true);
     }
 
-    function setStatusMessage (message: string) {
+    function setStatusMessage(message: string) {
         setStatus(message);
     }
 

@@ -53,7 +53,7 @@ const notify = (type: string, message: string, description: string) => {
  */
 const BankData: React.FC = ({ history, match }: any) => {
     const [webSocket, setWebSocket] = useState(false);
-    const [fields, setFields] = useState();
+    const [fields, setFields] = useState<object>();
     const [accountType, setAccountType] = useState();
     const [status, setStatus] = useState('');
     const [accountStep, setAccountStep] = useState(1);

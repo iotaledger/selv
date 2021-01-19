@@ -25,7 +25,7 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
     const [status, setStatus] = useState("pages.general.proveIdentity.waitingForLogin");
     const [qrContent, setQrContent] = useState('');
     const [channel, setChannel] = useState('');
-    const [channelDetails, setChannelDetails] = useState();
+    const [channelDetails, setChannelDetails] = useState<IChannelDetails>();
 
     const messages = {
         waiting: 'general.messages.waiting',
