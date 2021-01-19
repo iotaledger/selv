@@ -4,11 +4,12 @@ import { Button } from 'antd';
 import useStep from '../utils/useStep';
 import covid from '../assets/demos/covid.png';
 import selv from '../assets/demos/selv.png';
+import persistent_selv from '../assets/demos/persistent_selv.png';
 import { Disclaimer, RandomGraphicElement } from '../components';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
 import logo from '../assets/landing/logoHeader.svg';
-import { covidDemo } from '../config.json';
+import { covidDemo, persistentSelvDemo } from '../config.json';
 
 /**
  * Component which will display a IntroDemoSelection.
@@ -50,6 +51,18 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                                 <h3>Health status management</h3>
                                 <p>Share trusted credentials and immunity status</p>
                                 <a href={`${covidDemo}/demo/app`} rel='noopener noreferrer'>
+                                    <Button className='cta'>
+                                        Try the demo
+                                    </Button>
+                                </a>
+                            </div>
+                        </div>
+                        <div className='demo-card-wrapper'>
+                            <img src={persistent_selv} alt="Persistent Selv" />
+                            <div className="demo-card-content">
+                                <h3>Long-term Identity management</h3>
+                                <p>Learn about Futures Literacy and green futures</p>
+                                <a href={`${persistentSelvDemo}/demo/welcome`} rel='noopener noreferrer'>
                                     <Button className='cta'>
                                         Try the demo
                                     </Button>
