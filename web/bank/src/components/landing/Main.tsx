@@ -9,30 +9,35 @@ import { Translation } from 'react-i18next';
 
 export default () => {
     return (
-        <RandomGraphicElement elements={5}>
-            <div className='heading-section'>
-                <div className='desktop'>
-                    <div className='content-wrapper'>
-                        <div className='content'>
-                            <Content />
-                            <Buttons />
+        <Translation>
+            { //need translation tag so that suspense-promise-resolve reaches this component 
+                (t) =>
+                    <RandomGraphicElement elements={5}>
+                        <div className='heading-section'>
+                            <div className='desktop'>
+                                <div className='content-wrapper'>
+                                    <div className='content'>
+                                        <Content />
+                                        <Buttons />
+                                    </div>
+                                </div>
+                                <div className='image-wrapper'>
+                                    <img src={main} alt='Portrait' className='portrait' />
+                                </div>
+                                <img src={dots} alt='' className='dots' />
+                                <img src={ellipse} alt='' className='ellipse' />
+                            </div>
+                            <div className='mobile'>
+                                <div className='content'>
+                                    <Content />
+                                </div>
+                                <img src={main} alt='Portrait' className='portrait' />
+                                <Buttons />
+                            </div>
                         </div>
-                    </div>
-                    <div className='image-wrapper'>
-                        <img src={main} alt='Portrait' className='portrait' />
-                    </div>
-                    <img src={dots} alt='' className='dots' />
-                    <img src={ellipse} alt='' className='ellipse' />
-                </div>
-                <div className='mobile'>
-                    <div className='content'>
-                        <Content />
-                    </div>
-                    <img src={main} alt='Portrait' className='portrait' />
-                    <Buttons />
-                </div>
-            </div>
-        </RandomGraphicElement>
+                    </RandomGraphicElement>
+            }
+        </Translation>
     );
 };
 

@@ -1,6 +1,6 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { getRandomInt } from '../utils/helper';
-import useWindowSize from "../utils/useWindowSize";
+// import useWindowSize from "../utils/useWindowSize";
 
 import circle1 from '../assets/randomGraphics/circle1.svg';
 import circle2 from '../assets/randomGraphics/circle2.svg';
@@ -26,22 +26,16 @@ const RandomGraphicElement = ({ children, elements }: {
     elements: number;
 }) => {
     const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
-    const [windowWidth, windowHeight] = useWindowSize();
 
     const mainSectionEl = useCallback(node => {
         if (node !== null) {
-            if(node.getBoundingClientRect().height != 0){
-                setDimensions(node.getBoundingClientRect());
-            }
+            setDimensions(node.getBoundingClientRect());
         }
     }, []); // [windowWidth, windowHeight]
 
-    useEffect(() => {
-        setDimensions({height: windowHeight, width: windowWidth});
-    }, [windowWidth, windowHeight]);
 
     return (
-        <div className='random-element-wrapper'>
+        <div className='random-element-wrapper' ref={mainSectionEl}>
             { children }
             {
                 dimensions && Array.from(Array(elements).keys()).map(e => {
