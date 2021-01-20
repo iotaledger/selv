@@ -1,6 +1,6 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { getRandomInt } from '../utils/helper';
-// import useWindowSize from "../utils/useWindowSize";
+import useWindowSize from "../utils/useWindowSize";
 
 import circle1 from '../assets/randomGraphics/circle1.svg';
 import circle2 from '../assets/randomGraphics/circle2.svg';
@@ -10,14 +10,15 @@ import circle5 from '../assets/randomGraphics/circle5.svg';
 import circle6 from '../assets/randomGraphics/circle6.svg';
 import circle7 from '../assets/randomGraphics/circle7.svg';
 import circle8 from '../assets/randomGraphics/circle8.svg';
-import circle9 from '../assets/randomGraphics/circle9.svg';
+//circle9.svg was considered a bit distracting when positioned behind text
+// import circle9 from '../assets/randomGraphics/circle9.svg'; 
 import circle10 from '../assets/randomGraphics/circle10.svg';
 import circle11 from '../assets/randomGraphics/circle11.svg';
 import circle12 from '../assets/randomGraphics/circle12.svg';
 
 const graphics = [
     circle1, circle2, circle3, circle4, circle5, circle6,
-    circle7, circle8, circle9, circle10, circle11, circle12
+    circle7, circle8, circle10, circle11, circle12
 ];
 
 const RandomGraphicElement = ({ children, elements }: {
@@ -25,16 +26,22 @@ const RandomGraphicElement = ({ children, elements }: {
     elements: number;
 }) => {
     const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
-    // const [windowWidth, windowHeight] = useWindowSize();
+    const [windowWidth, windowHeight] = useWindowSize();
 
     const mainSectionEl = useCallback(node => {
         if (node !== null) {
-            setDimensions(node.getBoundingClientRect());
+            if(node.getBoundingClientRect().height != 0){
+                setDimensions(node.getBoundingClientRect());
+            }
         }
     }, []); // [windowWidth, windowHeight]
 
+    useEffect(() => {
+        setDimensions({height: windowHeight, width: windowWidth});
+    }, [windowWidth, windowHeight]);
+
     return (
-        <div className='random-element-wrapper' ref={mainSectionEl}>
+        <div className='random-element-wrapper'>
             { children }
             {
                 dimensions && Array.from(Array(elements).keys()).map(e => {

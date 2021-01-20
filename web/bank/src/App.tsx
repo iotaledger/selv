@@ -32,7 +32,7 @@ AOS.init();
 
 const App: React.FC = () => {
   return (
-    <React.Suspense fallback={<Loading />}>
+    <React.Suspense fallback={<React.Fragment/>}>
       <GlobalState>
         <BrowserRouter>
           <Switch>
