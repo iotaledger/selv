@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button, Checkbox } from 'antd';
 import { useTranslation } from 'react-i18next';
-//translation done
+
 const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
     form: any;
     onSubmit: (values: object) => void;

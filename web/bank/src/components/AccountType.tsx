@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Button, Checkbox, Radio } from 'antd';
 import { Trans } from 'react-i18next';
 import { useTranslation } from 'react-i18next';
-//Translation done
+
 interface IAccountType {
     label: string;
     error: string;

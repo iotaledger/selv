@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import '../styles/components/dropSelector.scss';
 import { useTranslation } from 'react-i18next';
 
-//Translation done
 //TODO: currently only works properly with two items due to some scss-bug
 const DropSelector = () => {
     const [isExpanded, handleExpand] = useState(false);

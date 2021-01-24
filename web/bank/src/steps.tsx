@@ -18,26 +18,26 @@ import {
 
 export const routes = [
     { path: '/', page: Landing },
-    { path: '/demo/select', page: IntroDemoSelection }, //translation done
-    { path: '/demo/todos', page: IntroShowTodos }, //translation done
-    { path: '/demo/app', page: IntroShowMobile }, //translation done
-    { path: '/company/list/0', page: IncorporatedCompanies }, //translation done
-    { path: '/demo/app/0', page: AppDownloadQR }, //translation done
-    { path: '/company/prove/0', page: ProveIdentity }, //translation done
-    { path: '/company/signin/0', page: SingInConfirmation }, //translation done
+    { path: '/demo/select', page: IntroDemoSelection },
+    { path: '/demo/todos', page: IntroShowTodos },
+    { path: '/demo/app', page: IntroShowMobile },
+    { path: '/company/list/0', page: IncorporatedCompanies },
+    { path: '/demo/app/0', page: AppDownloadQR },
+    { path: '/company/prove/0', page: ProveIdentity },
+    { path: '/company/signin/0', page: SingInConfirmation },
     { path: '/company/data/0', page: CompanyData },
-    { path: '/company/confirm/1', page: Confirmation }, //translation done
-    { path: '/demo/success/1', page: GreatSuccess }, //translation done
-    { path: '/company/details/1/:companyId', page: CompanyDetails }, //translation done
-    { path: '/bank/prove/1', page: ProveIdentity }, //translation done
+    { path: '/company/confirm/1', page: Confirmation },
+    { path: '/demo/success/1', page: GreatSuccess },
+    { path: '/company/details/1/:companyId', page: CompanyDetails },
+    { path: '/bank/prove/1', page: ProveIdentity },
     { path: '/bank/data/1', page: BankData },
-    { path: '/bank/confirm/2', page: Confirmation }, //translation done
-    { path: '/company/details/2/:companyId', page: CompanyDetails }, //translation done
-    { path: '/insurance/prove/2', page: ProveIdentity }, //translation done
+    { path: '/bank/confirm/2', page: Confirmation },
+    { path: '/company/details/2/:companyId', page: CompanyDetails },
+    { path: '/insurance/prove/2', page: ProveIdentity },
     { path: '/insurance/data/2', page: InsuranceData },
-    { path: '/insurance/confirm/3', page: Confirmation },//translation done
-    { path: '/company/details/3/:companyId', page: CompanyDetails },//translation done
-    { path: '/demo/thankyou', page: ThankYou } //translation done
+    { path: '/insurance/confirm/3', page: Confirmation },
+    { path: '/company/details/3/:companyId', page: CompanyDetails },
+    { path: '/demo/thankyou', page: ThankYou }
 ];
 
 //These are now just the keys for the translation that get dynamically loaded

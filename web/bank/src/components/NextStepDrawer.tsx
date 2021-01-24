@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
-//translation done
+
 export default ({ link }: { link: string }) => {
     const [nextStep, setNextStep] = useState('');
 

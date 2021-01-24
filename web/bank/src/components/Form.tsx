@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
-//translation done
+
 const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }: {
     form: any;
     dataFields: string[];

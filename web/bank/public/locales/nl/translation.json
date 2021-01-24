@@ -133,7 +133,9 @@
     "demo": {
       "introDemoSelection": {
         "healthStatusManagement": "Translated Health Status Management",
-        "shareTrustedCredentials": "Translated Share trusted credentials and immunity status"
+        "shareTrustedCredentials": "Translated Share trusted credentials and immunity status",
+        "longtermIdentityManagement": "Translated Long-term Identity Management",
+        "LearnAboutFutures": "Translated Learn about Futures Literacy and green futures"
       },
       "introShowTodos": {
         "welcomeToThe": "Translated Welcome to the",

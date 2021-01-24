@@ -1,7 +1,7 @@
 import React from 'react';
 import companyHouse from '../assets/companyHouse.svg'
 import snsBank from '../assets/snsBank.svg'
-//translation done
+
 const Header = ({ children, theme }: {
     children?: JSX.Element | null | undefined;
     theme: string | undefined;

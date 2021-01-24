@@ -1,7 +1,7 @@
 import React from 'react';
 import companyHouse from '../assets/companyHouseCrone.svg'
 import snsBank from '../assets/snsBank.svg'
-//translation done
+
 const Footer = ({ children, theme }: {
     children?: JSX.Element | null | undefined;
     theme: string | undefined;
