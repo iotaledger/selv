@@ -14,7 +14,7 @@ export default ({ children, match, customTheme, customStep, noHeader, noFooter }
 
     return (
         <div className={`theme-${theme || customTheme}`}>
-            <div className='page-wrapper'>
+            <div className='page-wrapper' id='app'>
                 <div className='main-section'>
                     {
                         !noHeader && <Header theme={theme || customTheme} />

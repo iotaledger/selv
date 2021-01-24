@@ -251,9 +251,10 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: space-around;
     width: 100%;
-    max-width: 870px;
+    max-width: 900px;
     align-items: center;
     z-index: 1;
 

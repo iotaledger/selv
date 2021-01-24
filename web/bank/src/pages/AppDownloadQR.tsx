@@ -23,7 +23,7 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
     return (
         <Layout match={match} noHeader noFooter>
             <React.Fragment>
-                <div className='scan-qr-page-wrapper app-download' id='app'>
+                <div className='scan-qr-page-wrapper app-download'>
                     <RandomGraphicElement elements={5}>
                         <React.Fragment>
                             <h1 className='title'>{t("actions.downloadTheSelvApp")}</h1>
@@ -62,14 +62,14 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
                     <img src={dots} alt='' className='dots' />
                     <img src={circle} alt='' className='circle' />
                 </div>
-                <div className="cta-section">
-                    <p className='subtitle'>{t("pages.demo.appDownloadQR.onceDownloaded")}</p>
-                    <Link to={nextStep} className='cta'>
-                        <Button>
-                            {t("actions.continue")}
-                        </Button>
-                    </Link>
-                </div>
+                    <div className="cta-section" id='app-download'>
+                        <p className='subtitle'>{t("pages.demo.appDownloadQR.onceDownloaded")}</p>
+                        <Link to={nextStep} className='cta'>
+                            <Button>
+                                {t("actions.continue")}
+                            </Button>
+                        </Link>
+                    </div>
             </React.Fragment>
         </Layout>
     );

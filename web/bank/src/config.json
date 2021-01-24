@@ -3,5 +3,6 @@
     "serverAPI": "https://selv01.iota.cafe",
     "provider": "https://nodes.devnet.iota.org:443",
     "keyId": "selv",
-    "covidDemo": "https://selv.iota.org"
+    "covidDemo": "https://selv.iota.org",
+    "persistentSelvDemo": "https://persistent-selv.iota.org"
 }

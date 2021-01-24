@@ -134,3 +134,22 @@ button {
   }
 }
 
+.page-wrapper.cookie-bar-bottom-bar {
+  .main-section {
+    margin-bottom: 80px;
+
+    .drawer.fixed {
+      bottom: 80px;
+    }
+  }
+}
+
+.great-success.cookie-bar-bottom-bar {
+  margin-bottom: 180px;
+}
+
+.thank-you-page-wrapper {
+  .footer-section.cookie-bar-bottom-bar {
+    padding-bottom: 120px;
+  }
+}

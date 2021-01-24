@@ -90,6 +90,11 @@
     }
 }
 
+.cta-section-extended {
+    @extend .cta-section;
+    bottom: 80px;    
+}
+
 .scan-qr-content-wrapper {
     height: 100%;
     display: flex;
