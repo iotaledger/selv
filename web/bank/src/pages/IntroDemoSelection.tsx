@@ -6,6 +6,7 @@ import covid from '../assets/demos/covid.png';
 import selv from '../assets/demos/selv.png';
 import persistent_selv from '../assets/demos/persistent_selv.png';
 import { Disclaimer, RandomGraphicElement } from '../components';
+import DropSelector from '../components/DropSelector';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
 import logo from '../assets/landing/logoHeader.svg';
@@ -33,6 +34,9 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                 <Link to={'/'} className="logo demo-page">
                     <img src={logo} alt="Selv logo" />
                 </Link>
+                <div className="demo-select-page-drop-selector">
+                    <DropSelector />
+                </div>
                 <div className='demo-intro app' id='app'>
                     <div className='demo-select-wrapper'>
                         <div className='demo-card-wrapper'>

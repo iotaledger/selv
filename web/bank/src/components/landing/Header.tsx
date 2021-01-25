@@ -51,7 +51,6 @@ export default () => {
             <img src={logo} alt="Selv logo" className="logo" />
             <div className="menu-links">
 
-                <DropSelector/>
                 {/* <img className="cta" alt="USA" src="http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg" onClick={() => setLanguage('en')} style={{ borderWidth: 100, borderColor: '#FFF' }} /> */}
                 {/* <Button className='cta' onClick={}>
                 </Button> */}
@@ -67,6 +66,9 @@ export default () => {
                         {t("landing.app.tryTheDemo")}
                     </Button>
                 </Link>
+                <div className="menu-link">
+                    <DropSelector />
+                </div>
             </div>
             <MobileMenu menuOpenState={menuOpenState} onAnchorClick={onAnchorClick} />
             <div className="burger-icon-wrapper">

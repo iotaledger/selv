@@ -27,6 +27,11 @@
         width: 84px;
     }
 
+    .sidebar-drop-selector {
+        position: absolute;
+        right: 70px;
+    }
+
     .todo-list {
         display: flex;
         flex-direction: row;

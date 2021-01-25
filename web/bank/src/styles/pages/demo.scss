@@ -14,6 +14,20 @@
     }
 }
 
+.demo-drop-selector {
+    position: absolute;
+    top: 37px;
+    right: 40px;
+    z-index: 10;
+}
+
+.demo-select-page-drop-selector {
+    position: absolute;
+    top: 37px;
+    right: 23px;
+    z-index: 10;
+}
+
 .demo-intro {
     position: relative;
     display: flex;

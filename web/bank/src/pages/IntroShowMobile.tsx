@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import useStep from '../utils/useStep';
 import mobile from '../assets/mobile.png';
 import { Disclaimer, RandomGraphicElement } from '../components';
+import DropSelector from '../components/DropSelector';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
 import logo from '../assets/landing/logoHeader.svg';
@@ -30,6 +31,9 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                 <Link to={'/'} className="logo demo-page">
                     <img src={logo} alt="Selv logo" />
                 </Link>
+                <div className="demo-drop-selector">
+                    <DropSelector/>
+                </div>
                 <div className='demo-intro app' id='app'>
                     <div className='app-content-wrapper'>
                         <h2>{t("pages.demo.introShowMobile.looksLikeWork")}</h2>

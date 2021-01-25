@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { Disclaimer, RandomGraphicElement } from '../components';
+import DropSelector from '../components/DropSelector';
 import useStep from '../utils/useStep';
 import howItWorks from '../assets/landing/howItWorks1.png';
 import dots from '../assets/backgrounds/dots.png';
@@ -34,6 +35,9 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                 <Link to={'/'} className="logo demo-page">
                     <img src={logo} alt="Selv logo" />
                 </Link>
+                <div className="demo-drop-selector">
+                    <DropSelector />
+                </div>
                 <div className='demo-intro' id='app'>
                     <div className='todos'>
                         <span className='heading'><h2>{t("pages.demo.introShowTodos.welcomeToThe")}</h2>&nbsp;&nbsp;&nbsp;<h2 className='highlight'>{t("pages.demo.introShowTodos.selvDemo")}</h2></span>
@@ -47,7 +51,7 @@ const IntroShowTodos: React.FC = ({ match }: any) => {
                         </ul>
                         <Link to={nextStep}>
                             <Button className='cta'>
-                            {t("actions.continue")}
+                                {t("actions.continue")}
                             </Button>
                         </Link>
                     </div>
