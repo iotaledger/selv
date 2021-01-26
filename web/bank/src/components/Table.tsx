@@ -155,7 +155,7 @@ const TableInstance = ({
                 top: -8,
               }}
             >
-              <div className="cell-content">...</div>
+              <div className="cell-content info">{'\u24D8'}</div>
             </Cell>
           </Column>
         </Table>
