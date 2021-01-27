@@ -44,11 +44,19 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                             <div className="demo-card-content">
                                 <h3>{t("general.digitalIdentityManagement")}</h3>
                                 <p>{t("general.claimControlReuse")}</p>
-                                <Link to={nextStep}>
-                                    <Button className='cta'>
-                                        {t("actions.tryTheDemo")}
-                                    </Button>
-                                </Link>
+                                <div>
+                                    <div className="bottom">
+                                        <Link to={nextStep}>
+                                            <Button className='cta'>
+                                                {t("actions.tryTheDemo")}
+                                            </Button>
+                                        </Link>
+                                        <div className="partner-img">
+                                            <p>logo placeholder</p>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                         <div className='demo-card-wrapper'>
@@ -56,11 +64,16 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                             <div className="demo-card-content">
                                 <h3>{t("pages.demo.introDemoSelection.healthStatusManagement")}</h3>
                                 <p>{t("pages.demo.introDemoSelection.shareTrustedCredentials")}</p>
-                                <a href={`${covidDemo}/demo/app`} rel='noopener noreferrer'>
-                                    <Button className='cta'>
-                                        {t("actions.tryTheDemo")}
-                                    </Button>
-                                </a>
+                                <div className="bottom">
+                                    <a href={`${covidDemo}/demo/app`}>
+                                        <Button className="cta">
+                                            {t("actions.tryTheDemo")}
+                                        </Button>
+                                    </a>
+                                    {/* <div className="partner-img">
+                                        <p>logo placeholder</p>
+                                    </div> */}
+                                </div>
                             </div>
                         </div>
                         <div className='demo-card-wrapper'>
@@ -68,11 +81,16 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                             <div className="demo-card-content">
                                 <h3>{t("pages.demo.introDemoSelection.longtermIdentityManagement")}</h3>
                                 <p>{t("pages.demo.introDemoSelection.LearnAboutFutures")}</p>
-                                <a href={`${persistentSelvDemo}/demo/welcome`} rel='noopener noreferrer'>
-                                    <Button className='cta'>
-                                        {t("actions.tryTheDemo")}
-                                    </Button>
-                                </a>
+                                <div className="bottom">
+                                    <a href={`${persistentSelvDemo}/demo/welcome`} rel='noopener noreferrer'>
+                                        <Button className='cta'>
+                                            {t("actions.tryTheDemo")}
+                                        </Button>
+                                    </a>
+                                    {/* <div className="partner-img">
+                                        <p>logo placeholder</p>
+                                    </div> */}
+                                </div>
                             </div>
                         </div>
                     </div>
