@@ -51,9 +51,9 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                                                 {t("actions.tryTheDemo")}
                                             </Button>
                                         </Link>
-                                        <div className="partner-img">
+                                        {/* <div className="partner-img">
                                             <p>logo placeholder</p>
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                 </div>
