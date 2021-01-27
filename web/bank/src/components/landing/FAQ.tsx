@@ -41,10 +41,34 @@ export default () => (
                                 <Collapse.Panel
                                     header={(
                                         <div className="section-header">
-                                            <h5>{t("landing.FAQ.question1")}</h5>
+                                            <h5>{t("landing.FAQ.question7")}</h5>
+                                        </div>
+                                    )}
+                                    key={0}
+                                >
+                                    <div className="faq-content">
+                                        <p>{t("landing.FAQ.answer7")}</p>
+                                    </div>
+                                </Collapse.Panel>
+                                <Collapse.Panel
+                                    header={(
+                                        <div className="section-header">
+                                            <h5>{t("landing.FAQ.question8")}</h5>
                                         </div>
                                     )}
                                     key={1}
+                                >
+                                    <div className="faq-content">
+                                        <p>{t("landing.FAQ.answer8")}</p>
+                                    </div>
+                                </Collapse.Panel>
+                                <Collapse.Panel
+                                    header={(
+                                        <div className="section-header">
+                                            <h5>{t("landing.FAQ.question1")}</h5>
+                                        </div>
+                                    )}
+                                    key={2}
                                 >
                                     <div className="faq-content">
                                         <p>{t("landing.FAQ.answer1")}</p>
@@ -56,7 +80,7 @@ export default () => (
                                             <h5>{t("landing.FAQ.question2")}</h5>
                                         </div>
                                     )}
-                                    key={2}
+                                    key={3}
                                 >
                                     <div className="faq-content">
                                         <p>{t("landing.FAQ.answer2")}</p>
@@ -68,7 +92,7 @@ export default () => (
                                             <h5>{t("landing.FAQ.question3")}</h5>
                                         </div>
                                     )}
-                                    key={3}
+                                    key={4}
                                 >
                                     <div className="faq-content">
                                         <p>{t("landing.FAQ.answer3")}</p>
@@ -80,10 +104,10 @@ export default () => (
                                             <h5>{t("landing.FAQ.question4")}</h5>
                                         </div>
                                     )}
-                                    key={4}
+                                    key={5}
                                 >
                                     <div className="faq-content">
-                                        <p>{t("landing.FAQ.answer3")}</p>
+                                        <p>{t("landing.FAQ.answer4")}</p>
                                     </div>
                                 </Collapse.Panel>
                                 <Collapse.Panel
@@ -92,7 +116,7 @@ export default () => (
                                             <h5>{t("landing.FAQ.question5")}</h5>
                                         </div>
                                     )}
-                                    key={5}
+                                    key={6}
                                 >
                                     <div className="faq-content">
                                         <p>{t("landing.FAQ.answer5")}</p>
@@ -104,7 +128,7 @@ export default () => (
                                             <h5>{t("landing.FAQ.question6")}</h5>
                                         </div>
                                     )}
-                                    key={6}
+                                    key={7}
                                 >
                                     <div className="faq-content">
                                         <p>{t("landing.FAQ.answer6.part1")}<a target="_blank" rel="noopener noreferrer" href="https://files.iota.org/comms/IOTA_The_Case_for_a_Unified_Identity.pdf" >"{t("landing.FAQ.answer6.part2")}"</a>. {t("landing.FAQ.answer6.part3")}</p>
