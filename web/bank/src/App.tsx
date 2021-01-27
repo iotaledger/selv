@@ -4,7 +4,6 @@ import WebFontLoader from 'webfontloader';
 import ReactGA from 'react-ga';
 import AOS from 'aos';
 import { Landing, IncorporatedCompanies, CompanyDetails } from './pages'
-import Loading from './components/Loading';
 import GlobalState from './context/globalState'
 import 'aos/dist/aos.css';
 import 'antd/dist/antd.css';

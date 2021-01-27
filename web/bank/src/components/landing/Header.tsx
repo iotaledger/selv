@@ -66,7 +66,7 @@ export default () => {
                         {t("landing.app.tryTheDemo")}
                     </Button>
                 </Link>
-                <div className="menu-link">
+                <div className="drop-selector">
                     <DropSelector />
                 </div>
             </div>
@@ -89,7 +89,12 @@ const MobileMenu = ({ onAnchorClick, menuOpenState }: { onAnchorClick: (anchor: 
     const { t } = useTranslation();
     return (
         <div className={`mobile-menu-wrapper ${menuOpenState ? 'open' : ''}`}>
-            <h1>{t("landing.header.menu")}</h1>
+            <div className="header-section">
+                <h1>{t("landing.header.menu")}</h1>
+                <div className="drop-selector">
+                    <DropSelector />
+                </div>
+            </div>
             <div className="mobile-menu-links">
                 {
                     links.map(link => (
