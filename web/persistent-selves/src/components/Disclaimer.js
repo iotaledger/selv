@@ -6,7 +6,7 @@ const Disclaimer = ({ cookies }) => {
     const [ack, setAck] = useState(true);
 
     useEffect(() => {
-        const ack = cookies.get('persistent-selves-cookie');
+        const ack = cookies.get('persistent-selv-cookie');
         if (!ack && document) {
             const element = document.getElementById('footer') || document.getElementById('app');
 			const elementDownloadApp = document.getElementById('app-download');
@@ -19,7 +19,7 @@ const Disclaimer = ({ cookies }) => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     function dismiss () {
-        cookies.set('persistent-selves-cookie', true, { path: '/' });
+        cookies.set('persistent-selv-cookie', true, { path: '/' });
         if (document) {
             const element = document.getElementById('footer') || document.getElementById('app');
 			const elementDownloadApp = document.getElementById('app-download');
