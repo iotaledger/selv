@@ -15,7 +15,7 @@ const customCss = fs.readFileSync((process.cwd() + '/swagger.css'), 'utf8');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://covid-19.iota.org', 'https://selv.vercel.app', 'https://selv.iota1.vercel.app', 'https://covid-19.iota1.vercel.app', 'https://persistent-selv.vercel.app'];
+const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://covid-19.iota.org', 'https://selv.vercel.app', 'https://selv.iota1.vercel.app', 'https://covid-19.iota1.vercel.app', 'https://persistent-selv.iota.org'];
 const corsOptions = {
     // methods: ["GET, POST, OPTIONS"],
     // allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
