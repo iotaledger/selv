@@ -38,7 +38,6 @@ export default () => {
 const Content = () => (
     <>
         <h1>Claim, Control &<br />Reuse your new<br />Digital Identity</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     </>
 );
 
