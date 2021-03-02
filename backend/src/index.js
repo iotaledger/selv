@@ -57,7 +57,7 @@ const desktopClients = new Map();
 
 setInterval(() => {
     try {
-        if (mobileClients && mobileClients.size > 2) {
+        if (mobileClients && mobileClients.size > 20) {
             const keys = Array.from(mobileClients.keys()).slice(0, 2);
             keys.forEach(k => {
                 mobileClients.delete(k);
@@ -65,7 +65,7 @@ setInterval(() => {
             });
         }
 
-        if (desktopClients && desktopClients.size > 2) {
+        if (desktopClients && desktopClients.size > 20) {
             const keys = Array.from(desktopClients.keys()).slice(0, 2);
             keys.forEach(k => {
                 desktopClients.delete(k);
