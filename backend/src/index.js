@@ -17,6 +17,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const whitelist = [
     'http://localhost:3000', 
+    'http://localhost:3003', 
     'https://selv.iota.org', 
     'https://covid-19.iota.org', 
     'https://selv.vercel.app', 
@@ -40,6 +41,7 @@ const corsOptions = {
 };
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json());
@@ -117,8 +119,8 @@ try {
                 await mobileClients.delete(mobileClient.channelId);
             }
 
-            console.log('connected desktopClients', desktopClients.keys());
-            console.log('connected mobileClients', mobileClients.keys());
+            console.log('connected desktopClients', Array.from(desktopClients).map(items => items?.[0]));
+            console.log('connected mobileClients', Array.from(mobileClients).map(items => items?.[0]));
         });
 
         socket.on('verifiablePresentation', async (data) => {
@@ -126,6 +128,7 @@ try {
             const desktopClient = desktopClients.get(channelId);
             if (desktopClient && desktopClient.socket) {
                 const desktopSocket = desktopClient.socket;
+                // console.log('Emit to desktop', channelId, payload);
                 desktopSocket && desktopSocket.emit('verifiablePresentation', payload);
                 console.info('Verifiable Presentation sent to desktop client');
             }
