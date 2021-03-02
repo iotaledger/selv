@@ -126,8 +126,8 @@ try {
         socket.on('verifiablePresentation', async (data) => {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
-            console.log('Emit verifiablePresentation to desktop', desktopClient && desktopClient.socket, channelId, payload);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit verifiablePresentation to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('verifiablePresentation', payload);
                 console.info('Verifiable Presentation sent to desktop client');
@@ -137,8 +137,8 @@ try {
         socket.on('createCredential', async (data) => {
             const { channelId, payload } = data;
             const mobileClient = mobileClients.get(channelId);
-            console.log('Emit createCredential to mobile', mobileClient && mobileClient.socket, channelId, payload);
             if (mobileClient && mobileClient.socket) {
+                console.log('Emit createCredential to mobile', channelId, payload);
                 const mobileSocket = mobileClient.socket;
                 mobileSocket && mobileSocket.emit('createCredential', payload);
                 console.info('Create Credential request sent to mobile client', channelId);
@@ -148,8 +148,8 @@ try {
         socket.on('createCredentialConfirmation', async (data) => {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
-            console.log('Emit createCredentialConfirmation to desktop', desktopClient && desktopClient.socket, channelId, payload);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit createCredentialConfirmation to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload);
                 console.info('Create Credential Confirmation sent to desktop client', channelId);
@@ -159,8 +159,8 @@ try {
         socket.on('errorMessage', async (data) => {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
-            console.log('Emit errorMessage to desktop', desktopClient && desktopClient.socket, channelId, payload);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit errorMessage to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('errorMessage', payload);
             }
@@ -169,8 +169,8 @@ try {
         socket.on('rejectCredentials', async (data) => {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
-            console.log('Emit rejectCredentials to desktop', desktopClient && desktopClient.socket, channelId, payload);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit rejectCredentials to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('rejectCredentials', payload);
             }
