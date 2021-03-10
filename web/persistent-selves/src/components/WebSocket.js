@@ -161,7 +161,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                             break;
                     }
                     await localStorage.setItem(schemaName, JSON.stringify({ ...data, ...payload?.payload }));
-                    await shareCommitment(payload?.payload?.Commitments, schemaName);
+                    await shareCommitment(payload?.payload?.data?.Commitments, schemaName);
                     history.push(nextStep);
                 }
             } catch (e) {
