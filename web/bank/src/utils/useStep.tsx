@@ -36,14 +36,13 @@ const useStep = (match: any) => {
             const idx = routes.findIndex(({ path }: { path: string; }) => path === match.path);
             if (idx !== -1 && routes.length > idx + 1) {
                 var next = routes[idx + 1].path;
-                next = next.replace("/:lng?", "i18n.language.toString()");
+                next = next.replace(":lng?", i18n.language.toString()); //replace route-param
                 setNextStep(next);
             }
         }
         setSteps();
     }, [match, routes, step]);
 
-    console.log(nextStep)
     return { step, nextStep, mainSteps, theme };
 };
 
