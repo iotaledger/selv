@@ -1,37 +1,37 @@
 {
   "landing": {
     "app": {
-      "demo": "Translated Demo",
-      "theApp": "Translated The App",
-      "selfSovereignIdentity": "Translated Self Sovereign Identity",
-      "whatItIs": "Translated Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
-      "oneAppOneProtocol": "Translated One App – One Protocol",
-      "easyGDPRcompliance": "Translated This solution provides an easy and cheap way to comply with GDPR and similar privacy laws.",
-      "unifiedIdentity": "Translated A Unified Identity",
-      "protocolEnablesDevices": "Translated The Unified Identity Protocol not only enables people and organisations to have the benefits of identity, but devices, opening up a whole new world of business models and use cases.",
-      "tryTheDemo": "Translated Try the Demo"
+      "demo": "Demo",
+      "theApp": "De App",
+      "selfSovereignIdentity": "Self Sovereign Identity",
+      "whatItIs": "Zelf aan het roer bij het verzamelen, beheren en delen van je digitale identiteit door Self-sovereign identity (SSI).",
+      "oneAppOneProtocol": "Één app - één protocol",
+      "easyGDPRcompliance": "Met deze open technologie voldoe je makkelijk en goedkoop aan de Algemene verordening gegevensbescherming (AVG) en andere privacywetgevingen.",
+      "unifiedIdentity": "Een verenigde identiteit",
+      "protocolEnablesDevices": "Met het IOTA Identity framewerk is digitale identiteit niet alleen mogelijk voor mensen en organisaties, maar ook voor apparaten. Daardoor ontstaat een heel scala aan nieuwe business modellen.",
+      "tryTheDemo": "Start de demo"
     },
     "benefits": {
-      "benefits": "Translated Benefits",
-      "forUsers": "Translated For Users",
-      "control": "Translated Control",
-      "benefitsControl": "Translated Anything related to your identity and your personal data remains in your control.",
-      "privacy": "Translated Privacy",
-      "benefitsPrivacy": "Translated Improved privacy by only revealing the minimum amount of information.",
-      "reusability": "Translated Reusability",
-      "benefitsReusability": "Translated Share as often as you like. No more typing in the same information repeatedly in online forms.",
-      "forBusiness": "Translated For Business",
-      "privacyLaws": "Translated Privacy Laws",
-      "benefitsPrivacyLaws": "Translated Complies to the strictest interpretation of the General Data Protection Act (GDPR).",
-      "dataResponsibility": "Translated Data Responsibility",
-      "benefitsDataResponsibility": "Translated Users can present or consent, removing responsibility on data protection from the company.",
-      "userExperience": "Translated User Experience",
-      "benefitsUserExperience": "Translated Retain more customers through an enhanced User Experience. Less manual typing required."
+      "benefits": "Voordelen",
+      "forUsers": "Voor gebruikers",
+      "control": "Controle",
+      "benefitsControl": "Jij hebt de volledige controle over jouw digitale identiteit.",
+      "privacy": "Privacy",
+      "benefitsPrivacy": "Deel alleen die informatie met anderen die écht nodig is.",
+      "reusability": "Hergebruik",
+      "benefitsReusability": "Deel je data zo vaak als je wilt en razendsnel met anderen.",
+      "forBusiness": "Voor bedrijven",
+      "privacyLaws": "Privacy wetgeving",
+      "benefitsPrivacyLaws": "Voldoet aan de meest strikte interpretatie van de Algemene verordening gegevensbescherming (AVG).",
+      "dataResponsibility": "Data verantwoordelijkheid",
+      "benefitsDataResponsibility": "Klanten bepalen zelf welke data ze willen delen. Zodat jouw bedrijf niet meer de verantwoordelijkheid hoeft te dragen voor de veiligheid van de gegevens.",
+      "userExperience": "Gebruikerservaring",
+      "benefitsUserExperience": "Krijg en behoud meer klanten. Een betere gebruikerservaring met veel minder formulieren invullen."
     },
     "controlIdentity": {
-      "youControlYour": "Translated You control your",
-      "ownIdentity": "Translated own identity",
-      "whatItIsDetailed": "Translated Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity. This increased privacy and control enables a “Bring Your Own Identity” (BYOI) style of engagement with corporations, removing the need to perform expensive data collection."
+      "youControlYour": "Baas over je",
+      "ownIdentity": "eigen identiteit",
+      "whatItIsDetailed": "Met Self Sovereign Identity (SSI) kunnen mensen, organisaties en dingen zelf gevalideerde data verzamelen en veilig delen met anderen. Met meet privacy en conrole wordt zo een \"Bring your own Identity\" (BYOI) mogelijk bij bedrijven. En is de moeilijke, trage en kostbare verzameling van data verleden tijd."
     },
     "FAQ": {
       "question1": "Translated Does the IOTA Foundation track my data and usage?",
@@ -64,36 +64,35 @@
       "privacyPolicy": "Translated Privacy Policy"
     },
     "howItWorks": {
-      "inBrief": "Translated In Brief",
-      "howItWorks": "Translated How It Works",
-      "create": "Translated Create",
-      "createText": "Translated Download Selv and create a unique identifier, representing you online. This profile remains in your control and doesn’t leave the app without your consent.",
-      "share": "Translated Share",
-      "shareText": "Translated Decide who and what others get to see from your personal profile. You can share your data peer-to-peer or on request. Controlled data flow allows you to always get something in return for your data.",
-      "grow": "Translated Grow",
-      "growText": "Translated Gather statements, or credentials, about yourself, verified by others, to grow your personal identity. Fully under your control and not stored in any database.",
-      "accept": "Translated Accept",
-      "acceptText": "Translated By accepting BYOI, companies can verify customer data, instantly and for free. This allows you to speed up processes such as onboarding and reduce the amount of typing your customers have to do."
+      "inBrief": "In het kort",
+      "howItWorks": "Hoe Selv werkt",
+      "create": "Maak je digital identiteit",
+      "createText": "Download de Selv app en maak jouw digitale identiteit aan. Jouw identiteit blijft alleen in de app en alleen jij bepaalt met wie je data deelt.",
+      "share": "Deel",
+      "shareText": "Jij bepaalt welke gegevens je deelt en met wie je dat doet. Je kunt je data zelf met iemand delen of op verzoek. Jij hebt de controle! Zo kun je ervoor zorgen dat je altijd iets terug krijgt voor het delen van je data.",
+      "grow": "Voeg je data toe",
+      "growText": "Verzamel alle data en referenties over jezelf, gevalideerd door anderen, en maak je digitale identiteit compleet. Alles veilig in Selv zonder dat het ergens in de cloud rondzwerft.",
+      "accept": "Voor bedrijven",
+      "acceptText": "Met deze digitale identiteit kun je zonder kosten klanten gelijk identificeren en accepteren. Zodat ze veel sneller en makkelijker je klant kunnen worden."
     },
     "header": {
-      "How it works": "Translated How It Works",
-      "Benefits": "Translated Benefits",
-      "The App": "Translated The App",
-      "FAQs": "Translated FAQs",
-      "menu": "Translated Menu"
+      "How it works": "Hoe werkt het",
+      "Benefits": "Voordelen",
+      "The App": "De App",
+      "FAQs": "Veelgestelde vragen",
+      "menu": "Menu"
     },
     "main": {
-      "claimControl": "Translated Claim, Control",
-      "reuseYourNew": "Translated Reuse Your New",
-      "digitalIdentity": "Translated Digital Identity",
-      "mainText": "Translated Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity."
+      "claimControl": "Je Digitale Selv,",
+      "reuseYourNew": "in jouw beheer",
+      "mainText": "Met Self Sovereign Identity (SSI) beheren en delen mensen, organisaties en dingen hun eigen verifeerbare data en digitale identiteit."
     },
     "selv": {
-      "selvText": "Uw gegevens mogen niet openbaar zijn, maar ze mogen ook niet worden vergrendeld. <1 /> We beloven een oplossing die <3> gegevensstroom mogelijk maakt </3>, volledig in uw <5> controle </5>."
+      "selvText": "Jouw gegevens zouden niet overal moeten liggen, maar zouden ook niet ontoegankelijk moeten zijn. <1 /> Selv belooft een oplossing die het mogelijk maakt om <3> data te delen</3>, terwijl je <5> volledige controle hebt </5>."
     }
   },
   "actions": {
-    "tryTheDemo": "Translated Try the Demo",
+    "tryTheDemo": "Start de demo",
     "continue": "Translated Continue",
     "letsDoIt": "Translated Let's Do It",
     "continueNextStep": "Translated Continue to Next Step",
@@ -119,7 +118,7 @@
     "The App": "Translated The App",
     "What it is": "Translated Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
     "A Unified Identity": "Translated A Unified Identity",
-    "digitalIdentityManagement": "Translated Digital Identity Management",
+    "digitalIdentityManagement": "Snel onboarden bij de Bank",
     "claimControlReuse": "Translated Claim, Control & Reuse your Digital Identity",
     "hello": "Translated Hello!",
     "greatSuccess": "Translated Great Success!",
@@ -136,10 +135,11 @@
   "pages": {
     "demo": {
       "introDemoSelection": {
-        "healthStatusManagement": "Translated Health Status Management",
+        "healthStatusManagement": "COVID-19 Test Certificaten",
         "shareTrustedCredentials": "Translated Share trusted credentials and immunity status",
-        "longtermIdentityManagement": "Translated Long-term Identity Management",
-        "LearnAboutFutures": "Translated Learn about Futures Literacy and green futures"
+        "longtermIdentityManagement": "Persistent Selv",
+        "LearnAboutFutures": "Translated Learn about Futures Literacy and green futures",
+        "collab": "In Collaboration With:"
       },
       "introShowTodos": {
         "welcomeToThe": "Translated Welcome to the",

@@ -4,11 +4,11 @@
       "demo": "Demo",
       "theApp": "The App",
       "selfSovereignIdentity": "Self Sovereign Identity",
-      "whatItIs": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
+      "whatItIs": "Through Self Sovereign Identity (SSI), people, organisations and things are empowered to collect and share their own verified data and digital identity.",
       "oneAppOneProtocol": "One App – One Protocol",
       "easyGDPRcompliance": "This solution provides an easy and cheap way to comply with GDPR and similar privacy laws.",
-      "unifiedIdentity": "A Unified Identity",
-      "protocolEnablesDevices": "The Unified Identity Protocol not only enables people and organisations to have the benefits of identity, but devices, opening up a whole new world of business models and use cases.",
+      "unifiedIdentity": "A Unified IOTA Identity",
+      "protocolEnablesDevices": "IOTA Identity not only enables people and organisations to have the benefits of identity, but devices, opening up a whole new world of business models and use cases.",
       "tryTheDemo": "Try the Demo"
     },
     "benefits": {
@@ -24,31 +24,31 @@
       "privacyLaws": "Privacy Laws",
       "benefitsPrivacyLaws": "Complies to the strictest interpretation of the General Data Protection Act (GDPR).",
       "dataResponsibility": "Data Responsibility",
-      "benefitsDataResponsibility": "Users can present or consent, removing responsibility on data protection from the company.",
+      "benefitsDataResponsibility": "Sharing or requesting data is so easy, that it is no longer necassary to store and protect customer data",
       "userExperience": "User Experience",
       "benefitsUserExperience": "Retain more customers through an enhanced User Experience. Less manual typing required."
     },
     "controlIdentity": {
-      "youControlYour": "You control your",
-      "ownIdentity": "own identity",
-      "whatItIsDetailed": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity. This increased privacy and control enables a “Bring Your Own Identity” (BYOI) style of engagement with corporations, removing the need to perform expensive data collection."
+      "youControlYour": "You Control Your",
+      "ownIdentity": "Own Identity",
+      "whatItIsDetailed": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity. This increased privacy and control, enabling a “Bring Your Own Identity” (BYOI) style of engagement with corporations, removing the need to perform expensive data collection."
     },
     "FAQ": {
       "question1": "Does the IOTA Foundation track my data and usage?",
-      "answer1": "We can’t! This solution puts data control in your hands. We have no way of accessing the data on your phone. Whenever you share data in the demo environment, you communicate this information to our servers, but it will be removed as soon as you complete the demo or close the connection. Also, only functional cookies are used on this website and during the demos. Once companies run demos or applications on their own servers, the IOTA Foundation, and other parties, will not be aware of the usage or data. For peer-to-peer sharing via QR codes, no information leaves the two communicating phones.",
+      "answer1": "We can’t! This solution puts data control in your hands. We have no way of accessing the data on your phone. Whenever you share data in the demo environment, you communicate this information to our servers, but it will be removed as soon as you complete the demo or close the connection. Also, only functional cookies are used on this website and during the demos. Once companies run demos or applications on their own servers, the IOTA Foundation, and other parties, will not be aware of the usage or data. Data is shared peer-to-peer making it impossible for others to listen in.",
       "question2": "Can I restore my data if I lose my phone?",
       "answer2": "Not yet. This is currently a demonstration application, which means it doesn’t have all the features that a full release would have. The application is using (mostly) fake data, therefore recovery is not on top of mind. Backups will be available in a future update.",
       "question3": "Does my personal data get uploaded to the Tangle?",
       "answer3": "No, absolutely no personal information is uploaded to the Tangle in accordance with GDPR regulations. Not even in a (pseudo)anonymized state. Any personal data uploaded to the Tangle would be in violation of \"the right to be forgotten\" as Tangle data is immutable.",
       "question4": "How does this application benefit from IOTA and DLT in general?",
-      "answer4": "Organisations sign credentials for the users, but how do we identify the organisations? Their digital identities are uploaded to the Tangle via 0-value transactions and are signed using asymmetric encryption methods. In addition, retraction of credentials are put on the Tangle as evidence that the credential can no longer be used.",
+      "answer4": "Organisations sign credentials for the users, but how do we identify the organisations? Their digital identities are uploaded to the Tangle and are signed using asymmetric encryption methods. In addition, revocation of credentials are put on the Tangle as evidence that the credential can no longer be used.",
       "question5": "On what IOTA network does this application run?",
-      "answer5": "The mainnet! IOTA has zero fees, so it isn’t any more difficult to run this demo on the mainnet then on the devnet.",
+      "answer5": "Currently the Chrysalis Phase 1 devnet. IOTA has zero fees, so it isn’t any more difficult to run this demo on the mainnet then on the devnet.",
       "question6": "How can I learn more?",
       "answer6": {
         "part1": "We released a whitepaper called:",
         "part2": "The Case for a Unified Identity",
-        "part3": "It is a relatively easy introduction to the subject and explains what the benefits are of a Unified Identity Protocol."
+        "part3": "It is a relatively easy introduction to the subject and explains what the benefits are of IOTA Identity."
       },
       "question7": "What is a DLT or Tangle?",
       "answer7": "Distributed Ledger Technology (DLT) describes the concept of replicated, shared and synchronized digital data without any centralized administration. The current state of the data stored within the ledger is achieved in a decentralized consensus. \n The most well-known form of a DLT is blockchain, however blockchain comes with significant shortcomings such as scalability issues and transaction fees. The so called Tangle is a novel architecture of a DLT that aims to mitigate those shortcomings. It is the underlying DLT of the IOTA Cryptocurrency Token, developed by the IOTA Foundation.",
@@ -67,11 +67,11 @@
       "inBrief": "In Brief",
       "howItWorks": "How It Works",
       "create": "Create",
-      "createText": "Download Selv and create a unique identifier, representing you online. This profile remains in your control and doesn’t leave the app without your consent.",
+      "createText": "Download the Selv app and create a unique identifier, representing you online. This profile remains in your control and doesn’t leave the app without your consent.",
       "share": "Share",
       "shareText": "Decide who and what others get to see from your personal profile. You can share your data peer-to-peer or on request. Controlled data flow allows you to always get something in return for your data.",
       "grow": "Grow",
-      "growText": "Gather statements, or credentials, about yourself, verified by others, to grow your personal identity. Fully under your control and not stored in any database.",
+      "growText": "Gather credentials about yourself, verified by others, to grow your personal identity. Fully under your control and not stored in any database.",
       "accept": "Accept",
       "acceptText": "By accepting BYOI, companies can verify customer data, instantly and for free. This allows you to speed up processes such as onboarding and reduce the amount of typing your customers have to do."
     },
@@ -83,13 +83,12 @@
       "menu": "Menu"
     },
     "main": {
-      "claimControl": "Claim, Control",
-      "reuseYourNew": "Reuse Your New",
-      "digitalIdentity": "Digital Identity",
-      "mainText": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity."
+      "claimControl": "A digital Selv,",
+      "reuseYourNew": "under your control",
+      "mainText": "Selv is a demo app that showcases how IOTA Identity may affect existing or create new digital processes, with a focus on privacy and control of your own digital Selv"
     },
     "selv": {
-      "selvText": "Your data shouldn’t be public, but it shouldn’t be locked up either.<1/>We promise a solution that <3>enables data flow</3>, completely in your <5>control</5>."
+      "selvText": "Your data shouldn’t be public, but it shouldn’t be locked up either.<1/>Selv promises a solution that <3>enables data flow</3>, completely in your <5>control</5>."
     }
   },
   "actions": {
@@ -119,8 +118,8 @@
     "The App": "The App",
     "What it is": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
     "A Unified Identity": "A Unified Identity",
-    "digitalIdentityManagement": "Digital Identity Management",
-    "claimControlReuse": "Claim, Control & Reuse your Digital Identity",
+    "digitalIdentityManagement": "Instant Onboarding at the Bank",
+    "claimControlReuse": "Reuse a Know-Your-Customer (KYC) credential to create a new company. Proof your identity and ownership over your company to open a corporate bank account and liability insurance with the click of a button.",
     "hello": "Hello!",
     "greatSuccess": "Great Success!",
     "signedInDID": "You Signed in With DID",
@@ -136,10 +135,11 @@
   "pages": {
     "demo": {
       "introDemoSelection": {
-        "healthStatusManagement": "Health Status Management",
-        "shareTrustedCredentials": "Share trusted credentials and immunity status",
-        "longtermIdentityManagement": "Long-term Identity Management",
-        "LearnAboutFutures": "Learn about Futures Literacy and green futures"
+        "healthStatusManagement": "COVID-19 Health Certificates",
+        "shareTrustedCredentials": "Collect your COVID-19 testing status after a negative test result. Use this to get back access to the workfloor and international travel.",
+        "longtermIdentityManagement": "Persistent Selv",
+        "LearnAboutFutures": "Plan your environmental legacy, create present and future commitments and complete a pledge.",
+        "collab": "In Collaboration With:"
       },
       "introShowTodos": {
         "welcomeToThe": "Welcome to the",

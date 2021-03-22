@@ -44,9 +44,9 @@
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
-    max-width: 950px;
+    max-width: 1400px;
     align-items: center;
-    margin: 200px auto;
+    margin: 160px auto;
     z-index: 1;
 
     @include breakPoint(medium) {
@@ -278,7 +278,7 @@
     flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
-    max-width: 900px;
+    max-width:1400px;
     align-items: center;
     z-index: 1;
 
@@ -288,10 +288,14 @@
 
     .demo-card-wrapper {
         width: 410px;
-        height: 410px;
+        height: 560px;
         background: #F2F5FA;
         border-radius: 10px;
         margin-bottom: 40px;
+
+        @include breakPoint(medium) {
+            height: auto;
+        }
 
         img {
             width: 410px;
@@ -299,7 +303,7 @@
     }
 
     .demo-card-content {
-        margin: 27px 12px 32px 30px;
+        margin: 27px 12px 0px 30px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -310,7 +314,12 @@
         }
 
         p {
-            margin: 10px 0 20px;
+            margin: 10px 0 10px;
+            height: 130px;
+
+            @include breakPoint(medium) {
+                height: auto;
+            }
         }
 
         .bottom {
@@ -318,14 +327,15 @@
             flex-direction: row;
             width: 100%;
             justify-content: space-between;
-            
-            //logo placeholder
-            .partner-img {
-                align-items: center;
-                background-color: red;
-                margin-right: 18px;
-                top: 40;
-                width: 40%;
+        }
+        .partners {
+            flex-direction: row;
+            align-items: baseline;
+            justify-content: space-evenly;
+            img {
+                margin: 10px 10px 0px 0px;
+                height: 40px;
+                width: auto;
             }
         }
     }

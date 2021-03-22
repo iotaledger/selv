@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
+import VB from '../assets/VB.jpg'
+import dentons from '../assets/dentons.jpg'
+import climateKIC from '../assets/climateKIC.png'
+import dm from '../assets/dm.png'
 import useStep from '../utils/useStep';
 import covid from '../assets/demos/covid.png';
 import selv from '../assets/demos/selv.png';
@@ -51,11 +55,11 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                                                 {t("actions.tryTheDemo")}
                                             </Button>
                                         </Link>
-                                        {/* <div className="partner-img">
-                                            <p>logo placeholder</p>
-                                        </div> */}
                                     </div>
-
+                                </div>
+                                <div><i>{t("pages.demo.introDemoSelection.collab")}</i></div>
+                                <div className="partners">
+                                    <img src={VB} alt='Volksbank'></img>
                                 </div>
                             </div>
                         </div>
@@ -70,9 +74,10 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                                             {t("actions.tryTheDemo")}
                                         </Button>
                                     </a>
-                                    {/* <div className="partner-img">
-                                        <p>logo placeholder</p>
-                                    </div> */}
+                                </div>
+                                <div><i>{t("pages.demo.introDemoSelection.collab")}</i></div>
+                                <div className="partners">
+                                    <img src={dentons} alt='Dentons'></img>
                                 </div>
                             </div>
                         </div>
@@ -87,9 +92,11 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                                             {t("actions.tryTheDemo")}
                                         </Button>
                                     </a>
-                                    {/* <div className="partner-img">
-                                        <p>logo placeholder</p>
-                                    </div> */}
+                                </div>
+                                <div><i>{t("pages.demo.introDemoSelection.collab")}</i></div>
+                                <div className="partners">
+                                    <img src={climateKIC} alt='Climate KIC'></img>
+                                    <img src={dm} alt='Dark Matter Labs'></img>
                                 </div>
                             </div>
                         </div>
