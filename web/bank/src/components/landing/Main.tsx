@@ -46,7 +46,7 @@ const Content = () => (
         {
             (t) =>
                 <>
-                    <h1>{t("landing.main.claimControl")} &<br />{t("landing.main.reuseYourNew")}<br />{t("landing.main.digitalIdentity")}</h1>
+                    <h1>{t("landing.main.claimControl")} <br />{t("landing.main.reuseYourNew")}</h1>
                     <p>{t("landing.main.mainText")}</p>
                 </>
         }

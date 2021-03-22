@@ -83,9 +83,8 @@
       "menu": "Menu"
     },
     "main": {
-      "claimControl": "Claim, Control",
-      "reuseYourNew": "Reuse Your New",
-      "digitalIdentity": "Digital Identity",
+      "claimControl": "A digital Selv,",
+      "reuseYourNew": "under your control",
       "mainText": "Selv is a demo app that showcases how IOTA Identity may affect existing or create new digital processes, with a focus on privacy and control of your own digital Selv"
     },
     "selv": {
@@ -119,8 +118,8 @@
     "The App": "The App",
     "What it is": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
     "A Unified Identity": "A Unified Identity",
-    "digitalIdentityManagement": "Digital Identity Management",
-    "claimControlReuse": "Claim, Control & Reuse your Digital Identity",
+    "digitalIdentityManagement": "Instant Onboarding at the Bank",
+    "claimControlReuse": "Reuse a Know-Your-Customer (KYC) credential to create a new company. Proof your identity and ownership over your company to open a corporate bank account and liability insurance with the click of a button.",
     "hello": "Hello!",
     "greatSuccess": "Great Success!",
     "signedInDID": "You Signed in With DID",
@@ -136,10 +135,11 @@
   "pages": {
     "demo": {
       "introDemoSelection": {
-        "healthStatusManagement": "Health Status Management",
-        "shareTrustedCredentials": "Share trusted credentials and immunity status",
-        "longtermIdentityManagement": "Long-term Identity Management",
-        "LearnAboutFutures": "Learn about Futures Literacy and green futures"
+        "healthStatusManagement": "COVID-19 Health Certificates",
+        "shareTrustedCredentials": "Collect your COVID-19 testing status after a negative test result. Use this to get back access to the workfloor and international travel.",
+        "longtermIdentityManagement": "Persistent Selv",
+        "LearnAboutFutures": "Plan your environmental legacy, create present and future commitments and complete a pledge.",
+        "collab": "In Collaboration With:"
       },
       "introShowTodos": {
         "welcomeToThe": "Welcome to the",
