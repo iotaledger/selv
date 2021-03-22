@@ -11,10 +11,10 @@ i18n
         whitelist: ['nl', 'en'],
         debug: false,
         detection: {
-            order: ['path', 'localStorage'] //optionally: 'navigator', if we want to use browser-language
+            order: ['path', 'localStorage', 'navigator']
           },
         
-        fallbackLng: 'nl',
+        fallbackLng: 'en',
         keySeparator: '.',
         interpolation: {
             //escapeValue: false // react already safes from xss
