@@ -48,6 +48,13 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                             <div className="demo-card-content">
                                 <h3>{t("general.digitalIdentityManagement")}</h3>
                                 <p>{t("general.claimControlReuse")}</p>
+
+                                <div><i>{t("pages.demo.introDemoSelection.collab")}</i></div>
+                                <div className="partners">
+                                    <a href={`https://www.devolksbank.nl/`}>
+                                        <img src={VB} alt='Volksbank'></img>
+                                    </a>
+                                </div>
                                 <div>
                                     <div className="bottom">
                                         <Link to={nextStep}>
@@ -57,10 +64,6 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                                         </Link>
                                     </div>
                                 </div>
-                                <div><i>{t("pages.demo.introDemoSelection.collab")}</i></div>
-                                <div className="partners">
-                                    <img src={VB} alt='Volksbank'></img>
-                                </div>
                             </div>
                         </div>
                         <div className='demo-card-wrapper'>
@@ -68,16 +71,18 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                             <div className="demo-card-content">
                                 <h3>{t("pages.demo.introDemoSelection.healthStatusManagement")}</h3>
                                 <p>{t("pages.demo.introDemoSelection.shareTrustedCredentials")}</p>
+                                <div><i>{t("pages.demo.introDemoSelection.collab")}</i></div>
+                                <div className="partners">
+                                    <a href={`https://www.dentons.com/`}>
+                                        <img src={dentons} alt='Dentons'></img>
+                                    </a>
+                                </div>
                                 <div className="bottom">
                                     <a href={`${covidDemo}/demo/app`}>
                                         <Button className="cta">
                                             {t("actions.tryTheDemo")}
                                         </Button>
                                     </a>
-                                </div>
-                                <div><i>{t("pages.demo.introDemoSelection.collab")}</i></div>
-                                <div className="partners">
-                                    <img src={dentons} alt='Dentons'></img>
                                 </div>
                             </div>
                         </div>
@@ -86,6 +91,15 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                             <div className="demo-card-content">
                                 <h3>{t("pages.demo.introDemoSelection.longtermIdentityManagement")}</h3>
                                 <p>{t("pages.demo.introDemoSelection.LearnAboutFutures")}</p>
+                                <div><i>{t("pages.demo.introDemoSelection.collab")}</i></div>
+                                <div className="partners">
+                                    <a href={`https://www.climate-kic.org/`}>
+                                        <img src={climateKIC} alt='Climate KIC'></img>
+                                    </a>
+                                    <a href={`https://darkmatterlabs.org/`}>
+                                        <img src={dm} alt='Dark Matter Labs'></img>
+                                    </a>
+                                </div>
                                 <div className="bottom">
                                     <a href={`${persistentSelvDemo}/demo/welcome`} rel='noopener noreferrer'>
                                         <Button className='cta'>
@@ -93,11 +107,7 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                                         </Button>
                                     </a>
                                 </div>
-                                <div><i>{t("pages.demo.introDemoSelection.collab")}</i></div>
-                                <div className="partners">
-                                    <img src={climateKIC} alt='Climate KIC'></img>
-                                    <img src={dm} alt='Dark Matter Labs'></img>
-                                </div>
+
                             </div>
                         </div>
                     </div>
