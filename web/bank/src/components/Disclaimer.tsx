@@ -47,6 +47,7 @@ const Disclaimer = ({ cookies }: { cookies: any; }) => {
                     target='_blank'
                     rel='noopener noreferrer'
                     href='https://www.iota.org/research/privacy-policy'
+                    style={{color: '#4140DF'}}
                 >
                     {t("actions.learnMore")}
                 </a>

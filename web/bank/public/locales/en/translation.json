@@ -35,7 +35,7 @@
     },
     "FAQ": {
       "question1": "Does the IOTA Foundation track my data and usage?",
-      "answer1": "We can’t! This solution puts data control in your hands. We have no way of accessing the data on your phone. Whenever you share data in the demo environment, you communicate this information to our servers, but it will be removed as soon as you complete the demo or close the connection. Once companies run demo’s or applications on their own servers, the IOTA Foundation, and other parties, will not be aware of the usage or data. Data is shared peer-to-peer, making it impossible for others to listen in.",
+      "answer1": "We can’t! This solution puts data control in your hands. We have no way of accessing the data on your phone. Whenever you share data in the demo environment, you communicate this information to our servers, but it will be removed as soon as you complete the demo or close the connection. Also, only functional cookies are used on this website and during the demos. Once companies run demos or applications on their own servers, the IOTA Foundation, and other parties, will not be aware of the usage or data. Data is shared peer-to-peer making it impossible for others to listen in.",
       "question2": "Can I restore my data if I lose my phone?",
       "answer2": "Not yet. This is currently a demonstration application, which means it doesn’t have all the features that a full release would have. The application is using (mostly) fake data, therefore recovery is not on top of mind. Backups will be available in a future update.",
       "question3": "Does my personal data get uploaded to the Tangle?",
@@ -49,7 +49,11 @@
         "part1": "We released a whitepaper called:",
         "part2": "The Case for a Unified Identity",
         "part3": "It is a relatively easy introduction to the subject and explains what the benefits are of IOTA Identity."
-      }
+      },
+      "question7": "What is a DLT or Tangle?",
+      "answer7": "Distributed Ledger Technology (DLT) describes the concept of replicated, shared and synchronized digital data without any centralized administration. The current state of the data stored within the ledger is achieved in a decentralized consensus. \n The most well-known form of a DLT is blockchain, however blockchain comes with significant shortcomings such as scalability issues and transaction fees. The so called Tangle is a novel architecture of a DLT that aims to mitigate those shortcomings. It is the underlying DLT of the IOTA Cryptocurrency Token, developed by the IOTA Foundation.",
+      "question8": "Who developed the Selv Digital Identity Management Demo?",
+      "answer8": "Selv is developed by the IOTA Foundation, the Digital Identity Management Demo was developed in a collaboration with de Volksbank. The IOTA Foundation is a non-profit foundation guiding and contributing to the development of the core protocol and facilitating the development of the ecosystem around IOTA."
     },
     "footer": {
       "contactUs": "Contact Us",
