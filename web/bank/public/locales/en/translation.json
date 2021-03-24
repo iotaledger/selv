@@ -51,9 +51,9 @@
         "part3": "It is a relatively easy introduction to the subject and explains what the benefits are of IOTA Identity."
       },
       "question7": "What is a DLT or Tangle?",
-      "answer7": "Distributed Ledger Technology (DLT) describes the concept of replicated, shared and synchronized digital data without any centralized administration. The current state of the data stored within the ledger is achieved in a decentralized consensus. \n The most well-known form of a DLT is blockchain, however blockchain comes with significant shortcomings such as scalability issues and transaction fees. The so called Tangle is a novel architecture of a DLT that aims to mitigate those shortcomings. It is the underlying DLT of the IOTA Cryptocurrency Token, developed by the IOTA Foundation.",
-      "question8": "Who developed the Selv Digital Identity Management Demo?",
-      "answer8": "Selv is developed by the IOTA Foundation, the Digital Identity Management Demo was developed in a collaboration with de Volksbank. The IOTA Foundation is a non-profit foundation guiding and contributing to the development of the core protocol and facilitating the development of the ecosystem around IOTA."
+      "answer7": "Distributed Ledger Technology (DLT) is the umbrella term for Blockchain technology. It is a decentral database of which many copies are hosted across the world. They discuss with each other what is truth and what isn't through the \"consensus mechanism\". With Bitcoin, this process costs a lot of electricity due to the scalability problems it has. The Tangle of IOTA solves this, making is faster, feeless and green. The Tangle is the underlying data structure of the IOTA network, which hosts the IOTA cryptocurrency token and is developed by the IOTA Foundation.",
+      "question8": "Who developed the Selv Demo's?",
+      "answer8": "Selv is developed by the IOTA Foundation in collaboration with different parties. The IOTA Foundation is a non-profit foundation guiding and contributing to the development of the core protocol and facilitating the development of the ecosystem around IOTA."
     },
     "footer": {
       "contactUs": "Contact Us",
@@ -117,7 +117,7 @@
     "Demo": "Demo",
     "The App": "The App",
     "What it is": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
-    "A Unified Identity": "A Unified Identity",
+    "A Unified Identity": "IOTA Identity",
     "digitalIdentityManagement": "Instant Onboarding at the Bank",
     "claimControlReuse": "Reuse a Know-Your-Customer (KYC) credential to create a new company. Proof your identity and ownership over your company to open a corporate bank account and liability insurance with the click of a button.",
     "hello": "Hello!",
@@ -151,7 +151,7 @@
       },
       "introShowMobile": {
         "looksLikeWork": "That Looks Like a Lot of Work...",
-        "advantage": "<0>But using IOTA’s Unified Identity Protocol and the Selv app, it will be <1>​quick and easy​.</1></0>",
+        "advantage": "<0>But using IOTA Identity and the Selv app, it will be <1>​quick and easy​.</1></0>",
         "noteDesktop": "This demo website is best experienced on a desktop computer."
       },
       "appDownloadQR": {
