@@ -15,7 +15,17 @@ const customCss = fs.readFileSync((process.cwd() + '/swagger.css'), 'utf8');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://covid-19.iota.org', 'https://selv.vercel.app', 'https://selv.iota1.vercel.app', 'https://covid-19.iota1.vercel.app', 'https://persistent-selves.vercel.app'];
+const whitelist = [
+    'http://localhost:3000', 
+    'http://localhost:3003', 
+    'https://selv.iota.org', 
+    'https://covid-19.iota.org', 
+    'https://selv.vercel.app', 
+    'https://selv.iota1.vercel.app', 
+    'https://covid-19.iota1.vercel.app', 
+    'https://persistent-selv.iota.org',
+    'https://persistent-selves.vercel.app'
+];
 const corsOptions = {
     // methods: ["GET, POST, OPTIONS"],
     // allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
@@ -31,6 +41,7 @@ const corsOptions = {
 };
 
 const app = express();
+// app.use(cors());
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json());
@@ -46,7 +57,7 @@ const desktopClients = new Map();
 
 setInterval(() => {
     try {
-        if (mobileClients && mobileClients.size > 2) {
+        if (mobileClients && mobileClients.size > 20) {
             const keys = Array.from(mobileClients.keys()).slice(0, 2);
             keys.forEach(k => {
                 mobileClients.delete(k);
@@ -54,7 +65,7 @@ setInterval(() => {
             });
         }
 
-        if (desktopClients && desktopClients.size > 2) {
+        if (desktopClients && desktopClients.size > 20) {
             const keys = Array.from(desktopClients.keys()).slice(0, 2);
             keys.forEach(k => {
                 desktopClients.delete(k);
@@ -108,14 +119,15 @@ try {
                 await mobileClients.delete(mobileClient.channelId);
             }
 
-            console.log('connected desktopClients', desktopClients.keys());
-            console.log('connected mobileClients', mobileClients.keys());
+            console.log('connected desktopClients', Array.from(desktopClients).map(items => items?.[0]));
+            console.log('connected mobileClients', Array.from(mobileClients).map(items => items?.[0]));
         });
 
         socket.on('verifiablePresentation', async (data) => {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit verifiablePresentation to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('verifiablePresentation', payload);
                 console.info('Verifiable Presentation sent to desktop client');
@@ -126,6 +138,7 @@ try {
             const { channelId, payload } = data;
             const mobileClient = mobileClients.get(channelId);
             if (mobileClient && mobileClient.socket) {
+                console.log('Emit createCredential to mobile', channelId, payload);
                 const mobileSocket = mobileClient.socket;
                 mobileSocket && mobileSocket.emit('createCredential', payload);
                 console.info('Create Credential request sent to mobile client', channelId);
@@ -136,6 +149,7 @@ try {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit createCredentialConfirmation to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload);
                 console.info('Create Credential Confirmation sent to desktop client', channelId);
@@ -146,6 +160,7 @@ try {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit errorMessage to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('errorMessage', payload);
             }
@@ -155,6 +170,7 @@ try {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit rejectCredentials to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('rejectCredentials', payload);
             }
