@@ -66,9 +66,7 @@ export default () => {
                         {t("landing.app.tryTheDemo")}
                     </Button>
                 </Link>
-                <div className="drop-selector">
-                    <DropSelector />
-                </div>
+                <DropSelector />
             </div>
             <MobileMenu menuOpenState={menuOpenState} onAnchorClick={onAnchorClick} />
             <div className="burger-icon-wrapper">

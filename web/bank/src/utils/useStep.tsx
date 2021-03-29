@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import Context from '../context/app-context';
 import matchStep from './matchSteps';
+import { useTranslation } from 'react-i18next';
 
 interface MatchResult {
     page: string | undefined;
@@ -14,6 +15,8 @@ const useStep = (match: any) => {
     const { mainSteps, routes }: any = useContext(Context);
     const [nextStep, setNextStep] = useState('');
     const [theme, setTheme] = useState('');
+
+    const { i18n } = useTranslation();
 
     useEffect(() => {
         async function setSteps () {
@@ -32,7 +35,8 @@ const useStep = (match: any) => {
 
             const idx = routes.findIndex(({ path }: { path: string; }) => path === match.path);
             if (idx !== -1 && routes.length > idx + 1) {
-                const next = routes[idx + 1].path;
+                var next = routes[idx + 1].path;
+                next = next.replace(":lng?", i18n.language.toString()); //replace route-param
                 setNextStep(next);
             }
         }
