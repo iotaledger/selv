@@ -2,7 +2,7 @@
   "name": "selv",
   "version": "1.1.0",
   "private": true,
-  "description": "IOTA Selv App. Claim, Control & Reuse your new Digital Identity.",
+  "description": "Selv - A digital Selv, under your control.",
   "author": "Alexey Sobolev <alexey@iota.org>",
   "repository": {
     "type": "git",
