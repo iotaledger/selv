@@ -5,6 +5,7 @@ import useFetch from '../utils/useFetch';
 import { Layout, Loading, NextStepDrawer } from '../components';
 import back from '../assets/back.svg';
 import { serverAPI } from '../config.json';
+import { useTranslation } from 'react-i18next';
 
 interface CompanyData {
     'CompanyNumber': string;
@@ -26,6 +27,8 @@ const CompanyData: React.FC = ({ match }: any) => {
     const { nextStep } = useStep(match);
     const { response, loading } = useFetch(`${serverAPI}/company?company=${companyId}`);
 
+    const { t } = useTranslation();
+
     return (
         <Layout match={match}>
             <React.Fragment>
@@ -40,11 +43,11 @@ const CompanyData: React.FC = ({ match }: any) => {
                                     }}
                                     className='company-details-back bold'
                                 >
-                                    <img src={back} alt='' />&nbsp;&nbsp;&nbsp;Back
+                                    <img src={back} alt='' />&nbsp;&nbsp;&nbsp;{t("actions.back")} 
                                 </Link>
                                 <h2>{response?.data?.CompanyName}</h2>
                                 <p className='company-number-wrapper'>
-                                    Company number <span className='company-number'>{response?.data?.CompanyNumber}</span>
+                                    {t("pages.general.companyDetails.companyNumber")} <span className='company-number'>{response?.data?.CompanyNumber}</span>
                                 </p>
                                 <div className='company-details'>
                                     <CompanyDetails details={response?.data} />
@@ -60,30 +63,33 @@ const CompanyData: React.FC = ({ match }: any) => {
 };
 
 const CompanyDetails = ({ details }: { details: CompanyData | undefined }) => {
+
+    const { t } = useTranslation();
+
     return (
         <React.Fragment>
             <div className='company-details-item'>
-                <p>Registered office address</p>
+                <p>{t("pages.general.companyDetails.officeAddress")}</p>
                 <p className='bold'>{details?.CompanyAddress}</p>
             </div>
             <div className='company-details-item'>
-                <p>Company Type</p>
+                <p>{t("pages.general.companyDetails.companyType")}</p>
                 <p className='bold'>{details?.CompanyType}</p>
             </div>
             <div className='company-details-item'>
-                <p>Incorporated on</p>
+                <p>{t("pages.general.companyDetails.incorporatedOn")}</p>
                 <p className='bold'>{details?.CompanyCreationDate}</p>
             </div>
             <div className='company-details-item'>
-                <p>Company owner</p>
+                <p>{t("pages.general.companyDetails.companyOwner")}</p>
                 <p className='bold'>{details?.CompanyOwner}</p>
             </div>
             <div className='company-details-item'>
-                <p>Nature of business</p>
+                <p>{t("pages.general.companyDetails.natureOfBusiness")}</p>
                 <p className='bold'>{details?.CompanyBusiness}</p>
             </div>
             <div className='company-details-item'>
-                <p>Company status</p>
+                <p>{t("pages.general.companyDetails.companyStatus")}</p>
                 <p className={`status ${details?.CompanyStatus.toLowerCase()}`}>{details?.CompanyStatus}</p>
             </div>
         </React.Fragment>

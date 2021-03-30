@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { withCookies } from 'react-cookie';
 import { Button } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const Disclaimer = ({ cookies }: { cookies: any; }) => {
 	const [ack, setAck] = useState(true);
+
 
 	useEffect(() => {
 		const ack = cookies.get('selv-cookie');
@@ -32,25 +34,27 @@ const Disclaimer = ({ cookies }: { cookies: any; }) => {
 		}
 	}
 
-	if (ack) return null;
+    const { t } = useTranslation();
+    if (ack) return null;
 
-	return (
-		<div className='disclaimer-wrapper'>
-			<span className='disclaimer-text'>
-				This website uses cookies to ensure you get the best experience on our website.&nbsp;
-				<a
-					className='disclaimer-link'
-					target='_blank'
-					rel='noopener noreferrer'
-					href='https://www.iota.org/research/privacy-policy'>
-					Learn more
-				</a>
-			</span>
-			<Button className='cta' onClick={dismiss}>
-				Dismiss
-			</Button>
-		</div>
-	);
+
+    return (
+        <div className='disclaimer-wrapper'>
+            <span className='disclaimer-text'>
+                {t("components.disclaimer.usesCookies")}&nbsp;
+                <a
+                    className='disclaimer-link'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href='https://www.iota.org/research/privacy-policy'
+                    style={{color: '#4140DF'}}
+                >
+                    {t("actions.learnMore")}
+                </a>
+            </span>
+            <Button className='cta' onClick={dismiss}>{t("actions.dismiss")}</Button>
+        </div>
+    );
 };
 
 export default withCookies(Disclaimer);

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Form, Button, Checkbox, Radio } from 'antd';
+import { Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 
 interface IAccountType {
     label: string;
@@ -14,7 +16,7 @@ const RadioGroup = ({ form, onSubmit, accountTypes }: {
 }) => {
     const { getFieldDecorator, getFieldsError, validateFields } = form;
 
-    function handleSubmit (e: any) {
+    function handleSubmit(e: any) {
         e.preventDefault();
         validateFields((err: any, values: string[]) => {
             if (!err) {
@@ -23,40 +25,45 @@ const RadioGroup = ({ form, onSubmit, accountTypes }: {
         });
     }
 
-    function hasErrors (fieldsError: any) {
+    function hasErrors(fieldsError: any) {
         return Object.keys(fieldsError).some(field => fieldsError[field]);
     }
+
+    const { t } = useTranslation();
 
     return (
         <div className='empty-form'>
             <Form onSubmit={handleSubmit}>
-                <Form.Item label={accountTypes.label} colon={false}>
+                <Form.Item label={t(accountTypes.label)} colon={false}>
                     {getFieldDecorator('accountType', {
                         rules: [{
                             required: true,
-                            message: accountTypes.error
-                        }] })(
-                            <Radio.Group>
-                                    {
-                                        accountTypes.accounts.map((account: string) =>
-                                            <Radio key={account} style={{ display: 'block ' }} value={account}>{account}</Radio>
-                                        )
-                                    }
-                            </Radio.Group>
+                            message: t(accountTypes.error)
+                        }]
+                    })(
+                        <Radio.Group>
+                            {
+                                accountTypes.accounts.map((account: string) =>
+                                    <Radio key={account} style={{ display: 'block ' }} value={t(account)}>{t(account)}</Radio>
+                                )
+                            }
+                        </Radio.Group>
                     )}
                 </Form.Item>
-                <Form.Item label='Special feature' colon={false}>
-                    {getFieldDecorator(accountTypes.special, {
+                <Form.Item label= {t("components.accountType.specialFeature")} colon={false}>
+                    {getFieldDecorator(t(accountTypes.special), { //confused by this, shouldnt this rather be an id not the string?
                         valuePropName: 'checked'
                     })(
                         <Checkbox>
-                            {accountTypes.special}
+                            {t(accountTypes.special)}
                         </Checkbox>
                     )}
                 </Form.Item>
                 <Form.Item>
                     <Button htmlType='submit' disabled={hasErrors(getFieldsError())}>
-                        Continue
+                        <Trans i18nKey="actions.continue">
+                            Continue
+                        </Trans>
                     </Button>
                 </Form.Item>
             </Form>

@@ -1,16 +1,19 @@
 import React from 'react';
 import { Form, Button, Checkbox } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
     form: any;
     onSubmit: (values: object) => void;
     status: string;
-    messages: { [ key: string ]: string; };
+    messages: { [key: string]: string; };
     buttonText: string;
 }) => {
     const { getFieldDecorator, getFieldsError, validateFields } = form;
 
-    function handleSubmit (e: any) {
+    const { t } = useTranslation();
+
+    function handleSubmit(e: any) {
         e.preventDefault();
         validateFields((err: any, values: string[]) => {
             if (!err) {
@@ -19,7 +22,7 @@ const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
         });
     }
 
-    function hasErrors (fieldsError: any) {
+    function hasErrors(fieldsError: any) {
         return Object.keys(fieldsError).some(field => fieldsError[field]);
     }
 
@@ -34,11 +37,11 @@ const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
                             required: true,
                             transform: (value: boolean) => (value || undefined),
                             type: 'boolean',
-                            message: 'Please agree the terms and conditions.'
+                            message: t("components.checkBox.errorMessage")
                         }]
                     })(
                         <Checkbox>
-                            I confirm everything and agree to any terms
+                            {t("components.checkBox.confirm")}
                         </Checkbox>
                     )}
                 </Form.Item>

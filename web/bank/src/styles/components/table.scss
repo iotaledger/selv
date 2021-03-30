@@ -40,6 +40,10 @@
             flex-direction: row;
             border-radius: 100px;
           }
+          &.info {
+            position: absolute;
+            top: 42px;
+          }
         }
       }
     }

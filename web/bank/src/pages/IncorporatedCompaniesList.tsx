@@ -6,6 +6,7 @@ import useStep from '../utils/useStep';
 import useFetch from '../utils/useFetch';
 import { Layout, Table, NextStepDrawer } from '../components';
 import { serverAPI } from '../config.json';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Component which will display a IncorporatedCompanies.
@@ -13,6 +14,8 @@ import { serverAPI } from '../config.json';
 const IncorporatedCompanies: React.FC = ({ history, match, ...props }: any) => {
     const { nextStep } = useStep(match);
     const { response, loading } = useFetch(`${serverAPI}/company`);
+
+    const { t } = useTranslation();
 
     function onRowClick (data: any) {
         history.push(`/company/details/${match?.params?.step || 0}/${data.CompanyNumber}`);
@@ -24,18 +27,18 @@ const IncorporatedCompanies: React.FC = ({ history, match, ...props }: any) => {
             <React.Fragment>
                 <div className={`companies-page-wrapper ${drawer}`}>
                     <div className='companies-cta-wrapper'>
-                        <h2>Newly Incorporated Companies</h2>
+                        <h2>{t("pages.company.incorporatedCompanies.newlyIncorporatedCompanies")}</h2>
                         {
                             props?.location?.state?.nextStep ? (
                                 <Link to={props?.location?.state?.nextStep}>
                                     <Button>
-                                        Continue to next step
+                                        {t("actions.continueNextStep")}
                                     </Button>
                                 </Link>
                             ) : (
                                 <Link to={nextStep}>
                                     <Button>
-                                        Register new Company
+                                        {t("actions.registerNewCompany")}
                                     </Button>
                                 </Link>
                             )
