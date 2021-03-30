@@ -38,13 +38,15 @@
     }
 }
 
+
+
 .demo-intro {
     position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     width: 100%;
-    max-width: 1400px;
+    max-width: 989px;
     align-items: center;
     margin: 160px auto;
     z-index: 1;
@@ -269,6 +271,10 @@
            display: none;
         }
     }
+}
+
+.demo-selector {
+    max-width: 1400px;
 }
 
 .demo-select-wrapper {
