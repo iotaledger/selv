@@ -130,7 +130,9 @@
       "connectionError": "Connection Error. Please Try Again!",
       "missing": "Credentials Missing or not Trusted",
       "verifying": "Verifying Credentials..."
-    }
+    },
+    "pending": "Pending",
+    "active": "Active"
   },
   "pages": {
     "demo": {

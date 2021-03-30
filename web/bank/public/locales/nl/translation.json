@@ -130,7 +130,9 @@
       "connectionError": "Verbindingsfout. Probeer het opnieuw.",
       "missing": "Credentials not gevonden of vertrouwd",
       "verifying": "Data wordt geverifeerd"
-    }
+    },
+    "pending": "Incompleet",
+    "active": "Actief"
   },
   "pages": {
     "demo": {

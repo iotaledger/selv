@@ -90,7 +90,7 @@ const CompanyDetails = ({ details }: { details: CompanyData | undefined }) => {
             </div>
             <div className='company-details-item'>
                 <p>{t("pages.general.companyDetails.companyStatus")}</p>
-                <p className={`status ${details?.CompanyStatus.toLowerCase()}`}>{details?.CompanyStatus}</p>
+                <p className={`status ${details?.CompanyStatus.toLowerCase()}`}>{t("general." + details?.CompanyStatus.toLocaleLowerCase())}</p>
             </div>
         </React.Fragment>
     );
