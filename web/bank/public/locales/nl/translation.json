@@ -208,8 +208,8 @@
         "companyDetails": "Bedrijf gegevens",
         "bankAccountDetails": "Bankrekening gegevens",
         "accountTypes": {
-          "label": "Translated Choose Liability Insurance Type",
-          "error": "Translated Please choose a type of liability insurance",
+          "label": "Kies een verzekeringstype",
+          "error": "Kies een verzekeringstype om door te gaan",
           "accounts1": "Aansprakelijkheidsverzekering",
           "accounts2": "Inventarisverzekering",
           "accounts3": "Rechtsbijstandverzekering",
@@ -247,7 +247,7 @@
       "specialFeature": "Extra opties"
     },
     "checkBox": {
-      "errorMessage": "Je moet determs and conditions accepteren om door te gaan.",
+      "errorMessage": "Je moet de terms and conditions accepteren om door te gaan.",
       "confirm": "Ik verklaar dat ik alle voorwaarden heb gelezen en ga akkoord."
     },
     "disclaimer": {
