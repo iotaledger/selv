@@ -41,7 +41,7 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                 <div className="demo-select-page-drop-selector">
                     <DropSelector />
                 </div>
-                <div className='demo-intro app' id='app'>
+                <div className='demo-selector demo-intro app' id='app'>
                     <div className='demo-select-wrapper'>
                         <div className='demo-card-wrapper'>
                             <img src={selv} alt="Selv demo" />
