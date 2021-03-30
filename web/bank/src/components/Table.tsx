@@ -29,6 +29,7 @@ const CompanyCell = ({ ...props }) => {
 };
 
 const StatusCell = ({ ...props }) => {
+  const { i18n } = useTranslation();
   return (
     <Cell
       {...props}
@@ -40,7 +41,7 @@ const StatusCell = ({ ...props }) => {
     >
       <div className="cell-content status-wrapper">
         <p className={`status ${props.rowData.CompanyStatus.toLowerCase()}`}>
-          {props.rowData.CompanyStatus}
+          {i18n.t("general." + props.rowData.CompanyStatus.toLowerCase())}
         </p>
       </div>
     </Cell>
