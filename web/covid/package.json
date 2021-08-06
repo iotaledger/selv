@@ -9,6 +9,7 @@
     "url": "https://github.com/iotaledger/selv-web.git"
   },
   "dependencies": {
+    "@iota/identity-wasm": "^0.3.5",
     "antd": "^3.26.9",
     "aos": "^3.0.0-beta.6",
     "axios": "^0.21.1",
@@ -26,7 +27,7 @@
     "rsuite": "^4.3.4",
     "socket.io-client": "^2.3.0",
     "static-auth": "^1.1.1",
-    "typescript": "~3.7.5",
+    "typescript": "^3.9.10",
     "webfontloader": "^1.6.28"
   },
   "scripts": {

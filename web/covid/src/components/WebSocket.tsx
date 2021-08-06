@@ -148,7 +148,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                 setStatus(evaluationResult.message);
                 notify(evaluationResult.type, 'Verification result', evaluationResult.message);
                 setLoading && setLoading(false);
-
+                console.log(evaluationResult);
                 if (evaluationResult?.status === 2) { // DID_TRUSTED
                     notification.destroy();
                     await localStorage.setItem('credentials', JSON.stringify(evaluationResult));
