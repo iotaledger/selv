@@ -20,3 +20,5 @@ yarn-error.log*
 .vercel
 
 api/node_modules
+
+public/*.wasm
