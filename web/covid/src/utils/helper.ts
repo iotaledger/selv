@@ -29,7 +29,6 @@ export const encrypt = async (key: string, payload: string) => {
 export const flattenObject = (obj: {[key: string]: any;}, prefix = '') =>
     Object.keys(obj).reduce((acc: any, k: any) => {
         const pre = prefix.length ? prefix + '.' : '';
-        console.log(obj[k], obj.hasOwnProperty(k));
         if (obj[k] && typeof obj[k] === 'object') {
             Object.assign(acc, flattenObject(obj[k], pre + k));
         } else {

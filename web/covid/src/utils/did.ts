@@ -31,7 +31,6 @@ const verificationType = {
 
 export default async (presentationData: {proof: any, verifiableCredential: {credentialSubject: any}[]}, requestedCredentials: string[], challengeNonce: string) => {
     return new Promise(async resolve => {
-        console.log(presentationData);
         try {
         // Check if the credential fits to the request
             if (presentationData?.proof && presentationData?.verifiableCredential.length > 1) {
@@ -80,7 +79,6 @@ export default async (presentationData: {proof: any, verifiableCredential: {cred
                         });
                     })
                     .catch((error: Error) => {
-                        console.error('Error 1', error);
                         resolve({
                             status: VERIFICATION_LEVEL.UNVERIFIED,
                             message: verificationStatus.notVerified,

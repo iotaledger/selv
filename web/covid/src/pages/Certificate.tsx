@@ -47,7 +47,6 @@ const Certificate: React.FC = ({ history, match }: any) => {
                 notify('error', 'Error', messages.connectionError);
                 history.goBack();
             }
-            console.log(credentials);
             const flattenData = flattenObject(credentials?.data);
             const testData = testResults[0];
 

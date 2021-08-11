@@ -69,7 +69,6 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
             const newQrContent = JSON.stringify(channelDetails);
             setQrContent(newQrContent);
             setChannel(channelId);
-            console.log(newQrContent);
             await localStorage.setItem('WebSocket_DID', newQrContent);
         }
         if (nextStep) {
