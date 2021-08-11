@@ -1,14 +1,10 @@
-import {
-    DecodeProofDocument,
-    SchemaManager,
-    VerifiablePresentation
-} from 'identity';
-import { provider } from '../config.json';
 import Address from '../schemas/Address.json';
 import ContactDetails from '../schemas/ContactDetails.json';
 import PersonalData from '../schemas/PersonalData.json';
 import FutureCommitments from '../schemas/FutureCommitments.json';
 import PresentCommitments from '../schemas/PresentCommitments.json';
+
+import * as identity from '@iota/identity-wasm/web';
 
 const schemas = {
     Address,
@@ -36,42 +32,40 @@ const verificationType = {
     trusted: 'success'
 };
 
-export default (presentationData, requestedCredentials, challengeNonce) => {
+export default async (presentationData, requestedCredentials) => {
     return new Promise(async resolve => {
         try {
         // Check if the credential fits to the request
             if (presentationData?.proof && presentationData?.verifiableCredential.length > 1) {
-                requestedCredentials.forEach(schemaName => {
-                    SchemaManager.GetInstance().AddSchema(schemaName, schemas[schemaName]);
-                });
+                
+                await identity.init('/identity_wasm_bg.wasm');
 
-                const proofParameters = await DecodeProofDocument(presentationData?.proof, provider);
-                const verifiablePresentation = await VerifiablePresentation.DecodeFromJSON(presentationData, provider, proofParameters);
+                const mainNet = identity.Network.mainnet();
+                    
+                const config = identity.Config.fromNetwork(mainNet);
+                config.setPermanode('https://chrysalis-chronicle.iota.org/api/mainnet/');
 
-                requestedCredentials.forEach(schemaName => {
-                    SchemaManager.GetInstance().GetSchema(schemaName).AddTrustedDID(proofParameters.issuer.GetDID());
-                });
-
-                SchemaManager.GetInstance().GetSchema('DIDAuthenticationCredential').AddTrustedDID(proofParameters.issuer.GetDID());
-
-                verifiablePresentation.Verify(provider)
+                // Create a client instance to publish messages to the Tangle.
+                const client = identity.Client.fromConfig(config);
+                client.checkPresentation(JSON.stringify(presentationData))
                     .then(() => {
                         // Determine level of trust
                         let type = verificationType.notVerified;
                         let message = verificationStatus.notVerified;
                         let verificationLevel = VERIFICATION_LEVEL.UNVERIFIED;
-                        if (presentationData?.proof?.nonce === challengeNonce) {
-                            type = verificationType.trusted;
-                            message = verificationStatus.trusted;
-                            verificationLevel = VERIFICATION_LEVEL.DID_TRUSTED;
-                            requestedCredentials.forEach(schemaName => {
-                                if (!verifiablePresentation.GetVerifiedTypes().includes(schemaName)) {
-                                    type = verificationType.missing;
-                                    message = `${verificationStatus.missing} ${schemaName}`;
-                                    verificationLevel = VERIFICATION_LEVEL.DID_OWNER;
-                                }
-                            });
-                        }
+
+                        type = verificationType.trusted;
+                        message = verificationStatus.trusted;
+                        verificationLevel = VERIFICATION_LEVEL.DID_TRUSTED;
+
+                        requestedCredentials.forEach(schemaName => {
+                            if (!Object.keys(schemas).includes(schemaName)) {
+                                type = verificationType.missing;
+                                message = `${verificationStatus.missing} ${schemaName}`;
+                                verificationLevel = VERIFICATION_LEVEL.DID_OWNER;
+                            }
+                        });
+                        
                         const subjects = presentationData.verifiableCredential.map(credential => credential?.credentialSubject);
                         resolve({
                             status: verificationLevel,
@@ -81,16 +75,12 @@ export default (presentationData, requestedCredentials, challengeNonce) => {
                         });
                     })
                     .catch((error) => {
-                        console.error('Error 1', error);
                         resolve({
                             status: VERIFICATION_LEVEL.UNVERIFIED,
                             message: verificationStatus.notVerified,
                             type: verificationType.notVerified
                         });
                     })
-                    .finally(() => {
-                        SchemaManager.GetInstance().GetSchema('DIDAuthenticationCredential').RemoveTrustedDID(proofParameters.issuer.GetDID());
-                    });
             } else {
                 resolve({
                     status: VERIFICATION_LEVEL.UNVERIFIED,

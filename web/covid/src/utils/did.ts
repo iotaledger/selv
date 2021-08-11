@@ -38,15 +38,8 @@ export default async (presentationData: {proof: any, verifiableCredential: {cred
                 await identity.init('/identity_wasm_bg.wasm');
 
                 const mainNet = identity.Network.mainnet();
-            
-                const CLIENT_CONFIG = {
-                    network: mainNet,
-                    defaultNodeURL: mainNet.defaultNodeURL,
-                    explorerURL: mainNet.explorerURL
-                };
-            
-                // Create a default client configuration from the parent config network.
-                const config = identity.Config.fromNetwork(CLIENT_CONFIG.network);
+                    
+                const config = identity.Config.fromNetwork(mainNet);
                 config.setPermanode('https://chrysalis-chronicle.iota.org/api/mainnet/');
 
                 // Create a client instance to publish messages to the Tangle.

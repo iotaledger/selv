@@ -117,6 +117,13 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             notify('error', 'Mobile client error', error);
         });
 
+        ioClient.on('minAppVersion', async (message) => {
+            notification.error({
+                duration: 0,
+                message: 'Outdated App detected', description: 'Please update your Selv App and try again'
+            });     
+        });
+
         ioClient.on('verifiablePresentation', async (payload) => {
             try {
                 setIsRunning(false);
