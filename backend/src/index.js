@@ -11,6 +11,7 @@ const { createOrUpdateCompany, createCommitment, readData, readAllData, removeDa
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger.json');
+const config = require('../config');
 const customCss = fs.readFileSync((process.cwd() + '/swagger.css'), 'utf8');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
@@ -24,7 +25,7 @@ const whitelist = [
     'https://selv.iota1.vercel.app', 
     'https://covid-19.iota1.vercel.app', 
     'https://persistent-selv.iota.org',
-    'https://persistent-selves.vercel.app'
+    'https://persistent-selves.vercel.app',
 ];
 const corsOptions = {
     // methods: ["GET, POST, OPTIONS"],
@@ -83,8 +84,21 @@ try {
 
     socketServer.on('connection', (socket) => {
         socket.on('registerMobileClient', async (data) => {
-            const { channelId } = data;
+            const { channelId, version } = data;
             console.info(`Mobile client connected [id=${socket.id}, channel=${channelId}]`);
+
+            if(!version || version !== config.minVersions.mobile) {
+                console.log('version mismatched');
+                socket.emit('minAppVersion', config.minVersions.mobile);
+                const desktopClient = desktopClients.get(channelId);
+                if (desktopClient && desktopClient.socket) {
+                    console.log('desktop notify');
+                    desktopClient.socket.emit('minAppVersion', config.minVersions.mobile);
+                }
+                socket.disconnect(true); 
+                return;
+            } 
+
             mobileClients.set(channelId, { socket, channelId, socketId: socket.id });
         });
 

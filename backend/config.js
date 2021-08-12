@@ -5,5 +5,8 @@ module.exports = {
   database: '../db/selv.sqlite3',
   did: {
     keyId: 'selv'
-  }
+  },
+  minVersions: {
+    mobile: '0.2.0'
+  } 
 }

@@ -24,7 +24,7 @@ const RandomGraphicElement = ({ children, elements }: {
     children?: JSX.Element | null | undefined;
     elements: number;
 }) => {
-    const [dimensions, setDimensions] = useState();
+    const [dimensions, setDimensions] = useState<any | undefined>();
     // const [windowWidth, windowHeight] = useWindowSize();
 
     const mainSectionEl = useCallback(node => {

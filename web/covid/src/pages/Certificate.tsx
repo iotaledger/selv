@@ -36,7 +36,7 @@ const Certificate: React.FC = ({ history, match }: any) => {
     const [webSocket, setWebSocket] = useState(false);
     const [fields, setFields] = useState({});
     const [status, setStatus] = useState('');
-    const [prefilledData, setPrefilledData] = useState();
+    const [prefilledData, setPrefilledData] = useState<any>();
 
     useEffect(() => {
         async function getData () {

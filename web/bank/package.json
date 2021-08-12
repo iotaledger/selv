@@ -9,6 +9,7 @@
     "url": "https://github.com/iotaledger/selv-web.git"
   },
   "dependencies": {
+    "@iota/identity-wasm": "^0.3.5",
     "@types/classnames": "^2.2.11",
     "antd": "^3.26.9",
     "aos": "^3.0.0-beta.6",
@@ -17,7 +18,6 @@
     "i18next": "^19.8.4",
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-http-backend": "^1.0.21",
-    "identity": "iotaledger/identity.ts",
     "qrcode.react": "^1.0.0",
     "randomstring": "^1.1.5",
     "react": "^16.13.1",
@@ -30,14 +30,15 @@
     "react-scripts": "3.4.1",
     "rsuite": "^4.7.3",
     "socket.io-client": "^2.3.0",
-    "typescript": "~3.7.5",
+    "typescript": "~3.8.3",
     "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "npm run copy_wasm && react-scripts start",
+    "build": "npm run copy_wasm && react-scripts build",
+    "test": "npm run copy_wasm && react-scripts test",
+    "eject": "react-scripts eject",
+    "copy_wasm": "cp ./node_modules/@iota/identity-wasm/web/identity_wasm_bg.wasm ./public"
   },
   "eslintConfig": {
     "extends": "react-app"

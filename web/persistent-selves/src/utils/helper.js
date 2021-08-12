@@ -25,7 +25,7 @@ export const encrypt = async (key, payload) => {
 export const flattenObject = (obj, prefix = '') =>
     Object.keys(obj).reduce((acc, k) => {
         const pre = prefix.length ? prefix + '.' : '';
-        if (typeof obj[k] === 'object') {
+        if (obj[k] && typeof obj[k] === 'object') {
             Object.assign(acc, flattenObject(obj[k], pre + k));
         } else {
             acc[k] = obj[k]; // acc[pre + k] to keep the nested structure
