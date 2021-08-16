@@ -1,0 +1,311 @@
+{
+  "landing": {
+    "app": {
+      "demo": "Demo",
+      "theApp": "De App",
+      "selfSovereignIdentity": "Self Sovereign Identity",
+      "whatItIs": "Zelf aan het roer bij het verzamelen, beheren en delen van je digitale identiteit door Self-sovereign identity (SSI).",
+      "oneAppOneProtocol": "Één app - één protocol",
+      "easyGDPRcompliance": "Met deze open technologie voldoe je makkelijk en goedkoop aan de Algemene verordening gegevensbescherming (AVG) en andere privacywetgevingen.",
+      "unifiedIdentity": "Een verenigde identiteit",
+      "protocolEnablesDevices": "Met het IOTA Identity framewerk is digitale identiteit niet alleen mogelijk voor mensen en organisaties, maar ook voor apparaten. Daardoor ontstaat een heel scala aan nieuwe business modellen.",
+      "tryTheDemo": "Start de demo"
+    },
+    "benefits": {
+      "benefits": "Voordelen",
+      "forUsers": "Voor gebruikers",
+      "control": "Controle",
+      "benefitsControl": "Jij hebt de volledige controle over jouw digitale identiteit.",
+      "privacy": "Privacy",
+      "benefitsPrivacy": "Deel alleen die informatie met anderen die écht nodig is.",
+      "reusability": "Hergebruik",
+      "benefitsReusability": "Deel je data zo vaak als je wilt en razendsnel met anderen.",
+      "forBusiness": "Voor bedrijven",
+      "privacyLaws": "Privacy wetgeving",
+      "benefitsPrivacyLaws": "Voldoet aan de meest strikte interpretatie van de Algemene verordening gegevensbescherming (AVG).",
+      "dataResponsibility": "Verantwoordelijkheid",
+      "benefitsDataResponsibility": "Klanten bepalen zelf welke data ze willen delen. Bedrijven hoeven niet meer de verantwoordelijkheid te dragen over de veiligheid van gegevens.",
+      "userExperience": "Gebruikerservaring",
+      "benefitsUserExperience": "Krijg en behoud meer klanten. Een betere gebruikerservaring met veel minder formulieren invullen."
+    },
+    "controlIdentity": {
+      "youControlYour": "Baas over je",
+      "ownIdentity": "eigen identiteit",
+      "whatItIsDetailed": "Met Self Sovereign Identity (SSI) kunnen mensen, organisaties en dingen zelf gevalideerde data verzamelen en veilig delen met anderen. Met meet privacy en conrole wordt zo een \"Bring your own Identity\" (BYOI) mogelijk bij bedrijven. En is de moeilijke, trage en kostbare verzameling van data verleden tijd."
+    },
+    "FAQ": {
+      "question1": "Kan de IOTA Stichting mijn data en gebruik van de app inzien?",
+      "answer1": "Nee! De techniek is zo ontworpen dat het de controle over data terug geeft aan de persoon van wie deze data is. Anderen hebben geen toegang tot de gegevens of het gebruik van de app. Er is geen manier voor anderen om de data op jouw toestel in te zien. Als je in de demo-omgeving ervoor kiest om je gegevens te delen dan worden die gegevens tijdelijk opgeslagen op de IOTA servers. Deze gegevens worden verwijderd zodra je de demo afgerond hebt of de verbinding verbreekt. Zodra andere organisaties demo’s of applicaties maken heeft de IOTA stichting of anderen partijen hier helemaal geen inzicht in. Bij het één-op-één delen van gegevens via QR-codes vindt er geen communicatie plaats behalve via de twee toestellen die de gegevens met elkaar delen.",
+      "question2": "Kan ik mijn data terughalen als ik mijn telefoon verlies?",
+      "answer2": "Nog niet. Op dit moment is de app nog een demonstratie-toepassing. Dat betekent dat het niet alle functies heeft van een echt applicatie. Deze demo-app gebruikt (meestal) nepgegevens. Daarom is het herstellen van gegevens nog niet belangrijk. De mogelijkheid voor een back-up zal in de toekomst wel mogelijk zijn.",
+      "question3": "Worden mijn persoonlijke gegevens geüpload naar de Tangle?",
+      "answer3": "Nee. Er wordt geen persoonlijke informatie geüpload naar het onderliggende IOTA netwerk, zoals vereist in de AVG. Zelfs niet in een (pseudo)geanonimiseerde vorm. Elk persoonlijk gegeven dat op de Tangle geüpload wordt zou in strijd zijn met het recht om vergeten te worden, aangezien de gegevens op de Tangle onveranderlijk is.",
+      "question4": "Hoe maakt deze app gebruik van IOTA en Distributed Ledger Technology (DLT)?",
+      "answer4": "Organisatie ondertekenen referenties van gebruikers, maar hoe worden deze organisaties herkend? De digitale identiteit van deze organisaties worden middels een data transactie geupload and zijn ondertekend met asymmetrische encrypte technieken. Ook word het intrekken van referenties ook op de Tangle opgeslagen zodat altijd duidelijk is welke referenties geldig zijn .",
+      "question5": "Op welk IOTA-netwerk draait deze applicatie?",
+      "answer5": "Op het moment draait de applicatie op het testnetwerk van IOTA 1.0. Aangezien er geen transactie kosten zijn op IOTA, kan dit makkelijk worden omgezet naar het hoofdnetwerk.",
+      "question6": "Waar kan ik meer te weten komen?",
+      "answer6": {
+        "part1": "IOTA heeft een whitepaper uitgebracht in het Engels met de titel: ",
+        "part2": "The Case for a Unified Identity",
+        "part3": "Het is een makkelijk te lezen inleiding over het IOTA Identity framewerk en wat de voordelen zijn."
+      },
+      "question7": "Wat is een DLT of Tangle?",
+      "answer7": "Distributed Ledger Technologie (DLT) is de overkoepelende term voor Blockchain technologie. Het is een decentrale database waarvan er veel kopieën worden verspreid over de wereld. Onderling spreken die met elkaar af wat waarheid is en wat niet, dit is het \"consensus mechanism\". Bij Bitcoin kost die een hoop elektriciteit vanweeg schaalbaarheids problemen, de Tangle van IOTA lost dit op en is daarmee sneller, zonder transactie kosten en zonder verbruik van enorm veel elektriciteit. De Tangle is de onderliggende data structuur van het IOTA netwerk die ook de IOTA cryptocurrency token beheerd en is ontwikkelt door de IOTA Foundation.",
+      "question8": "Wie creërde de Selv Demo's?",
+      "answer8": "Selv is ontwikkelt door de IOTA Foundation, in samenwerking met verschillende partijen. De IOTA Foundation is een stichting die zich bezig houd met de ontwikkeling van het IOTA protocol en het IOTA ecosysteem."
+    },
+    "footer": {
+      "contactUs": "Contact",
+      "contactUsLowerText1": "Wil je meer weten over hoe Self Sovereign Identiteit positief kan bijdragen",
+      "contactUsLowerText2": "of wil je ook met de achterliggende technologie aan de slag?",
+      "contactUsAt": "Bereik ons op",
+      "visit": "Ga naar ",
+      "privacyPolicy": "Privacy Policy"
+    },
+    "howItWorks": {
+      "inBrief": "In het kort",
+      "howItWorks": "Hoe Selv werkt",
+      "create": "Maak je digital identiteit",
+      "createText": "Download de Selv app en maak jouw digitale identiteit aan. Jouw identiteit blijft alleen in de app en alleen jij bepaalt met wie je data deelt.",
+      "share": "Deel",
+      "shareText": "Jij bepaalt welke gegevens je deelt en met wie je dat doet. Je kunt je data zelf met iemand delen of op verzoek. Jij hebt de controle! Zo kun je ervoor zorgen dat je altijd iets terug krijgt voor het delen van je data.",
+      "grow": "Voeg je data toe",
+      "growText": "Verzamel alle data en referenties over jezelf, gevalideerd door anderen, en maak je digitale identiteit compleet. Alles veilig in Selv zonder dat het ergens in de cloud rondzwerft.",
+      "accept": "Voor bedrijven",
+      "acceptText": "Met deze digitale identiteit kun je zonder kosten klanten gelijk identificeren en accepteren. Zodat ze veel sneller en makkelijker je klant kunnen worden."
+    },
+    "header": {
+      "How it works": "Hoe werkt het",
+      "Benefits": "Voordelen",
+      "The App": "De App",
+      "FAQs": "Veelgestelde vragen",
+      "menu": "Menu"
+    },
+    "main": {
+      "claimControl": "Je Digitale Selv,",
+      "reuseYourNew": "in jouw beheer",
+      "mainText": "Met Self Sovereign Identity (SSI) beheren en delen mensen, organisaties en dingen hun eigen verifeerbare data en digitale identiteit."
+    },
+    "selv": {
+      "selvText": "Jouw gegevens zouden niet overal moeten liggen, maar zouden ook niet ontoegankelijk moeten zijn. <1 /> Selv belooft een oplossing die het mogelijk maakt om <3> data te delen</3>, terwijl je <5> volledige controle hebt </5>."
+    }
+  },
+  "actions": {
+    "tryTheDemo": "Start de demo",
+    "continue": "Ga verder",
+    "letsDoIt": "Starten",
+    "continueNextStep": "Doorgaan",
+    "registerNewCompany": "Registeer nieuw bedrijf",
+    "downloadTheSelvApp": "Download de Selv App",
+    "orScanCode": "Of scan deze QR code<1/>om te downloaden",
+    "back": "Terug",
+    "setUpCompany": "Registreer nieuw bedrijf",
+    "getBankAccount": "Open een bankrekening",
+    "liabilityInsurance": "Aansprakelijkheidsverzekering",
+    "readyForBusiness": "Actief",
+    "confirm": "Accepteren",
+    "learnMore": "Leer meer",
+    "dismiss": "Sluiten",
+    "finishDemo": "Ga verder",
+    "getInsurance": "Sluit een verzekering af",
+    "openBankAccount": "Bankrekening openen"
+  },
+  "general": {
+    "Self Sovereign Identity": "Self Sovereign Identity",
+    "selfSovereignity": "Self Sovereignity",
+    "Demo": "Demo",
+    "The App": "De App",
+    "What it is": "Translated Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
+    "A Unified Identity": "IOTA Identiteit",
+    "digitalIdentityManagement": "Snel onboarden bij de Bank (NL)",
+    "claimControlReuse": "Hergebruik een Know-Your-Customer (KYC) credential om een bedrijf op te richten. Bewijs je identiteit en eigenaarschap over jouw bedrijf om een bankrekening en aansprakelijkheids verzekering af te sluiten",
+    "hello": "Welkom",
+    "greatSuccess": "Succes!",
+    "signedInDID": "Je hebt ingelogd met je digitale identiteit",
+    "receivedNewCredentials": "Je hebt nieuwe credentials ontvangen",
+    "reusedSelvCredentials": "Hergebruik Selv Credentials",
+    "messages": {
+      "waiting": "Wachtende op de Selv app",
+      "connectionError": "Verbindingsfout. Probeer het opnieuw.",
+      "missing": "Credentials not gevonden of vertrouwd",
+      "verifying": "Data wordt geverifeerd"
+    },
+    "pending": "Incompleet",
+    "active": "Actief"
+  },
+  "pages": {
+    "demo": {
+      "introDemoSelection": {
+        "healthStatusManagement": "COVID-19 Test Certificaten (EN)",
+        "shareTrustedCredentials": "Ontvang een digitaal bewijs voor je COVID-19 test uitslag. Gebruik deze om weer terug naar het werk te gaan en om te reizen.",
+        "longtermIdentityManagement": "Persistent Selv (EN)",
+        "LearnAboutFutures": "Plan je toekomstige impact op het klimaat, maak beloftes voor nu en in de toekomst.",
+        "collab": "In samenwerking met:"
+      },
+      "introShowTodos": {
+        "welcomeToThe": "Welkom bij de",
+        "selvDemo": "Selv Demo",
+        "hereIsTodo": "Dit zijn de taken die we gaan doen:",
+        "setUpCompany": "Een bedrijf registreren bij de Kamer van Koophandel",
+        "getBankAccount": "Een zakelijke bankrekening openen",
+        "getLiabilityInsurance": "Een zakelijke aansprakelijksheidsverzekering afsluiten"
+      },
+      "introShowMobile": {
+        "looksLikeWork": "Dat is veel werk...",
+        "advantage": "<0>Maar met IOTA Identiteit en de Selv app is dit <1>snel en eenvoudig</1></0>",
+        "noteDesktop": "Deze demo-site werkt het beste op een laptop of desktop."
+      },
+      "appDownloadQR": {
+        "onceDownloaded": "Ga verder wanneer je de Selv app hebt gedownload en geinstalleerd."
+      },
+      "greatSuccess": {
+        "signedInDIDText": "Je bent ingelogd op een website waar je nooit een account voor hebt hoeven aanmaken. Door dit over te slaan heb je tijd en moeite gespaard. De KvK hoeft nu ook geen wachtwoord van jou te bewaren waardoor de kans op een datalek uitgesloten is.",
+        "receivedNewCredentialsText": "Je bent de eigenaar van een nieuw bedrijf geworden. Vanaf nu kan je eenvoudig online bewijzen dat je de eigenaar en mag handelen uit naam van het bedrijf. Over de tijd heen kan je je Selv profiel uitbreiden met nog meer referenties geleverd door vertrouwde partijen.",
+        "reusedSelvCredentialsText": "Doordat je persoonsgegevens als geverifieerde referenties in Selv stonden heb je deze niet hoeven invullen in het formulier. Je kan alle gegevens die je in Selv bewaard blijven verbruiken. Stel je eens voor dat je nooit meer een invulformulier in hoeft te vullen."
+      },
+      "thankYou": {
+        "thanksForTryingSelv": "Bedankt voor het uitproberen van Selv!",
+        "improvedExperience": "Verbeterde gebruikerservaring",
+        "savedTime": "Met Selv, gebouwd door IOTA, heb je een volledig nieuwe bedrijf opgezet, zakelijke bankrekening en aansprakelijkheidsverzekering geopend in een paar keer klikken. Je hebt je gegevens kunnen hergebruiken waardoor je x velden niet zelf hebt hoeven invullen.",
+        "sovereignityText": "Je hebt de volledige controle over je eigen gegevens. En jij hebt zelf gekozen met wie je die gegevens hebt gedeeld. Wist je dat je je referenties ook handmatig via een QR-code kunt delen met anderen? Probeer het in de Selv app!",
+        "moreTrust": "Meer vertrouwen",
+        "trustText": "De gegevens die je hebt gedeeld met de KvK en ede SNS Bank zijn geverifieerde referenties. Dat betekend dat de KvK en SNS Bank er vanuit kunnen gaan dat de gegevens kloppen. Hierdoor konden de processen direct afgerond worden en was er geen handmatig werk meer nodig.",
+        "returnCompanyHouse": "Terug naar de Kamer van Koophandel",
+        "returnHome": "Terug naar de homepage"
+      }
+    },
+    "company": {
+      "incorporatedCompanies": {
+        "newlyIncorporatedCompanies": "Nieuw opgerichte bedrijven"
+      },
+      "signInConfirmation": {
+        "signInSuccess": "Je hebt je nu aangemeld zonder een account aan te hoeven maken. Niet meer eindeloos veel toegangsnamen en wachtwoorden aanmaken en onthouden. Doordat je gegevens zijn ondertekend door betrouwbare organisaties kunnen bedrijven en instellingen de gegevens vertrouwen en direct gebruiken zonder dure en moeilijke verificatie processen. Dit alles in een oogwenk en zonder kosten."
+      },
+      "companyData": {
+        "companyName": "Bedrijfsnaam",
+        "companyAddress": "Adres",
+        "companyType": "Type vennootschap",
+        "companyBusiness": "Aard van het bedrijf",
+        "setUpPrivateCompany": "Registreer een nieuw bedrijf"
+
+      }
+    },
+    "bank": {
+      "bankData": {
+        "accountTypes": {
+          "label": "Kies een bankrekening",
+          "error": "Je moet een bankrekening uitkiezen",
+          "accounts1": "SNS Zakenrekening",
+          "accounts2": "SNS Zakelijke Sparen",
+          "special": "SNS Zakelijke Beleggen"
+        }
+      }
+    },
+    "insurance": {
+      "insuranceData": {
+        "openAnAccount": "Aanvragen verzekering",
+        "accountType": "Account type",
+        "businessOwner": "Eigenaar",
+        "companyDetails": "Bedrijf gegevens",
+        "bankAccountDetails": "Bankrekening gegevens",
+        "accountTypes": {
+          "label": "Kies een verzekeringstype",
+          "error": "Kies een verzekeringstype om door te gaan",
+          "accounts1": "Aansprakelijkheidsverzekering",
+          "accounts2": "Inventarisverzekering",
+          "accounts3": "Rechtsbijstandverzekering",
+          "special": "Aansprakelijkheid van bedrijf"
+        }
+      }
+    },
+    "general": {
+      "confirmation": {
+        "titleBank": "Je zakelijke bankrekening is geopend!",
+        "titleInsurance": "Gefeliciteerd, je bedrijf is nu verzekerd!",
+        "titleCompany": "Gefeliciteerd, je bedrijf is geregistreerd!",
+        "credentialsToSelv": "Je credential is gestuurd naar Selv",
+        "proudOwnerOfCompany": "Je bent nu de trotse eigenaar ven een nieuw bedrijf. Vanaf nu kan je eenvoudig bewijzen dat je de eigenwaan bent met de Selv app. Open de app opnieuw om je geverifieerde bewijs dat je eigenaar bent en je mag handelen uit naam van het bedrijf in te zien.",
+        "returnToCompany": "Terug naar de Kamer van Koophandel"
+      },
+      "proveIdentity": {
+        "waitingForLogin": "Wachtende op je inloggegevens",
+        "provideCredentials": "Deel je Digital Identiteit",
+        "scanToContinue": "Scan de QR-code met de <1>Selv App</1> om door te gaan"
+      },
+      "companyDetails": {
+        "companyNumber": "KvK nummer",
+        "officeAddress": "Adres",
+        "companyType": "Type vennootschap",
+        "incorporatedOn": "Oprichtingsdatum",
+        "companyOwner": "Eigenaar",
+        "natureOfBusiness": "Aard van het bedrijf",
+        "companyStatus": "Status van het bedrijf"
+      }
+    }
+  },
+  "components": {
+    "accountType": {
+      "specialFeature": "Extra opties"
+    },
+    "checkBox": {
+      "errorMessage": "Je moet de terms and conditions accepteren om door te gaan.",
+      "confirm": "Ik verklaar dat ik alle voorwaarden heb gelezen en ga akkoord."
+    },
+    "disclaimer": {
+      "usesCookies": "Deze website gebruikt koekjes voor de beste ervaring."
+    },
+    "form": {
+      "error": "Vul de benodigde informatie in."
+    },
+    "nextStepDrawer": {
+      "companyNowActive": "Je bedrijf is nu volledig actief",
+      "businessSetUp": "Je hebt succesvol een volledig nieuw bedrijf opgezet. Dit is het einde van de demo. Dank je voor het uitproberen. We werken er hard aan om Selv voor steeds meer doeleinden geschikt te maken.",
+      "companyNotActive": "Je bedrijf is nog niet volledig",
+      "needLiabilityInsurance": "Je hebt nog een zakelijke aansprakelijkheidsverzekering nodig.",
+      "needBankAndInsurance": "Je bent verplicht een zakelijke bankrekening en aansprakelijkheidsverzekering af te sluiten voor je bedrijf."
+    },
+    "prefilledForm": {
+      "FirstName": "Voornaam",
+      "LastName": "Achternaam",
+      "Date": "Geboortedatum",
+      "Nationality": "Nationaliteit",
+      "Gender": "Sex",
+      "Birthplace": "Geboorteplaats",
+      "Country": "Land",
+      "Phone": "Telefoonnummer",
+      "Address": "Privé Adres",
+      "CompanyName": "Bedrijfsnaam",
+      "CompanyAddress": "Adres van je onderneming",
+      "CompanyType": "Type vennootschap",
+      "CompanyBusiness": "Aard van het bedrijf",
+      "CompanyCreationDate": "Oprichtingsdatum",
+      "CompanyNumber": "KvK nummer",
+      "CompanyOwner": "Eigenaar",
+      "BankName": "Naam van de bank",
+      "AccountType": "Bankrekening type",
+      "credentialsBySelv": "Data automatisch ingevuld door Selv"
+    },
+    "sideBar": {
+      "yourTodoList": "Je takenlijst"
+    },
+    "table": {
+      "companyName": "Bedrijfsnaam",
+      "incorporatedOn": "Oprichtingsdatum",
+      "status": "Status"
+    },
+    "websocket": {
+      "connectionErrorDescription": "Probeer opnieuw!",
+      "verification": "Verificatie",
+      "verificationResult": "Verificatie resultaat",
+      "warningInfo": "Geen connectie met de mobile app",
+      "warningDescription": "Ga terug naar de vorige pagina en scan de Selv app QR-code",
+      "errorInfo": "Geen connectie details",
+      "didLibraryResults": {
+        "Credentials could not be verified": "Credential kon niet worden gecontroleerd",
+        "Missing credential of type": "Credential type mist",
+        "Credentials successfully verified": "Credential successvol gecontroleerd"
+      }
+    }
+  }
+}

@@ -1,0 +1,311 @@
+{
+  "landing": {
+    "app": {
+      "demo": "Demo",
+      "theApp": "The App",
+      "selfSovereignIdentity": "Self Sovereign Identity",
+      "whatItIs": "Through Self Sovereign Identity (SSI), people, organisations and things are empowered to collect and share their own verified data and digital identity.",
+      "oneAppOneProtocol": "One App – One Protocol",
+      "easyGDPRcompliance": "This solution provides an easy and cheap way to comply with GDPR and similar privacy laws.",
+      "unifiedIdentity": "A Unified IOTA Identity",
+      "protocolEnablesDevices": "IOTA Identity not only enables people and organisations to have the benefits of identity, but devices, opening up a whole new world of business models and use cases.",
+      "tryTheDemo": "Try the Demo"
+    },
+    "benefits": {
+      "benefits": "Benefits",
+      "forUsers": "For Users",
+      "control": "Control",
+      "benefitsControl": "Anything related to your identity and your personal data remains in your control.",
+      "privacy": "Privacy",
+      "benefitsPrivacy": "Improved privacy by only revealing the minimum amount of information.",
+      "reusability": "Reusability",
+      "benefitsReusability": "Share as often as you like. No more typing in the same information repeatedly in online forms.",
+      "forBusiness": "For Business",
+      "privacyLaws": "Privacy Laws",
+      "benefitsPrivacyLaws": "Complies to the strictest interpretation of the General Data Protection Act (GDPR).",
+      "dataResponsibility": "Data Responsibility",
+      "benefitsDataResponsibility": "Sharing or requesting data is so easy, that it is no longer necassary to store and protect customer data",
+      "userExperience": "User Experience",
+      "benefitsUserExperience": "Retain more customers through an enhanced User Experience. Less manual typing required."
+    },
+    "controlIdentity": {
+      "youControlYour": "You Control Your",
+      "ownIdentity": "Own Identity",
+      "whatItIsDetailed": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity. This increased privacy and control, enabling a “Bring Your Own Identity” (BYOI) style of engagement with corporations, removing the need to perform expensive data collection."
+    },
+    "FAQ": {
+      "question1": "Does the IOTA Foundation track my data and usage?",
+      "answer1": "We can’t! This solution puts data control in your hands. We have no way of accessing the data on your phone. Whenever you share data in the demo environment, you communicate this information to our servers, but it will be removed as soon as you complete the demo or close the connection. Also, only functional cookies are used on this website and during the demos. Once companies run demos or applications on their own servers, the IOTA Foundation, and other parties, will not be aware of the usage or data. Data is shared peer-to-peer making it impossible for others to listen in.",
+      "question2": "Can I restore my data if I lose my phone?",
+      "answer2": "Not yet. This is currently a demonstration application, which means it doesn’t have all the features that a full release would have. The application is using (mostly) fake data, therefore recovery is not on top of mind. Backups will be available in a future update.",
+      "question3": "Does my personal data get uploaded to the Tangle?",
+      "answer3": "No, absolutely no personal information is uploaded to the Tangle in accordance with GDPR regulations. Not even in a (pseudo)anonymized state. Any personal data uploaded to the Tangle would be in violation of \"the right to be forgotten\" as Tangle data is immutable.",
+      "question4": "How does this application benefit from IOTA and DLT in general?",
+      "answer4": "Organisations sign credentials for the users, but how do we identify the organisations? Their digital identities are uploaded to the Tangle and are signed using asymmetric encryption methods. In addition, revocation of credentials are put on the Tangle as evidence that the credential can no longer be used.",
+      "question5": "On what IOTA network does this application run?",
+      "answer5": "Currently the Chrysalis Phase 1 devnet. IOTA has zero fees, so it isn’t any more difficult to run this demo on the mainnet then on the devnet.",
+      "question6": "How can I learn more?",
+      "answer6": {
+        "part1": "We released a whitepaper called:",
+        "part2": "The Case for a Unified Identity",
+        "part3": "It is a relatively easy introduction to the subject and explains what the benefits are of IOTA Identity."
+      },
+      "question7": "What is a DLT or Tangle?",
+      "answer7": "Distributed Ledger Technology (DLT) is the umbrella term for Blockchain technology. It is a decentral database of which many copies are hosted across the world. They discuss with each other what is truth and what isn't through the \"consensus mechanism\". With Bitcoin, this process costs a lot of electricity due to the scalability problems it has. The Tangle of IOTA solves this, making is faster, feeless and green. The Tangle is the underlying data structure of the IOTA network, which hosts the IOTA cryptocurrency token and is developed by the IOTA Foundation.",
+      "question8": "Who developed the Selv Demo's?",
+      "answer8": "Selv is developed by the IOTA Foundation in collaboration with different parties. The IOTA Foundation is a non-profit foundation guiding and contributing to the development of the core protocol and facilitating the development of the ecosystem around IOTA."
+    },
+    "footer": {
+      "contactUs": "Contact Us",
+      "contactUsLowerText1": "Would you like to know how Self Sovereign Identity can positively influence",
+      "contactUsLowerText2": "your business or would you like to experiment with the technology?",
+      "contactUsAt": "Contact us at",
+      "visit": "Visit",
+      "privacyPolicy": "Privacy Policy"
+    },
+    "howItWorks": {
+      "inBrief": "In Brief",
+      "howItWorks": "How It Works",
+      "create": "Create",
+      "createText": "Download the Selv app and create a unique identifier, representing you online. This profile remains in your control and doesn’t leave the app without your consent.",
+      "share": "Share",
+      "shareText": "Decide who and what others get to see from your personal profile. You can share your data peer-to-peer or on request. Controlled data flow allows you to always get something in return for your data.",
+      "grow": "Grow",
+      "growText": "Gather credentials about yourself, verified by others, to grow your personal identity. Fully under your control and not stored in any database.",
+      "accept": "Accept",
+      "acceptText": "By accepting BYOI, companies can verify customer data, instantly and for free. This allows you to speed up processes such as onboarding and reduce the amount of typing your customers have to do."
+    },
+    "header": {
+      "How it works": "How It Works",
+      "Benefits": "Benefits",
+      "The App": "The App",
+      "FAQs": "FAQs",
+      "menu": "Menu"
+    },
+    "main": {
+      "claimControl": "A digital Selv,",
+      "reuseYourNew": "under your control",
+      "mainText": "Selv is a demo app that showcases how IOTA Identity may affect existing or create new digital processes, with a focus on privacy and control of your own digital Selv"
+    },
+    "selv": {
+      "selvText": "Your data shouldn’t be public, but it shouldn’t be locked up either.<1/>Selv promises a solution that <3>enables data flow</3>, completely in your <5>control</5>."
+    }
+  },
+  "actions": {
+    "tryTheDemo": "Try the Demo",
+    "continue": "Continue",
+    "letsDoIt": "Let's Do It",
+    "continueNextStep": "Continue to Next Step",
+    "registerNewCompany": "Register New Company",
+    "downloadTheSelvApp": "Download the Selv App",
+    "orScanCode": "Or scan this QR code<1/>to download",
+    "back": "Back",
+    "setUpCompany": "Set up a Company",
+    "getBankAccount": "Get a Bank Account",
+    "liabilityInsurance": "Liability Insurance",
+    "readyForBusiness": "Ready for Business",
+    "confirm": "Confirm",
+    "learnMore": "Learn More",
+    "dismiss": "Dismiss",
+    "finishDemo": "Finish Demo",
+    "getInsurance": "Get Insurance",
+    "openBankAccount": "Open Bank Account"
+  },
+  "general": {
+    "Self Sovereign Identity": "Self Sovereign Identity",
+    "selfSovereignity": "Self Sovereignity",
+    "Demo": "Demo",
+    "The App": "The App",
+    "What it is": "Through Self Sovereign Identity, people, organisations and things are empowered to collect and share their own verified data and digital identity.",
+    "A Unified Identity": "IOTA Identity",
+    "digitalIdentityManagement": "Instant Onboarding at the Bank",
+    "claimControlReuse": "Reuse a Know-Your-Customer (KYC) credential to create a new company. Proof your identity and ownership over your company to open a corporate bank account and liability insurance with the click of a button.",
+    "hello": "Hello!",
+    "greatSuccess": "Great Success!",
+    "signedInDID": "You Signed in With DID",
+    "receivedNewCredentials": "Received New Credentials",
+    "reusedSelvCredentials": "Re-used Selv Credentials",
+    "messages": {
+      "waiting": "Waiting for Selv App...",
+      "connectionError": "Connection Error. Please Try Again!",
+      "missing": "Credentials Missing or not Trusted",
+      "verifying": "Verifying Credentials..."
+    },
+    "pending": "Pending",
+    "active": "Active"
+  },
+  "pages": {
+    "demo": {
+      "introDemoSelection": {
+        "healthStatusManagement": "COVID-19 Health Certificates",
+        "shareTrustedCredentials": "Collect your COVID-19 testing status after a negative test result. Use this to get back access to the workfloor and international travel.",
+        "longtermIdentityManagement": "Persistent Selv",
+        "LearnAboutFutures": "Plan your environmental legacy, create present and future commitments and complete a pledge.",
+        "collab": "In Collaboration With:"
+      },
+      "introShowTodos": {
+        "welcomeToThe": "Welcome to the",
+        "selvDemo": "Selv Demo",
+        "hereIsTodo": "<0>Here is <1>your to-do list</1> for today:</0>",
+        "setUpCompany": "Set up a Company",
+        "getBankAccount": "Get a Bank Account",
+        "getLiabilityInsurance": "Get Liability Insurance"
+      },
+      "introShowMobile": {
+        "looksLikeWork": "That Looks Like a Lot of Work...",
+        "advantage": "<0>But using IOTA Identity and the Selv app, it will be <1>​quick and easy​.</1></0>",
+        "noteDesktop": "This demo website is best experienced on a desktop computer."
+      },
+      "appDownloadQR": {
+        "onceDownloaded": "Once you’ve downloaded and installed the app, click the button below."
+      },
+      "greatSuccess": {
+        "signedInDIDText": "You managed to sign into a website you never signed up for. Account creation has been skipped saving you time and effort. The company house is also not burdened with saving your password.",
+        "receivedNewCredentialsText": "You became the owner of a company. From this point onwards, you would be able to prove your directorship position online, allowing you to act on behalf of the company. Overtime you can grow your Selv profile by gathering such credentials from trusted third parties.",
+        "reusedSelvCredentialsText": "By controlling your personal data, you shared verifiable data without having to type it into a form. You can use these same credentials in other processes. Imagine never having to type in your name, address, email etc..."
+      },
+      "thankYou": {
+        "thanksForTryingSelv": "Thanks for Trying Selv!",
+        "improvedExperience": "Improved Experience",
+        "savedTime": "With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and insurance with very few clicks. Your data was reusable and this saved you x fields of form fields to fill in.",
+        "sovereignityText": "You have taken full control of your data. You decided who you shared your data with. Did you know that you can share them with others manually via QR as well. Try so in the Selv app!",
+        "moreTrust": "More Trust",
+        "trustText": "The data you shared with the Company House and the SNS Bank was verifiable. This allows to verify your data instantly and freely using IOTA as the trust layer.",
+        "returnCompanyHouse": "Return to Company House",
+        "returnHome": "Return Home"
+      }
+    },
+    "company": {
+      "incorporatedCompanies": {
+        "newlyIncorporatedCompanies": "Newly Incorporated Companies"
+      },
+      "signInConfirmation": {
+        "signInSuccess": "You have now signed in without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which [business] can use without an expensive verification process. Verifying your data is nearly instant and completely free."
+      },
+      "companyData": {
+        "companyName": "Company Name",
+        "companyAddress": "Company Address",
+        "companyType": "Company Type",
+        "companyBusiness": "Nature of Business",
+        "setUpPrivateCompany": "Set up a Private Limited Company"
+
+      }
+    },
+    "bank": {
+      "bankData": {
+        "accountTypes": {
+          "label": "Choose Bank Account Type",
+          "error": "Please choose an account type",
+          "accounts1": "Business Checking Account",
+          "accounts2": "Business Savings Account",
+          "special": "Brokerage Account"
+        }
+      }
+    },
+    "insurance": {
+      "insuranceData": {
+        "openAnAccount": "Open an Account",
+        "accountType": "Account Type",
+        "businessOwner": "Business Owner",
+        "companyDetails": "Company Details",
+        "bankAccountDetails": "Bank Account Details",
+        "accountTypes": {
+          "label": "Choose Liability Insurance Type",
+          "error": "Please choose a type of liability insurance",
+          "accounts1": "General Liability",
+          "accounts2": "Professional Liability",
+          "accounts3": "Employer Liability",
+          "special": "Business Liability"
+        }
+      }
+    },
+    "general": {
+      "confirmation": {
+        "titleBank": "Your Business Bank Account Is Now Set Up!",
+        "titleInsurance": "Congratulations, Your Liability Insurance Is Now Set Up!",
+        "titleCompany": "Congratulations, Your Company Is Now Set Up!",
+        "credentialsToSelv": "Your New Business Is Sent to Selv",
+        "proudOwnerOfCompany": "You are now the proud owner of your new company. From now on you’ll be able to prove that you have a directorship position at your newly found company. Open up Selv in order to receive a signed credential you can use to act on behalf of your company.",
+        "returnToCompany": "Return to Company House"
+      },
+      "proveIdentity": {
+        "waitingForLogin": "Waiting for Login",
+        "provideCredentials": "Provide Your Digital Identity Credentials",
+        "scanToContinue": "Scan this QR code with <1>Selv App</1> to continue"
+      },
+      "companyDetails": {
+        "companyNumber": "Company Number",
+        "officeAddress": "Registered Office Address",
+        "companyType": "Company Type",
+        "incorporatedOn": "Incorporated on",
+        "companyOwner": "Company Owner",
+        "natureOfBusiness": "Nature of Business",
+        "companyStatus": "Company Status"
+      }
+    }
+  },
+  "components": {
+    "accountType": {
+      "specialFeature": "Special Feature"
+    },
+    "checkBox": {
+      "errorMessage": "Please agree the terms and conditions.",
+      "confirm": "I confirm everything and agree to any terms"
+    },
+    "disclaimer": {
+      "usesCookies": "This website uses cookies to ensure you get the best experience on our website."
+    },
+    "form": {
+      "error": "Please provide required information!"
+    },
+    "nextStepDrawer": {
+      "companyNowActive": "Your Company Is Now Active",
+      "businessSetUp": "You have successfully set up your entire business. This is the end of this demo and we thank you for participating. Selv will be updated with more demonstrations and will be updated with more features",
+      "companyNotActive": "Your Company Is Not Active Yet",
+      "needLiabilityInsurance": "You need to add Liability Insurance to finish this process",
+      "needBankAndInsurance": "You need to add Bank Account and Liability Insurance to finish this process"
+    },
+    "prefilledForm": {
+      "FirstName": "First Name",
+      "LastName": "Last Name",
+      "Date": "Date of Birth",
+      "Nationality": "Nationality",
+      "Gender": "Gender",
+      "Birthplace": "Birthplace",
+      "Country": "Country of Residence",
+      "Phone": "Phone Number",
+      "Address": "Address",
+      "CompanyName": "Company Name",
+      "CompanyAddress": "Company Address",
+      "CompanyType": "Company Type",
+      "CompanyBusiness": "Nature of Business",
+      "CompanyCreationDate": "Company Creation Date",
+      "CompanyNumber": "Company Number",
+      "CompanyOwner": "Managing Director",
+      "BankName": "Name of the Bank",
+      "AccountType": "Bank Account Type",
+      "credentialsBySelv": "Credentials Provided by Selv ID"
+    },
+    "sideBar": {
+      "yourTodoList": "Your To-Do List"
+    },
+    "table": {
+      "companyName": "Company Name",
+      "incorporatedOn": "Incorporated on",
+      "status": "Status"
+    },
+    "websocket": {
+      "connectionErrorDescription": "Please try again!",
+      "verification": "Verification",
+      "verificationResult": "Verification Result",
+      "warningInfo": "Mobile App Not Connected",
+      "warningDescription": "Please return to the previous page and scan the QR code with your Selv app",
+      "errorInfo": "No Connection Details",
+      "didLibraryResults": {
+        "Credentials could not be verified": "Credentials could not be verified",
+        "Missing credential of type": "Missing credential of type",
+        "Credentials successfully verified": "Credentials successfully verified"
+      }
+    }
+  }
+}

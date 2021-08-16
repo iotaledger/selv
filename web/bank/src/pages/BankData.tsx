@@ -3,6 +3,7 @@ import { Button, Collapse, notification } from 'antd';
 import { flattenObject } from '../utils/helper';
 import { Layout, Loading, AccountType, PrefilledForm, Checkbox, WebSocket } from '../components';
 import checkmark from '../assets/bankCheckmark.svg';
+import { useTranslation } from 'react-i18next';
 
 const personalDataFields = [
     'FirstName',
@@ -25,16 +26,20 @@ const companyFields = [
 ];
 
 const accountTypes = {
-    label: 'Choose bank account type',
-    error: 'Please choose an account type',
-    accounts: ['Business checking account', 'Business savings account'],
-    special: 'Brokerage account'
-};
+    label: 'pages.bank.bankData.accountTypes.label',
+    error: 'pages.bank.bankData.accountTypes.error',
+    accounts: [
+        'pages.bank.bankData.accountTypes.accounts1',
+        'pages.bank.bankData.accountTypes.accounts2',
+    ],
+    special: 'pages.bank.bankData.accountTypes.special',
+}
 
 const messages = {
-    waiting: 'Waiting for Selv app...',
-    connectionError: 'Connection error. Please try again!',
-    missing: 'Credentials missing or not trusted'
+    waiting: 'general.messages.waiting',
+    connectionError: 'general.messages.connectionError',
+    missing: 'general.messages.missing',
+    verifying: 'general.messages.verifying'
 };
 
 const notify = (type: string, message: string, description: string) => {
@@ -48,20 +53,22 @@ const notify = (type: string, message: string, description: string) => {
  */
 const BankData: React.FC = ({ history, match }: any) => {
     const [webSocket, setWebSocket] = useState(false);
-    const [fields, setFields] = useState();
+    const [fields, setFields] = useState<object>();
     const [accountType, setAccountType] = useState();
     const [status, setStatus] = useState('');
     const [accountStep, setAccountStep] = useState(1);
     const [prefilledPersonalData, setPrefilledPersonalData] = useState({});
     const [prefilledCompanyData, setPrefilledCompanyData] = useState({});
 
+    const { t } = useTranslation();
+
     useEffect(() => {
-        async function getData () {
+        async function getData() {
             const credentialsString: string | null = await localStorage.getItem('credentials');
             const credentials = credentialsString && await JSON.parse(credentialsString);
             const status = credentials?.status;
             if (!status || Number(status) !== 2) {
-                notify('error', 'Error', messages.connectionError);
+                notify('error', 'Error', t(messages.connectionError));
                 history.goBack();
             }
             const flattenData = flattenObject(credentials?.data);
@@ -77,16 +84,16 @@ const BankData: React.FC = ({ history, match }: any) => {
         getData();
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    async function processValues (fields: object) {
+    async function processValues(fields: object) {
         setFields(fields);
         setWebSocket(true);
     }
 
-    function setStatusMessage (message: string) {
+    function setStatusMessage(message: string) {
         setStatus(message);
     }
 
-    async function continueNextStep (params: any) {
+    async function continueNextStep(params: any) {
         if (accountStep < 4) {
             setAccountStep(accountStep => accountStep + 1);
             if (params.accountType) {
@@ -101,18 +108,18 @@ const BankData: React.FC = ({ history, match }: any) => {
         }
     }
 
-    function onChange (step: any) {
+    function onChange(step: any) {
         accountStep > step && setAccountStep(Number(step));
     }
 
     const prefilledPersonalFormData: any = { dataFields: prefilledPersonalData };
     const prefilledCompanyFormData: any = { dataFields: prefilledCompanyData };
-    const formData: any = { onSubmit: continueNextStep, status, messages, accountTypes, buttonText: 'Open bank account' };
+    const formData: any = { onSubmit: continueNextStep, status, messages, accountTypes, buttonText: t("pages.demo.introShowTodos.getBankAccount") };
 
     return (
         <Layout match={match}>
             <div className='bank-data-page-wrapper'>
-                <h1>Open an account</h1>
+                <h1>{t("pages.insurance.insuranceData.openAnAccount")}</h1>
                 <Collapse
                     onChange={onChange}
                     bordered={false}
@@ -126,7 +133,7 @@ const BankData: React.FC = ({ history, match }: any) => {
                                 {
                                     accountStep > 1 ? <img src={checkmark} alt='' /> : <span>1</span>
                                 }
-                                <h3>Account type</h3>
+                                <h3>{t("pages.insurance.insuranceData.accountType")}</h3>
                             </div>
                         )}
                         showArrow={false}
@@ -140,7 +147,7 @@ const BankData: React.FC = ({ history, match }: any) => {
                                 {
                                     accountStep > 2 ? <img src={checkmark} alt='' /> : <span>2</span>
                                 }
-                                <h3>Business owner</h3>
+                                <h3>{t("pages.insurance.insuranceData.businessOwner")}</h3>
                             </div>
                         )}
                         showArrow={false}
@@ -152,7 +159,7 @@ const BankData: React.FC = ({ history, match }: any) => {
                             <PrefilledForm {...prefilledPersonalFormData} />
                         }
                         <Button onClick={continueNextStep}>
-                            Continue
+                            {t("actions.continue")}
                         </Button>
                     </Collapse.Panel>
                     <Collapse.Panel
@@ -161,7 +168,7 @@ const BankData: React.FC = ({ history, match }: any) => {
                                 {
                                     accountStep > 3 ? <img src={checkmark} alt='' /> : <span>3</span>
                                 }
-                                <h3>Company Details</h3>
+                                <h3>{t("pages.insurance.insuranceData.companyDetails")}</h3>
                             </div>
                         )}
                         showArrow={false}
@@ -173,14 +180,14 @@ const BankData: React.FC = ({ history, match }: any) => {
                             <PrefilledForm {...prefilledCompanyFormData} />
                         }
                         <Button onClick={continueNextStep}>
-                            Continue
+                            {t("actions.continue")}
                         </Button>
                     </Collapse.Panel>
                     <Collapse.Panel
                         header={(
                             <div className='section-header'>
                                 <span>4</span>
-                                <h3>Confirm</h3>
+                                <h3>{t("actions.confirm")}</h3>
                             </div>
                         )}
                         showArrow={false}
@@ -193,7 +200,7 @@ const BankData: React.FC = ({ history, match }: any) => {
                 {
                     status && (
                         <div className='loading'>
-                            <p className='bold'>{status}</p>
+                            <p className='bold'>{t(status)}</p>
                             {
                                 status === messages.waiting && <Loading />
                             }
@@ -207,6 +214,7 @@ const BankData: React.FC = ({ history, match }: any) => {
                         schemaName='BankAccount'
                         setStatus={setStatusMessage}
                         fields={fields}
+                        messages={messages}
                     />
                 }
             </div>

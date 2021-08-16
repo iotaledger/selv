@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import useStep from '../utils/useStep';
 import { Layout, RandomGraphicElement } from '../components';
 import selv from '../assets/selvBordered.svg';
+import { useTranslation } from 'react-i18next';
 
 /**
  * Component which will display a SingInConfirmation.
@@ -11,8 +12,10 @@ import selv from '../assets/selvBordered.svg';
 const SingInConfirmation: React.FC = ({ history, match }: any) => {
     const { nextStep } = useStep(match);
 
+    const { t } = useTranslation();
+
     useEffect(() => {
-        async function getData () {
+        async function getData() {
             const credentialsString: string | null = await localStorage.getItem('credentials');
             const credentials = credentialsString && await JSON.parse(credentialsString);
             const status = credentials?.status;
@@ -28,13 +31,13 @@ const SingInConfirmation: React.FC = ({ history, match }: any) => {
             <RandomGraphicElement elements={5}>
                 <div className='sign-in-confirmation'>
                     <img src={selv} alt='Selv app logo' />
-                    <h2>Hello!</h2>
+                    <h2>{t("general.hello")}</h2>
                     <p>
-                        You have now signed in without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which [business] can use without an expensive verification process. Verifying your data is nearly instant and completely free.
+                        {t("pages.company.signInConfirmation.signInSuccess")}
                     </p>
                     <Link to={nextStep}>
                         <Button>
-                            Continue
+                            {t("actions.continue")}
                         </Button>
                     </Link>
                 </div>

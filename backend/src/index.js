@@ -1,15 +1,32 @@
 const express = require('express');
+const fs = require('fs');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const SocketIO = require('socket.io');
 const { Server } = require('http');
-// const { createIdentity, createAccessCredential } = require('./DID')
+const randomstring = require('randomstring');
+
 const { websocketPort } = require('../config');
-const { createOrUpdateCompany, readData, readAllData, removeData } = require('./database');
+const { createOrUpdateCompany, createCommitment, readData, readAllData, removeData } = require('./database');
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../swagger.json');
+const config = require('../config');
+const customCss = fs.readFileSync((process.cwd() + '/swagger.css'), 'utf8');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-const whitelist = ['http://localhost:3000', 'https://selv.iota.org', 'https://covid-19.iota.org', 'https://selv.vercel.app', 'https://selv.iota1.vercel.app', 'https://covid-19.iota1.vercel.app'];
+const whitelist = [
+    'http://localhost:3000', 
+    'http://localhost:3003', 
+    'https://selv.iota.org', 
+    'https://covid-19.iota.org', 
+    'https://selv.vercel.app', 
+    'https://selv.iota1.vercel.app', 
+    'https://covid-19.iota1.vercel.app', 
+    'https://persistent-selv.iota.org',
+    'https://persistent-selves.vercel.app',
+];
 const corsOptions = {
     // methods: ["GET, POST, OPTIONS"],
     // allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"],
@@ -25,9 +42,11 @@ const corsOptions = {
 };
 
 const app = express();
+// app.use(cors());
 app.use(bodyParser.json({ limit: '100mb' }));
 app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 app.use(bodyParser.json());
+app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {customCss}));
 
 console.log('Websocket server starting', websocketPort);
 
@@ -39,7 +58,7 @@ const desktopClients = new Map();
 
 setInterval(() => {
     try {
-        if (mobileClients && mobileClients.size > 2) {
+        if (mobileClients && mobileClients.size > 20) {
             const keys = Array.from(mobileClients.keys()).slice(0, 2);
             keys.forEach(k => {
                 mobileClients.delete(k);
@@ -47,7 +66,7 @@ setInterval(() => {
             });
         }
 
-        if (desktopClients && desktopClients.size > 2) {
+        if (desktopClients && desktopClients.size > 20) {
             const keys = Array.from(desktopClients.keys()).slice(0, 2);
             keys.forEach(k => {
                 desktopClients.delete(k);
@@ -65,8 +84,21 @@ try {
 
     socketServer.on('connection', (socket) => {
         socket.on('registerMobileClient', async (data) => {
-            const { channelId } = data;
+            const { channelId, version } = data;
             console.info(`Mobile client connected [id=${socket.id}, channel=${channelId}]`);
+
+            if(!version || version !== config.minVersions.mobile) {
+                console.log('version mismatched');
+                socket.emit('minAppVersion', config.minVersions.mobile);
+                const desktopClient = desktopClients.get(channelId);
+                if (desktopClient && desktopClient.socket) {
+                    console.log('desktop notify');
+                    desktopClient.socket.emit('minAppVersion', config.minVersions.mobile);
+                }
+                socket.disconnect(true); 
+                return;
+            } 
+
             mobileClients.set(channelId, { socket, channelId, socketId: socket.id });
         });
 
@@ -101,14 +133,15 @@ try {
                 await mobileClients.delete(mobileClient.channelId);
             }
 
-            console.log('connected desktopClients', desktopClients.keys());
-            console.log('connected mobileClients', mobileClients.keys());
+            console.log('connected desktopClients', Array.from(desktopClients).map(items => items?.[0]));
+            console.log('connected mobileClients', Array.from(mobileClients).map(items => items?.[0]));
         });
 
         socket.on('verifiablePresentation', async (data) => {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit verifiablePresentation to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('verifiablePresentation', payload);
                 console.info('Verifiable Presentation sent to desktop client');
@@ -119,6 +152,7 @@ try {
             const { channelId, payload } = data;
             const mobileClient = mobileClients.get(channelId);
             if (mobileClient && mobileClient.socket) {
+                console.log('Emit createCredential to mobile', channelId, payload);
                 const mobileSocket = mobileClient.socket;
                 mobileSocket && mobileSocket.emit('createCredential', payload);
                 console.info('Create Credential request sent to mobile client', channelId);
@@ -129,6 +163,7 @@ try {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit createCredentialConfirmation to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('createCredentialConfirmation', payload);
                 console.info('Create Credential Confirmation sent to desktop client', channelId);
@@ -139,6 +174,7 @@ try {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit errorMessage to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('errorMessage', payload);
             }
@@ -148,6 +184,7 @@ try {
             const { channelId, payload } = data;
             const desktopClient = desktopClients.get(channelId);
             if (desktopClient && desktopClient.socket) {
+                console.log('Emit rejectCredentials to desktop', channelId, payload);
                 const desktopSocket = desktopClient.socket;
                 desktopSocket && desktopSocket.emit('rejectCredentials', payload);
             }
@@ -157,6 +194,32 @@ try {
             const { payload } = data;
             await createOrUpdateCompany(payload);
             console.info('Company created', payload);
+        });
+
+        socket.on('commitment', async (data) => {
+            try {
+                const { commitments, type } = data;
+                const timestamp = Date.now();
+        
+                for await (const commitment of commitments) {
+                    const uuid = randomstring.generate({
+                        length: 7,
+                        charset: 'numeric'
+                    });
+        
+                    const storedCommitment = {
+                        CommitmentUUID: uuid,
+                        CommitmentCreationDate: timestamp,
+                        CommitmentType: type,
+                        ...commitment
+                    };
+        
+                    await createCommitment(storedCommitment);
+                    console.info('Commitment stored', storedCommitment);
+                };
+            } catch (e) {
+                console.error('Socket commitment', data, e);
+            }
         });
     });
 } catch (error) {
@@ -245,6 +308,25 @@ app.get('/company', cors(corsOptions), async (req, res) => {
 });
 
 /*
+Get pledge details
+*/
+app.get('/commitments', cors(corsOptions), async (req, res) => {
+    try {
+        const data = await readAllData('commitments');
+        res.json({
+            status: 'success',
+            data
+        });
+    } catch (e) {
+        console.error(e);
+        res.json({
+            status: 'failure',
+            error: JSON.stringify(e)
+        });
+    }
+});
+
+/*
 Activate company
 */
 app.get('/activate', cors(corsOptions), async (req, res) => {
@@ -291,7 +373,7 @@ app.post('/activate', cors(corsOptions), async (req, res) => {
 /*
 Remove company
 */
-app.get('/remove', cors(corsOptions), async (req, res) => {
+app.get('/remove_company', cors(corsOptions), async (req, res) => {
     try {
         const companyNumber = req.query.company;
         if (companyNumber) {
@@ -300,6 +382,31 @@ app.get('/remove', cors(corsOptions), async (req, res) => {
            
         } else {
             await removeData('company', '');
+        }
+        res.json({
+            status: 'success'
+        });
+    } catch (e) {
+        console.error(e);
+        res.json({
+            status: 'failure',
+            error: JSON.stringify(e)
+        });
+    }
+});
+
+/*
+Remove commitment
+*/
+app.get('/remove_commitment', cors(corsOptions), async (req, res) => {
+    try {
+        const commitment = req.query.commitment;
+        if (commitment) {
+            await removeData('commitments', commitment);
+            console.log('Removed commitment', commitment);
+           
+        } else {
+            await removeData('commitments', '');
         }
         res.json({
             status: 'success'

@@ -20,7 +20,7 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
     return (
         <Layout match={match} noHeader>
             <React.Fragment>
-                <div className='scan-qr-page-wrapper app-download' id='app'>
+                <div className='scan-qr-page-wrapper app-download'>
                     <RandomGraphicElement elements={5}>
                         <React.Fragment>
                             <h1 className='title'>Download the Selv app</h1>
@@ -55,7 +55,7 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
                     <img src={dots} alt='' className='dots' />
                     <img src={circle} alt='' className='circle' />
                 </div>
-                <div className="cta-section">
+                <div className="cta-section" id='app-download'>
                     <p className='subtitle'>Once you’ve downloaded and installed the app, click the button below.</p>
                     <Link to={nextStep} className='cta'>
                         <Button>

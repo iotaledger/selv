@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 export default ({ link }: { link: string }) => {
     const [nextStep, setNextStep] = useState('');
 
+    const { t } = useTranslation();
+
     useEffect(() => {
-        async function setInfo () {
+        async function setInfo() {
             const companyHouse = await localStorage.getItem('companyHouse');
             const bank = await localStorage.getItem('bank');
             const insurance = await localStorage.getItem('insurance');
@@ -29,13 +32,13 @@ export default ({ link }: { link: string }) => {
         case 'completed':
             return (
                 <div className='next-step-drawer completed'>
-                    <h3>Your company is now Active</h3>
+                    <h3>{t("components.nextStepDrawer.companyNowActive")}</h3>
                     <p>
-                        You have successfully set up your entire business. This is the end of this demo and we thank you for participating. Selv will be updated with more demonstrations and will be updated with more features
+                        {t("components.nextStepDrawer.businessSetUp")}
                     </p>
                     <Link to={link}>
                         <Button>
-                                Finish demo
+                            {t("actions.finishDemo")}
                         </Button>
                     </Link>
                 </div>
@@ -43,13 +46,13 @@ export default ({ link }: { link: string }) => {
         case 'insurance':
             return (
                 <div className='next-step-drawer'>
-                    <h3>Your company is not Active yet</h3>
+                    <h3>{t("components.nextStepDrawer.companyNotActive")}</h3>
                     <p>
-                        You need to add Liability Insurance to finish this process
+                        {t("components.nextStepDrawer.needLiabilityInsurance")}
                     </p>
                     <Link to={link}>
                         <Button>
-                            Get insurance
+                            {t("actions.getInsurance")}
                         </Button>
                     </Link>
                 </div>
@@ -57,13 +60,13 @@ export default ({ link }: { link: string }) => {
         case 'bank':
             return (
                 <div className='next-step-drawer'>
-                    <h3>Your company is not Active yet</h3>
+                    <h3>{t("components.nextStepDrawer.companyNotActive")}</h3>
                     <p>
-                        You need to add Bank Account and Liability Insurance to finish this process
+                        {t("components.nextStepDrawer.needBankAndInsurance")}
                     </p>
                     <Link to={link}>
                         <Button>
-                            Open bank account
+                        {t("actions.openBankAccount")}
                         </Button>
                     </Link>
                 </div>

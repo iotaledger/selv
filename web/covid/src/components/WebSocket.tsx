@@ -135,6 +135,13 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             notify('error', 'Credentials rejected', message);
         });
 
+        ioClient.on('minAppVersion', async (message: any) => {
+            notification.error({
+                duration: 0,
+                message: 'Outdated App detected', description: 'Please update your Selv App and try again'
+            });     
+        });
+
         ioClient.on('verifiablePresentation', async (payload: any) => {
             try {
                 setIsRunning(false);
@@ -148,7 +155,6 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
                 setStatus(evaluationResult.message);
                 notify(evaluationResult.type, 'Verification result', evaluationResult.message);
                 setLoading && setLoading(false);
-
                 if (evaluationResult?.status === 2) { // DID_TRUSTED
                     notification.destroy();
                     await localStorage.setItem('credentials', JSON.stringify(evaluationResult));

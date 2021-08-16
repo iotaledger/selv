@@ -41,6 +41,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+        z-index: 100;
 
         @include breakPoint(medium) {
             max-height: 50px;
@@ -58,8 +59,17 @@
             justify-content: space-between;
             align-items: center;
 
-            @media (max-width: 820px) {
+            @include breakPoint(menucollapse2) {
                 display: none;
+            }
+            .drop-selector {
+                margin: 0 25px;
+                border-top: 3px solid transparent;
+                border-bottom: 3px solid #ffffff;
+
+                @include breakPoint(medium) {
+                    margin: 0 15px;
+                }
             } 
 
             .menu-link {
@@ -74,9 +84,10 @@
                 border-top: 3px solid transparent;
                 border-bottom: 3px solid #ffffff;
 
-                @include breakPoint(medium) {
-                    margin: 0 15px;
-                }
+                @include breakPoint(menucollapse) {
+					margin: 0 15px;
+					font-size: 15px;
+				}
 
                 &:hover {
                     @include themify($themes) {
@@ -107,7 +118,7 @@
             display: none;
             z-index: 100;
         
-            @media (max-width: 820px) {
+            @include breakPoint(menucollapse2) {
                 display: flex;
             } 
         }

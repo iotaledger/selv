@@ -2,6 +2,12 @@
     @if $point == large {
         @media (max-width: 9990px) { @content; }
     } 
+    @if $point == menucollapse {
+        @media (max-width: 1303px) { @content; }
+    }
+    @if $point == menucollapse2 {
+        @media (max-width: 1160px) { @content; }
+    }
     @if $point == medium {
         @media (max-width: 989px) { @content; }
     } 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Steps } from 'rsuite';
+import i18n from 'i18next';
 
 const styles = {
     width: '200px',
@@ -20,7 +21,7 @@ const StepsInstance = ({ steps, stepId }: {
                     steps.map((step: any) =>
                         <Steps.Item
                             key={step.title}
-                            title={step.title}
+                            title={i18n.t(step.title)}
                         />
                     )
                 }

@@ -7,12 +7,13 @@ import useInterval from '../utils/useInterval';
 import evaluateCredential from '../utils/did';
 import { getCompanyId, encrypt, decrypt } from '../utils/helper';
 import { serverAPI, websocketURL } from '../config.json';
+import { useTranslation } from 'react-i18next';
 
-const messages = {
-    waiting: 'Waiting for Selv app...',
-    connectionError: 'Connection error. Please try again!',
-    missing: 'Credentials missing or not trusted'
-};
+// const messages = {
+//     waiting: 'Waiting for Selv app...',
+//     connectionError: 'Connection error. Please try again!',
+//     missing: 'Credentials missing or not trusted'
+// };
 
 const notify = (type: string, message: string, description: string) => {
     switch (type) {
@@ -32,12 +33,13 @@ const notify = (type: string, message: string, description: string) => {
     }
 };
 
-const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, generatedChannelId }: {
+const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, messages, generatedChannelId }: {
     history: any;
     match: any;
     schemaName?: string;
     setStatus: (status: string) => void;
     setLoading?: (status: boolean) => void;
+    messages: { [ key: string ]: string; };
     fields: any;
     generatedChannelId?: string;
 }) => {
@@ -46,6 +48,8 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     const [channelId, setChannelId] = useState('');
     const [isRunning, setIsRunning] = useState(false);
     const [counter, setCounter] = useState(0);
+
+    const { t } = useTranslation();
 
     let ioClient: any;
 
@@ -110,7 +114,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
         const timeout = setTimeout(() => {
             if (setStatus) {
                 setStatus(messages.connectionError);
-                notify('error', 'Connection error', 'Please try again!');
+                notify('error', t("general.messages.connectionError"), t("components.websocket.connectionErrorDescription"));
             }
         }, 180000);
 
@@ -123,19 +127,26 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             notify('error', 'Mobile client error', error);
         });
 
+        ioClient.on('minAppVersion', async (message: any) => {
+            notification.error({
+                duration: 0,
+                message: 'Outdated App detected', description: 'Please update your Selv App and try again'
+            });     
+        });
+
         ioClient.on('verifiablePresentation', async (payload: any) => {
             try {
                 setIsRunning(false);
                 clearTimeout(timeout);
-                setStatus('Verifying credentials...');
+                setStatus(messages.verifying);
 
-                notify('info', 'Verification', 'Verifying credentials...');
+                notify('info', t("components.websocket.verification"), t("general.messages.verifying"));
                 let verifiablePresentation = await decrypt(fields?.password, payload);
                 verifiablePresentation = JSON.parse(verifiablePresentation);
                 const evaluationResult: any = await evaluateCredential(verifiablePresentation, fields?.requestedCredentials, fields?.challenge);
 
-                setStatus(evaluationResult.message);
-                notify(evaluationResult.type, 'Verification result', evaluationResult.message);
+                setStatus("components.websocket.didLibraryResults." +evaluationResult.message);
+                notify(evaluationResult.type, t("components.websocket.verificationResult"), t("components.websocket.didLibraryResults." +evaluationResult.message));
                 setLoading && setLoading(false);
 
                 if (evaluationResult?.status === 2) { // DID_TRUSTED
@@ -190,10 +201,10 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             const isMobileConnected = await checkConnectedStatus(channelDetails?.channelId);
             if (!isMobileConnected) {
                 setIsRunning(true);
-                notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app');
+                notify('warning', t("components.websocket.warningInfo"), t("components.websocket.warningDescription"));
             }
         } else {
-            notify('error', 'No connection details', 'Please return to the previous page and scan the QR code with your Selv app');
+            notify('error', t("components.websocket.errorInfo"), t("components.websocket.warningDescription"));
         }
     }
 
@@ -208,7 +219,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             setIsRunning(false);
         } else {
             if (counter === 7) {
-                notify('warning', 'Mobile app not connected', 'Please return to the previous page and scan the QR code with your Selv app');
+                notify('warning', t("components.websocket.warningInfo"), t("components.websocket.warningDescription"));
                 setCounter(0);
             } else {
                 setCounter(counter => counter + 1);

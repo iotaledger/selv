@@ -4,7 +4,10 @@ import { routes, mainSteps } from '../steps';
 
 const GlobalState = ({ children }: any) => {
     return (
-        <AppContext.Provider value={{ mainSteps, routes }}>
+        <AppContext.Provider value={{
+            mainSteps,
+            routes
+        }}>
             {children}
         </AppContext.Provider>
     );

@@ -5,41 +5,52 @@ import appStore from '../../assets/appStore.svg';
 import googlePlay from '../../assets/googlePlay.svg';
 import dots from '../../assets/backgrounds/dots.png';
 import ellipse from '../../assets/backgrounds/ellipse1.svg';
+import { Translation } from 'react-i18next';
 
 export default () => {
     return (
-        <RandomGraphicElement elements={5}>
-            <div className='heading-section'>
-                <div className='desktop'>
-                    <div className='content-wrapper'>
-                        <div className='content'>
-                            <Content />
-                            <Buttons />
+        <Translation>
+            { //need translation tag so that suspense-promise-resolve reaches this component 
+                (t) =>
+                    <RandomGraphicElement elements={5}>
+                        <div className='heading-section'>
+                            <div className='desktop'>
+                                <div className='content-wrapper'>
+                                    <div className='content'>
+                                        <Content />
+                                        <Buttons />
+                                    </div>
+                                </div>
+                                <div className='image-wrapper'>
+                                    <img src={main} alt='Portrait' className='portrait' />
+                                </div>
+                                <img src={dots} alt='' className='dots' />
+                                <img src={ellipse} alt='' className='ellipse' />
+                            </div>
+                            <div className='mobile'>
+                                <div className='content'>
+                                    <Content />
+                                </div>
+                                <img src={main} alt='Portrait' className='portrait' />
+                                <Buttons />
+                            </div>
                         </div>
-                    </div>
-                    <div className='image-wrapper'>
-                        <img src={main} alt='Portrait' className='portrait' />
-                    </div>
-                    <img src={dots} alt='' className='dots' />
-                    <img src={ellipse} alt='' className='ellipse' />
-                </div>
-                <div className='mobile'>
-                    <div className='content'>
-                        <Content />
-                    </div>
-                    <img src={main} alt='Portrait' className='portrait' />
-                    <Buttons />
-                </div>
-            </div>
-        </RandomGraphicElement>
+                    </RandomGraphicElement>
+            }
+        </Translation>
     );
 };
 
 const Content = () => (
-    <>
-        <h1>Claim, Control &<br />Reuse your new<br />Digital Identity</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </>
+    <Translation>
+        {
+            (t) =>
+                <>
+                    <h1>{t("landing.main.claimControl")} <br />{t("landing.main.reuseYourNew")}</h1>
+                    <p>{t("landing.main.mainText")}</p>
+                </>
+        }
+    </Translation>
 );
 
 const Buttons = () => (
