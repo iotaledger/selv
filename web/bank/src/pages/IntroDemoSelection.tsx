@@ -43,6 +43,7 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                 </div>
                 <div className='demo-selector demo-intro app' id='app'>
                     <div className='demo-select-wrapper'>
+                        {/*
                         <div className='demo-card-wrapper'>
                             <img src={selv} alt="Selv demo" />
                             <div className="demo-card-content">
@@ -66,6 +67,7 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                                 </div>
                             </div>
                         </div>
+                        */}
                         <div className='demo-card-wrapper'>
                             <img src={covid} alt="Covid-19 demo" />
                             <div className="demo-card-content">
