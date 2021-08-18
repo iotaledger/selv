@@ -17,21 +17,21 @@
       "control": "Controle",
       "benefitsControl": "Jij hebt de volledige controle over jouw digitale identiteit.",
       "privacy": "Privacy",
-      "benefitsPrivacy": "Deel alleen die informatie met anderen die écht nodig is.",
+      "benefitsPrivacy": "Deel alleen de informatie die anderen écht nodig hebben.",
       "reusability": "Hergebruik",
       "benefitsReusability": "Deel je data zo vaak als je wilt en razendsnel met anderen.",
       "forBusiness": "Voor bedrijven",
       "privacyLaws": "Privacy wetgeving",
       "benefitsPrivacyLaws": "Voldoet aan de meest strikte interpretatie van de Algemene verordening gegevensbescherming (AVG).",
       "dataResponsibility": "Verantwoordelijkheid",
-      "benefitsDataResponsibility": "Klanten bepalen zelf welke data ze willen delen. Bedrijven hoeven niet meer de verantwoordelijkheid te dragen over de veiligheid van gegevens.",
+      "benefitsDataResponsibility": "Delen is zo eenvoudig dat het opslaan en beschermen van klantgegevens niet meer nodig is.",
       "userExperience": "Gebruikerservaring",
       "benefitsUserExperience": "Krijg en behoud meer klanten. Een betere gebruikerservaring met veel minder formulieren invullen."
     },
     "controlIdentity": {
       "youControlYour": "Baas over je",
       "ownIdentity": "eigen identiteit",
-      "whatItIsDetailed": "Met Self Sovereign Identity (SSI) kunnen mensen, organisaties en dingen zelf gevalideerde data verzamelen en veilig delen met anderen. Met meet privacy en conrole wordt zo een \"Bring your own Identity\" (BYOI) mogelijk bij bedrijven. En is de moeilijke, trage en kostbare verzameling van data verleden tijd."
+      "whatItIsDetailed": "Met Self Sovereign Identity (SSI) kunnen mensen zelf gevalideerde data verzamelen en veilig delen met anderen. De privacy en controle ervan maakt \"Bring your own Identity\" (BYOI) mogelijk binnen bedrijven. Moeilijke, trage en kostbare verzameling van data is hiermee verleden tijd."
     },
     "FAQ": {
       "question1": "Kan de IOTA Stichting mijn data en gebruik van de app inzien?",
@@ -66,14 +66,14 @@
     "howItWorks": {
       "inBrief": "In het kort",
       "howItWorks": "Hoe Selv werkt",
-      "create": "Maak je digital identiteit",
-      "createText": "Download de Selv app en maak jouw digitale identiteit aan. Jouw identiteit blijft alleen in de app en alleen jij bepaalt met wie je data deelt.",
+      "create": "Maak je digitale identiteit",
+      "createText": "Download de Selv app en maak jouw digitale identiteit aan. Jouw identiteit blijft in de app en alleen jij bepaalt met wie je data deelt.",
       "share": "Deel",
       "shareText": "Jij bepaalt welke gegevens je deelt en met wie je dat doet. Je kunt je data zelf met iemand delen of op verzoek. Jij hebt de controle! Zo kun je ervoor zorgen dat je altijd iets terug krijgt voor het delen van je data.",
       "grow": "Voeg je data toe",
       "growText": "Verzamel alle data en referenties over jezelf, gevalideerd door anderen, en maak je digitale identiteit compleet. Alles veilig in Selv zonder dat het ergens in de cloud rondzwerft.",
       "accept": "Voor bedrijven",
-      "acceptText": "Met deze digitale identiteit kun je zonder kosten klanten gelijk identificeren en accepteren. Zodat ze veel sneller en makkelijker je klant kunnen worden."
+      "acceptText": "Met deze digitale identiteit kun je zonder kosten klanten direct identificeren en accepteren. Zo kunnen ze makkelijker en sneller klant kunnen worden."
     },
     "header": {
       "How it works": "Hoe werkt het",
@@ -85,10 +85,10 @@
     "main": {
       "claimControl": "Je Digitale Selv,",
       "reuseYourNew": "in jouw beheer",
-      "mainText": "Met Self Sovereign Identity (SSI) beheren en delen mensen, organisaties en dingen hun eigen verifeerbare data en digitale identiteit."
+      "mainText": "Selv is een demo app die mensen en organisaties zelf hun geverifeerde data en digitale identiteit laat beheren."
     },
     "selv": {
-      "selvText": "Jouw gegevens zouden niet overal moeten liggen, maar zouden ook niet ontoegankelijk moeten zijn. <1 /> Selv belooft een oplossing die het mogelijk maakt om <3> data te delen</3>, terwijl je <5> volledige controle hebt </5>."
+      "selvText": "Jouw gegevens moeten deelbaar zijn, zonder dat iedereen vrije toegang geeft. <1 /> Selv maakt het mogelijk om <3> data te delen</3>, <5> met volledige controle </5> hebt over wie het kan zien."
     }
   },
   "actions": {
