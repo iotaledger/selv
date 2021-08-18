@@ -19,12 +19,12 @@
       "privacy": "Privacy",
       "benefitsPrivacy": "Improved privacy by only revealing the minimum amount of information.",
       "reusability": "Reusability",
-      "benefitsReusability": "Share as often as you like. No more typing in the same information repeatedly in online forms.",
+      "benefitsReusability": "Share as often as you like. No more typing in the same information over and over.",
       "forBusiness": "For Business",
       "privacyLaws": "Privacy Laws",
       "benefitsPrivacyLaws": "Complies to the strictest interpretation of the General Data Protection Act (GDPR).",
       "dataResponsibility": "Data Responsibility",
-      "benefitsDataResponsibility": "Sharing or requesting data is so easy, that it is no longer necassary to store and protect customer data",
+      "benefitsDataResponsibility": "Sharing is so easy, that storing and protecting customer data is no longer needed.",
       "userExperience": "User Experience",
       "benefitsUserExperience": "Retain more customers through an enhanced User Experience. Less manual typing required."
     },
@@ -37,23 +37,27 @@
       "question1": "Does the IOTA Foundation track my data and usage?",
       "answer1": "We can’t! This solution puts data control in your hands. We have no way of accessing the data on your phone. Whenever you share data in the demo environment, you communicate this information to our servers, but it will be removed as soon as you complete the demo or close the connection. Also, only functional cookies are used on this website and during the demos. Once companies run demos or applications on their own servers, the IOTA Foundation, and other parties, will not be aware of the usage or data. Data is shared peer-to-peer making it impossible for others to listen in.",
       "question2": "Can I restore my data if I lose my phone?",
-      "answer2": "Not yet. This is currently a demonstration application, which means it doesn’t have all the features that a full release would have. The application is using (mostly) fake data, therefore recovery is not on top of mind. Backups will be available in a future update.",
+      "answer2": "Not yet. This is currently a demonstration application, which means it doesn’t have all the features that a full release would have. The application is using (mostly) fake data, therefore recovery is not our priority.",
       "question3": "Does my personal data get uploaded to the Tangle?",
       "answer3": "No, absolutely no personal information is uploaded to the Tangle in accordance with GDPR regulations. Not even in a (pseudo)anonymized state. Any personal data uploaded to the Tangle would be in violation of \"the right to be forgotten\" as Tangle data is immutable.",
       "question4": "How does this application benefit from IOTA and DLT in general?",
       "answer4": "Organisations sign credentials for the users, but how do we identify the organisations? Their digital identities are uploaded to the Tangle and are signed using asymmetric encryption methods. In addition, revocation of credentials are put on the Tangle as evidence that the credential can no longer be used.",
       "question5": "On what IOTA network does this application run?",
-      "answer5": "Currently the Chrysalis Phase 1 devnet. IOTA has zero fees, so it isn’t any more difficult to run this demo on the mainnet then on the devnet.",
+      "answer5": "It runs on mainnet. Since IOTA has zero fees, it isn’t any more difficult to run any demo on the mainnet then on the devnet.",
       "question6": "How can I learn more?",
       "answer6": {
-        "part1": "We released a whitepaper called:",
+        "part1": "We released a whitepaper called: ",
         "part2": "The Case for a Unified Identity",
-        "part3": "It is a relatively easy introduction to the subject and explains what the benefits are of IOTA Identity."
+        "part3": "It is a relatively easy introduction to the subject and explains what the benefits of IOTA Identity are. For a deeper dive into the documentation visit our",
+        "part4": "Wiki",
+        "part5": "or checkout the implementation on",
+        "part6": "GitHub",
+        "part7": "."
       },
       "question7": "What is a DLT or Tangle?",
-      "answer7": "Distributed Ledger Technology (DLT) is the umbrella term for Blockchain technology. It is a decentral database of which many copies are hosted across the world. They discuss with each other what is truth and what isn't through the \"consensus mechanism\". With Bitcoin, this process costs a lot of electricity due to the scalability problems it has. The Tangle of IOTA solves this, making is faster, feeless and green. The Tangle is the underlying data structure of the IOTA network, which hosts the IOTA cryptocurrency token and is developed by the IOTA Foundation.",
+      "answer7": "Distributed Ledger Technology (DLT) is the umbrella term for technologies like Blockchains. It is a decentral database of which many copies are hosted across the world. They agree with each other on what is true and what isn't through the \"consensus mechanism\". With Bitcoin, this process costs a lot of electricity due to the security model it has. The Tangle of IOTA solves this, making is faster, feeless and green. The Tangle is the underlying data structure of the IOTA network, which hosts the IOTA cryptocurrency token and is developed by the IOTA Foundation.",
       "question8": "Who developed the Selv Demo's?",
-      "answer8": "Selv is developed by the IOTA Foundation in collaboration with different parties. The IOTA Foundation is a non-profit foundation guiding and contributing to the development of the core protocol and facilitating the development of the ecosystem around IOTA."
+      "answer8": "Selv is developed by the IOTA Foundation in collaboration with different parties. The IOTA Foundation is a non-profit foundation guiding and contributing to the development of the core protocol and facilitating the development of the ecosystem around IOTA. You can find the documation for IOTA Identity in our "
     },
     "footer": {
       "contactUs": "Contact Us",
@@ -85,10 +89,10 @@
     "main": {
       "claimControl": "A digital Selv,",
       "reuseYourNew": "under your control",
-      "mainText": "Selv is a demo app that showcases how IOTA Identity may affect existing or create new digital processes, with a focus on privacy and control of your own digital Selv"
+      "mainText": "Selv is a demo app that showcases how IOTA Identity creates new digital processes and revolutionizes existing once, with a focus on privacy and control of your own digital Selv"
     },
     "selv": {
-      "selvText": "Your data shouldn’t be public, but it shouldn’t be locked up either.<1/>Selv promises a solution that <3>enables data flow</3>, completely in your <5>control</5>."
+      "selvText": "Your data shouldn’t be locked up, but it can't be public either.<1/>Selv promises a solution that <3>enables data flow</3>, completely under your <5>control</5>."
     }
   },
   "actions": {
