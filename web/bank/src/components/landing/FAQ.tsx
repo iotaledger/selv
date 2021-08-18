@@ -131,7 +131,7 @@ export default () => (
                                     key={7}
                                 >
                                     <div className="faq-content">
-                                        <p>{t("landing.FAQ.answer6.part1")}<a target="_blank" rel="noopener noreferrer" href="https://files.iota.org/comms/IOTA_The_Case_for_a_Unified_Identity.pdf" >"{t("landing.FAQ.answer6.part2")}"</a>. {t("landing.FAQ.answer6.part3")}</p>
+                                        <p>{t("landing.FAQ.answer6.part1")}<a target="_blank" rel="noopener noreferrer" href="https://files.iota.org/comms/IOTA_The_Case_for_a_Unified_Identity.pdf" >"{t("landing.FAQ.answer6.part2")}"</a>. {t("landing.FAQ.answer6.part3")} <a target="_blank" rel="noopener noreferrer" href="https://wiki.iota.org/">{t("landing.FAQ.answer6.part4")}</a> {t("landing.FAQ.answer6.part5")} <a target="_blank" rel="noopener noreferrer" href="https://github.com/iotaledger/identity.rs">{t("landing.FAQ.answer6.part6")}</a>{t("landing.FAQ.answer6.part7")}</p>
                                     </div>
                                 </Collapse.Panel>
                             </Collapse>
