@@ -37,23 +37,27 @@
       "question1": "Kan de IOTA Stichting mijn data en gebruik van de app inzien?",
       "answer1": "Nee! De techniek is zo ontworpen dat het de controle over data terug geeft aan de persoon van wie deze data is. Anderen hebben geen toegang tot de gegevens of het gebruik van de app. Er is geen manier voor anderen om de data op jouw toestel in te zien. Als je in de demo-omgeving ervoor kiest om je gegevens te delen dan worden die gegevens tijdelijk opgeslagen op de IOTA servers. Deze gegevens worden verwijderd zodra je de demo afgerond hebt of de verbinding verbreekt. Zodra andere organisaties demo’s of applicaties maken heeft de IOTA stichting of anderen partijen hier helemaal geen inzicht in. Bij het één-op-één delen van gegevens via QR-codes vindt er geen communicatie plaats behalve via de twee toestellen die de gegevens met elkaar delen.",
       "question2": "Kan ik mijn data terughalen als ik mijn telefoon verlies?",
-      "answer2": "Nog niet. Op dit moment is de app nog een demonstratie-toepassing. Dat betekent dat het niet alle functies heeft van een echt applicatie. Deze demo-app gebruikt (meestal) nepgegevens. Daarom is het herstellen van gegevens nog niet belangrijk. De mogelijkheid voor een back-up zal in de toekomst wel mogelijk zijn.",
+      "answer2": "Nog niet. Op dit moment is de app nog een demonstratie-toepassing. Dat betekent dat het niet alle functies heeft van een echt applicatie. Deze demo-app gebruikt (meestal) nepgegevens. Daarom is het herstellen van gegevens nog niet belangrijk.",
       "question3": "Worden mijn persoonlijke gegevens geüpload naar de Tangle?",
       "answer3": "Nee. Er wordt geen persoonlijke informatie geüpload naar het onderliggende IOTA netwerk, zoals vereist in de AVG. Zelfs niet in een (pseudo)geanonimiseerde vorm. Elk persoonlijk gegeven dat op de Tangle geüpload wordt zou in strijd zijn met het recht om vergeten te worden, aangezien de gegevens op de Tangle onveranderlijk is.",
       "question4": "Hoe maakt deze app gebruik van IOTA en Distributed Ledger Technology (DLT)?",
       "answer4": "Organisatie ondertekenen referenties van gebruikers, maar hoe worden deze organisaties herkend? De digitale identiteit van deze organisaties worden middels een data transactie geupload and zijn ondertekend met asymmetrische encrypte technieken. Ook word het intrekken van referenties ook op de Tangle opgeslagen zodat altijd duidelijk is welke referenties geldig zijn .",
       "question5": "Op welk IOTA-netwerk draait deze applicatie?",
-      "answer5": "Op het moment draait de applicatie op het testnetwerk van IOTA 1.0. Aangezien er geen transactie kosten zijn op IOTA, kan dit makkelijk worden omgezet naar het hoofdnetwerk.",
+      "answer5": "TBD Op het moment draait de applicatie op het testnetwerk van IOTA 1.0. Aangezien er geen transactie kosten zijn op IOTA, kan dit makkelijk worden omgezet naar het hoofdnetwerk.",
       "question6": "Waar kan ik meer te weten komen?",
       "answer6": {
         "part1": "IOTA heeft een whitepaper uitgebracht in het Engels met de titel: ",
         "part2": "The Case for a Unified Identity",
-        "part3": "Het is een makkelijk te lezen inleiding over het IOTA Identity framewerk en wat de voordelen zijn."
+        "part3": "Het is een makkelijk te lezen inleiding over het IOTA Identity framewerk en wat de voordelen zijn. TBD",
+        "part4": "Wiki",
+        "part5": "TBD",
+        "part6": "GitHub",
+        "part7": "."
       },
       "question7": "Wat is een DLT of Tangle?",
-      "answer7": "Distributed Ledger Technologie (DLT) is de overkoepelende term voor Blockchain technologie. Het is een decentrale database waarvan er veel kopieën worden verspreid over de wereld. Onderling spreken die met elkaar af wat waarheid is en wat niet, dit is het \"consensus mechanism\". Bij Bitcoin kost die een hoop elektriciteit vanweeg schaalbaarheids problemen, de Tangle van IOTA lost dit op en is daarmee sneller, zonder transactie kosten en zonder verbruik van enorm veel elektriciteit. De Tangle is de onderliggende data structuur van het IOTA netwerk die ook de IOTA cryptocurrency token beheerd en is ontwikkelt door de IOTA Foundation.",
+      "answer7": "TBD Distributed Ledger Technologie (DLT) is de overkoepelende term voor Blockchain technologie. Het is een decentrale database waarvan er veel kopieën worden verspreid over de wereld. Onderling spreken die met elkaar af wat waarheid is en wat niet, dit is het \"consensus mechanism\". Bij Bitcoin kost die een hoop elektriciteit vanweeg schaalbaarheids problemen, de Tangle van IOTA lost dit op en is daarmee sneller, zonder transactie kosten en zonder verbruik van enorm veel elektriciteit. De Tangle is de onderliggende data structuur van het IOTA netwerk die ook de IOTA cryptocurrency token beheerd en is ontwikkelt door de IOTA Foundation.",
       "question8": "Wie creërde de Selv Demo's?",
-      "answer8": "Selv is ontwikkelt door de IOTA Foundation, in samenwerking met verschillende partijen. De IOTA Foundation is een stichting die zich bezig houd met de ontwikkeling van het IOTA protocol en het IOTA ecosysteem."
+      "answer8": "TBD Selv is ontwikkelt door de IOTA Foundation, in samenwerking met verschillende partijen. De IOTA Foundation is een stichting die zich bezig houd met de ontwikkeling van het IOTA protocol en het IOTA ecosysteem."
     },
     "footer": {
       "contactUs": "Contact",
