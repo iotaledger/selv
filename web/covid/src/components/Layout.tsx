@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactGA from 'react-ga';
 import Disclaimer from './Disclaimer';
 import Header from './Header';
 import Steps from './Steps';
@@ -15,8 +14,6 @@ export default ({ children, match, customTheme, customClass, customStep, noHeade
     noHeader?: boolean;
 }) => {
     const { step, mainSteps, theme } = useStep(match);
-
-    ReactGA.pageview(match.url);
 
     return (
         <div className={`theme-${theme || customTheme}`}>

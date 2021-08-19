@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import WebFontLoader from 'webfontloader';
-import ReactGA from 'react-ga';
 import { IntroWelcome } from './pages'
 import GlobalState from './context/globalState'
 import 'antd/dist/antd.css';
@@ -21,9 +20,6 @@ WebFontLoader.load({
       ],
   },
 });
-
-ReactGA.initialize('UA-159929129-1'); // (trackingID, { debug: true })
-ReactGA.set({ anonymizeIp: true });
 
 const App = () => {
   return (
