@@ -1,6 +1,5 @@
 import React from 'react';
 import WebFontLoader from 'webfontloader';
-import ReactGA from 'react-ga';
 import AOS from 'aos';
 import Router from './Router';
 import GlobalState from './context/globalState';
@@ -21,9 +20,6 @@ WebFontLoader.load({
       ],
   },
 });
-
-ReactGA.initialize('UA-159929129-2'); // (trackingID, { debug: true })
-ReactGA.set({ anonymizeIp: true });
 
 AOS.init();
 
