@@ -20,11 +20,11 @@ const whitelist = [
     'http://localhost:3000', 
     'http://localhost:3003', 
     'https://selv.iota.org', 
-    'https://covid-19.iota.org', 
+    'https://health-selv.iota.org', 
+    'https://persistent-selv.iota.org',
     'https://selv.vercel.app', 
     'https://selv.iota1.vercel.app', 
     'https://covid-19.iota1.vercel.app', 
-    'https://persistent-selv.iota.org',
     'https://persistent-selves.vercel.app',
 ];
 const corsOptions = {
