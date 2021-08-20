@@ -41,9 +41,9 @@
       "question3": "Worden mijn persoonlijke gegevens geüpload naar de Tangle?",
       "answer3": "Nee. Er wordt geen persoonlijke informatie geüpload naar het onderliggende IOTA netwerk, zoals vereist in de AVG. Zelfs niet in een (pseudo)geanonimiseerde vorm. Elk persoonlijk gegeven dat op de Tangle geüpload wordt zou in strijd zijn met het recht om vergeten te worden, aangezien de gegevens op de Tangle onveranderlijk is.",
       "question4": "Hoe maakt deze app gebruik van IOTA en Distributed Ledger Technology (DLT)?",
-      "answer4": "Organisatie ondertekenen referenties van gebruikers, maar hoe worden deze organisaties herkend? De digitale identiteit van deze organisaties worden middels een data transactie geupload and zijn ondertekend met asymmetrische encrypte technieken. Ook word het intrekken van referenties ook op de Tangle opgeslagen zodat altijd duidelijk is welke referenties geldig zijn .",
+      "answer4": "Organisatie ondertekenen referenties van gebruikers, maar hoe worden deze organisaties herkend? De digitale identiteit van deze organisaties worden middels een data transactie geupload and zijn ondertekend met asymmetrische encryptietechnieken. Het intrekken van referenties wordt ook op de Tangle opgeslagen, zodat altijd duidelijk is welke referenties geldig zijn.",
       "question5": "Op welk IOTA-netwerk draait deze applicatie?",
-      "answer5": "De applicatie draait op het mainnet van IOTA. Aangezien er geen transactie kosten zijn op IOTA, is het geen probleem om direct gebruik te maken van het mainnet.",
+      "answer5": "De applicatie draait op het mainnet van IOTA. Aangezien er geen transactiekosten zijn op IOTA, is het geen probleem om direct gebruik te maken van het mainnet.",
       "question6": "Waar kan ik meer te weten komen?",
       "answer6": {
         "part1": "IOTA heeft een whitepaper uitgebracht in het Engels met de titel: ",
@@ -55,7 +55,7 @@
         "part7": "."
       },
       "question7": "Wat is een DLT of Tangle?",
-      "answer7": "Distributed Ledger Technologie (DLT) is de overkoepelende term voor o.a. Blockchain technologie. Het is een decentrale database waarvan er veel kopieën worden verspreid over de wereld. Onderling spreken deze kopieën met elkaar af wat waarheid is en wat niet, dit is het \"consensus mechanism\". Bij Bitcoin kost dit proces veel elektriciteit vanwege de schaalbaarheidsproblemen die het heeft. De Tangle van IOTA lost dit op door het sneller, goedkoper en groener te maken. De Tangle - ontwikkeld door de IOTA Foundation - is de onderliggende data-structuur van het IOTA-netwerk, waar ook de IOTA-cryptocurrency-token uitgewisself wordt.",
+      "answer7": "Distributed Ledger Technologie (DLT) is de overkoepelende term voor o.a. Blockchain technologie. Het is een decentrale database waarvan er veel kopieën worden verspreid over de wereld. Onderling spreken deze kopieën met elkaar af wat waarheid is en wat niet, dit is het \"consensus mechanism\". Bij Bitcoin kost dit proces veel elektriciteit vanwege de schaalbaarheidsproblemen die het heeft. De Tangle van IOTA lost dit op door het sneller, goedkoper en groener te maken. De Tangle - ontwikkeld door de IOTA Foundation - is de onderliggende data-structuur van het IOTA-netwerk, waar ook de IOTA-cryptocurrency-token uitgewisseld wordt.",
       "question8": "Wie creëerde de Selv Demo's?",
       "answer8": "Selv is ontwikkeld door de IOTA Foundation, in samenwerking met verschillende partijen. De IOTA Foundation is een stichting die zich bezig houdt met de ontwikkeling van het IOTA protocol en het IOTA ecosysteem."
     },
@@ -77,7 +77,7 @@
       "grow": "Voeg je data toe",
       "growText": "Verzamel alle data en referenties over jezelf, gevalideerd door anderen, en maak je digitale identiteit compleet. Alles veilig in Selv zonder dat het ergens in de cloud rondzwerft.",
       "accept": "Voor bedrijven",
-      "acceptText": "Met deze digitale identiteit kun je zonder kosten klanten direct identificeren en accepteren. Zo kunnen ze makkelijker en sneller klant kunnen worden."
+      "acceptText": "Met deze digitale identiteit kun je zonder kosten klanten direct identificeren en accepteren. Zo kunnen ze makkelijker en sneller klant worden."
     },
     "header": {
       "How it works": "Hoe werkt het",
