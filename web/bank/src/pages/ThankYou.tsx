@@ -62,13 +62,10 @@ const ThankYou: React.FC = () => {
                             </div>
                         </div>
                         <div className='cta-wrapper'>
-                            <Link to={'/company/list/0'}>
-                                <Button className='cta'>
-                                    {t("pages.demo.thankYou.returnCompanyHouse")}
-                                </Button>
-                            </Link>
                             <Link to={'/'}>
-                                {t("pages.demo.thankYou.returnHome")}
+                                <Button className='cta'>
+                                    {t("pages.demo.thankYou.returnHome")}
+                                </Button>
                             </Link>
                         </div>
                         <img src={dots} alt='' className='dots-bottom' />
