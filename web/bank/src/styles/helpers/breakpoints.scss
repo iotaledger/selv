@@ -11,8 +11,11 @@
     @if $point == medium {
         @media (max-width: 989px) { @content; }
     } 
-    @else if $point == small {
+    @if $point == small {
         @media (max-width: 767px) { @content; }
+    }
+    @else if $point == verysmall {
+        @media (max-width: 350px) { @content; }
     }
 }
 
