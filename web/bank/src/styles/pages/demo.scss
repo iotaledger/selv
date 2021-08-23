@@ -306,6 +306,16 @@
         img {
             width: 410px;
         }
+
+        @media (max-width: 430px) {
+            width: auto;
+            padding: 15px;
+            margin: 0 10px 20px 10px;
+
+            img {
+                width: 100%;
+            }
+        }
     }
 
     .demo-card-content {
@@ -313,6 +323,14 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+
+        @include breakPoint(medium) {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 430px) {
+            margin: 10px 5px 10px 5px;
+        }
 
         h3 {
             margin: 0;
