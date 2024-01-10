@@ -7,8 +7,8 @@ import { Steps, Sidebar } from '../components';
 /**
  * Component which will display a CompanyIntro.
  */
-const CompanyIntro: React.FC = ({ match }: any) => {
-    const { step, nextStep, mainSteps } = useStep(match);
+const CompanyIntro: React.FC = () => {
+    const { step, nextStep, mainSteps } = useStep();
 
     return (
         <div className='page-wrapper'>

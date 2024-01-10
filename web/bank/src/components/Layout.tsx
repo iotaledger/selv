@@ -6,15 +6,14 @@ import Steps from './Steps';
 import Sidebar from './Sidebar';
 import useStep from '../utils/useStep';
 
-export default ({ children, match, customTheme, customStep, noHeader, noFooter }: {
+export default ({ children, customTheme, customStep, noHeader, noFooter }: {
     children?: JSX.Element | null | undefined;
-    match: any;
     customTheme?: string;
     customStep?: number;
     noHeader?: boolean;
     noFooter?: boolean;
 }) => {
-    const { step, mainSteps, theme } = useStep(match);
+    const { step, mainSteps, theme } = useStep();
 
     return (
         <div className={`theme-${theme || customTheme}`}>

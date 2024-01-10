@@ -130,7 +130,7 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
 
 
     return (
-        <Layout match={match}>
+        <Layout>
             <div className='insurance-data-page-wrapper'>
                 <h1>{t("pages.insurance.insuranceData.openAnAccount")}</h1>
                 <Collapse
@@ -245,7 +245,6 @@ const InsuranceData: React.FC = ({ history, match }: any) => {
                 {
                     webSocket && <WebSocket
                         history={history}
-                        match={match}
                         schemaName='Insurance'
                         setStatus={setStatusMessage}
                         fields={fields}

@@ -27,6 +27,7 @@ const RandomGraphicElement = ({ children, elements }: {
 }) => {
     const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
 
+    //@ts-ignore
     const mainSectionEl = useCallback(node => {
         if (node !== null) {
             setDimensions(node.getBoundingClientRect());

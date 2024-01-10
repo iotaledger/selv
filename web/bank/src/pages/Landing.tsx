@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
     App,
     ControlIdentity,
@@ -14,7 +15,8 @@ import {
 /**
  * Component which will display a Landing page.
  */
-const Landing: React.FC = ({ location }: any) => {
+const Landing: React.FC = () => {
+    let location = useLocation();
     useEffect(() => {
         if (location.hash) {
             const target: Element | null = document.querySelector(location.hash);

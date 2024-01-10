@@ -6,7 +6,7 @@ import useStep from '../utils/useStep';
 import useInterval from '../utils/useInterval';
 import evaluateCredential from '../utils/did';
 import { getCompanyId, encrypt, decrypt } from '../utils/helper';
-import { serverAPI, websocketURL } from '../config.json';
+import config from '../config.json';
 import { useTranslation } from 'react-i18next';
 
 // const messages = {
@@ -33,9 +33,8 @@ const notify = (type: string, message: string, description: string) => {
     }
 };
 
-const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, messages, generatedChannelId }: {
+const WebSocket = ({ history, schemaName, setStatus, setLoading, fields, messages, generatedChannelId }: {
     history: any;
-    match: any;
     schemaName?: string;
     setStatus: (status: string) => void;
     setLoading?: (status: boolean) => void;
@@ -43,7 +42,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     fields: any;
     generatedChannelId?: string;
 }) => {
-    const { nextStep } = useStep(match);
+    const { nextStep } = useStep();
     const [password, setPassword] = useState('');
     const [channelId, setChannelId] = useState('');
     const [isRunning, setIsRunning] = useState(false);
@@ -90,7 +89,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     }, [channelId]); // eslint-disable-line react-hooks/exhaustive-deps
 
     async function connectWebSocket (channelId: string, data: object) {
-        ioClient = SocketIOClient(websocketURL, {
+        ioClient = SocketIOClient(config.websocketURL, {
             autoConnect: true,
             reconnection: true,
             reconnectionDelay: 500,
@@ -106,7 +105,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
             const payload = {
                 schemaName: schemaName,
                 data: await encrypt(password, JSON.stringify(data)),
-                url: websocketURL
+                url: config.websocketURL
             };
             ioClient.emit('createCredential', { channelId, payload });
         }
@@ -188,7 +187,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
     }
 
     async function checkConnectedStatus (channelId: string) {
-        const response = await axios.get(`${serverAPI}/connection?channelId=${channelId}`);
+        const response = await axios.get(`${config.serverAPI}/connection?channelId=${channelId}`);
         return response && response?.data?.status === 'success';
     }
 
@@ -210,7 +209,7 @@ const WebSocket = ({ history, match, schemaName, setStatus, setLoading, fields, 
 
     async function updateCompanyStatus () {
         const companyId = await getCompanyId();
-        await axios.get(`${serverAPI}/activate?company=${companyId}`);
+        await axios.get(`${config.serverAPI}/activate?company=${companyId}`);
     }
 
     useInterval(async () => {

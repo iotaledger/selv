@@ -9,19 +9,19 @@ import avatar1 from '../assets/avatar1.png';
 import avatar2 from '../assets/avatar2.png';
 import dots from '../assets/backgrounds/dots.png';
 import circle from '../assets/backgrounds/circleFrame6.svg';
-import { covidDemo } from '../config.json';
+import config from '../config.json';
 import { useTranslation, Trans } from 'react-i18next';
 
 /**
  * Component which will display a AppDownloadQR.
  */
-const AppDownloadQR: React.FC = ({ match }: any) => {
-    const { nextStep } = useStep(match);
+const AppDownloadQR: React.FC = () => {
+    const { nextStep } = useStep();
 
     const { t } = useTranslation();
 
     return (
-        <Layout match={match} noHeader noFooter>
+        <Layout noHeader noFooter>
             <React.Fragment>
                 <div className='scan-qr-page-wrapper app-download'>
                     <RandomGraphicElement elements={5}>
@@ -51,7 +51,7 @@ const AppDownloadQR: React.FC = ({ match }: any) => {
                                         </Trans>
                                     </p>
                                     <div className='qr-wrapper'>
-                                        <QRCode text={`${covidDemo}//qr-redirect`} size={200} />
+                                        <QRCode text={`${config.covidDemo}//qr-redirect`} size={200} />
                                     </div>
                                 </div>
                                 <img src={avatar1} alt='' className='avatar1' />

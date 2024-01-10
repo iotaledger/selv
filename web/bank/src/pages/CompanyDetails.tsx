@@ -1,13 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import useStep from '../utils/useStep';
 import useFetch from '../utils/useFetch';
 import { Layout, Loading, NextStepDrawer } from '../components';
 import back from '../assets/back.svg';
-import { serverAPI } from '../config.json';
+import config from '../config.json';
 import { useTranslation } from 'react-i18next';
 
-interface CompanyData {
+interface ICompanyData {
     'CompanyNumber': string;
     'CompanyName': string;
     'CompanyCreationDate': string;
@@ -22,15 +22,16 @@ interface CompanyData {
 /**
  * Component which will display a CompanyData.
  */
-const CompanyData: React.FC = ({ match }: any) => {
-    const companyId = match?.params?.companyId;
-    const { nextStep } = useStep(match);
-    const { response, loading } = useFetch(`${serverAPI}/company?company=${companyId}`);
+const CompanyData: React.FC = () => {
+    const location = useLocation();
+    const companyId = new URLSearchParams(location.search).get('companyId');
+    const { nextStep } = useStep();
+    const { response, loading } = useFetch(`${config.serverAPI}/company?company=${companyId}`);
 
     const { t } = useTranslation();
 
     return (
-        <Layout match={match}>
+        <Layout>
             <React.Fragment>
                 <div className='company-details-wrapper'>
                     {
@@ -38,9 +39,9 @@ const CompanyData: React.FC = ({ match }: any) => {
                             <React.Fragment>
                                 <Link
                                     to={{
-                                        pathname: `${match.url.replace(companyId, '').replace('details', 'list')}`,
-                                        state: { nextStep }
+                                        pathname: `${location.pathname.replace(companyId ?? '', '').replace('details', 'list')}`,
                                     }}
+                                    state={{ nextStep }}
                                     className='company-details-back bold'
                                 >
                                     <img src={back} alt='' />&nbsp;&nbsp;&nbsp;{t("actions.back")} 
@@ -62,7 +63,7 @@ const CompanyData: React.FC = ({ match }: any) => {
     );
 };
 
-const CompanyDetails = ({ details }: { details: CompanyData | undefined }) => {
+const CompanyDetails = ({ details }: { details: ICompanyData | undefined }) => {
 
     const { t } = useTranslation();
 

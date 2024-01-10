@@ -12,8 +12,8 @@ import { useTranslation, Trans } from 'react-i18next';
 /**
  * Component which will display a IntroShowTodos.
  */
-const IntroShowTodos: React.FC = ({ match }: any) => {
-    const { nextStep } = useStep(match);
+const IntroShowTodos: React.FC = () => {
+    const { nextStep } = useStep();
 
     const { t } = useTranslation();
 

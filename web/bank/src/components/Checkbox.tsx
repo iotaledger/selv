@@ -28,7 +28,7 @@ const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
 
     return (
         <div className='empty-form'>
-            <Form layout='vertical' onSubmit={handleSubmit}>
+            <Form layout='vertical' onFinish={handleSubmit}>
                 <Form.Item>
                     {getFieldDecorator('agreement', {
                         valuePropName: 'checked',
@@ -58,6 +58,4 @@ const CheckboxInstance = ({ form, onSubmit, status, messages, buttonText }: {
     );
 };
 
-const WrappedForm = Form.create({ name: 'checkbox' })(CheckboxInstance);
-
-export default WrappedForm;
+export default CheckboxInstance;

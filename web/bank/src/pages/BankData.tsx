@@ -117,7 +117,7 @@ const BankData: React.FC = ({ history, match }: any) => {
     const formData: any = { onSubmit: continueNextStep, status, messages, accountTypes, buttonText: t("pages.demo.introShowTodos.getBankAccount") };
 
     return (
-        <Layout match={match}>
+        <Layout>
             <div className='bank-data-page-wrapper'>
                 <h1>{t("pages.insurance.insuranceData.openAnAccount")}</h1>
                 <Collapse
@@ -210,7 +210,6 @@ const BankData: React.FC = ({ history, match }: any) => {
                 {
                     webSocket && <WebSocket
                         history={history}
-                        match={match}
                         schemaName='BankAccount'
                         setStatus={setStatusMessage}
                         fields={fields}

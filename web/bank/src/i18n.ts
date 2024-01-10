@@ -8,7 +8,7 @@ i18n
     .use(Backend)
     .use(initReactI18next)
     .init({
-        whitelist: ['nl', 'en'],
+        supportedLngs: ['nl', 'en'],
         debug: false,
         detection: {
             order: ['path', 'localStorage', 'navigator']

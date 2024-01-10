@@ -17,10 +17,10 @@ interface IChannelDetails {
 /**
  * Component which will display a ProveIdentity.
  */
-const ProveIdentity: React.FC = ({ history, match }: any) => {
+const ProveIdentity: React.FC = ({ history }: any) => {
     const { t } = useTranslation();
 
-    const { nextStep } = useStep(match);
+    const { nextStep } = useStep();
     const [loading, setLoading] = useState(true);
     const [status, setStatus] = useState("pages.general.proveIdentity.waitingForLogin");
     const [qrContent, setQrContent] = useState('');
@@ -84,7 +84,7 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
     }, [nextStep]); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Layout match={match}>
+        <Layout>
             <RandomGraphicElement elements={5}>
                 <div className='scan-qr-page-wrapper'>
                     <h2>{t("pages.general.proveIdentity.provideCredentials")}</h2>
@@ -101,7 +101,6 @@ const ProveIdentity: React.FC = ({ history, match }: any) => {
                     {
                         channel && <WebSocket
                             history={history}
-                            match={match}
                             generatedChannelId={channel}
                             setStatus={status => setStatusMessage(status)}
                             setLoading={status => setLoading(status)}

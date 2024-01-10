@@ -84,7 +84,7 @@ const CompanyData: React.FC = ({ history, match }: any) => {
     const emptyFormData: any = { dataFields: emptyFields, labels, processValues, status, messages };
 
     return (
-        <Layout match={match}>
+        <Layout>
             <div className='company-data-page-wrapper'>
                 <h2>{t("pages.company.companyData.setUpPrivateCompany")}</h2>
                 <h3 className='section-header'>{t("pages.insurance.insuranceData.businessOwner")}</h3>
@@ -108,7 +108,6 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                 {
                     webSocket && <WebSocket
                         history={history}
-                        match={match}
                         schemaName='Company'
                         setStatus={setStatusMessage}
                         fields={fields}

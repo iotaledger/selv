@@ -14,14 +14,14 @@ import DropSelector from '../components/DropSelector';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
 import logo from '../assets/landing/logoHeader.svg';
-import { covidDemo, persistentSelvDemo } from '../config.json';
+import config from '../config.json';
 import { useTranslation } from 'react-i18next';
 
 /**
  * Component which will display a IntroDemoSelection.
  */
-const IntroDemoSelection: React.FC = ({ match }: any) => {
-    const { nextStep } = useStep(match);
+const IntroDemoSelection: React.FC = () => {
+    const { nextStep } = useStep();
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -78,7 +78,7 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                                     </a>
                                 </div>
                                 <div className="bottom">
-                                    <a href={`${covidDemo}/demo/app`}>
+                                    <a href={`${config.covidDemo}/demo/app`}>
                                         <Button className="cta">
                                             {t("actions.tryTheDemo")}
                                         </Button>
@@ -101,7 +101,7 @@ const IntroDemoSelection: React.FC = ({ match }: any) => {
                                     </a>
                                 </div>
                                 <div className="bottom">
-                                    <a href={`${persistentSelvDemo}/demo/welcome`} rel='noopener noreferrer'>
+                                    <a href={`${config.persistentSelvDemo}/demo/welcome`} rel='noopener noreferrer'>
                                         <Button className='cta'>
                                             {t("actions.tryTheDemo")}
                                         </Button>

@@ -13,6 +13,7 @@ const useFetch = (url: string, options?: any) => {
                 const json = await res.json();
                 setResponse(json);
             } catch (e) {
+                //@ts-ignore
                 setError(e);
             } finally {
                 setLoading(false);

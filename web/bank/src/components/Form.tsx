@@ -29,7 +29,7 @@ const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }
 
     return (
         <div className='empty-form'>
-            <Form layout='vertical' onSubmit={handleSubmit}>
+            <Form layout='vertical' onFinish={handleSubmit}>
                 {
                     dataFields.map((field: string) => (
                         <Form.Item label={t(labels[field])} key={field}>
@@ -52,6 +52,4 @@ const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }
     );
 };
 
-const WrappedForm = Form.create({ name: 'form' })(EmptyForm);
-
-export default WrappedForm;
+export default EmptyForm;

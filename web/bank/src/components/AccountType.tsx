@@ -33,7 +33,7 @@ const RadioGroup = ({ form, onSubmit, accountTypes }: {
 
     return (
         <div className='empty-form'>
-            <Form onSubmit={handleSubmit}>
+            <Form onFinish={handleSubmit}>
                 <Form.Item label={t(accountTypes.label)} colon={false}>
                     {getFieldDecorator('accountType', {
                         rules: [{
@@ -71,6 +71,4 @@ const RadioGroup = ({ form, onSubmit, accountTypes }: {
     );
 };
 
-const WrappedForm = Form.create({ name: 'radioGroup' })(RadioGroup);
-
-export default WrappedForm;
+export default RadioGroup;

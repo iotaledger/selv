@@ -121,7 +121,7 @@ const TableInstance = ({
           onRowClick={onRowClick}
           loading={loading}
         >
-          <Column width={tableDimensions[1]} fixed>
+          {/* <Column width={tableDimensions[1]} fixed>
             <HeaderCell>{t("components.table.companyName")}</HeaderCell>
             <CompanyCell />
           </Column>
@@ -158,7 +158,7 @@ const TableInstance = ({
             >
               <div className="cell-content info">{'\u24D8'}</div>
             </Cell>
-          </Column>
+          </Column> */}
         </Table>
       </div>
       <Pagination

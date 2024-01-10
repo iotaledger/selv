@@ -14,8 +14,8 @@ import { useTranslation } from 'react-i18next';
 /**
  * Component which will display a GreatSuccess.
  */
-const GreatSuccess: React.FC = ({ match }: any) => {
-    const { nextStep } = useStep(match);
+const GreatSuccess: React.FC = () => {
+    const { nextStep } = useStep();
     const [companyId, setCompanyId] = useState('');
 
     const { t } = useTranslation();

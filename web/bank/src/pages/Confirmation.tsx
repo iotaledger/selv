@@ -10,8 +10,8 @@ import { useTranslation } from 'react-i18next';
 /**
  * Component which will display a Confirmation.
  */
-const Confirmation: React.FC = ({ match }: any) => {
-    const { nextStep, theme } = useStep(match);
+const Confirmation: React.FC = () => {
+    const { nextStep, theme } = useStep();
     const [companyId, setCompanyId] = useState('');
     const [title, setTitle] = useState('');
 
@@ -39,7 +39,7 @@ const Confirmation: React.FC = ({ match }: any) => {
     }, [companyId, theme]);
 
     return (
-        <Layout match={match}>
+        <Layout>
             <RandomGraphicElement elements={5}>
                 <div className='confirmation-page'>
                     <div className='selv-wrapper'>

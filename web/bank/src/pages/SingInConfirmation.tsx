@@ -9,8 +9,8 @@ import { useTranslation } from 'react-i18next';
 /**
  * Component which will display a SingInConfirmation.
  */
-const SingInConfirmation: React.FC = ({ history, match }: any) => {
-    const { nextStep } = useStep(match);
+const SingInConfirmation: React.FC = ({ history }: any) => {
+    const { nextStep } = useStep();
 
     const { t } = useTranslation();
 
@@ -27,7 +27,7 @@ const SingInConfirmation: React.FC = ({ history, match }: any) => {
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
-        <Layout match={match}>
+        <Layout>
             <RandomGraphicElement elements={5}>
                 <div className='sign-in-confirmation'>
                     <img src={selv} alt='Selv app logo' />
