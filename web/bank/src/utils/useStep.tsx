@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import Context from '../context/app-context';
 import matchStep from './matchSteps';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { matchPath, useLocation } from 'react-router-dom';
 
 interface MatchResult {
     page: string | undefined;
@@ -24,19 +24,20 @@ const useStep = () => {
         async function setSteps () {
             const matchStepResult: MatchResult | null | undefined = matchStep(location.pathname);
             if (matchStepResult?.step) {
+                console.log(matchStepResult, location)
                 // TODO: figure out was is going on here
-                // if (location?.search?.step) {
-                //     setStep(Number(match?.params?.step));
-                // } else {
-                //     setStep(Number(matchStepResult?.step));
-                // }
+                if(false) {  // if (location?.search?.step) {
+                    //setStep(Number(match?.params?.step));
+                } else {
+                    setStep(Number(matchStepResult?.step));
+                }
             }
 
             if (matchStepResult?.theme) {
                 setTheme(matchStepResult?.theme);
             }
 
-            const idx = routes.findIndex(({ path }: { path: string; }) => path.endsWith(location.pathname));
+            const idx = routes.findIndex(({ path }: { path: string; }) => matchPath(path, location.pathname));
             if (idx !== -1 && routes.length > idx + 1) {
                 var next = routes[idx + 1].path;
                 next = next.replace(":lng?", i18n.language.toString()); //replace route-param

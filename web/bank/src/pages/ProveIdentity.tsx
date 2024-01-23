@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import randomstring from 'randomstring';
 import { Layout, Loading, QRCode, RandomGraphicElement, WebSocket } from '../components';
 import useStep from '../utils/useStep';
 import config from '../config.json';
 import { useTranslation, Trans } from 'react-i18next';
+import { WebsocketContext } from '../context/websocket';
 
 interface IChannelDetails {
     channelId: string;
@@ -26,6 +27,28 @@ const ProveIdentity: React.FC = ({ history }: any) => {
     const [qrContent, setQrContent] = useState('');
     const [channel, setChannel] = useState('');
     const [channelDetails, setChannelDetails] = useState<IChannelDetails>();
+
+    const [connected, socket] = useContext(WebsocketContext);
+
+    useEffect(() => {
+        
+        socket.on('connect', () => {
+            socket.emit('requestOffer');
+        })
+        
+        socket.on('offer', (data, cb) => {
+            console.log(data);
+            cb();
+        })
+        
+        socket.on('connectDid', (data, cb) => {
+            console.log(data);
+            cb();
+        })
+        
+        socket.connect();
+
+    }, []);
 
     const messages = {
         waiting: 'general.messages.waiting',
@@ -98,7 +121,7 @@ const ProveIdentity: React.FC = ({ history }: any) => {
                     </div>
                     <p className='bold'>{t(status)}</p>
                     {loading && <Loading />}
-                    {
+                    {/* {
                         channel && <WebSocket
                             history={history}
                             generatedChannelId={channel}
@@ -107,7 +130,7 @@ const ProveIdentity: React.FC = ({ history }: any) => {
                             fields={channelDetails}
                             messages={messages}
                         />
-                    }
+                    } */}
                 </div>
             </RandomGraphicElement>
         </Layout>

@@ -30,7 +30,7 @@ const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }
     return (
         <div className='empty-form'>
             <Form layout='vertical' onFinish={handleSubmit}>
-                {
+                {/* {
                     dataFields.map((field: string) => (
                         <Form.Item label={t(labels[field])} key={field}>
                             { getFieldDecorator(field, {
@@ -38,7 +38,7 @@ const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }
                             })(<Input />)}
                         </Form.Item>
                     ))
-                }
+                } */}
                 <Form.Item>
                     <Button
                         htmlType='submit'

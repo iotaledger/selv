@@ -30,7 +30,7 @@
     "react-router-dom": "^6.21.1",
     "react-scripts": "^5.0.1",
     "rsuite": "^4.7.3",
-    "socket.io-client": "^2.3.0",
+    "socket.io-client": "^4.7.4",
     "stream-browserify": "^3.0.0",
     "webfontloader": "^1.6.28"
   },
@@ -73,7 +73,6 @@
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "@types/react-router-dom": "^5.3.3",
-    "@types/socket.io-client": "^1.4.33",
     "@types/webfontloader": "^1.6.32",
     "node-sass": "^9.0.0",
     "typescript": "^4.9.5"

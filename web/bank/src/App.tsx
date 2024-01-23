@@ -8,6 +8,7 @@ import 'rsuite/lib/styles/index.less';
 import 'rsuite/dist/styles/rsuite-default.css'
 import './styles/index.scss';
 import { routes } from './steps'
+import { WebsocketProvider } from './context/websocket';
 
 
 WebFontLoader.load({
@@ -30,7 +31,9 @@ const App: React.FC = () => {
   return (
     <React.Suspense fallback={<React.Fragment />}>
       <GlobalState>
-        <RouterProvider router={router} />
+        <WebsocketProvider>
+          <RouterProvider router={router} />
+        </WebsocketProvider>
       </GlobalState>
     </React.Suspense>
   );

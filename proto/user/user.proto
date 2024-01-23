@@ -1,0 +1,14 @@
+
+// user/user.proto
+syntax = "proto3";
+
+package user;
+
+service UsersService {
+  rpc ConnectUser (User) returns (User) {}
+}
+
+message User {
+  string did = 1;
+  string code = 2;
+}
