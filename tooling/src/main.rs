@@ -8,8 +8,8 @@ use identity_iota::iota::NetworkName;
 use identity_iota::resolver::Resolver;
 use identity_iota::storage::JwkDocumentExt;
 use identity_stronghold::ED25519_KEY_TYPE;
-use iota_sdk::client::secret::SecretManager;
-use iota_sdk::types::block::address;
+
+
 use rand::distributions::{Alphanumeric, DistString};
 use tooling::get_address_with_funds;
 
@@ -26,13 +26,13 @@ use iota_sdk::types::block::address::Address;
 use iota_sdk::types::block::output::AliasOutput;
 
 // The API endpoint of an IOTA node, e.g. Hornet.
-const api_endpoint: &str = "http://localhost";
+const API_ENDPOINT: &str = "http://localhost";
 
 // The faucet endpoint allows requesting funds for testing purposes.
-const faucet_endpoint: &str = "http://localhost/faucet/api/enqueue";
+const FAUCET_ENDPOINT: &str = "http://localhost/faucet/api/enqueue";
 
 // Stronghold snapshot path.
-const path: &str = "./stronghold.hodl";
+const PATH: &str = "./stronghold.hodl";
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -44,13 +44,13 @@ async fn main() -> anyhow::Result<()> {
 
     // Create a new client to interact with the IOTA ledger.
     let client: Client = Client::builder()
-        .with_primary_node(api_endpoint, None)?
+        .with_primary_node(API_ENDPOINT, None)?
         .finish()
         .await?;
 
     let stronghold = StrongholdSecretManager::builder()
         .password(password.clone())
-        .build(path)?;
+        .build(PATH)?;
 
     // Create a `StrongholdStorage`.
     // `StrongholdStorage` creates internally a `SecretManager` that can be
@@ -74,7 +74,7 @@ async fn create_issuer(stronghold_storage: &StrongholdStorage, password: &Passwo
     let address: Address = get_address_with_funds(
         &client,
         stronghold_storage.as_secret_manager(),
-        faucet_endpoint,
+        FAUCET_ENDPOINT,
     )
     .await?;
     let network_name: NetworkName = client.network_name().await?;
@@ -117,7 +117,7 @@ async fn create_issuer(stronghold_storage: &StrongholdStorage, password: &Passwo
     // Create the storage again to demonstrate that data are read from the stronghold file.
     let stronghold = StrongholdSecretManager::builder()
         .password(password.clone())
-        .build(path)?;
+        .build(PATH)?;
     let stronghold_storage = StrongholdStorage::new(stronghold);
     let storage = Storage::new(stronghold_storage.clone(), stronghold_storage.clone());
 

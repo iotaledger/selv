@@ -1,20 +1,7 @@
 // Copyright 2020-2023 IOTA Stiftung
 // SPDX-License-Identifier: Apache-2.0
-
-use std::path::PathBuf;
-
 use anyhow::Context;
 
-use identity_iota::iota::block::output::AliasOutput;
-use identity_iota::iota::IotaClientExt;
-use identity_iota::iota::IotaDocument;
-use identity_iota::iota::IotaIdentityClientExt;
-use identity_iota::iota::NetworkName;
-use identity_iota::storage::JwkDocumentExt;
-use identity_iota::storage::Storage;
-use identity_iota::verification::MethodScope;
-
-use identity_iota::verification::jws::JwsAlgorithm;
 use iota_sdk::client::api::GetAddressesOptions;
 use iota_sdk::client::node_api::indexer::query_parameters::QueryParameter;
 use iota_sdk::client::secret::SecretManager;
@@ -23,11 +10,8 @@ use iota_sdk::crypto::keys::bip39;
 use iota_sdk::types::block::address::Address;
 use iota_sdk::types::block::address::Bech32Address;
 use iota_sdk::types::block::address::Hrp;
-use rand::distributions::DistString;
 use serde_json::Value;
 
-pub static API_ENDPOINT: &str = "http://localhost:14265";
-pub static FAUCET_ENDPOINT: &str = "http://localhost:8091/api/enqueue";
 
 /// Generates an address from the given [`SecretManager`] and adds funds from the faucet.
 pub async fn get_address_with_funds(
