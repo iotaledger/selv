@@ -9,7 +9,6 @@ use identity_iota::resolver::Resolver;
 use identity_iota::storage::JwkDocumentExt;
 use identity_stronghold::ED25519_KEY_TYPE;
 
-
 use rand::distributions::{Alphanumeric, DistString};
 use tooling::get_address_with_funds;
 
@@ -57,9 +56,9 @@ async fn main() -> anyhow::Result<()> {
     // referenced to avoid creating multiple instances around the same stronghold snapshot.
     let stronghold_storage = StrongholdStorage::new(stronghold);
 
-    let government_issuer = create_issuer(&stronghold_storage, &password, &client).await?;
-    let bank_issuer = create_issuer(&stronghold_storage, &password, &client).await?;
-    let insurance_issuer = create_issuer(&stronghold_storage, &password, &client).await?;
+    let government_issuer = create_issuer(&stronghold_storage, &client).await?;
+    let bank_issuer = create_issuer(&stronghold_storage, &client).await?;
+    let insurance_issuer = create_issuer(&stronghold_storage, &client).await?;
 
     println!("created stronghold with pw:{}", pw_string);
     println!("created government issuer with:{:?}", government_issuer);
@@ -69,7 +68,7 @@ async fn main() -> anyhow::Result<()> {
     Ok(())
 }
 
-async fn create_issuer(stronghold_storage: &StrongholdStorage, password: &Password, client: &Client) -> anyhow::Result<(String, String, Address)> {
+async fn create_issuer(stronghold_storage: &StrongholdStorage, client: &Client) -> anyhow::Result<(String, String, Address)> {
     // Create a DID document.
     let address: Address = get_address_with_funds(
         &client,
@@ -91,7 +90,7 @@ async fn create_issuer(stronghold_storage: &StrongholdStorage, password: &Passwo
     let fragment = document
         .generate_method(
             &storage,
-            ED25519_KEY_TYPE.clone(),
+            ED25519_KEY_TYPE.clone(), // TODO change this in stronghold example aswell
             JwsAlgorithm::EdDSA,
             None,
             MethodScope::VerificationMethod,
@@ -111,15 +110,6 @@ async fn create_issuer(stronghold_storage: &StrongholdStorage, password: &Passwo
     let mut resolver = Resolver::<IotaDocument>::new();
     resolver.attach_iota_handler(client.clone());
     let resolved_document: IotaDocument = resolver.resolve(document.id()).await.unwrap();
-
-    drop(stronghold_storage);
-
-    // Create the storage again to demonstrate that data are read from the stronghold file.
-    let stronghold = StrongholdSecretManager::builder()
-        .password(password.clone())
-        .build(PATH)?;
-    let stronghold_storage = StrongholdStorage::new(stronghold);
-    let storage = Storage::new(stronghold_storage.clone(), stronghold_storage.clone());
 
     // Sign data with the created verification method.
     let data = b"test_data";
