@@ -35,24 +35,39 @@ export class WebAppGateway {
       client,
     });
 
-    this.identityService
-      .check({
-        url: 'did:example:1234567890#my-revocation-service',
-        id: 'did:iota:EvaQhPXXsJsGgxSXGhZGMCvTt63KuAFtaGThx6a5nSpw?index=5#revocation',
-        type: 'RevocationBitmap2022',
-        revocationBitmapIndex: '5',
-      })
-      .subscribe({
-        next(x) {
-          console.log('got value ' + x);
-        },
-        error(err) {
-          console.error('something wrong occurred: ' + err);
-        },
-        complete() {
-          console.log('done');
-        },
-      });
+    // this.identityService
+    //   .check({
+    //     url: 'did:example:1234567890#my-revocation-service',
+    //     id: 'did:iota:EvaQhPXXsJsGgxSXGhZGMCvTt63KuAFtaGThx6a5nSpw?index=5#revocation',
+    //     type: 'RevocationBitmap2022',
+    //     revocationBitmapIndex: '5',
+    //   })
+    //   .subscribe({
+    //     next(x) {
+    //       console.log('got value ' + x);
+    //     },
+    //     error(err) {
+    //       console.error('something wrong occurred: ' + err);
+    //     },
+    //     complete() {
+    //       console.log('done');
+    //     },
+    //   });
+    // await client.emitWithAck('registration', {
+    //   id: session_id,
+    // });
+
+    this.identityService.create().subscribe({
+      next(x) {
+        console.log('got value ' + x);
+      },
+      error(err) {
+        console.error('something wrong occurred: ' + err);
+      },
+      complete() {
+        console.log('done');
+      },
+    });
     await client.emitWithAck('registration', {
       id: session_id,
     });

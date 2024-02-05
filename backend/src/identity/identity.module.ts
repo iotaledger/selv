@@ -4,12 +4,13 @@ import { join } from 'path';
 
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { IdentityService } from './identity.service';
+import { CREDENTIALS_PACKAGE_NAME } from './credentials';
 
 @Module({
   imports: [
     ClientsModule.register([
       {
-        name: 'IDENTITY_PACKAGE',
+        name: CREDENTIALS_PACKAGE_NAME,
         transport: Transport.GRPC,
         options: {
           package: 'credentials',
