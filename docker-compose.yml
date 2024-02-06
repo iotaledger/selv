@@ -33,8 +33,6 @@ services:
   
   redis:
     image: redis:latest
-    ports:
-      - "6379:6379"
     labels:
       - "traefik.enable=false"
 
@@ -42,6 +40,9 @@ services:
     build:
       context: ./
       dockerfile: ./backend/Dockerfile
+    networks:
+      - sandbox
+      - default
     expose:
       - '3000'
       - '5000'
@@ -61,14 +62,21 @@ services:
 
   identity:
     image: identity-grpc-test:latest
+    networks:
+      - sandbox
+      - default
     environment:
-      - API_ENDPOINT=http://localhost
+      - API_ENDPOINT=http://hornet:14265
       - STRONGHOLD_PWD=qhNR2KaMKaGZZIrUlXWvZ8ScZiBMtQiK
       - SNAPSHOT_PATH=/stronghold.hodl
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./data/stronghold.hodl:/stronghold.hodl"
     expose:
      - '50051'
     labels:
       - "traefik.enable=false"
+
+networks:
+  sandbox:
+      name: "sandbox_default"
+      external: true

@@ -35,42 +35,30 @@ export class WebAppGateway {
       client,
     });
 
-    // this.identityService
-    //   .check({
-    //     url: 'did:example:1234567890#my-revocation-service',
-    //     id: 'did:iota:EvaQhPXXsJsGgxSXGhZGMCvTt63KuAFtaGThx6a5nSpw?index=5#revocation',
-    //     type: 'RevocationBitmap2022',
-    //     revocationBitmapIndex: '5',
-    //   })
-    //   .subscribe({
-    //     next(x) {
-    //       console.log('got value ' + x);
-    //     },
-    //     error(err) {
-    //       console.error('something wrong occurred: ' + err);
-    //     },
-    //     complete() {
-    //       console.log('done');
-    //     },
-    //   });
-    // await client.emitWithAck('registration', {
-    //   id: session_id,
-    // });
-
-    this.identityService.create().subscribe({
-      next(x) {
-        console.log('got value ' + x);
-      },
-      error(err) {
-        console.error('something wrong occurred: ' + err);
-      },
-      complete() {
-        console.log('done');
-      },
-    });
-    await client.emitWithAck('registration', {
-      id: session_id,
-    });
+    try {
+      await this.identityService.create({
+        credentialJson: JSON.stringify({
+          '@context': [
+            'https://www.w3.org/2018/credentials/v1',
+            'https://www.w3.org/2018/credentials/examples/v1',
+          ],
+          type: ['VerifiableCredential', 'UniversityDegreeCredential'],
+          issuanceDate: '2017-10-22T12:23:48Z',
+          issuer:
+            'did:iota:snd:0x7ef854cf8ad0b48cd76832221035c9d287a986434cee037f9a5e7ef4ebec2958',
+          credentialSubject: {
+            id: 'did:iota:snd:0xce05da2c7e3fd32e89b4fcaf77bb3101d89be60ba6276cba80bd3ec2bd0603f6',
+            degree: {
+              type: 'BachelorDegree',
+              name: 'Bachelor of Science and Arts',
+            },
+          },
+        }),
+        issuerFragment: 'vMEts67gmY8kam21CGwdRQsfkhB6qgZl4xBO8bgCi8Y',
+      });
+    } catch (error) {
+      this.logger.error(error);
+    }
 
     this.logger.debug(`send registration for session_id:${session_id}`);
 

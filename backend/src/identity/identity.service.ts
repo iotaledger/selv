@@ -1,43 +1,46 @@
-import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
+import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
+import { lastValueFrom, timeout } from 'rxjs';
 import {
   CREDENTIALS_PACKAGE_NAME,
   JWT_SERVICE_NAME,
   JwtClient,
+  JwtCreationRequest,
   JwtCreationResponse,
 } from './credentials';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class IdentityService implements OnModuleInit {
   private identityService: JwtClient;
 
-  constructor(@Inject(CREDENTIALS_PACKAGE_NAME) private client: ClientGrpc) {}
+  private readonly logger = new Logger(IdentityService.name);
+
+  constructor(
+    @Inject(CREDENTIALS_PACKAGE_NAME) private client: ClientGrpc,
+    private configService: ConfigService,
+  ) {}
 
   onModuleInit() {
     this.identityService = this.client.getService<JwtClient>(JWT_SERVICE_NAME);
   }
 
-  create(): Observable<JwtCreationResponse> {
-    return this.identityService.create({
-      credentialJson: JSON.stringify({
-        '@context': [
-          'https://www.w3.org/2018/credentials/v1',
-          'https://www.w3.org/2018/credentials/examples/v1',
-        ],
-        type: ['VerifiableCredential', 'UniversityDegreeCredential'],
-        issuanceDate: '2017-10-22T12:23:48Z',
-        issuer:
-          'did:iota:snd:0x7ef854cf8ad0b48cd76832221035c9d287a986434cee037f9a5e7ef4ebec2958',
-        credentialSubject: {
-          id: 'did:iota:snd:0xce05da2c7e3fd32e89b4fcaf77bb3101d89be60ba6276cba80bd3ec2bd0603f6',
-          degree: {
-            type: 'BachelorDegree',
-            name: 'Bachelor of Science and Arts',
-          },
-        },
-      }),
-      issuerFragment: 'vMEts67gmY8kam21CGwdRQsfkhB6qgZl4xBO8bgCi8Y',
-    });
+  async create(request: JwtCreationRequest): Promise<JwtCreationResponse> {
+    this.logger.debug('Received JWTCreation request', request);
+
+    try {
+      const jwt = await lastValueFrom(
+        this.identityService
+          .create(request)
+          .pipe(
+            timeout(this.configService.get<number>('grpc_service_timeout')),
+          ),
+      );
+      this.logger.debug('created credential', jwt);
+      return jwt;
+    } catch (error) {
+      this.logger.error(error);
+      throw error;
+    }
   }
 }
