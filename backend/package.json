@@ -11,14 +11,14 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/backend/src/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "proto:generate": "protoc --ts_proto_out=./src --proto_path=../proto identity/credentials.proto user/user.proto --ts_proto_opt=esModuleInterop=true --ts_proto_opt=nestJs=true"
+    "proto:generate": "protoc --experimental_allow_proto3_optional --ts_proto_out=./src --proto_path=../proto identity/credentials.proto user/user.proto oid4vc/siopv2.proto --ts_proto_opt=esModuleInterop=true --ts_proto_opt=nestJs=true"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.9.13",

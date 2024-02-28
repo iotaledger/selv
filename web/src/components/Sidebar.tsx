@@ -1,11 +1,11 @@
 import React from 'react';
 import { Sidenav } from 'rsuite';
 import { Link } from 'react-router-dom';
-import poweredByIota from '../assets/poweredByIota.svg';
 import logo from '../assets/landing/logoHeader.svg';
 import frame from '../assets/backgrounds/circleFrame5.svg';
 import DropSelector from './DropSelector';
 import { useTranslation } from 'react-i18next';
+import IOTA from './powerdBy/IOTA';
 
 // https://rsuitejs.com/en/components/sidenav
 
@@ -15,14 +15,15 @@ const externalPages = [
     { url: 'https://iota.org', title: 'IOTA.org' }
 ];
 
-const SidebarInstance = ({ children }: {
+const SidebarInstance = ({ children, poweredBy }: {
     children?: JSX.Element | null | undefined;
+    poweredBy?: JSX.Element;
 }) => {
     const { t } = useTranslation();
 
     return (
         <div className='sidebar-wrapper'>
-            <Link to='/demo/select'>
+            <Link to='/demo/todos'>
                 <img src={logo} alt='Selv logo' className='sidebar-logo' />
             </Link>
             <div className="sidebar-drop-selector">
@@ -51,13 +52,13 @@ const SidebarInstance = ({ children }: {
                         </a>
                     ))}
                 </div>
-                <a
-                    href='https://iota.org'
-                    target='_blank'
-                    rel='noopener noreferrer'
-                >
-                    <img src={poweredByIota} alt='powered by Iota' />
-                </a>
+               <IOTA/>
+                {poweredBy && (
+                    <>
+                        <span style={{paddingLeft: '25px', paddingTop: '5px', paddingBottom: '5px'}}>and</span>
+                        { poweredBy }
+                    </>
+                )}
             </div>
             <img src={frame} alt='' className='frame' />
         </div>

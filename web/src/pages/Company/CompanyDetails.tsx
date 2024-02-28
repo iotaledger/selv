@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import useStep from '../utils/useStep';
-import useFetch from '../utils/useFetch';
-import { Layout, Loading, NextStepDrawer } from '../components';
-import back from '../assets/back.svg';
-import config from '../config.json';
+import useStep from '../../utils/useStep';
+import useFetch from '../../utils/useFetch';
+import { Layout, Loading, NextStepDrawer } from '../../components';
+import back from '../../assets/back.svg';
+import config from '../../config.json';
 import { useTranslation } from 'react-i18next';
 
 interface ICompanyData {

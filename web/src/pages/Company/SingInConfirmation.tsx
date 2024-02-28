@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
-import useStep from '../utils/useStep';
-import { Layout, RandomGraphicElement } from '../components';
-import selv from '../assets/selvBordered.svg';
+import useStep from '../../utils/useStep';
+import { Layout, RandomGraphicElement } from '../../components';
+import selv from '../../assets/selvBordered.svg';
 import { useTranslation } from 'react-i18next';
 
 /**
@@ -11,20 +11,7 @@ import { useTranslation } from 'react-i18next';
  */
 const SingInConfirmation: React.FC = () => {
     const { nextStep } = useStep();
-    const navigate = useNavigate();
     const { t } = useTranslation();
-
-    useEffect(() => {
-        async function getData() {
-            const credentialsString: string | null = await localStorage.getItem('credentials');
-            const credentials = credentialsString && await JSON.parse(credentialsString);
-            const status = credentials?.status;
-            if (!status || Number(status) !== 2) {
-                navigate(-1);
-            }
-        }
-        getData();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <Layout>

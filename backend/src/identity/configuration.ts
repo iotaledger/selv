@@ -8,6 +8,8 @@ export default () => ({
     '..',
     '..',
     '..',
+    '..',
+    '..',
     'proto',
     'identity',
   ),

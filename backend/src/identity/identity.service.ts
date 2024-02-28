@@ -9,6 +9,7 @@ import {
   JwtCreationResponse,
 } from './credentials';
 import { ConfigService } from '@nestjs/config';
+import { Issuers } from '../../../types/Issuers';
 
 @Injectable()
 export class IdentityService implements OnModuleInit {
@@ -25,13 +26,32 @@ export class IdentityService implements OnModuleInit {
     this.identityService = this.client.getService<JwtClient>(JWT_SERVICE_NAME);
   }
 
-  async create(request: JwtCreationRequest): Promise<JwtCreationResponse> {
-    this.logger.debug('Received JWTCreation request', request);
+  async create(
+    issuer: Issuers,
+    credential: string,
+  ): Promise<JwtCreationResponse> {
+    this.logger.debug('Received JWTCreation request', issuer, credential);
 
     try {
+      console.log(
+        issuer,
+        this.configService.get<string>(`ISSUERS_${issuer}_DID`),
+      );
+      const issuerDid = this.configService.get<string>(`ISSUERS_${issuer}_DID`);
+      const issuerFragment = this.configService.get<string>(
+        `ISSUERS_${issuer}_FRAGMENT`,
+      );
+      const credentialJson = JSON.stringify({
+        ...JSON.parse(credential),
+        issuer: issuerDid,
+      });
+
       const jwt = await lastValueFrom(
         this.identityService
-          .create(request)
+          .create({
+            credentialJson,
+            issuerFragment,
+          })
           .pipe(
             timeout(this.configService.get<number>('grpc_service_timeout')),
           ),

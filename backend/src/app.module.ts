@@ -10,7 +10,7 @@ import { UsersModule } from './users/user.module';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '..', 'web', 'build'),
+      rootPath: join(__dirname, '..', '..', '..', '..', 'web', 'build'),
     }),
     WebAppModule,
     UsersModule,

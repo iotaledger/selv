@@ -13,7 +13,7 @@ export default ({ children, customTheme, customStep, noHeader, noFooter }: {
     noHeader?: boolean;
     noFooter?: boolean;
 }) => {
-    const { step, mainSteps, theme } = useStep();
+    const { step, mainSteps, theme, currentRoute } = useStep();
 
     return (
         <div className={`theme-${theme || customTheme}`}>
@@ -31,7 +31,9 @@ export default ({ children, customTheme, customStep, noHeader, noFooter }: {
                 </div>
                 {
                     customStep || step >= 0 ? (
-                        <Sidebar>
+                        <Sidebar
+                            poweredBy={currentRoute?.poweredBy}
+                        >
                             <Steps
                                 steps={mainSteps}
                                 stepId={customStep || step}

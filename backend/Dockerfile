@@ -2,7 +2,7 @@ FROM node:20
 
 RUN apt-get update && apt-get install -y protobuf-compiler
 
-WORKDIR /app
+WORKDIR /backend
 
 COPY backend/package*.json ./
 
@@ -11,6 +11,7 @@ RUN npm install
 COPY backend/. .
 
 COPY proto /proto
+COPY types /types
 
 RUN npm run proto:generate
 

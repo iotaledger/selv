@@ -5,6 +5,11 @@ services:
     extends:
       file: docker-compose.yml
       service: backend
+    volumes: 
+      - ./backend/src:/backend/src
+      - ./web/build:/web/build
+      - ./proto:/proto
+      - ./types:/types
     entrypoint:
     - npm
     - run

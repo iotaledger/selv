@@ -1,0 +1,37 @@
+syntax = "proto3";
+package oid4vc;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
+
+service SIOPV2 {
+  rpc CreateRequest (RequestConfig) returns (Request) {}
+  rpc VerifyAuthResponse (AuthRequest) returns (google.protobuf.Empty) {}
+  rpc CreateAuthToken (AuthTokenRequest) returns (Token) {}
+}
+
+message RequestConfig {
+  google.protobuf.Any presentationDefinition = 1;
+  optional string nonce = 2;
+  optional string state = 3;
+}
+
+message Request {
+  string uri = 1;
+  string request = 2;
+}
+
+message AuthRequest {
+  optional string id_token = 1;
+  optional string vp_token = 2;
+  optional string issuer_state = 3;
+  optional google.protobuf.Any presentation_submission = 4;
+}
+
+message AuthTokenRequest {
+  string did = 1;
+}
+
+message Token {
+  string token = 1;
+}

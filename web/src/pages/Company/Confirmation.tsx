@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import { getCompanyId } from '../utils/helper';
-import useStep from '../utils/useStep';
-import { Layout, RandomGraphicElement } from '../components';
-import selv from '../assets/selvSuccessBordered.svg';
+import { getCompanyId } from '../../utils/helper';
+import useStep from '../../utils/useStep';
+import { Layout, RandomGraphicElement } from '../../components';
+import selv from '../../assets/selvSuccessBordered.svg';
 import { useTranslation } from 'react-i18next';
 
 /**

@@ -5,52 +5,35 @@ import { useTranslation } from 'react-i18next';
 
 const shortFields: string[] = ['Date', 'Nationality'];
 
-// const labels: { [key: string]: string; } = {
-//     FirstName: 'First Name',
-//     LastName: 'Last Name',
-//     Date: 'Date of birth',
-//     Nationality: 'Nationality',
-//     Gender: 'Gender',
-//     Birthplace: 'Birthplace',
-//     Country: 'Country of residence',
-//     Phone: 'Phone number',
-//     Address: 'Address',
-//     CompanyName: 'Company name',
-//     CompanyAddress: 'Company address',
-//     CompanyType: 'Company type',
-//     CompanyBusiness: 'Nature of business',
-//     CompanyCreationDate: 'Company creation date',
-//     CompanyNumber: 'Company number',
-//     CompanyOwner: 'Managing director',
-//     BankName: 'Name of the bank',
-//     AccountType: 'Bank account type'
-// };
-
 const Icon = () => <img src={icon} alt='' width={18} />;
 
-const PrefilledForm = ({ form, dataFields }: {
-    form: any;
+const PrefilledForm = ({ dataFields }: {
     dataFields: any;
 }) => {
+
+    const [form] = Form.useForm()
+
     useEffect(() => {
         form.setFieldsValue(dataFields);
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-    
+    }, [dataFields, form]);
+
+
     const { t } = useTranslation();
-    
+
     return (
         <div className='prefilled-form'>
-            <Form layout='vertical'>
+            <Form layout='vertical' form={form}>
                 {
-                    Object.keys(dataFields).map((field: string) => (
+                    Object.keys(dataFields).map((field: string, index) => (
                         <Form.Item
-                            label={t("components.prefilledForm."+field)}
+                            label={t("components.prefilledForm." + field)}
                             key={field}
+                            name={field}
                             className={shortFields.includes(field) ? 'short-field' : ''}
                         >
-                            { form.getFieldDecorator(field, {})(
-                                <Input disabled suffix={<Icon />} />
-                            )}
+                            {/* { form.getFieldDecorator(field, {})( */}
+                            <Input disabled suffix={<Icon />} />
+                            {/* )} */}
                         </Form.Item>
                     ))
                 }

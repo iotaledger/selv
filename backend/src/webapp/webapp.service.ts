@@ -6,6 +6,10 @@ import { Cache } from 'cache-manager';
 import { RedisCache } from 'cache-manager-redis-yet';
 import { User } from 'src/users/interfaces/User';
 import { WebAppGateway } from './webapp.gateway';
+import { PresentationDefinitionV2 } from '../../../types/PresentationExchange';
+import { IdentityService } from 'src/identity/identity.service';
+import type { Issuers } from '../../../types/Issuers';
+import { Scopes } from '../../../types/Scopes';
 // import { User } from 'src/users/interfaces/User';
 
 @Injectable()
@@ -14,16 +18,67 @@ export class WebAppService {
     @Inject(CACHE_MANAGER) private readonly cache: RedisCache,
     @Inject(forwardRef(() => WebAppGateway))
     private webAppGateway: WebAppGateway,
+    @Inject(IdentityService)
+    private readonly identityService: IdentityService,
   ) {}
 
   private readonly logger = new Logger(WebAppService.name);
 
-  async requestOffer(session_id: string): Promise<string> {
-    this.logger.debug(`receiving offer request for session_id:${session_id}`);
+  async requestSiopInvite(session_id: string): Promise<string> {
+    this.logger.debug(
+      `receiving SIOP invite request for session_id:${session_id}`,
+    );
 
-    const token = await this.requestTokenForSessionId(session_id);
+    //const token = await this.requestTokenForSessionId(session_id);
+    //TODO replace with call against OID4VCI component using either a token or session_id
+    const url = 'example.com';
 
-    return token;
+    return url;
+  }
+
+  async requestPresentation(
+    session_id: string,
+    presentationDefinition: PresentationDefinitionV2,
+  ): Promise<string> {
+    this.logger.debug(
+      `receiving presentation request for session_id:${session_id}`,
+      presentationDefinition,
+    );
+
+    //const token = await this.requestTokenForSessionId(session_id);
+    //TODO replace with call against OID4VCI component using either a token or session_id
+    const url = 'example.com';
+
+    return url;
+  }
+
+  async requestIssuance(
+    session_id: string,
+    issuer: Issuers,
+    credential: string,
+  ): Promise<string> {
+    this.logger.debug(
+      `receiving issuance request for session_id:${session_id}`,
+      issuer,
+      credential,
+    );
+
+    //const token = await this.requestTokenForSessionId(session_id);
+
+    //TODO replace with call against OID4VCI component using either a token or session_id
+    const url = 'example.com';
+
+    try {
+      const signed_credential = await this.identityService.create(
+        issuer,
+        credential,
+      );
+      this.logger.debug('created credential', signed_credential);
+    } catch (error) {
+      this.logger.error(error);
+    }
+
+    return url;
   }
 
   async requestTokenForSessionId(sessionId: string): Promise<string> {
@@ -52,7 +107,7 @@ export class WebAppService {
     return String(session_id);
   }
 
-  async connectUser(user: User): Promise<void> {
+  async connectUser(user: User, scope: Scopes): Promise<void> {
     this.logger.debug(
       `connect user with did:${user.did} and code:${user.code}`,
     );
@@ -62,6 +117,6 @@ export class WebAppService {
     await this.cache.set(`user:${session_id}`, { did: user.did });
     this.logger.debug(`connected session_id:${session_id} with :${user.did}`);
 
-    await this.webAppGateway.connectDid(session_id, user.did);
+    await this.webAppGateway.connectDid(session_id, user.did, scope);
   }
 }

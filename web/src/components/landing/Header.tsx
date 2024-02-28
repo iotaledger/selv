@@ -61,7 +61,7 @@ export default () => {
                         </Link>
                     ))
                 }
-                <Link to={'/demo/select'}>
+                <Link to={'/demo/todos'}>
                     <Button className="cta">
                         {t("landing.app.tryTheDemo")}
                     </Button>
@@ -101,7 +101,7 @@ const MobileMenu = ({ onAnchorClick, menuOpenState }: { onAnchorClick: (anchor: 
                         </Link>
                     ))
                 }
-                <Link to={'/demo/select'}>
+                <Link to={'/demo/todos'}>
                     <Button className="cta">
                         {t("landing.app.tryTheDemo")}
                     </Button>

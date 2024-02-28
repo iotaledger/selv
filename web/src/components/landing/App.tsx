@@ -48,7 +48,7 @@ export default () => (
                             </div>
                         </div>
 
-                        <Link to='/demo/select'>
+                        <Link to='/demo/todos'>
                             <Button className='cta' data-aos='fade-up' data-aos-duration='1000'>
                                 {t("landing.app.tryTheDemo")}
                 </Button>

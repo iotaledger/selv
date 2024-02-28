@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { User } from './interfaces/User';
 import { WebAppService } from 'src/webapp/webapp.service';
+import { Scopes } from '../../../types/Scopes';
 
 @Injectable()
 export class UsersService {
@@ -12,7 +13,8 @@ export class UsersService {
     this.logger.debug(
       `User with did:${user.did} and code:${user.code} connected`,
     );
-    await this.webAppService.connectUser(user);
+    //TODO: manage scope
+    await this.webAppService.connectUser(user, Scopes.CompanyHouse);
     return user;
   }
 }

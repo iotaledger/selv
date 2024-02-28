@@ -9,14 +9,18 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { WebAppService } from './webapp.service';
-import { IdentityService } from 'src/identity/identity.service';
+import { SIOPV2Service } from 'src/oid4vc/oid4vc.service';
+import type { PresentationDefinitionV2 } from '../../../types/PresentationExchange';
+import { Issuers } from '../../../types/Issuers';
+import { Scopes } from '../../../types/Scopes';
+import { Providers } from '../../../types/Providers';
 
 @Injectable()
 @WebSocketGateway()
 export class WebAppGateway {
   constructor(
     private readonly webAppService: WebAppService,
-    private readonly identityService: IdentityService,
+    private readonly siopV2Service: SIOPV2Service,
   ) {}
 
   @WebSocketServer()
@@ -35,33 +39,6 @@ export class WebAppGateway {
       client,
     });
 
-    try {
-      await this.identityService.create({
-        credentialJson: JSON.stringify({
-          '@context': [
-            'https://www.w3.org/2018/credentials/v1',
-            'https://www.w3.org/2018/credentials/examples/v1',
-          ],
-          type: ['VerifiableCredential', 'UniversityDegreeCredential'],
-          issuanceDate: '2017-10-22T12:23:48Z',
-          issuer:
-            'did:iota:snd:0x7ef854cf8ad0b48cd76832221035c9d287a986434cee037f9a5e7ef4ebec2958',
-          credentialSubject: {
-            id: 'did:iota:snd:0xce05da2c7e3fd32e89b4fcaf77bb3101d89be60ba6276cba80bd3ec2bd0603f6',
-            degree: {
-              type: 'BachelorDegree',
-              name: 'Bachelor of Science and Arts',
-            },
-          },
-        }),
-        issuerFragment: 'vMEts67gmY8kam21CGwdRQsfkhB6qgZl4xBO8bgCi8Y',
-      });
-    } catch (error) {
-      this.logger.error(error);
-    }
-
-    this.logger.debug(`send registration for session_id:${session_id}`);
-
     this.logger.debug(`added session_id:${session_id} to connected clients`);
   }
 
@@ -74,30 +51,189 @@ export class WebAppGateway {
     this.connectedClients.delete(connectedClient);
   }
 
-  @SubscribeMessage('requestOffer')
-  async handleMessage(
-    //@MessageBody() data: string,
+  findClient(session_id: string): Socket {
+    const connectedClient = this.connectedClients.get(session_id);
+    if (connectedClient) {
+      return connectedClient.client;
+    } else {
+      this.logger.error(`could not find client for ${session_id}`);
+    }
+  }
+
+  @SubscribeMessage('requestSiopInvite')
+  async requestSignIn(
+    @MessageBody()
+    payload: {
+      provider: Providers;
+      scope: Scopes;
+    },
+    @ConnectedSocket() client: Socket,
+  ) {
+    // TODO: handle provider
+
+    const session_id = [...this.connectedClients].find(
+      ([key, value]) => value.client === client,
+    )[0];
+
+    this.logger.debug(
+      `receiving SIOPV2 invite request for session_id:${session_id}, provider:${payload.provider} and scope:${payload.scope}`,
+    );
+
+    const url = await this.webAppService.requestSiopInvite(session_id);
+    await client.emitWithAck('siopInvite', {
+      url,
+      scope: payload.scope,
+    });
+
+    this.logger.debug(`send SIOPV2 invite for session_id:${session_id}`);
+
+    //TODO remove once OID4VCI component can call back
+    setTimeout(() => {
+      this.connectDid(session_id, 'did:web:example.com', payload.scope);
+    }, 10000);
+  }
+
+  @SubscribeMessage('requestPresentation')
+  async requestPresentation(
+    @MessageBody()
+    payload: {
+      scope: Scopes;
+      presentationDefinition: PresentationDefinitionV2;
+      provider: Providers;
+    },
     @ConnectedSocket() client: Socket,
   ) {
     const session_id = [...this.connectedClients].find(
       ([key, value]) => value.client === client,
     )[0];
 
-    this.logger.debug(`receiving offer request for session_id:${session_id}`);
+    this.logger.debug(
+      `receiving presentation request for session_id:${session_id}, provider:${payload.provider} and scope:${payload.scope}`,
+    );
 
-    const token = await this.webAppService.requestOffer(session_id);
+    const url = await this.webAppService.requestPresentation(
+      session_id,
+      payload.presentationDefinition,
+    );
 
-    await client.emitWithAck('offer', {
-      token: token,
+    await client.emitWithAck('presentationOffer', {
+      url,
+      scope: payload.scope,
     });
 
-    this.logger.debug(`send offer for session_id:${session_id}`);
+    this.logger.debug(`send presentation offer for session_id:${session_id}`);
+
+    //TODO remove once OID4VCI component can call back
+    setTimeout(() => {
+      this.presentation(
+        session_id,
+        {
+          vc: {
+            '@context': [
+              'https://www.w3.org/2018/credentials/v1',
+              'https://www.w3.org/2018/credentials/examples/v1',
+            ],
+            id: 'http://example.edu/credentials/3732',
+            type: ['VerifiableCredential', 'UniversityDegreeCredential'],
+            issuer: 'https://example.edu/issuers/14',
+            issuanceDate: '2010-01-01T19:23:24Z',
+            credentialSubject: {
+              id: 'did:example:ebfeb1f712ebc6f1c276e12ec21',
+              degree: {
+                type: 'BachelorDegree',
+                name: 'Bachelor of Science and Arts',
+              },
+              firstName: 'Ben',
+              lastName: 'Utzer',
+              date: Date.now(),
+              nationality: 'german',
+              birthplace: 'Musterstadt',
+              country: 'Germany',
+              phone: '00-0000',
+            },
+            credentialSchema: {
+              id: 'https://example.org/examples/degree.json',
+              type: 'JsonSchemaValidator2018',
+            },
+          },
+          iss: 'https://example.edu/issuers/14',
+          nbf: 1262373804,
+          jti: 'http://example.edu/credentials/3732',
+          sub: 'did:example:ebfeb1f712ebc6f1c276e12ec21',
+        },
+        payload.scope,
+      );
+    }, 10000);
   }
 
-  async connectDid(session_id: string, did: string) {
-    const connectedClient = this.connectedClients.get(session_id);
-    connectedClient.client.emitWithAck('connectDid', {
-      did,
+  @SubscribeMessage('requestIssuance')
+  async requestIssuance(
+    @MessageBody()
+    payload: {
+      issuer: Issuers;
+      scope: Scopes;
+      credential: string;
+      provider: Providers;
+    },
+    @ConnectedSocket() client: Socket,
+  ) {
+    const session_id = [...this.connectedClients].find(
+      ([key, value]) => value.client === client,
+    )[0];
+
+    this.logger.debug(
+      `receiving issuance request for session_id:${session_id}, provider:${payload.provider} and scope:${payload.scope}`,
+      payload,
+    );
+
+    const url = await this.webAppService.requestIssuance(
+      session_id,
+      payload.issuer,
+      payload.credential,
+    );
+
+    await client.emitWithAck('issuanceOffer', {
+      url,
+      scope: payload.scope,
     });
+
+    this.logger.debug(`send issuance offer for session_id:${session_id}`);
+
+    setTimeout(() => {
+      this.issuance(session_id, {}, payload.scope);
+    }, 10000);
+  }
+
+  async connectDid(session_id: string, did: string, scope: Scopes) {
+    const connectedClient = this.findClient(session_id);
+
+    if (!connectedClient) {
+      return;
+    }
+
+    connectedClient.emitWithAck('connectDid', {
+      did,
+      scope,
+    });
+  }
+
+  async presentation(session_id: string, credential: any, scope: Scopes) {
+    const connectedClient = this.findClient(session_id);
+
+    if (!connectedClient) {
+      return;
+    }
+
+    connectedClient.emitWithAck('presentation', { credential, scope });
+  }
+
+  async issuance(session_id: string, data: any, scope: Scopes) {
+    const connectedClient = this.findClient(session_id);
+
+    if (!connectedClient) {
+      return;
+    }
+
+    connectedClient.emitWithAck('issuance', { data, scope });
   }
 }

@@ -49,16 +49,26 @@ services:
     depends_on:
       - redis
       - identity
-    volumes:
-      - ./backend/src:/app/src
-      - ./web/build:/web/build
-      - ./proto:/proto
+    environment:
+      ISSUERS_BANK_DID: did:iota:snd:0x1d78531b739a3aef0e90523213f28e869423a6d6253ea0fcbd7db2714e9606bf
+      ISSUERS_BANK_FRAGMENT: xwhWgiK3plOzbQESCONMneeFx4ps24rzbtC1jXEb42o
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`backend.localhost`)"
       - "traefik.http.routers.backend.entrypoints=web"
       - "traefik.http.routers.backend.service=backend"
       - "traefik.http.services.backend.loadbalancer.server.port=3000"
+
+  oid4vc-tanglelabs:
+    build:
+      context: ./
+      dockerfile: ./oid4vc/TangleLabs/Dockerfile
+    expose:
+      - '50051'
+    volumes:
+      - ./proto:/usr/proto
+    labels:
+      - "traefik.enable=false"
 
   identity:
     image: identity-grpc-test:latest
@@ -67,7 +77,7 @@ services:
       - default
     environment:
       - API_ENDPOINT=http://hornet:14265
-      - STRONGHOLD_PWD=qhNR2KaMKaGZZIrUlXWvZ8ScZiBMtQiK
+      - STRONGHOLD_PWD=nEyWjBDO3sQSDnXuwij3KIJREHnWhtIu
       - SNAPSHOT_PATH=/stronghold.hodl
     volumes:
       - "./data/stronghold.hodl:/stronghold.hodl"

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import useStep from '../utils/useStep';
-import { Steps, Sidebar } from '../components';
+import useStep from '../../utils/useStep';
+import { Steps, Sidebar } from '../../components';
 
 /**
  * Component which will display a CompanyIntro.
