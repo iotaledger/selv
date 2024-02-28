@@ -6,5 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: docker compose build
-      - run: docker compose -d
+      - run: docker compose up -d
       - run: docker compose exec backend "npm run test"
+      - run: docker compose down
