@@ -1,9 +1,0 @@
-*/node_modules
-*/build
-.build
-
-# misc
-.DS_Store
-
-yarn-debug.log*
-yarn-error.log*

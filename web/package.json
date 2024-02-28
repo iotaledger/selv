@@ -1,0 +1,81 @@
+{
+  "name": "selv",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Selv - A digital Selv, under your control.",
+  "author": "Alexey Sobolev <alexey@iota.org>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iotaledger/selv-web.git"
+  },
+  "dependencies": {
+    "@iota/identity-wasm": "^0.3.5",
+    "@types/classnames": "^2.2.11",
+    "antd": "^5.12.8",
+    "aos": "^3.0.0-beta.6",
+    "axios": "^1.6.5",
+    "buffer": "^6.0.3",
+    "classnames": "^2.2.6",
+    "crypto-browserify": "^3.12.0",
+    "i18next": "^23.7.16",
+    "i18next-browser-languagedetector": "^7.2.0",
+    "i18next-http-backend": "^2.4.2",
+    "qrcode.react": "^3.1.0",
+    "randomstring": "^1.1.5",
+    "react": "^18.2.0",
+    "react-cookie": "^7.0.1",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^14.0.0",
+    "react-router": "^6.21.1",
+    "react-router-dom": "^6.21.1",
+    "react-scripts": "^5.0.1",
+    "rsuite": "^4.7.3",
+    "socket.io-client": "^4.7.4",
+    "stream-browserify": "^3.0.0",
+    "webfontloader": "^1.6.28"
+  },
+  "scripts": {
+    "start": "npm run copy_wasm && craco start",
+    "build": "npm run copy_wasm && craco build",
+    "test": "npm run copy_wasm && craco test",
+    "eject": "craco eject",
+    "copy_wasm": "cp ./node_modules/@iota/identity-wasm/web/identity_wasm_bg.wasm ./public"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=16.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@craco/craco": "^7.1.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/aos": "^3.0.3",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^20.10.7",
+    "@types/qrcode.react": "^1.0.1",
+    "@types/randomstring": "^1.1.6",
+    "@types/react": "^18.2.47",
+    "@types/react-dom": "^18.2.18",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/webfontloader": "^1.6.32",
+    "craco-alias": "^3.0.1",
+    "node-sass": "^9.0.0",
+    "typescript": "^4.9.5"
+  }
+}

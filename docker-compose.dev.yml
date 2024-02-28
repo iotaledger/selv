@@ -1,0 +1,39 @@
+version: '3'
+services:
+
+  backend:
+    extends:
+      file: docker-compose.yml
+      service: backend
+    volumes: 
+      - ./backend/src:/backend/src
+      - ./web/build:/web/build
+      - ./proto:/proto
+      - ./types:/types
+    entrypoint:
+    - npm
+    - run
+    - start:dev
+    labels:
+    - "traefik.http.routers.backend-grpc.rule=Host(`backend.localhost`)"
+    - "traefik.http.routers.backend-grpc.entrypoints=grpc"
+    - "traefik.http.routers.backend-grpc.service=svc_backend-grpc"
+    - "traefik.http.services.svc_backend-grpc.loadbalancer.server.port=5000"
+    - "traefik.http.services.svc_backend-grpc.loadbalancer.server.scheme=h2c"
+
+  identity:
+    extends:
+      file: docker-compose.yml
+      service: identity
+    labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.identity-grpc.rule=Host(`identity.localhost`)"
+    - "traefik.http.routers.identity-grpc.entrypoints=grpc"
+    - "traefik.http.routers.identity-grpc.service=svc_identity-grpc"
+    - "traefik.http.services.svc_identity-grpc.loadbalancer.server.port=50051"
+    - "traefik.http.services.svc_identity-grpc.loadbalancer.server.scheme=h2c"
+
+  grpcurl:
+    image: fullstorydev/grpcurl:latest
+    volumes:
+    - ./proto:/proto
