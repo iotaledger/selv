@@ -1,11 +1,11 @@
-FROM gradle:4.5-jdk8-alpine as builder
+FROM gradle:latest as builder
 USER root
 WORKDIR /builder
-ADD . /builder
+ADD oid4vc/walt.id/ /builder
 RUN gradle build --no-daemon --info --stacktrace
 
-FROM openjdk:8-jre-alpine
+FROM openjdk:latest
 WORKDIR /app
 EXPOSE 8080
-COPY --from=builder /builder/build/libs/server.jar .
-CMD ["java", "-jar", "server.jar"]
+COPY --from=builder /builder/build .
+CMD ["java", "-jar", "libs/oid4vc-0.1.jar"]

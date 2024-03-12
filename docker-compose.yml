@@ -40,9 +40,6 @@ services:
     build:
       context: ./
       dockerfile: ./backend/Dockerfile
-    networks:
-      - sandbox
-      - default
     expose:
       - '3000'
       - '5000'
@@ -70,13 +67,21 @@ services:
     labels:
       - "traefik.enable=false"
 
+  oid4vc-waltid:
+    build:
+      context: ./
+      dockerfile: ./oid4vc/walt.id/Dockerfile
+    expose:
+      - '50051'
+    volumes:
+      - ./proto:/usr/proto
+    labels:
+      - "traefik.enable=false"
+
   identity:
     image: identity-grpc-test:latest
-    networks:
-      - sandbox
-      - default
     environment:
-      - API_ENDPOINT=http://hornet:14265
+      - API_ENDPOINT=http://host.docker.internal
       - STRONGHOLD_PWD=nEyWjBDO3sQSDnXuwij3KIJREHnWhtIu
       - SNAPSHOT_PATH=/stronghold.hodl
     volumes:
@@ -85,8 +90,3 @@ services:
      - '50051'
     labels:
       - "traefik.enable=false"
-
-networks:
-  sandbox:
-      name: "sandbox_default"
-      external: true
