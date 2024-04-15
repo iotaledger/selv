@@ -4,6 +4,7 @@ import { loadSync } from "@grpc/proto-loader";
 import {
   AuthResponse,
   RelyingParty,
+  SigningAlgs,
   SiopRequestResult,
   bytesToString,
 } from "@tanglelabs/oid4vc";
@@ -14,10 +15,21 @@ import { PresentationDefinitionV2 } from "@sphereon/pex-models";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+import express from "express";
+import asyncHandler from "express-async-handler";
+
 //@ts-ignore
 import { driver } from "@digitalbazaar/did-method-key";
 //@ts-ignore
 import { Ed25519VerificationKey2020 } from "@digitalbazaar/ed25519-verification-key-2020";
+
+
+import { Signer } from 'did-jwt';
+
+const remoteSigner: Signer = async (data) => {
+    console.log(data);
+    return "test";
+};
 
 (async () => {
 
@@ -49,15 +61,19 @@ const __dirname = dirname(__filename);
   let resolver = new Resolver(keyDidResolver);
 
   const rp = new RelyingParty({
-    clientId: "",
+    clientId: "did:iota:0x",
     clientMetadata: {
-      subjectSyntaxTypesSupported: [],
-      idTokenSigningAlgValuesSupported: [],
+      subjectSyntaxTypesSupported: [
+        "did:iota"
+      ],
+      idTokenSigningAlgValuesSupported: [
+        SigningAlgs.EdDSA
+      ],
     },
-    did: "",
-    kid: "",
-    privKeyHex: bytesToString(verificationKeyPair._privateKeyBuffer),
-    redirectUri: "",
+    did: "did:iota:0x",
+    kid: "did:iota:0x#my_key",
+    signer: remoteSigner,
+    redirectUri: "http://192.168.0.234:8080/api/auth",
     resolver: resolver,
   });
 
@@ -125,18 +141,36 @@ const __dirname = dirname(__filename);
     }
   }
 
-  const server = new grpc.Server();
+  const gRPCServer = new grpc.Server();
   //@ts-ignore
-  server.addService(protoPackage.oid4vc.SIOPV2.service, {
+  gRPCServer.addService(protoPackage.oid4vc.SIOPV2.service, {
     createRequest,
     verifyAuthResponse,
     createAuthToken,
   });
-  server.bindAsync(
+  gRPCServer.bindAsync(
     "0.0.0.0:50051",
     grpc.ServerCredentials.createInsecure(),
     () => {
-      server.start();
+      gRPCServer.start();
     }
   );
+
+  
+  const app = express();
+  app.use(express.json());
+  app.route("/api/health").get(
+    asyncHandler(async (req, res) => {
+        res.status(200).send();
+    })
+  );
+  app.route("/api/auth").post(
+    asyncHandler(async (req, res) => {
+        console.log(req);
+        await rp.verifyAuthResponse(req.body);
+        res.status(204).send();
+    })
+  );
+  const server = app.listen(3333, "0.0.0.0");
+
 })();

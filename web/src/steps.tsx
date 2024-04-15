@@ -12,6 +12,7 @@ import {
     IncorporatedCompanies,
     GreatSuccess,
     ThankYou,
+    AppPicker,
 } from './pages';
 
 import TangleLabs from "./components/powerdBy/TangleLabs";
@@ -23,7 +24,7 @@ export const routes = [
     { path: '/:lng?/demo/todos', element: <IntroShowTodos/> },
     { path: '/:lng?/demo/app', element: <IntroShowMobile/> },
     { path: '/:lng?/company/list/0', element: <IncorporatedCompanies/> },
-    { path: '/:lng?/demo/app/0', element: <AppDownloadQR/> },
+    { path: '/:lng?/demo/app/0', element: <AppPicker/> },
     { path: '/:lng?/company/prove/0', element: <Company.ProveIdentity/>, poweredBy: <Waltid/> },
     { path: '/:lng?/company/signin/0', element: <Company.SingInConfirmation/>, poweredBy: <Waltid/> },
     { path: '/:lng?/company/provide/0', element: <Company.ProvideData/>, poweredBy: <Waltid/> },
