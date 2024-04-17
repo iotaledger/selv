@@ -7,6 +7,8 @@ use identity_iota::iota::IotaIdentityClientExt;
 use identity_iota::iota::NetworkName;
 use identity_iota::resolver::Resolver;
 use identity_iota::storage::JwkDocumentExt;
+use identity_iota::storage::KeyId;
+use identity_iota::storage::MethodDigest;
 use identity_stronghold::ED25519_KEY_TYPE;
 
 use rand::distributions::{Alphanumeric, DistString};
@@ -23,6 +25,8 @@ use iota_sdk::client::Client;
 use iota_sdk::client::Password;
 use iota_sdk::types::block::address::Address;
 use iota_sdk::types::block::output::AliasOutput;
+use identity_iota::storage::KeyIdStorage;
+
 
 // The API endpoint of an IOTA node, e.g. Hornet.
 const API_ENDPOINT: &str = "http://localhost";
@@ -68,7 +72,7 @@ async fn main() -> anyhow::Result<()> {
     Ok(())
 }
 
-async fn create_issuer(stronghold_storage: &StrongholdStorage, client: &Client) -> anyhow::Result<(String, String, Address)> {
+async fn create_issuer(stronghold_storage: &StrongholdStorage, client: &Client) -> anyhow::Result<(String, KeyId, String, Address)> {
     // Create a DID document.
     let address: Address = get_address_with_funds(
         &client,
@@ -96,6 +100,9 @@ async fn create_issuer(stronghold_storage: &StrongholdStorage, client: &Client) 
             MethodScope::VerificationMethod,
         )
         .await?;
+
+    let method = document.resolve_method(&fragment, Some(MethodScope::VerificationMethod)).ok_or(anyhow::anyhow!("no go"))?;
+    let key_id = storage.key_id_storage().get_key_id(&MethodDigest::new(method)?).await?;
 
     // Construct an Alias Output containing the DID document, with the wallet address
     // set as both the state controller and governor.
@@ -129,5 +136,5 @@ async fn create_issuer(stronghold_storage: &StrongholdStorage, client: &Client) 
         String::from_utf8_lossy(decoded_jws.claims.as_ref()),
         "test_data"
     );
-    Ok((document.id().to_string(), fragment, address))
+    Ok((document.id().to_string(), key_id, fragment, address))
 }

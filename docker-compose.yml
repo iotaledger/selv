@@ -47,8 +47,8 @@ services:
     #   - redis
     #   - identity
     environment:
-      ISSUERS_BANK_DID: did:iota:snd:0x1d78531b739a3aef0e90523213f28e869423a6d6253ea0fcbd7db2714e9606bf
-      ISSUERS_BANK_FRAGMENT: xwhWgiK3plOzbQESCONMneeFx4ps24rzbtC1jXEb42o
+      ISSUERS_BANK_DID: did:iota:snd:0x2cfb60f00089a91a96fa8fcee5e2bda15f51b0b062762ad9ca846bba536f8818
+      ISSUERS_BANK_FRAGMENT: S3zEW4inNy8FYZEMVTEthdzqqSBq1WglM2k75xKHzy0
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`backend.localhost`)"
@@ -60,6 +60,8 @@ services:
     build:
       context: ./
       dockerfile: ./oid4vc/TangleLabs/Dockerfile
+    environment:
+      SIGNER_KEYID: pK0JAYw5RFFKqorBn0x4w98zl2UBfRys
     expose:
       - '50051'
     volumes:
@@ -120,7 +122,7 @@ services:
     image: iotaledger/identity-grpc:alpha
     environment:
       - API_ENDPOINT=http://host.docker.internal
-      - STRONGHOLD_PWD=nEyWjBDO3sQSDnXuwij3KIJREHnWhtIu
+      - STRONGHOLD_PWD=nhNc9yAjbCuh6YQxKlceLAUrWCwAYLvu
       - SNAPSHOT_PATH=/stronghold.hodl
     volumes:
       - "./data/stronghold.hodl:/stronghold.hodl"
