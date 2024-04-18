@@ -30,14 +30,16 @@ export const remoteSigner: (keyId: string) => Signer = (keyId) => async (data) =
   
     const response = await new Promise((resolve, reject) => identityClient.sign({
       keyId,
-      data: Array.from(Buffer.from(data)),
+      data: Uint8Array.from(Buffer.from(data)),
     }, (err, response) => {
       if (err) {
-        console.error(err);
+        reject(err);
       }
       resolve(response);
     }));
     console.log(response)
-    return response as string;
+    return (response as {
+      signature: Buffer
+    }).signature.toString('base64');
     
 };

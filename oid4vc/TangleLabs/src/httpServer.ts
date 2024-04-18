@@ -12,7 +12,7 @@ export const createServer = (rp) => {
   );
   app.route("/api/auth").post(
     asyncHandler(async (req, res) => {
-        console.log(req);
+        console.debug(req);
         await rp.verifyAuthResponse(req.body);
         res.status(204).send();
     })

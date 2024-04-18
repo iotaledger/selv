@@ -1,6 +1,16 @@
 version: '3'
 services:
 
+  whoami:
+    # A container that exposes an API to show its IP address
+    image: traefik/whoami
+    expose:
+      - '80'
+    labels:
+      traefik.enable: true
+      traefik.http.routers.whoami.rule: Host(`whoami.localhost`)
+      traefik.http.routers.whoami.entrypoints: web
+
   backend:
     extends:
       file: docker-compose.yml
@@ -15,23 +25,40 @@ services:
     - run
     - start:dev
     labels:
-    - "traefik.http.routers.backend-grpc.rule=Host(`backend.localhost`)"
-    - "traefik.http.routers.backend-grpc.entrypoints=grpc"
-    - "traefik.http.routers.backend-grpc.service=svc_backend-grpc"
-    - "traefik.http.services.svc_backend-grpc.loadbalancer.server.port=5000"
-    - "traefik.http.services.svc_backend-grpc.loadbalancer.server.scheme=h2c"
+      traefik.http.routers.backend-grpc.rule: PathPrefix(`/backend`)
+      traefik.http.routers.backend-grpc.middlewares: backend-grpc-stripprefix
+      traefik.http.middlewares.backend-grpc-stripprefix.stripprefix.prefixes: /backend
+      traefik.http.routers.backend-grpc.entrypoints: grpc
+      traefik.http.routers.backend-grpc.service: svc_backend-grpc
+      traefik.http.services.svc_backend-grpc.loadbalancer.server.port: "50051"
+      traefik.http.services.svc_backend-grpc.loadbalancer.server.scheme: h2c
 
   identity:
     extends:
       file: docker-compose.yml
       service: identity
     labels:
-    - "traefik.enable=true"
-    - "traefik.http.routers.identity-grpc.rule=Host(`identity.localhost`)"
-    - "traefik.http.routers.identity-grpc.entrypoints=grpc"
-    - "traefik.http.routers.identity-grpc.service=svc_identity-grpc"
-    - "traefik.http.services.svc_identity-grpc.loadbalancer.server.port=50051"
-    - "traefik.http.services.svc_identity-grpc.loadbalancer.server.scheme=h2c"
+      traefik.enable: true
+      traefik.http.routers.identity-grpc.rule: PathPrefix(`/identity`)
+      traefik.http.routers.identity-grpc.middlewares: identity-grpc-stripprefix
+      traefik.http.middlewares.identity-grpc-stripprefix.stripprefix.prefixes: /identity
+      traefik.http.routers.identity-grpc.entrypoints: grpc
+      traefik.http.routers.identity-grpc.service: svc_identity-grpc
+      traefik.http.services.svc_identity-grpc.loadbalancer.server.port: "50051"
+      traefik.http.services.svc_identity-grpc.loadbalancer.server.scheme: h2c
+
+  oid4vc-tanglelabs:
+    extends:
+      file: docker-compose.yml
+      service: oid4vc-tanglelabs
+    labels:
+      traefik.http.routers.oid4vc-tanglelabs-grpc.rule: PathPrefix(`/oid4vc-tanglelabs`)
+      traefik.http.routers.oid4vc-tanglelabs-grpc.middlewares: oid4vc-tanglelabs-grpc-stripprefix
+      traefik.http.middlewares.oid4vc-tanglelabs-grpc-stripprefix.stripprefix.prefixes: /oid4vc-tanglelabs
+      traefik.http.routers.oid4vc-tanglelabs-grpc.entrypoints: grpc
+      traefik.http.routers.oid4vc-tanglelabs-grpc.service: svc_oid4vc-tanglelabs-grpc
+      traefik.http.services.svc_oid4vc-tanglelabs-grpc.loadbalancer.server.port: "50051"
+      traefik.http.services.svc_oid4vc-tanglelabs-grpc.loadbalancer.server.scheme: h2c
 
   grpcurl:
     image: fullstorydev/grpcurl:latest

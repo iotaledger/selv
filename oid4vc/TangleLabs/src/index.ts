@@ -25,16 +25,16 @@ import { createServer } from "./httpServer";
     fromMultibase: Ed25519VerificationKey2020.from,
   });
 
-  const verificationKeyPair = await Ed25519VerificationKey2020.generate();
+  // const verificationKeyPair = await Ed25519VerificationKey2020.generate();
 
-  console.log(bytesToString(verificationKeyPair._publicKeyBuffer));
-  console.log(bytesToString(verificationKeyPair._privateKeyBuffer));
+  // console.log(bytesToString(verificationKeyPair._publicKeyBuffer));
+  // console.log(bytesToString(verificationKeyPair._privateKeyBuffer));
 
   const keyDidResolver = KeyDIDResolver.getResolver();
   let resolver = new Resolver(keyDidResolver);
 
   const rp = new RelyingParty({
-    clientId: "did:iota:0x",
+    clientId: process.env.RP_DID,
     clientMetadata: {
       subjectSyntaxTypesSupported: [
         "did:iota"
@@ -43,10 +43,10 @@ import { createServer } from "./httpServer";
         SigningAlgs.EdDSA
       ],
     },
-    did: "did:iota:0x",
-    kid: "did:iota:0x#my_key",
+    did: process.env.RP_DID,
+    kid: `${process.env.SIGNER_KEYID}#${process.env.KEY_FRAGMENT}`,
     signer: remoteSigner(process.env.SIGNER_KEYID),
-    redirectUri: "http://192.168.0.234:8080/api/auth",
+    redirectUri: `http://${process.env.PUBLIC_URL}/api/auth`,
     resolver: resolver,
   });
 

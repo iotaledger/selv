@@ -20,7 +20,7 @@ async function bootstrap() {
         'proto',
         'user/user.proto',
       ),
-      url: '0.0.0.0:5000',
+      url: '0.0.0.0:50051',
     },
   });
 
