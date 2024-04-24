@@ -1,13 +1,16 @@
 syntax = "proto3";
 package oid4vc;
 
-service SIOPV2 {
+import "google/protobuf/any.proto";
+
+service OID4VP {
   rpc CreateRequest (RequestConfig) returns (Request) {}
 }
 
 message RequestConfig {
-  optional string nonce = 1;
-  optional string state = 2;
+  google.protobuf.Any presentationDefinition = 1;
+  optional string nonce = 2;
+  optional string state = 3;
 }
 
 message Request {

@@ -4,11 +4,19 @@ syntax = "proto3";
 
 package user;
 
+import "google/protobuf/any.proto";
+
 service UsersService {
   rpc ConnectUser (User) returns (User) {}
+  rpc PresentCredential (CredentialPresentation) returns (CredentialPresentation) {}
 }
 
 message User {
   string did = 1;
   string code = 2;
+}
+
+message CredentialPresentation {
+  User user = 1;
+  google.protobuf.Any vp = 2;
 }
