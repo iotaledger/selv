@@ -1,17 +1,17 @@
 syntax = "proto3";
 package oid4vc;
 
-import "google/protobuf/any.proto";
+// import "google/protobuf/any.proto";
 
 service OID4VCI {
-  rpc CreateOffer (OfferConfig) returns (Request) {}
+  rpc CreateOffer (OfferConfig) returns (Offer) {}
 }
 
 message OfferConfig {
   repeated string credentials = 1;
 }
 
-message Request {
+message Offer {
   string uri = 1;
-  google.protobuf.Any offer = 2;
+  string offer = 2;
 }

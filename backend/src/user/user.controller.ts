@@ -3,13 +3,13 @@ import { GrpcMethod } from '@nestjs/microservices';
 import { User } from './interfaces/User';
 import { WebAppService } from 'src/webapp/webapp.service';
 import { Metadata, ServerUnaryCall } from '@grpc/grpc-js';
-import { UsersService } from './users.service';
+import { UserService } from './user.service';
 
 @Injectable()
 @Controller('user')
-export class UsersController {
-  private readonly logger = new Logger(UsersController.name);
-  constructor(private readonly usersService: UsersService) {}
+export class UserController {
+  private readonly logger = new Logger(UserController.name);
+  constructor(private readonly usersService: UserService) {}
 
   @GrpcMethod('UsersService', 'ConnectUser')
   async connectUser(

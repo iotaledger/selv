@@ -4,16 +4,16 @@ package oid4vc;
 import "google/protobuf/any.proto";
 
 service OID4VP {
-  rpc CreateRequest (RequestConfig) returns (Request) {}
+  rpc CreateRequest (OID4VPRequestConfig) returns (OID4VPRequest) {}
 }
 
-message RequestConfig {
+message OID4VPRequestConfig {
   google.protobuf.Any presentationDefinition = 1;
   optional string nonce = 2;
   optional string state = 3;
 }
 
-message Request {
+message OID4VPRequest {
   string uri = 1;
   string request = 2;
 }

@@ -6,7 +6,7 @@ import { redisStore } from 'cache-manager-redis-yet';
 import { WebAppGateway } from './webapp.gateway';
 import { WebAppService } from './webapp.service';
 import { IdentityModule } from 'src/identity/identity.module';
-import { UsersModule } from 'src/users/user.module';
+import { UserModule } from 'src/user/user.module';
 import { OID4VCModule } from 'src/oid4vc/oid4vc.module';
 
 @Module({
@@ -20,7 +20,7 @@ import { OID4VCModule } from 'src/oid4vc/oid4vc.module';
     }),
     IdentityModule,
     OID4VCModule,
-    forwardRef(() => UsersModule),
+    forwardRef(() => UserModule),
   ],
   controllers: [],
   providers: [WebAppGateway, WebAppService],

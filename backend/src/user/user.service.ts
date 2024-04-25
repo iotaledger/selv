@@ -4,8 +4,8 @@ import { WebAppService } from 'src/webapp/webapp.service';
 import { Scopes } from '../../../types/Scopes';
 
 @Injectable()
-export class UsersService {
-  private readonly logger = new Logger(UsersService.name);
+export class UserService {
+  private readonly logger = new Logger(UserService.name);
 
   constructor(private readonly webAppService: WebAppService) {}
 

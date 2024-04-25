@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { WebAppModule } from './webapp/webapp.module';
-import { UsersModule } from './users/user.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -13,7 +13,7 @@ import { UsersModule } from './users/user.module';
       rootPath: join(__dirname, '..', '..', '..', '..', 'web', 'build'),
     }),
     WebAppModule,
-    UsersModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

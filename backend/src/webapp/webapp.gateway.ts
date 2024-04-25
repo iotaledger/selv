@@ -9,7 +9,6 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { WebAppService } from './webapp.service';
-import { SIOPV2Service } from 'src/oid4vc/oid4vc.service';
 import type { PresentationDefinitionV2 } from '../../../types/PresentationExchange';
 import { Issuers } from '../../../types/Issuers';
 import { Scopes } from '../../../types/Scopes';
@@ -18,10 +17,7 @@ import { Providers } from '../../../types/Providers';
 @Injectable()
 @WebSocketGateway()
 export class WebAppGateway {
-  constructor(
-    private readonly webAppService: WebAppService,
-    private readonly siopV2Service: SIOPV2Service,
-  ) {}
+  constructor(private readonly webAppService: WebAppService) {}
 
   @WebSocketServer()
   server: Server;
@@ -87,10 +83,10 @@ export class WebAppGateway {
 
     this.logger.debug(`send SIOPV2 invite for session_id:${session_id}`);
 
-    //TODO remove once OID4VCI component can call back
-    setTimeout(() => {
-      this.connectDid(session_id, 'did:web:example.com', payload.scope);
-    }, 10000);
+    // //TODO remove once OID4VCI component can call back
+    // setTimeout(() => {
+    //   this.connectDid(session_id, 'did:web:example.com', payload.scope);
+    // }, 10000);
   }
 
   @SubscribeMessage('requestPresentation')

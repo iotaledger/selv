@@ -1,6 +1,8 @@
 import {
   RelyingParty,
   SigningAlgs,
+  SimpleStore,
+  VcIssuer,
   bytesToString,
 } from "@tanglelabs/oid4vc";
 import * as KeyDIDResolver from "key-did-resolver";
@@ -15,15 +17,17 @@ import { Ed25519VerificationKey2020 } from "@digitalbazaar/ed25519-verification-
 import { remoteSigner } from "./remoteSigner";
 import { createService } from "./grpcService";
 import { createServer } from "./httpServer";
+import { createStore } from "./store";
+import { UserService } from "./userService";
 
 (async () => {
 
-  const didKeyDriver = driver();
+  // const didKeyDriver = driver();
 
-  didKeyDriver.use({
-    multibaseMultikeyHeader: "z6Mk",
-    fromMultibase: Ed25519VerificationKey2020.from,
-  });
+  // didKeyDriver.use({
+  //   multibaseMultikeyHeader: "z6Mk",
+  //   fromMultibase: Ed25519VerificationKey2020.from,
+  // });
 
   // const verificationKeyPair = await Ed25519VerificationKey2020.generate();
 
@@ -34,7 +38,7 @@ import { createServer } from "./httpServer";
   let resolver = new Resolver(keyDidResolver);
 
   const rp = new RelyingParty({
-    clientId: process.env.RP_DID,
+    clientId: process.env.RP_DID, //could also be URL (bank.selv.iota.org)
     clientMetadata: {
       subjectSyntaxTypesSupported: [
         "did:iota"
@@ -44,13 +48,36 @@ import { createServer } from "./httpServer";
       ],
     },
     did: process.env.RP_DID,
-    kid: `${process.env.SIGNER_KEYID}#${process.env.KEY_FRAGMENT}`,
+    kid: `${process.env.RP_DID}#${process.env.KEY_FRAGMENT}`,
     signer: remoteSigner(process.env.SIGNER_KEYID),
     redirectUri: `http://${process.env.PUBLIC_URL}/api/auth`,
-    resolver: resolver,
+    resolver,
   });
 
-  createService(rp);
-  createServer(rp);
+  const issuer = new VcIssuer({
+    batchCredentialEndpoint: `http://${process.env.PUBLIC_URL}/api/credentials`,
+    credentialEndpoint: `http://${process.env.PUBLIC_URL}/api/credential`,
+    credentialIssuer: `http://${process.env.PUBLIC_URL}/`,
+    proofTypesSupported: ["jwt"],
+    cryptographicBindingMethodsSupported: ["did:key"],
+    resolver,
+    signer: remoteSigner(process.env.SIGNER_KEYID),
+    did: process.env.RP_DID,
+    kid: `${process.env.RP_DID}#${process.env.KEY_FRAGMENT}`,
+    cryptographicSuitesSupported: [SigningAlgs.EdDSA],
+    store: createStore(),
+    tokenEndpoint: `http://${process.env.PUBLIC_URL}/token`,
+    supportedCredentials: [
+      {
+          name: "wa_driving_license",
+          type: "wa_driving_license",
+      },
+  ],
+  });
+
+  const userService = new UserService();
+
+  createService(rp, issuer);
+  createServer(rp, userService);
 
 })();

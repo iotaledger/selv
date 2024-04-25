@@ -1,21 +1,22 @@
 import { v4 as uuidv4 } from 'uuid';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Logger, Injectable, Inject, forwardRef } from '@nestjs/common';
-import { Cache } from 'cache-manager';
 
 import { RedisCache } from 'cache-manager-redis-yet';
-import { User } from 'src/users/interfaces/User';
+import { User } from 'src/user/interfaces/User';
 import { WebAppGateway } from './webapp.gateway';
 import { PresentationDefinitionV2 } from '../../../types/PresentationExchange';
 import { IdentityService } from 'src/identity/identity.service';
 import type { Issuers } from '../../../types/Issuers';
 import { Scopes } from '../../../types/Scopes';
+import { SIOPV2Service } from 'src/oid4vc/oid4vc.service';
 // import { User } from 'src/users/interfaces/User';
 
 @Injectable()
 export class WebAppService {
   constructor(
     @Inject(CACHE_MANAGER) private readonly cache: RedisCache,
+    private readonly siopV2Service: SIOPV2Service,
     @Inject(forwardRef(() => WebAppGateway))
     private webAppGateway: WebAppGateway,
     @Inject(IdentityService)
@@ -29,11 +30,13 @@ export class WebAppService {
       `receiving SIOP invite request for session_id:${session_id}`,
     );
 
-    //const token = await this.requestTokenForSessionId(session_id);
-    //TODO replace with call against OID4VCI component using either a token or session_id
-    const url = 'example.com';
+    const token = await this.requestTokenForSessionId(session_id);
 
-    return url;
+    const siopResponse = await this.siopV2Service.createSIOPV2Request({
+      state: token,
+    });
+
+    return siopResponse.uri;
   }
 
   async requestPresentation(

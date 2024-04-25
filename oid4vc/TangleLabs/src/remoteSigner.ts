@@ -40,6 +40,6 @@ export const remoteSigner: (keyId: string) => Signer = (keyId) => async (data) =
     console.log(response)
     return (response as {
       signature: Buffer
-    }).signature.toString('base64');
+    }).signature.toString("base64url");
     
 };

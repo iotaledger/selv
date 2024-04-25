@@ -5,6 +5,7 @@ import {
   AuthResponse,
   RelyingParty,
   SiopRequestResult,
+  VcIssuer,
 } from "@tanglelabs/oid4vc";
 import { PresentationDefinitionV2 } from "@sphereon/pex-models";
 
@@ -26,11 +27,11 @@ const getPackageDefinition = (protoFile: string): grpc.GrpcObject => {
   return grpc.loadPackageDefinition(packageDefinition);
 }
 
-export const createService = async (rp: RelyingParty) => {
+export const createService = async (rp: RelyingParty, issuer: VcIssuer) => {
 
   async function createSIOPRequest(
     call: grpc.ServerUnaryCall<
-      { presentationDefinition: any; state: any; nonce: string },
+      { state: any; nonce: string },
       any
     >,
     callback: grpc.sendUnaryData<SiopRequestResult>
@@ -75,6 +76,29 @@ export const createService = async (rp: RelyingParty) => {
     }
   }
 
+  async function createOID4VCIOffer(
+    call: grpc.ServerUnaryCall<
+      { credentials: string[] },
+      any
+    >,
+    callback: grpc.sendUnaryData<{uri: string, offer: any}>
+  ): Promise<void> {
+    const offer = await issuer.createCredentialOffer({
+      credentials: call.request.credentials,
+      requestBy: "value",
+    });
+    if (offer) {
+      console.log(JSON.stringify(offer.offer));
+      callback(null, {uri: offer.uri, offer: JSON.stringify(offer.offer)});
+    } else {
+      callback({
+        message: "Could not create offer",
+        code: grpc.status.INVALID_ARGUMENT,
+      });
+    }
+  }
+
+
   const gRPCServer = new grpc.Server();
   //@ts-ignore
   gRPCServer.addService(getPackageDefinition("proto/oid4vc/siopv2.proto").oid4vc.SIOPV2.service, {
@@ -83,6 +107,10 @@ export const createService = async (rp: RelyingParty) => {
   //@ts-ignore
   gRPCServer.addService(getPackageDefinition("proto/oid4vc/oid4vp.proto").oid4vc.OID4VP.service, {
     createRequest: createOID4VPRequest,
+  });
+  //@ts-ignore
+  gRPCServer.addService(getPackageDefinition("proto/oid4vc/oid4vci.proto").oid4vc.OID4VCI.service, {
+    createOffer: createOID4VCIOffer,
   });
   gRPCServer.bindAsync(
     "0.0.0.0:50051",
