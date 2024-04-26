@@ -1,4 +1,4 @@
-@host=http://bank.host.docker.internal:81
+@host=http://bank.selv.local:81
 ###
 GET /api/health
 ###

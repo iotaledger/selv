@@ -9,10 +9,6 @@ GRPC /SIOPV2/CreateRequest
     "state": "test"
 }
 ###
-GRPC 0  - OK
-content-type: application/grpc+proto
-date: Thu, 25 Apr 2024 19:42:51 GMT
-###
 GRPC /OID4VP/CreateRequest
 {
     "state": "test",
@@ -21,6 +17,7 @@ GRPC /OID4VP/CreateRequest
     }
 }
 ###
-GRPC 0  - OK
-content-type: application/grpc+proto
-date: Thu, 25 Apr 2024 19:43:57 GMT
+GRPC /OID4VCI/CreateOffer
+{
+ "credentials": ["wa_driving_license"]
+}

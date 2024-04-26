@@ -31,7 +31,6 @@ GRPC /Jwt/create
     "credential_json": {{credential_json}},
     "issuer_fragment": "S3zEW4inNy8FYZEMVTEthdzqqSBq1WglM2k75xKHzy0"
 }
-
 ###
 
 {{
@@ -47,4 +46,4 @@ GRPC /Signing/sign
 
 GRPC 0  - OK
 content-type: application/grpc
-date: Fri, 26 Apr 2024 08:30:11 GMT
+date: Fri, 26 Apr 2024 08:40:40 GMT

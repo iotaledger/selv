@@ -1,0 +1,18 @@
+proto < ../../../proto/user/user.proto
+
+@host=http://selv.local:5001/backend
+###
+{{
+    //pre request script
+    exports.data = new TextEncoder().encode("test");
+}}
+
+GRPC /UsersService/ConnectUser
+{
+    "did": "test",
+    "code": "f42f11ac-63dc-441a-9778-b6b55721ab47"
+}
+
+GRPC 0  - OK
+content-type: application/grpc+proto
+date: Fri, 26 Apr 2024 08:33:29 GMT
