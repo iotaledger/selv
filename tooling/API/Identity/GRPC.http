@@ -1,0 +1,50 @@
+proto < ../../../proto/identity/credentials.proto
+proto < ../../../proto/identity/utils.proto
+
+@host=http://selv.local:5001/identity
+###
+{{
+    //pre request script
+    const issuer = "did:iota:snd:0x2cfb60f00089a91a96fa8fcee5e2bda15f51b0b062762ad9ca846bba536f8818";
+    const credential = {
+        "@context":[
+            "https://www.w3.org/2018/credentials/v1",
+            "https://www.w3.org/2018/credentials/examples/v1",
+        ],
+        type: ["VerifiableCredential","UniversityDegreeCredential"],
+        issuanceDate:"2017-10-22T12:23:48Z",
+        issuer,
+        credentialSubject:{
+            id:"did:iota:snd:0xce05da2c7e3fd32e89b4fcaf77bb3101d89be60ba6276cba80bd3ec2bd0603f6",
+            degree:{
+                type:"BachelorDegree",
+                name:"Bachelor of Science and Arts",
+            }
+        },
+    }
+
+    exports.credential_json = JSON.stringify(credential);
+}}
+
+GRPC /Jwt/create
+{
+    "credential_json": {{credential_json}},
+    "issuer_fragment": "S3zEW4inNy8FYZEMVTEthdzqqSBq1WglM2k75xKHzy0"
+}
+
+###
+
+{{
+    //pre request script
+    exports.data = new TextEncoder().encode("test");
+}}
+
+GRPC /Signing/sign
+{
+    "data": {{data}},
+    "keyId": "pK0JAYw5RFFKqorBn0x4w98zl2UBfRys"
+}
+
+GRPC 0  - OK
+content-type: application/grpc
+date: Fri, 26 Apr 2024 08:30:11 GMT

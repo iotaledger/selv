@@ -42,7 +42,7 @@ services:
       ISSUERS_BANK_FRAGMENT: S3zEW4inNy8FYZEMVTEthdzqqSBq1WglM2k75xKHzy0
     labels:
       traefik.enable: true
-      traefik.http.routers.backend.rule: Host(`backend.localhost`)
+      traefik.http.routers.backend.rule: Host(`backend.selv.local`)
       traefik.http.routers.backend.entrypoints: web
       traefik.http.routers.backend.service: backend
       traefik.http.services.backend.loadbalancer.server.port: "3000"
@@ -63,7 +63,7 @@ services:
       - ./proto:/usr/proto
     labels:
       traefik.enable: true
-      traefik.http.routers.oid4vc-tanglelabs.rule: Host(`bank.localhost`)
+      traefik.http.routers.oid4vc-tanglelabs.rule: Host(`bank.selv.local`)
       traefik.http.routers.oid4vc-tanglelabs.entrypoints: web
       traefik.http.routers.oid4vc-tanglelabs.service: oid4vc-tanglelabs
       traefik.http.services.oid4vc-tanglelabs.loadbalancer.server.port: "3333"
@@ -78,7 +78,7 @@ services:
       - ./proto:/usr/proto
     labels:
       traefik.enable: true
-      traefik.http.routers.oid4vc-waltid.rule: Host(`government.localhost`)
+      traefik.http.routers.oid4vc-waltid.rule: Host(`government.selv.local`)
       traefik.http.routers.oid4vc-waltid.entrypoints: web
       traefik.http.routers.oid4vc-waltid.service: oid4vc-waltid
       traefik.http.services.oid4vc-waltid.loadbalancer.server.port: "3000"
@@ -91,7 +91,7 @@ services:
       - ./proto:/usr/proto
     labels:
       traefik.enable: true
-      traefik.http.routers.oid4vc-impierce.rule: Host(`insurance.localhost`)
+      traefik.http.routers.oid4vc-impierce.rule: Host(`insurance.selv.local`)
       traefik.http.routers.oid4vc-impierce.entrypoints: web
       traefik.http.routers.oid4vc-impierce.service: oid4vc-impierce
       traefik.http.services.oid4vc-impierce.loadbalancer.server.port: "3033"
