@@ -4,7 +4,6 @@ import IntroShowMobile from './IntroShowMobile';
 import AppDownloadQR from './AppDownloadQR';
 import BankData from './BankData';
 import InsuranceData from './InsuranceData';
-import IncorporatedCompanies from './IncorporatedCompaniesList';
 import GreatSuccess from './GreatSuccess';
 import ThankYou from './ThankYou';
 import AppPicker from './AppPicker';
@@ -17,7 +16,6 @@ export {
     AppPicker,
     BankData,
     InsuranceData,
-    IncorporatedCompanies,
     GreatSuccess,
     ThankYou
 };
