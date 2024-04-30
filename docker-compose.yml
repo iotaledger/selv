@@ -34,6 +34,8 @@ services:
     expose:
       - '3000'
       - '50051'
+    ports:
+      - "127.0.0.1:3000:3000/tcp"
     # depends_on:
     #   - redis
     #   - identity
@@ -59,6 +61,8 @@ services:
     expose:
       - '3333'
       - '50051'
+    ports:
+      - "127.0.0.1:3333:3333/tcp"
     volumes:
       - ./proto:/usr/proto
     labels:
@@ -73,7 +77,10 @@ services:
       context: ./
       dockerfile: ./oid4vc/walt.id/Dockerfile
     expose:
+      - '3000'
       - '50051'
+    ports:
+      - "127.0.0.1:3001:3000/tcp"
     volumes:
       - ./proto:/usr/proto
     labels:
@@ -87,6 +94,8 @@ services:
     image: impierce/ssi-agent
     expose:
       - '3033'
+    ports:
+      - "127.0.0.1:3033:3033/tcp"
     volumes:
       - ./proto:/usr/proto
     labels:
