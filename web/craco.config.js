@@ -3,6 +3,12 @@ const CracoAlias = require("craco-alias");
 
 module.exports = {
 
+  devServer: {
+    devMiddleware: {
+        writeToDisk: true,
+    },
+  },
+
   plugins: [
     {
       plugin: CracoAlias,

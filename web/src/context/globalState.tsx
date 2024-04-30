@@ -75,10 +75,7 @@ type State = {
 
 type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction;
 
-// "undefined" means the URL will be computed from the `window.location` object
-const URL = config.websocketURL // process.env.NODE_ENV === 'production' ? undefined : 'http://localhost:4000';
-
-const socket = SocketIOClient(URL, {
+const socket = SocketIOClient("/", {
     autoConnect: true,
     transports: ['websocket'],
     secure: true,

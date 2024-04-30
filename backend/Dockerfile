@@ -2,6 +2,14 @@ FROM node:20
 
 RUN apt-get update && apt-get install -y protobuf-compiler
 
+WORKDIR /web
+
+COPY web/package*.json ./
+
+RUN npm install
+
+COPY web/. .
+
 WORKDIR /backend
 
 COPY backend/package*.json ./

@@ -8,6 +8,7 @@ export const createServer = (rp: RelyingParty, userService: UserService) => {
   
   const app = express();
   app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
   app.route("/api/health").get(
     asyncHandler(async (req, res) => {
         res.status(200).send();
@@ -16,6 +17,7 @@ export const createServer = (rp: RelyingParty, userService: UserService) => {
   app.route("/api/auth").post(
     asyncHandler(async (req, res) => {
       
+      console.debug(req.body)
       const { id_token: idToken } = req.body;
       const { state } = req.body;
       const { iss } = await rp.validateJwt(idToken);
