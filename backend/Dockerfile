@@ -10,6 +10,8 @@ RUN npm install
 
 COPY web/. .
 
+RUN npm run build
+
 WORKDIR /backend
 
 COPY backend/package*.json ./
