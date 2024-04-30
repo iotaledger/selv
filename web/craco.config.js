@@ -4,6 +4,7 @@ const CracoAlias = require("craco-alias");
 module.exports = {
 
   devServer: {
+    port: 9000,
     devMiddleware: {
         writeToDisk: true,
     },

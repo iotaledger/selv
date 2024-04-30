@@ -1,26 +1,6 @@
 version: '3'
 
 services:
-
-##################################################################
-#  Reverse Proxy and SSL                                         #
-##################################################################
-
-  traefik:
-    image: traefik:v2.11
-    command:
-      - "--accesslog=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.grpc.address=:5000"
-      - "--log.level=DEBUG"
-    ports:
-      - "${HTTP_PORT}:80/tcp"
-      - "${GRPC_PORT}:5000/tcp"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./data/letsencrypt:/letsencrypt"
   
   redis:
     image: redis:latest
@@ -42,12 +22,21 @@ services:
     environment:
       ISSUERS_BANK_DID: did:iota:snd:0x2cfb60f00089a91a96fa8fcee5e2bda15f51b0b062762ad9ca846bba536f8818
       ISSUERS_BANK_FRAGMENT: S3zEW4inNy8FYZEMVTEthdzqqSBq1WglM2k75xKHzy0
+
+  identity:
+    image: iotaledger/identity-grpc:alpha
+    environment:
+      - API_ENDPOINT=https://api.testnet.shimmer.network
+      - SNAPSHOT_PATH=/stronghold.hodl
+      - STRONGHOLD_PWD_FILE=/run/secrets/stronghold_pwd
+    volumes:
+      - "./data/stronghold.hodl:/stronghold.hodl"
+    expose:
+     - '50051'
     labels:
-      traefik.enable: true
-      traefik.http.routers.backend.rule: Host(`selv.local`)
-      traefik.http.routers.backend.entrypoints: web
-      traefik.http.routers.backend.service: backend
-      traefik.http.services.backend.loadbalancer.server.port: "3000"
+      traefik.enable: false
+    secrets:
+      - stronghold_pwd
 
   oid4vc-tanglelabs:
     build:
@@ -57,7 +46,7 @@ services:
       RP_DID: did:iota:snd:0x2cfb60f00089a91a96fa8fcee5e2bda15f51b0b062762ad9ca846bba536f8818
       SIGNER_KEYID: pK0JAYw5RFFKqorBn0x4w98zl2UBfRys
       KEY_FRAGMENT: key-1
-      PUBLIC_URL: "bank.selv.local"
+      PUBLIC_URL: "bank.selv.iota.org"
     expose:
       - '3333'
       - '50051'
@@ -65,12 +54,6 @@ services:
       - "127.0.0.1:3333:3333/tcp"
     volumes:
       - ./proto:/usr/proto
-    labels:
-      traefik.enable: true
-      traefik.http.routers.oid4vc-tanglelabs.rule: Host(`bank.selv.local`)
-      traefik.http.routers.oid4vc-tanglelabs.entrypoints: web
-      traefik.http.routers.oid4vc-tanglelabs.service: oid4vc-tanglelabs
-      traefik.http.services.oid4vc-tanglelabs.loadbalancer.server.port: "3333"
 
   oid4vc-waltid:
     build:
@@ -83,12 +66,6 @@ services:
       - "127.0.0.1:3001:3000/tcp"
     volumes:
       - ./proto:/usr/proto
-    labels:
-      traefik.enable: true
-      traefik.http.routers.oid4vc-waltid.rule: Host(`government.selv.local`)
-      traefik.http.routers.oid4vc-waltid.entrypoints: web
-      traefik.http.routers.oid4vc-waltid.service: oid4vc-waltid
-      traefik.http.services.oid4vc-waltid.loadbalancer.server.port: "3000"
 
   oid4vc-impierce:
     image: impierce/ssi-agent
@@ -98,12 +75,6 @@ services:
       - "127.0.0.1:3033:3033/tcp"
     volumes:
       - ./proto:/usr/proto
-    labels:
-      traefik.enable: true
-      traefik.http.routers.oid4vc-impierce.rule: Host(`insurance.selv.local`)
-      traefik.http.routers.oid4vc-impierce.entrypoints: web
-      traefik.http.routers.oid4vc-impierce.service: oid4vc-impierce
-      traefik.http.services.oid4vc-impierce.loadbalancer.server.port: "3033"
     environment:
       #AGENT_CONFIG_LOG_FORMAT: json
       AGENT_CONFIG_EVENT_STORE: postgres
@@ -122,15 +93,6 @@ services:
     volumes:
       - "./data/db:/docker-entrypoint-initdb.d"
 
-  identity:
-    image: iotaledger/identity-grpc:alpha
-    environment:
-      - API_ENDPOINT=http://host.docker.internal
-      - STRONGHOLD_PWD=nhNc9yAjbCuh6YQxKlceLAUrWCwAYLvu
-      - SNAPSHOT_PATH=/stronghold.hodl
-    volumes:
-      - "./data/stronghold.hodl:/stronghold.hodl"
-    expose:
-     - '50051'
-    labels:
-      traefik.enable: false
+secrets:
+  stronghold_pwd:
+    file: data/stronghold_secret.txt
