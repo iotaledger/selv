@@ -1,5 +1,5 @@
 echo "building the image ..."
-docker compose -f ../docker-compose.yml build --no-cache
+docker compose -f ../docker-compose.yml build --pull --no-cache
 
 echo "shuting down the docker compose ..."
 docker compose -f ../docker-compose.yml down
