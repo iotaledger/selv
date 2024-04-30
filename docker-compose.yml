@@ -42,7 +42,7 @@ services:
       ISSUERS_BANK_FRAGMENT: S3zEW4inNy8FYZEMVTEthdzqqSBq1WglM2k75xKHzy0
     labels:
       traefik.enable: true
-      traefik.http.routers.backend.rule: Host(`backend.selv.local`)
+      traefik.http.routers.backend.rule: Host(`selv.local`)
       traefik.http.routers.backend.entrypoints: web
       traefik.http.routers.backend.service: backend
       traefik.http.services.backend.loadbalancer.server.port: "3000"
