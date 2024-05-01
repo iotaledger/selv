@@ -1,0 +1,23 @@
+{
+    "id":"Verifiable Presentation request for Selv",
+        "input_descriptors":[
+        {
+            "id":"Request for Selv Credential",
+            "constraints":{
+                "fields":[
+                    {
+                        "path":[
+                            "$.vc.type"
+                        ],
+                        "filter":{
+                            "type":"array",
+                            "contains":{
+                                "const":"SelvCredential"
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

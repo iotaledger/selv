@@ -1,5 +1,5 @@
 {
-    "websocketURL": "http://backend.selv.local:81",
+    "websocketURL": "http://selv.local:81",
     "serverAPI": "https://selv01.iota.cafe",
     "provider": "https://nodes.devnet.iota.org:443",
     "keyId": "selv",

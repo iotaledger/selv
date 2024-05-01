@@ -29,10 +29,12 @@ use identity_iota::storage::KeyIdStorage;
 
 
 // The API endpoint of an IOTA node, e.g. Hornet.
-const API_ENDPOINT: &str = "http://localhost";
+// const API_ENDPOINT: &str = "http://localhost";
+const API_ENDPOINT: &str = "https://api.testnet.shimmer.network";
 
 // The faucet endpoint allows requesting funds for testing purposes.
-const FAUCET_ENDPOINT: &str = "http://localhost/faucet/api/enqueue";
+// const FAUCET_ENDPOINT: &str = "http://localhost/faucet/api/enqueue";
+const FAUCET_ENDPOINT: &str = "https://faucet.testnet.shimmer.network/api/enqueue";
 
 // Stronghold snapshot path.
 const PATH: &str = "./stronghold.hodl";

@@ -1,0 +1,20 @@
+# Configure here to which events will be dispatched to a specific `target_url`. In the example below, the
+# `EventPublisherHttp` will listen for the `SIOPv2AuthorizationResponseVerified` event which is part of the `connection`
+# aggregate. The events will be dispatched to the `https://my-domain.example.org/event-subscriber` endpoint.
+
+target_url: &target_url "http://backend:3000/event-listener"
+
+connection: {
+  target_url: *target_url,
+  target_events: [
+    SIOPv2AuthorizationResponseVerified,
+    OID4VPAuthorizationResponseVerified
+  ]
+}
+
+offer: {
+  target_url: *target_url,
+  target_events: [
+      CredentialRequestVerified
+  ]
+}

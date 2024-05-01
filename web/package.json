@@ -35,7 +35,7 @@
     "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "start": "npm run copy_wasm && craco start",
+    "start": "npm run copy_wasm && npm run build && craco start",
     "build": "npm run copy_wasm && craco build",
     "test": "npm run copy_wasm && craco test",
     "eject": "craco eject",

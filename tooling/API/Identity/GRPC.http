@@ -43,7 +43,3 @@ GRPC /Signing/sign
     "data": {{data}},
     "keyId": "pK0JAYw5RFFKqorBn0x4w98zl2UBfRys"
 }
-
-GRPC 0  - OK
-content-type: application/grpc
-date: Fri, 26 Apr 2024 08:40:40 GMT
