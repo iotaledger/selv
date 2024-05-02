@@ -78,7 +78,7 @@ import {Cache} from './cache';
   });
 
   const userService = new UserService();
-  const tokenCache = await Cache.init<string, any>();
+  const tokenCache = await Cache.init<string, string>();
   const credentialCache = await Cache.init<string, any>();
 
 

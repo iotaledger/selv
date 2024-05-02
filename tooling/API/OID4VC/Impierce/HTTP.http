@@ -13,3 +13,8 @@ Content-Type: application/json
 }
 ###
 GET /v1/authorization_requests/06adfc99a128b078726c9cca383df3883db1e8dbd0270518bd4af7eb5a8e9191
+###
+POST /redirect
+Content-Type: application/x-www-form-urlencoded
+
+id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSIsImtpZCI6ImRpZDppb3RhOnJtczoweGY4MGM1MTM0OGNmMzIzOGRmMTEzMzE1NmM3ODk2NWQxZDVmOWFiYTJiZjA3MGMyM2ZiYmI5NmVkYjMzNmUxNTQjbVpYbTltSndqN2Q2WHJtejIxS3VvRDA3ZXhvM0lTOVlWWXFwTlk1RjhYSSJ9

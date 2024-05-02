@@ -32,7 +32,7 @@ export const createServer = (
     asyncHandler(async (req, res) => {
       const offer_id = req.params.id;
 
-      const offer = tokenCache.consumeItem(offer_id);
+      const offer = await tokenCache.consumeItem(offer_id);
 
       if (!offer) {
         res.status(500).send();
@@ -46,7 +46,7 @@ export const createServer = (
     asyncHandler(async (req, res) => {
       const offer_id = req.params.id;
 
-      const offer = credentialCache.consumeItem(offer_id);
+      const offer = await credentialCache.consumeItem(offer_id);
 
       if (!offer) {
         res.status(500).send();

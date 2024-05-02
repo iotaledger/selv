@@ -26,10 +26,9 @@ export class Cache<K,V> {
     }
 
     async consumeItem(key: K) {
-        const item = this.memoryCache.retrieveItemValue(key);
+        const item = this.memoryCache.retrieveItemValue(key);   
         this.memoryCache.removeItem(key);
         return item;
     }
 
-    private generate
 }
