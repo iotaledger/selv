@@ -20,10 +20,11 @@
 ### Setup
 Add following domains to your host files:
 - `selv.local`
-- `backend.selv.local`
 - `bank.selv.local`
 - `government.selv.local`
 - `insurance.selv.local`
+
+Copy .env.template to .env
 
 ### Tooling
 1. create stronghold

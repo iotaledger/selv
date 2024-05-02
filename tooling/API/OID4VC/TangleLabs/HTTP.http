@@ -1,6 +1,21 @@
-@host=http://bank.selv.local:81
+@host=http://insurance.selv.iota.org
 ###
 GET /api/health
+###
+GET /.well-known/oauth-authorization-server
+###
+GET /.well-known/openid-credential-issuer
+###
+GET /auth/token
+###
+GET /openid4vci/credential
+###
+GET /request/032f4ed9fbe94e6ea1b58e0a97f011dc4a6ca21e260da715c23bbf717574a434
+###
+POST /redirect
+Content-Type: application/x-www-form-urlencoded
+
+id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSIsImtpZCI6ImRpZDppb3RhOnJtczoweGY4MGM1MTM0OGNmMzIzOGRmMTEzMzE1NmM3ODk2NWQxZDVmOWFiYTJiZjA3MGMyM2ZiYmI5NmVkYjMzNmUxNTQjbVpYbTltSndqN2Q2WHJtejIxS3VvRDA3ZXhvM0lTOVlWWXFwTlk1RjhYSSJ9
 ###
 {{
 const crypto = require('crypto');

@@ -9,6 +9,8 @@ service OID4VCI {
 
 message OfferConfig {
   repeated string credentials = 1;
+  optional string nonce = 2;
+  optional string state = 3;
 }
 
 message Offer {

@@ -1,57 +1,15 @@
-@host=http://bank.selv.local:81
+@host=http://insurance.selv.iota.org
 ###
-GET /api/health
+POST /v1/credentials
 ###
-{{
-const crypto = require('crypto');
-
-const holder_did = "did:key:z6MkquY2TrE7KeuBNRAJ4eZbPqtYeCyGXe8seQNfK1ZXAumj";
-const state = "775dd08e-c0cd-417b-9a0e-f65f8bd33fea";
-const nonce = "QtIxNkPd_NX_hBqIeTR7-";
-
-const header =   {
-  "kid": "did:key:z6MkquY2TrE7KeuBNRAJ4eZbPqtYeCyGXe8seQNfK1ZXAumj#z6MkquY2TrE7KeuBNRAJ4eZbPqtYeCyGXe8seQNfK1ZXAumj",
-  "alg": "EdDSA",
-  "typ": "JWT"
+GET /v1/credentials/{credential_id}
+###
+POST /v1/offers
+###
+POST /v1/authorization_requests
+Content-Type: application/json
+{
+    "nonce": "0d520cbe176ab9e1f7888c70888020d84a69672a4baabd3ce1c6aaad8f6420c0"
 }
-const encodedHeaders = Buffer.from(JSON.stringify(header), "utf8").toString("base64url");
-
-const claims = {
-  "iat": 1714457784,
-  "request_uri": `${host}/api/offers/siop/N5NGrHKYYxMMIC3uZ9BLn`, //TODO: what is that?
-  "response_type": "id_token",
-  state,
-  "client_metadata": {
-    "subject_syntax_types_supported": [
-      "did:key"
-    ],
-    "id_token_signing_alg_values_supported": [
-      "EdDSA"
-    ],
-    "client_name": "TEST",
-    "logo_uri": "TBD"
-  },
-  "redirect_uri": `${host}/api/auth`,
-  "resolver": {
-    "registry": {}
-  },
-  "scope": "openid",
-  "response_mode": "post",
-  "client_id": holder_did,
-  nonce,
-  "iss": holder_did
-}
-const encodedPayload = Buffer.from(JSON.stringify(claims), "utf8").toString("base64url");
-
-const encodedSignature = crypto.createHmac('sha256', "mysecret").update(`${encodedHeaders}.${encodedPayload}`).digest("base64url")
-
-console.log(encodedSignature);
-const jwt = `${encodedHeaders}.${encodedPayload}.${encodedSignature}`;
-console.log(jwt);
-exports.jwt = jwt
-}}
-
-POST /api/auth
-Content-Type: application/x-www-form-urlencoded
-
-id_token={{jwt}}
+###
+GET /v1/authorization_requests/06adfc99a128b078726c9cca383df3883db1e8dbd0270518bd4af7eb5a8e9191
