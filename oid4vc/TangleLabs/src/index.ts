@@ -68,7 +68,7 @@ import {Cache} from './cache';
     kid: `${process.env.RP_DID}#${process.env.KEY_FRAGMENT}`,
     cryptographicSuitesSupported: [SigningAlgs.EdDSA],
     store: createStore(),
-    tokenEndpoint: `http://${process.env.PUBLIC_URL}/token`,
+    tokenEndpoint: `http://${process.env.PUBLIC_URL}/api/token`,
     supportedCredentials: [
       {
           name: "wa_driving_license",

@@ -22,13 +22,13 @@ export const createServer = (
     })
   );
 
-  app.route("/token").get(
+  app.route("/api/token").get(
     asyncHandler(async (req, res) => {
       res.json(await issuer.createTokenResponse(req.body));
     })
   );
 
-  app.route("/api/offer/:id").post(
+  app.route("/api/offer/:id").get(
     asyncHandler(async (req, res) => {
       const offer_id = req.params.id;
 
@@ -42,7 +42,7 @@ export const createServer = (
     })
   );
 
-  app.route("/api/credential-offer/:id").post(
+  app.route("/api/credential-offer/:id").get(
     asyncHandler(async (req, res) => {
       const offer_id = req.params.id;
 
@@ -91,14 +91,14 @@ export const createServer = (
     })
   );
 
-  app.route("/.well-known/openid-credential-issuer").post(
+  app.route("/.well-known/openid-credential-issuer").get(
     asyncHandler(async (req, res) => {
       const metadata = issuer.getIssuerMetadata();
       res.send(metadata);
     })
   );
 
-  app.route("/.well-known/oauth-authorization-server").post(
+  app.route("/.well-known/oauth-authorization-server").get(
     asyncHandler(async (req, res) => {
       const metadata = issuer.getOauthServerMetadata();
       res.send(metadata);
