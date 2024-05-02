@@ -32,7 +32,7 @@ export const createService = async (
     const requestId = crypto.randomUUID();
     const request = await rp.createRequest({
       requestBy: "reference",
-      requestUri: encodeURIComponent(`${process.env.PUBLIC_URL}/offer/${requestId}`),
+      requestUri: encodeURIComponent(`${process.env.PUBLIC_URL}/api/offer/${requestId}`),
       responseType: "id_token",
       state: call.request.state,
       nonce: call.request.nonce,
@@ -62,7 +62,7 @@ export const createService = async (
     const request = await rp.createRequest({
       presentationDefinition: call.request.presentationDefinition,
       requestBy: "reference",
-      requestUri: encodeURIComponent(`${process.env.PUBLIC_URL}/offer/${requestId}`),
+      requestUri: encodeURIComponent(`${process.env.PUBLIC_URL}/api/offer/${requestId}`),
       responseType: "vp_token",
       state: call.request.state,
       nonce: call.request.nonce,
@@ -92,7 +92,7 @@ export const createService = async (
       {
         credentials: call.request.credentials,
         requestBy: "reference",
-        credentialOfferUri: encodeURIComponent(`${process.env.PUBLIC_URL}/credential-offer/${requestId}`),
+        credentialOfferUri: encodeURIComponent(`${process.env.PUBLIC_URL}/api/credential-offer/${requestId}`),
       },
       { state: call.request.state }
     );
