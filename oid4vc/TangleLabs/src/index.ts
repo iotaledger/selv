@@ -20,6 +20,8 @@ import { createServer } from "./httpServer";
 import { createStore } from "./store";
 import { UserService } from "./userService";
 
+import {Cache} from './cache';
+
 (async () => {
 
   // const didKeyDriver = driver();
@@ -55,7 +57,7 @@ import { UserService } from "./userService";
   });
 
   const issuer = new VcIssuer({
-    batchCredentialEndpoint: `http://${process.env.PUBLIC_URL}/api/credentials`,
+    batchCredentialEndpoint: `http://${process.env.PUBLIC_URL}/api/credential`,
     credentialEndpoint: `http://${process.env.PUBLIC_URL}/api/credential`,
     credentialIssuer: `http://${process.env.PUBLIC_URL}/`,
     proofTypesSupported: ["jwt"],
@@ -76,8 +78,11 @@ import { UserService } from "./userService";
   });
 
   const userService = new UserService();
+  const tokenCache = await Cache.init<string, any>();
+  const credentialCache = await Cache.init<string, any>();
 
-  createService(rp, issuer);
-  createServer(rp, userService);
+
+  createService(rp, issuer, tokenCache, credentialCache);
+  createServer(rp, issuer, userService, tokenCache, credentialCache);
 
 })();

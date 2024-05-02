@@ -76,11 +76,6 @@ services:
     extends:
       file: docker-compose.yml
       service: oid4vc-tanglelabs
-    environment:
-      RP_DID: did:iota:snd:0x2cfb60f00089a91a96fa8fcee5e2bda15f51b0b062762ad9ca846bba536f8818
-      SIGNER_KEYID: pK0JAYw5RFFKqorBn0x4w98zl2UBfRys
-      KEY_FRAGMENT: key-1
-      PUBLIC_URL: "bank.selv.local"
     labels:
       traefik.enable: true
       traefik.http.routers.oid4vc-tanglelabs.rule: Host(`bank.selv.local`)
