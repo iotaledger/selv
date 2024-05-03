@@ -38,10 +38,8 @@ export const createService = async (
       nonce: call.request.nonce,
     });
 
-    tokenCache.storeItem(requestId, request.request);
-
     if (request) {
-      /// should just be uri
+      tokenCache.storeItem(requestId, request.request);
       callback(null, request);
     } else {
       callback({
@@ -68,9 +66,8 @@ export const createService = async (
       nonce: call.request.nonce,
     });
 
-    tokenCache.storeItem(requestId, request.request);
-
     if (request) {
+      tokenCache.storeItem(requestId, request.request);
       callback(null, request);
     } else {
       callback({
@@ -96,8 +93,8 @@ export const createService = async (
       },
       { state: call.request.state }
     );
-    tokenCache.storeItem(requestId, offer.offer);
     if (offer) {
+      credentialCache.storeItem(requestId, offer.offer);
       console.log(JSON.stringify(offer.offer));
       callback(null, { uri: offer.uri, offer: JSON.stringify(offer.offer) });
     } else {

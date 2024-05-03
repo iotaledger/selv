@@ -6,6 +6,8 @@ export const protobufPackage = "oid4vc";
 
 export interface OfferConfig {
   credentials: string[];
+  nonce?: string | undefined;
+  state?: string | undefined;
 }
 
 export interface Offer {

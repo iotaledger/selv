@@ -13,10 +13,32 @@ GRPC /UsersService/ConnectUser
     "code": "063bf112-5e45-4529-a085-fd91c79d8837"
 }
 ###
-GRPC 0  - OK
-content-type: application/grpc+proto
-date: Mon, 29 Apr 2024 14:04:34 GMT
+{{
+    //pre request script
+    exports.data = new TextEncoder().encode("test");
+}}
+
+GRPC /UsersService/PresentCredential
+{
+    "user": {
+        "did": "test",
+        "code": "063bf112-5e45-4529-a085-fd91c79d8837"
+    },
+    "vp": {}
+}
 ###
-GRPC 0  - OK
-content-type: application/grpc+proto
-date: Fri, 26 Apr 2024 08:33:29 GMT
+{{
+    //pre request script
+    exports.data = new TextEncoder().encode("test");
+}}
+
+GRPC /UsersService/RequestCredential
+{
+    "user": {
+        "did": "test",
+        "code": "063bf112-5e45-4529-a085-fd91c79d8837"
+    },
+    "unsignedCredentials": [
+        {}
+    ]
+}

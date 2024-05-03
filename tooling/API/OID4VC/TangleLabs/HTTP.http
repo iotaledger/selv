@@ -10,57 +10,60 @@ GET /.well-known/openid-credential-issuer
 ###
 POST /api/credential
 ###
-GET /api/credential-offer/05c438e5-f27a-4572-b57b-8b2be990b6ba
+GET /api/credential-offer/372e0ad6-e601-473d-b632-bcf1762e79aa
 ###
-GET /api/offer/05c438e5-f27a-4572-b57b-8b2be990b6ba
+GET /api/offer/c10dc98c-06e4-4199-bc2d-3d6cff1a2e25
 ###
 {{
-const crypto = require('crypto');
 
-const holder_did = "did:key:z6MkquY2TrE7KeuBNRAJ4eZbPqtYeCyGXe8seQNfK1ZXAumj";
-const state = "775dd08e-c0cd-417b-9a0e-f65f8bd33fea";
-const nonce = "QtIxNkPd_NX_hBqIeTR7-";
+const utils = require('../../scripting/dist/bundle5.js');
 
-const header =   {
-  "kid": "did:key:z6MkquY2TrE7KeuBNRAJ4eZbPqtYeCyGXe8seQNfK1ZXAumj#z6MkquY2TrE7KeuBNRAJ4eZbPqtYeCyGXe8seQNfK1ZXAumj",
-  "alg": "EdDSA",
-  "typ": "JWT"
-}
-const encodedHeaders = Buffer.from(JSON.stringify(header), "utf8").toString("base64url");
+const jwt = async () => {
 
-const claims = {
-  "iat": 1714457784,
-  "request_uri": `${host}/api/offers/siop/N5NGrHKYYxMMIC3uZ9BLn`, //TODO: what is that?
+  const { didDocument, keyPairs } = await utils.getDIDKey();
+  const { id:did, authentication } = didDocument; 
+
+  const issuer_did = "test"
+
+  const header = {
+    kid: `${authentication}`,
+    alg: "EdDSA",
+    typ: "JWT"
+  }
+
+  const encodedHeaders = Buffer.from(JSON.stringify(header), "utf8").toString("base64url");
+
+  const claims = {
+  "iat": 1714775844,
+  "request_uri": "http%3A%2F%2Fbank.selv.local%3A81%2Fapi%2Foffer%2F9f38f7c9-708b-4351-99b4-12cc75f9c94c",
   "response_type": "id_token",
-  state,
+  "state": "test",
+  "nonce": "3X8JDguMcK76sYRZifbRJ",
   "client_metadata": {
     "subject_syntax_types_supported": [
       "did:key"
     ],
     "id_token_signing_alg_values_supported": [
       "EdDSA"
-    ],
-    "client_name": "TEST",
-    "logo_uri": "TBD"
+    ]
   },
-  "redirect_uri": `${host}/api/auth`,
+  "redirect_uri": "http://bank.selv.local:81/api/auth",
   "resolver": {
     "registry": {}
   },
   "scope": "openid",
   "response_mode": "post",
-  "client_id": holder_did,
-  nonce,
-  "iss": holder_did
+  "client_id": "did:iota:rms:0xc276250e9292c35bc1692cf81f417bbec3a1c825d5e47a9082d656a08a039b05",
+  "iss": "did:iota:rms:0xc276250e9292c35bc1692cf81f417bbec3a1c825d5e47a9082d656a08a039b05"
 }
-const encodedPayload = Buffer.from(JSON.stringify(claims), "utf8").toString("base64url");
+  const encodedPayload = Buffer.from(JSON.stringify(claims), "utf8").toString("base64url");
 
-const encodedSignature = crypto.createHmac('sha256', "mysecret").update(`${encodedHeaders}.${encodedPayload}`).digest("base64url")
+  const encodedSignature = await utils.sign(`${encodedHeaders}.${encodedPayload}`)
 
-console.log(encodedSignature);
-const jwt = `${encodedHeaders}.${encodedPayload}.${encodedSignature}`;
-console.log(jwt);
-exports.jwt = jwt
+  const jwt = `${encodedHeaders}.${encodedPayload}.${encodedSignature}`;
+  return jwt;
+}
+exports.jwt = jwt();
 }}
 
 POST /api/auth

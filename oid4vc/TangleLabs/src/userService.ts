@@ -30,9 +30,6 @@ export class UserService {
   }
   
   connectUser (did: string, code: string) {
-    
-    
-    //@ts-ignore
     return new Promise<void>((resolve, reject) => this.userClient.connectUser({
       did,
       code,
@@ -40,7 +37,37 @@ export class UserService {
       if (err) {
         reject(err);
       }
-      resolve();
+      resolve(response);
+    }));
+  }
+
+  presentCredential (did: string, code: string, presentation: any) {
+    return new Promise<void>((resolve, reject) => this.userClient.presentCredential({
+      user : {
+        did,
+        code,
+      },
+      vp: presentation
+    }, (err, response) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(response);
+    }));
+  }
+
+  credentialRequest (did: string, code: string, unsigned_credentials: any[]): Promise<{credentials: any[]}> {
+    return new Promise((resolve, reject) => this.userClient.credentialRequest({
+      user : {
+        did,
+        code,
+      },
+      unsigned_credentials,
+    }, (err, response) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(response);
     }));
   }
     

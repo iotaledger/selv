@@ -18,18 +18,21 @@ export const createServer = (
 
   app.route("/api/health").get(
     asyncHandler(async (req, res) => {
+      console.debug(req);
       res.status(200).send();
     })
   );
 
   app.route("/api/token").get(
     asyncHandler(async (req, res) => {
+      console.debug(req);
       res.json(await issuer.createTokenResponse(req.body));
     })
   );
 
   app.route("/api/offer/:id").get(
     asyncHandler(async (req, res) => {
+      console.debug(req);
       const offer_id = req.params.id;
 
       const offer = await tokenCache.consumeItem(offer_id);
@@ -44,6 +47,7 @@ export const createServer = (
 
   app.route("/api/credential-offer/:id").get(
     asyncHandler(async (req, res) => {
+      console.debug(req);
       const offer_id = req.params.id;
 
       const offer = await credentialCache.consumeItem(offer_id);
@@ -58,16 +62,26 @@ export const createServer = (
 
   app.route("/api/credential").post(
     asyncHandler(async (req, res) => {
+      console.debug(req);
       await issuer.validateCredentialsResponse({
         token: req.headers.authorization?.split("Bearer ")[1],
         proof: req.body.credential_requests[0].proof.jwt,
       });
       // TODO: get state from token, need to decode
-      // TODO: get actual signed credential via state
-      // const response = await issuer.createSendCredentialsResponse({
-      //   credentials: [credential],
-      // });
-      // res.json(response);
+      const iss = "";
+      const state = "";
+      const unsigned_credentials = [];
+
+      const { credentials } = await userService.credentialRequest(
+        iss,
+        state,
+        unsigned_credentials
+      );
+
+      const response = await issuer.createSendCredentialsResponse({
+        credentials,
+      });
+      res.json(response);
     })
   );
 
@@ -82,7 +96,7 @@ export const createServer = (
         console.debug(req, state, iss);
         await userService.connectUser(iss, state);
       } else if (vpToken) {
-        // TODO: await userService.presentation(iss, state, vpToken);
+        await userService.presentCredential(iss, state, vpToken);
       } else {
         res.status(500).send();
       }
@@ -93,6 +107,7 @@ export const createServer = (
 
   app.route("/.well-known/openid-credential-issuer").get(
     asyncHandler(async (req, res) => {
+      console.debug(req);
       const metadata = issuer.getIssuerMetadata();
       res.send(metadata);
     })
@@ -100,13 +115,14 @@ export const createServer = (
 
   app.route("/.well-known/oauth-authorization-server").get(
     asyncHandler(async (req, res) => {
+      console.debug(req);
       const metadata = issuer.getOauthServerMetadata();
       res.send(metadata);
     })
   );
 
   const port = 3333;
-  const server = app.listen(port, "0.0.0.0", () => {
+  app.listen(port, "0.0.0.0", () => {
     console.log(`HTTP server listening on port ${port}`);
   });
 };

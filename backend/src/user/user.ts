@@ -1,7 +1,8 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
+import { wrappers } from "protobufjs";
 import { Observable } from "rxjs";
-import { Any } from "../google/protobuf/any";
+import { Struct } from "../google/protobuf/struct";
 
 export const protobufPackage = "user";
 
@@ -14,15 +15,28 @@ export interface User {
 
 export interface CredentialPresentation {
   user: User | undefined;
-  vp: Any | undefined;
+  vp: { [key: string]: any } | undefined;
+}
+
+export interface CredentialRequest {
+  user: User | undefined;
+  unsignedCredentials: { [key: string]: any }[];
+}
+
+export interface CredentialResponse {
+  signedCredentials: { [key: string]: any }[];
 }
 
 export const USER_PACKAGE_NAME = "user";
+
+wrappers[".google.protobuf.Struct"] = { fromObject: Struct.wrap, toObject: Struct.unwrap } as any;
 
 export interface UsersServiceClient {
   connectUser(request: User): Observable<User>;
 
   presentCredential(request: CredentialPresentation): Observable<CredentialPresentation>;
+
+  requestCredential(request: CredentialRequest): Observable<CredentialResponse>;
 }
 
 export interface UsersServiceController {
@@ -31,11 +45,15 @@ export interface UsersServiceController {
   presentCredential(
     request: CredentialPresentation,
   ): Promise<CredentialPresentation> | Observable<CredentialPresentation> | CredentialPresentation;
+
+  requestCredential(
+    request: CredentialRequest,
+  ): Promise<CredentialResponse> | Observable<CredentialResponse> | CredentialResponse;
 }
 
 export function UsersServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["connectUser", "presentCredential"];
+    const grpcMethods: string[] = ["connectUser", "presentCredential", "requestCredential"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("UsersService", method)(constructor.prototype[method], method, descriptor);

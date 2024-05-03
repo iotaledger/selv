@@ -1,7 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { User } from './interfaces/User';
 import { WebAppService } from 'src/webapp/webapp.service';
 import { Scopes } from '../../../types/Scopes';
+import {
+  CredentialPresentation,
+  CredentialRequest,
+  CredentialResponse,
+  User,
+} from './user';
 
 @Injectable()
 export class UserService {
@@ -16,5 +21,41 @@ export class UserService {
     //TODO: manage scope
     await this.webAppService.connectUser(user, Scopes.CompanyHouse);
     return user;
+  }
+
+  async presentCredential(
+    presentation: CredentialPresentation,
+  ): Promise<CredentialPresentation> {
+    this.logger.debug(
+      `User with did:${presentation.user.did} and code:${presentation.user.code} presented`,
+      presentation.vp,
+    );
+    //TODO: manage scope
+    await this.webAppService.presentCredential(
+      presentation.user,
+      presentation.vp,
+      Scopes.CompanyHouse,
+    );
+    return presentation;
+  }
+
+  async requestCredential(
+    request: CredentialRequest,
+  ): Promise<CredentialResponse> {
+    this.logger.debug(
+      `User with did:${request.user.did} and code:${request.user.code} requested`,
+      request.unsignedCredentials,
+    );
+    //TODO: manage scope
+    await this.webAppService.requestCredential(
+      request.user,
+      request.unsignedCredentials,
+      Scopes.CompanyHouse,
+    );
+
+    //TODO
+    return {
+      signedCredentials: [{}],
+    };
   }
 }

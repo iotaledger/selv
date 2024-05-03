@@ -3,14 +3,13 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Logger, Injectable, Inject, forwardRef } from '@nestjs/common';
 
 import { RedisCache } from 'cache-manager-redis-yet';
-import { User } from 'src/user/interfaces/User';
 import { WebAppGateway } from './webapp.gateway';
 import { PresentationDefinitionV2 } from '../../../types/PresentationExchange';
 import { IdentityService } from 'src/identity/identity.service';
 import type { Issuers } from '../../../types/Issuers';
 import { Scopes } from '../../../types/Scopes';
 import { SIOPV2Service } from 'src/oid4vc/oid4vc.service';
-// import { User } from 'src/users/interfaces/User';
+import { User } from 'src/user/user';
 
 @Injectable()
 export class WebAppService {
@@ -84,6 +83,57 @@ export class WebAppService {
     return url;
   }
 
+  async connectUser(user: User, scope: Scopes): Promise<void> {
+    this.logger.debug(
+      `connect user with did:${user.did} and code:${user.code}`,
+    );
+    const session_id = await this.consumeToken(user.code);
+    this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
+
+    await this.cache.set(`user:${session_id}`, { did: user.did });
+    this.logger.debug(`connected session_id:${session_id} with :${user.did}`);
+
+    await this.webAppGateway.connectDid(session_id, user.did, scope);
+  }
+
+  async presentCredential(
+    user: User,
+    presentation: any,
+    scope: Scopes,
+  ): Promise<void> {
+    this.logger.debug(
+      `user with did:${user.did} and code:${user.code} presented`,
+      presentation,
+    );
+    // TODO:
+    // const session_id = await this.consumeToken(user.code);
+    // this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
+
+    // await this.cache.set(`user:${session_id}`, { did: user.did });
+    // this.logger.debug(`connected session_id:${session_id} with :${user.did}`);
+
+    // await this.webAppGateway.connectDid(session_id, user.did, scope);
+  }
+
+  async requestCredential(
+    user: User,
+    credentials: any[],
+    scope: Scopes,
+  ): Promise<void> {
+    this.logger.debug(
+      `user with did:${user.did} and code:${user.code} requested`,
+      credentials,
+    );
+    // TODO:
+    // const session_id = await this.consumeToken(user.code);
+    // this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
+
+    // await this.cache.set(`user:${session_id}`, { did: user.did });
+    // this.logger.debug(`connected session_id:${session_id} with :${user.did}`);
+
+    // await this.webAppGateway.connectDid(session_id, user.did, scope);
+  }
+
   async requestTokenForSessionId(sessionId: string): Promise<string> {
     this.logger.debug(`request token for session_id:${sessionId}`);
 
@@ -108,18 +158,5 @@ export class WebAppService {
     this.logger.debug(`cleared token:${token} for session_id:${session_id}`);
 
     return String(session_id);
-  }
-
-  async connectUser(user: User, scope: Scopes): Promise<void> {
-    this.logger.debug(
-      `connect user with did:${user.did} and code:${user.code}`,
-    );
-    const session_id = await this.consumeToken(user.code);
-    this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
-
-    await this.cache.set(`user:${session_id}`, { did: user.did });
-    this.logger.debug(`connected session_id:${session_id} with :${user.did}`);
-
-    await this.webAppGateway.connectDid(session_id, user.did, scope);
   }
 }
