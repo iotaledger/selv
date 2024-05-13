@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+      "rootDir": "./",
+      "outDir": "./dist",
+      "target": "es2019",
+      "lib": [   
+        "es2019"
+      ],
+      "allowJs": true,
+      "allowSyntheticDefaultImports": true,
+      "forceConsistentCasingInFileNames": true,
+      "resolveJsonModule": true,
+      "isolatedModules": true,
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "moduleResolution": "node",
+      "strict": true,
+      "declaration": true,
+      "sourceMap": true
+    },
+    "include": ["./", "./node_modules/**/*"],
+  }
