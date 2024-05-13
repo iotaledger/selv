@@ -41,6 +41,7 @@ interface RequestInviteAction extends ReducerBaseAction {
 interface RequestPresentationAction extends ReducerBaseAction {
     type: Actions.REQUEST_PRESENTATION,
     provider: Providers,
+    presentationDefinition: any,
 }
 
 interface RequestIssuanceAction extends ReducerBaseAction {
@@ -88,9 +89,9 @@ const requestSIOPInvite: RequestSIOPInvite = (provider, scope) => {
 }
 
 // OIDC4VP
-type RequestPresentation = (provider: Providers, scope: Scopes) => void
-const requestPresentation: RequestPresentation = (provider, scope) => {
-    socket.emit('requestPresentation', {provider, scope});
+type RequestPresentation = (provider: Providers, scope: Scopes, presentationDefinition: any) => void
+const requestPresentation: RequestPresentation = (provider, scope, presentationDefinition) => {
+    socket.emit('requestPresentation', {provider, scope, presentationDefinition});
 }
 
 // OIDC4VCI
@@ -215,7 +216,7 @@ export function GlobalStateProvider({ children }: any) {
             }
 
             case Actions.REQUEST_PRESENTATION: {
-                requestPresentation(action.provider, action.scope);
+                requestPresentation(action.provider, action.scope, action.presentationDefinition);
                 return state;
             }
 

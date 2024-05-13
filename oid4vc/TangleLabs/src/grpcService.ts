@@ -4,6 +4,7 @@ import { loadSync } from "@grpc/proto-loader";
 import { RelyingParty, SiopRequestResult, VcIssuer } from "@tanglelabs/oid4vc";
 import { PresentationDefinitionV2 } from "@sphereon/pex-models";
 import { Cache } from "./cache";
+import {struct, Struct} from 'pb-util';
 
 const crypto = await import('node:crypto');
 
@@ -51,14 +52,16 @@ export const createService = async (
 
   async function createOID4VPRequest(
     call: grpc.ServerUnaryCall<
-      { presentationDefinition: any; state: any; nonce: string },
+      { presentationDefinition: Struct; state: string; nonce: string },
       any
     >,
     callback: grpc.sendUnaryData<SiopRequestResult>
   ): Promise<void> {
     const requestId = crypto.randomUUID();
+
+    console.debug(struct.decode(call.request.presentationDefinition));
     const request = await rp.createRequest({
-      presentationDefinition: call.request.presentationDefinition,
+      presentationDefinition: struct.decode(call.request.presentationDefinition) as unknown as PresentationDefinitionV2,
       requestBy: "reference",
       requestUri: encodeURIComponent(`${process.env.PUBLIC_URL}/api/offer/${requestId}`),
       responseType: "vp_token",

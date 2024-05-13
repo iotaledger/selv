@@ -25,19 +25,42 @@ const ProvideData: React.FC = () => {
         navigate(nextStep);
     }, [nextStep, navigate]);
 
-    useEffect(() => {      
+    useEffect(() => {
 
         dispatch?.({
             type: Actions.REQUEST_PRESENTATION,
             provider: Providers.WaltId,
+            presentationDefinition: {
+                id: '32f54163-7166-48f1-93d8-ff217bdb0653',
+                input_descriptors: [
+                    {
+                        id: 'wa_driver_license',
+                        name: 'Washington State Business License',
+                        purpose:
+                            'We can only allow licensed Washington State business representatives into the WA Business Conference',
+                        constraints: {
+                            fields: [
+                                {
+                                    path: [
+                                        '$.credentialSubject.dateOfBirth',
+                                        '$.credentialSubject.dob',
+                                        '$.vc.credentialSubject.dateOfBirth',
+                                        '$.vc.credentialSubject.dob',
+                                    ],
+                                },
+                            ],
+                        },
+                    },
+                ],
+            },
             scope: Scopes.CompanyHouse,
 
         })
-           
+
     }, [dispatch]);
 
     useEffect(() => {
-        if(state[Scopes.CompanyHouse]?.credentials?.length) {
+        if (state[Scopes.CompanyHouse]?.credentials?.length) {
             goToNextStep();
         }
     }, [state, goToNextStep])

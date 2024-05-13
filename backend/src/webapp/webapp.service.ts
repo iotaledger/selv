@@ -8,7 +8,7 @@ import { PresentationDefinitionV2 } from '../../../types/PresentationExchange';
 import { IdentityService } from 'src/identity/identity.service';
 import type { Issuers } from '../../../types/Issuers';
 import { Scopes } from '../../../types/Scopes';
-import { SIOPV2Service } from 'src/oid4vc/oid4vc.service';
+import { OID4VPService, SIOPV2Service } from 'src/oid4vc/oid4vc.service';
 import { User } from 'src/user/user';
 
 @Injectable()
@@ -16,6 +16,7 @@ export class WebAppService {
   constructor(
     @Inject(CACHE_MANAGER) private readonly cache: RedisCache,
     private readonly siopV2Service: SIOPV2Service,
+    private readonly oid4vpService: OID4VPService,
     @Inject(forwardRef(() => WebAppGateway))
     private webAppGateway: WebAppGateway,
     @Inject(IdentityService)
@@ -47,11 +48,14 @@ export class WebAppService {
       presentationDefinition,
     );
 
-    //const token = await this.requestTokenForSessionId(session_id);
-    //TODO replace with call against OID4VCI component using either a token or session_id
-    const url = 'example.com';
+    const token = await this.requestTokenForSessionId(session_id);
 
-    return url;
+    const siopResponse = await this.oid4vpService.createOID4VPRequest({
+      state: token,
+      presentationDefinition: presentationDefinition,
+    });
+
+    return siopResponse.uri;
   }
 
   async requestIssuance(

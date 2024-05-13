@@ -1,12 +1,13 @@
 /* eslint-disable */
 import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
+import { wrappers } from "protobufjs";
 import { Observable } from "rxjs";
-import { Any } from "../google/protobuf/any";
+import { Struct } from "../google/protobuf/struct";
 
 export const protobufPackage = "oid4vc";
 
 export interface OID4VPRequestConfig {
-  presentationDefinition: Any | undefined;
+  presentationDefinition: { [key: string]: any } | undefined;
   nonce?: string | undefined;
   state?: string | undefined;
 }
@@ -17,6 +18,8 @@ export interface OID4VPRequest {
 }
 
 export const OID4VC_PACKAGE_NAME = "oid4vc";
+
+wrappers[".google.protobuf.Struct"] = { fromObject: Struct.wrap, toObject: Struct.unwrap } as any;
 
 export interface OID4VPClient {
   createRequest(request: OID4VPRequestConfig): Observable<OID4VPRequest>;
