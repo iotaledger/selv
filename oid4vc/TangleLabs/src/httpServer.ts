@@ -32,10 +32,11 @@ export const createServer = (
 
   app.route("/api/offer/:id").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
+      console.debug(req.params);
       const offer_id = req.params.id;
 
-      const offer = await tokenCache.consumeItem(offer_id);
+      // TODO: consider consuming the token
+      const offer = await tokenCache.retrieveItem(offer_id);
 
       if (!offer) {
         res.status(500).send();
@@ -47,10 +48,11 @@ export const createServer = (
 
   app.route("/api/credential-offer/:id").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
+      console.debug(req.params);
       const offer_id = req.params.id;
-
-      const offer = await credentialCache.consumeItem(offer_id);
+      
+      // TODO: consider consuming the token
+      const offer = await credentialCache.retrieveItem(offer_id);
 
       if (!offer) {
         res.status(500).send();
