@@ -76,6 +76,9 @@ export const createServer = (
       const state = "";
       const unsigned_credentials = [];
 
+      console.log("------------------------");
+      console.log(req.body);
+
       const { credentials } = await userService.credentialRequest(
         iss,
         state,
