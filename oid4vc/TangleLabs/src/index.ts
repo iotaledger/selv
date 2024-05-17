@@ -55,7 +55,7 @@ import {Cache} from './cache';
           type: ["wa_driving_license"],
       },
       {
-          name: "citizen_credential",
+          name: "CitizenCredential",
           type: ["CitizenCredential"],
           display: [{
             name: "National Citizen Credential",
