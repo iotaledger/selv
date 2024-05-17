@@ -94,12 +94,14 @@ export const createServer = (
       console.debug(req.body);
       const { id_token: idToken, vp_token: vpToken } = req.body;
       const { state } = req.body;
-      const { iss } = await rp.validateJwt(idToken);
-
+      
+      console.debug(req, state);
       if (idToken) {
-        console.debug(req, state, iss);
+        const { iss } = await rp.validateJwt(idToken);
         await userService.connectUser(iss, state);
       } else if (vpToken) {
+        console.debug(req, state, vpToken);
+        const { iss } = await rp.validateJwt(vpToken);
         await userService.presentCredential(iss, state, vpToken);
       } else {
         res.status(500).send();

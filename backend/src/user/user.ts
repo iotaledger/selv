@@ -15,7 +15,7 @@ export interface User {
 
 export interface CredentialPresentation {
   user: User | undefined;
-  vp: { [key: string]: any } | undefined;
+  vp: string;
 }
 
 export interface CredentialRequest {

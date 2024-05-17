@@ -164,7 +164,7 @@ export class WebAppGateway {
     payload: {
       issuer: Issuers;
       scope: Scopes;
-      credential: string;
+      credentials: string[];
       provider: Providers;
     },
     @ConnectedSocket() client: Socket,
@@ -181,7 +181,7 @@ export class WebAppGateway {
     const url = await this.webAppService.requestIssuance(
       session_id,
       payload.issuer,
-      payload.credential,
+      payload.credentials,
     );
 
     await client.emitWithAck('issuanceOffer', {
@@ -191,9 +191,9 @@ export class WebAppGateway {
 
     this.logger.debug(`send issuance offer for session_id:${session_id}`);
 
-    setTimeout(() => {
-      this.issuance(session_id, {}, payload.scope);
-    }, 10000);
+    // setTimeout(() => {
+    //   this.issuance(session_id, {}, payload.scope);
+    // }, 10000);
   }
 
   async connectDid(session_id: string, did: string, scope: Scopes) {

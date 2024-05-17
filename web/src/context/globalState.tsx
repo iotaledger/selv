@@ -47,7 +47,7 @@ interface RequestPresentationAction extends ReducerBaseAction {
 interface RequestIssuanceAction extends ReducerBaseAction {
     type: Actions.REQUEST_ISSUANCE,
     provider: Providers,
-    credential: any,
+    credentials: string[],
     issuer: Issuers,
 }
 
@@ -96,11 +96,11 @@ const requestPresentation: RequestPresentation = (provider, scope, presentationD
 
 // OIDC4VCI
 // TODO: Issuers.Bank
-type RequestIssuance = (provider: Providers, scope: Scopes, credential: any, issuer: Issuers) => void
-const requestIssuance: RequestIssuance = (provider, scope, credential, issuer) => {
+type RequestIssuance = (provider: Providers, scope: Scopes, credentials: any, issuer: Issuers) => void
+const requestIssuance: RequestIssuance = (provider, scope, credentials, issuer) => {
     socket.emit('requestIssuance',
         {
-            credential,
+            credentials,
             provider,
             issuer,
             scope
@@ -221,7 +221,7 @@ export function GlobalStateProvider({ children }: any) {
             }
 
             case Actions.REQUEST_ISSUANCE: {
-                requestIssuance(action.provider, action.scope, action.credential, action.issuer);
+                requestIssuance(action.provider, action.scope, action.credentials, action.issuer);
                 return state;
             }
 

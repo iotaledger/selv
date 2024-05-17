@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import * as Company from './pages/Company'
+import * as Government from './pages/Government'
 
 import {
     Landing,
@@ -23,6 +24,11 @@ export const routes = [
     { path: '/:lng?/demo/todos', element: <IntroShowTodos/> },
     { path: '/:lng?/demo/app', element: <IntroShowMobile/> },
     { path: '/:lng?/demo/app/0', element: <AppPicker/> },
+    { path: '/:lng?/government/prove/0', element: <Government.ProveIdentity/>, poweredBy: <TangleLabs/> },
+    { path: '/:lng?/government/signin/0', element: <Government.SingInConfirmation/>, poweredBy: <TangleLabs/> },
+    // { path: '/:lng?/government/data/0', element: <Government.GovernmentData/>, poweredBy: <TangleLabs/> },
+    { path: '/:lng?/government/receive/0', element: <Government.ReceiveCredentials/>, poweredBy: <TangleLabs/> },
+    { path: '/:lng?/government/confirm/1', element: <Government.Confirmation/>, poweredBy: <TangleLabs/> },
     { path: '/:lng?/company/prove/0', element: <Company.ProveIdentity/>, poweredBy: <Waltid/> },
     { path: '/:lng?/company/signin/0', element: <Company.SingInConfirmation/>, poweredBy: <Waltid/> },
     { path: '/:lng?/company/provide/0', element: <Company.ProvideData/>, poweredBy: <Waltid/> },
