@@ -57,6 +57,10 @@ import {Cache} from './cache';
       {
           name: "citizen_credential",
           type: ["CitizenCredential"],
+          display: [{
+            name: "National Citizen Credential",
+            locale: "en"
+          }]
       },
   ],
   });

@@ -113,7 +113,6 @@ export const createServer = (
 
   app.route("/.well-known/openid-credential-issuer").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
       const metadata = issuer.getIssuerMetadata();
       res.send(metadata);
     }),
@@ -121,7 +120,6 @@ export const createServer = (
 
   app.route("/.well-known/oauth-authorization-server").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
       const metadata = issuer.getOauthServerMetadata();
       res.send(metadata);
     }),
