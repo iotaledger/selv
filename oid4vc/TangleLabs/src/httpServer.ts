@@ -27,8 +27,10 @@ export const createServer = (
 
   app.route("/api/token").post(
     asyncHandler(async (req, res) => {
-      console.debug(req);
-      res.json(await issuer.createTokenResponse(req.body));
+      console.debug(req.body);
+      const response = await issuer.createTokenResponse(req.body);
+      console.debug(response);
+      res.json(response);
     }),
   );
 
