@@ -46,13 +46,17 @@ import {Cache} from './cache';
     signer: remoteSigner(process.env.SIGNER_KEYID),
     did: process.env.RP_DID,
     kid: `${process.env.RP_DID}#${process.env.KEY_FRAGMENT}`,
-    cryptographicSuitesSupported: [SigningAlgs.EdDSA],
+    credentialSigningAlgValuesSupported: [SigningAlgs.EdDSA],
     store: createStore(),
     tokenEndpoint: `${process.env.PUBLIC_URL}/api/token`,
     supportedCredentials: [
       {
           name: "wa_driving_license",
-          type: "wa_driving_license",
+          type: ["wa_driving_license"],
+      },
+      {
+          name: "citizen_credential",
+          type: ["CitizenCredential"],
       },
   ],
   });
@@ -60,7 +64,6 @@ import {Cache} from './cache';
   const userService = new UserService();
   const tokenCache = await Cache.init<string, string>();
   const credentialCache = await Cache.init<string, any>();
-
 
   createService(rp, issuer, tokenCache, credentialCache);
   createServer(rp, issuer, userService, tokenCache, credentialCache);
