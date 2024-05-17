@@ -4,30 +4,32 @@ import asyncHandler from "express-async-handler";
 import { UserService } from "./userService";
 import { decodeJWT } from "did-jwt";
 import { Cache } from "./cache";
+import cors from "cors";
 
 export const createServer = (
   rp: RelyingParty,
   issuer: VcIssuer,
   userService: UserService,
   tokenCache: Cache<string, any>,
-  credentialCache: Cache<string, any>
+  credentialCache: Cache<string, any>,
 ) => {
   const app = express();
   app.use(express.json());
+  app.use(cors({ origin: true }));
   app.use(express.urlencoded({ extended: true }));
 
   app.route("/api/health").get(
     asyncHandler(async (req, res) => {
       console.debug(req);
       res.status(200).send();
-    })
+    }),
   );
 
   app.route("/api/token").get(
     asyncHandler(async (req, res) => {
       console.debug(req);
       res.json(await issuer.createTokenResponse(req.body));
-    })
+    }),
   );
 
   app.route("/api/offer/:id").get(
@@ -43,14 +45,14 @@ export const createServer = (
       }
 
       res.send(offer);
-    })
+    }),
   );
 
   app.route("/api/credential-offer/:id").get(
     asyncHandler(async (req, res) => {
       console.debug(req.params);
       const offer_id = req.params.id;
-      
+
       // TODO: consider consuming the token
       const offer = await credentialCache.retrieveItem(offer_id);
 
@@ -59,7 +61,7 @@ export const createServer = (
       }
 
       res.json(offer);
-    })
+    }),
   );
 
   app.route("/api/credential").post(
@@ -77,14 +79,14 @@ export const createServer = (
       const { credentials } = await userService.credentialRequest(
         iss,
         state,
-        unsigned_credentials
+        unsigned_credentials,
       );
 
       const response = await issuer.createSendCredentialsResponse({
         credentials,
       });
       res.json(response);
-    })
+    }),
   );
 
   app.route("/api/auth").post(
@@ -104,7 +106,7 @@ export const createServer = (
       }
 
       res.status(204).send();
-    })
+    }),
   );
 
   app.route("/.well-known/openid-credential-issuer").get(
@@ -112,7 +114,7 @@ export const createServer = (
       console.debug(req);
       const metadata = issuer.getIssuerMetadata();
       res.send(metadata);
-    })
+    }),
   );
 
   app.route("/.well-known/oauth-authorization-server").get(
@@ -120,7 +122,7 @@ export const createServer = (
       console.debug(req);
       const metadata = issuer.getOauthServerMetadata();
       res.send(metadata);
-    })
+    }),
   );
 
   const port = 3333;
