@@ -6,6 +6,13 @@ import { decodeJWT } from "did-jwt";
 import { Cache } from "./cache";
 import cors from "cors";
 
+import { Resolver } from "did-resolver";
+import * as didJWT from "did-jwt";
+
+import * as IOTADIDResolver from "./IOTADIDResolver";
+const iotaDidResolver = IOTADIDResolver.getResolver();
+let resolver = new Resolver(iotaDidResolver);
+
 export const createServer = (
   rp: RelyingParty,
   issuer: VcIssuer,
@@ -28,6 +35,18 @@ export const createServer = (
   app.route("/api/token").post(
     asyncHandler(async (req, res) => {
       console.debug(req.body);
+      
+      // TODO: remove only for testing
+      const { signer, payload } = await didJWT
+      .verifyJWT(req.body["pre-authorized_code"], {
+        resolver: resolver,
+        policies: { aud: false },
+      })
+      .catch((e) => {
+        console.error("ERROR", e);
+        throw new Error("invalid_request");
+      });
+      // end remove
       const response = await issuer.createTokenResponse(req.body);
       console.debug(response);
       res.json(response);

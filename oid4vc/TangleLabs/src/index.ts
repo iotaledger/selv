@@ -6,6 +6,8 @@ import {
 import * as KeyDIDResolver from "key-did-resolver";
 import { Resolver } from "did-resolver";
 
+import * as IOTADIDResolver from "./IOTADIDResolver";
+
 import { remoteSigner } from "./remoteSigner";
 import { createService } from "./grpcService";
 import { createServer } from "./httpServer";
@@ -17,7 +19,11 @@ import {Cache} from './cache';
 (async () => {
 
   const keyDidResolver = KeyDIDResolver.getResolver();
-  let resolver = new Resolver(keyDidResolver);
+  const iotaDidResolver = IOTADIDResolver.getResolver();
+  let resolver = new Resolver({
+      ...keyDidResolver,
+      ...iotaDidResolver
+  });
 
   const rp = new RelyingParty({
     clientId: process.env.RP_DID, //could also be URL (bank.selv.iota.org)

@@ -1,5 +1,6 @@
 use identity_eddsa_verifier::EdDSAJwsVerifier;
 use identity_iota::credential::Jws;
+use identity_iota::did::DID;
 use identity_iota::document::verifiable::JwsVerificationOptions;
 use identity_iota::iota::IotaClientExt;
 use identity_iota::iota::IotaDocument;
@@ -19,6 +20,7 @@ use identity_iota::storage::Storage;
 use identity_iota::verification::jws::DecodedJws;
 use identity_iota::verification::jws::JwsAlgorithm;
 use identity_iota::verification::MethodScope;
+use identity_iota::verification::MethodRelationship;
 use identity_stronghold::StrongholdStorage;
 use iota_sdk::client::secret::stronghold::StrongholdSecretManager;
 use iota_sdk::client::Client;
@@ -30,11 +32,11 @@ use identity_iota::storage::KeyIdStorage;
 
 // The API endpoint of an IOTA node, e.g. Hornet.
 // const API_ENDPOINT: &str = "http://localhost";
-const API_ENDPOINT: &str = "http://localhost";
+const API_ENDPOINT: &str = "https://api.testnet.shimmer.network";
 
 // The faucet endpoint allows requesting funds for testing purposes.
 // const FAUCET_ENDPOINT: &str = "http://localhost/faucet/api/enqueue";
-const FAUCET_ENDPOINT: &str = "http://localhost/faucet/api/enqueue";
+const FAUCET_ENDPOINT: &str = "https://faucet.testnet.shimmer.network/api/enqueue";
 
 // Stronghold snapshot path.
 const PATH: &str = "./stronghold.hodl";
@@ -102,6 +104,11 @@ async fn create_issuer(stronghold_storage: &StrongholdStorage, client: &Client) 
             MethodScope::VerificationMethod,
         )
         .await?;
+
+    document.attach_method_relationship(
+        &document.id().to_url().join(format!("#{fragment}"))?,
+        MethodRelationship::AssertionMethod,
+    )?;        
 
     let method = document.resolve_method(&fragment, Some(MethodScope::VerificationMethod)).ok_or(anyhow::anyhow!("no go"))?;
     let key_id = storage.key_id_storage().get_key_id(&MethodDigest::new(method)?).await?;

@@ -2,7 +2,11 @@
 ###
 GET /api/health
 ###
-GET /api/token
+POST /api/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=urn:ietf:params:oauth:grant-type:pre-authorized_code
+&pre-authorized_code=eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDppb3RhOnJtczoweGZjNDNjZjRlOTA3MTdlMzdjYmI3ZWZjZjYyYmIxYjEyY2RlMGY3YmY3YTk1NTJjMjY2NjQyYzllMDIwMzBiZGEjZGVUODVNU2x2MXZReDlHYjZtWnNtNmRxQ1J0WjVNTUFtQWRrNEM5LXM2NCIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTU5ODMwNjAsImV4cCI6MTcxNjA2OTQ2MCwiaWQiOiJQZ0dCcW9Ib01nU1c0S2R3ckRyVXUiLCJzdGF0ZSI6IjEwMjljMWFhLTU0ZWUtNDFlYS1hYTZhLTgyZTdlZmMxMGRiZiIsImlzcyI6ImRpZDppb3RhOnJtczoweGZjNDNjZjRlOTA3MTdlMzdjYmI3ZWZjZjYyYmIxYjEyY2RlMGY3YmY3YTk1NTJjMjY2NjQyYzllMDIwMzBiZGEifQ.A9oFzNLWJYIXBFLlu7jGzeBoSHSeJj3hVeYhVi0XYqdRQnNm2zpFMpLeqxbczD4n_qUuz4L2kC64Bmk6gCZlDw
 ###
 GET /.well-known/oauth-authorization-server
 ###
