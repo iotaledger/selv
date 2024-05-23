@@ -68,6 +68,9 @@ async fn main() -> anyhow::Result<()> {
     // referenced to avoid creating multiple instances around the same stronghold snapshot.
     let stronghold_storage = StrongholdStorage::new(stronghold);
     println!("Created stronghold with pwd: {pw_string}");
+    // Persist stronghold's password to file.
+    let mut stronghold_pwd_file = std::fs::File::create("stronghold_secret.txt")?;
+    write!(stronghold_pwd_file, "{pw_string}")?;
 
     let mut env_file = std::fs::File::create(".env")?;
     writeln!(env_file, "HTTP_PORT=81\nGRPC_PORT=5001")?;
