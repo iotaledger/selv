@@ -8,7 +8,11 @@ import { PresentationDefinitionV2 } from '../../../types/PresentationExchange';
 import { IdentityService } from 'src/identity/identity.service';
 import type { Issuers } from '../../../types/Issuers';
 import { Scopes } from '../../../types/Scopes';
-import { OID4VPService, SIOPV2Service } from 'src/oid4vc/oid4vc.service';
+import {
+  OID4VCIService,
+  OID4VPService,
+  SIOPV2Service,
+} from 'src/oid4vc/oid4vc.service';
 import { User } from 'src/user/user';
 
 @Injectable()
@@ -17,6 +21,7 @@ export class WebAppService {
     @Inject(CACHE_MANAGER) private readonly cache: RedisCache,
     private readonly siopV2Service: SIOPV2Service,
     private readonly oid4vpService: OID4VPService,
+    private readonly oid4vciService: OID4VCIService,
     @Inject(forwardRef(() => WebAppGateway))
     private webAppGateway: WebAppGateway,
     @Inject(IdentityService)
@@ -61,30 +66,34 @@ export class WebAppService {
   async requestIssuance(
     session_id: string,
     issuer: Issuers,
-    credential: string,
+    credentials: string[],
   ): Promise<string> {
     this.logger.debug(
       `receiving issuance request for session_id:${session_id}`,
       issuer,
-      credential,
+      credentials,
     );
 
-    //const token = await this.requestTokenForSessionId(session_id);
+    const token = await this.requestTokenForSessionId(session_id);
 
-    //TODO replace with call against OID4VCI component using either a token or session_id
-    const url = 'example.com';
+    const offer = await this.oid4vciService.createOID4VPRequest({
+      state: token,
+      credentials,
+    });
 
-    try {
-      const signed_credential = await this.identityService.create(
-        issuer,
-        credential,
-      );
-      this.logger.debug('created credential', signed_credential);
-    } catch (error) {
-      this.logger.error(error);
-    }
+    // try {
+    //   const signed_credential = await this.identityService.create(
+    //     issuer,
+    //     credential,
+    //   );
+    //   this.logger.debug('created credential', signed_credential);
+    // } catch (error) {
+    //   this.logger.error(error);
+    // }
 
-    return url;
+    this.logger.debug(`created offfer for:${session_id}`, offer);
+
+    return offer.uri;
   }
 
   async connectUser(user: User, scope: Scopes): Promise<void> {
@@ -109,14 +118,21 @@ export class WebAppService {
       `user with did:${user.did} and code:${user.code} presented`,
       presentation,
     );
-    // TODO:
-    // const session_id = await this.consumeToken(user.code);
-    // this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
 
-    // await this.cache.set(`user:${session_id}`, { did: user.did });
-    // this.logger.debug(`connected session_id:${session_id} with :${user.did}`);
+    const session_id = await this.consumeToken(user.code);
+    this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
 
-    // await this.webAppGateway.connectDid(session_id, user.did, scope);
+    this.logger.debug(
+      `presented credential for session_id:${session_id} with :${user.did}`,
+      presentation,
+    );
+
+    const validationResponse =
+      await this.identityService.validatePresentation(presentation);
+
+    this.logger.debug(`validation response`, validationResponse);
+
+    await this.webAppGateway.presentation(session_id, presentation, scope);
   }
 
   async requestCredential(

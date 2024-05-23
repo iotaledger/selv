@@ -25,8 +25,6 @@ export const remoteSigner: (keyId: string) => Signer = (keyId) => async (data) =
     const identityClient = new identityPackage.Signing(
       'identity:50051', grpc.credentials.createInsecure()
     );
-
-    console.debug(data);
   
     const response = await new Promise((resolve, reject) => identityClient.sign({
       keyId,
@@ -37,7 +35,7 @@ export const remoteSigner: (keyId: string) => Signer = (keyId) => async (data) =
       }
       resolve(response);
     }));
-    console.log(response)
+
     return (response as {
       signature: Buffer
     }).signature.toString("base64url");

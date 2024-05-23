@@ -1,5 +1,6 @@
 use identity_eddsa_verifier::EdDSAJwsVerifier;
 use identity_iota::credential::Jws;
+use identity_iota::did::DID;
 use identity_iota::document::verifiable::JwsVerificationOptions;
 use identity_iota::iota::IotaClientExt;
 use identity_iota::iota::IotaDocument;
@@ -20,6 +21,7 @@ use identity_iota::storage::Storage;
 use identity_iota::verification::jws::DecodedJws;
 use identity_iota::verification::jws::JwsAlgorithm;
 use identity_iota::verification::MethodScope;
+use identity_iota::verification::MethodRelationship;
 use identity_stronghold::StrongholdStorage;
 use iota_sdk::client::secret::stronghold::StrongholdSecretManager;
 use iota_sdk::client::Client;
@@ -121,14 +123,14 @@ async fn create_issuer(
             MethodScope::VerificationMethod,
         )
         .await?;
-
+  
     let method = document
         .resolve_method(&fragment, Some(MethodScope::VerificationMethod))
         .ok_or(anyhow::anyhow!("no go"))?;
     let key_id = storage
         .key_id_storage()
         .get_key_id(&MethodDigest::new(method)?)
-        .await?;
+        .await?;      
 
     // Construct an Alias Output containing the DID document, with the wallet address
     // set as both the state controller and governor.

@@ -19,7 +19,7 @@ message User {
 
 message CredentialPresentation {
   User user = 1;
-  google.protobuf.Struct vp = 2;
+  string vp = 2;
 }
 
 message CredentialRequest {

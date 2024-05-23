@@ -6,6 +6,8 @@ import {
 import * as KeyDIDResolver from "key-did-resolver";
 import { Resolver } from "did-resolver";
 
+import * as IOTADIDResolver from "./IOTADIDResolver";
+
 import { remoteSigner } from "./remoteSigner";
 import { createService } from "./grpcService";
 import { createServer } from "./httpServer";
@@ -17,7 +19,11 @@ import {Cache} from './cache';
 (async () => {
 
   const keyDidResolver = KeyDIDResolver.getResolver();
-  let resolver = new Resolver(keyDidResolver);
+  const iotaDidResolver = IOTADIDResolver.getResolver();
+  let resolver = new Resolver({
+      ...keyDidResolver,
+      ...iotaDidResolver
+  });
 
   const rp = new RelyingParty({
     clientId: process.env.RP_DID, //could also be URL (bank.selv.iota.org)
@@ -46,13 +52,21 @@ import {Cache} from './cache';
     signer: remoteSigner(process.env.SIGNER_KEYID),
     did: process.env.RP_DID,
     kid: `${process.env.RP_DID}#${process.env.KEY_FRAGMENT}`,
-    cryptographicSuitesSupported: [SigningAlgs.EdDSA],
+    credentialSigningAlgValuesSupported: [SigningAlgs.EdDSA],
     store: createStore(),
     tokenEndpoint: `${process.env.PUBLIC_URL}/api/token`,
     supportedCredentials: [
       {
           name: "wa_driving_license",
-          type: "wa_driving_license",
+          type: ["wa_driving_license"],
+      },
+      {
+          name: "CitizenCredential",
+          type: ["CitizenCredential"],
+          display: [{
+            name: "National Citizen Credential",
+            locale: "en"
+          }]
       },
   ],
   });
@@ -60,7 +74,6 @@ import {Cache} from './cache';
   const userService = new UserService();
   const tokenCache = await Cache.init<string, string>();
   const credentialCache = await Cache.init<string, any>();
-
 
   createService(rp, issuer, tokenCache, credentialCache);
   createServer(rp, issuer, userService, tokenCache, credentialCache);

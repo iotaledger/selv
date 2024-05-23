@@ -6,6 +6,13 @@ import { decodeJWT } from "did-jwt";
 import { Cache } from "./cache";
 import cors from "cors";
 
+import { Resolver } from "did-resolver";
+import * as didJWT from "did-jwt";
+
+import * as IOTADIDResolver from "./IOTADIDResolver";
+const iotaDidResolver = IOTADIDResolver.getResolver();
+let resolver = new Resolver(iotaDidResolver);
+
 export const createServer = (
   rp: RelyingParty,
   issuer: VcIssuer,
@@ -25,10 +32,24 @@ export const createServer = (
     }),
   );
 
-  app.route("/api/token").get(
+  app.route("/api/token").post(
     asyncHandler(async (req, res) => {
-      console.debug(req);
-      res.json(await issuer.createTokenResponse(req.body));
+      console.debug(req.body);
+      
+      // TODO: remove only for testing
+      const { signer, payload } = await didJWT
+      .verifyJWT(req.body["pre-authorized_code"], {
+        resolver: resolver,
+        policies: { aud: false },
+      })
+      .catch((e) => {
+        console.error("ERROR", e);
+        throw new Error("invalid_request");
+      });
+      // end remove
+      const response = await issuer.createTokenResponse(req.body);
+      console.debug(response);
+      res.json(response);
     }),
   );
 
@@ -76,6 +97,9 @@ export const createServer = (
       const state = "";
       const unsigned_credentials = [];
 
+      console.log("------------------------");
+      console.log(req.body);
+
       const { credentials } = await userService.credentialRequest(
         iss,
         state,
@@ -94,12 +118,14 @@ export const createServer = (
       console.debug(req.body);
       const { id_token: idToken, vp_token: vpToken } = req.body;
       const { state } = req.body;
-      const { iss } = await rp.validateJwt(idToken);
-
+      
+      console.debug(req, state);
       if (idToken) {
-        console.debug(req, state, iss);
+        const { iss } = await rp.validateJwt(idToken);
         await userService.connectUser(iss, state);
       } else if (vpToken) {
+        console.debug(req, state, vpToken);
+        const { iss } = await rp.validateJwt(vpToken);
         await userService.presentCredential(iss, state, vpToken);
       } else {
         res.status(500).send();
@@ -111,7 +137,6 @@ export const createServer = (
 
   app.route("/.well-known/openid-credential-issuer").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
       const metadata = issuer.getIssuerMetadata();
       res.send(metadata);
     }),
@@ -119,7 +144,6 @@ export const createServer = (
 
   app.route("/.well-known/oauth-authorization-server").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
       const metadata = issuer.getOauthServerMetadata();
       res.send(metadata);
     }),

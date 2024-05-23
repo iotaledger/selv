@@ -10,7 +10,7 @@ proto < ../../../proto/user/user.proto
 GRPC /UsersService/ConnectUser
 {
     "did": "did:key:z6MkfDvsiwx8ddaUitBuwxn8fCfyMZkK7ipQanMVS1FqvchE",
-    "code": "9b243eb6-6037-4458-8bf3-85b05b9d3add"
+    "code": "a4e4aadf-90c7-4112-b00d-edb09496fc6e"
 }
 ###
 {{
