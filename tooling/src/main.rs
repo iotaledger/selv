@@ -15,6 +15,7 @@ use rand::distributions::{Alphanumeric, DistString};
 use tooling::get_address_with_funds;
 
 use identity_iota::storage::JwsSignatureOptions;
+use identity_iota::storage::KeyIdStorage;
 use identity_iota::storage::Storage;
 use identity_iota::verification::jws::DecodedJws;
 use identity_iota::verification::jws::JwsAlgorithm;
@@ -25,8 +26,8 @@ use iota_sdk::client::Client;
 use iota_sdk::client::Password;
 use iota_sdk::types::block::address::Address;
 use iota_sdk::types::block::output::AliasOutput;
-use identity_iota::storage::KeyIdStorage;
 
+use std::io::Write;
 
 // The API endpoint of an IOTA node, e.g. Hornet.
 // const API_ENDPOINT: &str = "http://localhost";
@@ -41,6 +42,11 @@ const PATH: &str = "./stronghold.hodl";
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
+    let mut issuers = std::env::args().skip(1).peekable();
+
+    if issuers.peek().is_none() {
+        anyhow::bail!("A list of names for the issuers must be provided.");
+    }
 
     let pw_string = Alphanumeric.sample_string(&mut rand::thread_rng(), 32);
 
@@ -61,20 +67,26 @@ async fn main() -> anyhow::Result<()> {
     // `StrongholdStorage` creates internally a `SecretManager` that can be
     // referenced to avoid creating multiple instances around the same stronghold snapshot.
     let stronghold_storage = StrongholdStorage::new(stronghold);
+    println!("Created stronghold with pwd: {pw_string}");
 
-    let government_issuer = create_issuer(&stronghold_storage, &client).await?;
-    let bank_issuer = create_issuer(&stronghold_storage, &client).await?;
-    let insurance_issuer = create_issuer(&stronghold_storage, &client).await?;
-
-    println!("created stronghold with pw:{}", pw_string);
-    println!("created government issuer with:{:?}", government_issuer);
-    println!("created bank issuer with:{:?}", bank_issuer);
-    println!("created insurance issuer with:{:?}", insurance_issuer);
+    let mut env_file = std::fs::File::create(".env")?;
+    writeln!(env_file, "HTTP_PORT=81\nGRPC_PORT=5001")?;
+    for name in issuers {
+        let (did, key_id, fragment, _address) = create_issuer(&stronghold_storage, &client).await?;
+        let name = name.to_uppercase();
+        writeln!(env_file, "ISSUERS_{name}_DID={did}")?;
+        writeln!(env_file, "ISSUERS_{name}_KEYID={key_id}")?;
+        writeln!(env_file, "ISSUERS_{name}_FRAGMENT={fragment}")?;
+        writeln!(env_file, "{name}_PUBLIC_URL=https://{}.selv.local.${{HTTP_PORT}}", name.to_lowercase())?;
+    }
 
     Ok(())
 }
 
-async fn create_issuer(stronghold_storage: &StrongholdStorage, client: &Client) -> anyhow::Result<(String, KeyId, String, Address)> {
+async fn create_issuer(
+    stronghold_storage: &StrongholdStorage,
+    client: &Client,
+) -> anyhow::Result<(String, KeyId, String, Address)> {
     // Create a DID document.
     let address: Address = get_address_with_funds(
         &client,
@@ -103,8 +115,13 @@ async fn create_issuer(stronghold_storage: &StrongholdStorage, client: &Client) 
         )
         .await?;
 
-    let method = document.resolve_method(&fragment, Some(MethodScope::VerificationMethod)).ok_or(anyhow::anyhow!("no go"))?;
-    let key_id = storage.key_id_storage().get_key_id(&MethodDigest::new(method)?).await?;
+    let method = document
+        .resolve_method(&fragment, Some(MethodScope::VerificationMethod))
+        .ok_or(anyhow::anyhow!("no go"))?;
+    let key_id = storage
+        .key_id_storage()
+        .get_key_id(&MethodDigest::new(method)?)
+        .await?;
 
     // Construct an Alias Output containing the DID document, with the wallet address
     // set as both the state controller and governor.
