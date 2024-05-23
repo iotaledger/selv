@@ -80,7 +80,11 @@ async fn main() -> anyhow::Result<()> {
         writeln!(env_file, "ISSUERS_{name}_DID={did}")?;
         writeln!(env_file, "ISSUERS_{name}_KEYID={key_id}")?;
         writeln!(env_file, "ISSUERS_{name}_FRAGMENT={fragment}")?;
-        writeln!(env_file, "{name}_PUBLIC_URL=https://{}.selv.local.${{HTTP_PORT}}", name.to_lowercase())?;
+        writeln!(
+            env_file,
+            "{name}_PUBLIC_URL=https://{}.selv.local.${{HTTP_PORT}}",
+            name.to_lowercase()
+        )?;
     }
 
     Ok(())
@@ -92,7 +96,7 @@ async fn create_issuer(
 ) -> anyhow::Result<(String, KeyId, String, Address)> {
     // Create a DID document.
     let address: Address = get_address_with_funds(
-        &client,
+        client,
         stronghold_storage.as_secret_manager(),
         FAUCET_ENDPOINT,
     )
