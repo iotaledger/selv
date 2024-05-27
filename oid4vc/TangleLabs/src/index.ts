@@ -26,14 +26,15 @@ import {Cache} from './cache';
   let resolver = new Resolver({
       ...keyDidResolver,
       ...iotaDidResolver,
-      ...getDidJwkResolver
+      ...getDidJwkResolver()
   });
 
   const rp = new RelyingParty({
     clientId: process.env.RP_DID, //could also be URL (bank.selv.iota.org)
     clientMetadata: {
       subjectSyntaxTypesSupported: [
-        "did:key"
+        "did:key",
+        "did:jwk",
       ],
       idTokenSigningAlgValuesSupported: [
         SigningAlgs.EdDSA
@@ -51,7 +52,7 @@ import {Cache} from './cache';
     credentialEndpoint: `${process.env.PUBLIC_URL}/api/credential`,
     credentialIssuer: `${process.env.PUBLIC_URL}/`, // should be DID?
     proofTypesSupported: ["jwt"],
-    cryptographicBindingMethodsSupported: ["did:key"],
+    cryptographicBindingMethodsSupported: ["did:key"], //TODO: did:jwk?
     resolver,
     signer: remoteSigner(process.env.SIGNER_KEYID),
     did: process.env.RP_DID,
