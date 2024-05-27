@@ -137,12 +137,12 @@ export class WebAppService {
 
   async requestCredential(
     user: User,
-    credentials: any[],
+    credentialIdentifier: string,
     scope: Scopes,
   ): Promise<void> {
     this.logger.debug(
       `user with did:${user.did} and code:${user.code} requested`,
-      credentials,
+      credentialIdentifier,
     );
     // TODO:
     // const session_id = await this.consumeToken(user.code);

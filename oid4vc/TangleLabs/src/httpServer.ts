@@ -88,21 +88,23 @@ export const createServer = (
   app.route("/api/credential").post(
     asyncHandler(async (req, res) => {
 
+      console.debug("received credential request", req.body);
+
       await issuer.validateCredentialsResponse({
         token: req.headers.authorization?.split("Bearer ")[1],
         proof: req.body.proof.jwt,
       });
-      // TODO: get state from token, need to decode
-      const iss = "";
-      const state = "";
-      const unsigned_credentials = [];
 
-      console.log("------------------------");
+      const decodedJWT = decodeJWT(req.body.proof.jwt);
+
+      const {iss} = decodedJWT.payload;
+
+      const state = ""; //TODO: how to get?
 
       const { credentials } = await userService.credentialRequest(
         iss,
         state,
-        unsigned_credentials,
+        req.body.credential_identifier,
       );
 
       const response = await issuer.createSendCredentialsResponse({

@@ -44,12 +44,12 @@ export class UserService {
   ): Promise<CredentialResponse> {
     this.logger.debug(
       `User with did:${request.user.did} and code:${request.user.code} requested`,
-      request.unsignedCredentials,
+      request.credentialIdentifier,
     );
     //TODO: manage scope
     await this.webAppService.requestCredential(
       request.user,
-      request.unsignedCredentials,
+      request.credentialIdentifier,
       Scopes.CompanyHouse,
     );
 

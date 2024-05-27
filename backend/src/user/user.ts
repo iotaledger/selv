@@ -20,7 +20,7 @@ export interface CredentialPresentation {
 
 export interface CredentialRequest {
   user: User | undefined;
-  unsignedCredentials: { [key: string]: any }[];
+  credentialIdentifier: string;
 }
 
 export interface CredentialResponse {
