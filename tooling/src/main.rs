@@ -1,6 +1,5 @@
 use identity_eddsa_verifier::EdDSAJwsVerifier;
 use identity_iota::credential::Jws;
-use identity_iota::did::DID;
 use identity_iota::document::verifiable::JwsVerificationOptions;
 use identity_iota::iota::IotaClientExt;
 use identity_iota::iota::IotaDocument;
@@ -21,7 +20,6 @@ use identity_iota::storage::Storage;
 use identity_iota::verification::jws::DecodedJws;
 use identity_iota::verification::jws::JwsAlgorithm;
 use identity_iota::verification::MethodScope;
-use identity_iota::verification::MethodRelationship;
 use identity_stronghold::StrongholdStorage;
 use iota_sdk::client::secret::stronghold::StrongholdSecretManager;
 use iota_sdk::client::Client;
@@ -44,7 +42,13 @@ const PATH: &str = "./stronghold.hodl";
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let mut issuers = std::env::args().skip(1).peekable();
+    let mut args = std::env::args().skip(1);
+    let Some(public_url_domain) = args.next() else {
+        anyhow::bail!(
+            "No arguments provided. Pass the public url's domain followed by a list of issuers"
+        );
+    };
+    let mut issuers = args.peekable();
 
     if issuers.peek().is_none() {
         anyhow::bail!("A list of names for the issuers must be provided.");
@@ -84,7 +88,7 @@ async fn main() -> anyhow::Result<()> {
         writeln!(env_file, "ISSUERS_{name}_FRAGMENT={fragment}")?;
         writeln!(
             env_file,
-            "{name}_PUBLIC_URL=https://{}.selv.local.${{HTTP_PORT}}",
+            "{name}_PUBLIC_URL=https://{}.{public_url_domain}",
             name.to_lowercase()
         )?;
     }
@@ -123,14 +127,14 @@ async fn create_issuer(
             MethodScope::VerificationMethod,
         )
         .await?;
-  
+
     let method = document
         .resolve_method(&fragment, Some(MethodScope::VerificationMethod))
         .ok_or(anyhow::anyhow!("no go"))?;
     let key_id = storage
         .key_id_storage()
         .get_key_id(&MethodDigest::new(method)?)
-        .await?;      
+        .await?;
 
     // Construct an Alias Output containing the DID document, with the wallet address
     // set as both the state controller and governor.
