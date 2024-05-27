@@ -87,11 +87,10 @@ export const createServer = (
 
   app.route("/api/credential").post(
     asyncHandler(async (req, res) => {
-      console.debug(req);
-      console.log(req.body);
+
       await issuer.validateCredentialsResponse({
         token: req.headers.authorization?.split("Bearer ")[1],
-        proof: req.body.credential_requests[0].proof.jwt,
+        proof: req.body.proof.jwt,
       });
       // TODO: get state from token, need to decode
       const iss = "";

@@ -6,6 +6,9 @@ import {
 import * as KeyDIDResolver from "key-did-resolver";
 import { Resolver } from "did-resolver";
 
+import {
+  getDidJwkResolver
+} from "@sphereon/did-resolver-jwk";
 import * as IOTADIDResolver from "./IOTADIDResolver";
 
 import { remoteSigner } from "./remoteSigner";
@@ -22,7 +25,8 @@ import {Cache} from './cache';
   const iotaDidResolver = IOTADIDResolver.getResolver();
   let resolver = new Resolver({
       ...keyDidResolver,
-      ...iotaDidResolver
+      ...iotaDidResolver,
+      ...getDidJwkResolver
   });
 
   const rp = new RelyingParty({
