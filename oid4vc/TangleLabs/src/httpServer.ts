@@ -88,6 +88,7 @@ export const createServer = (
   app.route("/api/credential").post(
     asyncHandler(async (req, res) => {
       console.debug(req);
+      console.log(req.body);
       await issuer.validateCredentialsResponse({
         token: req.headers.authorization?.split("Bearer ")[1],
         proof: req.body.credential_requests[0].proof.jwt,
@@ -98,7 +99,6 @@ export const createServer = (
       const unsigned_credentials = [];
 
       console.log("------------------------");
-      console.log(req.body);
 
       const { credentials } = await userService.credentialRequest(
         iss,
