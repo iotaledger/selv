@@ -131,7 +131,7 @@ export class WebAppService {
     user: User,
     credentialDefinition: any,
     scope: Scopes,
-  ): Promise<[any]> {
+  ): Promise<[string]> {
     this.logger.debug(
       `user with did:${user.did} and code:${user.code} requested`,
       credentialDefinition,
@@ -157,7 +157,7 @@ export class WebAppService {
         JSON.stringify(credential_template),
       );
       this.logger.debug('created credential', signed_credential);
-      return [signed_credential];
+      return [signed_credential.jwt];
     } catch (error) {
       this.logger.error(error);
     }

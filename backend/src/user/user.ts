@@ -24,7 +24,7 @@ export interface CredentialRequest {
 }
 
 export interface CredentialResponse {
-  signedCredentials: { [key: string]: any }[];
+  signedCredentials: string[];
 }
 
 export const USER_PACKAGE_NAME = "user";

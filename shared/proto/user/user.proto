@@ -28,5 +28,5 @@ message CredentialRequest {
 }
 
 message CredentialResponse {
-  repeated google.protobuf.Struct signedCredentials = 1;
+  repeated string signedCredentials = 1;
 }

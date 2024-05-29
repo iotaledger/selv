@@ -113,16 +113,13 @@ export const createServer = (
 
       console.debug(signedCredentials);
 
-      // TODO: How does this relate to https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-credential-response
       const response = await issuer.createSendCredentialsResponse({
         credentials: signedCredentials,
       });
 
       console.debug(response);
 
-      res.json({
-        credential: signedCredentials[0]
-      });
+      res.json(response);
     }),
   );
 
