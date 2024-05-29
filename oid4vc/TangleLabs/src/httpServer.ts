@@ -88,7 +88,7 @@ export const createServer = (
   app.route("/api/credential").post(
     asyncHandler(async (req, res) => {
 
-      console.debug("received credential request", req.body);
+      console.debug("received credential request", req.headers, req.body);
 
       await issuer.validateCredentialsResponse({
         token: req.headers.authorization?.split("Bearer ")[1],

@@ -6,7 +6,7 @@ import { RedisCache } from 'cache-manager-redis-yet';
 import { WebAppGateway } from './webapp.gateway';
 import { PresentationDefinitionV2 } from '../../../types/PresentationExchange';
 import { IdentityService } from 'src/identity/identity.service';
-import type { Issuers } from '../../../types/Issuers';
+import { Issuers } from '../../../types/Issuers';
 import { Scopes } from '../../../types/Scopes';
 import {
   OID4VCIService,
@@ -154,7 +154,7 @@ export class WebAppService {
     // await this.webAppGateway.connectDid(session_id, user.did, scope);
 
     //TODO: get issuer (from session token, maybe?)
-    const issuer = '';
+    const issuer = Issuers.Bank;
     //TODO: get credential (from TBD config via credential definition)
     const credential = '';
 
