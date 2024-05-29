@@ -90,26 +90,32 @@ export const createServer = (
 
       console.debug("received credential request", req.headers, req.body);
 
+      const bearer_token = req.headers.authorization?.split("Bearer ")[1];
+
       await issuer.validateCredentialsResponse({
-        token: req.headers.authorization?.split("Bearer ")[1],
+        token: bearer_token,
         proof: req.body.proof.jwt,
       });
 
+      const decodedBearer = decodeJWT(bearer_token);
       const decodedJWT = decodeJWT(req.body.proof.jwt);
 
       const {iss} = decodedJWT.payload;
 
-      const state = ""; //TODO: how to get?
+      const {state} = decodedBearer.payload;
 
-      const { credentials } = await userService.credentialRequest(
+      const { signedCredentials } = await userService.credentialRequest(
         iss,
         state,
         req.body.credential_definition,
       );
 
       const response = await issuer.createSendCredentialsResponse({
-        credentials,
+        credentials: signedCredentials,
       });
+
+      console.debug(response);
+
       res.json(response);
     }),
   );

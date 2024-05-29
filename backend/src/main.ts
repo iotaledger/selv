@@ -17,6 +17,7 @@ async function bootstrap() {
         '..',
         '..',
         '..',
+        'shared',
         'proto',
         'user/user.proto',
       ),

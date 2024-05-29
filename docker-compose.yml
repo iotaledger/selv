@@ -55,7 +55,7 @@ services:
     ports:
       - "127.0.0.1:3333:3333/tcp"
     volumes:
-      - ./proto:/usr/proto
+      - ./shared:/usr/shared
 
   oid4vc-waltid:
     build:
@@ -67,7 +67,7 @@ services:
     ports:
       - "127.0.0.1:3001:3000/tcp"
     volumes:
-      - ./proto:/usr/proto
+      - ./shared:/usr/shared
 
   oid4vc-impierce:
     image: impierce/ssi-agent
@@ -78,7 +78,7 @@ services:
     ports:
       - "127.0.0.1:3033:3033/tcp"
     volumes:
-      - ./proto:/usr/proto
+      - ./shared:/usr/shared
       - ./data/stronghold.hodl:/stronghold.hodl:ro
       - ./oid4vc/impierce/event_publisher_config.yml:/app/agent_event_publisher_http/config.yml:ro
       - ./oid4vc/impierce/presentation_definitions:/app/agent_verification/presentation_definitions:ro

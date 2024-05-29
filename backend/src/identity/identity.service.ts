@@ -9,7 +9,7 @@ import {
   JwtCreationResponse,
 } from './credentials';
 import { ConfigService } from '@nestjs/config';
-import { Issuers } from '../../../types/Issuers';
+import { Issuers } from '../../../shared/types/Issuers';
 import {
   CredentialPresentationClient,
   CREDENTIAL_PRESENTATION_SERVICE_NAME,

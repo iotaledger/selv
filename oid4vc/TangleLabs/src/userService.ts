@@ -12,7 +12,7 @@ const userProtoPath = path.join(
   "..",
   "..",
   "..",
-  "proto/user/user.proto"
+  "shared/proto/user/user.proto"
 );
 
 const userPackageDefinition = loadSync(userProtoPath);
@@ -56,7 +56,7 @@ export class UserService {
     }));
   }
 
-  credentialRequest (did: string, code: string, credentialDefinition: any): Promise<{credentials: any[]}> {
+  credentialRequest (did: string, code: string, credentialDefinition: any): Promise<{signedCredentials: any[]}> {
     return new Promise((resolve, reject) => this.userClient.requestCredential({
       user : {
         did,

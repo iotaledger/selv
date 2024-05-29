@@ -16,7 +16,7 @@ module.exports = {
       options: {
         source: "options",
         aliases: {
-          '@sharedTypes': path.resolve(__dirname, "../types"),
+          '@sharedTypes': path.resolve(__dirname, "../shared/types"),
         },
       }
     }
@@ -45,7 +45,7 @@ module.exports = {
       webpackConfig.module.rules.push({
         test: /\.(ts)$/,
         include: [
-          path.resolve(__dirname, "../types"),
+          path.resolve(__dirname, "../shared/types"),
         ],
         use: {
           loader: "babel-loader",

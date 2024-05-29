@@ -2,7 +2,7 @@ FROM node:20
 
 RUN apt-get update && apt-get install -y protobuf-compiler
 
-COPY types /types
+COPY shared /shared
 
 WORKDIR /web
 
@@ -13,8 +13,6 @@ RUN npm install
 COPY web/. .
 
 RUN npm run build
-
-COPY proto /proto
 
 WORKDIR /backend
 

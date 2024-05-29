@@ -9,10 +9,10 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { WebAppService } from './webapp.service';
-import type { PresentationDefinitionV2 } from '../../../types/PresentationExchange';
-import { Issuers } from '../../../types/Issuers';
-import { Scopes } from '../../../types/Scopes';
-import { Providers } from '../../../types/Providers';
+import type { PresentationDefinitionV2 } from '../../../shared/types/PresentationExchange';
+import { Issuers } from '../../../shared/types/Issuers';
+import { Scopes } from '../../../shared/types/Scopes';
+import { Providers } from '../../../shared/types/Providers';
 
 @Injectable()
 @WebSocketGateway()

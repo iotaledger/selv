@@ -10,6 +10,7 @@ export default () => ({
     '..',
     '..',
     '..',
+    'shared',
     'proto',
     'oid4vc',
   ),

@@ -4,16 +4,18 @@ import { Logger, Injectable, Inject, forwardRef } from '@nestjs/common';
 
 import { RedisCache } from 'cache-manager-redis-yet';
 import { WebAppGateway } from './webapp.gateway';
-import { PresentationDefinitionV2 } from '../../../types/PresentationExchange';
+import { PresentationDefinitionV2 } from '../../../shared/types/PresentationExchange';
 import { IdentityService } from 'src/identity/identity.service';
-import { Issuers } from '../../../types/Issuers';
-import { Scopes } from '../../../types/Scopes';
+import { Issuers } from '../../../shared/types/Issuers';
+import { Scopes } from '../../../shared/types/Scopes';
 import {
   OID4VCIService,
   OID4VPService,
   SIOPV2Service,
 } from 'src/oid4vc/oid4vc.service';
 import { User } from 'src/user/user';
+
+import CitizenCredentialConfig from '../../../shared/credentials/CitizenCredential.json';
 
 @Injectable()
 export class WebAppService {
@@ -81,16 +83,6 @@ export class WebAppService {
       credentials,
     });
 
-    // try {
-    //   const signed_credential = await this.identityService.create(
-    //     issuer,
-    //     credential,
-    //   );
-    //   this.logger.debug('created credential', signed_credential);
-    // } catch (error) {
-    //   this.logger.error(error);
-    // }
-
     this.logger.debug(`created offfer for:${session_id}`, offer);
 
     return offer.uri;
@@ -103,7 +95,7 @@ export class WebAppService {
     const session_id = await this.consumeToken(user.code);
     this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
 
-    await this.cache.set(`user:${session_id}`, { did: user.did });
+    await this.cache.set(`user:${user.did}`, { session_id });
     this.logger.debug(`connected session_id:${session_id} with :${user.did}`);
 
     await this.webAppGateway.connectDid(session_id, user.did, scope);
@@ -139,7 +131,7 @@ export class WebAppService {
     user: User,
     credentialDefinition: any,
     scope: Scopes,
-  ): Promise<void> {
+  ): Promise<[any]> {
     this.logger.debug(
       `user with did:${user.did} and code:${user.code} requested`,
       credentialDefinition,
@@ -148,22 +140,24 @@ export class WebAppService {
     const session_id = await this.consumeToken(user.code);
     this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
 
-    await this.cache.set(`user:${session_id}`, { did: user.did });
-    this.logger.debug(`connected session_id:${session_id} with :${user.did}`);
-
-    // await this.webAppGateway.connectDid(session_id, user.did, scope);
-
     //TODO: get issuer (from session token, maybe?)
     const issuer = Issuers.Bank;
+
     //TODO: get credential (from TBD config via credential definition)
-    const credential = '';
+    const credential_template = CitizenCredentialConfig.template;
+
+    credential_template.credentialSubject.id = user.did;
+
+    // TODO
+    // await this.webAppGateway.requestCredential(session_id, user.did, scope);
 
     try {
       const signed_credential = await this.identityService.create(
         issuer,
-        credential,
+        JSON.stringify(credential_template),
       );
       this.logger.debug('created credential', signed_credential);
+      return [signed_credential];
     } catch (error) {
       this.logger.error(error);
     }
