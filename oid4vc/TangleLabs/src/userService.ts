@@ -56,13 +56,13 @@ export class UserService {
     }));
   }
 
-  credentialRequest (did: string, code: string, credentialIdentifier: string): Promise<{credentials: any[]}> {
-    return new Promise((resolve, reject) => this.userClient.credentialRequest({
+  credentialRequest (did: string, code: string, credentialDefinition: any): Promise<{credentials: any[]}> {
+    return new Promise((resolve, reject) => this.userClient.requestCredential({
       user : {
         did,
         code,
       },
-      credentialIdentifier,
+      credentialDefinition,
     }, (err, response) => {
       if (err) {
         reject(err);

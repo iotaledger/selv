@@ -104,7 +104,7 @@ export const createServer = (
       const { credentials } = await userService.credentialRequest(
         iss,
         state,
-        req.body.credential_identifier,
+        req.body.credential_definition,
       );
 
       const response = await issuer.createSendCredentialsResponse({

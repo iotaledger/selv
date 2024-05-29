@@ -137,21 +137,36 @@ export class WebAppService {
 
   async requestCredential(
     user: User,
-    credentialIdentifier: string,
+    credentialDefinition: any,
     scope: Scopes,
   ): Promise<void> {
     this.logger.debug(
       `user with did:${user.did} and code:${user.code} requested`,
-      credentialIdentifier,
+      credentialDefinition,
     );
-    // TODO:
-    // const session_id = await this.consumeToken(user.code);
-    // this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
 
-    // await this.cache.set(`user:${session_id}`, { did: user.did });
-    // this.logger.debug(`connected session_id:${session_id} with :${user.did}`);
+    const session_id = await this.consumeToken(user.code);
+    this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
+
+    await this.cache.set(`user:${session_id}`, { did: user.did });
+    this.logger.debug(`connected session_id:${session_id} with :${user.did}`);
 
     // await this.webAppGateway.connectDid(session_id, user.did, scope);
+
+    //TODO: get issuer (from session token, maybe?)
+    const issuer = '';
+    //TODO: get credential (from TBD config via credential definition)
+    const credential = '';
+
+    try {
+      const signed_credential = await this.identityService.create(
+        issuer,
+        credential,
+      );
+      this.logger.debug('created credential', signed_credential);
+    } catch (error) {
+      this.logger.error(error);
+    }
   }
 
   async requestTokenForSessionId(sessionId: string): Promise<string> {
