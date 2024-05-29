@@ -10,6 +10,7 @@ import { Resolver } from "did-resolver";
 import * as didJWT from "did-jwt";
 
 import * as IOTADIDResolver from "./IOTADIDResolver";
+import { credentials } from "@grpc/grpc-js";
 const iotaDidResolver = IOTADIDResolver.getResolver();
 let resolver = new Resolver(iotaDidResolver);
 
@@ -110,13 +111,16 @@ export const createServer = (
         req.body.credential_definition,
       );
 
+      // TODO: How does this relate to https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-credential-response
       const response = await issuer.createSendCredentialsResponse({
         credentials: signedCredentials,
       });
 
       console.debug(response);
 
-      res.json(response);
+      res.json({
+        credential: signedCredentials[0]
+      });
     }),
   );
 
