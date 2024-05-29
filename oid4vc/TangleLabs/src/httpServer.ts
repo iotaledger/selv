@@ -111,6 +111,8 @@ export const createServer = (
         req.body.credential_definition,
       );
 
+      console.debug(signedCredentials);
+
       // TODO: How does this relate to https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#name-credential-response
       const response = await issuer.createSendCredentialsResponse({
         credentials: signedCredentials,
