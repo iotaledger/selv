@@ -53,9 +53,14 @@ export class UserService {
       Scopes.CompanyHouse,
     );
 
-    //TODO
-    return {
+    const response = {
       signedCredentials,
     };
+    this.logger.debug(
+      `preparing response for user with did:${request.user.did} and code:${request.user.code}`,
+      response,
+    );
+
+    return response;
   }
 }

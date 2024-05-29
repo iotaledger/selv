@@ -156,7 +156,7 @@ export class WebAppService {
         issuer,
         JSON.stringify(credential_template),
       );
-      this.logger.debug('created credential', signed_credential);
+      this.logger.debug('created credential', signed_credential.jwt);
       return [signed_credential.jwt];
     } catch (error) {
       this.logger.error(error);
