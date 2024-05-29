@@ -1,4 +1,4 @@
-proto < ../../../proto/user/user.proto
+proto < ../../../shared/proto/user/user.proto
 
 @host=http://selv.local:5001/backend
 ###
@@ -66,7 +66,7 @@ exports.jwt = jwt();
 GRPC /UsersService/PresentCredential
 {
     "user": {
-        "did": "test",
+        "did": "did:key:z6MkfDvsiwx8ddaUitBuwxn8fCfyMZkK7ipQanMVS1FqvchE",
         "code": "52c05d44-9020-40b5-9c6d-7109e2d94996"
     },
     "vp": "{{jwt}}"
@@ -80,10 +80,10 @@ GRPC /UsersService/PresentCredential
 GRPC /UsersService/RequestCredential
 {
     "user": {
-        "did": "test",
+        "did": "did:key:z6MkfDvsiwx8ddaUitBuwxn8fCfyMZkK7ipQanMVS1FqvchE",
         "code": "063bf112-5e45-4529-a085-fd91c79d8837"
     },
-    "unsignedCredentials": [
-        {}
-    ]
+    "credentialDefinition": { 
+        "type": [ "VerifiableCredential", "CitizenCredential" ]
+    }
 }

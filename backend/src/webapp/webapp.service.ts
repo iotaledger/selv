@@ -15,7 +15,7 @@ import {
 } from 'src/oid4vc/oid4vc.service';
 import { User } from 'src/user/user';
 
-import CitizenCredentialConfig from '../../../shared/credentials/CitizenCredential.json';
+import * as CitizenCredentialConfig from '../../../shared/credentials/CitizenCredential.json';
 
 @Injectable()
 export class WebAppService {

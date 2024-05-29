@@ -1,5 +1,5 @@
-proto < ../../../proto/identity/credentials.proto
-proto < ../../../proto/identity/utils.proto
+proto < ../../../shared/proto/identity/credentials.proto
+proto < ../../../shared/proto/identity/utils.proto
 
 @host=http://selv.local:5001/identity
 ###
