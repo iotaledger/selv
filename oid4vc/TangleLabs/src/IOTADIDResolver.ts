@@ -35,7 +35,7 @@ export function getResolver() {
     const didDocument: IotaDocument = await didClient.resolveDid(
       IotaDID.fromJSON(did)
     );
-    console.log("Resolved DID document:", JSON.stringify(didDocument, null, 2));
+    // console.log("Resolved DID document:", JSON.stringify(didDocument, null, 2));
 
     const contentType =
       typeof didDocument?.["@context"] !== "undefined"
@@ -46,9 +46,9 @@ export function getResolver() {
     const aliasOutput: AliasOutput = await didClient.resolveDidOutput(
       IotaDID.fromJSON(did)
     );
-    console.log(
-      "The Alias Output holds " + aliasOutput.getAmount() + " tokens"
-    );
+    // console.log(
+    //   "The Alias Output holds " + aliasOutput.getAmount() + " tokens"
+    // );
 
     return {
       didDocument: didDocument.toJSON() as DIDDocument,

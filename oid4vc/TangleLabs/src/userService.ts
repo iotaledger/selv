@@ -67,6 +67,7 @@ export class UserService {
       if (err) {
         reject(err);
       }
+      console.debug(response);
       resolve(response);
     }));
   }

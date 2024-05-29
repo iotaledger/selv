@@ -129,12 +129,12 @@ export const createServer = (
       const { id_token: idToken, vp_token: vpToken } = req.body;
       const { state } = req.body;
       
-      console.debug(req, state);
+      console.debug(state);
       if (idToken) {
         const { iss } = await rp.validateJwt(idToken);
         await userService.connectUser(iss, state);
       } else if (vpToken) {
-        console.debug(req, state, vpToken);
+        console.debug(state, vpToken);
         const { iss } = await rp.validateJwt(vpToken);
         await userService.presentCredential(iss, state, vpToken);
       } else {
