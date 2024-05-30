@@ -148,8 +148,7 @@ export class WebAppService {
 
     credential_template.credentialSubject.id = user.did;
 
-    // TODO
-    // await this.webAppGateway.requestCredential(session_id, user.did, scope);
+    await this.webAppGateway.issuance(session_id, user.did, scope);
 
     try {
       const signed_credential = await this.identityService.create(

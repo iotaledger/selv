@@ -114,48 +114,6 @@ export class WebAppGateway {
     });
 
     this.logger.debug(`send presentation offer for session_id:${session_id}`);
-
-    // //TODO remove once OID4VCI component can call back
-    // setTimeout(() => {
-    //   this.presentation(
-    //     session_id,
-    //     {
-    //       vc: {
-    //         '@context': [
-    //           'https://www.w3.org/2018/credentials/v1',
-    //           'https://www.w3.org/2018/credentials/examples/v1',
-    //         ],
-    //         id: 'http://example.edu/credentials/3732',
-    //         type: ['VerifiableCredential', 'UniversityDegreeCredential'],
-    //         issuer: 'https://example.edu/issuers/14',
-    //         issuanceDate: '2010-01-01T19:23:24Z',
-    //         credentialSubject: {
-    //           id: 'did:example:ebfeb1f712ebc6f1c276e12ec21',
-    //           degree: {
-    //             type: 'BachelorDegree',
-    //             name: 'Bachelor of Science and Arts',
-    //           },
-    //           firstName: 'Ben',
-    //           lastName: 'Utzer',
-    //           date: Date.now(),
-    //           nationality: 'german',
-    //           birthplace: 'Musterstadt',
-    //           country: 'Germany',
-    //           phone: '00-0000',
-    //         },
-    //         credentialSchema: {
-    //           id: 'https://example.org/examples/degree.json',
-    //           type: 'JsonSchemaValidator2018',
-    //         },
-    //       },
-    //       iss: 'https://example.edu/issuers/14',
-    //       nbf: 1262373804,
-    //       jti: 'http://example.edu/credentials/3732',
-    //       sub: 'did:example:ebfeb1f712ebc6f1c276e12ec21',
-    //     },
-    //     payload.scope,
-    //   );
-    // }, 10000);
   }
 
   @SubscribeMessage('requestIssuance')
@@ -190,10 +148,6 @@ export class WebAppGateway {
     });
 
     this.logger.debug(`send issuance offer for session_id:${session_id}`);
-
-    // setTimeout(() => {
-    //   this.issuance(session_id, {}, payload.scope);
-    // }, 10000);
   }
 
   async connectDid(session_id: string, did: string, scope: Scopes) {
