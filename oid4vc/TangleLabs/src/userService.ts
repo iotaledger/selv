@@ -41,7 +41,7 @@ export class UserService {
     }));
   }
 
-  presentCredential (did: string, code: string, presentation: any) {
+  presentCredential (did: string, code: string, presentation: string) {
     return new Promise<void>((resolve, reject) => this.userClient.presentCredential({
       user : {
         did,

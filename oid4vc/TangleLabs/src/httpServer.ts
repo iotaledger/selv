@@ -37,17 +37,17 @@ export const createServer = (
     asyncHandler(async (req, res) => {
       console.debug(req.body);
       
-      // TODO: remove only for testing
-      const { signer, payload } = await didJWT
-      .verifyJWT(req.body["pre-authorized_code"], {
-        resolver: resolver,
-        policies: { aud: false },
-      })
-      .catch((e) => {
-        console.error("ERROR", e);
-        throw new Error("invalid_request");
-      });
-      // end remove
+      // // TODO: remove only for testing
+      // const { signer, payload } = await didJWT
+      // .verifyJWT(req.body["pre-authorized_code"], {
+      //   resolver: resolver,
+      //   policies: { aud: false },
+      // })
+      // .catch((e) => {
+      //   console.error("ERROR", e);
+      //   throw new Error("invalid_request");
+      // });
+      // // end remove
       const response = await issuer.createTokenResponse(req.body);
       console.debug(response);
       res.json(response);
