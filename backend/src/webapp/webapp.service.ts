@@ -103,7 +103,7 @@ export class WebAppService {
 
   async presentCredential(
     user: User,
-    presentation: any,
+    presentation: string,
     scope: Scopes,
   ): Promise<void> {
     this.logger.debug(
