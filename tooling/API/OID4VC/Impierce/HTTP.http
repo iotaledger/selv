@@ -1,10 +1,23 @@
 @host=http://insurance.selv.local:81
 ###
 POST /v1/credentials
+Content-Type: application/json
+{
+    "offerId": "TBD",
+    "credential": {
+        "credentialSubject": "did:key:z6MkfDvsiwx8ddaUitBuwxn8fCfyMZkK7ipQanMVS1FqvchE"
+    },
+    "isSigned": false
+}
 ###
-GET /v1/credentials/{credential_id}
+GET /v1/credentials/TBD
 ###
 POST /v1/offers
+Content-Type: application/json
+{
+    "offerId": "0d520cbe176ab9e1f7888c70888020d84a69672a4baabd3ce1c6aaad8f6420c0",
+    "preAuthorizedCode": "TBD"
+}
 ###
 POST /v1/authorization_requests
 Content-Type: application/json
@@ -12,9 +25,54 @@ Content-Type: application/json
     "nonce": "0d520cbe176ab9e1f7888c70888020d84a69672a4baabd3ce1c6aaad8f6420c0"
 }
 ###
-GET /v1/authorization_requests/06adfc99a128b078726c9cca383df3883db1e8dbd0270518bd4af7eb5a8e9191
+GET /v1/authorization_requests/66725a3a0219fe0354fd6f95176c2eef978ffeb7a2ba502ec1479cf8a43a03a4
 ###
+{{
+
+const utils = require('../../scripting/dist/bundle5.js');
+
+const jwt = async () => {
+
+  const { didDocument, keyPairs } = await utils.getDIDKey();
+  const { id:did, authentication } = didDocument; 
+
+  const issuer_did = "test"
+
+  const header = {
+    kid: `${authentication}`,
+    alg: "EdDSA",
+    typ: "JWT"
+  }
+
+  const encodedHeaders = Buffer.from(JSON.stringify(header), "utf8").toString("base64url");
+
+  const claims = {
+  "iat": 1714775844,
+  "request_uri": "http%3A%2F%2Fbank.selv.local%3A81%2Fapi%2Foffer%2F9f38f7c9-708b-4351-99b4-12cc75f9c94c",
+  "response_type": "id_token",
+  "state": "7d8d4b3a-e45e-41ce-b9af-4fef1fa5a909",
+  "nonce": "3X8JDguMcK76sYRZifbRJ",
+  "client_metadata": {
+    "subject_syntax_types_supported": [
+      "did:iota:rms"
+    ]
+  },
+  "redirect_uri": "http://insurance.selv.local:81/redirect",
+  "scope": "openid",
+  "response_mode": "post",
+  "client_id": "did:iota:rms:0x29a66aa42902d3ba8a9f4746aee3a30549fef72ccf69ccc60b5b36525deb3ab4"
+}
+  const encodedPayload = Buffer.from(JSON.stringify(claims), "utf8").toString("base64url");
+
+  const encodedSignature = await utils.sign(`${encodedHeaders}.${encodedPayload}`)
+
+  const jwt = `${encodedHeaders}.${encodedPayload}.${encodedSignature}`;
+  return jwt;
+}
+exports.jwt = jwt();
+}}
+
 POST /redirect
 Content-Type: application/x-www-form-urlencoded
 
-id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSIsImtpZCI6ImRpZDppb3RhOnJtczoweDI5YTY2YWE0MjkwMmQzYmE4YTlmNDc0NmFlZTNhMzA1NDlmZWY3MmNjZjY5Y2NjNjBiNWIzNjUyNWRlYjNhYjQjOHlCS2w1dmdQcVlKVlN0aEVJdVktdUNUV2JoTnMzcmR4bFBQeFhZQW9pbyJ9.eyJjbGllbnRfaWQiOiJkaWQ6aW90YTpybXM6MHgyOWE2NmFhNDI5MDJkM2JhOGE5ZjQ3NDZhZWUzYTMwNTQ5ZmVmNzJjY2Y2OWNjYzYwYjViMzY1MjVkZWIzYWI0IiwicmVkaXJlY3RfdXJpIjoiaHR0cDovL2luc3VyYW5jZS5zZWx2LmxvY2FsOjgxL3JlZGlyZWN0Iiwic3RhdGUiOiJhYmM2Y2YxYy1kYzgzLTRjNjAtYTA3MC0yZGVlYTkxN2MzZWMiLCJyZXNwb25zZV90eXBlIjoiaWRfdG9rZW4iLCJzY29wZSI6Im9wZW5pZCIsInJlc3BvbnNlX21vZGUiOiJkaXJlY3RfcG9zdCIsIm5vbmNlIjoidGVzdCIsImNsaWVudF9tZXRhZGF0YSI6eyJzdWJqZWN0X3N5bnRheF90eXBlc19zdXBwb3J0ZWQiOlsiZGlkOmlvdGE6cm1zIl19fQ.21VgOxEATtpuQMaEB8Ct2k-oy3LcKCq7FhrjgaIfiQywETJaF_zc1BneRbYhyC4dTkfiYORBOwYrNLWYvDG3Bw
+id_token={{jwt}}
