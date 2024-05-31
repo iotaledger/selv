@@ -54,7 +54,7 @@ const ProveIdentity: React.FC = () => {
                     </p>
                     <div className='qr-wrapper'>
                         {/* TODO: Handle loading state */}
-                        <QRCode text={state[Scopes.CompanyHouse]?.QRcontent ?? ""} />
+                        <QRCode text={state[Scopes.Government]?.QRcontent ?? ""} />
                     </div>
                     <p className='bold'>{t(status)}</p>
                     {loading && <Loading />}

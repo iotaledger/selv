@@ -25,7 +25,7 @@ const ReceiveCredentials: React.FC = () => {
     useEffect(() => {
         dispatch?.({
             type: Actions.REQUEST_ISSUANCE, provider: Providers.TangleLabs, scope: Scopes.Government, credentials: ["CitizenCredential"],
-            issuer: Issuers.CompanyHouse
+            issuer: Issuers.Government
         })
     }, [dispatch]);
 
@@ -58,7 +58,7 @@ const ReceiveCredentials: React.FC = () => {
                     </p>
                     <div className='qr-wrapper'>
                         {/* TODO: Handle loading state */}
-                        <QRCode text={state[Issuers.CompanyHouse]?.QRcontent ?? ""} />
+                        <QRCode text={state[Issuers.Government]?.QRcontent ?? ""} />
                     </div>
                     <p className='bold'>{t(status)}</p>
                     {loading && <Loading />}

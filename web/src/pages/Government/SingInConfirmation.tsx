@@ -25,7 +25,7 @@ const SingInConfirmation: React.FC = () => {
                         {t("pages.company.signInConfirmation.signInSuccess", {
                             interpolation: {
                                 escapeValue: false
-                            }, test: state.COMPANY_HOUSE?.connectedDID
+                            }, test: state.GOVERNMENT?.connectedDID
                         })}
                     </p>
                     <Link to={nextStep}>

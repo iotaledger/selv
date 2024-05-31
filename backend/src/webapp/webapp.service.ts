@@ -91,6 +91,8 @@ export class WebAppService {
       credentials,
     );
 
+    //TODO: handle issuer
+
     const token = await this.requestTokenForSessionId(session_id, scope);
 
     const offer = await this.oid4vciService.createOID4VCIRequest({
