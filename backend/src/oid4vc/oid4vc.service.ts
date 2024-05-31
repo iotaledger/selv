@@ -128,7 +128,7 @@ export class OID4VCIService implements OnModuleInit {
     );
   }
 
-  async createOID4VPRequest(request: OfferConfig): Promise<Offer> {
+  async createOID4VCIRequest(request: OfferConfig): Promise<Offer> {
     this.logger.debug('Received create request', request);
     try {
       const buildRequest = await lastValueFrom(

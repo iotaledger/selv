@@ -75,7 +75,10 @@ export class WebAppGateway {
       `receiving SIOPV2 invite request for session_id:${session_id}, provider:${payload.provider} and scope:${payload.scope}`,
     );
 
-    const url = await this.webAppService.requestSiopInvite(session_id);
+    const url = await this.webAppService.requestSiopInvite(
+      session_id,
+      payload.scope,
+    );
     await client.emitWithAck('siopInvite', {
       url,
       scope: payload.scope,
@@ -106,6 +109,7 @@ export class WebAppGateway {
     const url = await this.webAppService.requestPresentation(
       session_id,
       payload.presentationDefinition,
+      payload.scope,
     );
 
     await client.emitWithAck('presentationOffer', {
@@ -140,6 +144,7 @@ export class WebAppGateway {
       session_id,
       payload.issuer,
       payload.credentials,
+      payload.scope,
     );
 
     await client.emitWithAck('issuanceOffer', {

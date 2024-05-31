@@ -70,7 +70,7 @@ services:
       - ./shared:/usr/shared
 
   oid4vc-impierce:
-    image: impierce/ssi-agent
+    image: impiercetechnologies/ssi-agent:fbec575
     depends_on:
       - cqrs-postgres-db
     expose:

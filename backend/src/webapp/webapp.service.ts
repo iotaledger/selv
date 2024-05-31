@@ -17,6 +17,11 @@ import { User } from 'src/user/user';
 
 import * as CitizenCredentialConfig from '../../../shared/credentials/CitizenCredential.json';
 
+type Token = {
+  sessionId: string;
+  scope: Scopes;
+};
+
 @Injectable()
 export class WebAppService {
   constructor(
@@ -32,12 +37,12 @@ export class WebAppService {
 
   private readonly logger = new Logger(WebAppService.name);
 
-  async requestSiopInvite(session_id: string): Promise<string> {
+  async requestSiopInvite(session_id: string, scope: Scopes): Promise<string> {
     this.logger.debug(
       `receiving SIOP invite request for session_id:${session_id}`,
     );
 
-    const token = await this.requestTokenForSessionId(session_id);
+    const token = await this.requestTokenForSessionId(session_id, scope);
 
     const siopResponse = await this.siopV2Service.createSIOPV2Request({
       state: token,
@@ -49,13 +54,14 @@ export class WebAppService {
   async requestPresentation(
     session_id: string,
     presentationDefinition: PresentationDefinitionV2,
+    scope: Scopes,
   ): Promise<string> {
     this.logger.debug(
       `receiving presentation request for session_id:${session_id}`,
       presentationDefinition,
     );
 
-    const token = await this.requestTokenForSessionId(session_id);
+    const token = await this.requestTokenForSessionId(session_id, scope);
 
     const siopResponse = await this.oid4vpService.createOID4VPRequest({
       state: token,
@@ -69,6 +75,7 @@ export class WebAppService {
     session_id: string,
     issuer: Issuers,
     credentials: string[],
+    scope: Scopes,
   ): Promise<string> {
     this.logger.debug(
       `receiving issuance request for session_id:${session_id}`,
@@ -76,46 +83,42 @@ export class WebAppService {
       credentials,
     );
 
-    const token = await this.requestTokenForSessionId(session_id);
+    const token = await this.requestTokenForSessionId(session_id, scope);
 
-    const offer = await this.oid4vciService.createOID4VPRequest({
+    const offer = await this.oid4vciService.createOID4VCIRequest({
       state: token,
       credentials,
     });
 
-    this.logger.debug(`created offfer for:${session_id}`, offer);
+    this.logger.debug(`created offer for:${session_id}`, offer);
 
     return offer.uri;
   }
 
-  async connectUser(user: User, scope: Scopes): Promise<void> {
+  async connectUser(user: User): Promise<void> {
     this.logger.debug(
       `connect user with did:${user.did} and code:${user.code}`,
     );
-    const session_id = await this.consumeToken(user.code);
-    this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
+    const { sessionId, scope } = await this.consumeToken(user.code);
+    this.logger.debug(`found session_id:${sessionId} for code:${user.code}`);
 
-    await this.cache.set(`user:${user.did}`, { session_id });
-    this.logger.debug(`connected session_id:${session_id} with :${user.did}`);
+    await this.cache.set(`user:${user.did}`, { sessionId });
+    this.logger.debug(`connected session_id:${sessionId} with :${user.did}`);
 
-    await this.webAppGateway.connectDid(session_id, user.did, scope);
+    await this.webAppGateway.connectDid(sessionId, user.did, scope);
   }
 
-  async presentCredential(
-    user: User,
-    presentation: string,
-    scope: Scopes,
-  ): Promise<void> {
+  async presentCredential(user: User, presentation: string): Promise<void> {
     this.logger.debug(
       `user with did:${user.did} and code:${user.code} presented`,
       presentation,
     );
 
-    const session_id = await this.consumeToken(user.code);
-    this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
+    const { sessionId, scope } = await this.consumeToken(user.code);
+    this.logger.debug(`found session_id:${sessionId} for code:${user.code}`);
 
     this.logger.debug(
-      `presented credential for session_id:${session_id} with :${user.did}`,
+      `presented credential for session_id:${sessionId} with :${user.did}`,
       presentation,
     );
 
@@ -124,21 +127,20 @@ export class WebAppService {
 
     this.logger.debug(`validation response`, validationResponse);
 
-    await this.webAppGateway.presentation(session_id, presentation, scope);
+    await this.webAppGateway.presentation(sessionId, presentation, scope);
   }
 
   async requestCredential(
     user: User,
     credentialDefinition: any,
-    scope: Scopes,
   ): Promise<[string]> {
     this.logger.debug(
       `user with did:${user.did} and code:${user.code} requested`,
       credentialDefinition,
     );
 
-    const session_id = await this.consumeToken(user.code);
-    this.logger.debug(`found session_id:${session_id} for code:${user.code}`);
+    const { sessionId, scope } = await this.consumeToken(user.code);
+    this.logger.debug(`found session_id:${sessionId} for code:${user.code}`);
 
     //TODO: get issuer (from session token, maybe?)
     const issuer = Issuers.Bank;
@@ -148,7 +150,7 @@ export class WebAppService {
 
     credential_template.credentialSubject.id = user.did;
 
-    await this.webAppGateway.issuance(session_id, user.did, scope);
+    await this.webAppGateway.issuance(sessionId, user.did, scope);
 
     try {
       const signed_credential = await this.identityService.create(
@@ -162,29 +164,32 @@ export class WebAppService {
     }
   }
 
-  async requestTokenForSessionId(sessionId: string): Promise<string> {
+  async requestTokenForSessionId(
+    sessionId: string,
+    scope: Scopes,
+  ): Promise<string> {
     this.logger.debug(`request token for session_id:${sessionId}`);
 
     const token = uuidv4();
 
-    await this.cache.set(`token:${token}`, sessionId);
+    await this.cache.set(`token:${token}`, { sessionId, scope });
 
     this.logger.debug(`generated token:${token} for session_id:${sessionId}`);
 
     return token;
   }
 
-  async consumeToken(token: string): Promise<string> {
+  async consumeToken(token: string): Promise<Token> {
     this.logger.debug(`consuming token:${token}`);
 
-    const session_id = await this.cache.get(`token:${token}`);
+    const tokenVal = (await this.cache.get(`token:${token}`)) as Token;
 
-    this.logger.debug(`found session_id:${session_id} for token:${token}`);
+    this.logger.debug(`found entry:${tokenVal} for token:${token}`);
 
     await this.cache.del(`token:${token}`);
 
-    this.logger.debug(`cleared token:${token} for session_id:${session_id}`);
+    this.logger.debug(`cleared token:${token} for entry:${tokenVal.sessionId}`);
 
-    return String(session_id);
+    return tokenVal;
   }
 }
