@@ -1,15 +1,11 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import randomstring from 'randomstring';
-import { Layout, Loading, QRCode, RandomGraphicElement, WebSocket } from '../../components';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Layout, Loading, QRCode, RandomGraphicElement } from '../../components';
 import useStep from '../../utils/useStep';
-import config from '../../config.json';
 import { useTranslation, Trans } from 'react-i18next';
-import { Router, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { Actions, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
 import { Providers } from '@sharedTypes/Providers';
-import { Issuers } from '@sharedTypes/Issuers';
 import { Scopes } from '@sharedTypes/Scopes';
-import { copyFile } from 'fs';
 
 const ProveIdentity: React.FC = () => {
     const { t } = useTranslation();
@@ -26,7 +22,7 @@ const ProveIdentity: React.FC = () => {
     }, [nextStep, navigate]);
 
     useEffect(() => {
-        dispatch?.({type: Actions.REQUEST_INVITE, provider: Providers.WaltId, scope: Scopes.CompanyHouse});
+        dispatch?.({type: Actions.REQUEST_INVITE, provider: Providers.TangleLabs, scope: Scopes.Government});
     }, [dispatch]);
 
     useEffect(() => {

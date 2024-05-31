@@ -32,7 +32,7 @@ const ProvideData: React.FC = () => {
 
         dispatch?.({
             type: Actions.REQUEST_PRESENTATION,
-            provider: Providers.WaltId,
+            provider: Providers.Impierce,
             presentationDefinition: {
                 id: uuidv4(),
                 input_descriptors: CitizenCredentialConfig.input_descriptors

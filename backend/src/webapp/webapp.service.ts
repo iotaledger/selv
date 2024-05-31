@@ -16,6 +16,7 @@ import {
 import { User } from 'src/user/user';
 
 import * as CitizenCredentialConfig from '../../../shared/credentials/CitizenCredential.json';
+import { Providers } from '../../../shared/types/Providers';
 
 type Token = {
   sessionId: string;
@@ -37,15 +38,20 @@ export class WebAppService {
 
   private readonly logger = new Logger(WebAppService.name);
 
-  async requestSiopInvite(session_id: string, scope: Scopes): Promise<string> {
+  async requestSiopInvite(
+    session_id: string,
+    scope: Scopes,
+    provider: Providers,
+  ): Promise<string> {
     this.logger.debug(
-      `receiving SIOP invite request for session_id:${session_id}`,
+      `receiving SIOP invite request for scope:${scope}, session_id:${session_id} via provider:${provider}`,
     );
 
     const token = await this.requestTokenForSessionId(session_id, scope);
 
     const siopResponse = await this.siopV2Service.createSIOPV2Request({
       state: token,
+      provider,
     });
 
     return siopResponse.uri;
@@ -55,9 +61,10 @@ export class WebAppService {
     session_id: string,
     presentationDefinition: PresentationDefinitionV2,
     scope: Scopes,
+    provider: Providers,
   ): Promise<string> {
     this.logger.debug(
-      `receiving presentation request for session_id:${session_id}`,
+      `receiving presentation request for scope:${scope}, session_id:${session_id} via provider:${provider}`,
       presentationDefinition,
     );
 
@@ -66,6 +73,7 @@ export class WebAppService {
     const siopResponse = await this.oid4vpService.createOID4VPRequest({
       state: token,
       presentationDefinition: presentationDefinition,
+      provider,
     });
 
     return siopResponse.uri;
@@ -76,10 +84,10 @@ export class WebAppService {
     issuer: Issuers,
     credentials: string[],
     scope: Scopes,
+    provider: Providers,
   ): Promise<string> {
     this.logger.debug(
-      `receiving issuance request for session_id:${session_id}`,
-      issuer,
+      `receiving issuance request for scope:${scope}, session_id:${session_id} with issuer:${issuer} via provider:${provider}`,
       credentials,
     );
 
@@ -88,6 +96,7 @@ export class WebAppService {
     const offer = await this.oid4vciService.createOID4VCIRequest({
       state: token,
       credentials,
+      provider,
     });
 
     this.logger.debug(`created offer for:${session_id}`, offer);

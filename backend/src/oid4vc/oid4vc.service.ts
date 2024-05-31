@@ -21,6 +21,7 @@ import {
   Offer,
   OfferConfig,
 } from './oid4vci';
+import { Providers } from '../../../shared/types/Providers';
 
 //
 // SIOP
@@ -43,24 +44,29 @@ export class SIOPV2Service implements OnModuleInit {
   }
 
   async createSIOPV2Request(
-    request: SIOPV2RequestConfig,
+    request: SIOPV2RequestConfig & { provider: Providers },
   ): Promise<SIOPV2Request> {
-    this.logger.debug('Received create request', request);
-    try {
-      const buildRequest = await lastValueFrom(
-        this.siopV2Service
-          .createRequest(request)
-          .pipe(
-            timeout(
-              this.configService.get<number>('oid4vc_grpc_service_timeout'),
-            ),
-          ),
-      );
-      this.logger.debug('build request', buildRequest);
-      return buildRequest;
-    } catch (error) {
-      this.logger.error(error);
-      throw error;
+    this.logger.debug('Received createSIOPV2Request request', request);
+
+    switch (request.provider) {
+      case Providers.TangleLabs:
+        try {
+          const buildRequest = await lastValueFrom(
+            this.siopV2Service
+              .createRequest(request)
+              .pipe(
+                timeout(
+                  this.configService.get<number>('oid4vc_grpc_service_timeout'),
+                ),
+              ),
+          );
+          this.logger.debug('build request', buildRequest);
+          return buildRequest;
+        } catch (error) {
+          this.logger.error(error);
+          throw error;
+        }
+      case Providers.Impierce:
     }
   }
 }
@@ -86,24 +92,29 @@ export class OID4VPService implements OnModuleInit {
   }
 
   async createOID4VPRequest(
-    request: OID4VPRequestConfig,
+    request: OID4VPRequestConfig & { provider: Providers },
   ): Promise<OID4VPRequest> {
-    this.logger.debug('Received create request', request);
-    try {
-      const buildRequest = await lastValueFrom(
-        this.oid4vpService
-          .createRequest(request)
-          .pipe(
-            timeout(
-              this.configService.get<number>('oid4vc_grpc_service_timeout'),
-            ),
-          ),
-      );
-      this.logger.debug('build request', buildRequest);
-      return buildRequest;
-    } catch (error) {
-      this.logger.error(error);
-      throw error;
+    this.logger.debug('Received createOID4VPRequest request', request);
+
+    switch (request.provider) {
+      case Providers.TangleLabs:
+        try {
+          const buildRequest = await lastValueFrom(
+            this.oid4vpService
+              .createRequest(request)
+              .pipe(
+                timeout(
+                  this.configService.get<number>('oid4vc_grpc_service_timeout'),
+                ),
+              ),
+          );
+          this.logger.debug('build request', buildRequest);
+          return buildRequest;
+        } catch (error) {
+          this.logger.error(error);
+          throw error;
+        }
+      case Providers.Impierce:
     }
   }
 }
@@ -128,23 +139,29 @@ export class OID4VCIService implements OnModuleInit {
     );
   }
 
-  async createOID4VCIRequest(request: OfferConfig): Promise<Offer> {
-    this.logger.debug('Received create request', request);
-    try {
-      const buildRequest = await lastValueFrom(
-        this.oid4vciService
-          .createOffer(request)
-          .pipe(
-            timeout(
-              this.configService.get<number>('oid4vc_grpc_service_timeout'),
-            ),
-          ),
-      );
-      this.logger.debug('build request', buildRequest);
-      return buildRequest;
-    } catch (error) {
-      this.logger.error(error);
-      throw error;
+  async createOID4VCIRequest(
+    request: OfferConfig & { provider: Providers },
+  ): Promise<Offer> {
+    this.logger.debug('Received createOID4VCIRequest request', request);
+    switch (request.provider) {
+      case Providers.TangleLabs:
+        try {
+          const buildRequest = await lastValueFrom(
+            this.oid4vciService
+              .createOffer(request)
+              .pipe(
+                timeout(
+                  this.configService.get<number>('oid4vc_grpc_service_timeout'),
+                ),
+              ),
+          );
+          this.logger.debug('build request', buildRequest);
+          return buildRequest;
+        } catch (error) {
+          this.logger.error(error);
+          throw error;
+        }
+      case Providers.Impierce:
     }
   }
 }
