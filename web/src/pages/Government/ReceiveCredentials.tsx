@@ -30,7 +30,7 @@ const ReceiveCredentials: React.FC = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (state[Scopes.CompanyHouse]?.issuanceComplete) {
+        if (state[Scopes.Government]?.issuanceComplete) {
             goToNextStep();
         }
     }, [state, goToNextStep])

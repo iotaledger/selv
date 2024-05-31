@@ -26,7 +26,7 @@ const ProveIdentity: React.FC = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if(state[Scopes.CompanyHouse]?.connectedDID) {
+        if(state[Scopes.Government]?.connectedDID) {
             goToNextStep();
         }
     }, [state, goToNextStep])
