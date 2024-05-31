@@ -1,4 +1,12 @@
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
+
+import * as cors from 'cors';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -18,4 +26,15 @@ import { UserModule } from './user/user.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+@Module({ controllers: [AppController] })
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(cors())
+      //This one route will have its cors config overriden with the custom implementation
+      .forRoutes({
+        path: '.well-known/did-configuration.json',
+        method: RequestMethod.GET,
+      });
+  }
+}
