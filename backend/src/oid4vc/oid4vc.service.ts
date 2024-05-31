@@ -22,6 +22,7 @@ import {
   OfferConfig,
 } from './oid4vci';
 import { Providers } from '../../../shared/types/Providers';
+import { OID4VCImpierceService } from './oid4vc-impierce.service';
 
 //
 // SIOP
@@ -35,6 +36,7 @@ export class SIOPV2Service implements OnModuleInit {
   constructor(
     @Inject(OID4VC_PACKAGE_NAME) private client: ClientGrpc,
     private configService: ConfigService,
+    private readonly impierceService: OID4VCImpierceService,
   ) {}
 
   onModuleInit() {
@@ -45,7 +47,7 @@ export class SIOPV2Service implements OnModuleInit {
 
   async createSIOPV2Request(
     request: SIOPV2RequestConfig & { provider: Providers },
-  ): Promise<SIOPV2Request> {
+  ): Promise<string> {
     this.logger.debug('Received createSIOPV2Request request', request);
 
     switch (request.provider) {
@@ -61,12 +63,13 @@ export class SIOPV2Service implements OnModuleInit {
               ),
           );
           this.logger.debug('build request', buildRequest);
-          return buildRequest;
+          return buildRequest.uri;
         } catch (error) {
           this.logger.error(error);
           throw error;
         }
       case Providers.Impierce:
+        return await this.impierceService.createSIOPInvite(request);
     }
   }
 }

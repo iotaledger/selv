@@ -10,7 +10,7 @@ proto < ../../../shared/proto/user/user.proto
 GRPC /UsersService/ConnectUser
 {
     "did": "did:key:z6MkfDvsiwx8ddaUitBuwxn8fCfyMZkK7ipQanMVS1FqvchE",
-    "code": "a4e4aadf-90c7-4112-b00d-edb09496fc6e"
+    "code": "3c9323c8-8691-4fb4-b406-43113592010d"
 }
 ###
 {{
@@ -81,7 +81,7 @@ GRPC /UsersService/RequestCredential
 {
     "user": {
         "did": "did:key:z6MkfDvsiwx8ddaUitBuwxn8fCfyMZkK7ipQanMVS1FqvchE",
-        "code": "063bf112-5e45-4529-a085-fd91c79d8837"
+        "code": "ae794ad5-7c88-4397-abb9-e5e0771aa97a"
     },
     "credentialDefinition": { 
         "type": [ "VerifiableCredential", "CitizenCredential" ]
