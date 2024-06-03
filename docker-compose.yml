@@ -57,17 +57,17 @@ services:
     volumes:
       - ./shared:/usr/shared
 
-  oid4vc-waltid:
-    build:
-      context: ./
-      dockerfile: ./oid4vc/walt.id/Dockerfile
-    expose:
-      - '3000'
-      - '50051'
-    ports:
-      - "127.0.0.1:3001:3000/tcp"
-    volumes:
-      - ./shared:/usr/shared
+  # oid4vc-waltid:
+  #   build:
+  #     context: ./
+  #     dockerfile: ./oid4vc/walt.id/Dockerfile
+  #   expose:
+  #     - '3000'
+  #     - '50051'
+  #   ports:
+  #     - "127.0.0.1:3001:3000/tcp"
+  #   volumes:
+  #     - ./shared:/usr/shared
 
   oid4vc-impierce:
     image: impiercetechnologies/ssi-agent:fbec575

@@ -60,8 +60,8 @@ services:
     extends:
       file: docker-compose.yml
       service: identity
-    environment:
-      - API_ENDPOINT=http://host.docker.internal
+    # environment:
+    #   - API_ENDPOINT=http://host.docker.internal
     labels:
       traefik.enable: true
       traefik.http.routers.identity-grpc.rule: PathPrefix(`/identity`)
@@ -90,23 +90,23 @@ services:
       traefik.http.services.svc_oid4vc-tanglelabs-grpc.loadbalancer.server.port: "50051"
       traefik.http.services.svc_oid4vc-tanglelabs-grpc.loadbalancer.server.scheme: h2c
 
-  oid4vc-waltid:
-    extends:
-      file: docker-compose.yml
-      service: oid4vc-waltid
-    labels:
-      traefik.enable: true
-      traefik.http.routers.oid4vc-waltid.rule: Host(`government.selv.local`)
-      traefik.http.routers.oid4vc-waltid.entrypoints: web
-      traefik.http.routers.oid4vc-waltid.service: oid4vc-waltid
-      traefik.http.services.oid4vc-waltid.loadbalancer.server.port: "3000"
-      traefik.http.routers.oid4vc-waltid-grpc.rule: PathPrefix(`/oid4vc-waltid`)
-      traefik.http.routers.oid4vc-waltid-grpc.middlewares: oid4vc-waltid-grpc-stripprefix
-      traefik.http.middlewares.oid4vc-waltid-grpc-stripprefix.stripprefix.prefixes: /oid4vc-waltid
-      traefik.http.routers.oid4vc-waltid-grpc.entrypoints: grpc
-      traefik.http.routers.oid4vc-waltid-grpc.service: svc_oid4vc-waltid-grpc
-      traefik.http.services.svc_oid4vc-waltid-grpc.loadbalancer.server.port: "50051"
-      traefik.http.services.svc_oid4vc-waltid-grpc.loadbalancer.server.scheme: h2c
+  # oid4vc-waltid:
+  #   extends:
+  #     file: docker-compose.yml
+  #     service: oid4vc-waltid
+  #   labels:
+  #     traefik.enable: true
+  #     traefik.http.routers.oid4vc-waltid.rule: Host(`government.selv.local`)
+  #     traefik.http.routers.oid4vc-waltid.entrypoints: web
+  #     traefik.http.routers.oid4vc-waltid.service: oid4vc-waltid
+  #     traefik.http.services.oid4vc-waltid.loadbalancer.server.port: "3000"
+  #     traefik.http.routers.oid4vc-waltid-grpc.rule: PathPrefix(`/oid4vc-waltid`)
+  #     traefik.http.routers.oid4vc-waltid-grpc.middlewares: oid4vc-waltid-grpc-stripprefix
+  #     traefik.http.middlewares.oid4vc-waltid-grpc-stripprefix.stripprefix.prefixes: /oid4vc-waltid
+  #     traefik.http.routers.oid4vc-waltid-grpc.entrypoints: grpc
+  #     traefik.http.routers.oid4vc-waltid-grpc.service: svc_oid4vc-waltid-grpc
+  #     traefik.http.services.svc_oid4vc-waltid-grpc.loadbalancer.server.port: "50051"
+  #     traefik.http.services.svc_oid4vc-waltid-grpc.loadbalancer.server.scheme: h2c
 
   oid4vc-impierce:
     extends:
