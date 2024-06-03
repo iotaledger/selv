@@ -26,15 +26,15 @@ import { UserModule } from './user/user.module';
   controllers: [AppController],
   providers: [AppService],
 })
+// allow CORS for wellknown did-configuration
+// revert to: export class AppModule {}
+// once CORS is unneeded
 @Module({ controllers: [AppController] })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(cors())
-      //This one route will have its cors config overriden with the custom implementation
-      .forRoutes({
-        path: '.well-known/did-configuration.json',
-        method: RequestMethod.GET,
-      });
+    consumer.apply(cors()).forRoutes({
+      path: '.well-known/did-configuration.json',
+      method: RequestMethod.GET,
+    });
   }
 }
