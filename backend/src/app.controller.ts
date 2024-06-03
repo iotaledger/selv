@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Header, Post } from '@nestjs/common';
+import { Body, Controller, Get, Header, Logger, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
+
+  private readonly logger = new Logger(AppController.name);
 
   @Get('.well-known/did-configuration.json')
   @Header('content-type', 'application/json')
@@ -19,7 +21,7 @@ export class AppController {
 
   @Post('event-listener')
   eventListener(@Body() body: any): void {
-    console.log(body);
+    this.logger.debug('received event', body);
     return;
   }
 }

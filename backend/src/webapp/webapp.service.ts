@@ -32,8 +32,7 @@ export class WebAppService {
     private readonly oid4vciService: OID4VCIService,
     @Inject(forwardRef(() => WebAppGateway))
     private webAppGateway: WebAppGateway,
-    @Inject(IdentityService)
-    private readonly identityService: IdentityService,
+    @Inject(IdentityService) private readonly identityService: IdentityService,
   ) {}
 
   private readonly logger = new Logger(WebAppService.name);
