@@ -69,7 +69,7 @@ export class AppController {
             did: parsedVPToken.sub,
             code: state,
           },
-          parsedVPToken.vp,
+          vp_token,
         );
         break;
       }
