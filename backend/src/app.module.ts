@@ -3,7 +3,6 @@ import {
   Module,
   NestModule,
   RequestMethod,
-  forwardRef,
 } from '@nestjs/common';
 
 import * as cors from 'cors';

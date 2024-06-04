@@ -4,6 +4,24 @@ import { WebAppService } from './webapp/webapp.service';
 
 import { jwtDecode } from 'jwt-decode';
 
+interface SIOPv2AuthorizationResponseVerified {
+  SIOPv2AuthorizationResponseVerified: {
+    state: string;
+    id_token: string;
+  };
+}
+
+interface OID4VPAuthorizationResponseVerified {
+  OID4VPAuthorizationResponseVerified: {
+    state: string;
+    vp_token: string;
+  };
+}
+
+type Events =
+  | SIOPv2AuthorizationResponseVerified
+  | OID4VPAuthorizationResponseVerified;
+
 @Controller()
 export class AppController {
   constructor(
@@ -26,19 +44,32 @@ export class AppController {
   }
 
   @Post('event-listener')
-  eventListener(@Body() body: string): void {
+  eventListener(@Body() body: Events): void {
     this.logger.debug('received event', body);
-    const parsedEvent = JSON.parse(body);
 
-    switch (parsedEvent[0]) {
-      case 'SIOPv2AuthorizationResponseVerified':
-        const { id_token, state } = parsedEvent[0];
+    const event = Object.keys(body)[0];
+
+    // TODO: figure out type safety
+    switch (event) {
+      case 'SIOPv2AuthorizationResponseVerified': {
+        const { id_token, state } = body[event];
         const parsedIDToken = jwtDecode(id_token);
         this.webAppService.connectUser({
           did: parsedIDToken.sub,
           code: state,
         });
         break;
+      }
+
+      case 'OID4VPAuthorizationResponseVerified': {
+        const { vp_token, state } = body[event];
+        const parsedIDToken = jwtDecode(vp_token);
+        this.webAppService.connectUser({
+          did: parsedIDToken.sub,
+          code: state,
+        });
+        break;
+      }
 
       default:
         break;
