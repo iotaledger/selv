@@ -70,7 +70,7 @@ services:
   #     - ./shared:/usr/shared
 
   oid4vc-impierce:
-    image: impiercetechnologies/ssi-agent:fbec575
+    image: impiercetechnologies/ssi-agent:dev
     depends_on:
       - cqrs-postgres-db
     expose:
@@ -90,6 +90,8 @@ services:
       AGENT_CONFIG_ISSUER_DID: ${ISSUERS_INSURANCE_DID}
       AGENT_CONFIG_ISSUER_FRAGMENT: ${ISSUERS_INSURANCE_FRAGMENT}
       AGENT_CONFIG_DEFAULT_DID_METHOD: "did:iota:rms"
+      AGENT_CONFIG_DISPLAY_NAME: "Selv Bank"
+      AGENT_CONFIG_DISPLAY_LOGO_URI: "https://some-image.png"
       #AGENT_CONFIG_LOG_FORMAT: json
       AGENT_CONFIG_EVENT_STORE: postgres
       AGENT_STORE_DB_CONNECTION_STRING: postgresql://demo_user:demo_pass@cqrs-postgres-db:5432/demo

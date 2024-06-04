@@ -47,20 +47,12 @@ const jwt = async () => {
   const encodedHeaders = Buffer.from(JSON.stringify(header), "utf8").toString("base64url");
 
   const claims = {
-  "iat": 1714775844,
-  "request_uri": "http%3A%2F%2Fbank.selv.local%3A81%2Fapi%2Foffer%2F9f38f7c9-708b-4351-99b4-12cc75f9c94c",
-  "response_type": "id_token",
-  "state": "7d8d4b3a-e45e-41ce-b9af-4fef1fa5a909",
-  "nonce": "3X8JDguMcK76sYRZifbRJ",
-  "client_metadata": {
-    "subject_syntax_types_supported": [
-      "did:iota:rms"
-    ]
-  },
-  "redirect_uri": "http://insurance.selv.local:81/redirect",
-  "scope": "openid",
-  "response_mode": "post",
-  "client_id": "did:iota:rms:0x29a66aa42902d3ba8a9f4746aee3a30549fef72ccf69ccc60b5b36525deb3ab4"
+  "iss": did,
+  "sub": did,
+  "aud": "did:iota:rms:0x29a66aa42902d3ba8a9f4746aee3a30549fef72ccf69ccc60b5b36525deb3ab4",
+  "exp": 1717409527,
+  "iat": 1718408927,
+  "nonce": "test"
 }
   const encodedPayload = Buffer.from(JSON.stringify(claims), "utf8").toString("base64url");
 
@@ -68,6 +60,7 @@ const jwt = async () => {
 
   const jwt = `${encodedHeaders}.${encodedPayload}.${encodedSignature}`;
   return jwt;
+
 }
 exports.jwt = jwt();
 }}
@@ -75,4 +68,4 @@ exports.jwt = jwt();
 POST /redirect
 Content-Type: application/x-www-form-urlencoded
 
-id_token={{jwt}}
+state=8ae4fe50-d7ce-4e0a-bbc6-207c5c3e48a3&id_token={{jwt}}
