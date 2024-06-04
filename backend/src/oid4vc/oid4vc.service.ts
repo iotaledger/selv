@@ -2,22 +2,22 @@ import { Inject, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { lastValueFrom, timeout } from 'rxjs';
 import {
-  OID4VC_PACKAGE_NAME,
   SIOPV2RequestConfig,
   SIOPV2Request,
   SIOPV2Client,
-  S_IO_PV2_SERVICE_NAME,
+  OID_4_VC_PACKAGE_NAME,
+  SIOPV_2_SERVICE_NAME,
 } from './siopv2';
 import { ConfigService } from '@nestjs/config';
 import {
   OID4VPClient,
   OID4VPRequest,
   OID4VPRequestConfig,
-  O_ID4_VP_SERVICE_NAME,
+  OID_4_VP_SERVICE_NAME,
 } from './oid4vp';
 import {
   OID4VCIClient,
-  O_ID4_VC_I_SERVICE_NAME,
+  OID_4_VCI_SERVICE_NAME,
   Offer,
   OfferConfig,
 } from './oid4vci';
@@ -34,15 +34,14 @@ export class SIOPV2Service implements OnModuleInit {
   private readonly logger = new Logger(SIOPV2Service.name);
 
   constructor(
-    @Inject(OID4VC_PACKAGE_NAME) private client: ClientGrpc,
+    @Inject(OID_4_VC_PACKAGE_NAME) private client: ClientGrpc,
     private configService: ConfigService,
     private readonly impierceService: OID4VCImpierceService,
   ) {}
 
   onModuleInit() {
-    this.siopV2Service = this.client.getService<SIOPV2Client>(
-      S_IO_PV2_SERVICE_NAME,
-    );
+    this.siopV2Service =
+      this.client.getService<SIOPV2Client>(SIOPV_2_SERVICE_NAME);
   }
 
   async createSIOPV2Request(
@@ -68,6 +67,7 @@ export class SIOPV2Service implements OnModuleInit {
           this.logger.error(error);
           throw error;
         }
+
       case Providers.Impierce:
         return await this.impierceService.createSIOPInvite(request);
     }
@@ -84,13 +84,13 @@ export class OID4VPService implements OnModuleInit {
   private readonly logger = new Logger(OID4VPService.name);
 
   constructor(
-    @Inject(OID4VC_PACKAGE_NAME) private client: ClientGrpc,
+    @Inject(OID_4_VC_PACKAGE_NAME) private client: ClientGrpc,
     private configService: ConfigService,
   ) {}
 
   onModuleInit() {
     this.oid4vpService = this.client.getService<OID4VPClient>(
-      O_ID4_VP_SERVICE_NAME,
+      OID_4_VP_SERVICE_NAME,
     );
   }
 
@@ -132,13 +132,13 @@ export class OID4VCIService implements OnModuleInit {
   private readonly logger = new Logger(OID4VCIService.name);
 
   constructor(
-    @Inject(OID4VC_PACKAGE_NAME) private client: ClientGrpc,
+    @Inject(OID_4_VC_PACKAGE_NAME) private client: ClientGrpc,
     private configService: ConfigService,
   ) {}
 
   onModuleInit() {
     this.oid4vciService = this.client.getService<OID4VCIClient>(
-      O_ID4_VC_I_SERVICE_NAME,
+      OID_4_VCI_SERVICE_NAME,
     );
   }
 

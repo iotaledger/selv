@@ -1,9 +1,15 @@
 import { Body, Controller, Get, Header, Logger, Post } from '@nestjs/common';
 import { AppService } from './app.service';
+import { WebAppService } from './webapp/webapp.service';
+
+import { jwtDecode } from 'jwt-decode';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    // private readonly appService: AppService,
+    private readonly webAppService: WebAppService,
+  ) {}
 
   private readonly logger = new Logger(AppController.name);
 
@@ -20,8 +26,24 @@ export class AppController {
   }
 
   @Post('event-listener')
-  eventListener(@Body() body: any): void {
+  eventListener(@Body() body: string): void {
     this.logger.debug('received event', body);
+    const parsedEvent = JSON.parse(body);
+
+    switch (parsedEvent[0]) {
+      case 'SIOPv2AuthorizationResponseVerified':
+        const { id_token, state } = parsedEvent[0];
+        const parsedIDToken = jwtDecode(id_token);
+        this.webAppService.connectUser({
+          did: parsedIDToken.sub,
+          code: state,
+        });
+        break;
+
+      default:
+        break;
+    }
+
     return;
   }
 }

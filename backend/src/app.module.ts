@@ -3,6 +3,7 @@ import {
   Module,
   NestModule,
   RequestMethod,
+  forwardRef,
 } from '@nestjs/common';
 
 import * as cors from 'cors';
@@ -13,7 +14,6 @@ import { AppService } from './app.service';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { WebAppModule } from './webapp/webapp.module';
-import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -21,7 +21,6 @@ import { UserModule } from './user/user.module';
       rootPath: join(__dirname, '..', '..', '..', '..', 'web', 'build'),
     }),
     WebAppModule,
-    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

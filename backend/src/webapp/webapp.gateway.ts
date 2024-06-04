@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Logger, Injectable } from '@nestjs/common';
+import { Logger, Injectable, Inject, forwardRef } from '@nestjs/common';
 import {
   ConnectedSocket,
   MessageBody,
@@ -17,7 +17,10 @@ import { Providers } from '../../../shared/types/Providers';
 @Injectable()
 @WebSocketGateway()
 export class WebAppGateway {
-  constructor(private readonly webAppService: WebAppService) {}
+  constructor(
+    @Inject(forwardRef(() => WebAppService))
+    private webAppService: WebAppService,
+  ) {}
 
   @WebSocketServer()
   server: Server;

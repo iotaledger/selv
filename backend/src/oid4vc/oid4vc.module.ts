@@ -4,7 +4,7 @@ import { join } from 'path';
 
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { OID4VCIService, OID4VPService, SIOPV2Service } from './oid4vc.service';
-import { OID4VC_PACKAGE_NAME } from './siopv2';
+import { OID_4_VC_PACKAGE_NAME } from './siopv2';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configuration from './configuration';
 import { OID4VCImpierceService } from './oid4vc-impierce.service';
@@ -18,7 +18,7 @@ import { HttpModule } from '@nestjs/axios';
     OID4VPService,
     OID4VCIService,
     {
-      provide: OID4VC_PACKAGE_NAME,
+      provide: OID_4_VC_PACKAGE_NAME,
       useFactory: (configService: ConfigService) =>
         ClientProxyFactory.create({
           transport: Transport.GRPC,
