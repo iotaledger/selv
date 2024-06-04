@@ -88,7 +88,7 @@ const CompanyData: React.FC = ({ history, match }: any) => {
 
     useEffect(() => {
         if(!state[Scopes.CompanyHouse]?.credentials.length) return;
-        const relevantCredential = state[Scopes.CompanyHouse].credentials.filter((c: any) => c.credential.type.includes("UniversityDegreeCredential"))?.[0]?.credential;
+        const relevantCredential = state[Scopes.CompanyHouse].credentials.filter((c: any) => c.credential?.type.includes("UniversityDegreeCredential"))?.[0]?.credential;
         console.log(relevantCredential)
         if (!relevantCredential) return;
         setPrefilledData({

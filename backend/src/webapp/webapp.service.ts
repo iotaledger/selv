@@ -137,7 +137,13 @@ export class WebAppService {
 
     this.logger.debug(`validation response`, validationResponse);
 
-    await this.webAppGateway.presentation(sessionId, presentation, scope);
+    // TODO check validation response
+
+    await this.webAppGateway.presentation(
+      sessionId,
+      JSON.parse(validationResponse.credentials[0].credential), //TODO handle multiple credentials
+      scope,
+    );
   }
 
   async requestCredential(

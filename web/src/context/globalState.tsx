@@ -161,7 +161,7 @@ export function GlobalStateProvider({ children }: any) {
             dispatch({
                 type: Actions.ADD_CREDENTIAL,
                 scope: data.scope,
-                credential: data.credential.vc
+                credential: data.credential
             });
             cb();
         })
