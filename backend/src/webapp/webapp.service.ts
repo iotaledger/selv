@@ -75,7 +75,7 @@ export class WebAppService {
       provider,
     });
 
-    return siopResponse.uri;
+    return siopResponse;
   }
 
   async requestIssuance(

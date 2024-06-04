@@ -82,6 +82,7 @@ services:
       - ./data/stronghold.hodl:/stronghold.hodl:ro
       - ./oid4vc/impierce/event_publisher_config.yml:/app/agent_event_publisher_http/config.yml:ro
       - ./oid4vc/impierce/presentation_definitions:/app/agent_verification/presentation_definitions:ro
+      - ./data/tmp:/app/agent_api_rest
     entrypoint: [ '/bin/sh', '-c', 'export AGENT_CONFIG_STRONGHOLD_PASSWORD=$$(cat /run/secrets/stronghold_pwd) ; /usr/local/bin/agent_application' ]
     environment:
       AGENT_APPLICATION_URL: ${INSURANCE_PUBLIC_URL}

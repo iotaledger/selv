@@ -1,0 +1,20 @@
+{
+    "id": "Verifiable Presentation request for Selv",
+    "input_descriptors": [
+        {
+            "id": "national_citizenship",
+            "name": "National Citizenship Credential",
+            "purpose":
+                "We can only allow open bank accounts for national citizens",
+            "constraints": {
+                "fields": [
+                    {
+                        "path": [
+                            "$.vc.credentialSubject.firstName"
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Header, Logger, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { WebAppService } from './webapp/webapp.service';
 
-import { jwtDecode } from 'jwt-decode';
+import { JwtPayload, jwtDecode } from 'jwt-decode';
 
 interface SIOPv2AuthorizationResponseVerified {
   SIOPv2AuthorizationResponseVerified: {
@@ -63,11 +63,14 @@ export class AppController {
 
       case 'OID4VPAuthorizationResponseVerified': {
         const { vp_token, state } = body[event];
-        const parsedIDToken = jwtDecode(vp_token);
-        this.webAppService.connectUser({
-          did: parsedIDToken.sub,
-          code: state,
-        });
+        const parsedVPToken = jwtDecode<JwtPayload & { vp: string }>(vp_token);
+        this.webAppService.presentCredential(
+          {
+            did: parsedVPToken.sub,
+            code: state,
+          },
+          parsedVPToken.vp,
+        );
         break;
       }
 

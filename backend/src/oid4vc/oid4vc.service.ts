@@ -86,6 +86,7 @@ export class OID4VPService implements OnModuleInit {
   constructor(
     @Inject(OID_4_VC_PACKAGE_NAME) private client: ClientGrpc,
     private configService: ConfigService,
+    private readonly impierceService: OID4VCImpierceService,
   ) {}
 
   onModuleInit() {
@@ -96,7 +97,7 @@ export class OID4VPService implements OnModuleInit {
 
   async createOID4VPRequest(
     request: OID4VPRequestConfig & { provider: Providers },
-  ): Promise<OID4VPRequest> {
+  ): Promise<string> {
     this.logger.debug('Received createOID4VPRequest request', request);
 
     switch (request.provider) {
@@ -112,12 +113,13 @@ export class OID4VPService implements OnModuleInit {
               ),
           );
           this.logger.debug('build request', buildRequest);
-          return buildRequest;
+          return buildRequest.uri;
         } catch (error) {
           this.logger.error(error);
           throw error;
         }
       case Providers.Impierce:
+        return await this.impierceService.createOID4VPInvite(request);
     }
   }
 }
