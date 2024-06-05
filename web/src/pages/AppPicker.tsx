@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Modal } from 'antd';
-import { Layout, QRCode, RandomGraphicElement } from '../components';
+import { Layout, RandomGraphicElement } from '../components';
+import { QRCode } from 'antd';
 import useStep from '../utils/useStep';
 import appStore from '../assets/appStore.svg';
 import googlePlay from '../assets/googlePlay.svg';
@@ -13,7 +14,10 @@ import config from '../config.json';
 import { useTranslation, Trans } from 'react-i18next';
 import Impierce from '../components/powerdBy/Impierce';
 import UniMe from '../components/apps/UniMe';
-import UniMeImage from '../assets/apps/image.png';
+import UniMeImage from '../assets/apps/unime-image.png';
+import ViraImage from '../assets/apps/vira-image.png';
+import TangleLabs from '../components/powerdBy/TangleLabs';
+import Vira from '../components/apps/Vira';
 
 
 interface WalletInfo {
@@ -32,13 +36,24 @@ interface WalletInfo {
 const wallets: WalletInfo[] = [
     {
         name: "UniMe",
-        logo: <UniMe></UniMe>,
+        logo: <UniMe/>,
         by: <Impierce/>,
         image: UniMeImage,
         description: "An Identity Wallet to manage Decentralized Identities and Verifiable Credentials",
         storeLinks: {
             android: "https://play.google.com/store/apps/details?id=com.impierce.identity_wallet",
             apple: ""
+        }
+    },
+    {
+        name: "Vira",
+        logo: <Vira/>,
+        by: <TangleLabs/>,
+        image: ViraImage,
+        description: "Vira Identity Wallet is a digital identity wallet for the future. Giving you back control of your data and providing you with extended privacy throughout the web 3.0 space.",
+        storeLinks: {
+            android: "https://play.google.com/store/apps/details?id=io.tanglelabs.vira",
+            apple: "https://apps.apple.com/de/app/vira-wallet/id6466040524"
         }
     }
 ]
@@ -48,7 +63,7 @@ const AppPicker: React.FC = () => {
 
     const { t } = useTranslation();
 
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState("");
 
     return (
         <Layout noHeader noFooter>
@@ -56,49 +71,54 @@ const AppPicker: React.FC = () => {
                 <div className='app-picker'>
                     <RandomGraphicElement elements={5}>
                         <React.Fragment>
-                            <h1 className='title'>{t("actions.downloadApp")}</h1>
-                            <div className='apps'>
-                                {wallets.map(wallet => (
-                                    <div className="app">
-                                        <section className="app__wrapper">
-                                            <div className='app__column'>
-                                                {wallet.logo}
-                                                <div className='app__content'>
-                                                    <span>
-                                                        by &nbsp;
-                                                        {wallet.by}
-                                                    </span>            
-                                    
-                                                    <Button onClick={() => setOpen(true)}>
-                                                        {t("actions.continue")}
-                                                    </Button>
+                            <div className='app-picker__scroller'>
+
+                                <h1 className='title'>{t("actions.downloadApp")}</h1>
+                                <div className='apps'>
+                                    {wallets.sort( () => .5 - Math.random() ).map(wallet => (
+                                        <div className="app">
+                                            <section className="app__wrapper">
+                                                <div className='app__column'>
+                                                    {wallet.logo}
+                                                    <div className='app__content'>
+                                                        <span>
+                                                            by &nbsp;
+                                                            {wallet.by}
+                                                        </span>            
+                                        
+                                                        <Button onClick={() => setOpen(wallet.name)}>
+                                                            {t("actions.continue")}
+                                                        </Button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <img className="app__image" src={wallet.image}></img>
-                                        </section>
-                                        <Modal
-                                            open={open}
-                                            footer={null}
-                                        >
-                                            <h3>{wallet.name}</h3>
-                                            by
-                                            {wallet.by}
-                                            <p>{wallet.description}</p>
-                                            <a href={wallet.storeLinks?.android}>
-                                                <img src=""></img>
-                                            </a>
-                                        </Modal>
-                                    </div>
+                                                <img className="app__image" src={wallet.image}></img>
+                                            </section>
+                                            <Modal
+                                                open={open === wallet.name}
+                                                footer={null}
+                                                closable={true}
+                                                maskClosable={true}
+                                                onCancel={() => setOpen("")}
+                                            >
+                                                <h3>{wallet.name}</h3>
+                                                by
+                                                {wallet.by}
+                                                <p>{wallet.description}</p>
 
-                                ))}
+                                                <QRCode value={wallet.storeLinks?.android ?? ""} />
+                                            </Modal>
+                                        </div>
 
+                                    ))}
+
+                                </div>
                             </div>
-                            <img src={avatar1} alt='' className='avatar1' />
-                            <img src={avatar2} alt='' className='avatar2' />
                         </React.Fragment>
                     </RandomGraphicElement>
                     <img src={dots} alt='' className='dots' />
                     <img src={circle} alt='' className='circle' />
+                    <img src={avatar1} alt='' className='avatar1' />
+                    <img src={avatar2} alt='' className='avatar2' />
                 </div>
                     <div className="cta-section" id='app-download'>
                         <p className='subtitle'>{t("pages.demo.appDownloadQR.onceDownloaded")}</p>

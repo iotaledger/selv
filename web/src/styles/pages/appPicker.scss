@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    overflow-y: auto;
 
     > * {
         z-index: 1;
@@ -11,12 +10,19 @@
 
     position: fixed;
     width: calc(100% - 320px);
-    height: 100%;
+    height: calc(100% - 100px);
     z-index: 2;
+    margin-top: -50px;
     padding-top: 18px;
 
     @include breakPointHeight(short) {
         position: relative;
+    }
+
+    &__scroller {
+        overflow-y: auto;
+        position: relative;
+        z-index: 1;
     }
 
     h1 {
@@ -46,6 +52,28 @@
         line-height: 30px;
         text-align: center;
         max-width: 380px;
+    }
+
+    .avatar2 {
+        position: absolute;
+        top: 130px;
+        left: 55px;
+        z-index: 1;
+
+        @include breakPoint(small) {
+            left: 0;
+        }
+    }
+
+    .avatar1 {
+        position: absolute;
+        top: 350px;
+        right: 40px;
+        z-index: 1;
+
+        @include breakPoint(small) {
+            right: 0;
+        }
     }
 
     // .app-cta-wrapper {
@@ -98,13 +126,16 @@
     .apps {
 
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: column;
         justify-content: center;
         overflow-y: auto;
         max-height: 100%;
         padding: 10px;
 
         .app {
+
+            padding: 15px;
+
             &__wrapper {
                 display: flex;
                 flex-direction: row;
@@ -119,6 +150,7 @@
             &__column {
                 display: flex;
                 flex-direction: column;
+                min-width: 200px;
             }
 
             &__content {
@@ -137,27 +169,7 @@
             }
         }
 
-        .avatar2 {
-            position: absolute;
-            top: 130px;
-            left: -155px;
-            z-index: 1;
-
-            @include breakPoint(small) {
-                left: 0;
-            }
-        }
-
-        .avatar1 {
-            position: absolute;
-            top: 350px;
-            right: -155px;
-            z-index: 1;
-
-            @include breakPoint(small) {
-                right: 0;
-            }
-        }
+        
     }
     
     
