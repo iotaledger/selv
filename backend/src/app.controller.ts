@@ -102,7 +102,7 @@ export class AppController {
             did: subject_id,
             code: offer_id,
           },
-          'TBD',
+          'company',
         );
 
         this.impierceService.submitSignedCredential(offer_id, credential[0]);

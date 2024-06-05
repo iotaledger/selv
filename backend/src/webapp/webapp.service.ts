@@ -16,6 +16,7 @@ import {
 import { User } from 'src/user/user';
 
 import * as CitizenCredentialConfig from '../../../shared/credentials/CitizenCredential.json';
+import * as CompanyCredentialConfig from '../../../shared/credentials/CompanyCredential.json';
 import { Providers } from '../../../shared/types/Providers';
 
 type Token = {
@@ -162,7 +163,10 @@ export class WebAppService {
     const issuer = Issuers.Bank;
 
     //TODO: get credential (from TBD config via credential definition)
-    const credential_template = CitizenCredentialConfig.template;
+    const credential_template =
+      credentialDefinition === 'company'
+        ? CompanyCredentialConfig.template
+        : CitizenCredentialConfig.template;
 
     credential_template.credentialSubject.id = user.did;
 
