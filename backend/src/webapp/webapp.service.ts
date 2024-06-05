@@ -102,7 +102,7 @@ export class WebAppService {
 
     this.logger.debug(`created offer for:${session_id}`, offer);
 
-    return offer.uri;
+    return offer;
   }
 
   async connectUser(user: User): Promise<void> {

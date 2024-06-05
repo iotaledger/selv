@@ -45,6 +45,11 @@ import { HttpModule } from '@nestjs/axios';
     },
     OID4VCImpierceService,
   ],
-  exports: [SIOPV2Service, OID4VPService, OID4VCIService],
+  exports: [
+    SIOPV2Service,
+    OID4VPService,
+    OID4VCIService,
+    OID4VCImpierceService,
+  ],
 })
 export class OID4VCModule {}

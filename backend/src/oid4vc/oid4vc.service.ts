@@ -136,6 +136,7 @@ export class OID4VCIService implements OnModuleInit {
   constructor(
     @Inject(OID_4_VC_PACKAGE_NAME) private client: ClientGrpc,
     private configService: ConfigService,
+    private readonly impierceService: OID4VCImpierceService,
   ) {}
 
   onModuleInit() {
@@ -146,7 +147,7 @@ export class OID4VCIService implements OnModuleInit {
 
   async createOID4VCIRequest(
     request: OfferConfig & { provider: Providers },
-  ): Promise<Offer> {
+  ): Promise<string> {
     this.logger.debug('Received createOID4VCIRequest request', request);
     switch (request.provider) {
       case Providers.TangleLabs:
@@ -161,12 +162,13 @@ export class OID4VCIService implements OnModuleInit {
               ),
           );
           this.logger.debug('build request', buildRequest);
-          return buildRequest;
+          return buildRequest.uri;
         } catch (error) {
           this.logger.error(error);
           throw error;
         }
       case Providers.Impierce:
+        return await this.impierceService.createOID4VCIInvite(request);
     }
   }
 }

@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 import { WebAppService } from './webapp/webapp.service';
 
 import { JwtPayload, jwtDecode } from 'jwt-decode';
+import { OID4VCImpierceService } from './oid4vc/oid4vc-impierce.service';
 
 interface SIOPv2AuthorizationResponseVerified {
   SIOPv2AuthorizationResponseVerified: {
@@ -18,15 +19,34 @@ interface OID4VPAuthorizationResponseVerified {
   };
 }
 
+interface CredentialRequestVerified {
+  CredentialRequestVerified: {
+    offer_id: string;
+    subject_id: string;
+  };
+}
+
+interface CredentialResponseCreated {
+  CredentialResponseCreated: {
+    offer_id: string;
+    credential_response: {
+      credential: string;
+    };
+  };
+}
+
 type Events =
   | SIOPv2AuthorizationResponseVerified
-  | OID4VPAuthorizationResponseVerified;
+  | OID4VPAuthorizationResponseVerified
+  | CredentialRequestVerified
+  | CredentialResponseCreated;
 
 @Controller()
 export class AppController {
   constructor(
     // private readonly appService: AppService,
     private readonly webAppService: WebAppService,
+    private readonly impierceService: OID4VCImpierceService,
   ) {}
 
   private readonly logger = new Logger(AppController.name);
@@ -44,7 +64,7 @@ export class AppController {
   }
 
   @Post('event-listener')
-  eventListener(@Body() body: Events): void {
+  async eventListener(@Body() body: Events): Promise<void> {
     this.logger.debug('received event', body);
 
     const event = Object.keys(body)[0];
@@ -71,6 +91,22 @@ export class AppController {
           },
           vp_token,
         );
+        break;
+      }
+
+      case 'CredentialRequestVerified': {
+        const { offer_id, subject_id } = body[event];
+
+        const credential = await this.webAppService.requestCredential(
+          {
+            did: subject_id,
+            code: offer_id,
+          },
+          'TBD',
+        );
+
+        this.impierceService.submitSignedCredential(offer_id, credential[0]);
+
         break;
       }
 

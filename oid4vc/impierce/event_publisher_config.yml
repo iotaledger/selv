@@ -18,6 +18,7 @@ connection: {
 offer: {
   target_url: *target_url,
   target_events: [
-      CredentialRequestVerified
+      CredentialRequestVerified,
+      CredentialResponseCreated,
   ]
 }

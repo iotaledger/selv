@@ -77,7 +77,7 @@ GRPC /Signing/sign
             "aud": "did:example:4a57546973436f6f6c4a4a57573",
             "nbf": Math.floor(Date.now() / 1000),
             "iat": Math.floor(Date.now() / 1000),
-            "exp": Math.floor((Date.now() + 2 * (60 * 60 * 1000)) / 1000),
+            "exp": Math.floor((Date.now() + 10 * (60 * 1000)) / 1000),
             "nonce": "343s$FSFDa-",
             "vp": {
                 "@context": [
