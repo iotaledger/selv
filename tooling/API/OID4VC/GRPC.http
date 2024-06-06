@@ -1,6 +1,6 @@
-proto < ../../../proto/oid4vc/siopv2.proto
-proto < ../../../proto/oid4vc/oid4vp.proto
-proto < ../../../proto/oid4vc/oid4vci.proto
+proto < ../../../shared/proto/oid4vc/siopv2.proto
+proto < ../../../shared/proto/oid4vc/oid4vp.proto
+proto < ../../../shared/proto/oid4vc/oid4vci.proto
 
 @host=http://selv.local:5001/oid4vc-tanglelabs
 ###

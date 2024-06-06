@@ -1,10 +1,23 @@
-@host=http://insurance.selv.iota.org
+@host=http://insurance.selv.local:81
 ###
 POST /v1/credentials
+Content-Type: application/json
+{
+    "offerId": "TBD",
+    "credential": {
+        "credentialSubject": "did:key:z6MkfDvsiwx8ddaUitBuwxn8fCfyMZkK7ipQanMVS1FqvchE"
+    },
+    "isSigned": false
+}
 ###
-GET /v1/credentials/{credential_id}
+GET /v1/credentials/TBD
 ###
 POST /v1/offers
+Content-Type: application/json
+{
+    "offerId": "0d520cbe176ab9e1f7888c70888020d84a69672a4baabd3ce1c6aaad8f6420c0",
+    "preAuthorizedCode": "TBD"
+}
 ###
 POST /v1/authorization_requests
 Content-Type: application/json
@@ -12,9 +25,102 @@ Content-Type: application/json
     "nonce": "0d520cbe176ab9e1f7888c70888020d84a69672a4baabd3ce1c6aaad8f6420c0"
 }
 ###
-GET /v1/authorization_requests/06adfc99a128b078726c9cca383df3883db1e8dbd0270518bd4af7eb5a8e9191
+GET /v1/authorization_requests/66725a3a0219fe0354fd6f95176c2eef978ffeb7a2ba502ec1479cf8a43a03a4
 ###
+{{
+
+const utils = require('../../scripting/dist/bundle5.js');
+
+const jwt = async () => {
+
+  const { didDocument, keyPairs } = await utils.getDIDKey();
+  const { id:did, authentication } = didDocument; 
+
+  const issuer_did = "test"
+
+  const header = {
+    kid: `${authentication}`,
+    alg: "EdDSA",
+    typ: "JWT"
+  }
+
+  const encodedHeaders = Buffer.from(JSON.stringify(header), "utf8").toString("base64url");
+
+  const claims = {
+  "iss": did,
+  "sub": did,
+  "aud": "did:iota:rms:0x29a66aa42902d3ba8a9f4746aee3a30549fef72ccf69ccc60b5b36525deb3ab4",
+  "exp": 1717409527,
+  "iat": 1718408927,
+  "nonce": "test"
+}
+  const encodedPayload = Buffer.from(JSON.stringify(claims), "utf8").toString("base64url");
+
+  const encodedSignature = await utils.sign(`${encodedHeaders}.${encodedPayload}`)
+
+  const jwt = `${encodedHeaders}.${encodedPayload}.${encodedSignature}`;
+  return jwt;
+
+}
+exports.jwt = jwt();
+}}
+
 POST /redirect
 Content-Type: application/x-www-form-urlencoded
 
-id_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSIsImtpZCI6ImRpZDppb3RhOnJtczoweGY4MGM1MTM0OGNmMzIzOGRmMTEzMzE1NmM3ODk2NWQxZDVmOWFiYTJiZjA3MGMyM2ZiYmI5NmVkYjMzNmUxNTQjbVpYbTltSndqN2Q2WHJtejIxS3VvRDA3ZXhvM0lTOVlWWXFwTlk1RjhYSSJ9
+state=726e176a-8a6b-4656-9c48-5aa256eef9c5&id_token={{jwt}}
+###
+{{
+
+ const utils = require('../../scripting/dist/bundle5.js');
+
+    const jwt = async () => {
+
+        const { didDocument, keyPairs } = await utils.getDIDKey();
+        const { id:did, authentication } = didDocument; 
+
+        const header = {
+            kid: `${authentication}`,
+            alg: "EdDSA",
+            typ: "JWT"
+        }
+
+        const encodedHeaders = Buffer.from(JSON.stringify(header), "utf8").toString("base64url");
+
+        const claims = {
+            "iss": did,
+            "jti": "urn:uuid:3978344f-8596-4c3a-a978-8fcaba3903c5",
+            "aud": "did:example:4a57546973436f6f6c4a4a57573",
+            "nbf": Math.floor(Date.now() / 1000),
+            "iat": Math.floor(Date.now() / 1000),
+            "exp": Math.floor((Date.now() + 10 * (60 * 1000)) / 1000),
+            "nonce": "343s$FSFDa-",
+            "vp": {
+                "@context": [
+                    "https://www.w3.org/2018/credentials/v1",
+                    "https://www.w3.org/2018/credentials/examples/v1"
+                ],
+                "type": [
+                    "VerifiablePresentation",
+                    "CredentialManagerPresentation"
+                ],
+                "verifiableCredential": [
+                    "eyJraWQiOiJkaWQ6aW90YTpybXM6MHgzZmJjNjVmMzg5ZTk2ZjI3MjZiOGY5YjZmNjNmNGUyZTYyYTc4YzQyMzhhMzgxYWUyNWJiOWQ3OGNmNDhjNGE1I0RmQnhlTTZrdnpvczc2VUlQWl9zNUhUQUJfNEM4bE5MRlZ3QlItczJtX1kiLCJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJpc3MiOiJkaWQ6aW90YTpybXM6MHgzZmJjNjVmMzg5ZTk2ZjI3MjZiOGY5YjZmNjNmNGUyZTYyYTc4YzQyMzhhMzgxYWUyNWJiOWQ3OGNmNDhjNGE1IiwibmJmIjoxNTA4Njc1MDI4LCJzdWIiOiJkaWQ6a2V5Ono2TWtnaHdTU0xrSFhDd0hGRjlmTnpjeUJNY1ZBSzM4TERuUU14dDJFUTFha0FIZiIsInZjIjp7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIiwiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvZXhhbXBsZXMvdjEiXSwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCIsIlVuaXZlcnNpdHlEZWdyZWVDcmVkZW50aWFsIl0sImNyZWRlbnRpYWxTdWJqZWN0Ijp7ImJpcnRocGxhY2UiOiJNdXN0ZXJzdGFkdCIsImNvdW50cnkiOiJHZXJtYW55IiwiZGF0ZSI6IkRhdGUubm93KCkiLCJmaXJzdE5hbWUiOiJCZW4iLCJsYXN0TmFtZSI6IlV0emVyIiwibmF0aW9uYWxpdHkiOiJnZXJtYW4iLCJwaG9uZSI6IjAwLTAwMDAifX19.BJuWfQH4lImRCb7GLKsSPTU46L9Asqs9PrymH-iPOnLBaoXMXO2V-Q4fgYouS2poJ1IyMjScX6f_BPe2tdHvBQ"
+                ]
+            }
+        }
+
+        const encodedPayload = Buffer.from(JSON.stringify(claims), "utf8").toString("base64url");
+
+        const encodedSignature = await utils.sign(`${encodedHeaders}.${encodedPayload}`)
+
+        const jwt = `${encodedHeaders}.${encodedPayload}.${encodedSignature}`;
+        return jwt;
+    }
+    exports.jwt = jwt();
+}}
+
+POST /redirect
+Content-Type: application/x-www-form-urlencoded
+
+presentation_submission=TBDstate=83f1fa63-2802-4524-85a0-653ceaf170cf&vp_token={{jwt}}

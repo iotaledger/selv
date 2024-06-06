@@ -67,6 +67,48 @@ $themes: (
         buttonBorderRadius: 100px,
 
     ),
+    government: (
+        fontFamily: $font-family-companyHouse,
+        fontFamilyHeadings: $font-family-companyHouse,
+
+        defaultTextSize: 16px,
+        defaultLineHeight: 24px,
+
+        primaryColor: $primary-color-companyHouse,
+        secondaryColor: $secondary-color-companyHouse,
+        trinaryColor: $trinary-color-companyHouse,
+        primaryFontColor: $primary-font-color-companyHouse,
+        secondaryFontColor: $secondary-font-color-companyHouse,
+        linkColor: $link-color,
+        noticeColor: $notice-color,
+        formSelectorColor: $form-selector-color,
+        pageBackground: $page-background-companyHouse,
+
+        h1TextSize: 36px,
+        h1LineHeight: 42px,
+        h2TextSize: 24px,
+        h2LineHeight: 30px,
+        h3TextSize: 18px,
+        h3LineHeight: 20px,
+        h4TextSize: 16px,
+        h4LineHeight: 18px,
+        h5TextSize: 14px,
+        h5LineHeight: 15px,
+
+        buttonBackgroundColor: $primary-color-companyHouse,
+        buttonHeight: 43px,
+        buttonBorderRadius: 4px,
+
+        headerBackgroundColor: #032F5D,
+        headerHeight: 60px,
+        headerLogoAlign: left,
+        headerLogoHeight: 24px,
+
+        footerBackgroundColor: #FFFFFF,
+        footerHeight: 76px,
+        footerLogoAlign: center,
+        footerLogoHeight: 24px,
+    ),
     company: (
         fontFamily: $font-family-companyHouse,
         fontFamilyHeadings: $font-family-companyHouse,

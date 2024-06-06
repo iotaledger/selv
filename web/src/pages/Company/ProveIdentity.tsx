@@ -26,7 +26,7 @@ const ProveIdentity: React.FC = () => {
     }, [nextStep, navigate]);
 
     useEffect(() => {
-        dispatch?.({type: Actions.REQUEST_INVITE, provider: Providers.WaltId, scope: Scopes.CompanyHouse});
+        dispatch?.({type: Actions.REQUEST_INVITE, provider: Providers.Impierce, scope: Scopes.CompanyHouse});
     }, [dispatch]);
 
     useEffect(() => {

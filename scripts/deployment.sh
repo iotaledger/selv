@@ -1,11 +1,12 @@
 echo "building the image ..."
-docker compose -f ../docker-compose.yml pull --ignore-pull-failures
-docker compose -f ../docker-compose.yml build --pull --no-cache #TODO: discuss flags
+docker compose -f ../docker-compose.yml build --pull 
 
 echo "shuting down the docker compose ..."
 docker compose -f ../docker-compose.yml down
 
 echo "starting the docker compose ..."
-docker compose -f ../docker-compose.yml up -d
+docker compose -f ../docker-compose.yml up --pull always -d
+
+docker system prune -a --volumes -f
 
 echo "done"

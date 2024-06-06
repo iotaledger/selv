@@ -24,9 +24,9 @@ message CredentialPresentation {
 
 message CredentialRequest {
   User user = 1;
-  repeated google.protobuf.Struct unsignedCredentials = 2;
+  google.protobuf.Struct credentialDefinition = 2;
 }
 
 message CredentialResponse {
-  repeated google.protobuf.Struct signedCredentials = 1;
+  repeated string signedCredentials = 1;
 }

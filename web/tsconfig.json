@@ -11,7 +11,7 @@
     "moduleResolution": "node",
     "paths": {
       "@sharedTypes/*": [
-        "../types/*"
+        "../shared/types/*"
       ]
     },
     "baseUrl": "./",
@@ -23,6 +23,6 @@
   },
   "include": [
     "src",
-    "../types/**/*"
+    "../shared/types/**/*"
   ]
 }

@@ -10,6 +10,7 @@ import { Resolver } from "did-resolver";
 import * as didJWT from "did-jwt";
 
 import * as IOTADIDResolver from "./IOTADIDResolver";
+import { credentials } from "@grpc/grpc-js";
 const iotaDidResolver = IOTADIDResolver.getResolver();
 let resolver = new Resolver(iotaDidResolver);
 
@@ -36,17 +37,17 @@ export const createServer = (
     asyncHandler(async (req, res) => {
       console.debug(req.body);
       
-      // TODO: remove only for testing
-      const { signer, payload } = await didJWT
-      .verifyJWT(req.body["pre-authorized_code"], {
-        resolver: resolver,
-        policies: { aud: false },
-      })
-      .catch((e) => {
-        console.error("ERROR", e);
-        throw new Error("invalid_request");
-      });
-      // end remove
+      // // TODO: remove only for testing
+      // const { signer, payload } = await didJWT
+      // .verifyJWT(req.body["pre-authorized_code"], {
+      //   resolver: resolver,
+      //   policies: { aud: false },
+      // })
+      // .catch((e) => {
+      //   console.error("ERROR", e);
+      //   throw new Error("invalid_request");
+      // });
+      // // end remove
       const response = await issuer.createTokenResponse(req.body);
       console.debug(response);
       res.json(response);
@@ -87,28 +88,37 @@ export const createServer = (
 
   app.route("/api/credential").post(
     asyncHandler(async (req, res) => {
-      console.debug(req);
+
+      console.debug("received credential request", req.headers, req.body);
+
+      const bearer_token = req.headers.authorization?.split("Bearer ")[1];
+
       await issuer.validateCredentialsResponse({
-        token: req.headers.authorization?.split("Bearer ")[1],
-        proof: req.body.credential_requests[0].proof.jwt,
+        token: bearer_token,
+        proof: req.body.proof.jwt,
       });
-      // TODO: get state from token, need to decode
-      const iss = "";
-      const state = "";
-      const unsigned_credentials = [];
 
-      console.log("------------------------");
-      console.log(req.body);
+      const decodedBearer = decodeJWT(bearer_token);
+      const decodedJWT = decodeJWT(req.body.proof.jwt);
 
-      const { credentials } = await userService.credentialRequest(
+      const {iss} = decodedJWT.payload;
+
+      const {state} = decodedBearer.payload;
+
+      const { signedCredentials } = await userService.credentialRequest(
         iss,
         state,
-        unsigned_credentials,
+        req.body.credential_definition,
       );
 
+      console.debug(signedCredentials);
+
       const response = await issuer.createSendCredentialsResponse({
-        credentials,
+        credentials: signedCredentials,
       });
+
+      console.debug(response);
+
       res.json(response);
     }),
   );
@@ -119,12 +129,12 @@ export const createServer = (
       const { id_token: idToken, vp_token: vpToken } = req.body;
       const { state } = req.body;
       
-      console.debug(req, state);
+      console.debug(state);
       if (idToken) {
         const { iss } = await rp.validateJwt(idToken);
         await userService.connectUser(iss, state);
       } else if (vpToken) {
-        console.debug(req, state, vpToken);
+        console.debug(state, vpToken);
         const { iss } = await rp.validateJwt(vpToken);
         await userService.presentCredential(iss, state, vpToken);
       } else {

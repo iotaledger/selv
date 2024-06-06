@@ -10,6 +10,9 @@ import { Providers } from '@sharedTypes/Providers';
 import { Issuers } from '@sharedTypes/Issuers';
 import { Scopes } from '@sharedTypes/Scopes';
 
+import { v4 as uuidv4 } from 'uuid';
+import CitizenCredentialConfig from '../../../../shared/credentials/CitizenCredential.json'
+
 
 const ProvideData: React.FC = () => {
     const { t } = useTranslation();
@@ -29,29 +32,10 @@ const ProvideData: React.FC = () => {
 
         dispatch?.({
             type: Actions.REQUEST_PRESENTATION,
-            provider: Providers.WaltId,
+            provider: Providers.Impierce,
             presentationDefinition: {
-                id: '32f54163-7166-48f1-93d8-ff217bdb0653',
-                input_descriptors: [
-                    {
-                        id: 'wa_driver_license',
-                        name: 'Washington State Business License',
-                        purpose:
-                            'We can only allow licensed Washington State business representatives into the WA Business Conference',
-                        constraints: {
-                            fields: [
-                                {
-                                    path: [
-                                        '$.credentialSubject.dateOfBirth',
-                                        '$.credentialSubject.dob',
-                                        '$.vc.credentialSubject.dateOfBirth',
-                                        '$.vc.credentialSubject.dob',
-                                    ],
-                                },
-                            ],
-                        },
-                    },
-                ],
+                id: uuidv4(),
+                input_descriptors: CitizenCredentialConfig.input_descriptors
             },
             scope: Scopes.CompanyHouse,
 

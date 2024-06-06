@@ -6,6 +6,9 @@ import {
 import * as KeyDIDResolver from "key-did-resolver";
 import { Resolver } from "did-resolver";
 
+import {
+  getDidJwkResolver
+} from "@sphereon/did-resolver-jwk";
 import * as IOTADIDResolver from "./IOTADIDResolver";
 
 import { remoteSigner } from "./remoteSigner";
@@ -22,14 +25,16 @@ import {Cache} from './cache';
   const iotaDidResolver = IOTADIDResolver.getResolver();
   let resolver = new Resolver({
       ...keyDidResolver,
-      ...iotaDidResolver
+      ...iotaDidResolver,
+      ...getDidJwkResolver()
   });
 
   const rp = new RelyingParty({
     clientId: process.env.RP_DID, //could also be URL (bank.selv.iota.org)
     clientMetadata: {
       subjectSyntaxTypesSupported: [
-        "did:key"
+        "did:key",
+        "did:jwk",
       ],
       idTokenSigningAlgValuesSupported: [
         SigningAlgs.EdDSA
@@ -47,7 +52,7 @@ import {Cache} from './cache';
     credentialEndpoint: `${process.env.PUBLIC_URL}/api/credential`,
     credentialIssuer: `${process.env.PUBLIC_URL}/`, // should be DID?
     proofTypesSupported: ["jwt"],
-    cryptographicBindingMethodsSupported: ["did:key"],
+    cryptographicBindingMethodsSupported: ["did:key"], //TODO: did:jwk?
     resolver,
     signer: remoteSigner(process.env.SIGNER_KEYID),
     did: process.env.RP_DID,

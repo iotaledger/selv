@@ -111,21 +111,21 @@ export const createService = async (
   const gRPCServer = new grpc.Server();
   gRPCServer.addService(
     //@ts-ignore
-    getPackageDefinition("proto/oid4vc/siopv2.proto").oid4vc.SIOPV2.service,
+    getPackageDefinition("shared/proto/oid4vc/siopv2.proto").oid4vc.SIOPV2.service,
     {
       createRequest: createSIOPRequest,
     }
   );
   gRPCServer.addService(
     //@ts-ignore
-    getPackageDefinition("proto/oid4vc/oid4vp.proto").oid4vc.OID4VP.service,
+    getPackageDefinition("shared/proto/oid4vc/oid4vp.proto").oid4vc.OID4VP.service,
     {
       createRequest: createOID4VPRequest,
     }
   );
   gRPCServer.addService(
     //@ts-ignore
-    getPackageDefinition("proto/oid4vc/oid4vci.proto").oid4vc.OID4VCI.service,
+    getPackageDefinition("shared/proto/oid4vc/oid4vci.proto").oid4vc.OID4VCI.service,
     {
       createOffer: createOID4VCIOffer,
     }

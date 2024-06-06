@@ -13,7 +13,7 @@ const identityProtoPath = path.join(
   "..",
   "..",
   "..",
-  "proto/identity/utils.proto"
+  "shared/proto/identity/utils.proto"
 );
 
 const identityPackageDefinition = loadSync(identityProtoPath);
