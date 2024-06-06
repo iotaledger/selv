@@ -1,5 +1,16 @@
+use anyhow::Context as _;
 use identity_eddsa_verifier::EdDSAJwsVerifier;
+use identity_iota::core::Object;
+use identity_iota::core::OrderedSet;
+use identity_iota::core::Timestamp;
+use identity_iota::core::ToJson;
+use identity_iota::core::Url;
+use identity_iota::credential::Credential;
+use identity_iota::credential::DomainLinkageConfiguration;
+use identity_iota::credential::DomainLinkageCredentialBuilder;
 use identity_iota::credential::Jws;
+use identity_iota::credential::LinkedDomainService;
+use identity_iota::did::DID as _;
 use identity_iota::document::verifiable::JwsVerificationOptions;
 use identity_iota::iota::IotaClientExt;
 use identity_iota::iota::IotaDocument;
@@ -81,16 +92,20 @@ async fn main() -> anyhow::Result<()> {
     let mut env_file = std::fs::File::create(".env")?;
     writeln!(env_file, "HTTP_PORT=81\nGRPC_PORT=5001")?;
     for name in issuers {
-        let (did, key_id, fragment, _address) = create_issuer(&stronghold_storage, &client).await?;
+        let domain = format!("https://{}.{public_url_domain}", name.to_lowercase()).parse::<Url>()?;
+        let (did, key_id, fragment, _address, domain_linkage_config) =
+            create_issuer(&stronghold_storage, &client, domain.clone()).await?;
         let name = name.to_uppercase();
         writeln!(env_file, "ISSUERS_{name}_DID={did}")?;
         writeln!(env_file, "ISSUERS_{name}_KEYID={key_id}")?;
         writeln!(env_file, "ISSUERS_{name}_FRAGMENT={fragment}")?;
-        writeln!(
-            env_file,
-            "{name}_PUBLIC_URL=https://{}.{public_url_domain}",
-            name.to_lowercase()
-        )?;
+        writeln!(env_file, "{name}_PUBLIC_URL={domain}")?;
+
+        let mut domain_linkage_resource_file = {
+            let file_name = format!("./{}-did-configuration.json", name.to_lowercase());
+            std::fs::File::create(&file_name)?
+        };
+        domain_linkage_resource_file.write_all(domain_linkage_config.to_json()?.as_bytes())?;
     }
 
     Ok(())
@@ -99,7 +114,8 @@ async fn main() -> anyhow::Result<()> {
 async fn create_issuer(
     stronghold_storage: &StrongholdStorage,
     client: &Client,
-) -> anyhow::Result<(String, KeyId, String, Address)> {
+    domain_to_link: Url,
+) -> anyhow::Result<(String, KeyId, String, Address, DomainLinkageConfiguration)> {
     // Create a DID document.
     let address: Address = get_address_with_funds(
         client,
@@ -136,6 +152,8 @@ async fn create_issuer(
         .get_key_id(&MethodDigest::new(method)?)
         .await?;
 
+    let domain_linkage_credential = add_domain_linkage(&mut document, domain_to_link)?;
+
     // Construct an Alias Output containing the DID document, with the wallet address
     // set as both the state controller and governor.
     let alias_output: AliasOutput = client.new_did_output(address, document, None).await?;
@@ -144,6 +162,18 @@ async fn create_issuer(
     let document: IotaDocument = client
         .publish_did_output(stronghold_storage.as_secret_manager(), alias_output)
         .await?;
+
+    // Create a domain linkage configuration
+    let domain_linkage_config = document
+            .create_credential_jwt(
+                &domain_linkage_credential,
+                &storage,
+                &fragment,
+                &JwsSignatureOptions::default(),
+                None,
+            )
+            .await
+            .map(|jwt| DomainLinkageConfiguration::new(vec![jwt]))?;
 
     // Resolve the published DID Document.
     let mut resolver = Resolver::<IotaDocument>::new();
@@ -168,5 +198,27 @@ async fn create_issuer(
         String::from_utf8_lossy(decoded_jws.claims.as_ref()),
         "test_data"
     );
-    Ok((document.id().to_string(), key_id, fragment, address))
+    Ok((
+        document.id().to_string(),
+        key_id,
+        fragment,
+        address,
+        domain_linkage_config,
+    ))
+}
+
+fn add_domain_linkage(doc: &mut IotaDocument, domain: Url) -> anyhow::Result<Credential> {
+    let service_url = doc.id().clone().join("#domain-linkage")?;
+    let mut domains = OrderedSet::new();
+    domains.append(domain.clone());
+
+    let domain_linkage_service = LinkedDomainService::new(service_url, domains, Object::default())?;
+    doc.insert_service(domain_linkage_service.into())?;
+
+    DomainLinkageCredentialBuilder::new()
+        .issuer(doc.id().clone().into())
+        .issuance_date(Timestamp::now_utc())
+        .origin(domain)
+        .build()
+        .context("Failed to create DomainLinkageCredential")
 }
