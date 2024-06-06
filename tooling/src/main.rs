@@ -154,16 +154,18 @@ async fn create_issuer(
         .get_key_id(&MethodDigest::new(method)?)
         .await?;
 
-    let domain_linkage_credential = add_domain_linkage(&mut document, domain_to_link)?;
-
     // Construct an Alias Output containing the DID document, with the wallet address
     // set as both the state controller and governor.
     let alias_output: AliasOutput = client.new_did_output(address, document, None).await?;
 
     // Publish the Alias Output and get the published DID document.
-    let document: IotaDocument = client
+    let mut document: IotaDocument = client
         .publish_did_output(stronghold_storage.as_secret_manager(), alias_output)
         .await?;
+
+    let domain_linkage_credential = add_domain_linkage(&mut document, domain_to_link)?;
+    let alias_output: AliasOutput = client.new_did_output(address, document, None).await?;
+    let document = client.publish_did_output(stronghold_storage.as_secret_manager(), alias_output).await?;
 
     // Create a domain linkage configuration
     let domain_linkage_config = document
