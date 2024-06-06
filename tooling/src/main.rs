@@ -1,5 +1,6 @@
 use anyhow::Context as _;
 use identity_eddsa_verifier::EdDSAJwsVerifier;
+use identity_iota::core::Duration;
 use identity_iota::core::Object;
 use identity_iota::core::OrderedSet;
 use identity_iota::core::Timestamp;
@@ -92,7 +93,8 @@ async fn main() -> anyhow::Result<()> {
     let mut env_file = std::fs::File::create(".env")?;
     writeln!(env_file, "HTTP_PORT=81\nGRPC_PORT=5001")?;
     for name in issuers {
-        let domain = format!("https://{}.{public_url_domain}", name.to_lowercase()).parse::<Url>()?;
+        let domain =
+            format!("https://{}.{public_url_domain}", name.to_lowercase()).parse::<Url>()?;
         let (did, key_id, fragment, _address, domain_linkage_config) =
             create_issuer(&stronghold_storage, &client, domain.clone()).await?;
         let name = name.to_uppercase();
@@ -165,15 +167,15 @@ async fn create_issuer(
 
     // Create a domain linkage configuration
     let domain_linkage_config = document
-            .create_credential_jwt(
-                &domain_linkage_credential,
-                &storage,
-                &fragment,
-                &JwsSignatureOptions::default(),
-                None,
-            )
-            .await
-            .map(|jwt| DomainLinkageConfiguration::new(vec![jwt]))?;
+        .create_credential_jwt(
+            &domain_linkage_credential,
+            &storage,
+            &fragment,
+            &JwsSignatureOptions::default(),
+            None,
+        )
+        .await
+        .map(|jwt| DomainLinkageConfiguration::new(vec![jwt]))?;
 
     // Resolve the published DID Document.
     let mut resolver = Resolver::<IotaDocument>::new();
@@ -218,6 +220,11 @@ fn add_domain_linkage(doc: &mut IotaDocument, domain: Url) -> anyhow::Result<Cre
     DomainLinkageCredentialBuilder::new()
         .issuer(doc.id().clone().into())
         .issuance_date(Timestamp::now_utc())
+        .expiration_date(
+            Timestamp::now_utc()
+                .checked_add(Duration::days(365))
+                .context("overflowing timestamp")?,
+        )
         .origin(domain)
         .build()
         .context("Failed to create DomainLinkageCredential")
