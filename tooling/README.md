@@ -1,1 +1,1 @@
-cargo run --release -- bank government insurance 
+cargo run --release -- selv.iota.org bank government insurance
