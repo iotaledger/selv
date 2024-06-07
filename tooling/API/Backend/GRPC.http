@@ -10,7 +10,7 @@ proto < ../../../shared/proto/user/user.proto
 GRPC /UsersService/ConnectUser
 {
     "did": "did:key:z6MkfDvsiwx8ddaUitBuwxn8fCfyMZkK7ipQanMVS1FqvchE",
-    "code": "3c9323c8-8691-4fb4-b406-43113592010d"
+    "code": "8b6c5877-aab1-41a0-b1c7-acdc25b8527b"
 }
 ###
 {{
@@ -48,7 +48,7 @@ const jwt = async () => {
             "CredentialManagerPresentation"
             ],
             "verifiableCredential": [
-                "eyJraWQiOiJkaWQ6aW90YTpybXM6MHgzZmJjNjVmMzg5ZTk2ZjI3MjZiOGY5YjZmNjNmNGUyZTYyYTc4YzQyMzhhMzgxYWUyNWJiOWQ3OGNmNDhjNGE1I0RmQnhlTTZrdnpvczc2VUlQWl9zNUhUQUJfNEM4bE5MRlZ3QlItczJtX1kiLCJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJpc3MiOiJkaWQ6aW90YTpybXM6MHgzZmJjNjVmMzg5ZTk2ZjI3MjZiOGY5YjZmNjNmNGUyZTYyYTc4YzQyMzhhMzgxYWUyNWJiOWQ3OGNmNDhjNGE1IiwibmJmIjoxNTA4Njc1MDI4LCJzdWIiOiJkaWQ6a2V5Ono2TWtnaHdTU0xrSFhDd0hGRjlmTnpjeUJNY1ZBSzM4TERuUU14dDJFUTFha0FIZiIsInZjIjp7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIiwiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvZXhhbXBsZXMvdjEiXSwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCIsIlVuaXZlcnNpdHlEZWdyZWVDcmVkZW50aWFsIl0sImNyZWRlbnRpYWxTdWJqZWN0Ijp7ImJpcnRocGxhY2UiOiJNdXN0ZXJzdGFkdCIsImNvdW50cnkiOiJHZXJtYW55IiwiZGF0ZSI6IkRhdGUubm93KCkiLCJmaXJzdE5hbWUiOiJCZW4iLCJsYXN0TmFtZSI6IlV0emVyIiwibmF0aW9uYWxpdHkiOiJnZXJtYW4iLCJwaG9uZSI6IjAwLTAwMDAifX19.BJuWfQH4lImRCb7GLKsSPTU46L9Asqs9PrymH-iPOnLBaoXMXO2V-Q4fgYouS2poJ1IyMjScX6f_BPe2tdHvBQ"
+                "eyJraWQiOiJkaWQ6aW90YTpybXM6MHg4MDNjNjZjY2QzMzRhYTQxOTY2MThmNjZiYWVjZjBjNTRhYjFkMzI2NzYzM2ZlOTc1YWVmNTRmM2Q0ZDE2MWVkI2hRRWNZQzVhWGdIVXpaRHZPRmFUWi0xN3B3WVdmOHBZTXJkTFFoaGMzZ00iLCJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJpc3MiOiJkaWQ6aW90YTpybXM6MHg4MDNjNjZjY2QzMzRhYTQxOTY2MThmNjZiYWVjZjBjNTRhYjFkMzI2NzYzM2ZlOTc1YWVmNTRmM2Q0ZDE2MWVkIiwibmJmIjoxNTA4Njc1MDI4LCJzdWIiOiJkaWQ6andrOmV5SmhiR2NpT2lKRlpFUlRRU0lzSW1OeWRpSTZJa1ZrTWpVMU1Ua2lMQ0pyYVdRaU9pSnNhMEZVTld4bU0wMDBUMVI1YUVGa1VsaGpUMncyY2tOMFREZHBZVnBzVGxJek5XSjRSUzAzZGs1aklpd2lhM1I1SWpvaVQwdFFJaXdpZUNJNklrZHlZMUJsVW1kaGRtdHVUMWRsTTJaeFV6QjFjblpKWTAwd2QwdHVORVZGVmtzMmVGcFhSbTE0UTBVaWZRIiwidmMiOnsiQGNvbnRleHQiOlsiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvdjEiLCJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy9leGFtcGxlcy92MSJdLCJ0eXBlIjpbIlZlcmlmaWFibGVDcmVkZW50aWFsIiwiQ2l0aXplbkNyZWRlbnRpYWwiXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiYmlydGhwbGFjZSI6Ik11c3RlcnN0YWR0IiwiY291bnRyeSI6Ikdlcm1hbnkiLCJkYXRlIjoiRGF0ZS5ub3coKSIsImZpcnN0TmFtZSI6IkJlbiIsImxhc3ROYW1lIjoiVXR6ZXIiLCJuYXRpb25hbGl0eSI6Imdlcm1hbiIsInBob25lIjoiMDAtMDAwMCJ9fX0.1ULDFIC-3ckBRuB-8P-1R-eZKgPlVEEwQpiDM8JjnVD4Mpx3FgPOkz0g5yruUoCbyygT88rTX-ax0-_GNegYAQ"
             ]
         }
     }
@@ -67,7 +67,7 @@ GRPC /UsersService/PresentCredential
 {
     "user": {
         "did": "did:key:z6MkfDvsiwx8ddaUitBuwxn8fCfyMZkK7ipQanMVS1FqvchE",
-        "code": "08a8ef9f-da84-4e65-8e26-6d05a5cbe9bf"
+        "code": "57cb794d-74d8-4505-a076-e44264fce024"
     },
     "vp": "{{jwt}}"
 }
@@ -81,7 +81,7 @@ GRPC /UsersService/RequestCredential
 {
     "user": {
         "did": "did:key:z6MkfDvsiwx8ddaUitBuwxn8fCfyMZkK7ipQanMVS1FqvchE",
-        "code": "ae794ad5-7c88-4397-abb9-e5e0771aa97a"
+        "code": "b5dc4074-d6c8-4e9e-a5be-abb956ff1c10"
     },
     "credentialDefinition": { 
         "type": [ "VerifiableCredential", "CitizenCredential" ]

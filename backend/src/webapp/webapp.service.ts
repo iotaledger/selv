@@ -18,6 +18,7 @@ import { User } from 'src/user/user';
 import * as CitizenCredentialConfig from '../../../shared/credentials/CitizenCredential.json';
 import * as CompanyCredentialConfig from '../../../shared/credentials/CompanyCredential.json';
 import { Providers } from '../../../shared/types/Providers';
+import { ValidateDidResponse } from 'src/identity/domain_linkage';
 
 type Token = {
   sessionId: string;
@@ -104,6 +105,20 @@ export class WebAppService {
     this.logger.debug(`created offer for:${session_id}`, offer);
 
     return offer;
+  }
+
+  async requestDomainLinkageValidation(
+    did: string,
+  ): Promise<ValidateDidResponse> {
+    this.logger.debug(
+      `receiving DomainLinkageValidation request for did:${did}`,
+    );
+
+    const validation = await this.identityService.validateDIDDomainLinkage(did);
+
+    this.logger.debug(`validation for did:${did}`, did);
+
+    return validation;
   }
 
   async connectUser(user: User): Promise<void> {

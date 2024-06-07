@@ -3,11 +3,9 @@
 POST /v1/credentials
 Content-Type: application/json
 {
-    "offerId": "TBD",
-    "credential": {
-        "credentialSubject": "did:key:z6MkfDvsiwx8ddaUitBuwxn8fCfyMZkK7ipQanMVS1FqvchE"
-    },
-    "isSigned": false
+    "offerId": "68bbc380-2339-4a44-b41f-2d1583d9c26e",
+    "credential": "eyJraWQiOiJkaWQ6aW90YTpybXM6MHgzZmJjNjVmMzg5ZTk2ZjI3MjZiOGY5YjZmNjNmNGUyZTYyYTc4YzQyMzhhMzgxYWUyNWJiOWQ3OGNmNDhjNGE1I0RmQnhlTTZrdnpvczc2VUlQWl9zNUhUQUJfNEM4bE5MRlZ3QlItczJtX1kiLCJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJpc3MiOiJkaWQ6aW90YTpybXM6MHgzZmJjNjVmMzg5ZTk2ZjI3MjZiOGY5YjZmNjNmNGUyZTYyYTc4YzQyMzhhMzgxYWUyNWJiOWQ3OGNmNDhjNGE1IiwibmJmIjoxNTA4Njc1MDI4LCJzdWIiOiJkaWQ6a2V5Ono2TWt0RW5vMlBuN2pqNGd1RHBSeVVWU2dSWTNxajZXRzlDZTJlODgxRHNLUnR5ayIsInZjIjp7IkBjb250ZXh0IjpbImh0dHBzOi8vd3d3LnczLm9yZy8yMDE4L2NyZWRlbnRpYWxzL3YxIiwiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvZXhhbXBsZXMvdjEiXSwidHlwZSI6WyJWZXJpZmlhYmxlQ3JlZGVudGlhbCIsIlVuaXZlcnNpdHlEZWdyZWVDcmVkZW50aWFsIl0sImNyZWRlbnRpYWxTdWJqZWN0Ijp7ImJpcnRocGxhY2UiOiJNdXN0ZXJzdGFkdCIsImNvdW50cnkiOiJHZXJtYW55IiwiZGF0ZSI6IkRhdGUubm93KCkiLCJmaXJzdE5hbWUiOiJCZW4iLCJsYXN0TmFtZSI6IlV0emVyIiwibmF0aW9uYWxpdHkiOiJnZXJtYW4iLCJwaG9uZSI6IjAwLTAwMDAifX19.ulMArvYfQEmaad4pPufwHyQgDb57o5hZuH98Dh0ZdqJGU5eUyJ7gRMWvF2y_ZmnjMgwHlMUWXX7vWsTF6ua6Bg",
+    "isSigned": true
 }
 ###
 GET /v1/credentials/TBD
@@ -15,8 +13,7 @@ GET /v1/credentials/TBD
 POST /v1/offers
 Content-Type: application/json
 {
-    "offerId": "0d520cbe176ab9e1f7888c70888020d84a69672a4baabd3ce1c6aaad8f6420c0",
-    "preAuthorizedCode": "TBD"
+    "offerId": "0d520cbe176ab9e1f7888c70888020d84a69672a4baabd3ce1c6aaad8f6420c0"
 }
 ###
 POST /v1/authorization_requests

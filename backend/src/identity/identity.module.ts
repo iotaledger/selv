@@ -19,7 +19,7 @@ import configuration from './configuration';
         ClientProxyFactory.create({
           transport: Transport.GRPC,
           options: {
-            package: ['credentials', 'presentation'],
+            package: ['credentials', 'presentation', 'domain_linkage'],
             url: configService.getOrThrow('grpc_service_url'),
             protoPath: [
               join(
@@ -29,6 +29,10 @@ import configuration from './configuration';
               join(
                 configService.getOrThrow('grpc_service_protopath'),
                 'credentials.proto',
+              ),
+              join(
+                configService.getOrThrow('grpc_service_protopath'),
+                'domain_linkage.proto',
               ),
             ],
           },

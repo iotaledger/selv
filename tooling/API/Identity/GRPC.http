@@ -1,6 +1,7 @@
 proto < ../../../shared/proto/identity/credentials.proto
 proto < ../../../shared/proto/identity/utils.proto
 proto < ../../../shared/proto/identity/presentation.proto
+proto < ../../../shared/proto/identity/domain_linkage.proto
 
 @host=http://selv.local:5001/identity
 ###
@@ -53,6 +54,17 @@ GRPC /Signing/sign
 {
     "data": {{data}},
     "keyId": "pK0JAYw5RFFKqorBn0x4w98zl2UBfRys"
+}
+###
+
+{{
+    //pre request script
+    exports.data = new TextEncoder().encode("test");
+}}
+
+GRPC /DomainLinkage/validate_did
+{
+    "did": "did:iota:rms:0xb97ebcab3c70d9d3087a96e04aac43c8a139a187a1a7cbaae1a17bc2d7eb0766"
 }
 ###
 {{

@@ -16,50 +16,68 @@ export enum Actions {
     CONNECT_DID,
     SET_QR_CONTENT,
     COMPLETE_ISSUANCE,
+    REQUEST_DOMAIN_LINKAGE_VALIDATION,
+    SET_DOMAIN_LINKAGE_VALIDATION,
 }
 
+type ValidationResult = { id: string, service_endpoint: { valid: boolean, error?: string, document?: string }[] };
+
 interface ReducerBaseAction {
+    type: Actions,
+}
+
+interface ScopedReducerAction extends ReducerBaseAction {
     type: Actions,
     scope: Scopes,
 }
 
-interface AddCredentialAction extends ReducerBaseAction {
+interface AddCredentialAction extends ScopedReducerAction {
     type: Actions.ADD_CREDENTIAL,
     credential: any,
 }
 
-interface ConnectDIDAction extends ReducerBaseAction {
+interface ConnectDIDAction extends ScopedReducerAction {
     type: Actions.CONNECT_DID,
     DID: string,
 }
 
-interface RequestInviteAction extends ReducerBaseAction {
+interface RequestInviteAction extends ScopedReducerAction {
     type: Actions.REQUEST_INVITE,
     provider: Providers,
 }
 
-interface RequestPresentationAction extends ReducerBaseAction {
+interface RequestPresentationAction extends ScopedReducerAction {
     type: Actions.REQUEST_PRESENTATION,
     provider: Providers,
     presentationDefinition: any,
 }
 
-interface RequestIssuanceAction extends ReducerBaseAction {
+interface RequestIssuanceAction extends ScopedReducerAction {
     type: Actions.REQUEST_ISSUANCE,
     provider: Providers,
     credentials: string[],
     issuer: Issuers,
 }
 
-interface SetQRContentAction extends ReducerBaseAction {
+interface SetQRContentAction extends ScopedReducerAction {
     type: Actions.SET_QR_CONTENT,
     QRContent: string,
 }
 
-interface SetCompleteIssuanceAction extends ReducerBaseAction {
+interface SetCompleteIssuanceAction extends ScopedReducerAction {
     type: Actions.COMPLETE_ISSUANCE,
 }
 
+interface RequestDomainLinkageValidation extends ReducerBaseAction {
+    type: Actions.REQUEST_DOMAIN_LINKAGE_VALIDATION,
+    did: string,
+}
+
+interface SetDomainLinkageValidation extends ReducerBaseAction {
+    type: Actions.SET_DOMAIN_LINKAGE_VALIDATION,
+    did: string,
+    result: ValidationResult[],
+}
 
 interface StoredCredential {
     credential: any;
@@ -71,10 +89,14 @@ type State = {
         connectedDID: string;
         QRcontent: string;
         issuanceComplete: boolean;
-    };
+    }
+} & {
+    validatedDomains: {
+        [did: string]: ValidationResult[] | "in-flight";
+    }
 };
 
-type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction;
+type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction | RequestDomainLinkageValidation | SetDomainLinkageValidation;
 
 const socket = SocketIOClient("/", {
     autoConnect: true,
@@ -85,13 +107,13 @@ const socket = SocketIOClient("/", {
 // SIOPV2
 type RequestSIOPInvite = (provider: Providers, scope: Scopes) => void
 const requestSIOPInvite: RequestSIOPInvite = (provider, scope) => {
-    socket.emit('requestSiopInvite', {provider, scope});
+    socket.emit('requestSiopInvite', { provider, scope });
 }
 
 // OIDC4VP
 type RequestPresentation = (provider: Providers, scope: Scopes, presentationDefinition: any) => void
 const requestPresentation: RequestPresentation = (provider, scope, presentationDefinition) => {
-    socket.emit('requestPresentation', {provider, scope, presentationDefinition});
+    socket.emit('requestPresentation', { provider, scope, presentationDefinition });
 }
 
 // OIDC4VCI
@@ -107,13 +129,19 @@ const requestIssuance: RequestIssuance = (provider, scope, credentials, issuer) 
         });
 }
 
+// DomainLinkage
+type RequestDomainLinkage = (did: string) => void
+const requestDomainLinkageValidation: RequestDomainLinkage = (did) => {
+    socket.emit('requestDomainLinkageValidation', { did });
+}
+
 export function GlobalStateProvider({ children }: any) {
 
     const [isConnected, setIsConnected] = useState(socket.connected);
 
     const [state, dispatch] = useReducer(
         stateReducer,
-        {}
+        {validatedDomains: {}}
     );
 
     useEffect(() => {
@@ -159,10 +187,16 @@ export function GlobalStateProvider({ children }: any) {
 
         socket.on('presentation', (data, cb) => {
             dispatch({
+                type: Actions.REQUEST_DOMAIN_LINKAGE_VALIDATION,
+                did: data.credential.issuer
+            });
+
+            dispatch({
                 type: Actions.ADD_CREDENTIAL,
                 scope: data.scope,
                 credential: data.credential
             });
+
             cb();
         })
 
@@ -185,6 +219,15 @@ export function GlobalStateProvider({ children }: any) {
             cb();
         })
 
+        socket.on('didDomainLinkageValidation', (data, cb) => {
+            dispatch({
+                type: Actions.SET_DOMAIN_LINKAGE_VALIDATION,
+                did: data.did,
+                result: data.result,
+            });
+            cb();
+        })
+
 
         return () => {
             socket.off('connect', onConnect);
@@ -194,14 +237,15 @@ export function GlobalStateProvider({ children }: any) {
     }, []);
 
     function stateReducer(state: State, action: ReducerAction): State {
-        const scope = action.scope;
-        console.log(action);
+
+        console.debug(action);
+
         switch (action.type) {
             case Actions.ADD_CREDENTIAL: {
                 return {
-                    ...state, 
-                    [scope]: {
-                        ...state[scope],
+                    ...state,
+                    [action.scope]: {
+                        ...state[action.scope],
                         credentials: [
                             // ...state?.[scope]?.credentials,
                             { credential: action.credential }
@@ -225,10 +269,22 @@ export function GlobalStateProvider({ children }: any) {
                 return state;
             }
 
+            case Actions.REQUEST_DOMAIN_LINKAGE_VALIDATION: {
+                requestDomainLinkageValidation(action.did);
+                return {
+                    ...state,
+                    validatedDomains: {
+                        ...state.validatedDomains,
+                        [action.did]: 'in-flight',
+                        
+                    }
+                };
+            }
+
             case Actions.CONNECT_DID: {
                 return {
-                    ...state, [scope]: {
-                        ...state[scope],
+                    ...state, [action.scope]: {
+                        ...state[action.scope],
                         connectedDID: action.DID
                     }
                 };
@@ -236,8 +292,8 @@ export function GlobalStateProvider({ children }: any) {
 
             case Actions.SET_QR_CONTENT: {
                 return {
-                    ...state, [scope]: {
-                        ...state[scope],
+                    ...state, [action.scope]: {
+                        ...state[action.scope],
                         QRcontent: action.QRContent
                     }
                 };
@@ -245,9 +301,20 @@ export function GlobalStateProvider({ children }: any) {
 
             case Actions.COMPLETE_ISSUANCE: {
                 return {
-                    ...state, [scope]: {
-                        ...state[scope],
+                    ...state, [action.scope]: {
+                        ...state[action.scope],
                         issuanceComplete: true,
+                    }
+                };
+            }
+
+            case Actions.SET_DOMAIN_LINKAGE_VALIDATION: {
+                return {
+                    ...state,
+                    validatedDomains: {
+                        ...state.validatedDomains,
+                        [action.did]: action.result
+                        
                     }
                 };
             }
@@ -274,7 +341,7 @@ export function GlobalStateProvider({ children }: any) {
     );
 };
 
-export const GlobalStateContext = createContext<{ mainSteps: any, routes: any, state: State }>({ mainSteps: null, routes: null, state: {} });
+export const GlobalStateContext = createContext<{ mainSteps: any, routes: any, state: State }>({ mainSteps: null, routes: null, state: {validatedDomains: {}} });
 const CredentialDispatchContext = createContext<Dispatch<ReducerAction> | null>(null);
 
 export function useGlobalState() {

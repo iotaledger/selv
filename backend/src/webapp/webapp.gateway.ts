@@ -161,6 +161,31 @@ export class WebAppGateway {
     this.logger.debug(`send issuance offer for session_id:${session_id}`);
   }
 
+  @SubscribeMessage('requestDomainLinkageValidation')
+  async requestDomainLinkageValidation(
+    @MessageBody()
+    payload: {
+      did: string;
+    },
+    @ConnectedSocket() client: Socket,
+  ) {
+    this.logger.debug(
+      `receiving DomainLinkageValidation request for did :${payload.did}`,
+      payload,
+    );
+
+    const validation = await this.webAppService.requestDomainLinkageValidation(
+      payload.did,
+    );
+
+    await client.emitWithAck('didDomainLinkageValidation', {
+      did: payload.did,
+      result: validation.service,
+    });
+
+    this.logger.debug(`send validation response for did:${payload.did}`);
+  }
+
   async connectDid(session_id: string, did: string, scope: Scopes) {
     const connectedClient = this.findClient(session_id);
 
