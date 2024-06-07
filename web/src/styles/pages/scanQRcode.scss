@@ -9,7 +9,17 @@
     }
 
     .qr-code {
-        margin: 40px;
+        padding: 40px;
+        box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.4);
+        background: #FFFFFF;
+        border-radius: 22px;
+        // z-index: 4;
+        margin: 50px 0 20px 0;
+
+        &__link {
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
     }
 
     .cta {
@@ -33,16 +43,6 @@
         }
     }
 
-    .qr-wrapper {
-        box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.4);
-        -webkit-box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.3); 
-        background: #FFFFFF;
-        border-radius: 22px;
-        width: 370px;
-        //height: 370px;
-        z-index: 4;
-        margin: 50px 0;
-    }
 }
 
 .cta-section {
@@ -150,76 +150,26 @@
         margin-top: 0;
     }
 
-    .scan-wrapper {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
 
-        .qr-content-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-evenly;
-            width: 380px;
-            height: 600px;
-            background: #FFFFFF;
-            box-shadow: 6px 6px 11px rgba(72, 87, 118, 0.3);
-            border-radius: 34px;
-            z-index: 3;
-            text-align: center;
+    .avatar2 {
+        position: absolute;
+        top: 130px;
+        left: -155px;
+        z-index: 1;
 
-            @include breakPoint(small) {
-                width: 300px;
-                background: unset;
-                box-shadow: unset;
-            }
-
-            .scan-note {
-                font-weight: 600;
-                font-size: 20px;
-                line-height: 30px;
-                color: #4247DC;
-            }
-
-            .qr-wrapper {
-                box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.4);
-                -webkit-box-shadow: 0px 0px 30px 0px rgba(72, 87, 118, 0.3);
-                background: #FFFFFF;
-                border-radius: 22px;
-                width: 280px;
-                height: 280px;
-                z-index: 4;
-                margin: 0 0 100px;
-            }
-
-            .qr-code {
-                margin: 40px;
-                z-index: 5;
-            }
+        @include breakPoint(small) {
+            left: 0;
         }
+    }
 
-        .avatar2 {
-            position: absolute;
-            top: 130px;
-            left: -155px;
-            z-index: 1;
+    .avatar1 {
+        position: absolute;
+        top: 350px;
+        right: -155px;
+        z-index: 1;
 
-            @include breakPoint(small) {
-                left: 0;
-            }
-        }
-
-        .avatar1 {
-            position: absolute;
-            top: 350px;
-            right: -155px;
-            z-index: 1;
-
-            @include breakPoint(small) {
-                right: 0;
-            }
+        @include breakPoint(small) {
+            right: 0;
         }
     }
 }

@@ -2,6 +2,7 @@ import * as React from "react";
 
 import * as Company from './pages/Company'
 import * as Government from './pages/Government'
+import * as Insurance from './pages/Insurance'
 
 import {
     Landing,
@@ -36,6 +37,12 @@ export const routes = [
     { path: '/:lng?/company/receive/0', element: <Company.ReceiveCredentials/>, poweredBy: <Impierce/> },
     { path: '/:lng?/company/confirm/1', element: <Company.Confirmation/>, poweredBy: <Impierce/> },
     { path: '/:lng?/demo/success/1', element: <GreatSuccess/> },
+    { path: '/:lng?/insurance/prove/0', element: <Insurance.ProveIdentity/>, poweredBy: <Waltid/> },
+    { path: '/:lng?/insurance/signin/0', element: <Insurance.SingInConfirmation/>, poweredBy: <Waltid/> },
+    { path: '/:lng?/insurance/provide/0', element: <Insurance.ProvideData/>, poweredBy: <Waltid/> },
+    { path: '/:lng?/insurance/data/0', element: <Insurance.InsuranceData/>, poweredBy: <Waltid/> },
+    { path: '/:lng?/insurance/receive/0', element: <Insurance.ReceiveCredentials/>, poweredBy: <Waltid/> },
+    { path: '/:lng?/insurance/confirm/1', element: <Insurance.Confirmation/>, poweredBy: <Waltid/> },
     { path: '/:lng?/company/details/1/:companyId', element: <Company.CompanyDetails/> },
     { path: '/:lng?/bank/prove/1', element: <Company.ProveIdentity/> },
     { path: '/:lng?/bank/data/1', element: <BankData/> },
