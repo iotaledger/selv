@@ -43,14 +43,14 @@ import {Cache} from './cache';
     did: process.env.RP_DID,
     kid: `${process.env.RP_DID}#${process.env.KEY_FRAGMENT}`,
     signer: remoteSigner(process.env.SIGNER_KEYID),
-    redirectUri: `${process.env.PUBLIC_URL}/api/auth`,
+    redirectUri: new URL('/api/auth', process.env.PUBLIC_URL).toString(),
     resolver,
   });
 
   const issuer = new VcIssuer({
-    batchCredentialEndpoint: `${process.env.PUBLIC_URL}/api/credential`,
-    credentialEndpoint: `${process.env.PUBLIC_URL}/api/credential`,
-    credentialIssuer: `${process.env.PUBLIC_URL}/`, // should be DID?
+    batchCredentialEndpoint: new URL('api/credential', process.env.PUBLIC_URL).toString(),
+    credentialEndpoint: new URL('api/credential', process.env.PUBLIC_URL).toString(),
+    credentialIssuer: new URL(process.env.PUBLIC_URL).toString(), // should be DID?
     proofTypesSupported: ["jwt"],
     cryptographicBindingMethodsSupported: ["did:key"], //TODO: did:jwk?
     resolver,
@@ -59,7 +59,7 @@ import {Cache} from './cache';
     kid: `${process.env.RP_DID}#${process.env.KEY_FRAGMENT}`,
     credentialSigningAlgValuesSupported: [SigningAlgs.EdDSA],
     store: createStore(),
-    tokenEndpoint: `${process.env.PUBLIC_URL}/api/token`,
+    tokenEndpoint: new URL('/api/token', process.env.PUBLIC_URL).toString(),
     supportedCredentials: [
       {
           name: "wa_driving_license",

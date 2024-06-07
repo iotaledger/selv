@@ -33,7 +33,7 @@ export const createService = async (
     const requestId = crypto.randomUUID();
     const request = await rp.createRequest({
       requestBy: "reference",
-      requestUri: `${process.env.PUBLIC_URL}/api/offer/${requestId}`,
+      requestUri: new URL(`/api/offer/${requestId}`, process.env.PUBLIC_URL).toString(),
       responseType: "id_token",
       state: call.request.state,
       nonce: call.request.nonce,
@@ -63,7 +63,7 @@ export const createService = async (
     const request = await rp.createRequest({
       presentationDefinition: struct.decode(call.request.presentationDefinition) as unknown as PresentationDefinitionV2,
       requestBy: "reference",
-      requestUri: `${process.env.PUBLIC_URL}/api/offer/${requestId}`,
+      requestUri: new URL(`/api/offer/${requestId}`, process.env.PUBLIC_URL).toString(),
       responseType: "vp_token",
       state: call.request.state,
       nonce: call.request.nonce,
@@ -92,7 +92,7 @@ export const createService = async (
       {
         credentials: call.request.credentials,
         requestBy: "reference",
-        credentialOfferUri: `${process.env.PUBLIC_URL}/api/credential-offer/${requestId}`,
+        credentialOfferUri: new URL(`/api/credential-offer/${requestId}`, process.env.PUBLIC_URL).toString(),
       },
       { state: call.request.state }
     );
