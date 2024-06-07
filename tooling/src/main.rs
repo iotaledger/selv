@@ -23,6 +23,7 @@ use identity_iota::storage::KeyId;
 use identity_iota::storage::MethodDigest;
 use identity_stronghold::ED25519_KEY_TYPE;
 
+use iota_sdk::types::block::output::AliasOutputBuilder;
 use rand::distributions::{Alphanumeric, DistString};
 use tooling::get_address_with_funds;
 
@@ -164,7 +165,13 @@ async fn create_issuer(
         .await?;
 
     let domain_linkage_credential = add_domain_linkage(&mut document, domain_to_link)?;
-    let alias_output: AliasOutput = client.new_did_output(address, document, None).await?;
+    let alias_output = {
+        let rent_structure = client.get_rent_structure().await?;
+        let updated_alias = client
+            .update_did_output(document)
+            .await?;
+        AliasOutputBuilder::from(&updated_alias).with_minimum_storage_deposit(rent_structure).finish()?
+    };
     let document = client.publish_did_output(stronghold_storage.as_secret_manager(), alias_output).await?;
 
     // Create a domain linkage configuration
