@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Modal } from 'antd';
 import { Layout, RandomGraphicElement } from '../components';
@@ -65,6 +65,10 @@ const AppPicker: React.FC = () => {
 
     const [open, setOpen] = useState("");
 
+    const randomOrderWallets = useMemo(() => {
+        return wallets.sort( () => .5 - Math.random() )
+    }, [])
+
     return (
         <Layout noHeader noFooter>
             <React.Fragment>
@@ -75,7 +79,7 @@ const AppPicker: React.FC = () => {
 
                                 <h1 className='title'>{t("actions.downloadApp")}</h1>
                                 <div className='apps'>
-                                    {wallets.sort( () => .5 - Math.random() ).map(wallet => (
+                                    {randomOrderWallets.map(wallet => (
                                         <div className="app">
                                             <section className="app__wrapper">
                                                 <div className='app__column'>
