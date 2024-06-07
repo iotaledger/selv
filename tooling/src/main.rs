@@ -1,6 +1,17 @@
+use anyhow::Context as _;
 use identity_eddsa_verifier::EdDSAJwsVerifier;
+use identity_iota::core::Duration;
+use identity_iota::core::Object;
+use identity_iota::core::OrderedSet;
+use identity_iota::core::Timestamp;
+use identity_iota::core::ToJson;
+use identity_iota::core::Url;
+use identity_iota::credential::Credential;
+use identity_iota::credential::DomainLinkageConfiguration;
+use identity_iota::credential::DomainLinkageCredentialBuilder;
 use identity_iota::credential::Jws;
-use identity_iota::did::DID;
+use identity_iota::credential::LinkedDomainService;
+use identity_iota::did::DID as _;
 use identity_iota::document::verifiable::JwsVerificationOptions;
 use identity_iota::iota::IotaClientExt;
 use identity_iota::iota::IotaDocument;
@@ -12,23 +23,24 @@ use identity_iota::storage::KeyId;
 use identity_iota::storage::MethodDigest;
 use identity_stronghold::ED25519_KEY_TYPE;
 
+use iota_sdk::types::block::output::AliasOutputBuilder;
 use rand::distributions::{Alphanumeric, DistString};
 use tooling::get_address_with_funds;
 
 use identity_iota::storage::JwsSignatureOptions;
+use identity_iota::storage::KeyIdStorage;
 use identity_iota::storage::Storage;
 use identity_iota::verification::jws::DecodedJws;
 use identity_iota::verification::jws::JwsAlgorithm;
 use identity_iota::verification::MethodScope;
-use identity_iota::verification::MethodRelationship;
 use identity_stronghold::StrongholdStorage;
 use iota_sdk::client::secret::stronghold::StrongholdSecretManager;
 use iota_sdk::client::Client;
 use iota_sdk::client::Password;
 use iota_sdk::types::block::address::Address;
 use iota_sdk::types::block::output::AliasOutput;
-use identity_iota::storage::KeyIdStorage;
 
+use std::io::Write;
 
 // The API endpoint of an IOTA node, e.g. Hornet.
 // const API_ENDPOINT: &str = "http://localhost";
@@ -43,6 +55,17 @@ const PATH: &str = "./stronghold.hodl";
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
+    let mut args = std::env::args().skip(1);
+    let Some(public_url_domain) = args.next() else {
+        anyhow::bail!(
+            "No arguments provided. Pass the public url's domain followed by a list of issuers"
+        );
+    };
+    let mut issuers = args.peekable();
+
+    if issuers.peek().is_none() {
+        anyhow::bail!("A list of names for the issuers must be provided.");
+    }
 
     let pw_string = Alphanumeric.sample_string(&mut rand::thread_rng(), 32);
 
@@ -63,23 +86,42 @@ async fn main() -> anyhow::Result<()> {
     // `StrongholdStorage` creates internally a `SecretManager` that can be
     // referenced to avoid creating multiple instances around the same stronghold snapshot.
     let stronghold_storage = StrongholdStorage::new(stronghold);
+    println!("Created stronghold with pwd: {pw_string}");
+    // Persist stronghold's password to file.
+    let mut stronghold_pwd_file = std::fs::File::create("stronghold_secret.txt")?;
+    write!(stronghold_pwd_file, "{pw_string}")?;
 
-    let government_issuer = create_issuer(&stronghold_storage, &client).await?;
-    let bank_issuer = create_issuer(&stronghold_storage, &client).await?;
-    let insurance_issuer = create_issuer(&stronghold_storage, &client).await?;
+    let mut env_file = std::fs::File::create(".env")?;
+    writeln!(env_file, "HTTP_PORT=81\nGRPC_PORT=5001")?;
+    for name in issuers {
+        let domain =
+            format!("https://{}.{public_url_domain}", name.to_lowercase()).parse::<Url>()?;
+        let (did, key_id, fragment, _address, domain_linkage_config) =
+            create_issuer(&stronghold_storage, &client, domain.clone()).await?;
+        let name = name.to_uppercase();
+        writeln!(env_file, "ISSUERS_{name}_DID={did}")?;
+        writeln!(env_file, "ISSUERS_{name}_KEYID={key_id}")?;
+        writeln!(env_file, "ISSUERS_{name}_FRAGMENT={fragment}")?;
+        writeln!(env_file, "{name}_PUBLIC_URL={domain}")?;
 
-    println!("created stronghold with pw:{}", pw_string);
-    println!("created government issuer with:{:?}", government_issuer);
-    println!("created bank issuer with:{:?}", bank_issuer);
-    println!("created insurance issuer with:{:?}", insurance_issuer);
+        let mut domain_linkage_resource_file = {
+            let file_name = format!("./{}-did-configuration.json", name.to_lowercase());
+            std::fs::File::create(&file_name)?
+        };
+        domain_linkage_resource_file.write_all(domain_linkage_config.to_json()?.as_bytes())?;
+    }
 
     Ok(())
 }
 
-async fn create_issuer(stronghold_storage: &StrongholdStorage, client: &Client) -> anyhow::Result<(String, KeyId, String, Address)> {
+async fn create_issuer(
+    stronghold_storage: &StrongholdStorage,
+    client: &Client,
+    domain_to_link: Url,
+) -> anyhow::Result<(String, KeyId, String, Address, DomainLinkageConfiguration)> {
     // Create a DID document.
     let address: Address = get_address_with_funds(
-        &client,
+        client,
         stronghold_storage.as_secret_manager(),
         FAUCET_ENDPOINT,
     )
@@ -105,22 +147,44 @@ async fn create_issuer(stronghold_storage: &StrongholdStorage, client: &Client) 
         )
         .await?;
 
-    document.attach_method_relationship(
-        &document.id().to_url().join(format!("#{fragment}"))?,
-        MethodRelationship::AssertionMethod,
-    )?;        
-
-    let method = document.resolve_method(&fragment, Some(MethodScope::VerificationMethod)).ok_or(anyhow::anyhow!("no go"))?;
-    let key_id = storage.key_id_storage().get_key_id(&MethodDigest::new(method)?).await?;
+    let method = document
+        .resolve_method(&fragment, Some(MethodScope::VerificationMethod))
+        .ok_or(anyhow::anyhow!("no go"))?;
+    let key_id = storage
+        .key_id_storage()
+        .get_key_id(&MethodDigest::new(method)?)
+        .await?;
 
     // Construct an Alias Output containing the DID document, with the wallet address
     // set as both the state controller and governor.
     let alias_output: AliasOutput = client.new_did_output(address, document, None).await?;
 
     // Publish the Alias Output and get the published DID document.
-    let document: IotaDocument = client
+    let mut document: IotaDocument = client
         .publish_did_output(stronghold_storage.as_secret_manager(), alias_output)
         .await?;
+
+    let domain_linkage_credential = add_domain_linkage(&mut document, domain_to_link)?;
+    let alias_output = {
+        let rent_structure = client.get_rent_structure().await?;
+        let updated_alias = client
+            .update_did_output(document)
+            .await?;
+        AliasOutputBuilder::from(&updated_alias).with_minimum_storage_deposit(rent_structure).finish()?
+    };
+    let document = client.publish_did_output(stronghold_storage.as_secret_manager(), alias_output).await?;
+
+    // Create a domain linkage configuration
+    let domain_linkage_config = document
+        .create_credential_jwt(
+            &domain_linkage_credential,
+            &storage,
+            &fragment,
+            &JwsSignatureOptions::default(),
+            None,
+        )
+        .await
+        .map(|jwt| DomainLinkageConfiguration::new(vec![jwt]))?;
 
     // Resolve the published DID Document.
     let mut resolver = Resolver::<IotaDocument>::new();
@@ -145,5 +209,32 @@ async fn create_issuer(stronghold_storage: &StrongholdStorage, client: &Client) 
         String::from_utf8_lossy(decoded_jws.claims.as_ref()),
         "test_data"
     );
-    Ok((document.id().to_string(), key_id, fragment, address))
+    Ok((
+        document.id().to_string(),
+        key_id,
+        fragment,
+        address,
+        domain_linkage_config,
+    ))
+}
+
+fn add_domain_linkage(doc: &mut IotaDocument, domain: Url) -> anyhow::Result<Credential> {
+    let service_url = doc.id().clone().join("#domain-linkage")?;
+    let mut domains = OrderedSet::new();
+    domains.append(domain.clone());
+
+    let domain_linkage_service = LinkedDomainService::new(service_url, domains, Object::default())?;
+    doc.insert_service(domain_linkage_service.into())?;
+
+    DomainLinkageCredentialBuilder::new()
+        .issuer(doc.id().clone().into())
+        .issuance_date(Timestamp::now_utc())
+        .expiration_date(
+            Timestamp::now_utc()
+                .checked_add(Duration::days(365))
+                .context("overflowing timestamp")?,
+        )
+        .origin(domain)
+        .build()
+        .context("Failed to create DomainLinkageCredential")
 }
