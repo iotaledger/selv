@@ -18,7 +18,6 @@ export default () => {
                                 <div className='content-wrapper'>
                                     <div className='content'>
                                         <Content />
-                                        <Buttons />
                                     </div>
                                 </div>
                                 <div className='image-wrapper'>
@@ -32,7 +31,6 @@ export default () => {
                                     <Content />
                                 </div>
                                 <img src={main} alt='Portrait' className='portrait' />
-                                <Buttons />
                             </div>
                         </div>
                     </RandomGraphicElement>
@@ -51,23 +49,4 @@ const Content = () => (
                 </>
         }
     </Translation>
-);
-
-const Buttons = () => (
-    <div className='store-buttons'>
-        <a
-            href='https://testflight.apple.com/join/3FCosIcj'
-            target='_blank'
-            rel='noopener noreferrer'
-        >
-            <img src={appStore} alt='Apple AppStore' />
-        </a>
-        <a
-            href='https://play.google.com/apps/testing/com.iota.selv.demo'
-            target='_blank'
-            rel='noopener noreferrer'
-        >
-            <img src={googlePlay} alt='Google Play Market' />
-        </a>
-    </div>
 );
