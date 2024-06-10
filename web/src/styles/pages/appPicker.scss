@@ -168,12 +168,23 @@
                 object-fit: cover;
             }
         }
-
         
     }
     
-    
+}
 
+.wallet-modal {
+    &__by {
+        margin: 10px 0 20px 0;
+    }
+
+    &__qr {
+        margin-top: 20px;
+
+        .ant-qrcode {
+            padding-left: 0;
+        }
+    }
 }
 
 .cta-section {

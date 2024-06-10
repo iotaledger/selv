@@ -104,12 +104,20 @@ const AppPicker: React.FC = () => {
                                                 maskClosable={true}
                                                 onCancel={() => setOpen("")}
                                             >
-                                                <h3>{wallet.name}</h3>
-                                                by
-                                                {wallet.by}
-                                                <p>{wallet.description}</p>
-
-                                                <QRCode value={wallet.storeLinks?.android ?? ""} />
+                                                <section className='wallet-modal'>
+                                                    {wallet.logo}
+                                                    <div className='wallet-modal__by'>
+                                                        <span>
+                                                            by &nbsp;
+                                                            {wallet.by}
+                                                        </span>
+                                                    </div>
+                                                    <p>{wallet.description}</p>
+                                                    
+                                                    <div className='wallet-modal__qr'>
+                                                        <QRCode type="svg" bordered={false} errorLevel='H' size={200} value={wallet.storeLinks?.android ?? ""} />
+                                                    </div>
+                                                </section>
                                             </Modal>
                                         </div>
 
