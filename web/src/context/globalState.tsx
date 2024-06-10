@@ -332,22 +332,22 @@ export function GlobalStateProvider({ children }: any) {
             routes,
             state
         }}>
-            <CredentialDispatchContext.Provider
+            <DispatchContext.Provider
                 value={dispatch}
             >
                 {children}
-            </CredentialDispatchContext.Provider>
+            </DispatchContext.Provider>
         </GlobalStateContext.Provider>
     );
 };
 
-export const GlobalStateContext = createContext<{ mainSteps: any, routes: any, state: State }>({ mainSteps: null, routes: null, state: {validatedDomains: {}} });
-const CredentialDispatchContext = createContext<Dispatch<ReducerAction> | null>(null);
+const GlobalStateContext = createContext<{ mainSteps: any, routes: any, state: State }>({ mainSteps: null, routes: null, state: {validatedDomains: {}} });
+const DispatchContext = createContext<Dispatch<ReducerAction> | null>(null);
 
 export function useGlobalState() {
     return useContext(GlobalStateContext);
 }
 
 export function useCredentialsDispatch() {
-    return useContext(CredentialDispatchContext);
+    return useContext(DispatchContext);
 }

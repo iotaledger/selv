@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from 'react';
-import {GlobalStateContext} from '../context/globalState';
+import { useState, useEffect } from 'react';
+import { useGlobalState } from '../context/globalState';
 import matchStep from './matchSteps';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
@@ -13,7 +13,7 @@ interface MatchResult {
 
 const useStep = () => {
     const [step, setStep] = useState(0);
-    const { mainSteps, routes }: any = useContext(GlobalStateContext);
+    const { mainSteps, routes }: any = useGlobalState();
     const [nextStep, setNextStep] = useState('');
     const [currentRoute, setCurrentRoute] = useState<any>(null);
     const [theme, setTheme] = useState('');
