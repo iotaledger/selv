@@ -10,24 +10,23 @@ const QRCodeComponent = ({ text, size }: { text: string; size?: number; }) => {
 
         //@ts-ignore
         navigator.permissions.query({ name: "clipboard-write" }).then((result) => {
-            console.log(result)
-            message.open({
-                type: 'error',
-                content: 'Could not get permission to copy text to clipboard',
-              });
             if (result.state === "granted" || result.state === "prompt") {
                 /* write to the clipboard now */
                 navigator.clipboard.writeText(text).then(function () {
                     message.open({
                         type: 'success',
-                    content: 'Link copied to clipboard',
+                        content: 'Link copied to clipboard',
                     });
-                    console.log('Async: Copying to clipboard was successful!');
                 }, function (err) {
                     message.open({
                         type: 'error',
                         content: 'Could not copy text to clipboard',
-                      });
+                    });
+                });
+            } else {
+                message.open({
+                    type: 'error',
+                    content: 'Could not get permission to copy text to clipboard',
                 });
             }
         });
@@ -43,7 +42,7 @@ const QRCodeComponent = ({ text, size }: { text: string; size?: number; }) => {
         <>
             <div className='qr-code'>
                 {text && (
-                    <QRCode type="svg" status={text ? 'active' : 'loading'} bordered={false} value={text} errorLevel='H' size={size || 290}/>
+                    <QRCode type="svg" status={text ? 'active' : 'loading'} bordered={false} value={text} errorLevel='H' size={size || 290} />
                 )}
             </div>
             <div className='qr-code__link'>
