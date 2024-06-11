@@ -4,9 +4,9 @@ import { routes, mainSteps } from '../steps';
 import SocketIOClient, { Socket } from 'socket.io-client';
 
 import config from '../config.json';
-import { Issuers } from '@sharedTypes/Issuers';
-import { Scopes } from '@sharedTypes/Scopes';
-import { Providers } from '@sharedTypes/Providers';
+import { Issuers } from '@shared/types/Issuers';
+import { Scopes } from '@shared/types/Scopes';
+import { Providers } from '@shared/types/Providers';
 
 export enum Actions {
     ADD_CREDENTIAL,

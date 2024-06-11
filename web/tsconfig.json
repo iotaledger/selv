@@ -10,8 +10,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "paths": {
-      "@sharedTypes/*": [
-        "../shared/types/*"
+      "@shared/*": [
+        "../shared/*"
       ]
     },
     "baseUrl": "./",
@@ -23,6 +23,6 @@
   },
   "include": [
     "src",
-    "../shared/types/**/*"
+    "../shared/**/*"
   ]
 }

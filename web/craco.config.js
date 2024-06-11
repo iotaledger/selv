@@ -16,7 +16,7 @@ module.exports = {
       options: {
         source: "options",
         aliases: {
-          '@sharedTypes': path.resolve(__dirname, "../shared/types"),
+          '@shared': path.resolve(__dirname, "../shared"),
         },
       }
     }
@@ -24,7 +24,7 @@ module.exports = {
 
   webpack: {
     // alias: {
-    //   '@sharedTypes': path.resolve(__dirname, "../types"),
+    //   '@shared': path.resolve(__dirname, "../shared"),
     // },
     configure: webpackConfig => {
       // const scopePluginIndex = webpackConfig.resolve.plugins.findIndex(

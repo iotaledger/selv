@@ -6,7 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { useGlobalState } from '../../context/globalState';
 import { Link } from 'react-router-dom';
 import useStep from '../../utils/useStep';
-import { Scopes } from '@sharedTypes/Scopes';
+import { Scopes } from '@shared/types/Scopes';
+import CitizenCredentialConfig  from '@shared/credentials/CitizenCredential.json';
 
 const prefilledFields = [
     'FirstName',
@@ -88,7 +89,7 @@ const CompanyData: React.FC = ({ history, match }: any) => {
 
     useEffect(() => {
         if(!state[Scopes.CompanyHouse]?.credentials.length) return;
-        const relevantCredential = state[Scopes.CompanyHouse].credentials.filter((c: any) => c.credential?.type.includes("UniversityDegreeCredential"))?.[0]?.credential;
+        const relevantCredential = state[Scopes.CompanyHouse].credentials.filter((c: any) => c.credential?.type.includes(CitizenCredentialConfig.template.type.pop()))?.[0]?.credential;
         console.log(relevantCredential)
         if (!relevantCredential) return;
         setPrefilledData({

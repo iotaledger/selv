@@ -6,9 +6,9 @@ import config from '../../config.json';
 import { useTranslation, Trans } from 'react-i18next';
 import { Router, useNavigate } from 'react-router';
 import { Actions, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
-import { Providers } from '@sharedTypes/Providers';
-import { Issuers } from '@sharedTypes/Issuers';
-import { Scopes } from '@sharedTypes/Scopes';
+import { Providers } from '@shared/types/Providers';
+import { Issuers } from '@shared/types/Issuers';
+import { Scopes } from '@shared/types/Scopes';
 
 import { v4 as uuidv4 } from 'uuid';
 import CitizenCredentialConfig from '../../../../shared/credentials/CitizenCredential.json'

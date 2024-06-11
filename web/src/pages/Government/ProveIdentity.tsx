@@ -4,8 +4,8 @@ import useStep from '../../utils/useStep';
 import { useTranslation, Trans } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { Actions, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
-import { Providers } from '@sharedTypes/Providers';
-import { Scopes } from '@sharedTypes/Scopes';
+import { Providers } from '@shared/types/Providers';
+import { Scopes } from '@shared/types/Scopes';
 
 const ProveIdentity: React.FC = () => {
     const { t } = useTranslation();

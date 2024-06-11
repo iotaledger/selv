@@ -4,9 +4,10 @@ import useStep from '../../utils/useStep';
 import { useTranslation, Trans } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { Actions, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
-import { Issuers } from '@sharedTypes/Issuers';
-import { Providers } from '@sharedTypes/Providers';
-import { Scopes } from '@sharedTypes/Scopes';
+import { Issuers } from '@shared/types/Issuers';
+import { Providers } from '@shared/types/Providers';
+import { Scopes } from '@shared/types/Scopes';
+import CitizenCredentialConfig  from '@shared/credentials/CitizenCredential.json';
 
 const ReceiveCredentials: React.FC = () => {
     const { t } = useTranslation();
@@ -24,7 +25,7 @@ const ReceiveCredentials: React.FC = () => {
 
     useEffect(() => {
         dispatch?.({
-            type: Actions.REQUEST_ISSUANCE, provider: Providers.TangleLabs, scope: Scopes.Government, credentials: ["CitizenCredential"],
+            type: Actions.REQUEST_ISSUANCE, provider: Providers.TangleLabs, scope: Scopes.Government, credentials: [CitizenCredentialConfig.template.type.pop() as string],
             issuer: Issuers.Government
         })
     }, [dispatch]);
