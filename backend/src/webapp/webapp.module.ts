@@ -16,7 +16,7 @@ import { OID4VCModule } from 'src/oid4vc/oid4vc.module';
       store: redisStore,
       ttl: 0, //no expiry
       // Store-specific configuration:
-      url: 'redis://redis:6379',
+      url: 'redis://valkey:6379',
     }),
     IdentityModule,
     OID4VCModule,
