@@ -1,5 +1,5 @@
 import React from 'react';
-import { Steps } from 'rsuite';
+import { Steps } from 'antd';
 import i18n from 'i18next';
 
 const styles = {
@@ -8,24 +8,13 @@ const styles = {
     verticalAlign: 'top'
 };
 
-// https://rsuitejs.com/en/components/sidenav
-
 const StepsInstance = ({ steps, stepId }: {
     steps: any;
     stepId: any;
 }) => {
     return (
         <div className='steps-wrapper'>
-            <Steps current={Number(stepId)} vertical style={styles}>
-                {
-                    steps.map((step: any) =>
-                        <Steps.Item
-                            key={step.title}
-                            title={i18n.t(step.title)}
-                        />
-                    )
-                }
-            </Steps>
+            <Steps current={Number(stepId)} size={'small'} direction="vertical" style={styles} items={steps.map((step: { title: string }) => ({ ...step, title: i18n.t(step.title) }))} />
         </div>
     );
 };

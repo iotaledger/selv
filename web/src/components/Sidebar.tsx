@@ -1,13 +1,10 @@
 import React from 'react';
-import { Sidenav } from 'rsuite';
 import { Link } from 'react-router-dom';
 import logo from '../assets/landing/logoHeader.svg';
 import frame from '../assets/backgrounds/circleFrame5.svg';
 import DropSelector from './DropSelector';
 import { useTranslation } from 'react-i18next';
 import IOTA from './powerdBy/IOTA';
-
-// https://rsuitejs.com/en/components/sidenav
 
 const externalPages = [
     { url: '/', title: 'Home' },
@@ -23,21 +20,24 @@ const SidebarInstance = ({ children, poweredBy }: {
 
     return (
         <div className='sidebar-wrapper'>
-            <Link to='/demo/todos'>
-                <img src={logo} alt='Selv logo' className='sidebar-logo' />
-            </Link>
-            <div className="sidebar-drop-selector">
-                <DropSelector />
-            </div>
+            <div>
+                <div className='sidebar-wrapper__header'>
 
-            <Sidenav activeKey='0'>
-                <Sidenav.Body>
+                    <Link to='/demo/todos'>
+                        <img src={logo} alt='Selv logo' className='sidebar-logo' />
+                    </Link>
+                    <div className="sidebar-drop-selector">
+                        <DropSelector />
+                    </div>
+                </div>
+                <div>
                     <h2 className='todo-list'>
                         {t("components.sideBar.yourTodoList")}
                     </h2>
                     { children }
-                </Sidenav.Body>
-            </Sidenav>
+                </div>
+
+            </div>
             <div className='sidebar-footer'>
                 <div className='sidebar-links'>
                     {externalPages.map(page => (

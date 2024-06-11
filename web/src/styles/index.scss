@@ -3,7 +3,6 @@
 
 // components
 @import './components/text';
-@import './components/table';
 @import './components/sidebar';
 @import './components/header';
 @import './components/footer';
@@ -25,6 +24,16 @@
 @import './pages/greatSuccess';
 @import './pages/appPicker';
 @import './pages/demo';
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
 
 html {
   background: none !important;

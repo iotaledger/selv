@@ -4,8 +4,7 @@ import WebFontLoader from 'webfontloader';
 import AOS from 'aos';
 import { GlobalStateProvider } from './context/globalState'
 import 'aos/dist/aos.css';
-import 'rsuite/lib/styles/index.less';
-import 'rsuite/dist/styles/rsuite-default.css'
+
 import './styles/index.scss';
 import { routes } from './steps'
 import { App } from 'antd';
