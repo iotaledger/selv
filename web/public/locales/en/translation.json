@@ -257,9 +257,6 @@
       "errorMessage": "Please agree the terms and conditions.",
       "confirm": "I confirm everything and agree to any terms"
     },
-    "disclaimer": {
-      "usesCookies": "This website uses cookies to ensure you get the best experience on our website."
-    },
     "form": {
       "error": "Please provide required information!"
     },

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import useStep from '../utils/useStep';
 import mobile from '../assets/mobile.png';
-import { Disclaimer, RandomGraphicElement } from '../components';
+import { RandomGraphicElement } from '../components';
 import DropSelector from '../components/DropSelector';
 import dots from '../assets/backgrounds/dots.png';
 import ellipse from '../assets/backgrounds/ellipse1.svg';
@@ -51,7 +51,6 @@ const IntroShowTodos: React.FC = () => {
                     <img src={dots} alt='' className='dots-top' />
                     <img src={dots} alt='' className='dots-bottom' />
                     <img src={ellipse} alt='' className='ellipse' />
-                    <Disclaimer />
                 </div>
             </div>
         </RandomGraphicElement>

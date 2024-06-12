@@ -1,5 +1,4 @@
 import React from 'react';
-import { Disclaimer } from '..';
 import logo from '../../assets/landing/logoFooter.svg';
 import { Translation } from 'react-i18next';
 
@@ -31,7 +30,6 @@ export default () => (
                             {t("landing.footer.privacyPolicy")}
             </a>
                     </div>
-                    <Disclaimer />
                 </div>
         }
     </Translation>

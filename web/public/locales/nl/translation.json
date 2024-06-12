@@ -257,9 +257,6 @@
       "errorMessage": "Je moet de terms and conditions accepteren om door te gaan.",
       "confirm": "Ik verklaar dat ik alle voorwaarden heb gelezen en ga akkoord."
     },
-    "disclaimer": {
-      "usesCookies": "Deze website gebruikt koekjes voor de beste ervaring."
-    },
     "form": {
       "error": "Vul de benodigde informatie in."
     },

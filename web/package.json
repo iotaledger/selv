@@ -23,7 +23,6 @@
     "i18next-http-backend": "^2.4.2",
     "randomstring": "^1.1.5",
     "react": "^18.2.0",
-    "react-cookie": "^7.0.1",
     "react-dom": "^18.2.0",
     "react-i18next": "^14.0.0",
     "react-router": "^6.21.1",
@@ -34,7 +33,7 @@
     "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "start": "npm run copy_wasm && npm run build && craco start",
+    "start": "npm run build && craco start",
     "build": "npm run copy_wasm && craco build",
     "test": "npm run copy_wasm && craco test",
     "eject": "craco eject",

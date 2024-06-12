@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import { Disclaimer, RandomGraphicElement } from '../components';
+import { RandomGraphicElement } from '../components';
 import DropSelector from '../components/DropSelector';
 import useStep from '../utils/useStep';
 import howItWorks from '../assets/landing/howItWorks1.png';
@@ -60,7 +60,6 @@ const IntroShowTodos: React.FC = () => {
                     </div>
                     <img src={dots} alt='' className='dots-top' />
                     <img src={dots} alt='' className='dots-bottom' />
-                    <Disclaimer />
                 </div>
             </div>
         </RandomGraphicElement>

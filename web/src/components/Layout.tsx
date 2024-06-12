@@ -1,5 +1,4 @@
 import React from 'react';
-import Disclaimer from './Disclaimer';
 import Header from './Header';
 import Footer from './Footer';
 import Steps from './Steps';
@@ -41,7 +40,6 @@ export default ({ children, customTheme, customStep, noHeader, noFooter }: {
                         </Sidebar>
                     ) : null
                 }
-                <Disclaimer />
             </div>
         </div>
     );

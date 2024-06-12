@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import useStep from '../utils/useStep';
 import { getCompanyId } from '../utils/helper';
-import { Disclaimer, RandomGraphicElement } from '../components';
 import image1 from '../assets/greatSuccess/image1.png';
 import image2 from '../assets/greatSuccess/image2.png';
 import image3 from '../assets/greatSuccess/image3.png';
 import checkmark from '../assets/checkmark.svg';
 import dots from '../assets/backgrounds/dots.png';
 import { useTranslation } from 'react-i18next';
+import { RandomGraphicElement } from '../components';
 
 /**
  * Component which will display a GreatSuccess.
@@ -78,7 +78,6 @@ const GreatSuccess: React.FC = () => {
                         </Link>
                     </div>
                     <img src={dots} alt='' className='dots-top' />
-                    <Disclaimer />
                 </div>
             </div>
         </RandomGraphicElement>
