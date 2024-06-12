@@ -6,6 +6,8 @@ import {
 import * as KeyDIDResolver from "key-did-resolver";
 import { Resolver } from "did-resolver";
 
+import { readFile } from 'fs/promises';
+
 import {
   getDidJwkResolver
 } from "@sphereon/did-resolver-jwk";
@@ -20,6 +22,10 @@ import { UserService } from "./userService";
 import {Cache} from './cache';
 
 (async () => {
+
+  const CitizenCredentialConfig = JSON.parse(
+    (await readFile(new URL('../../../shared/credentials/CitizenCredential.json', import.meta.url))).toString()
+  );
 
   const keyDidResolver = KeyDIDResolver.getResolver();
   const iotaDidResolver = IOTADIDResolver.getResolver();
@@ -61,18 +67,7 @@ import {Cache} from './cache';
     store: createStore(),
     tokenEndpoint: new URL('/api/token', process.env.PUBLIC_URL).toString(),
     supportedCredentials: [
-      {
-          name: "wa_driving_license",
-          type: ["wa_driving_license"],
-      },
-      {
-          name: "CitizenCredential",
-          type: ["CitizenCredential"],
-          display: [{
-            name: "National Citizen Credential",
-            locale: "en"
-          }]
-      },
+      CitizenCredentialConfig.issuer_config,
   ],
   });
 
