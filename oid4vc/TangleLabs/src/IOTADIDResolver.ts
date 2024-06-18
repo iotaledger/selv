@@ -21,7 +21,7 @@ export function getResolver() {
     didResolver: Resolver,
     options: DIDResolutionOptions
   ): Promise<DIDResolutionResult> {
-    console.log(parsed);
+    console.debug(parsed);
 
     const client = new Client({
       //TODO: Pass node url
@@ -35,7 +35,7 @@ export function getResolver() {
     const didDocument: IotaDocument = await didClient.resolveDid(
       IotaDID.fromJSON(did)
     );
-    // console.log("Resolved DID document:", JSON.stringify(didDocument, null, 2));
+    console.debug("Resolved DID document:", JSON.stringify(didDocument, null, 2));
 
     const contentType =
       typeof didDocument?.["@context"] !== "undefined"

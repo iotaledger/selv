@@ -28,14 +28,14 @@ export const createServer = (
 
   app.route("/api/health").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
+      console.debug("/api/health", req);
       res.status(200).send();
     }),
   );
 
   app.route("/api/token").post(
     asyncHandler(async (req, res) => {
-      console.debug(req.body);
+      console.debug("/api/token", req.body);
       
       // // TODO: remove only for testing
       // const { signer, payload } = await didJWT
@@ -56,7 +56,7 @@ export const createServer = (
 
   app.route("/api/offer/:id").get(
     asyncHandler(async (req, res) => {
-      console.debug(req.params);
+      console.debug("/api/offer/:id", req.params);
       const offer_id = req.params.id;
 
       // TODO: consider consuming the token
@@ -72,7 +72,7 @@ export const createServer = (
 
   app.route("/api/credential-offer/:id").get(
     asyncHandler(async (req, res) => {
-      console.debug(req.params);
+      console.debug("/api/credential-offer/:id", req.params);
       const offer_id = req.params.id;
 
       // TODO: consider consuming the token
@@ -89,7 +89,7 @@ export const createServer = (
   app.route("/api/credential").post(
     asyncHandler(async (req, res) => {
 
-      console.debug("received credential request", req.headers, req.body);
+      console.debug("/api/credential", req.headers, req.body);
 
       const bearer_token = req.headers.authorization?.split("Bearer ")[1];
 
@@ -125,7 +125,7 @@ export const createServer = (
 
   app.route("/api/auth").post(
     asyncHandler(async (req, res) => {
-      console.debug(req.body);
+      console.debug("/api/auth", req.body);
       const { id_token: idToken, vp_token: vpToken } = req.body;
       const { state } = req.body;
       
@@ -147,6 +147,7 @@ export const createServer = (
 
   app.route("/.well-known/openid-credential-issuer").get(
     asyncHandler(async (req, res) => {
+      console.debug("/.well-known/openid-credential-issuer");
       const metadata = issuer.getIssuerMetadata();
       res.send(metadata);
     }),
@@ -154,6 +155,7 @@ export const createServer = (
 
   app.route("/.well-known/oauth-authorization-server").get(
     asyncHandler(async (req, res) => {
+      console.debug("/.well-known/oauth-authorization-server");
       const metadata = issuer.getOauthServerMetadata();
       res.send(metadata);
     }),
