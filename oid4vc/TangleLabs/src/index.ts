@@ -12,7 +12,6 @@ import {
   getDidJwkResolver
 } from "@sphereon/did-resolver-jwk";
 import * as IOTADIDResolver from "./IOTADIDResolver";
-import * as didJWT from "did-jwt";
 
 import { remoteSigner } from "./remoteSigner";
 import { createService } from "./grpcService";
@@ -37,21 +36,6 @@ import {Cache} from './cache';
     ...getDidJwkResolver()
   });
   
-  // // TODO: remove only for testing
-  // const { signer, payload } = await didJWT
-  // .verifyJWT('eyJhbGciOiJFZERTQSIsImtpZCI6ImRpZDppb3RhOnJtczoweDgwM2M2NmNjZDMzNGFhNDE5NjYxOGY2NmJhZWNmMGM1NGFiMWQzMjY3NjMzZmU5NzVhZWY1NGYzZDRkMTYxZWQjaFFFY1lDNWFYZ0hVelpEdk9GYVRaLTE3cHdZV2Y4cFlNcmRMUWhoYzNnTSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTg3MTI4NDIsImV4cCI6MTcxODc5OTI0MiwiaWQiOiI5dm85LUEyYmhXZjFFRUVtZkJFRmciLCJzdGF0ZSI6ImQ1Y2IzOGZjLTI5N2QtNGQxYS05MmI2LTdlYWRjOGVjYmVkZCIsImlzcyI6ImRpZDppb3RhOnJtczoweDgwM2M2NmNjZDMzNGFhNDE5NjYxOGY2NmJhZWNmMGM1NGFiMWQzMjY3NjMzZmU5NzVhZWY1NGYzZDRkMTYxZWQifQ.f2KgOWSR95ZX7li56AF1O28v2h2FsxNWz6PvtgyuRcyy2biVRhs8M6lvZQdRRgK6N24KDXJ4gZ_yjdLGWGJ-Dw', {
-  //   resolver: resolver,
-  //   policies: { aud: false },
-  // })
-  // .catch((e) => {
-  //   console.error("ERROR", e);
-  //   throw new Error("invalid_request");
-  // });
-  // // end remove
-
-  //resolver.resolve("did:iota:rms:0x803c66ccd334aa4196618f66baecf0c54ab1d3267633fe975aef54f3d4d161ed");
-
-  // console.log(process.env)
 
   const rp = new RelyingParty({
     clientId: process.env.RP_DID, //could also be URL (bank.selv.iota.org)
