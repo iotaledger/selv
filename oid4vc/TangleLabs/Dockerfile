@@ -1,4 +1,4 @@
-FROM node:22
+FROM node:21
 WORKDIR /usr/src/app
 COPY oid4vc/TangleLabs/package*.json ./
 RUN npm ci
