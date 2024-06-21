@@ -34,28 +34,28 @@ const RandomGraphicElement = ({ children, elements }: {
         }
     }, []); // [windowWidth, windowHeight]
 
-    const randomTop = useMemo(() => {
-        return 50 + getRandomInt(dimensions.height - 100);
-    }, [dimensions])
-    const randomLeft = useMemo(() => {
-        return 50 + getRandomInt(dimensions.width - 100);
-    }, [dimensions])
-    const randomElement = useMemo(() => {
-        return getRandomInt(graphics.length);
-    }, [])
+    const calculatedRandomValues = useMemo(() => {
+        return Array.from(Array(elements).keys()).map(() => ({
+            element: getRandomInt(graphics.length),
+            top: 50 + getRandomInt(dimensions.height - 100),
+            left: 50 + getRandomInt(dimensions.width - 100)
+        
+
+        }))
+    }, [elements, dimensions])
 
 
     return (
         <div className='random-element-wrapper' ref={mainSectionEl}>
             { children }
-            {
-                dimensions && Array.from(Array(elements).keys()).map(e => {
-                    const randomGraphic = randomElement;
+            {   
+                dimensions && calculatedRandomValues.map(e => {
+                    const randomGraphic = e.element;
                     const styles: any = {
-                        zIndex: 0,
+                        zIndex: -1,
                         position: 'absolute',
-                        top: randomTop,
-                        left: randomLeft
+                        top: e.top,
+                        left: e.left
                     };
                     return (
                         <img
