@@ -180,7 +180,7 @@ export class WebAppGateway {
 
     await client.emitWithAck('didDomainLinkageValidation', {
       did: payload.did,
-      result: validation.service,
+      result: validation.domains,
     });
 
     this.logger.debug(`send validation response for did:${payload.did}`);

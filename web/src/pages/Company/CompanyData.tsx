@@ -3,11 +3,12 @@ import { Button, notification } from 'antd';
 import { flattenObject } from '../../utils/helper';
 import { Layout, Loading, Form, PrefilledForm } from '../../components';
 import { useTranslation } from 'react-i18next';
-import { useGlobalState } from '../../context/globalState';
+import { State, useGlobalState } from '../../context/globalState';
 import { Link } from 'react-router-dom';
 import useStep from '../../utils/useStep';
 import { Scopes } from '@shared/types/Scopes';
 import CitizenCredentialConfig  from '@shared/credentials/CitizenCredential.json';
+import DomainCheck from '../../components/DomainCheck';
 
 const prefilledFields = [
     'FirstName',
@@ -52,7 +53,9 @@ const notify = (type: string, message: string, description: string) => {
 const CompanyData: React.FC = ({ history, match }: any) => {
     const [fields, setFields] = useState<object>();
     const [status, setStatus] = useState('');
+    const [relevantCredential, setRelevantCredential] = useState<null | any>(null);
     const [prefilledData, setPrefilledData] = useState({});
+    const [validatedDomains, setValidatedDomains] = useState<State['validatedDomains'][keyof State['validatedDomains']] | null>(null);
     const { state } = useGlobalState();
     const { nextStep } = useStep();
 
@@ -89,8 +92,10 @@ const CompanyData: React.FC = ({ history, match }: any) => {
 
     useEffect(() => {
         if(!state[Scopes.CompanyHouse]?.credentials.length) return;
-        const relevantCredential = state[Scopes.CompanyHouse].credentials.filter((c: any) => c.credential?.type.includes(CitizenCredentialConfig.template.type.pop()))?.[0]?.credential;
-        console.log(relevantCredential)
+        setRelevantCredential(state[Scopes.CompanyHouse].credentials.filter((c: any) => c.credential?.type.includes(CitizenCredentialConfig.template.type.pop()))?.[0]?.credential);
+    }, [state, setRelevantCredential]) 
+
+    useEffect(() => {
         if (!relevantCredential) return;
         setPrefilledData({
             'FirstName': relevantCredential.credentialSubject.firstName,
@@ -101,12 +106,20 @@ const CompanyData: React.FC = ({ history, match }: any) => {
             'Country': relevantCredential.credentialSubject.country,
             'Phone': relevantCredential.credentialSubject.phone,
         })
-    }, [state, setPrefilledData]) 
+    }, [state, relevantCredential]) 
+
+    useEffect(() => {
+        if (!relevantCredential) return;
+        setValidatedDomains(state.validatedDomains[relevantCredential.issuer])
+    }, [state, relevantCredential]) 
 
     return (
         <Layout>
             <div className='company-data-page-wrapper'>
                 <h2>{t("pages.company.companyData.setUpPrivateCompany")}</h2>
+                {validatedDomains && (validatedDomains !== 'in-flight') && (
+                    <DomainCheck result={validatedDomains}/>
+                )}
                 <h3 className='section-header'>{t("pages.insurance.insuranceData.businessOwner")}</h3>
                 {
                     // Object.keys(prefilledFormData.dataFields).length &&

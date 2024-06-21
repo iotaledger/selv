@@ -20,7 +20,18 @@ export enum Actions {
     SET_DOMAIN_LINKAGE_VALIDATION,
 }
 
-type ValidationResult = { id: string, service_endpoint: { valid: boolean, error?: string, document?: string }[] };
+export type ValidationResult = {
+    valid: {
+        url: string;
+        credential: string;
+        serviceId: string;
+    }[], invalid: {
+        url: string;
+        credential?: string | undefined;
+        serviceId: string;
+        error: string;
+    }[]
+};
 
 interface ReducerBaseAction {
     type: Actions,
@@ -76,14 +87,14 @@ interface RequestDomainLinkageValidation extends ReducerBaseAction {
 interface SetDomainLinkageValidation extends ReducerBaseAction {
     type: Actions.SET_DOMAIN_LINKAGE_VALIDATION,
     did: string,
-    result: ValidationResult[],
+    result: ValidationResult,
 }
 
 interface StoredCredential {
     credential: any;
 };
 
-type State = {
+export type State = {
     [scope in Scopes]?: {
         credentials: StoredCredential[];
         connectedDID: string;
@@ -92,7 +103,7 @@ type State = {
     }
 } & {
     validatedDomains: {
-        [did: string]: ValidationResult[] | "in-flight";
+        [did: string]: ValidationResult | "in-flight";
     }
 };
 
@@ -141,7 +152,7 @@ export function GlobalStateProvider({ children }: any) {
 
     const [state, dispatch] = useReducer(
         stateReducer,
-        {validatedDomains: {}}
+        { validatedDomains: {} }
     );
 
     useEffect(() => {
@@ -270,13 +281,18 @@ export function GlobalStateProvider({ children }: any) {
             }
 
             case Actions.REQUEST_DOMAIN_LINKAGE_VALIDATION: {
+
+                if(state.validatedDomains[action.did]){
+                    return state;
+                }
+
                 requestDomainLinkageValidation(action.did);
                 return {
                     ...state,
                     validatedDomains: {
                         ...state.validatedDomains,
                         [action.did]: 'in-flight',
-                        
+
                     }
                 };
             }
@@ -314,7 +330,7 @@ export function GlobalStateProvider({ children }: any) {
                     validatedDomains: {
                         ...state.validatedDomains,
                         [action.did]: action.result
-                        
+
                     }
                 };
             }
@@ -341,7 +357,7 @@ export function GlobalStateProvider({ children }: any) {
     );
 };
 
-const GlobalStateContext = createContext<{ mainSteps: any, routes: any, state: State }>({ mainSteps: null, routes: null, state: {validatedDomains: {}} });
+const GlobalStateContext = createContext<{ mainSteps: any, routes: any, state: State }>({ mainSteps: null, routes: null, state: { validatedDomains: {} } });
 const DispatchContext = createContext<Dispatch<ReducerAction> | null>(null);
 
 export function useGlobalState() {

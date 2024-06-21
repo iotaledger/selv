@@ -10,6 +10,52 @@ import { Observable } from "rxjs";
 
 export const protobufPackage = "domain_linkage";
 
+export interface ValidateDidResponse {
+  did: string;
+  domains: ValidateDidResponse_Domains | undefined;
+}
+
+export interface ValidateDidResponse_Domains {
+  valid: ValidateDidResponse_Domains_ValidDomain[];
+  invalid: ValidateDidResponse_Domains_InvalidDomain[];
+}
+
+export interface ValidateDidResponse_Domains_ValidDomain {
+  url: string;
+  credential: string;
+  serviceId: string;
+}
+
+export interface ValidateDidResponse_Domains_InvalidDomain {
+  url: string;
+  credential?: string | undefined;
+  serviceId: string;
+  error: string;
+}
+
+export interface ValidateDomainResponse {
+  domain: string;
+  linkedDids: ValidateDomainResponse_LinkedDids | undefined;
+}
+
+export interface ValidateDomainResponse_LinkedDids {
+  valid: ValidateDomainResponse_LinkedDids_ValidDid[];
+  invalid: ValidateDomainResponse_LinkedDids_InvalidDid[];
+}
+
+export interface ValidateDomainResponse_LinkedDids_ValidDid {
+  did: string;
+  credential: string;
+  serviceId: string;
+}
+
+export interface ValidateDomainResponse_LinkedDids_InvalidDid {
+  did?: string | undefined;
+  credential?: string | undefined;
+  serviceId?: string | undefined;
+  error: string;
+}
+
 export interface ValidateDomainRequest {
   /** domain to validate */
   domain: string;
@@ -22,29 +68,6 @@ export interface ValidateDomainAgainstDidConfigurationRequest {
   didConfiguration: string;
 }
 
-export interface LinkedDidValidationStatus {
-  /** validation succeeded or not, `error` property is added for `false` cases */
-  valid: boolean;
-  /** credential from `linked_dids` as compact JWT domain linkage credential if it could be retrieved */
-  document?:
-    | string
-    | undefined;
-  /** an error message, that occurred when validated, omitted if valid */
-  error?: string | undefined;
-}
-
-export interface ValidateDomainResponse {
-  /** list of JWT domain linkage credential, uses the same order as the `did-configuration.json` file for domain */
-  linkedDids: LinkedDidValidationStatus[];
-}
-
-export interface LinkedDidEndpointValidationStatus {
-  /** id of service endpoint entry */
-  id: string;
-  /** list of JWT domain linkage credential, uses the same order as the `did-configuration.json` file for domain */
-  serviceEndpoint: LinkedDidValidationStatus[];
-}
-
 export interface ValidateDidRequest {
   /** DID to validate */
   did: string;
@@ -55,11 +78,6 @@ export interface ValidateDidAgainstDidConfigurationsRequest {
   did: string;
   /** already resolved domain linkage configs */
   didConfigurations: ValidateDomainAgainstDidConfigurationRequest[];
-}
-
-export interface ValidateDidResponse {
-  /** mapping of service entries from DID with validation status for endpoint URLs */
-  service: LinkedDidEndpointValidationStatus[];
 }
 
 export const DOMAIN_LINKAGE_PACKAGE_NAME = "domain_linkage";
