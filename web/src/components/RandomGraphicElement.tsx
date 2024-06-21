@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { getRandomInt } from '../utils/helper';
 // import useWindowSize from "../utils/useWindowSize";
 
@@ -34,18 +34,28 @@ const RandomGraphicElement = ({ children, elements }: {
         }
     }, []); // [windowWidth, windowHeight]
 
+    const randomTop = useMemo(() => {
+        return 50 + getRandomInt(dimensions.height - 100);
+    }, [dimensions])
+    const randomLeft = useMemo(() => {
+        return 50 + getRandomInt(dimensions.width - 100);
+    }, [dimensions])
+    const randomElement = useMemo(() => {
+        return getRandomInt(graphics.length);
+    }, [])
+
 
     return (
         <div className='random-element-wrapper' ref={mainSectionEl}>
             { children }
             {
                 dimensions && Array.from(Array(elements).keys()).map(e => {
-                    const randomGraphic = getRandomInt(graphics.length);
+                    const randomGraphic = randomElement;
                     const styles: any = {
                         zIndex: 0,
                         position: 'absolute',
-                        top: 50 + getRandomInt(dimensions.height - 100),
-                        left: 50 + getRandomInt(dimensions.width - 100)
+                        top: randomTop,
+                        left: randomLeft
                     };
                     return (
                         <img
