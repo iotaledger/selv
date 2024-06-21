@@ -8,7 +8,7 @@ const DomainCheck = ({ result }: {
 }) => {
   return (
     <>
-      {result.valid.length &&
+      {result.valid?.length &&
         <List
           itemLayout="horizontal"
           dataSource={result.valid}
@@ -23,7 +23,7 @@ const DomainCheck = ({ result }: {
         />
       }
 
-      {result.invalid.length &&
+      {result.invalid?.length &&
         <List
           itemLayout="horizontal"
           dataSource={result.invalid}
