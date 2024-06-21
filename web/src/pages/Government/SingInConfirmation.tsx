@@ -25,7 +25,7 @@ const SingInConfirmation: React.FC = () => {
                         <Trans 
                             i18nKey="pages.company.signInConfirmation.signInSuccess"
                             values={{
-                                DID: state.COMPANY_HOUSE?.connectedDID
+                                DID: state.GOVERNMENT?.connectedDID
                             }}
                             components={{ bold: <strong /> }}    
                         />

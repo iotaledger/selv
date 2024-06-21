@@ -5,14 +5,14 @@ import Steps from './Steps';
 import Sidebar from './Sidebar';
 import useStep from '../utils/useStep';
 
-export default ({ children, customTheme, customStep, noHeader, noFooter }: {
+const Layout = ({ children, customTheme, customStep, noHeader, noFooter }: {
     children?: JSX.Element | null | undefined;
     customTheme?: string;
     customStep?: number;
     noHeader?: boolean;
     noFooter?: boolean;
 }) => {
-    const { step, mainSteps, theme, currentRoute } = useStep();
+    const { mainSteps, theme, currentRoute } = useStep();
 
     return (
         <div className={`theme-${theme || customTheme}`}>
@@ -29,13 +29,13 @@ export default ({ children, customTheme, customStep, noHeader, noFooter }: {
                     }
                 </div>
                 {
-                    customStep || step >= 0 ? (
+                    customStep || currentRoute?.step ? (
                         <Sidebar
                             poweredBy={currentRoute?.poweredBy}
                         >
                             <Steps
                                 steps={mainSteps}
-                                stepId={customStep || step}
+                                stepId={customStep || mainSteps.findIndex((elem) => elem.id === currentRoute.step)}
                             />
                         </Sidebar>
                     ) : null
@@ -44,3 +44,5 @@ export default ({ children, customTheme, customStep, noHeader, noFooter }: {
         </div>
     );
 };
+
+export default Layout;

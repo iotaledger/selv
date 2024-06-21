@@ -1,4 +1,3 @@
-import CompanyIntro from './CompanyIntro';
 import ProveIdentity from './ProveIdentity';
 import SingInConfirmation from './SingInConfirmation';
 import CompanyData from './CompanyData';
@@ -10,7 +9,6 @@ import ReceiveCredentials from './ReceiveCredentials';
 export {
     ProveIdentity,
     SingInConfirmation,
-    CompanyIntro,
     CompanyData,
     CompanyDetails,
     Confirmation,

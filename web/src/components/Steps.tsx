@@ -10,11 +10,11 @@ const styles = {
 
 const StepsInstance = ({ steps, stepId }: {
     steps: any;
-    stepId: any;
+    stepId: number;
 }) => {
     return (
         <div className='steps-wrapper'>
-            <Steps current={Number(stepId)} size={'small'} direction="vertical" style={styles} items={steps.map((step: { title: string }) => ({ ...step, title: i18n.t(step.title) }))} />
+            <Steps current={stepId} size={'small'} direction="vertical" style={styles} items={steps.map((step: { title: string }) => ({ ...step, title: i18n.t(step.title) }))} />
         </div>
     );
 };
