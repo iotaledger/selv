@@ -51,7 +51,7 @@ const Confirmation: React.FC = () => {
                         theme === 'company' &&
                             <p>{t("pages.general.confirmation.proudOwnerOfCompany")}</p>
                     }
-                    <Link to={nextStep.replace(':companyId', companyId)}>
+                    <Link to={nextStep}>
                         <Button>
                             {
                                 theme === 'company' ? t("actions.continue") : t("pages.general.confirmation.returnToCompany") 
