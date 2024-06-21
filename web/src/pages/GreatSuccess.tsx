@@ -71,7 +71,7 @@ const GreatSuccess: React.FC = () => {
                         </div>
                     </div>
                     <div className='cta-wrapper'>
-                        <Link to={nextStep.replace(':companyId', companyId)}>
+                        <Link to={nextStep}>
                             <Button className='cta'>
                                 {t("actions.continue")}
                             </Button>
