@@ -39,7 +39,7 @@
       "question2": "Can I restore my data if I lose my phone?",
       "answer2": "Not yet. This is currently a demonstration application, which means it doesn’t have all the features that a full release would have. The application is using (mostly) fake data, therefore recovery is not our priority.",
       "question3": "Does my personal data get uploaded to the Tangle?",
-      "answer3": "No. In accordance with GDPR regulaions, absolutely no personal information is uploaded to the Tangle. Not even in a (pseudo)anonymized state. Because data on the Tangle is immutable, any personal data uploaded to the Tangle would be in violation of the right to be forgotten.",
+      "answer3": "No. In accordance with GDPR regulations, absolutely no personal information is uploaded to the Tangle. Not even in a (pseudo)anonymized state. Because data on the Tangle is immutable, any personal data uploaded to the Tangle would be in violation of the right to be forgotten.",
       "question4": "How does this application benefit from IOTA and DLT in general?",
       "answer4": "Organizations sign credentials for the users, but how do we identify the organizations? Their digital identities are uploaded to the Tangle and are signed using asymmetric encryption methods. In addition, revocation of credentials is put on the Tangle as evidence that the credential can no longer be used.",
       "question5": "On what IOTA network does this application run?",
@@ -185,7 +185,7 @@
         "newlyIncorporatedCompanies": "Newly Incorporated Companies"
       },
       "signInConfirmation": {
-        "signInSuccess": "You have now signed in<b>using your DID {{test}}</b> without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which businesses can use without an expensive verification process. Verifying your data is nearly instant and completely free."
+        "signInSuccess": "You have now signed in <bold>using your DID {{DID}}</bold> without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which businesses can use without an expensive verification process. Verifying your data is nearly instant and completely free."
       },
       "companyData": {
         "companyName": "Company Name",

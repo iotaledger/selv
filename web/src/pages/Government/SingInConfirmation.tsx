@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import useStep from '../../utils/useStep';
 import { Layout, RandomGraphicElement } from '../../components';
 import selv from '../../assets/selvBordered.svg';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useGlobalState } from '../../context/globalState';
 
 /**
@@ -22,11 +22,13 @@ const SingInConfirmation: React.FC = () => {
                     <img src={selv} alt='Selv app logo' />
                     <h2>{t("general.hello")}</h2>
                     <p>
-                        {t("pages.company.signInConfirmation.signInSuccess", {
-                            interpolation: {
-                                escapeValue: false
-                            }, test: state.GOVERNMENT?.connectedDID
-                        })}
+                        <Trans 
+                            i18nKey="pages.company.signInConfirmation.signInSuccess"
+                            values={{
+                                DID: state.COMPANY_HOUSE?.connectedDID
+                            }}
+                            components={{ bold: <strong /> }}    
+                        />
                     </p>
                     <Link to={nextStep}>
                         <Button>
