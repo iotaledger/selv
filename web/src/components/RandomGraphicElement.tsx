@@ -49,7 +49,7 @@ const RandomGraphicElement = ({ children, elements }: {
         <div className='random-element-wrapper' ref={mainSectionEl}>
             { children }
             {   
-                dimensions && calculatedRandomValues.map(e => {
+                dimensions && calculatedRandomValues.map((e, i) => {
                     const randomGraphic = e.element;
                     const styles: any = {
                         zIndex: -1,
@@ -59,7 +59,7 @@ const RandomGraphicElement = ({ children, elements }: {
                     };
                     return (
                         <img
-                            key={`${e}-${randomGraphic}`}
+                            key={`${i}-${randomGraphic}`}
                             src={graphics[randomGraphic]}
                             style={styles}
                             alt=''
