@@ -19,6 +19,7 @@ import * as CitizenCredentialConfig from '../../../shared/credentials/CitizenCre
 import * as CompanyCredentialConfig from '../../../shared/credentials/CompanyCredential.json';
 import { Providers } from '../../../shared/types/Providers';
 import { ValidateDidResponse } from 'src/identity/domain_linkage';
+import { JwtCreationResponse } from 'src/identity/credentials';
 
 type Token = {
   sessionId: string;
@@ -182,7 +183,7 @@ export class WebAppService {
   async requestCredential(
     user: User,
     credentialDefinition: any,
-  ): Promise<[string]> {
+  ): Promise<string[]> {
     this.logger.debug(
       `user with did:${user.did} and code:${user.code} requested`,
       credentialDefinition,
@@ -204,10 +205,10 @@ export class WebAppService {
     this.logger.debug(`found session_id:${sessionId} for code:${user.code}`);
 
     // TODO: credential.type vs credentialDefinition?
-    let signedCredentials;
+    let signedCredentials: JwtCreationResponse[];
 
     try {
-      signedCredentials = Promise.all(
+      signedCredentials = await Promise.all(
         credentials.map((credential) => {
           let credential_template =
             credentialDefinition === 'company'
@@ -229,7 +230,7 @@ export class WebAppService {
       throw new Error(error);
     }
     await this.webAppGateway.issuance(sessionId, user.did, scope);
-    return signedCredentials;
+    return signedCredentials.map((e) => e.jwt);
   }
 
   async requestTokenForSessionId<T>(
