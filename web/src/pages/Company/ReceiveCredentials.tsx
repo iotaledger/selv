@@ -29,7 +29,7 @@ const ReceiveCredentials: React.FC = () => {
             provider: Providers.Impierce,
             scope: Scopes.CompanyHouse,
             credentials: [{type: CompanyCredentialConfig.template.type.pop() as string, data: state.COMPANY_HOUSE?.issuanceData}],
-            issuer: Issuers.CompanyHouse
+            issuer: Issuers.Bank //TODO: should be COMPANY_HOUSE?
         })
     }, [dispatch]);
 

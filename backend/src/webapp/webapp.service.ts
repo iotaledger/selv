@@ -202,18 +202,26 @@ export class WebAppService {
       state: { issuer, credentials },
     } = token;
 
-    this.logger.debug(`found session_id:${sessionId} for code:${user.code}`);
-
     // TODO: credential.type vs credentialDefinition?
     let signedCredentials: JwtCreationResponse[];
 
     try {
       signedCredentials = await Promise.all(
         credentials.map((credential) => {
-          let credential_template =
-            credentialDefinition === 'company'
-              ? CompanyCredentialConfig.template
-              : CitizenCredentialConfig.template;
+          let credential_template;
+          switch (credential.type) {
+            case 'CitizenCredential':
+              credential_template = CitizenCredentialConfig.template;
+              break;
+            case 'CompanyCredential':
+              credential_template = CompanyCredentialConfig.template;
+              break;
+
+            default:
+              throw new Error(
+                `credential template for ${credential.type} not found`,
+              );
+          }
 
           credential_template.credentialSubject.id = user.did;
           credential_template = {
@@ -260,7 +268,7 @@ export class WebAppService {
 
     const tokenVal = (await this.cache.get(`token:${token}`)) as Token;
 
-    this.logger.debug(`found entry:${tokenVal} for token:${token}`);
+    this.logger.debug(`found token:${token}`, tokenVal);
 
     await this.cache.del(`token:${token}`);
 
