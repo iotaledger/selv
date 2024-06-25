@@ -18,6 +18,7 @@ export enum Actions {
     COMPLETE_ISSUANCE,
     REQUEST_DOMAIN_LINKAGE_VALIDATION,
     SET_DOMAIN_LINKAGE_VALIDATION,
+    SET_ISSUANCE_DATA,
 }
 
 export type ValidationResult = {
@@ -66,7 +67,10 @@ interface RequestPresentationAction extends ScopedReducerAction {
 interface RequestIssuanceAction extends ScopedReducerAction {
     type: Actions.REQUEST_ISSUANCE,
     provider: Providers,
-    credentials: string[],
+    credentials: {
+        type: string,
+        data?: any,
+    }[],
     issuer: Issuers,
 }
 
@@ -78,11 +82,16 @@ interface SetQRContentAction extends ScopedReducerAction {
 interface SetCompleteIssuanceAction extends ScopedReducerAction {
     type: Actions.COMPLETE_ISSUANCE,
 }
+interface SetIssuanceData extends ScopedReducerAction {
+    type: Actions.SET_ISSUANCE_DATA,
+    issuanceData: any,
+}
 
 interface RequestDomainLinkageValidation extends ReducerBaseAction {
     type: Actions.REQUEST_DOMAIN_LINKAGE_VALIDATION,
     did: string,
 }
+
 
 interface SetDomainLinkageValidation extends ReducerBaseAction {
     type: Actions.SET_DOMAIN_LINKAGE_VALIDATION,
@@ -100,6 +109,7 @@ export type State = {
         connectedDID: string;
         QRcontent: string;
         issuanceComplete: boolean;
+        issuanceData: any;
     }
 } & {
     validatedDomains: {
@@ -107,7 +117,7 @@ export type State = {
     }
 };
 
-type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction | RequestDomainLinkageValidation | SetDomainLinkageValidation;
+type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction | SetIssuanceData | RequestDomainLinkageValidation | SetDomainLinkageValidation;
 
 const socket = SocketIOClient("/", {
     autoConnect: true,
@@ -129,7 +139,7 @@ const requestPresentation: RequestPresentation = (provider, scope, presentationD
 
 // OIDC4VCI
 // TODO: Issuers.Bank
-type RequestIssuance = (provider: Providers, scope: Scopes, credentials: any, issuer: Issuers) => void
+type RequestIssuance = (provider: Providers, scope: Scopes, credentials: {type: string, data?: any}[], issuer: Issuers) => void
 const requestIssuance: RequestIssuance = (provider, scope, credentials, issuer) => {
     socket.emit('requestIssuance',
         {
@@ -287,6 +297,7 @@ export function GlobalStateProvider({ children }: any) {
                 }
 
                 requestDomainLinkageValidation(action.did);
+
                 return {
                     ...state,
                     validatedDomains: {
@@ -311,6 +322,15 @@ export function GlobalStateProvider({ children }: any) {
                     ...state, [action.scope]: {
                         ...state[action.scope],
                         QRcontent: action.QRContent
+                    }
+                };
+            }
+
+            case Actions.SET_ISSUANCE_DATA: {
+                return {
+                    ...state, [action.scope]: {
+                        ...state[action.scope],
+                        issuanceData: action.issuanceData,
                     }
                 };
             }

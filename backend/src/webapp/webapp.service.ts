@@ -25,6 +25,18 @@ type Token = {
   scope: Scopes;
 };
 
+type StateToken<T> = Token & {
+  state: T;
+};
+
+type IssuanceState = {
+  issuer: Issuers;
+  credentials: {
+    type: string;
+    data?: any;
+  }[];
+};
+
 @Injectable()
 export class WebAppService {
   constructor(
@@ -83,7 +95,7 @@ export class WebAppService {
   async requestIssuance(
     session_id: string,
     issuer: Issuers,
-    credentials: string[],
+    credentials: { type: string; data?: any }[],
     scope: Scopes,
     provider: Providers,
   ): Promise<string> {
@@ -92,13 +104,18 @@ export class WebAppService {
       credentials,
     );
 
-    //TODO: handle issuer
-
-    const token = await this.requestTokenForSessionId(session_id, scope);
+    const token = await this.requestTokenForSessionId<IssuanceState>(
+      session_id,
+      scope,
+      {
+        issuer,
+        credentials,
+      },
+    );
 
     const offer = await this.oid4vciService.createOID4VCIRequest({
       state: token,
-      credentials,
+      credentials: credentials.map((e) => e.type),
       provider,
     });
 
@@ -171,50 +188,67 @@ export class WebAppService {
       credentialDefinition,
     );
 
-    const { sessionId, scope } = await this.consumeToken(user.code);
+    const token = await this.consumeToken<IssuanceState>(user.code);
+
+    if (!isStateToken<IssuanceState>(token)) {
+      this.logger.error('No state found');
+      throw new Error();
+    }
+
+    const {
+      sessionId,
+      scope,
+      state: { issuer, credentials },
+    } = token;
+
     this.logger.debug(`found session_id:${sessionId} for code:${user.code}`);
 
-    //TODO: get issuer (from session token, maybe?)
-    const issuer = Issuers.Bank;
-
-    //TODO: get credential (from TBD config via credential definition)
-    const credential_template =
-      credentialDefinition === 'company'
-        ? CompanyCredentialConfig.template
-        : CitizenCredentialConfig.template;
-
-    credential_template.credentialSubject.id = user.did;
-
-    await this.webAppGateway.issuance(sessionId, user.did, scope);
+    // TODO: credential.type vs credentialDefinition?
+    let signedCredentials;
 
     try {
-      const signed_credential = await this.identityService.create(
-        issuer,
-        JSON.stringify(credential_template),
+      signedCredentials = Promise.all(
+        credentials.map((credential) => {
+          let credential_template =
+            credentialDefinition === 'company'
+              ? CompanyCredentialConfig.template
+              : CitizenCredentialConfig.template;
+
+          credential_template.credentialSubject.id = user.did;
+          credential_template = { ...credential_template, ...credential.data };
+
+          this.logger.debug('requesting', credential_template);
+          return this.identityService.create(
+            issuer,
+            JSON.stringify(credential_template),
+          );
+        }),
       );
-      this.logger.debug('created credential', signed_credential.jwt);
-      return [signed_credential.jwt];
     } catch (error) {
       this.logger.error(error);
+      throw new Error(error);
     }
+    await this.webAppGateway.issuance(sessionId, user.did, scope);
+    return signedCredentials;
   }
 
-  async requestTokenForSessionId(
+  async requestTokenForSessionId<T>(
     sessionId: string,
     scope: Scopes,
+    state?: T,
   ): Promise<string> {
     this.logger.debug(`request token for session_id:${sessionId}`);
 
     const token = uuidv4();
 
-    await this.cache.set(`token:${token}`, { sessionId, scope });
+    await this.cache.set(`token:${token}`, { sessionId, scope, state });
 
     this.logger.debug(`generated token:${token} for session_id:${sessionId}`);
 
     return token;
   }
 
-  async consumeToken(token: string): Promise<Token> {
+  async consumeToken<T>(token: string): Promise<Token | StateToken<T>> {
     this.logger.debug(`consuming token:${token}`);
 
     const tokenVal = (await this.cache.get(`token:${token}`)) as Token;
@@ -227,4 +261,8 @@ export class WebAppService {
 
     return tokenVal;
   }
+}
+
+function isStateToken<T>(token: Token | StateToken<T>): token is StateToken<T> {
+  return (token as StateToken<T>).state !== undefined;
 }

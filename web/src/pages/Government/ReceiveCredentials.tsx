@@ -25,7 +25,10 @@ const ReceiveCredentials: React.FC = () => {
 
     useEffect(() => {
         dispatch?.({
-            type: Actions.REQUEST_ISSUANCE, provider: Providers.TangleLabs, scope: Scopes.Government, credentials: [CitizenCredentialConfig.template.type.pop() as string],
+            type: Actions.REQUEST_ISSUANCE, 
+            provider: Providers.TangleLabs, 
+            scope: Scopes.Government, 
+            credentials: [{type: CitizenCredentialConfig.template.type.pop() as string}],
             issuer: Issuers.Government
         })
     }, [dispatch]);

@@ -1,55 +1,62 @@
-import React from 'react';
-import { Form, Button, Input } from 'antd';
+import React, { useEffect } from 'react';
+import { Button, Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-const EmptyForm = ({ form, dataFields, labels, processValues, status, messages }: {
-    form: any;
-    dataFields: string[];
-    labels: { [key: string]: string; };
-    processValues: (values: object) => void;
-    status: string;
-    messages: { [key: string]: string; };
+const shortFields: string[] = ['Date', 'Nationality'];
+
+const ManualForm = ({ dataFields, onSubmit, submitLabel }: {
+    dataFields: {
+        label: string,
+        field: string,
+    }[];
+    onSubmit: (fields: {[field: string]: string}) => void
+    submitLabel: string
 }) => {
-    const { getFieldDecorator, getFieldsError, validateFields } = form;
+
+    const [form] = Form.useForm()
+
+    const [submittable, setSubmittable] = React.useState<boolean>(false);
+
+    // Watch all values
+    const values = Form.useWatch([], form);
+  
+    React.useEffect(() => {
+      form
+        .validateFields({ validateOnly: true })
+        .then(() => setSubmittable(true))
+        .catch(() => setSubmittable(false));
+    }, [form, values]);
 
     const { t } = useTranslation();
 
-    function handleSubmit(e: any) {
-        e.preventDefault();
-        validateFields((err: any, values: string[]) => {
-            if (!err) {
-                processValues(values);
-            }
-        });
-    }
-
-    function hasErrors(fieldsError: any) {
-        return Object.keys(fieldsError).some(field => fieldsError[field]);
-    }
+    const onFinish = (values: any) => {
+        onSubmit(values)
+    };
 
     return (
-        <div className='empty-form'>
-            <Form layout='vertical' onFinish={handleSubmit}>
-                {/* {
-                    dataFields.map((field: string) => (
-                        <Form.Item label={t(labels[field])} key={field}>
-                            { getFieldDecorator(field, {
-                                rules: [{ required: true, message: t("components.form.error") }]
-                            })(<Input />)}
+        <div className='prefilled-form'>
+            <Form layout='vertical' form={form} onFinish={onFinish}>
+                {
+                    dataFields.map((item, index) => (
+                        <Form.Item
+                            label={t(item.label)}
+                            key={item.field}
+                            name={item.field}
+                            rules={[{ required: true }]}
+                            className={shortFields.includes(item.field) ? 'short-field' : ''}
+                        >
+                            <Input />
                         </Form.Item>
                     ))
-                } */}
-                <Form.Item>
-                    <Button
-                        htmlType='submit'
-                        disabled={hasErrors(getFieldsError()) || status === messages.waiting}
-                    >
-                        {t("actions.registerNewCompany")}
+                }
+                    <Form.Item label=" " colon={false}>
+                    <Button type="primary" htmlType="submit" disabled={!submittable}>
+                        {submitLabel}
                     </Button>
-                </Form.Item>
+                    </Form.Item>
             </Form>
         </div>
     );
 };
 
-export default EmptyForm;
+export default ManualForm;

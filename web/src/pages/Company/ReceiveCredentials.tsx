@@ -7,6 +7,7 @@ import { Actions, useCredentialsDispatch, useGlobalState } from '../../context/g
 import { Issuers } from '@shared/types/Issuers';
 import { Providers } from '@shared/types/Providers';
 import { Scopes } from '@shared/types/Scopes';
+import CompanyCredentialConfig  from '@shared/credentials/CompanyCredential.json';
 
 const ReceiveCredentials: React.FC = () => {
     const { t } = useTranslation();
@@ -24,7 +25,10 @@ const ReceiveCredentials: React.FC = () => {
 
     useEffect(() => {
         dispatch?.({
-            type: Actions.REQUEST_ISSUANCE, provider: Providers.Impierce, scope: Scopes.CompanyHouse, credentials: ["CompanyCredential"],
+            type: Actions.REQUEST_ISSUANCE,
+            provider: Providers.Impierce,
+            scope: Scopes.CompanyHouse,
+            credentials: [{type: CompanyCredentialConfig.template.type.pop() as string, data: state.COMPANY_HOUSE?.issuanceData}],
             issuer: Issuers.CompanyHouse
         })
     }, [dispatch]);

@@ -131,7 +131,7 @@ export class WebAppGateway {
     payload: {
       issuer: Issuers;
       scope: Scopes;
-      credentials: string[];
+      credentials: { type: string; data?: any }[];
       provider: Providers;
     },
     @ConnectedSocket() client: Socket,
