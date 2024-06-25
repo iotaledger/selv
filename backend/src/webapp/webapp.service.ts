@@ -216,7 +216,13 @@ export class WebAppService {
               : CitizenCredentialConfig.template;
 
           credential_template.credentialSubject.id = user.did;
-          credential_template = { ...credential_template, ...credential.data };
+          credential_template = {
+            ...credential_template,
+            credentialSubject: {
+              ...credential_template.credentialSubject,
+              ...credential.data,
+            },
+          };
 
           this.logger.debug('requesting', credential_template);
           return this.identityService.create(
