@@ -1,0 +1,14 @@
+server_config:
+  credential_configurations:
+    - credential_configuration_id: w3c_vc_credential
+      format: jwt_vc_json
+      credential_definition:
+        type:
+          - VerifiableCredential
+          # - OpenBadgeCredential <-- uncomment this to specify that the to be issued Credentials are OpenBadgev3 Credentials
+      display:
+        - name: Verifiable Credential
+          locale: en
+          logo:
+            uri: https://impierce.com/images/logo-blue.png
+            alt_text: UniCore Logo

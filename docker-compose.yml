@@ -70,7 +70,7 @@ services:
   #     - ./shared:/usr/shared
 
   oid4vc-impierce:
-    image: impiercetechnologies/ssi-agent:9cda04d
+    image: impiercetechnologies/ssi-agent:c25f9da
     depends_on:
       - cqrs-postgres-db
     expose:
@@ -81,18 +81,17 @@ services:
       - ./shared:/usr/shared
       - ./data/stronghold.hodl:/stronghold.hodl:ro
       - ./oid4vc/impierce/event_publisher_config.yml:/app/agent_event_publisher_http/config.yml:ro
-      - ./oid4vc/impierce/presentation_definitions:/app/agent_verification/presentation_definitions:ro
+      - ./oid4vc/impierce/config.yml:/app/agent_application/config.yml:ro
+      - ./oid4vc/impierce/issuance_config.yml:/app/agent_issuance/issuance_config.yml:ro
       - ./data/tmp:/app/agent_api_rest
     entrypoint: [ '/bin/sh', '-c', 'export AGENT_CONFIG_STRONGHOLD_PASSWORD=$$(cat /run/secrets/stronghold_pwd) ; /usr/local/bin/agent_application' ]
     environment:
-      AGENT_APPLICATION_URL: ${INSURANCE_PUBLIC_URL}
+      AGENT_CONFIG_URL: ${INSURANCE_PUBLIC_URL}
       AGENT_SECRET_MANAGER_STRONGHOLD_PATH: /stronghold.hodl
       AGENT_CONFIG_ISSUER_KEY_ID: ${ISSUERS_INSURANCE_KEYID}
       AGENT_CONFIG_ISSUER_DID: ${ISSUERS_INSURANCE_DID}
       AGENT_CONFIG_ISSUER_FRAGMENT: ${ISSUERS_INSURANCE_FRAGMENT}
       AGENT_CONFIG_DEFAULT_DID_METHOD: "did:iota:rms"
-      AGENT_CONFIG_DISPLAY_NAME: "Selv Bank"
-      AGENT_CONFIG_DISPLAY_LOGO_URI: "https://some-image.png"
       AGENT_APPLICATION_ENABLE_CORS: true
       #AGENT_CONFIG_LOG_FORMAT: json
       AGENT_CONFIG_EVENT_STORE: postgres

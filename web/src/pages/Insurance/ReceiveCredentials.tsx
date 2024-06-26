@@ -28,7 +28,7 @@ const ReceiveCredentials: React.FC = () => {
             type: Actions.REQUEST_ISSUANCE,
             provider: Providers.Impierce,
             scope: Scopes.Insurance,
-            credentials: [{type: CompanyCredentialConfig.template.type.pop() as string}],
+            credentials: [{type: CompanyCredentialConfig.template.type.at(-1) as string}],
             issuer: Issuers.Insurance
         })
     }, [dispatch]);

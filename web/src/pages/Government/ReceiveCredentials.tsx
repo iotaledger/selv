@@ -28,7 +28,7 @@ const ReceiveCredentials: React.FC = () => {
             type: Actions.REQUEST_ISSUANCE, 
             provider: Providers.TangleLabs, 
             scope: Scopes.Government, 
-            credentials: [{type: CitizenCredentialConfig.template.type.pop() as string}],
+            credentials: [{type: CitizenCredentialConfig.template.type.at(-1) as string}],
             issuer: Issuers.Government
         })
     }, [dispatch]);

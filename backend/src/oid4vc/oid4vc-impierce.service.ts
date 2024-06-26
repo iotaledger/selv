@@ -16,7 +16,7 @@ export class OID4VCImpierceService {
     const response = await firstValueFrom(
       this.httpService
         .post<string>(
-          'http://oid4vc-impierce:3033/v1/authorization_requests',
+          'http://oid4vc-impierce:3033/v0/authorization_requests',
           {
             nonce: 'test', // TODO: remove or replace with proper nonce
             state: request.state,
@@ -27,8 +27,8 @@ export class OID4VCImpierceService {
         )
         .pipe(
           catchError((error: AxiosError) => {
-            this.logger.error(error.response.data);
-            throw 'An error happened!';
+            this.logger.error(error);
+            throw error.message;
           }),
         ),
     );
@@ -39,11 +39,11 @@ export class OID4VCImpierceService {
     const response = await firstValueFrom(
       this.httpService
         .post<string>(
-          'http://oid4vc-impierce:3033/v1/authorization_requests',
+          'http://oid4vc-impierce:3033/v0/authorization_requests',
           {
             nonce: 'test', // TODO: remove or replace with proper nonce
             state: request.state,
-            presentation_definition_id: 'selv_presentation_definition', // TODO: request.presentationDefinition
+            presentation_definition: request.presentationDefinition,
           },
           {
             responseType: 'formdata',
@@ -51,8 +51,8 @@ export class OID4VCImpierceService {
         )
         .pipe(
           catchError((error: AxiosError) => {
-            this.logger.error(error.response.data);
-            throw 'An error happened!';
+            this.logger.error(error);
+            throw error.message;
           }),
         ),
     );
@@ -63,7 +63,7 @@ export class OID4VCImpierceService {
     const response = await firstValueFrom(
       this.httpService
         .post<string>(
-          'http://oid4vc-impierce:3033/v1/offers',
+          'http://oid4vc-impierce:3033/v0/offers',
           {
             offerId: request.state,
           },
@@ -73,8 +73,8 @@ export class OID4VCImpierceService {
         )
         .pipe(
           catchError((error: AxiosError) => {
-            this.logger.error(error.response.data);
-            throw 'An error happened!';
+            this.logger.error(error);
+            throw error.message;
           }),
         ),
     );
@@ -87,15 +87,16 @@ export class OID4VCImpierceService {
   ): Promise<string> {
     const response = await firstValueFrom(
       this.httpService
-        .post<string>('http://oid4vc-impierce:3033/v1/credentials', {
+        .post<string>('http://oid4vc-impierce:3033/v0/credentials', {
           offerId: offer_id,
           credential: credential,
+          credentialConfigurationId: 'w3c_vc_credential', // must match oid4vc/impierce/issuance_config.yml
           isSigned: true,
         })
         .pipe(
           catchError((error: AxiosError) => {
-            this.logger.error(error.response.data);
-            throw 'An error happened!';
+            this.logger.error(error);
+            throw error.message;
           }),
         ),
     );
