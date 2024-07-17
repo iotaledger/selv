@@ -2,6 +2,7 @@ services:
   
   valkey:
     image: valkey/valkey:7.2.5
+    restart: unless-stopped
     labels:
       traefik.enable: false
 
@@ -17,6 +18,7 @@ services:
     # depends_on:
     #   - valkey
     #   - identity
+    restart: unless-stopped
     environment:
       ISSUERS_BANK_DID: ${ISSUERS_BANK_DID}
       ISSUERS_BANK_FRAGMENT: ${ISSUERS_BANK_FRAGMENT}
@@ -27,6 +29,7 @@ services:
   
   identity:
     image: iotaledger/identity-grpc:alpha
+    restart: unless-stopped
     environment:
       - API_ENDPOINT=https://api.testnet.shimmer.network
       - SNAPSHOT_PATH=/stronghold.hodl
@@ -44,6 +47,7 @@ services:
     build:
       context: ./
       dockerfile: ./oid4vc/TangleLabs/Dockerfile
+    restart: unless-stopped
     environment:
       RP_DID: ${ISSUERS_BANK_DID}
       SIGNER_KEYID: ${ISSUERS_BANK_KEYID}
@@ -61,6 +65,7 @@ services:
   #   build:
   #     context: ./
   #     dockerfile: ./oid4vc/walt.id/Dockerfile
+  #   restart: unless-stopped
   #   expose:
   #     - '3000'
   #     - '50051'
@@ -73,6 +78,7 @@ services:
     image: impiercetechnologies/ssi-agent:c25f9da
     depends_on:
       - cqrs-postgres-db
+    restart: unless-stopped
     expose:
       - '3033'
     ports:
