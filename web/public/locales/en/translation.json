@@ -1,14 +1,6 @@
 {
   "landing": {
     "app": {
-      "demo": "Demo",
-      "theApp": "The App",
-      "selfSovereignIdentity": "Self-Sovereign Identity",
-      "whatItIs": "Through Self-Sovereign Identity (SSI), people, organizations and things are empowered to collect and share their own verified data and digital identity.",
-      "oneAppOneProtocol": "One App – One Protocol",
-      "easyGDPRcompliance": "This solution provides an easy and cheap way to comply with GDPR and similar privacy laws.",
-      "unifiedIdentity": "A Unified IOTA Identity",
-      "protocolEnablesDevices": "IOTA Identity not only enables people and organizations to have the benefits of identity, but devices, opening up a whole new world of business models and use cases.",
       "tryTheDemo": "Try the Demo"
     },
     "benefits": {
@@ -35,8 +27,8 @@
     },
     "FAQ": {
       "question1": "Does the IOTA Foundation track my data and usage?",
-      "answer1": "We can’t! This solution puts data control in your hands. We have no way of accessing the data on your phone. Whenever you share data in the demo environment, you communicate this information to our servers, but it is removed as soon as you complete the demo or close the connection. Also, only functional cookies are used on this website and during the demos. Once companies run demos or applications on their own servers, the IOTA Foundation, and other parties, will not be aware of the usage or data. Data is shared peer-to-peer making it impossible for others to listen in.",
-      "question2": "Can I restore my data if I lose my phone?",
+      "answer1": "We can’t! This solution puts data control in your hands. We have no way of accessing the data in your wallet. Whenever you share data in the demo environment, you communicate this information to our servers, but it is removed as soon as you complete the demo or close the connection. Also, only functional cookies are used on this website and during the demos. Once companies run demos or applications on their own servers, the IOTA Foundation, and other parties, will not be aware of the usage or data. Data is shared peer-to-peer making it impossible for others to listen in.",
+      "question2": "Can I restore my data if I lose access to my wallet?",
       "answer2": "Not yet. This is currently a demonstration application, which means it doesn’t have all the features that a full release would have. The application is using (mostly) fake data, therefore recovery is not our priority.",
       "question3": "Does my personal data get uploaded to the Tangle?",
       "answer3": "No. In accordance with GDPR regulations, absolutely no personal information is uploaded to the Tangle. Not even in a (pseudo)anonymized state. Because data on the Tangle is immutable, any personal data uploaded to the Tangle would be in violation of the right to be forgotten.",
@@ -71,7 +63,7 @@
       "inBrief": "In Brief",
       "howItWorks": "How It Works",
       "create": "Create",
-      "createText": "Download the Selv app and create a unique identifier, representing you online. This profile remains in your control and doesn’t leave the app without your consent.",
+      "createText": "Choose a compatible wallet and create a unique identifier, representing you online. This profile remains in your control and doesn’t leave the wallet without your consent.",
       "share": "Share",
       "shareText": "Decide who and what others get to see from your personal profile. You can share your data peer-to-peer or on request. Controlled data flow allows you to always get something in return for your data.",
       "grow": "Grow",
@@ -158,11 +150,11 @@
       },
       "introShowMobile": {
         "looksLikeWork": "That Looks Like a Lot of Work...",
-        "advantage": "<0>But using IOTA Identity and the Selv app, it will be <1>​quick and easy​.</1></0>",
+        "advantage": "<0>But using IOTA Identity and our partner wallets, it will be <1>​quick and easy​.</1></0>",
         "noteDesktop": "This demo website is best experienced on a desktop computer."
       },
       "appDownloadQR": {
-        "onceDownloaded": "Once you’ve downloaded and installed the app, click the button below."
+        "onceDownloaded": "Once you’ve chosen and setup a wallet, click the button below."
       },
       "greatSuccess": {
         "signedInDIDText": "You managed to sign into a website you never signed up for. Account creation has been skipped saving you time and effort. The company house is also not burdened with saving your password.",

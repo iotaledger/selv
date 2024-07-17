@@ -11,7 +11,7 @@ export default () => (
                     <img src={logo} alt='Selv logo' />
                     <h1>{t("landing.footer.contactUs")}</h1>
                     <p>{t("landing.footer.contactUsLowerText1")}<br className='line-break' />{t("landing.footer.contactUsLowerText2")}</p>
-                    <p className='bold'>{t("landing.footer.contactUsAt")} <a href='mailto:selv@iota.org' className='bold'>selv@iota.org</a></p>
+                    <p className='bold'>{t("landing.footer.contactUsAt")} <a href='mailto:identity@iota.org' className='bold'>identity@iota.org</a></p>
                     <div className='footer-links'>
                         <a
                             className='footer-link'
