@@ -12,31 +12,8 @@ import { useTranslation } from 'react-i18next';
  */
 const Confirmation: React.FC = () => {
     const { nextStep, theme } = useStep();
-    const [companyId, setCompanyId] = useState('');
-    const [title, setTitle] = useState('');
 
     const { t } = useTranslation();
-
-    useEffect(() => {
-        async function determineCompanyId () {
-            setCompanyId(await getCompanyId());
-            switch (theme) {
-            case 'bank':
-                setTitle("pages.general.confirmation.titleBank");
-                break;
-            case 'insurance':
-                setTitle("pages.general.confirmation.titleInsurance");
-                break;
-            case 'company':
-                setTitle("pages.general.confirmation.titleCompany");
-                break;
-            default:
-                setTitle("pages.general.confirmation.titleCompany");
-                break;
-            }
-        }
-        determineCompanyId();
-    }, [companyId, theme]);
 
     return (
         <Layout>
@@ -46,7 +23,7 @@ const Confirmation: React.FC = () => {
                         <img src={selv} alt='Selv app logo' />
                         <h4>{t("pages.government.confirmation.confirmation")}</h4>
                     </div>
-                    <h2>{t(title)}</h2>
+                    <h2>{t("pages.government.confirmation.title")}</h2>
                     <p>{t("pages.government.confirmation.success")}</p>
                     <Link to={nextStep}>
                         <Button>

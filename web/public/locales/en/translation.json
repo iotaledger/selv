@@ -175,17 +175,19 @@
       }
     },
     "government": {
-      "confirm": {
+      "confirmation": {
         "confirmation": "Your Identity Credential Was Sent To Your Wallet",
+        "title": "🎉",
         "success": "Congratulations, You Claimed Your Identity!",
-        "nextStep": "Register your Company"
+        "nextStep": "Next, Register your Company"
       }
     },
     "company": {
-      "confirm": {
+      "confirmation": {
         "confirmation": "Your Company Credential Was Sent To Your Wallet",
+        "title": "🎉",
         "success": "Congratulations, You Setup your Company!",
-        "nextStep": "Claim Insurance"
+        "nextStep": "Next, Claim Open a Bank Account"
       },
       "incorporatedCompanies": {
         "newlyIncorporatedCompanies": "Newly Incorporated Companies"
@@ -203,10 +205,11 @@
       }
     },
     "bank": {
-      "confirm": {
+      "confirmation": {
         "confirmation": "Your Bank Credential Was Sent To Your Wallet",
+        "title": "🎉",
         "success": "Congratulations, You Claimed Your Bank Account!",
-        "nextStep": "Apply for Insurance"
+        "nextStep": "Next, Apply for Insurance"
       },
       "bankData": {
         "accountTypes": {
@@ -219,8 +222,9 @@
       }
     },
     "insurance": {
-      "confirm": {
+      "confirmation": {
         "confirmation": "Your Insurance Credential Was Sent To Your Wallet",
+        "title": "🎉",
         "success": "Congratulations, You Claimed Your Insurance!",
         "nextStep": "Ready for business"
       },
