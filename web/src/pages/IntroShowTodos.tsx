@@ -40,7 +40,7 @@ const IntroShowTodos: React.FC = () => {
                 </div>
                 <div className='demo-intro' id='app'>
                     <div className='todos'>
-                        <span className='heading'><h2>{t("pages.demo.introShowTodos.welcomeToThe")}</h2>&nbsp;&nbsp;&nbsp;<h2 className='highlight'>{t("pages.demo.introShowTodos.selvDemo")}</h2></span>
+                        <span className='heading'><h2>{t("pages.demo.introShowTodos.welcomeToThe")}&nbsp;</h2><h2 className='highlight'>{t("pages.demo.introShowTodos.selvDemo")}</h2></span>
                         <Trans i18nKey="pages.demo.introShowTodos.hereIsTodo">
                             <h3>Here is <strong>your to-do list</strong> for today:</h3>
                         </Trans>
