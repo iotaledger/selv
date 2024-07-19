@@ -232,6 +232,38 @@ export class WebAppService {
             },
           };
 
+          const walkObj = (obj) => {
+            if (!obj) return;
+            for (const [key, val] of Object.entries(obj)) {
+              if (typeof val === 'object') {
+                walkObj(val); // recursively call the function
+              }
+              if (typeof val === 'string' && val.startsWith('**TEMPLATE')) {
+                // TODO: extract template function
+                switch (val) {
+                  case '**TEMPLATE_DATENOW':
+                    obj[key] = new Date().toISOString();
+                    break;
+
+                  case '**TEMPLATE_BIRTHDAY':
+                    const start = new Date(1955, 0, 1);
+                    const end = new Date(2012, 0, 1);
+
+                    obj[key] = new Date(
+                      start.getTime() +
+                        Math.random() * (end.getTime() - start.getTime()),
+                    ).toISOString();
+                    break;
+
+                  default:
+                    break;
+                }
+              }
+            }
+          };
+
+          walkObj(credential_template);
+
           this.logger.debug('requesting', credential_template);
           return this.identityService.create(
             issuer,
