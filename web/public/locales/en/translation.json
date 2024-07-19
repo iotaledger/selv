@@ -81,7 +81,7 @@
     "main": {
       "claimControl": "A digital Selv,",
       "reuseYourNew": "under your control",
-      "mainText": "Selv is a demo app that showcases how IOTA Identity creates new digital processes and revolutionizes existing ones, with a focus on privacy and control of your own digital Selv."
+      "mainText": "Selv is a demo that showcases how IOTA Identity creates new digital processes and revolutionizes existing ones, with a focus on privacy and control of your own digital Selv."
     },
     "selv": {
       "selvText": "Your data shouldn’t be locked up, but it can't be public either.<1/>Selv promises a solution that <3>enables data flow</3>, completely under your <5>control</5>."
@@ -97,6 +97,7 @@
     "downloadTheSelvApp": "Download the Selv App",
     "orScanCode": "Or scan this QR code<1/>to download",
     "back": "Back",
+    "claimIdentity": "Claim Identity",
     "setUpCompany": "Set up a Company",
     "getBankAccount": "Get a Bank Account",
     "liabilityInsurance": "Liability Insurance",
