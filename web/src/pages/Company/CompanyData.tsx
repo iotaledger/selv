@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Button, notification } from 'antd';
+import { Button, notification, Popover, Tooltip, Typography } from 'antd';
 import { flattenObject } from '../../utils/helper';
 import { Layout, Loading, Form, PrefilledForm } from '../../components';
 import { useTranslation } from 'react-i18next';
 import { Actions, State, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useStep from '../../utils/useStep';
 import { Scopes } from '@shared/types/Scopes';
 import CitizenCredentialConfig from '@shared/credentials/CitizenCredential.json';
 import DomainCheck from '../../components/DomainCheck';
+import { ExportOutlined } from '@ant-design/icons';
+const { Link } = Typography;
 
 const emptyFields = [{
     field: 'CompanyName',
@@ -66,7 +68,7 @@ const CompanyData: React.FC = ({ history, match }: any) => {
     }
 
     function onSubmit(values: any) {
-        dispatch?.({type: Actions.SET_ISSUANCE_DATA, issuanceData: values, scope: Scopes.CompanyHouse});
+        dispatch?.({ type: Actions.SET_ISSUANCE_DATA, issuanceData: values, scope: Scopes.CompanyHouse });
         navigate(nextStep);
     }
 
@@ -109,23 +111,30 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                 </section>
                 <section>
                     <h3 className='section-header'>{t("pages.insurance.insuranceData.companyDetails")}</h3>
-                    <p>Will be issued by <b>company.selv.iota.org</b></p> {/* TODO */} 
-                    <p>to <b>{state.COMPANY_HOUSE?.connectedDID}</b></p> {/* TODO */} 
-                    <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")}/>
-                </section>
-                {
-                    status && (
-                        <div className='loading'>
-                            <p className='bold'>{t(status)}</p>
-                            {
-                                status === messages.waiting && <Loading />
-                            }
-                        </div>
-                    )
-                }
-            </div>
+                    <p>Will be issued by <Popover content={
+                        <Link 
+                            href="https://explorer.iota.org/shimmer-testnet/addr/rms1ppyx34shww5l3e28gynp5r5zljyru2vuyc2vjjeyqr3yy02vtwlx52sh4rj?tab=DID"
+                            target="_blank"
+                        >
+                            did:iota:rms:0x4868d61773a9f8e54741261a0e82fc883e299c2614c94b2400e2423d4c5bbe6a <ExportOutlined />
+                        </Link>
+                    }><b>company.selv.iota.org</b></Popover></p> {/* TODO */}
+                <p>to <b>{state.COMPANY_HOUSE?.connectedDID}</b></p> {/* TODO */}
+                <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")} />
+            </section>
+            {
+                status && (
+                    <div className='loading'>
+                        <p className='bold'>{t(status)}</p>
+                        {
+                            status === messages.waiting && <Loading />
+                        }
+                    </div>
+                )
+            }
+        </div>
 
-        </Layout>
+        </Layout >
     );
 };
 

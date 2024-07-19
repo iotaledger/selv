@@ -8,9 +8,12 @@
     }
 
     .notice {
-        text-align: right;
+        display: flex;
+        justify-content: flex-end;
         @include themify($themes) {
-            color: themed('noticeColor');  
+            p {
+                color: themed('noticeColor');  
+            }
         }
     }
 

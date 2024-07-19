@@ -300,7 +300,7 @@
       "CompanyOwner": "Managing Director",
       "BankName": "Name of the Bank",
       "AccountType": "Bank Account Type",
-      "credentialsBySelv": "Credentials Provided by Selv ID"
+      "dataViaCredentials": "Data provided via Verifiable Credentials"
     },
     "sideBar": {
       "yourTodoList": "Your To-Do List"
