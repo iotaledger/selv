@@ -46,7 +46,7 @@ const ProveIdentity: React.FC = () => {
         <Layout>
             <RandomGraphicElement elements={5}>
                 <div className='scan-qr-page-wrapper'>
-                    <h2>{t("pages.general.proveIdentity.provideCredentials")}</h2>
+                    <h2>{t("pages.general.proveIdentity.proveIdentity")}</h2>
                     <p>
                         <Trans i18nKey="pages.general.proveIdentity.scanToContinue">
                             Scan this QR code with <strong>Selv App</strong> to continue

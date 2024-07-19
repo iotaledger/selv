@@ -145,6 +145,7 @@
         "welcomeToThe": "Welcome to the",
         "selvDemo": "Selv Demo",
         "hereIsTodo": "<0>Here is <1>your to-do list</1> for today:</0>",
+        "claimIdentity": "Claim Identity",
         "setUpCompany": "Set up a Company",
         "getBankAccount": "Get a Bank Account",
         "getLiabilityInsurance": "Get Liability Insurance"
@@ -173,12 +174,24 @@
         "returnHome": "Return Home"
       }
     },
+    "government": {
+      "confirm": {
+        "confirmation": "Your Identity Credential Was Sent To Your Wallet",
+        "success": "Congratulations, You Claimed Your Identity!",
+        "nextStep": "Register your Company"
+      }
+    },
     "company": {
+      "confirm": {
+        "confirmation": "Your Company Credential Was Sent To Your Wallet",
+        "success": "Congratulations, You Setup your Company!",
+        "nextStep": "Claim Insurance"
+      },
       "incorporatedCompanies": {
         "newlyIncorporatedCompanies": "Newly Incorporated Companies"
       },
       "signInConfirmation": {
-        "signInSuccess": "You have now signed in <bold>using your DID {{DID}}</bold> without ever creating an account. No more need for endless account and password creations. In addition, you provided trustable information, which businesses can use without an expensive verification process. Verifying your data is nearly instant and completely free."
+        "signInSuccess": "You have now signed in <bold>using your DID {{DID}}</bold> without ever creating an account. No more need for endless account and password creations. In addition, you will be able to provide trustable information, which businesses can use without an expensive verification process. Verifying your data is nearly instant and completely free."
       },
       "companyData": {
         "companyName": "Company Name",
@@ -190,6 +203,11 @@
       }
     },
     "bank": {
+      "confirm": {
+        "confirmation": "Your Bank Credential Was Sent To Your Wallet",
+        "success": "Congratulations, You Claimed Your Bank Account!",
+        "nextStep": "Apply for Insurance"
+      },
       "bankData": {
         "accountTypes": {
           "label": "Choose Bank Account Type",
@@ -201,6 +219,11 @@
       }
     },
     "insurance": {
+      "confirm": {
+        "confirmation": "Your Insurance Credential Was Sent To Your Wallet",
+        "success": "Congratulations, You Claimed Your Insurance!",
+        "nextStep": "Ready for business"
+      },
       "insuranceData": {
         "openAnAccount": "Open an Account",
         "accountType": "Account Type",
@@ -218,18 +241,12 @@
       }
     },
     "general": {
-      "confirmation": {
-        "titleBank": "Your Business Bank Account Is Now Set Up!",
-        "titleInsurance": "Congratulations, Your Liability Insurance Is Now Set Up!",
-        "titleCompany": "Congratulations, Your Company Is Now Set Up!",
-        "credentialsToSelv": "Your New Business Is Sent to Selv",
-        "proudOwnerOfCompany": "You are now the proud owner of your new company. From now on you’ll be able to prove that you have a directorship position at your newly found company. Open up Selv in order to receive a signed credential you can use to act on behalf of your company.",
-        "returnToCompany": "Return to Company House"
-      },
       "proveIdentity": {
-        "waitingForLogin": "Waiting for Login",
+        "waitingForLogin": "Waiting for connection",
+        "proveIdentity": "Prove control over your Digital Identity",
+        "receiveCredentials": "Receive Credentials",
         "provideCredentials": "Provide Your Digital Identity Credentials",
-        "scanToContinue": "Scan this QR code with <1>Selv App</1> to continue"
+        "scanToContinue": "Scan this QR code with <1>your wallet</1> to continue"
       },
       "companyDetails": {
         "companyNumber": "Company Number",

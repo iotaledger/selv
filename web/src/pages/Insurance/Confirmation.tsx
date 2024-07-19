@@ -44,18 +44,13 @@ const Confirmation: React.FC = () => {
                 <div className='confirmation-page'>
                     <div className='selv-wrapper'>
                         <img src={selv} alt='Selv app logo' />
-                        <h4>{t("pages.general.confirmation.credentialsToSelv")}</h4>
+                        <h4>{t("pages.insurance.confirmation.confirmation")}</h4>
                     </div>
                     <h2>{t(title)}</h2>
-                    {
-                        theme === 'company' &&
-                            <p>{t("pages.general.confirmation.proudOwnerOfCompany")}</p>
-                    }
+                    <p>{t("pages.insurance.confirmation.success")}</p>
                     <Link to={nextStep}>
                         <Button>
-                            {
-                                theme === 'company' ? t("actions.continue") : t("pages.general.confirmation.returnToCompany") 
-                            }
+                            {t("pages.insurance.confirmation.nextStep")}
                         </Button>
                     </Link>
                 </div>

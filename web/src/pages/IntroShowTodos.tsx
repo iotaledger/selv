@@ -45,6 +45,7 @@ const IntroShowTodos: React.FC = () => {
                             <h3>Here is <strong>your to-do list</strong> for today:</h3>
                         </Trans>
                         <ul className='todos'>
+                            <li>{t("pages.demo.introShowTodos.claimIdentity")}</li>
                             <li>{t("pages.demo.introShowTodos.setUpCompany")}</li>
                             <li>{t("pages.demo.introShowTodos.getBankAccount")}</li>
                             <li>{t("pages.demo.introShowTodos.getLiabilityInsurance")}</li>
