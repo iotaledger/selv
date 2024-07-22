@@ -23,7 +23,7 @@
     "controlIdentity": {
       "youControlYour": "You Control Your",
       "ownIdentity": "Own Identity",
-      "whatItIsDetailed": "Through Self-Sovereign Identity, people, organizations and things are empowered to collect and share their own verified data and digital identity. This increased privacy and control, enabling a “Bring Your Own Identity” (BYOI) style of engagement with corporations, removing the need to perform expensive data collection."
+      "whatItIsDetailed": "Through Self-Sovereign Identity, people, organizations and things are empowered to collect and share their own verified data and digital identity. This approach increases privacy and control, enabling a “Bring Your Own Identity” (BYOI) style of engagement with corporations, removing the need to perform expensive data collection."
     },
     "FAQ": {
       "question1": "Does the IOTA Foundation track my data and usage?",
@@ -84,7 +84,7 @@
       "mainText": "Selv is a demo that showcases how IOTA Identity creates new digital processes and revolutionizes existing ones, with a focus on privacy and control of your own digital Selv."
     },
     "selv": {
-      "selvText": "Your data shouldn’t be locked up, but it can't be public either.<1/>Selv promises a solution that <3>enables data flow</3>, completely under your <5>control</5>."
+      "selvText": "Your data shouldn’t be locked up, but it can't be public either.<1/>Selv offers a solution that <3>enables data flow</3>, completely under your <5>control</5>."
     }
   },
   "actions": {
@@ -153,7 +153,7 @@
       "introShowMobile": {
         "looksLikeWork": "That Looks Like a Lot of Work...",
         "advantage": "<0>But using IOTA Identity and our partner wallets, it will be <1>​quick and easy​.</1></0>",
-        "noteDesktop": "This demo website is best experienced on a desktop computer."
+        "noteDesktop": "For the best experience, please use this demo website on a desktop computer."
       },
       "appDownloadQR": {
         "onceDownloaded": "Once you’ve chosen and setup a wallet, click the button below."
@@ -193,7 +193,7 @@
         "newlyIncorporatedCompanies": "Newly Incorporated Companies"
       },
       "signInConfirmation": {
-        "signInSuccess": "You have now signed in <bold>using your DID {{DID}}</bold> without ever creating an account. No more need for endless account and password creations. In addition, you will be able to provide trustable information, which businesses can use without an expensive verification process. Verifying your data is nearly instant and completely free."
+        "signInSuccess": "You have now signed in <bold>using your DID {{DID}}</bold> without ever creating an account. No more need for endless account and password creation. In addition, you will be able to provide trustable information, which businesses can use without an expensive verification process. Verifying your data is nearly instant and completely free."
       },
       "companyData": {
         "companyName": "Company Name",
