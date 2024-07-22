@@ -14,6 +14,7 @@ import {
     GreatSuccess,
     ThankYou,
     AppPicker,
+    WalletDownload,
 } from './pages';
 
 import TangleLabs from "./components/powerdBy/TangleLabs";
@@ -53,6 +54,10 @@ export const routes = [
     // { path: '/:lng?/insurance/confirm/3', element: <Company.Confirmation/> },
     // { path: '/:lng?/company/details/3/:companyId', element: <Company.CompanyDetails/> },
     { path: '/:lng?/demo/thankyou', element: <ThankYou/> }
+];
+
+export const utilityRoutes = [
+    { path: '/wallets/:wallet', element: <WalletDownload/> }
 ];
 
 //These are now just the keys for the translation that get dynamically loaded

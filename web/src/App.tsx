@@ -6,7 +6,7 @@ import { GlobalStateProvider } from './context/globalState'
 import 'aos/dist/aos.css';
 
 import './styles/index.scss';
-import { routes } from './steps'
+import { routes, utilityRoutes } from './steps'
 import { App } from 'antd';
 
 
@@ -23,7 +23,7 @@ WebFontLoader.load({
 
 AOS.init();
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter([...routes, ...utilityRoutes]);
 
 const SelvApp: React.FC = () => {
 

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import { Button, Modal } from 'antd';
 import { Layout, RandomGraphicElement } from '../components';
 import { QRCode } from 'antd';
@@ -12,51 +12,8 @@ import dots from '../assets/backgrounds/dots.png';
 import circle from '../assets/backgrounds/circleFrame6.svg';
 import config from '../config.json';
 import { useTranslation, Trans } from 'react-i18next';
-import Impierce from '../components/powerdBy/Impierce';
-import UniMe from '../components/apps/UniMe';
-import UniMeImage from '../assets/apps/unime-image.png';
-import ViraImage from '../assets/apps/vira-image.png';
-import TangleLabs from '../components/powerdBy/TangleLabs';
-import Vira from '../components/apps/Vira';
-
-
-interface WalletInfo {
-    name: string,
-    logo: React.ReactElement,
-    by: React.ReactElement,
-    image: string,
-    description: string,
-    link?: string,
-    storeLinks?: {
-        android: string,
-        apple: string,
-    }
-}
-
-const wallets: WalletInfo[] = [
-    {
-        name: "UniMe",
-        logo: <UniMe/>,
-        by: <Impierce/>,
-        image: UniMeImage,
-        description: "An Identity Wallet to manage Decentralized Identities and Verifiable Credentials",
-        storeLinks: {
-            android: "https://play.google.com/store/apps/details?id=com.impierce.identity_wallet",
-            apple: ""
-        }
-    },
-    {
-        name: "Vira",
-        logo: <Vira/>,
-        by: <TangleLabs/>,
-        image: ViraImage,
-        description: "Vira Identity Wallet is a digital identity wallet for the future. Giving you back control of your data and providing you with extended privacy throughout the web 3.0 space.",
-        storeLinks: {
-            android: "https://play.google.com/store/apps/details?id=io.tanglelabs.vira",
-            apple: "https://apps.apple.com/de/app/vira-wallet/id6466040524"
-        }
-    }
-]
+import { wallets } from '../wallets';
+import { utilityRoutes } from '../steps';
 
 const AppPicker: React.FC = () => {
     const { nextStep } = useStep();
@@ -65,8 +22,10 @@ const AppPicker: React.FC = () => {
 
     const [open, setOpen] = useState("");
 
+    const walletDownloadRoute = utilityRoutes.find(elem => elem.path.includes('/wallets/:wallet'));
+
     const randomOrderWallets = useMemo(() => {
-        return wallets.sort( () => .5 - Math.random() )
+        return wallets.sort(() => .5 - Math.random())
     }, [])
 
     return (
@@ -88,8 +47,8 @@ const AppPicker: React.FC = () => {
                                                         <span>
                                                             by &nbsp;
                                                             {wallet.by}
-                                                        </span>            
-                                        
+                                                        </span>
+
                                                         <Button onClick={() => setOpen(wallet.name)}>
                                                             {t("actions.continue")}
                                                         </Button>
@@ -113,9 +72,9 @@ const AppPicker: React.FC = () => {
                                                         </span>
                                                     </div>
                                                     <p>{wallet.description}</p>
-                                                    
+
                                                     <div className='wallet-modal__qr'>
-                                                        <QRCode type="svg" bordered={false} errorLevel='H' size={200} value={wallet.storeLinks?.android ?? ""} />
+                                                        <QRCode type="svg" bordered={false} errorLevel='H' size={200} value={window.location.origin + generatePath(walletDownloadRoute!.path, { wallet: wallet.name })} />
                                                     </div>
                                                 </section>
                                             </Modal>
@@ -132,14 +91,14 @@ const AppPicker: React.FC = () => {
                     <img src={avatar1} alt='' className='avatar1' />
                     <img src={avatar2} alt='' className='avatar2' />
                 </div>
-                    <div className="cta-section" id='app-download'>
-                        <p className='subtitle'>{t("pages.demo.appDownloadQR.onceDownloaded")}</p>
-                        <Link to={nextStep} className='cta'>
-                            <Button>
-                                {t("actions.continue")}
-                            </Button>
-                        </Link>
-                    </div>
+                <div className="cta-section" id='app-download'>
+                    <p className='subtitle'>{t("pages.demo.appDownloadQR.onceDownloaded")}</p>
+                    <Link to={nextStep} className='cta'>
+                        <Button>
+                            {t("actions.continue")}
+                        </Button>
+                    </Link>
+                </div>
             </React.Fragment>
         </Layout>
     );
