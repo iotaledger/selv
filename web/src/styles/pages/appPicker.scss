@@ -8,9 +8,9 @@
         z-index: 1;
     }
 
-    position: fixed;
+    //position: fixed;
     width: calc(100% - 320px);
-    height: calc(100% - 100px);
+    height: calc(100% - 330px);
     z-index: 2;
     margin-top: -50px;
     padding-top: 18px;
@@ -23,6 +23,7 @@
         overflow-y: auto;
         position: relative;
         z-index: 1;
+        padding-bottom: 165px;
     }
 
     h1 {
