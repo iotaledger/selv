@@ -81,7 +81,7 @@
     "main": {
       "claimControl": "A digital Selv,",
       "reuseYourNew": "under your control",
-      "mainText": "Selv is a demo that showcases how IOTA Identity creates new digital processes and revolutionizes existing ones, with a focus on privacy and control of your own digital Selv."
+      "mainText": "Selv is a demo platform that showcases how IOTA Identity creates new digital processes and revolutionizes existing ones, with a focus on privacy and control of your own digital Selv."
     },
     "selv": {
       "selvText": "Your data shouldn’t be locked up, but it can't be public either.<1/>Selv offers a solution that <3>enables data flow</3>, completely under your <5>control</5>."
