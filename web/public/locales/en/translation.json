@@ -9,9 +9,9 @@
       "control": "Control",
       "benefitsControl": "Everything related to your identity and your personal data remains in your control.",
       "privacy": "Privacy",
-      "benefitsPrivacy": "Improved privacy by only revealing the minimum amount of information.",
+      "benefitsPrivacy": "Improved privacy by only revealing the minimal amount of information.",
       "reusability": "Reusability",
-      "benefitsReusability": "Share as often as you like. No more typing in the same information over and over.",
+      "benefitsReusability": "Share as often as you like. No more typing of the same information over and over.",
       "forBusiness": "For Business",
       "privacyLaws": "Privacy Laws",
       "benefitsPrivacyLaws": "Complies to the strictest interpretation of the General Data Protection Act (GDPR).",
@@ -49,7 +49,9 @@
       "question7": "What is a DLT or Tangle?",
       "answer7": "Distributed Ledger Technology (DLT) is the umbrella term for technologies like Blockchains. It is a decentralized database of which many copies are hosted across the world. They agree with each other on what is true and what isn't through the consensus mechanism. With Bitcoin, this process costs a lot of electricity due to its security model. The IOTA Tangle solves this, making it faster, feeless and green. The Tangle is the underlying data structure of the IOTA network, which hosts the IOTA cryptocurrency token and is developed by the IOTA Foundation.",
       "question8": "Who developed the Selv Demos?",
-      "answer8": "Selv is developed by the IOTA Foundation in collaboration with different parties. The IOTA Foundation is a non-profit foundation guiding and contributing to the development of the core protocol and facilitating the development of the ecosystem around IOTA."
+      "answer8": "Selv is developed by the IOTA Foundation in collaboration with different parties. The IOTA Foundation is a non-profit foundation guiding and contributing to the development of the core protocol and facilitating the development of the ecosystem around IOTA.",
+      "question9": "Where are the Identities of the Selv demo stored?",
+      "answer9": "“Identities of legal entities in this exemplary showcase (e.g. government, company xyz) are stored on the public and permissionless IOTA Mainnet, which allows everyone to verify statements issued by these entities. Identities of private individuals (e.g. you while walking through the demo process) are stored solely on your device for maximal privacy."
     },
     "footer": {
       "contactUs": "Contact Us",
@@ -65,11 +67,11 @@
       "create": "Create",
       "createText": "Choose a compatible wallet and create a unique identifier, representing you online. This profile remains in your control and doesn’t leave the wallet without your consent.",
       "share": "Share",
-      "shareText": "Decide who and what others get to see from your personal profile. You can share your data peer-to-peer or on request. Controlled data flow allows you to always get something in return for your data.",
+      "shareText": "Decide what others get to see from your personal profile, and whom you want to share it with. You can share your data peer-to-peer or on request. Controlled data flows allow you to always get something in return for your data.",
       "grow": "Grow",
       "growText": "Gather credentials about yourself, verified by others, to grow your personal identity. Fully under your control and not stored in any database.",
       "accept": "Accept",
-      "acceptText": "By accepting BYOI, companies can verify customer data, instantly and for free. This allows you to speed up processes such as onboarding and reduce the amount of typing your customers have to do."
+      "acceptText": "By adopting Bring Your Own Identity (BYOI), companies can instantly and freely verify customer data, instantly and for free. Companies benefit from accurate, verified information without the need for extensive data collection and storage, while customers enjoy a smoother, more secure experience."
     },
     "header": {
       "How it works": "How It Works",
@@ -81,7 +83,7 @@
     "main": {
       "claimControl": "A digital Selv,",
       "reuseYourNew": "under your control",
-      "mainText": "Selv is a demo platform that showcases how IOTA Identity creates new digital processes and revolutionizes existing ones, with a focus on privacy and control of your own digital Selv."
+      "mainText": "Selv is a demo platform that showcases how IOTA Identity streamlines and revolutionizes digital processes, with a focus on privacy and control of your own digital Identity."
     },
     "selv": {
       "selvText": "Your data shouldn’t be locked up, but it can't be public either.<1/>Selv offers a solution that <3>enables data flow</3>, completely under your <5>control</5>."
