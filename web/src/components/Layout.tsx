@@ -33,12 +33,9 @@ export default ({ children, customTheme, customStep, noHeader, noFooter }: {
                     customStep || step >= 0 ? (
                         <Sidebar
                             poweredBy={currentRoute?.poweredBy}
-                        >
-                            <Steps
-                                steps={mainSteps}
-                                stepId={customStep || step}
-                            />
-                        </Sidebar>
+                            processes={mainSteps[step].processes}
+                            mainSteps={mainSteps}
+                        />
                     ) : null
                 }
                 <Disclaimer />

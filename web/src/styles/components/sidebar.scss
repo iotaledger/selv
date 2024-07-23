@@ -3,14 +3,15 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    width: 320px;
-    padding: 60px 25px 40px 50px;
+    width: 420px;
+    padding: 50px 20px 30px 40px;
     height: 100vh;
     background-color: #FFFFFF;
     position: relative;
     box-shadow: -8px 0px 10px rgba(132, 147, 173, 0.1);
     border-bottom: 8px solid #4140DF;
     z-index: 2;
+    overflow-y: auto;
 
     @include breakPoint(medium) {
         display: none;
@@ -38,7 +39,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 20px 20px 100px 0;
+        padding: 20px 20px 30px 0;
 
         font-weight: bold;
         font-size: 24px;
@@ -85,6 +86,10 @@
         }
     }
 }
+
+.substep-wrapper {
+    margin-left: 20px;
+}
   
 .rs-sidenav {
     background-color: #FFFFFF;
@@ -101,9 +106,14 @@
 .steps-wrapper {
     text-align: left;
     width: 250px;
-    display: inline-table;
-    vertical-align: top;
-  }
+    overflow-y: hidden;
+    max-height: 24px;
+    transition: max-height 0.5s ease-in-out;
+}
+
+.steps-wrapper.is-open {
+    max-height: 9999px;
+}
   
 .rs-steps-item-tail {
     display: none;

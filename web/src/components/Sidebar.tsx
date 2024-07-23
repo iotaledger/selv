@@ -6,6 +6,7 @@ import frame from '../assets/backgrounds/circleFrame5.svg';
 import DropSelector from './DropSelector';
 import { useTranslation } from 'react-i18next';
 import IOTA from './powerdBy/IOTA';
+import StepsInstance from './Steps';
 
 // https://rsuitejs.com/en/components/sidenav
 
@@ -15,9 +16,10 @@ const externalPages = [
     { url: 'https://iota.org', title: 'IOTA.org' }
 ];
 
-const SidebarInstance = ({ children, poweredBy }: {
-    children?: JSX.Element | null | undefined;
+const SidebarInstance = ({ mainSteps, poweredBy, processes }: {
+    mainSteps?: JSX.Element;
     poweredBy?: JSX.Element;
+    processes?: JSX.Element;
 }) => {
     const { t } = useTranslation();
 
@@ -29,15 +31,7 @@ const SidebarInstance = ({ children, poweredBy }: {
             <div className="sidebar-drop-selector">
                 <DropSelector />
             </div>
-
-            <Sidenav activeKey='0'>
-                <Sidenav.Body>
-                    <h2 className='todo-list'>
-                        {t("components.sideBar.yourTodoList")}
-                    </h2>
-                    { children }
-                </Sidenav.Body>
-            </Sidenav>
+            <StepsInstance title={t("components.sideBar.yourTodoList")} steps={ mainSteps } stepId={1}/>
             <div className='sidebar-footer'>
                 <div className='sidebar-links'>
                     {externalPages.map(page => (

@@ -44,7 +44,29 @@ export const routes = [
 
 //These are now just the keys for the translation that get dynamically loaded
 export const mainSteps = [
-    { title: "actions.setUpCompany" },
+    { title: "actions.setUpCompany", processes: [
+        {
+            title: "process.signIn",
+        },
+        {
+            title: "process.signInVerification",
+        },
+        {
+            title: "process.presentCredential",
+        },
+        {
+            title: "process.presentCredentialVerification",
+        },
+        {
+            title: "process.offerCredential",
+        },
+        {
+            title: "process.acceptCredential",
+        },
+        {
+            title: "process.issueCredential",
+        },
+    ]},
     { title: "actions.getBankAccount" },
     { title: "actions.liabilityInsurance"},
     { title: "actions.readyForBusiness"},

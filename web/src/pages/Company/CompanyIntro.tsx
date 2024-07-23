@@ -20,12 +20,12 @@ const CompanyIntro: React.FC = () => {
                     </Button>
                 </Link>
             </div>
-            <Sidebar>
+            {/* <Sidebar>
                 <Steps
                     steps={mainSteps}
                     stepId={step}
                 />
-            </Sidebar>
+            </Sidebar> */}
         </div>
     );
 };
