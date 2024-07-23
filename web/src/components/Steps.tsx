@@ -8,6 +8,7 @@ import { MainStep, Route } from 'src/steps';
 
 const processStyles = {
     marginTop: '20px',
+    marginLeft: '1px',
 };
 
 const StepsInstance = ({ title, steps, currentRoute }: {

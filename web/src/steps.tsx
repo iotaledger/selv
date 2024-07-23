@@ -36,10 +36,10 @@ export const routes: Route[] = [
     { path: '/:lng?/demo/app', element: <IntroShowMobile /> },
     { path: '/:lng?/demo/app-picker', element: <AppPicker />, step: "setup" },
     { path: '/:lng?/government/prove', element: <Government.ProveIdentity />, step: "government", process: "signIn", poweredBy: <TangleLabs /> },
-    { path: '/:lng?/government/signin', element: <Government.SingInConfirmation />, step: "government", process: "offerCredential", poweredBy: <TangleLabs /> },
+    { path: '/:lng?/government/signin', element: <Government.SingInConfirmation />, step: "government", process: "signIn", poweredBy: <TangleLabs /> },
     // { path: '/:lng?/government/data', element: <Government.GovernmentData/>, step: "government", poweredBy: <TangleLabs/> },
     { path: '/:lng?/government/receive', element: <Government.ReceiveCredentials />, step: "government", process: "issueCredential", poweredBy: <TangleLabs /> },
-    { path: '/:lng?/government/confirm', element: <Government.Confirmation />, step: "government", poweredBy: <TangleLabs /> },
+    { path: '/:lng?/government/confirm', element: <Government.Confirmation />, step: "government", process: "issueCredential", poweredBy: <TangleLabs /> },
     { path: '/:lng?/company/prove', element: <Company.ProveIdentity />, step: "company", poweredBy: <Impierce /> },
     { path: '/:lng?/company/signin', element: <Company.SingInConfirmation />, step: "company", poweredBy: <Impierce /> },
     { path: '/:lng?/company/provide', element: <Company.ProvideData />, step: "company", poweredBy: <Impierce /> },
@@ -86,10 +86,6 @@ export const mainSteps: MainStep[] = [
             {
                 id: "signIn",
                 title: "steps.government.processes.signIn",
-            },
-            {
-                id: "offerCredential",
-                title: "steps.government.processes.issueCredential",
             },
             {
                 id: "issueCredential",
