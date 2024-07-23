@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import Steps from './Steps';
 import Sidebar from './Sidebar';
 import useStep from '../utils/useStep';
 
@@ -32,12 +31,9 @@ const Layout = ({ children, customTheme, customStep, noHeader, noFooter }: {
                     customStep || currentRoute?.step ? (
                         <Sidebar
                             poweredBy={currentRoute?.poweredBy}
-                        >
-                            <Steps
-                                steps={mainSteps}
-                                stepId={customStep || mainSteps.findIndex((elem) => elem.id === currentRoute.step)}
-                            />
-                        </Sidebar>
+                            currentRoute={currentRoute}
+                            mainSteps={mainSteps}
+                        />
                     ) : null
                 }
             </div>

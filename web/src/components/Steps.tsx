@@ -1,21 +1,50 @@
 import React from 'react';
-import { Steps } from 'antd';
-import i18n from 'i18next';
 
-const styles = {
-    width: '200px',
-    display: 'inline-table',
-    verticalAlign: 'top'
+import i18n, { t } from 'i18next';
+import classNames from 'classnames';
+import { Steps } from 'antd';
+import { MainStep, Route } from 'src/steps';
+
+
+const processStyles = {
+    marginTop: '20px',
 };
 
-const StepsInstance = ({ steps, stepId }: {
-    steps: any;
-    stepId: number;
+const StepsInstance = ({ title, steps, currentRoute }: {
+    title: string
+    steps: MainStep[];
+    currentRoute: Route;
 }) => {
+
     return (
-        <div className='steps-wrapper'>
-            <Steps current={stepId} size={'small'} direction="vertical" style={styles} items={steps.map((step: { title: string }) => ({ ...step, title: i18n.t(step.title) }))} />
-        </div>
+
+        <section>
+            <h2 className='todo-list'>
+                {t(title)}
+            </h2>
+            <div className={classNames('steps-wrapper')}>
+                <Steps
+                    current={steps.findIndex(elem => elem.id === currentRoute.step)}
+                    size={"small"}
+                    direction={"vertical"}
+                    items={steps.map((step) => ({
+                        title: i18n.t(step.title),
+                        description: currentRoute.step === step.id && <Steps
+                            current={step.processes?.findIndex(elem => elem.id === currentRoute.step)}
+                            progressDot
+                            direction={"vertical"}
+                            style={processStyles}
+                            items={step.processes?.map((process) => ({
+                                title: i18n.t(process.title),
+                            })
+                            )}
+                        />
+                    }))}
+                />
+
+            </div>
+
+        </section>
     );
 };
 

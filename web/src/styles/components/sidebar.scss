@@ -2,15 +2,15 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
-    width: 320px;
-    padding: 60px 25px 40px 50px;
+    width: 420px;
+    padding: 50px 20px 30px 40px;
     height: 100vh;
     background-color: #FFFFFF;
     position: relative;
     box-shadow: -8px 0px 10px rgba(132, 147, 173, 0.1);
     border-bottom: 8px solid #4140DF;
     z-index: 2;
+    overflow-y: auto;
 
     @include breakPoint(medium) {
         display: none;
@@ -20,6 +20,7 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 35px;
+        width: 100%;
     }
 
     .frame {
@@ -39,19 +40,21 @@
     }
 
     .todo-list {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
         font-weight: bold;
         font-size: 24px;
         line-height: 24px;
         color: #142037;
         margin-bottom: 40px;
-
-        img {
-            height: 18px;
-        }
     }
 }
 
 .sidebar-footer {
+    margin-top: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -85,11 +88,3 @@
         }
     }
 }
-  
-.steps-wrapper {
-    text-align: left;
-    width: 250px;
-    display: inline-table;
-    vertical-align: top;
-  }
-  
