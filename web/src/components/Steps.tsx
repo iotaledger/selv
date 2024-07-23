@@ -25,14 +25,12 @@ const StepsInstance = ({ title, steps, currentRoute }: {
             <div className={classNames('steps-wrapper')}>
                 <Steps
                     current={steps.findIndex(elem => elem.id === currentRoute.step)}
-                    // status={"wait"}
                     size={"small"}
                     direction={"vertical"}
                     items={steps.map((step) => ({
                         title: i18n.t(step.title),
                         description: currentRoute.step === step.id && <Steps
                             current={step.processes?.findIndex(elem => elem.id === currentRoute.step)}
-                            // status={"wait"}
                             progressDot
                             direction={"vertical"}
                             style={processStyles}
