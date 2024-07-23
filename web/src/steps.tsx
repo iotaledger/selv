@@ -21,29 +21,38 @@ import TangleLabs from "./components/powerdBy/TangleLabs";
 import Impierce from "./components/powerdBy/Impierce";
 import Waltid from "./components/powerdBy/Waltid";
 
-export const routes = [
-    { path: '/:lng?', element: <Landing/> },
-    { path: '/:lng?/demo/todos', element: <IntroShowTodos/> },
-    { path: '/:lng?/demo/app', element: <IntroShowMobile/> },
-    { path: '/:lng?/demo/app-picker', element: <AppPicker/>, step: "government" },
-    { path: '/:lng?/government/prove', element: <Government.ProveIdentity/>, step: "government", poweredBy: <TangleLabs/> },
-    { path: '/:lng?/government/signin', element: <Government.SingInConfirmation/>, step: "government", poweredBy: <TangleLabs/> },
+export type Route = {
+    path: string;
+    element: JSX.Element;
+    step?: string;
+    process?: string;
+    poweredBy?: JSX.Element;
+};
+
+
+export const routes: Route[] = [
+    { path: '/:lng?', element: <Landing /> },
+    { path: '/:lng?/demo/todos', element: <IntroShowTodos /> },
+    { path: '/:lng?/demo/app', element: <IntroShowMobile /> },
+    { path: '/:lng?/demo/app-picker', element: <AppPicker />, step: "setup" },
+    { path: '/:lng?/government/prove', element: <Government.ProveIdentity />, step: "government", process: "signIn", poweredBy: <TangleLabs /> },
+    { path: '/:lng?/government/signin', element: <Government.SingInConfirmation />, step: "government", process: "offerCredential", poweredBy: <TangleLabs /> },
     // { path: '/:lng?/government/data', element: <Government.GovernmentData/>, step: "government", poweredBy: <TangleLabs/> },
-    { path: '/:lng?/government/receive', element: <Government.ReceiveCredentials/>, step: "government", poweredBy: <TangleLabs/> },
-    { path: '/:lng?/government/confirm', element: <Government.Confirmation/>, step: "government", poweredBy: <TangleLabs/> },
-    { path: '/:lng?/company/prove', element: <Company.ProveIdentity/>, step: "company", poweredBy: <Impierce/> },
-    { path: '/:lng?/company/signin', element: <Company.SingInConfirmation/>, step: "company", poweredBy: <Impierce/> },
-    { path: '/:lng?/company/provide', element: <Company.ProvideData/>, step: "company", poweredBy: <Impierce/> },
-    { path: '/:lng?/company/data', element: <Company.CompanyData/>, step: "company", poweredBy: <Impierce/> },
-    { path: '/:lng?/company/receive', element: <Company.ReceiveCredentials/>, step: "company", poweredBy: <Impierce/> },
-    { path: '/:lng?/company/confirm', element: <Company.Confirmation/>, step: "company", poweredBy: <Impierce/> },
-    { path: '/:lng?/demo/success', element: <GreatSuccess/> },
-    { path: '/:lng?/insurance/prove', element: <Insurance.ProveIdentity/>, step: "insurance", poweredBy: <Waltid/> },
-    { path: '/:lng?/insurance/signin', element: <Insurance.SingInConfirmation/>, step: "insurance", poweredBy: <Waltid/> },
-    { path: '/:lng?/insurance/provide', element: <Insurance.ProvideData/>, step: "insurance", poweredBy: <Waltid/> },
-    { path: '/:lng?/insurance/data', element: <Insurance.InsuranceData/>, step: "insurance", poweredBy: <Waltid/> },
-    { path: '/:lng?/insurance/receive', element: <Insurance.ReceiveCredentials/>, step: "insurance", poweredBy: <Waltid/> },
-    { path: '/:lng?/insurance/confirm', element: <Insurance.Confirmation/>, step: "insurance", poweredBy: <Waltid/> },
+    { path: '/:lng?/government/receive', element: <Government.ReceiveCredentials />, step: "government", process: "issueCredential", poweredBy: <TangleLabs /> },
+    { path: '/:lng?/government/confirm', element: <Government.Confirmation />, step: "government", poweredBy: <TangleLabs /> },
+    { path: '/:lng?/company/prove', element: <Company.ProveIdentity />, step: "company", poweredBy: <Impierce /> },
+    { path: '/:lng?/company/signin', element: <Company.SingInConfirmation />, step: "company", poweredBy: <Impierce /> },
+    { path: '/:lng?/company/provide', element: <Company.ProvideData />, step: "company", poweredBy: <Impierce /> },
+    { path: '/:lng?/company/data', element: <Company.CompanyData />, step: "company", poweredBy: <Impierce /> },
+    { path: '/:lng?/company/receive', element: <Company.ReceiveCredentials />, step: "company", poweredBy: <Impierce /> },
+    { path: '/:lng?/company/confirm', element: <Company.Confirmation />, step: "company", poweredBy: <Impierce /> },
+    { path: '/:lng?/demo/success', element: <GreatSuccess /> },
+    { path: '/:lng?/insurance/prove', element: <Insurance.ProveIdentity />, step: "insurance", poweredBy: <Waltid /> },
+    { path: '/:lng?/insurance/signin', element: <Insurance.SingInConfirmation />, step: "insurance", poweredBy: <Waltid /> },
+    { path: '/:lng?/insurance/provide', element: <Insurance.ProvideData />, step: "insurance", poweredBy: <Waltid /> },
+    { path: '/:lng?/insurance/data', element: <Insurance.InsuranceData />, step: "insurance", poweredBy: <Waltid /> },
+    { path: '/:lng?/insurance/receive', element: <Insurance.ReceiveCredentials />, step: "insurance", poweredBy: <Waltid /> },
+    { path: '/:lng?/insurance/confirm', element: <Insurance.Confirmation />, step: "insurance", poweredBy: <Waltid /> },
     // { path: '/:lng?/company/details/1/:companyId', element: <Company.CompanyDetails/> },
     // { path: '/:lng?/bank/prove/1', element: <Company.ProveIdentity/> },
     // { path: '/:lng?/bank/data/1', element: <BankData/> },
@@ -53,40 +62,63 @@ export const routes = [
     // { path: '/:lng?/insurance/data/2', element: <InsuranceData/> },
     // { path: '/:lng?/insurance/confirm/3', element: <Company.Confirmation/> },
     // { path: '/:lng?/company/details/3/:companyId', element: <Company.CompanyDetails/> },
-    { path: '/:lng?/demo/thankyou', element: <ThankYou/> }
+    { path: '/:lng?/demo/thankyou', element: <ThankYou /> }
 ];
 
 export const utilityRoutes = [
-    { path: '/wallets/:wallet', element: <WalletDownload/> }
+    { path: '/wallets/:wallet', element: <WalletDownload /> }
 ];
 
+export type MainStep = {
+    id: string;
+    title: string;
+    processes?: {
+        id: string;
+        title: string;
+    }[]
+};
+
 //These are now just the keys for the translation that get dynamically loaded
-export const mainSteps = [
-    { id: "government", title: "actions.claimIdentity" },
-    { id: "company", title: "actions.setUpCompany", processes: [
-        {
-            title: "process.signIn",
-        },
-        {
-            title: "process.signInVerification",
-        },
-        {
-            title: "process.presentCredential",
-        },
-        {
-            title: "process.presentCredentialVerification",
-        },
-        {
-            title: "process.offerCredential",
-        },
-        {
-            title: "process.acceptCredential",
-        },
-        {
-            title: "process.issueCredential",
-        },
-    ]},
-    { id: "bank", title: "actions.getBankAccount" },
-    { id: "insurance", title: "actions.liabilityInsurance"},
-    { id: "done", title: "actions.readyForBusiness"},
+export const mainSteps: MainStep[] = [
+    { id: "setup", title: "steps.setup.title" },
+    {
+        id: "government", title: "steps.government.title", processes: [
+            {
+                id: "signIn",
+                title: "steps.government.processes.signIn",
+            },
+            {
+                id: "offerCredential",
+                title: "steps.government.processes.issueCredential",
+            },
+            {
+                id: "issueCredential",
+                title: "steps.government.processes.issueCredential",
+            },
+        ]
+    },
+    {
+        id: "company", title: "steps.company.title", processes: [
+            {
+                id: "signIn",
+                title: "steps.company.processes.signIn",
+            },
+            {
+
+                id: "presentCredential",
+                title: "steps.company.processes.presentCredential",
+            },
+            {
+                id: "offerCredential",
+                title: "steps.company.processes.offerCredential",
+            },
+            {
+                id: "issueCredential",
+                title: "steps.company.processes.done",
+            },
+        ]
+    },
+    // { id: "bank", title: "steps.company.processes.getBankAccount" },
+    // { id: "insurance", title: "steps.company.processes.liabilityInsurance" },
+    { id: "done", title: "steps.done.title" },
 ];

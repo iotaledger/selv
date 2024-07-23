@@ -6,6 +6,7 @@ import DropSelector from './DropSelector';
 import { useTranslation } from 'react-i18next';
 import IOTA from './powerdBy/IOTA';
 import StepsInstance from './Steps';
+import { MainStep, Route } from 'src/steps';
 
 const externalPages = [
     { url: '/', title: 'Home' },
@@ -13,22 +14,24 @@ const externalPages = [
     { url: 'https://iota.org', title: 'IOTA.org' }
 ];
 
-const SidebarInstance = ({ mainSteps, poweredBy, processes }: {
-    mainSteps?: JSX.Element;
+const SidebarInstance = ({ mainSteps, poweredBy, currentRoute }: {
+    mainSteps?: MainStep[];
     poweredBy?: JSX.Element;
-    processes?: JSX.Element;
+    currentRoute: Route;
 }) => {
     const { t } = useTranslation();
 
     return (
         <div className='sidebar-wrapper'>
-            <Link to='/demo/todos'>
-                <img src={logo} alt='Selv logo' className='sidebar-logo' />
-            </Link>
-            <div className="sidebar-drop-selector">
-                <DropSelector />
+            <div className='sidebar-wrapper__header'>
+                <Link to='/demo/todos'>
+                    <img src={logo} alt='Selv logo' className='sidebar-logo' />
+                </Link>
+                <div className="sidebar-drop-selector">
+                    <DropSelector />
+                </div>
             </div>
-            <StepsInstance title={t("components.sideBar.yourTodoList")} steps={ mainSteps } stepId={1}/>
+            <StepsInstance title={t("components.sideBar.yourTodoList")} steps={ mainSteps ?? [] } currentRoute={currentRoute} />
             <div className='sidebar-footer'>
                 <div className='sidebar-links'>
                     {externalPages.map(page => (
