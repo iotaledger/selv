@@ -78,12 +78,6 @@
         }
         h2 {
             font-size: 32px;
-
-            &.highlight {
-                line-height: 6px;
-                margin-top: 12px;
-                border-bottom: 20px solid #B5F3D8;
-            }
         }
         h4 {
             font-size: 14px;
@@ -145,10 +139,17 @@
 
         h2 {
             &.highlight {
-                border-bottom: 24px solid #B5F3D8;
-                line-height: 6px;
-                margin-top: 24px;
+                position: relative;
                 font-weight: 900;
+                &::after{
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    left: 0;
+                    bottom: -8px;
+                    z-index: -1;
+                    border-bottom: 24px solid #B5F3D8;
+                }
             }
         }
 

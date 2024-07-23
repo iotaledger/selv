@@ -9,11 +9,23 @@ import {
   JwtCreationResponse,
 } from './credentials';
 import { ConfigService } from '@nestjs/config';
-import { Issuers } from '../../../types/Issuers';
+import { Issuers } from '../../../shared/types/Issuers';
+import {
+  CredentialPresentationClient,
+  CREDENTIAL_PRESENTATION_SERVICE_NAME,
+  JwtPresentationResponse,
+} from './presentation';
+import {
+  DOMAIN_LINKAGE_SERVICE_NAME,
+  DomainLinkageClient,
+  ValidateDidResponse,
+} from './domain_linkage';
 
 @Injectable()
 export class IdentityService implements OnModuleInit {
   private identityService: JwtClient;
+  private presentationService: CredentialPresentationClient;
+  private domainLinkageService: DomainLinkageClient;
 
   private readonly logger = new Logger(IdentityService.name);
 
@@ -24,6 +36,13 @@ export class IdentityService implements OnModuleInit {
 
   onModuleInit() {
     this.identityService = this.client.getService<JwtClient>(JWT_SERVICE_NAME);
+    this.presentationService =
+      this.client.getService<CredentialPresentationClient>(
+        CREDENTIAL_PRESENTATION_SERVICE_NAME,
+      );
+    this.domainLinkageService = this.client.getService<DomainLinkageClient>(
+      DOMAIN_LINKAGE_SERVICE_NAME,
+    );
   }
 
   async create(
@@ -58,6 +77,50 @@ export class IdentityService implements OnModuleInit {
       );
       this.logger.debug('created credential', jwt);
       return jwt;
+    } catch (error) {
+      this.logger.error(error);
+      throw error;
+    }
+  }
+
+  async validatePresentation(
+    presentation: string,
+  ): Promise<JwtPresentationResponse> {
+    this.logger.debug('Received Presentation validation request', presentation);
+
+    try {
+      const response = await lastValueFrom(
+        this.presentationService
+          .validate({
+            jwt: presentation,
+          })
+          .pipe(
+            timeout(this.configService.get<number>('grpc_service_timeout')),
+          ),
+      );
+      this.logger.debug('validation response', response);
+      return response;
+    } catch (error) {
+      this.logger.error(error);
+      throw error;
+    }
+  }
+
+  async validateDIDDomainLinkage(did: string): Promise<ValidateDidResponse> {
+    this.logger.debug('Received Domain Linkage validation request', did);
+
+    try {
+      const response = await lastValueFrom(
+        this.domainLinkageService
+          .validateDid({
+            did,
+          })
+          .pipe(
+            timeout(this.configService.get<number>('grpc_service_timeout')),
+          ),
+      );
+      this.logger.debug('validation response', response);
+      return response;
     } catch (error) {
       this.logger.error(error);
       throw error;

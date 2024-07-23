@@ -1,5 +1,4 @@
 import React from 'react';
-import { Sidenav } from 'rsuite';
 import { Link } from 'react-router-dom';
 import logo from '../assets/landing/logoHeader.svg';
 import frame from '../assets/backgrounds/circleFrame5.svg';
@@ -7,8 +6,6 @@ import DropSelector from './DropSelector';
 import { useTranslation } from 'react-i18next';
 import IOTA from './powerdBy/IOTA';
 import StepsInstance from './Steps';
-
-// https://rsuitejs.com/en/components/sidenav
 
 const externalPages = [
     { url: '/', title: 'Home' },

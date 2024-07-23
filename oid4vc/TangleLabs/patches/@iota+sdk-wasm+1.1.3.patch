@@ -1,0 +1,21 @@
+diff --git a/node_modules/@iota/sdk-wasm/package.json b/node_modules/@iota/sdk-wasm/package.json
+index c7e0c7a..a767058 100644
+--- a/node_modules/@iota/sdk-wasm/package.json
++++ b/node_modules/@iota/sdk-wasm/package.json
+@@ -17,6 +17,16 @@
+         "!web/test/",
+         "!node/test/"
+     ],
++    "exports": {
++        "./node": {
++            "require": "./node/lib/index.js",
++            "import": {
++                "types": "./node/lib/index.d.js",
++                "default": "./node/lib/index.js"
++            },
++            "default": "./node/lib/index.js"
++        }
++    },
+     "scripts": {
+         "build": "npm run build:nodejs && npm run build:web",
+         "build:src": "cargo build --lib --profile=production --target wasm32-unknown-unknown",

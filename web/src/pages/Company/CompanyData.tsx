@@ -1,36 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Button, notification } from 'antd';
+import { Button, notification, Popover, Tooltip, Typography } from 'antd';
 import { flattenObject } from '../../utils/helper';
 import { Layout, Loading, Form, PrefilledForm } from '../../components';
 import { useTranslation } from 'react-i18next';
-import { useGlobalState } from '../../context/globalState';
-import { Link } from 'react-router-dom';
+import { Actions, State, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
+import { useNavigate } from 'react-router-dom';
 import useStep from '../../utils/useStep';
-import { Scopes } from '@sharedTypes/Scopes';
+import { Scopes } from '@shared/types/Scopes';
+import CitizenCredentialConfig from '@shared/credentials/CitizenCredential.json';
+import DomainCheck from '../../components/DomainCheck';
+import { ExportOutlined } from '@ant-design/icons';
+const { Link } = Typography;
 
-const prefilledFields = [
-    'FirstName',
-    'LastName',
-    'Date',
-    'Nationality',
-    'Birthplace',
-    'Country',
-    'Phone'
+const emptyFields = [{
+    field: 'CompanyName',
+    label: 'pages.company.companyData.companyName',
+},
+{
+    field: 'CompanyAddress',
+    label: 'pages.company.companyData.companyAddress',
+},
+{
+    field: 'CompanyType',
+    label: 'pages.company.companyData.companyType',
+},
+{
+    field: 'CompanyBusiness',
+    label: 'pages.company.companyData.companyBusiness',
+}
 ];
-
-const emptyFields = [
-    'CompanyName',
-    'CompanyAddress',
-    'CompanyType',
-    'CompanyBusiness'
-];
-
-const labels = {
-    CompanyName: 'pages.company.companyData.companyName',
-    CompanyAddress: 'pages.company.companyData.companyAddress',
-    CompanyType: 'pages.company.companyData.companyType',
-    CompanyBusiness: 'pages.company.companyData.companyBusiness'
-};
 
 const messages = {
     waiting: 'general.messages.waiting',
@@ -39,11 +37,11 @@ const messages = {
     verifying: 'general.messages.verifying'
 };
 
-const notify = (type: string, message: string, description: string) => {
-    return type === 'error'
-        ? notification.error({ message, description })
-        : notification.warning({ message, description });
-};
+// const notify = (type: string, message: string, description: string) => {
+//     return type === 'error'
+//         ? notification.error({ message, description })
+//         : notification.warning({ message, description });
+// };
 
 /**
  * Component which will display a CompanyData.
@@ -51,30 +49,15 @@ const notify = (type: string, message: string, description: string) => {
 const CompanyData: React.FC = ({ history, match }: any) => {
     const [fields, setFields] = useState<object>();
     const [status, setStatus] = useState('');
+    const [relevantCredential, setRelevantCredential] = useState<null | any>(null);
     const [prefilledData, setPrefilledData] = useState({});
+    const [validatedDomains, setValidatedDomains] = useState<State['validatedDomains'][keyof State['validatedDomains']] | null>(null);
     const { state } = useGlobalState();
     const { nextStep } = useStep();
+    const dispatch = useCredentialsDispatch();
+    const navigate = useNavigate();
 
     const { t } = useTranslation();
-
-    // useEffect(() => {
-    //     async function getData() {
-    //         const credentialsString: string | null = await localStorage.getItem('credentials');
-    //         const credentials = credentialsString && await JSON.parse(credentialsString);
-    //         const status = credentials?.status;
-    //         if (!status || Number(status) !== 2) {
-    //             notify('error', 'Error', t(messages.connectionError));
-    //             history.goBack();
-    //         }
-    //         const flattenData = flattenObject(credentials?.data);
-    //         const address = { Address: `${flattenData.Street} ${flattenData.House}, ${flattenData.City}, ${flattenData.Country}, ${flattenData.Postcode}` };
-    //         const result = prefilledFields.reduce((acc: any, entry: string) =>
-    //             ({ ...acc, [entry]: flattenData[entry] }), {});
-
-    //         setPrefilledData({ ...result, ...address });
-    //     }
-    //     getData();
-    // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     async function processValues(fields: object) {
         setFields(fields);
@@ -84,12 +67,17 @@ const CompanyData: React.FC = ({ history, match }: any) => {
         setStatus(message);
     }
 
-    const emptyFormData: any = { dataFields: emptyFields, labels, processValues, status, messages };
+    function onSubmit(values: any) {
+        dispatch?.({ type: Actions.SET_ISSUANCE_DATA, issuanceData: values, scope: Scopes.CompanyHouse });
+        navigate(nextStep);
+    }
 
     useEffect(() => {
-        if(!state[Scopes.CompanyHouse]?.credentials.length) return;
-        const relevantCredential = state[Scopes.CompanyHouse].credentials.filter((c: any) => c.credential.type.includes("UniversityDegreeCredential"))?.[0]?.credential;
-        console.log(relevantCredential)
+        if (!state[Scopes.CompanyHouse]?.credentials.length) return;
+        setRelevantCredential(state[Scopes.CompanyHouse].credentials.filter((c: any) => c.credential?.type.includes(CitizenCredentialConfig.template.type.pop()))?.[0]?.credential);
+    }, [state, setRelevantCredential])
+
+    useEffect(() => {
         if (!relevantCredential) return;
         setPrefilledData({
             'FirstName': relevantCredential.credentialSubject.firstName,
@@ -100,40 +88,53 @@ const CompanyData: React.FC = ({ history, match }: any) => {
             'Country': relevantCredential.credentialSubject.country,
             'Phone': relevantCredential.credentialSubject.phone,
         })
-    }, [state, setPrefilledData]) 
+    }, [state, relevantCredential])
+
+    useEffect(() => {
+        if (!relevantCredential) return;
+        setValidatedDomains(state.validatedDomains[relevantCredential.issuer])
+    }, [state, relevantCredential])
 
     return (
         <Layout>
             <div className='company-data-page-wrapper'>
                 <h2>{t("pages.company.companyData.setUpPrivateCompany")}</h2>
-                <h3 className='section-header'>{t("pages.insurance.insuranceData.businessOwner")}</h3>
-                {
-                    // Object.keys(prefilledFormData.dataFields).length &&
-                    <PrefilledForm dataFields={prefilledData} />
-                }
+                <section>
+                    <h3 className='section-header'>{t("pages.insurance.insuranceData.businessOwner")}</h3>
+                    {validatedDomains && (validatedDomains !== 'in-flight') && (
+                        <DomainCheck result={validatedDomains} />
+                    )}
+                    {
+                        // Object.keys(prefilledFormData.dataFields).length &&
+                        <PrefilledForm dataFields={prefilledData} />
+                    }
+                </section>
+                <section>
+                    <h3 className='section-header'>{t("pages.insurance.insuranceData.companyDetails")}</h3>
+                    <p>Will be issued by <Popover content={
+                        <Link 
+                            href="https://explorer.iota.org/shimmer-testnet/addr/rms1ppyx34shww5l3e28gynp5r5zljyru2vuyc2vjjeyqr3yy02vtwlx52sh4rj?tab=DID"
+                            target="_blank"
+                        >
+                            did:iota:rms:0x4868d61773a9f8e54741261a0e82fc883e299c2614c94b2400e2423d4c5bbe6a <ExportOutlined />
+                        </Link>
+                    }><b>company.selv.iota.org</b></Popover></p> {/* TODO */}
+                <p>to <b>{state.COMPANY_HOUSE?.connectedDID}</b></p> {/* TODO */}
+                <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")} />
+            </section>
+            {
+                status && (
+                    <div className='loading'>
+                        <p className='bold'>{t(status)}</p>
+                        {
+                            status === messages.waiting && <Loading />
+                        }
+                    </div>
+                )
+            }
+        </div>
 
-                <h3 className='section-header'>{t("pages.insurance.insuranceData.companyDetails")}</h3>
-                {/* <Form {...emptyFormData} /> */}
-                {
-                    status && (
-                        <div className='loading'>
-                            <p className='bold'>{t(status)}</p>
-                            {
-                                status === messages.waiting && <Loading />
-                            }
-                        </div>
-                    )
-                }
-            <Link to={nextStep}>
-                        <Button>
-                            {
-                                t("actions.continue") 
-                            }
-                        </Button>
-                    </Link>
-            </div>
-
-        </Layout>
+        </Layout >
     );
 };
 

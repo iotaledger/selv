@@ -1,0 +1,7 @@
+@host=http://selv.local:81
+###
+POST /event-listener
+Content-Type: application/json
+{
+    "test": true
+}

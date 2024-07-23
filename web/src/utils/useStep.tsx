@@ -1,43 +1,32 @@
-import { useState, useEffect, useContext } from 'react';
-import {GlobalStateContext} from '../context/globalState';
+import { useState, useEffect } from 'react';
+import { useGlobalState } from '../context/globalState';
 import matchStep from './matchSteps';
 import { useTranslation } from 'react-i18next';
 import { matchPath, useLocation } from 'react-router-dom';
 
 interface MatchResult {
     page: string | undefined;
-    step: string | undefined;
     companyId: string | undefined;
     theme: string | undefined;
 }
 
-const useStep = () => {
-    const [step, setStep] = useState(0);
-    const { mainSteps, routes }: any = useContext(GlobalStateContext);
-    const [nextStep, setNextStep] = useState('');
-    const [currentRoute, setCurrentRoute] = useState<any>(null);
-    const [theme, setTheme] = useState('');
+const useStep = (): { currentRoute: any | null, nextStep: any | null, mainSteps: {id: string, title: string}[], theme: any | null } => {
+    const { mainSteps, routes } = useGlobalState();
+    const [nextStep, setNextStep] = useState(null);
+    const [currentRoute, setCurrentRoute] = useState(null);
+    const [theme, setTheme] = useState<string | null>(null);
     const location = useLocation();
 
     const { i18n } = useTranslation();
 
     useEffect(() => {
-        async function setSteps () {
+        async function setSteps() {
             const matchStepResult: MatchResult | null | undefined = matchStep(location.pathname);
-            if (matchStepResult?.step) {
-                console.log(matchStepResult, location)
-                // TODO: figure out was is going on here
-                if(false) {  // if (location?.search?.step) {
-                    //setStep(Number(match?.params?.step));
-                } else {
-                    setStep(Number(matchStepResult?.step));
-                }
-            }
-            
+
             if (matchStepResult?.theme) {
                 setTheme(matchStepResult?.theme);
             }
-            
+
             const idx = routes.findIndex(({ path }: { path: string; }) => matchPath(path, location.pathname));
             setCurrentRoute(routes[idx]);
             if (idx !== -1 && routes.length > idx + 1) {
@@ -47,9 +36,9 @@ const useStep = () => {
             }
         }
         setSteps();
-    }, [location, routes, step]);
+    }, [location, routes, i18n]);
 
-    return { step, currentRoute, nextStep, mainSteps, theme };
+    return { currentRoute, nextStep, mainSteps, theme };
 };
 
 export default useStep;

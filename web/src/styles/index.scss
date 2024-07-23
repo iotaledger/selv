@@ -3,14 +3,12 @@
 
 // components
 @import './components/text';
-@import './components/table';
 @import './components/sidebar';
 @import './components/header';
 @import './components/footer';
 @import './components/buttons';
 @import './components/drawer';
 @import './components/mobileMenu';
-@import './components/disclaimer';
 @import './components/dropSelector';
 
 // pages
@@ -25,6 +23,16 @@
 @import './pages/greatSuccess';
 @import './pages/appPicker';
 @import './pages/demo';
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
 
 html {
   background: none !important;
@@ -110,6 +118,8 @@ button {
   align-items: center;
   overflow-x: auto;
   height: 100vh;
+  position: relative;
+  z-index: 1;
 
   @include themify($themes) {
     background-color: themed('pageBackground');

@@ -1,14 +1,13 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import randomstring from 'randomstring';
-import { Layout, Loading, QRCode, RandomGraphicElement, WebSocket } from '../../components';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Layout, Loading, QRCode, RandomGraphicElement } from '../../components';
 import useStep from '../../utils/useStep';
-import config from '../../config.json';
 import { useTranslation, Trans } from 'react-i18next';
-import { Router, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { Actions, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
-import { Issuers } from '@sharedTypes/Issuers';
-import { Providers } from '@sharedTypes/Providers';
-import { Scopes } from '@sharedTypes/Scopes';
+import { Issuers } from '@shared/types/Issuers';
+import { Providers } from '@shared/types/Providers';
+import { Scopes } from '@shared/types/Scopes';
+import CompanyCredentialConfig  from '@shared/credentials/CompanyCredential.json';
 
 const ReceiveCredentials: React.FC = () => {
     const { t } = useTranslation();
@@ -25,25 +24,13 @@ const ReceiveCredentials: React.FC = () => {
     }, [nextStep, navigate]);
 
     useEffect(() => {
-        dispatch?.({type: Actions.REQUEST_ISSUANCE, provider: Providers.WaltId, scope: Scopes.CompanyHouse, credential:JSON.stringify({
-            '@context': [
-                'https://www.w3.org/2018/credentials/v1',
-                'https://www.w3.org/2018/credentials/examples/v1',
-            ],
-            type: ['VerifiableCredential', 'UniversityDegreeCredential'],
-            issuanceDate: '2017-10-22T12:23:48Z',
-            // issuer:
-            // 'did:iota:snd:0x1d78531b739a3aef0e90523213f28e869423a6d6253ea0fcbd7db2714e9606bf',
-            credentialSubject: {
-                id: 'did:iota:snd:0xce05da2c7e3fd32e89b4fcaf77bb3101d89be60ba6276cba80bd3ec2bd0603f6',
-                degree: {
-                    type: 'BachelorDegree',
-                    name: 'Bachelor of Science and Arts',
-                },
-            },
-        }),
-        issuer: Issuers.CompanyHouse
-    })
+        dispatch?.({
+            type: Actions.REQUEST_ISSUANCE,
+            provider: Providers.Impierce,
+            scope: Scopes.CompanyHouse,
+            credentials: [{type: CompanyCredentialConfig.template.type.at(-1) as string, data: state.COMPANY_HOUSE?.issuanceData}],
+            issuer: Issuers.Bank //TODO: should be COMPANY_HOUSE?
+        })
     }, [dispatch]);
 
     useEffect(() => {
@@ -67,7 +54,7 @@ const ReceiveCredentials: React.FC = () => {
         <Layout>
             <RandomGraphicElement elements={5}>
                 <div className='scan-qr-page-wrapper'>
-                    <h2>{t("pages.general.proveIdentity.provideCredentials")}</h2>
+                    <h2>{t("pages.general.proveIdentity.receiveCredentials")}</h2>
                     <p>
                         <Trans i18nKey="pages.general.proveIdentity.scanToContinue">
                             Scan this QR code with <strong>Selv App</strong> to continue

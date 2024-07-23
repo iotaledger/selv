@@ -66,26 +66,6 @@
         height: 100%;
         display: flex;
 
-        .store-buttons {
-            > a {
-                margin-right: 20px;
-            }
-
-            @include breakPoint(small) {
-                margin-right: 0;
-                height: 124px;
-                background-color: #8793AB;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-evenly;
-                align-items: center;
-
-                > a {
-                    margin-right: 0;
-                }
-            }
-        }
-
         .desktop {
             @include breakPoint(large) {
                 display: flex;
@@ -489,85 +469,6 @@
             top: -340px;
             right: 0;
             z-index: -1;
-        }
-
-        .content-wrapper {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-around;
-            max-width: 1200px;
-            width: 100%;
-
-            .content-list {
-                z-index: 2;
-                margin: 70px 0;
-            }
-
-            .content-item {
-                margin: 50px 0;
-                max-width: 545px;
-
-                .content-header-wrapper {
-                    margin-bottom: 10px;
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                }
-
-                h5 {
-                    margin-left: 20px;
-                }
-
-                p {
-                    margin-left: 55px;
-                }
-            }
-
-            .desktop {
-                display: flex;
-                max-width: 50%;
-    
-                @include breakPoint(small) {
-                    display: none;
-                }
-            }
-    
-            .mobile {
-                z-index: 2;
-                display: none;
-                @include breakPoint(small) {
-                    display: flex;
-                    flex-direction: column;
-                    margin-top: 40px;
-                }
-            }
-
-            @include breakPoint(small) {
-                flex-direction: column;
-
-                .logo {
-                    display: none;
-                }
-
-                .content-list {
-                    margin: 0;
-                }
-
-                .content-item {
-                    margin: 40px 0;
-
-                    h5 {
-                        margin-left: 0;
-                        margin-bottom: 5px;
-                    }
-    
-                    p {
-                        margin-left: 0;
-                        line-height: 24px;
-                    }
-                }
-            }
         }
     }
 

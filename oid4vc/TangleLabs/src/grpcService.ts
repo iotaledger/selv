@@ -4,6 +4,7 @@ import { loadSync } from "@grpc/proto-loader";
 import { RelyingParty, SiopRequestResult, VcIssuer } from "@tanglelabs/oid4vc";
 import { PresentationDefinitionV2 } from "@sphereon/pex-models";
 import { Cache } from "./cache";
+import {struct, Struct} from 'pb-util';
 
 const crypto = await import('node:crypto');
 
@@ -32,7 +33,7 @@ export const createService = async (
     const requestId = crypto.randomUUID();
     const request = await rp.createRequest({
       requestBy: "reference",
-      requestUri: encodeURIComponent(`${process.env.PUBLIC_URL}/api/offer/${requestId}`),
+      requestUri: new URL(`/api/offer/${requestId}`, process.env.PUBLIC_URL).toString(),
       responseType: "id_token",
       state: call.request.state,
       nonce: call.request.nonce,
@@ -51,16 +52,18 @@ export const createService = async (
 
   async function createOID4VPRequest(
     call: grpc.ServerUnaryCall<
-      { presentationDefinition: any; state: any; nonce: string },
+      { presentationDefinition: Struct; state: string; nonce: string },
       any
     >,
     callback: grpc.sendUnaryData<SiopRequestResult>
   ): Promise<void> {
     const requestId = crypto.randomUUID();
+
+    console.debug(struct.decode(call.request.presentationDefinition));
     const request = await rp.createRequest({
-      presentationDefinition: call.request.presentationDefinition,
+      presentationDefinition: struct.decode(call.request.presentationDefinition) as unknown as PresentationDefinitionV2,
       requestBy: "reference",
-      requestUri: encodeURIComponent(`${process.env.PUBLIC_URL}/api/offer/${requestId}`),
+      requestUri: new URL(`/api/offer/${requestId}`, process.env.PUBLIC_URL).toString(),
       responseType: "vp_token",
       state: call.request.state,
       nonce: call.request.nonce,
@@ -89,7 +92,7 @@ export const createService = async (
       {
         credentials: call.request.credentials,
         requestBy: "reference",
-        credentialOfferUri: encodeURIComponent(`${process.env.PUBLIC_URL}/api/credential-offer/${requestId}`),
+        credentialOfferUri: new URL(`/api/credential-offer/${requestId}`, process.env.PUBLIC_URL).toString(),
       },
       { state: call.request.state }
     );
@@ -108,21 +111,21 @@ export const createService = async (
   const gRPCServer = new grpc.Server();
   gRPCServer.addService(
     //@ts-ignore
-    getPackageDefinition("proto/oid4vc/siopv2.proto").oid4vc.SIOPV2.service,
+    getPackageDefinition("shared/proto/oid4vc/siopv2.proto").oid4vc.SIOPV2.service,
     {
       createRequest: createSIOPRequest,
     }
   );
   gRPCServer.addService(
     //@ts-ignore
-    getPackageDefinition("proto/oid4vc/oid4vp.proto").oid4vc.OID4VP.service,
+    getPackageDefinition("shared/proto/oid4vc/oid4vp.proto").oid4vc.OID4VP.service,
     {
       createRequest: createOID4VPRequest,
     }
   );
   gRPCServer.addService(
     //@ts-ignore
-    getPackageDefinition("proto/oid4vc/oid4vci.proto").oid4vc.OID4VCI.service,
+    getPackageDefinition("shared/proto/oid4vc/oid4vci.proto").oid4vc.OID4VCI.service,
     {
       createOffer: createOID4VCIOffer,
     }

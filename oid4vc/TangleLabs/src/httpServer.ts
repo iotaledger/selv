@@ -4,121 +4,161 @@ import asyncHandler from "express-async-handler";
 import { UserService } from "./userService";
 import { decodeJWT } from "did-jwt";
 import { Cache } from "./cache";
+import cors from "cors";
+
+import { Resolver } from "did-resolver";
+import * as didJWT from "did-jwt";
+
+import * as IOTADIDResolver from "./IOTADIDResolver";
+import { credentials } from "@grpc/grpc-js";
+const iotaDidResolver = IOTADIDResolver.getResolver();
+let resolver = new Resolver(iotaDidResolver);
 
 export const createServer = (
   rp: RelyingParty,
   issuer: VcIssuer,
   userService: UserService,
   tokenCache: Cache<string, any>,
-  credentialCache: Cache<string, any>
+  credentialCache: Cache<string, any>,
 ) => {
   const app = express();
   app.use(express.json());
+  app.use(cors({ origin: true }));
   app.use(express.urlencoded({ extended: true }));
 
   app.route("/api/health").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
+      console.debug("/api/health", req);
       res.status(200).send();
-    })
+    }),
   );
 
-  app.route("/api/token").get(
+  app.route("/api/token").post(
     asyncHandler(async (req, res) => {
-      console.debug(req);
-      res.json(await issuer.createTokenResponse(req.body));
-    })
+      console.debug("/api/token", req.body);
+      
+      // // TODO: remove only for testing
+      // const { signer, payload } = await didJWT
+      // .verifyJWT(req.body["pre-authorized_code"], {
+      //   resolver: resolver,
+      //   policies: { aud: false },
+      // })
+      // .catch((e) => {
+      //   console.error("ERROR", e);
+      //   throw new Error("invalid_request");
+      // });
+      // // end remove
+      const response = await issuer.createTokenResponse(req.body);
+      console.debug(response);
+      res.json(response);
+    }),
   );
 
   app.route("/api/offer/:id").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
+      console.debug("/api/offer/:id", req.params);
       const offer_id = req.params.id;
 
-      const offer = await tokenCache.consumeItem(offer_id);
+      // TODO: consider consuming the token
+      const offer = await tokenCache.retrieveItem(offer_id);
 
       if (!offer) {
         res.status(500).send();
       }
 
       res.send(offer);
-    })
+    }),
   );
 
   app.route("/api/credential-offer/:id").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
+      console.debug("/api/credential-offer/:id", req.params);
       const offer_id = req.params.id;
 
-      const offer = await credentialCache.consumeItem(offer_id);
+      // TODO: consider consuming the token
+      const offer = await credentialCache.retrieveItem(offer_id);
 
       if (!offer) {
         res.status(500).send();
       }
 
       res.json(offer);
-    })
+    }),
   );
 
   app.route("/api/credential").post(
     asyncHandler(async (req, res) => {
-      console.debug(req);
-      await issuer.validateCredentialsResponse({
-        token: req.headers.authorization?.split("Bearer ")[1],
-        proof: req.body.credential_requests[0].proof.jwt,
-      });
-      // TODO: get state from token, need to decode
-      const iss = "";
-      const state = "";
-      const unsigned_credentials = [];
 
-      const { credentials } = await userService.credentialRequest(
+      console.debug("/api/credential", req.headers, req.body);
+
+      const bearer_token = req.headers.authorization?.split("Bearer ")[1];
+
+      await issuer.validateCredentialsResponse({
+        token: bearer_token,
+        proof: req.body.proof.jwt,
+      });
+
+      const decodedBearer = decodeJWT(bearer_token);
+      const decodedJWT = decodeJWT(req.body.proof.jwt);
+
+      const {iss} = decodedJWT.payload;
+
+      const {state} = decodedBearer.payload;
+
+      const { signedCredentials } = await userService.credentialRequest(
         iss,
         state,
-        unsigned_credentials
+        req.body.credential_definition,
       );
 
+      console.debug(signedCredentials);
+
       const response = await issuer.createSendCredentialsResponse({
-        credentials,
+        credentials: signedCredentials,
       });
+
+      console.debug(response);
+
       res.json(response);
-    })
+    }),
   );
 
   app.route("/api/auth").post(
     asyncHandler(async (req, res) => {
-      console.debug(req.body);
+      console.debug("/api/auth", req.body);
       const { id_token: idToken, vp_token: vpToken } = req.body;
       const { state } = req.body;
-      const { iss } = await rp.validateJwt(idToken);
-
+      
+      console.debug(state);
       if (idToken) {
-        console.debug(req, state, iss);
+        const { iss } = await rp.validateJwt(idToken);
         await userService.connectUser(iss, state);
       } else if (vpToken) {
+        console.debug(state, vpToken);
+        const { iss } = await rp.validateJwt(vpToken);
         await userService.presentCredential(iss, state, vpToken);
       } else {
         res.status(500).send();
       }
 
       res.status(204).send();
-    })
+    }),
   );
 
   app.route("/.well-known/openid-credential-issuer").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
+      console.debug("/.well-known/openid-credential-issuer");
       const metadata = issuer.getIssuerMetadata();
       res.send(metadata);
-    })
+    }),
   );
 
   app.route("/.well-known/oauth-authorization-server").get(
     asyncHandler(async (req, res) => {
-      console.debug(req);
+      console.debug("/.well-known/oauth-authorization-server");
       const metadata = issuer.getOauthServerMetadata();
       res.send(metadata);
-    })
+    }),
   );
 
   const port = 3333;

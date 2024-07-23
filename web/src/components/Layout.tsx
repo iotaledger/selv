@@ -1,19 +1,17 @@
 import React from 'react';
-import Disclaimer from './Disclaimer';
 import Header from './Header';
 import Footer from './Footer';
-import Steps from './Steps';
 import Sidebar from './Sidebar';
 import useStep from '../utils/useStep';
 
-export default ({ children, customTheme, customStep, noHeader, noFooter }: {
+const Layout = ({ children, customTheme, customStep, noHeader, noFooter }: {
     children?: JSX.Element | null | undefined;
     customTheme?: string;
     customStep?: number;
     noHeader?: boolean;
     noFooter?: boolean;
 }) => {
-    const { step, mainSteps, theme, currentRoute } = useStep();
+    const { mainSteps, theme, currentRoute } = useStep();
 
     return (
         <div className={`theme-${theme || customTheme}`}>
@@ -30,16 +28,17 @@ export default ({ children, customTheme, customStep, noHeader, noFooter }: {
                     }
                 </div>
                 {
-                    customStep || step >= 0 ? (
+                    customStep || currentRoute?.step ? (
                         <Sidebar
                             poweredBy={currentRoute?.poweredBy}
-                            processes={mainSteps[step].processes}
+                            currentRoute={currentRoute}
                             mainSteps={mainSteps}
                         />
                     ) : null
                 }
-                <Disclaimer />
             </div>
         </div>
     );
 };
+
+export default Layout;

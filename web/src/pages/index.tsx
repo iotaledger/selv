@@ -7,6 +7,7 @@ import InsuranceData from './InsuranceData';
 import GreatSuccess from './GreatSuccess';
 import ThankYou from './ThankYou';
 import AppPicker from './AppPicker';
+import WalletDownload from './WalletDownload';
 
 export {
     Landing,
@@ -17,5 +18,6 @@ export {
     BankData,
     InsuranceData,
     GreatSuccess,
-    ThankYou
+    ThankYou,
+    WalletDownload
 };

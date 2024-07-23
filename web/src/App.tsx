@@ -4,10 +4,10 @@ import WebFontLoader from 'webfontloader';
 import AOS from 'aos';
 import { GlobalStateProvider } from './context/globalState'
 import 'aos/dist/aos.css';
-import 'rsuite/lib/styles/index.less';
-import 'rsuite/dist/styles/rsuite-default.css'
+
 import './styles/index.scss';
-import { routes } from './steps'
+import { routes, utilityRoutes } from './steps'
+import { App } from 'antd';
 
 
 WebFontLoader.load({
@@ -23,18 +23,20 @@ WebFontLoader.load({
 
 AOS.init();
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter([...routes, ...utilityRoutes]);
 
-const App: React.FC = () => {
+const SelvApp: React.FC = () => {
 
   return (
-    <React.Suspense fallback={<React.Fragment />}>
-      <GlobalStateProvider>
+    <App>
+      <React.Suspense fallback={<React.Fragment />}>
+        <GlobalStateProvider>
           <RouterProvider router={router} />
-      </GlobalStateProvider>
-    </React.Suspense>
+        </GlobalStateProvider>
+      </React.Suspense>
+    </App>
   );
 }
 
-export default App;
+export default SelvApp;
 

@@ -1,7 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'antd';
-import { Layout, QRCode, RandomGraphicElement } from '../components';
+import React, { useMemo, useState } from 'react';
+import { generatePath, Link } from 'react-router-dom';
+import { Button, Modal } from 'antd';
+import { Layout, RandomGraphicElement } from '../components';
+import { QRCode } from 'antd';
 import useStep from '../utils/useStep';
 import appStore from '../assets/appStore.svg';
 import googlePlay from '../assets/googlePlay.svg';
@@ -11,11 +12,21 @@ import dots from '../assets/backgrounds/dots.png';
 import circle from '../assets/backgrounds/circleFrame6.svg';
 import config from '../config.json';
 import { useTranslation, Trans } from 'react-i18next';
+import { wallets } from '../wallets';
+import { utilityRoutes } from '../steps';
 
 const AppPicker: React.FC = () => {
     const { nextStep } = useStep();
 
     const { t } = useTranslation();
+
+    const [open, setOpen] = useState("");
+
+    const walletDownloadRoute = utilityRoutes.find(elem => elem.path.includes('/wallets/:wallet'));
+
+    const randomOrderWallets = useMemo(() => {
+        return wallets.sort(() => .5 - Math.random())
+    }, [])
 
     return (
         <Layout noHeader noFooter>
@@ -23,61 +34,71 @@ const AppPicker: React.FC = () => {
                 <div className='app-picker'>
                     <RandomGraphicElement elements={5}>
                         <React.Fragment>
-                            <h1 className='title'>{t("actions.downloadTheSelvApp")}</h1>
-                            <div className='apps'>
-                                <div className='scan-wrapper'>
-                                    <div className='qr-content-wrapper'>
-                                        <p className='scan-note'>
-                                            <Trans i18nKey="actions.orScanCode">
-                                                Or scan this QR code<br />to download
-                                            </Trans>
-                                        </p>
-                                        <div className='qr-wrapper'>
-                                            <QRCode text={`${config.covidDemo}//qr-redirect`} size={200} />
+                            <div className='app-picker__scroller'>
+
+                                <h1 className='title'>{t("actions.downloadApp")}</h1>
+                                <div className='apps'>
+                                    {randomOrderWallets.map(wallet => (
+                                        <div className="app">
+                                            <section className="app__wrapper">
+                                                <div className='app__column'>
+                                                    {wallet.logo}
+                                                    <div className='app__content'>
+                                                        <span>
+                                                            by &nbsp;
+                                                            {wallet.by}
+                                                        </span>
+
+                                                        <Button onClick={() => setOpen(wallet.name)}>
+                                                            {t("actions.continue")}
+                                                        </Button>
+                                                    </div>
+                                                </div>
+                                                <img className="app__image" src={wallet.image}></img>
+                                            </section>
+                                            <Modal
+                                                open={open === wallet.name}
+                                                footer={null}
+                                                closable={true}
+                                                maskClosable={true}
+                                                onCancel={() => setOpen("")}
+                                            >
+                                                <section className='wallet-modal'>
+                                                    {wallet.logo}
+                                                    <div className='wallet-modal__by'>
+                                                        <span>
+                                                            by &nbsp;
+                                                            {wallet.by}
+                                                        </span>
+                                                    </div>
+                                                    <p>{wallet.description}</p>
+
+                                                    <div className='wallet-modal__qr'>
+                                                        <QRCode type="svg" bordered={false} errorLevel='H' size={200} value={window.location.origin + generatePath(walletDownloadRoute!.path, { wallet: wallet.name })} />
+                                                    </div>
+                                                </section>
+                                            </Modal>
                                         </div>
-                                    </div>
+
+                                    ))}
 
                                 </div>
-                                <div className='scan-wrapper'>
-                                    <div className='qr-content-wrapper'>
-                                        <p className='scan-note'>
-                                            <Trans i18nKey="actions.orScanCode">
-                                                Or scan this QR code<br />to download
-                                            </Trans>
-                                        </p>
-                                        <div className='qr-wrapper'>
-                                            <QRCode text={`${config.covidDemo}//qr-redirect`} size={200} />
-                                        </div>
-                                        </div>
-                                </div>
-                                <div className='scan-wrapper'>
-                                    <div className='qr-content-wrapper'>
-                                        <p className='scan-note'>
-                                            <Trans i18nKey="actions.orScanCode">
-                                                Or scan this QR code<br />to download
-                                            </Trans>
-                                        </p>
-                                        <div className='qr-wrapper'>
-                                            <QRCode text={`${config.covidDemo}//qr-redirect`} size={200} />
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <img src={avatar1} alt='' className='avatar1' />
-                            <img src={avatar2} alt='' className='avatar2' />
                         </React.Fragment>
                     </RandomGraphicElement>
                     <img src={dots} alt='' className='dots' />
                     <img src={circle} alt='' className='circle' />
+                    <img src={avatar1} alt='' className='avatar1' />
+                    <img src={avatar2} alt='' className='avatar2' />
                 </div>
-                    <div className="cta-section" id='app-download'>
-                        <p className='subtitle'>{t("pages.demo.appDownloadQR.onceDownloaded")}</p>
-                        <Link to={nextStep} className='cta'>
-                            <Button>
-                                {t("actions.continue")}
-                            </Button>
-                        </Link>
-                    </div>
+                <div className="cta-section" id='app-download'>
+                    <p className='subtitle'>{t("pages.demo.appDownloadQR.onceDownloaded")}</p>
+                    <Link to={nextStep} className='cta'>
+                        <Button>
+                            {t("actions.continue")}
+                        </Button>
+                    </Link>
+                </div>
             </React.Fragment>
         </Layout>
     );

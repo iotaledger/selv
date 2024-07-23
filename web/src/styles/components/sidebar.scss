@@ -17,6 +17,12 @@
         display: none;
     }
 
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 35px;
+    }
+
     .frame {
         position: absolute;
         bottom: 0;
@@ -29,9 +35,8 @@
     }
 
     .sidebar-drop-selector {
-        position: absolute;
+        position: relative;
         margin-top: -4px;
-        right: 70px;
     }
 
     .todo-list {
@@ -45,6 +50,7 @@
         font-size: 24px;
         line-height: 24px;
         color: #142037;
+        margin-bottom: 40px;
 
         img {
             height: 18px;
@@ -91,18 +97,6 @@
     margin-left: 20px;
 }
   
-.rs-sidenav {
-    background-color: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-
-    .rs-sidenav-body {
-        margin-top: 60px;
-    }
-}
-
 .steps-wrapper {
     text-align: left;
     width: 250px;
@@ -115,68 +109,3 @@
     max-height: 9999px;
 }
   
-.rs-steps-item-tail {
-    display: none;
-}
-
-.rs-steps-item-title {
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 23px;
-}
-
-.rs-steps-item-icon-wrapper {
-    &:not(.rs-steps-item-custom-icon) {
-        border: 2px solid #8493AD;
-        color: #8493AD;
-        background: #FFFFFF;
-        height: 24px;
-        width: 24px;
-        border-radius: 50%;
-        line-height: 20px;
-        font-weight: 500;
-        font-size: 15px;
-    }
-
-    .rs-steps-item-icon {
-        font-weight: 700;
-    }
-}
-
-.rs-steps-item-status-process {
-    .rs-steps-item-icon-wrapper:not(.rs-steps-item-custom-icon) {
-        color: #4140DF;
-        border-color: #4140DF;
-        background: #FFFFFF;
-    }
-}
-
-.rs-steps-item-status-finish {
-    .rs-steps-item-title {
-        color: #C3D0E4;
-    }
-
-    .rs-steps-item-icon-wrapper {
-        border: none;
-
-        &:not(.rs-steps-item-custom-icon) {
-            .rs-steps-item-icon {
-                &:before {
-                    color: #FFFFFF;
-                    background: #69F0AE;
-                    height: 24px;
-                    width: 24px;
-                    border-radius: 50%;
-                    line-height: 26px;
-                    font-weight: 500;
-                    font-size: 15px;
-                }
-            }
-        }
-    }
-}
-
-.rs-steps-item-status-process > .rs-steps-item-content > .rs-steps-item-title {
-    color: #4140DF;
-    font-weight: 700;
-}

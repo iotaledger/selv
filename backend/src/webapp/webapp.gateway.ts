@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Logger, Injectable } from '@nestjs/common';
+import { Logger, Injectable, Inject, forwardRef } from '@nestjs/common';
 import {
   ConnectedSocket,
   MessageBody,
@@ -9,15 +9,18 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { WebAppService } from './webapp.service';
-import type { PresentationDefinitionV2 } from '../../../types/PresentationExchange';
-import { Issuers } from '../../../types/Issuers';
-import { Scopes } from '../../../types/Scopes';
-import { Providers } from '../../../types/Providers';
+import type { PresentationDefinitionV2 } from '../../../shared/types/PresentationExchange';
+import { Issuers } from '../../../shared/types/Issuers';
+import { Scopes } from '../../../shared/types/Scopes';
+import { Providers } from '../../../shared/types/Providers';
 
 @Injectable()
 @WebSocketGateway()
 export class WebAppGateway {
-  constructor(private readonly webAppService: WebAppService) {}
+  constructor(
+    @Inject(forwardRef(() => WebAppService))
+    private webAppService: WebAppService,
+  ) {}
 
   @WebSocketServer()
   server: Server;
@@ -75,18 +78,17 @@ export class WebAppGateway {
       `receiving SIOPV2 invite request for session_id:${session_id}, provider:${payload.provider} and scope:${payload.scope}`,
     );
 
-    const url = await this.webAppService.requestSiopInvite(session_id);
+    const url = await this.webAppService.requestSiopInvite(
+      session_id,
+      payload.scope,
+      payload.provider,
+    );
     await client.emitWithAck('siopInvite', {
       url,
       scope: payload.scope,
     });
 
     this.logger.debug(`send SIOPV2 invite for session_id:${session_id}`);
-
-    // //TODO remove once OID4VCI component can call back
-    // setTimeout(() => {
-    //   this.connectDid(session_id, 'did:web:example.com', payload.scope);
-    // }, 10000);
   }
 
   @SubscribeMessage('requestPresentation')
@@ -104,12 +106,15 @@ export class WebAppGateway {
     )[0];
 
     this.logger.debug(
-      `receiving presentation request for session_id:${session_id}, provider:${payload.provider} and scope:${payload.scope}`,
+      `receiving presentation request for session_id:${session_id}, provider:${payload.provider}, scope:${payload.scope} and presentationDefinition`,
+      payload.presentationDefinition,
     );
 
     const url = await this.webAppService.requestPresentation(
       session_id,
       payload.presentationDefinition,
+      payload.scope,
+      payload.provider,
     );
 
     await client.emitWithAck('presentationOffer', {
@@ -118,48 +123,6 @@ export class WebAppGateway {
     });
 
     this.logger.debug(`send presentation offer for session_id:${session_id}`);
-
-    //TODO remove once OID4VCI component can call back
-    setTimeout(() => {
-      this.presentation(
-        session_id,
-        {
-          vc: {
-            '@context': [
-              'https://www.w3.org/2018/credentials/v1',
-              'https://www.w3.org/2018/credentials/examples/v1',
-            ],
-            id: 'http://example.edu/credentials/3732',
-            type: ['VerifiableCredential', 'UniversityDegreeCredential'],
-            issuer: 'https://example.edu/issuers/14',
-            issuanceDate: '2010-01-01T19:23:24Z',
-            credentialSubject: {
-              id: 'did:example:ebfeb1f712ebc6f1c276e12ec21',
-              degree: {
-                type: 'BachelorDegree',
-                name: 'Bachelor of Science and Arts',
-              },
-              firstName: 'Ben',
-              lastName: 'Utzer',
-              date: Date.now(),
-              nationality: 'german',
-              birthplace: 'Musterstadt',
-              country: 'Germany',
-              phone: '00-0000',
-            },
-            credentialSchema: {
-              id: 'https://example.org/examples/degree.json',
-              type: 'JsonSchemaValidator2018',
-            },
-          },
-          iss: 'https://example.edu/issuers/14',
-          nbf: 1262373804,
-          jti: 'http://example.edu/credentials/3732',
-          sub: 'did:example:ebfeb1f712ebc6f1c276e12ec21',
-        },
-        payload.scope,
-      );
-    }, 10000);
   }
 
   @SubscribeMessage('requestIssuance')
@@ -168,7 +131,7 @@ export class WebAppGateway {
     payload: {
       issuer: Issuers;
       scope: Scopes;
-      credential: string;
+      credentials: { type: string; data?: any }[];
       provider: Providers;
     },
     @ConnectedSocket() client: Socket,
@@ -185,7 +148,9 @@ export class WebAppGateway {
     const url = await this.webAppService.requestIssuance(
       session_id,
       payload.issuer,
-      payload.credential,
+      payload.credentials,
+      payload.scope,
+      payload.provider,
     );
 
     await client.emitWithAck('issuanceOffer', {
@@ -194,10 +159,31 @@ export class WebAppGateway {
     });
 
     this.logger.debug(`send issuance offer for session_id:${session_id}`);
+  }
 
-    setTimeout(() => {
-      this.issuance(session_id, {}, payload.scope);
-    }, 10000);
+  @SubscribeMessage('requestDomainLinkageValidation')
+  async requestDomainLinkageValidation(
+    @MessageBody()
+    payload: {
+      did: string;
+    },
+    @ConnectedSocket() client: Socket,
+  ) {
+    this.logger.debug(
+      `receiving DomainLinkageValidation request for did :${payload.did}`,
+      payload,
+    );
+
+    const validation = await this.webAppService.requestDomainLinkageValidation(
+      payload.did,
+    );
+
+    await client.emitWithAck('didDomainLinkageValidation', {
+      did: payload.did,
+      result: validation.domains,
+    });
+
+    this.logger.debug(`send validation response for did:${payload.did}`);
   }
 
   async connectDid(session_id: string, did: string, scope: Scopes) {

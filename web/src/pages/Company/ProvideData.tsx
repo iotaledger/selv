@@ -6,9 +6,12 @@ import config from '../../config.json';
 import { useTranslation, Trans } from 'react-i18next';
 import { Router, useNavigate } from 'react-router';
 import { Actions, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
-import { Providers } from '@sharedTypes/Providers';
-import { Issuers } from '@sharedTypes/Issuers';
-import { Scopes } from '@sharedTypes/Scopes';
+import { Providers } from '@shared/types/Providers';
+import { Issuers } from '@shared/types/Issuers';
+import { Scopes } from '@shared/types/Scopes';
+
+import { v4 as uuidv4 } from 'uuid';
+import CitizenCredentialConfig  from '@shared/credentials/CitizenCredential.json';
 
 
 const ProvideData: React.FC = () => {
@@ -25,19 +28,23 @@ const ProvideData: React.FC = () => {
         navigate(nextStep);
     }, [nextStep, navigate]);
 
-    useEffect(() => {      
+    useEffect(() => {
 
         dispatch?.({
             type: Actions.REQUEST_PRESENTATION,
-            provider: Providers.WaltId,
+            provider: Providers.Impierce,
+            presentationDefinition: {
+                id: uuidv4(),
+                input_descriptors: CitizenCredentialConfig.input_descriptors
+            },
             scope: Scopes.CompanyHouse,
 
         })
-           
+
     }, [dispatch]);
 
     useEffect(() => {
-        if(state[Scopes.CompanyHouse]?.credentials?.length) {
+        if (state[Scopes.CompanyHouse]?.credentials?.length) {
             goToNextStep();
         }
     }, [state, goToNextStep])

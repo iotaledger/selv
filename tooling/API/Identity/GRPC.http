@@ -1,35 +1,47 @@
-proto < ../../../proto/identity/credentials.proto
-proto < ../../../proto/identity/utils.proto
+proto < ../../../shared/proto/identity/credentials.proto
+proto < ../../../shared/proto/identity/utils.proto
+proto < ../../../shared/proto/identity/presentation.proto
+proto < ../../../shared/proto/identity/domain_linkage.proto
 
 @host=http://selv.local:5001/identity
 ###
 {{
-    //pre request script
-    const issuer = "did:iota:snd:0x2cfb60f00089a91a96fa8fcee5e2bda15f51b0b062762ad9ca846bba536f8818";
-    const credential = {
-        "@context":[
-            "https://www.w3.org/2018/credentials/v1",
-            "https://www.w3.org/2018/credentials/examples/v1",
-        ],
-        type: ["VerifiableCredential","UniversityDegreeCredential"],
-        issuanceDate:"2017-10-22T12:23:48Z",
-        issuer,
-        credentialSubject:{
-            id:"did:iota:snd:0xce05da2c7e3fd32e89b4fcaf77bb3101d89be60ba6276cba80bd3ec2bd0603f6",
-            degree:{
-                type:"BachelorDegree",
-                name:"Bachelor of Science and Arts",
-            }
-        },
-    }
+    const utils = require('../scripting/dist/bundle5.js');
 
-    exports.credential_json = JSON.stringify(credential);
+    const credential_json = async () => {
+
+        const { didDocument, keyPairs } = await utils.getDIDKey();
+        const { id: did, authentication } = didDocument; 
+
+        const issuer = "did:iota:rms:0xc57ab41995853d08d3f310aaf939048d25ba3d804bba636a2ecacee95b16c268";
+        const credential = {
+            "@context":[
+                "https://www.w3.org/2018/credentials/v1",
+                "https://www.w3.org/2018/credentials/examples/v1",
+            ],
+            type: ["VerifiableCredential","UniversityDegreeCredential"],
+            issuanceDate:"2017-10-22T12:23:48Z",
+            issuer,
+            credentialSubject:{
+                id: did,
+                degree:{
+                    type:"BachelorDegree",
+                    name:"Bachelor of Science and Arts",
+                }
+            },
+        }
+
+        const credentialJson = JSON.stringify(JSON.stringify(credential));
+        console.log(credentialJson);
+        return credentialJson;
+    }
+    exports.credential_json = credential_json();
 }}
 
 GRPC /Jwt/create
 {
-    "credential_json": {{credential_json}},
-    "issuer_fragment": "S3zEW4inNy8FYZEMVTEthdzqqSBq1WglM2k75xKHzy0"
+    "credentialJson": {{credential_json}},
+    "issuerFragment": "NMu3IKkVVMCiBwEpeWq9-mzmJbtS-vS9QDJ1v0pGbqw"
 }
 ###
 
@@ -42,4 +54,69 @@ GRPC /Signing/sign
 {
     "data": {{data}},
     "keyId": "pK0JAYw5RFFKqorBn0x4w98zl2UBfRys"
+}
+###
+
+{{
+    //pre request script
+    exports.data = new TextEncoder().encode("test");
+}}
+
+GRPC /DomainLinkage/validate_did
+{
+    "did": "did:iota:rms:0xb97ebcab3c70d9d3087a96e04aac43c8a139a187a1a7cbaae1a17bc2d7eb0766"
+}
+###
+{{
+    const utils = require('../scripting/dist/bundle5.js');
+
+    const jwt = async () => {
+
+        const { didDocument, keyPairs } = await utils.getDIDKey();
+        const { id:did, authentication } = didDocument; 
+
+        const header = {
+            kid: `${authentication}`,
+            alg: "EdDSA",
+            typ: "JWT"
+        }
+
+        const encodedHeaders = Buffer.from(JSON.stringify(header), "utf8").toString("base64url");
+
+        const claims = {
+            "iss": did,
+            "jti": "urn:uuid:3978344f-8596-4c3a-a978-8fcaba3903c5",
+            "aud": "did:example:4a57546973436f6f6c4a4a57573",
+            "nbf": Math.floor(Date.now() / 1000),
+            "iat": Math.floor(Date.now() / 1000),
+            "exp": Math.floor((Date.now() + 10 * (60 * 1000)) / 1000),
+            "nonce": "343s$FSFDa-",
+            "vp": {
+                "@context": [
+                    "https://www.w3.org/2018/credentials/v1",
+                    "https://www.w3.org/2018/credentials/examples/v1"
+                ],
+                "type": [
+                    "VerifiablePresentation",
+                    "CredentialManagerPresentation"
+                ],
+                "verifiableCredential": [
+                    "eyJraWQiOiJkaWQ6aW90YTpybXM6MHgzZmJjNjVmMzg5ZTk2ZjI3MjZiOGY5YjZmNjNmNGUyZTYyYTc4YzQyMzhhMzgxYWUyNWJiOWQ3OGNmNDhjNGE1I0RmQnhlTTZrdnpvczc2VUlQWl9zNUhUQUJfNEM4bE5MRlZ3QlItczJtX1kiLCJ0eXAiOiJKV1QiLCJhbGciOiJFZERTQSJ9.eyJpc3MiOiJkaWQ6aW90YTpybXM6MHgzZmJjNjVmMzg5ZTk2ZjI3MjZiOGY5YjZmNjNmNGUyZTYyYTc4YzQyMzhhMzgxYWUyNWJiOWQ3OGNmNDhjNGE1IiwibmJmIjoxNTA4Njc1MDI4LCJzdWIiOiJkaWQ6andrOmV5SmhiR2NpT2lKRlpFUlRRU0lzSW1OeWRpSTZJa1ZrTWpVMU1Ua2lMQ0pyYVdRaU9pSmhjbmh6VEc1T1NXaEpZa1Z6WkdsQlpYVjROMlJ4YnpKaE0yTjZTRWRFWDJoU01VWllNV1U0UmpsQklpd2lhM1I1SWpvaVQwdFFJaXdpZUNJNklrbFliMDFUYkhSUk9UUnJWamRxYWtGa2VrVmZOSFZHU1dreU1DMXRhekpWV0hSeGVqbEljSGRSVWtraWZRIiwidmMiOnsiQGNvbnRleHQiOlsiaHR0cHM6Ly93d3cudzMub3JnLzIwMTgvY3JlZGVudGlhbHMvdjEiLCJodHRwczovL3d3dy53My5vcmcvMjAxOC9jcmVkZW50aWFscy9leGFtcGxlcy92MSJdLCJ0eXBlIjpbIlZlcmlmaWFibGVDcmVkZW50aWFsIiwiVW5pdmVyc2l0eURlZ3JlZUNyZWRlbnRpYWwiXSwiY3JlZGVudGlhbFN1YmplY3QiOnsiZGVncmVlIjp7Im5hbWUiOiJCYWNoZWxvciBvZiBTY2llbmNlIGFuZCBBcnRzIiwidHlwZSI6IkJhY2hlbG9yRGVncmVlIn19fX0.ljpZsaxd4JBap0y8ImaW6aOn_PRGfpckL2MIWKUMEuzGM2oX9MwmN10bMNU6szxLxcsAE3Gu37COwhiE8nvPBg"
+                ]
+            }
+        }
+
+        const encodedPayload = Buffer.from(JSON.stringify(claims), "utf8").toString("base64url");
+
+        const encodedSignature = await utils.sign(`${encodedHeaders}.${encodedPayload}`)
+
+        const jwt = `${encodedHeaders}.${encodedPayload}.${encodedSignature}`;
+        return jwt;
+    }
+    exports.jwt = jwt();
+}}
+
+GRPC /CredentialPresentation/validate
+{
+    "jwt": "{{jwt}}"
 }

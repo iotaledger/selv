@@ -12,31 +12,10 @@ import { useTranslation } from 'react-i18next';
  */
 const Confirmation: React.FC = () => {
     const { nextStep, theme } = useStep();
-    const [companyId, setCompanyId] = useState('');
     const [title, setTitle] = useState('');
 
     const { t } = useTranslation();
 
-    useEffect(() => {
-        async function determineCompanyId () {
-            setCompanyId(await getCompanyId());
-            switch (theme) {
-            case 'bank':
-                setTitle("pages.general.confirmation.titleBank");
-                break;
-            case 'insurance':
-                setTitle("pages.general.confirmation.titleInsurance");
-                break;
-            case 'company':
-                setTitle("pages.general.confirmation.titleCompany");
-                break;
-            default:
-                setTitle("pages.general.confirmation.titleCompany");
-                break;
-            }
-        }
-        determineCompanyId();
-    }, [companyId, theme]);
 
     return (
         <Layout>
@@ -44,18 +23,13 @@ const Confirmation: React.FC = () => {
                 <div className='confirmation-page'>
                     <div className='selv-wrapper'>
                         <img src={selv} alt='Selv app logo' />
-                        <h4>{t("pages.general.confirmation.credentialsToSelv")}</h4>
+                        <h4>{t("pages.company.confirmation.title")}</h4>
                     </div>
-                    <h2>{t(title)}</h2>
-                    {
-                        theme === 'company' &&
-                            <p>{t("pages.general.confirmation.proudOwnerOfCompany")}</p>
-                    }
-                    <Link to={nextStep.replace(':companyId', companyId)}>
+                    <h2>{t("pages.company.confirmation.confirmation")}</h2>
+                        <p>{t("pages.company.confirmation.success")}</p>
+                    <Link to={nextStep}>
                         <Button>
-                            {
-                                theme === 'company' ? t("actions.continue") : t("pages.general.confirmation.returnToCompany") 
-                            }
+                            {t("pages.general.confirmation.nextStep")}
                         </Button>
                     </Link>
                 </div>
