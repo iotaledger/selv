@@ -30,7 +30,7 @@ const StepsInstance = ({ title, steps, currentRoute }: {
                     items={steps.map((step) => ({
                         title: i18n.t(step.title),
                         description: currentRoute.step === step.id && <Steps
-                            current={step.processes?.findIndex(elem => elem.id === currentRoute.step)}
+                            current={step.processes?.findIndex(elem => elem.id === currentRoute.process)}
                             progressDot
                             direction={"vertical"}
                             style={processStyles}
