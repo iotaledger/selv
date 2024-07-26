@@ -199,10 +199,11 @@
       "thankYou": {
         "thanksForTryingSelv": "Thanks for Trying Selv!",
         "improvedExperience": "Improved Experience",
-        "savedTime": "With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and insurance with very few clicks. Your data was reusable and this saved you x fields of form fields to fill in.",
-        "sovereignityText": "You have taken full control of your data. You decided who you shared your data with. Did you know that you can share them with others manually via QR as well. Try so in the Selv app!",
+        "savedTime": "With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and insurance with just a few clicks. Your credentials are reusable,  making them a real time-saver.",
+        "selfSovereignty": "Self-Sovereignty",
+        "sovereigntyText": "You have taken full control of your data. You decided who you shared your credentials with and when. You can even share them with others manually via QR-Code.",
         "moreTrust": "More Trust",
-        "trustText": "The data you shared with the Company House and the SNS Bank was verifiable. This allows to verify your data instantly and freely using IOTA as the trust layer.",
+        "trustText": "The data you shared with the Government and the Company Registrar was verifiable, allowing the instant and free verification your data by using IOTA as the trust layer.",
         "returnCompanyHouse": "Return to Company House",
         "returnHome": "Return Home"
       }

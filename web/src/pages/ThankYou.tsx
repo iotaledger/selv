@@ -40,9 +40,9 @@ const ThankYou: React.FC = () => {
                                 <div className='great-success-text-wrapper'>
                                     <span>
                                         <img src={checkmark} alt='' />
-                                        <h3>{t("general.selfSovereignity")}</h3>
+                                        <h3>{t("pages.demo.thankYou.selfSovereignty")}</h3>
                                     </span>
-                                    <p>{t("pages.demo.thankYou.sovereignityText")}</p>
+                                    <p>{t("pages.demo.thankYou.sovereigntyText")}</p>
                                 </div>
                                 <div className='figure-wrapper'>
                                     <img className='figure' src={image2} alt='Received new Credentials' />
