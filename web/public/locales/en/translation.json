@@ -155,7 +155,6 @@
     "greatSuccess": "Great Success!",
     "signedInDID": "You Signed in With DID",
     "receivedNewCredentials": "Received New Credentials",
-    "reusedSelvCredentials": "Re-used Selv Credentials",
     "messages": {
       "waiting": "Waiting for Selv App...",
       "connectionError": "Connection Error. Please Try Again!",
@@ -192,9 +191,10 @@
         "onceDownloaded": "Once you’ve chosen and setup a wallet, click the button below."
       },
       "greatSuccess": {
-        "signedInDIDText": "You managed to sign into a website you never signed up for. Account creation has been skipped saving you time and effort. The company house is also not burdened with saving your password.",
-        "receivedNewCredentialsText": "You became the owner of a company. From this point onwards, you would be able to prove your directorship position online, allowing you to act on behalf of the company. Overtime you can grow your Selv profile by gathering such credentials from trusted third parties.",
-        "reusedSelvCredentialsText": "By controlling your personal data, you shared verifiable data without having to type it into a form. You can use these same credentials in other processes. Imagine never having to type in your name, address, email etc..."
+        "signedInDIDText": "You managed to sign into a website you never signed up for. At no point in the process you had to share your email address or a password with an arbitrary website.",
+        "receivedNewCredentialsText": "You became the owner of a company. From this point onwards, you would be able to prove your directorship position online, allowing you to act on behalf of the company. Overtime you can grow your Digital Identity profile by gathering further credentials from trusted third parties.",
+        "reusableCredentials": "Reusable Credentials",
+        "reusableCredentialsText": "By controlling your personal data, you shared verifiable data without having to manually type it into a form. You can reuse the same credentials in other processesand save your precious time for the really important things in life."
       },
       "thankYou": {
         "thanksForTryingSelv": "Thanks for Trying Selv!",
