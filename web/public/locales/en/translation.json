@@ -176,10 +176,9 @@
         "welcomeToThe": "Welcome to the",
         "selvDemo": "Selv Demo",
         "hereIsTodo": "<0>Here is <1>your to-do list</1> for today:</0>",
-        "claimIdentity": "Claim Identity",
-        "setUpCompany": "Set up a Company",
-        "getBankAccount": "Get a Bank Account",
-        "getLiabilityInsurance": "Get Liability Insurance"
+        "createIdentity": "Create your self-sovereign identity",
+        "claimId": "Claim national ID",
+        "registerCompany": "Register Company"
       },
       "introShowMobile": {
         "looksLikeWork": "That Looks Like a Lot of Work...",
