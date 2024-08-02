@@ -8,7 +8,6 @@ import {
     Landing,
     IntroShowTodos,
     IntroShowMobile,
-    AppDownloadQR,
     BankData,
     InsuranceData,
     GreatSuccess,
@@ -110,7 +109,7 @@ export const mainSteps: MainStep[] = [
             },
             {
                 id: "issueCredential",
-                title: "steps.company.processes.done",
+                title: "steps.company.processes.issueCredential",
             },
         ]
     },

@@ -52,9 +52,7 @@ const ProveIdentity: React.FC = () => {
                 <div className='scan-qr-page-wrapper'>
                     <h2>{t("pages.general.proveIdentity.provideCredentials")}</h2>
                     <p>
-                        <Trans i18nKey="pages.general.proveIdentity.scanToContinue">
-                            Scan this QR code with <strong>Selv App</strong> to continue
-                        </Trans>
+                        <Trans i18nKey="pages.company.signIn.subtitle" />
                     </p>
                     <div className='qr-wrapper'>
                         {/* TODO: Handle loading state */}

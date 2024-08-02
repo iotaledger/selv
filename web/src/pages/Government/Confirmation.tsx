@@ -23,7 +23,6 @@ const Confirmation: React.FC = () => {
                         <img src={selv} alt='Selv app logo' />
                         <h4>{t("pages.government.confirmation.confirmation")}</h4>
                     </div>
-                    <h2>{t("pages.government.confirmation.title")}</h2>
                     <p>{t("pages.government.confirmation.success")}</p>
                     <Link to={nextStep}>
                         <Button>

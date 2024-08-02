@@ -64,9 +64,9 @@ const GreatSuccess: React.FC = () => {
                             <div className='great-success-text-wrapper'>
                                 <span>
                                     <img src={checkmark} alt='' />
-                                    <h3>{t("general.reusedSelvCredentials")}</h3>
+                                    <h3>{t("pages.demo.greatSuccess.reusableCredentials")}</h3>
                                 </span>
-                                <p>{t("pages.demo.greatSuccess.reusedSelvCredentialsText")}</p>
+                                <p>{t("pages.demo.greatSuccess.reusableCredentialsText")}</p>
                             </div>
                         </div>
                     </div>

@@ -23,13 +23,12 @@ const Confirmation: React.FC = () => {
                 <div className='confirmation-page'>
                     <div className='selv-wrapper'>
                         <img src={selv} alt='Selv app logo' />
-                        <h4>{t("pages.company.confirmation.title")}</h4>
+                        <h4>{t("pages.company.confirmation.confirmation")}</h4>
                     </div>
-                    <h2>{t("pages.company.confirmation.confirmation")}</h2>
                         <p>{t("pages.company.confirmation.success")}</p>
                     <Link to={nextStep}>
                         <Button>
-                            {t("pages.general.confirmation.nextStep")}
+                            {t("pages.company.confirmation.nextStep")}
                         </Button>
                     </Link>
                 </div>

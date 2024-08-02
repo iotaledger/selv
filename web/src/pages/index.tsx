@@ -1,7 +1,6 @@
 import Landing from './Landing';
 import IntroShowTodos from './IntroShowTodos';
 import IntroShowMobile from './IntroShowMobile';
-import AppDownloadQR from './AppDownloadQR';
 import BankData from './BankData';
 import InsuranceData from './InsuranceData';
 import GreatSuccess from './GreatSuccess';
@@ -13,7 +12,6 @@ export {
     Landing,
     IntroShowTodos,
     IntroShowMobile,
-    AppDownloadQR,
     AppPicker,
     BankData,
     InsuranceData,

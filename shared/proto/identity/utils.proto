@@ -20,3 +20,17 @@ message DataSigningResponse {
 service Signing {
     rpc sign(DataSigningRequest) returns (DataSigningResponse);
 }
+
+message DidJwkResolutionRequest {
+    // did:jwk string
+    string did = 1;
+}
+
+message DidJwkResolutionResponse {
+    // JSON DID Document
+    string doc = 1;
+}
+
+service DidJwk {
+    rpc resolve(DidJwkResolutionRequest) returns (DidJwkResolutionResponse);
+}

@@ -64,11 +64,9 @@ const ProvideData: React.FC = () => {
         <Layout>
             <RandomGraphicElement elements={5}>
                 <div className='scan-qr-page-wrapper'>
-                    <h2>{t("pages.general.proveIdentity.provideCredentials")}</h2>
+                    <h2>{t("pages.company.provideData.title")}</h2>
                     <p>
-                        <Trans i18nKey="pages.general.proveIdentity.scanToContinue">
-                            Scan this QR code with <strong>Selv App</strong> to continue
-                        </Trans>
+                        <Trans i18nKey="pages.company.provideData.subTitle" />
                     </p>
                     <div className='qr-wrapper'>
                         {/* TODO: Handle loading state */}
