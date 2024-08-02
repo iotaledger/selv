@@ -109,7 +109,7 @@ export const mainSteps: MainStep[] = [
             },
             {
                 id: "issueCredential",
-                title: "steps.company.processes.done",
+                title: "steps.company.processes.issueCredential",
             },
         ]
     },

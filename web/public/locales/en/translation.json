@@ -177,7 +177,7 @@
         "selvDemo": "Selv Demo",
         "hereIsTodo": "<0>Here is <1>your to-do list</1> for today:</0>",
         "createIdentity": "Create your self-sovereign identity",
-        "claimId": "Claim national ID",
+        "claimId": "Claim your national ID",
         "registerCompany": "Register Company"
       },
       "introShowMobile": {
@@ -244,7 +244,7 @@
       },
       "confirmation": {
         "confirmation": "Company Registered Successfully",
-        "success": "Your private limited company has been successfully registered. Scan the QR code with your wallet app to store your company credential.",
+        "success": "Your private limited company has been successfully registered.",
         "nextStep": "Next, Review the results"
       },
       "incorporatedCompanies": {
