@@ -8,7 +8,6 @@ import {
     Landing,
     IntroShowTodos,
     IntroShowMobile,
-    AppDownloadQR,
     BankData,
     InsuranceData,
     GreatSuccess,

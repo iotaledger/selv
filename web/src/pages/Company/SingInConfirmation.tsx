@@ -20,7 +20,7 @@ const SingInConfirmation: React.FC = () => {
             <RandomGraphicElement elements={5}>
                 <div className='sign-in-confirmation'>
                     <img src={selv} alt='Selv app logo' />
-                    <h2>{t("general.hello")}</h2>
+                    <h2>{t("pages.company.signInConfirmation.title")}</h2>
                     <p>
                         <Trans 
                             i18nKey="pages.company.signInConfirmation.signInSuccess"

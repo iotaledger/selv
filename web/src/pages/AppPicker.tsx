@@ -36,7 +36,8 @@ const AppPicker: React.FC = () => {
                         <React.Fragment>
                             <div className='app-picker__scroller'>
 
-                                <h1 className='title'>{t("actions.downloadApp")}</h1>
+                                <h1 className='title'>{t("pages.walletSelect.title")}</h1>
+                                <h2 className='subTitle'>{t("pages.walletSelect.subTitle")}</h2>
                                 <div className='apps'>
                                     {randomOrderWallets.map(wallet => (
                                         <div className="app">
@@ -92,7 +93,7 @@ const AppPicker: React.FC = () => {
                     <img src={avatar2} alt='' className='avatar2' />
                 </div>
                 <div className="cta-section" id='app-download'>
-                    <p className='subtitle'>{t("pages.demo.appDownloadQR.onceDownloaded")}</p>
+                    <p className='subtitle'>{t("pages.walletSelect.onceDownloaded")}</p>
                     <Link to={nextStep} className='cta'>
                         <Button>
                             {t("actions.continue")}

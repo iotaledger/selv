@@ -114,21 +114,21 @@
   },
   "steps": {
     "setup": {
-      "title": "Identity Creation"
+      "title": "Identity wallet setup"
     },
     "government": {
-      "title": "Government Interaction",
+      "title": "National Id Agency",
       "processes": {
-        "signIn": "Sign In",
-        "issueCredential": "Claim Identity Credential"
+        "signIn": "Log In",
+        "issueCredential": "Claim national ID"
       }
     },
     "company": {
-      "title": "Company Registrar Interaction",
+      "title": "Company registration agency",
       "processes": {
-        "signIn": "Sign In",
-        "presentCredential": "Share Identity Credential",
-        "offerCredential": "Verify Identity Credential",
+        "signIn": "Log In",
+        "presentCredential": "Present National ID",
+        "offerCredential": "Enter company details",
         "issueCredential": "Claim Company Credential"
       }
     },
@@ -139,12 +139,11 @@
       "title": ""
     },
     "done": {
-      "title": "Ready for Business"
+      "title": "Ready for Business!"
     }
   },
   "general": {
     "Self Sovereign Identity": "Self-Sovereign Identity",
-    "selfSovereignity": "Self-Sovereignity",
     "Demo": "Demo",
     "The App": "The App",
     "What it is": "Through Self-Sovereign Identity, people, organizations and things are empowered to collect and share their own verified data and digital identity.",
@@ -187,9 +186,6 @@
         "advantage": "<0>But using IOTA Identity and our partner wallets, it will be <1>​quick and easy​.</1></0>",
         "noteDesktop": "For the best experience, please use this demo website on a desktop computer."
       },
-      "appDownloadQR": {
-        "onceDownloaded": "Once you’ve chosen and setup a wallet, click the button below."
-      },
       "greatSuccess": {
         "signedInDIDText": "You managed to sign into a website you never signed up for. At no point in the process you had to share your email address or a password with an arbitrary website.",
         "receivedNewCredentialsText": "You became the owner of a company. From this point onwards, you would be able to prove your directorship position online, allowing you to act on behalf of the company. Overtime you can grow your Digital Identity profile by gathering further credentials from trusted third parties.",
@@ -208,33 +204,60 @@
         "returnHome": "Return Home"
       }
     },
+    "walletSelect": {
+      "title": "Create your self-sovereign identity",
+      "subTitle": "Choose the wallet where you will save your identity and credentials",
+      "onceDownloaded": "Once you’ve chosen and setup a wallet, click the button below."
+    },
     "government": {
+      "signIn": {
+       "subtitle": "Scan this QR code with your wallet app to log in to the National ID agency portal"
+      },
+      "signInConfirmation": {
+        "title": "Login successful",
+        "signInSuccess": "You have successfully logged in to the National ID agency portal without ever creating an account, and using only the identity on your wallet. No more need for endless account and password creation."
+      },
+      "receiveCredentials": {
+        "title": "Claim your government emitted National Id",
+        "subTitle": "Scan the QR code with your wallet app to receive the credential that represents your National ID"
+      },
       "confirmation": {
-        "confirmation": "Your Identity Credential Was Sent To Your Wallet",
-        "title": "🎉",
-        "success": "Congratulations, You Claimed Your Identity!",
+        "confirmation": "National ID Claimed Successfully",
+        "success": "You have successfully claimed your government national ID. Your credential is now securely stored in your wallet app and can be used across various portals.",
         "nextStep": "Next, Register your Company"
       }
     },
     "company": {
+      "signIn": {
+        "subtitle": "Scan this QR code with your wallet app to log in to the Company Registration Agency portal"
+      },
+      "signInConfirmation": {
+        "title": "Login successful",
+        "signInSuccess": "You have successfully logged in to the Company registration agency"
+      },
+      "provideData": {
+        "title": "Present National ID to the Company Registration Agency",
+        "subTitle": "Scan the QR code with your wallet app to authenticate with your National ID in order to register your company"
+      },
+      "receiveCredentials": {
+        "title": "Company Registered Successfully",
+        "subTitle": "Your private limited company has been successfully registered. Scan the QR code with your wallet app to store your company credential."
+      },
       "confirmation": {
-        "confirmation": "Your Company Credential Was Sent To Your Wallet",
-        "title": "🎉",
-        "success": "Congratulations, You Setup your Company!",
-        "nextStep": "Next, Claim Open a Bank Account"
+        "confirmation": "Company Registered Successfully",
+        "success": "Your private limited company has been successfully registered. Scan the QR code with your wallet app to store your company credential.",
+        "nextStep": "Next, Review the results"
       },
       "incorporatedCompanies": {
         "newlyIncorporatedCompanies": "Newly Incorporated Companies"
-      },
-      "signInConfirmation": {
-        "signInSuccess": "You have now signed in <bold>using your DID {{DID}}</bold> without ever creating an account. No more need for endless account and password creation. In addition, you will be able to provide trustable information, which businesses can use without an expensive verification process. Verifying your data is nearly instant and completely free."
       },
       "companyData": {
         "companyName": "Company Name",
         "companyAddress": "Company Address",
         "companyType": "Company Type",
         "companyBusiness": "Nature of Business",
-        "setUpPrivateCompany": "Set up a Private Limited Company"
+        "setUpPrivateCompany": "Register Your Private Limited Company",
+        "subTitle": "Fill in Your Company Details to Complete the Registration"
 
       }
     },
@@ -283,7 +306,7 @@
         "waitingForLogin": "Waiting for connection",
         "proveIdentity": "Prove control over your Digital Identity",
         "receiveCredentials": "Receive Credentials",
-        "provideCredentials": "Provide Your Digital Identity Credentials",
+        "provideCredentials": "Prove control over your Digital Identity",
         "scanToContinue": "Scan this QR code with <1>your wallet</1> to continue"
       },
       "companyDetails": {
