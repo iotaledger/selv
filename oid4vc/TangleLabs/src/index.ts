@@ -48,6 +48,7 @@ import {Cache} from './cache';
         SigningAlgs.EdDSA
       ],
     },
+    signingAlgorithm: SigningAlgs.ES256,
     did: process.env.RP_DID,
     kid: `${process.env.RP_DID}#${process.env.KEY_FRAGMENT}`,
     signer: remoteSigner(process.env.SIGNER_KEYID),
@@ -60,9 +61,9 @@ import {Cache} from './cache';
     credentialEndpoint: new URL('api/credential', process.env.PUBLIC_URL).toString(),
     credentialIssuer: new URL(process.env.PUBLIC_URL).toString(), // should be DID?
     proofTypesSupported: ["jwt"],
-    //@ts-ignore
     cryptographicBindingMethodsSupported: ["did:jwk"],
     resolver,
+    signingAlgorithm: SigningAlgs.ES256,
     signer: remoteSigner(process.env.SIGNER_KEYID),
     did: process.env.RP_DID,
     kid: `${process.env.RP_DID}#${process.env.KEY_FRAGMENT}`,
