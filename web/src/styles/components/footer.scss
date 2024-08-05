@@ -11,13 +11,19 @@
     }
 
     .logo {
+
         @include themify($themes) {
             text-align: themed('footerLogoAlign');  
         }
+        
+        @include themify($themes) {
+            color: themed('footerFontColor');  
+        }
+        
 
-        img {
+        svg {
             @include themify($themes) {
-                height: themed('footerLogoHeight');  
+                font-size: themed('footerLogoHeight');  
             }
         }
     }

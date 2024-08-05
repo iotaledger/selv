@@ -19,13 +19,16 @@
     }
 
     .logo {
-        @include themify($themes) {
-            text-align: themed('headerLogoAlign');  
-        }
 
-        img {
+        font-weight: bold;
+        @include themify($themes) {
+            color: themed('headerFontColor');  
+        }
+        
+
+        svg {
             @include themify($themes) {
-                height: themed('headerLogoHeight');  
+                font-size: themed('headerLogoHeight');  
             }
         }
     }

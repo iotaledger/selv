@@ -117,14 +117,14 @@
       "title": "Identity wallet setup"
     },
     "government": {
-      "title": "National Id Agency",
+      "title": "National ID Agency",
       "processes": {
         "signIn": "Log In",
         "issueCredential": "Claim national ID"
       }
     },
     "company": {
-      "title": "Company registration agency",
+      "title": "Company Registration Agency",
       "processes": {
         "signIn": "Log In",
         "presentCredential": "Present National ID",
@@ -194,7 +194,7 @@
       "thankYou": {
         "thanksForTryingSelv": "Thanks for Trying Selv!",
         "improvedExperience": "Improved Experience",
-        "savedTime": "With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and insurance with just a few clicks. Your credentials are reusable,  making them a real time-saver.",
+        "savedTime": "With Selv, powered by IOTA, you managed to set up an entire company with just a few clicks. Your credentials are reusable,  making them a real time-saver.",
         "selfSovereignty": "Self-Sovereignty",
         "sovereigntyText": "You have taken full control of your data. You decided who you shared your credentials with and when. You can even share them with others manually via QR-Code.",
         "moreTrust": "More Trust",
@@ -217,7 +217,7 @@
         "signInSuccess": "You have successfully logged in to the National ID agency portal without ever creating an account, and using only the identity on your wallet. No more need for endless account and password creation."
       },
       "receiveCredentials": {
-        "title": "Claim your government emitted National Id",
+        "title": "Claim your government emitted National ID",
         "subTitle": "Scan the QR code with your wallet app to receive the credential that represents your National ID"
       },
       "confirmation": {
