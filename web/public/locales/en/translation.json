@@ -21,9 +21,10 @@
       "benefitsUserExperience": "Retain more customers through an enhanced user experience. Less manual typing required."
     },
     "controlIdentity": {
-      "youControlYour": "You Control Your",
-      "ownIdentity": "Own Identity",
-      "whatItIsDetailed": "Through Self-Sovereign Identity, people, organizations and things are empowered to collect and share their own verified data and digital identity. This approach increases privacy and control, enabling a “Bring Your Own Identity” (BYOI) style of engagement with corporations, removing the need to perform expensive data collection."
+      "theProblem": "The Problem",
+      "theProblemText": " In today's internet, a significant portion of user identification and authentication relies on email addresses tied to centralized platforms, such as Google. This approach comes with notable privacy and security concerns, as email addresses are frequently targeted by hackers, leading to data breaches and identity theft. Moreover, users have limited control over their personal information once it is shared with corporations, who may use or sell this data without explicit consent.",
+      "theSolution": "The Solution",
+      "theSolutionText": "Through Self-Sovereign Identity and Decentralized Identifiers (DIDs), people, organizations, and things are empowered to control their own digital identity as well as collect and share their own verified data. Unlike traditional email-based identities, IOTA Identities are not bound to any centralized platform, but are managed on a permissionless and decentralized network. This enables a seamless, single login experience across all platforms, enhancing privacy and control. By adopting a “Bring Your Own Identity” (BYOI) approach, users can engage with corporations without the need for costly and invasive data collection processes, maintaining ownership of their personal information and sharing it only when necessary."
     },
     "FAQ": {
       "question1": "Does the IOTA Foundation track my data and usage?",
