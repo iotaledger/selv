@@ -3,7 +3,6 @@ import { createContext, useContext, useReducer } from 'react';
 import { routes, mainSteps } from '../steps';
 import SocketIOClient, { Socket } from 'socket.io-client';
 
-import config from '../config.json';
 import { Issuers } from '@shared/types/Issuers';
 import { Scopes } from '@shared/types/Scopes';
 import { Providers } from '@shared/types/Providers';

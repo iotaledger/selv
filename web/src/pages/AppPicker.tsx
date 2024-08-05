@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { generatePath, Link } from 'react-router-dom';
-import { Button, Modal } from 'antd';
+import { Button, Flex, Modal } from 'antd';
 import { Layout, RandomGraphicElement } from '../components';
 import { QRCode } from 'antd';
 import useStep from '../utils/useStep';
@@ -10,7 +10,6 @@ import avatar1 from '../assets/avatar1.png';
 import avatar2 from '../assets/avatar2.png';
 import dots from '../assets/backgrounds/dots.png';
 import circle from '../assets/backgrounds/circleFrame6.svg';
-import config from '../config.json';
 import { useTranslation, Trans } from 'react-i18next';
 import { wallets } from '../wallets';
 import { utilityRoutes } from '../steps';
@@ -45,10 +44,10 @@ const AppPicker: React.FC = () => {
                                                 <div className='app__column'>
                                                     {wallet.logo}
                                                     <div className='app__content'>
-                                                        <span>
+                                                        <Flex align='center'>
                                                             by &nbsp;
                                                             {wallet.by}
-                                                        </span>
+                                                        </Flex>
 
                                                         <Button onClick={() => setOpen(wallet.name)}>
                                                             {t("actions.continue")}
@@ -67,10 +66,10 @@ const AppPicker: React.FC = () => {
                                                 <section className='wallet-modal'>
                                                     {wallet.logo}
                                                     <div className='wallet-modal__by'>
-                                                        <span>
+                                                        <Flex align='center'>
                                                             by &nbsp;
                                                             {wallet.by}
-                                                        </span>
+                                                        </Flex>
                                                     </div>
                                                     <p>{wallet.description}</p>
 
