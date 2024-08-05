@@ -5,6 +5,7 @@ import CompanyDetails from './CompanyDetails';
 import Confirmation from './Confirmation';
 import ProvideData from './ProvideData';
 import ReceiveCredentials from './ReceiveCredentials';
+import PresentationConfirmation from './PresentationConfirmation';
 
 export {
     ProveIdentity,
@@ -13,5 +14,6 @@ export {
     CompanyDetails,
     Confirmation,
     ProvideData,
-    ReceiveCredentials
+    ReceiveCredentials,
+    PresentationConfirmation
 };

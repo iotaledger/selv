@@ -238,6 +238,10 @@
         "title": "Present National ID to the Company Registration Agency",
         "subTitle": "Scan the QR code with your wallet app to authenticate with your National ID in order to register your company"
       },
+      "presentationConfirmation": {
+        "title": "National ID Verified Successfully",
+        "signInSuccess": "Your national ID has been successfully presented to the company registration agency."
+      },
       "receiveCredentials": {
         "title": "Company Registered Successfully",
         "subTitle": "Your private limited company has been successfully registered. Scan the QR code with your wallet app to store your company credential."

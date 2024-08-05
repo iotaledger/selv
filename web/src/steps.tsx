@@ -42,6 +42,7 @@ export const routes: Route[] = [
     { path: '/:lng?/company/prove', element: <Company.ProveIdentity />, step: "company", process: "signIn", poweredBy: <Impierce /> },
     { path: '/:lng?/company/signin', element: <Company.SingInConfirmation />, step: "company", process: "signIn", poweredBy: <Impierce /> },
     { path: '/:lng?/company/provide', element: <Company.ProvideData />, step: "company", process: "presentCredential", poweredBy: <Impierce /> },
+    { path: '/:lng?/company/provided', element: <Company.PresentationConfirmation />, step: "company", process: "presentCredential", poweredBy: <Impierce /> },
     { path: '/:lng?/company/data', element: <Company.CompanyData />, step: "company", process: "offerCredential", poweredBy: <Impierce /> },
     { path: '/:lng?/company/receive', element: <Company.ReceiveCredentials />, step: "company", process: "issueCredential", poweredBy: <Impierce /> },
     { path: '/:lng?/company/confirm', element: <Company.Confirmation />, step: "company", process: "issueCredential", poweredBy: <Impierce /> },
