@@ -50,7 +50,7 @@ const AppPicker: React.FC = () => {
                                                         </Flex>
 
                                                         <Button onClick={() => setOpen(wallet.name)}>
-                                                            {t("actions.continue")}
+                                                            {t("actions.select")}
                                                         </Button>
                                                     </div>
                                                 </div>
