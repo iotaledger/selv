@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { generatePath, Link } from 'react-router-dom';
 import { Button, Flex, Modal } from 'antd';
 import { Layout, RandomGraphicElement } from '../components';
@@ -13,6 +13,7 @@ import circle from '../assets/backgrounds/circleFrame6.svg';
 import { useTranslation, Trans } from 'react-i18next';
 import { wallets } from '../wallets';
 import { utilityRoutes } from '../steps';
+import { Actions, useCredentialsDispatch } from '../context/globalState';
 
 const AppPicker: React.FC = () => {
     const { nextStep } = useStep();
@@ -21,11 +22,19 @@ const AppPicker: React.FC = () => {
 
     const [open, setOpen] = useState("");
 
-    const walletDownloadRoute = utilityRoutes.find(elem => elem.path.includes('/wallets/:wallet'));
+    const dispatch = useCredentialsDispatch();
+
+    const walletDownloadRoute = utilityRoutes.find(elem => elem.id === "walletDownload");
 
     const randomOrderWallets = useMemo(() => {
         return wallets.sort(() => .5 - Math.random())
     }, [])
+
+    useEffect(() => {
+        dispatch?.({
+            type: Actions.RESET_STATE,
+        })
+    }, []);
 
     return (
         <Layout noHeader noFooter>

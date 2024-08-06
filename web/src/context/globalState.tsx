@@ -18,6 +18,7 @@ export enum Actions {
     REQUEST_DOMAIN_LINKAGE_VALIDATION,
     SET_DOMAIN_LINKAGE_VALIDATION,
     SET_ISSUANCE_DATA,
+    RESET_STATE,
 }
 
 export type ValidationResult = {
@@ -98,6 +99,10 @@ interface SetDomainLinkageValidation extends ReducerBaseAction {
     result: ValidationResult,
 }
 
+interface ResetState extends ReducerBaseAction {
+    type: Actions.RESET_STATE,
+}
+
 interface StoredCredential {
     credential: any;
 };
@@ -116,7 +121,7 @@ export type State = {
     }
 };
 
-type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction | SetIssuanceData | RequestDomainLinkageValidation | SetDomainLinkageValidation;
+type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction | SetIssuanceData | RequestDomainLinkageValidation | SetDomainLinkageValidation | ResetState;
 
 const socket = SocketIOClient("/", {
     autoConnect: true,
@@ -352,6 +357,12 @@ export function GlobalStateProvider({ children }: any) {
 
                     }
                 };
+            }
+
+            case Actions.RESET_STATE: {
+                return ({
+                    validatedDomains: state.validatedDomains
+                });
             }
 
             default: {
