@@ -136,7 +136,7 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                             did:iota:rms:0x4868d61773a9f8e54741261a0e82fc883e299c2614c94b2400e2423d4c5bbe6a <ExportOutlined />
                         </Link>
                     }><b>company.selv.iota.org</b></Popover></p> {/* TODO */}
-                <p>to <b>{state.COMPANY_HOUSE?.connectedDID}</b></p> {/* TODO */}
+                <p>to <b style={{wordBreak: "break-all"}}>{state.COMPANY_HOUSE?.connectedDID}</b></p> {/* TODO */}
                 <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")} />
             </section>
             {

@@ -26,10 +26,6 @@ const DomainCheck = ({ result }: {
                   avatar={<CheckCircleTwoTone />}
                   title={item.url}
                 /></Popover>
-              <List.Item.Meta
-                avatar={<CheckCircleTwoTone />}
-                title={item.url}
-              />
             </List.Item>
           )}
         />
