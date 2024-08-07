@@ -45,9 +45,10 @@ import {Cache} from './cache';
         "did:jwk",
       ],
       idTokenSigningAlgValuesSupported: [
-        SigningAlgs.EdDSA
+        SigningAlgs.ES256
       ],
     },
+    signingAlgorithm: SigningAlgs.ES256,
     did: process.env.RP_DID,
     kid: `${process.env.RP_DID}#${process.env.KEY_FRAGMENT}`,
     signer: remoteSigner(process.env.SIGNER_KEYID),
@@ -60,12 +61,13 @@ import {Cache} from './cache';
     credentialEndpoint: new URL('api/credential', process.env.PUBLIC_URL).toString(),
     credentialIssuer: new URL(process.env.PUBLIC_URL).toString(), // should be DID?
     proofTypesSupported: ["jwt"],
-    cryptographicBindingMethodsSupported: ["did:key"], //TODO: did:jwk?
+    cryptographicBindingMethodsSupported: ["did:jwk"],
     resolver,
+    signingAlgorithm: SigningAlgs.ES256,
     signer: remoteSigner(process.env.SIGNER_KEYID),
     did: process.env.RP_DID,
     kid: `${process.env.RP_DID}#${process.env.KEY_FRAGMENT}`,
-    credentialSigningAlgValuesSupported: [SigningAlgs.EdDSA],
+    credentialSigningAlgValuesSupported: [SigningAlgs.ES256],
     store: createStore(),
     tokenEndpoint: new URL('/api/token', process.env.PUBLIC_URL).toString(),
     supportedCredentials: [
