@@ -45,7 +45,7 @@ import {Cache} from './cache';
         "did:jwk",
       ],
       idTokenSigningAlgValuesSupported: [
-        SigningAlgs.EdDSA
+        SigningAlgs.ES256
       ],
     },
     signingAlgorithm: SigningAlgs.ES256,
