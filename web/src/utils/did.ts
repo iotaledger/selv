@@ -1,4 +1,3 @@
-import { provider } from '../config.json';
 import Address from '../schemas/Address.json';
 import BankAccount from '../schemas/BankAccount.json';
 import Company from '../schemas/Company.json';

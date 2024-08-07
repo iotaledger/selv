@@ -1,8 +1,6 @@
 import Landing from './Landing';
 import IntroShowTodos from './IntroShowTodos';
 import IntroShowMobile from './IntroShowMobile';
-import BankData from './BankData';
-import InsuranceData from './InsuranceData';
 import GreatSuccess from './GreatSuccess';
 import ThankYou from './ThankYou';
 import AppPicker from './AppPicker';
@@ -13,8 +11,6 @@ export {
     IntroShowTodos,
     IntroShowMobile,
     AppPicker,
-    BankData,
-    InsuranceData,
     GreatSuccess,
     ThankYou,
     WalletDownload

@@ -8,8 +8,6 @@ import {
     Landing,
     IntroShowTodos,
     IntroShowMobile,
-    BankData,
-    InsuranceData,
     GreatSuccess,
     ThankYou,
     AppPicker,
@@ -26,6 +24,7 @@ export type Route = {
     step?: string;
     process?: string;
     poweredBy?: JSX.Element;
+    id?: string;
 };
 
 
@@ -34,15 +33,16 @@ export const routes: Route[] = [
     { path: '/:lng?/demo/todos', element: <IntroShowTodos /> },
     { path: '/:lng?/demo/app', element: <IntroShowMobile /> },
     { path: '/:lng?/demo/app-picker', element: <AppPicker />, step: "setup" },
-    { path: '/:lng?/government/prove', element: <Government.ProveIdentity />, step: "government", process: "signIn", poweredBy: <TangleLabs /> },
+    { path: '/:lng?/government/prove', id: "governmentEntry", element: <Government.ProveIdentity />, step: "government", process: "signIn", poweredBy: <TangleLabs /> },
     { path: '/:lng?/government/signin', element: <Government.SingInConfirmation />, step: "government", process: "signIn", poweredBy: <TangleLabs /> },
     // { path: '/:lng?/government/data', element: <Government.GovernmentData/>, step: "government", poweredBy: <TangleLabs/> },
     { path: '/:lng?/government/receive', element: <Government.ReceiveCredentials />, step: "government", process: "issueCredential", poweredBy: <TangleLabs /> },
     { path: '/:lng?/government/confirm', element: <Government.Confirmation />, step: "government", process: "issueCredential", poweredBy: <TangleLabs /> },
-    { path: '/:lng?/company/prove', element: <Company.ProveIdentity />, step: "company", process: "signIn", poweredBy: <Impierce /> },
+    { path: '/:lng?/company/prove', id: "companyEntry", element: <Company.ProveIdentity />, step: "company", process: "signIn", poweredBy: <Impierce /> },
     { path: '/:lng?/company/signin', element: <Company.SingInConfirmation />, step: "company", process: "signIn", poweredBy: <Impierce /> },
-    { path: '/:lng?/company/provide', element: <Company.ProvideData />, step: "company", process: "presentCredential", poweredBy: <Impierce /> },
-    { path: '/:lng?/company/data', element: <Company.CompanyData />, step: "company", process: "offerCredential", poweredBy: <Impierce /> },
+    { path: '/:lng?/company/provide', id: "companyPresentation", element: <Company.ProvideData />, step: "company", process: "presentCredential", poweredBy: <Impierce /> },
+    { path: '/:lng?/company/provided', element: <Company.PresentationConfirmation />, step: "company", process: "presentCredential", poweredBy: <Impierce /> },
+    { path: '/:lng?/company/data', id: "companyData", element: <Company.CompanyData />, step: "company", process: "offerCredential", poweredBy: <Impierce /> },
     { path: '/:lng?/company/receive', element: <Company.ReceiveCredentials />, step: "company", process: "issueCredential", poweredBy: <Impierce /> },
     { path: '/:lng?/company/confirm', element: <Company.Confirmation />, step: "company", process: "issueCredential", poweredBy: <Impierce /> },
     { path: '/:lng?/demo/success', element: <GreatSuccess /> },
@@ -64,8 +64,8 @@ export const routes: Route[] = [
     { path: '/:lng?/demo/thankyou', element: <ThankYou /> }
 ];
 
-export const utilityRoutes = [
-    { path: '/wallets/:wallet', element: <WalletDownload /> }
+export const utilityRoutes: Route[] = [
+    { path: '/wallets/:wallet', id: "walletDownload", element: <WalletDownload /> }
 ];
 
 export type MainStep = {

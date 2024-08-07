@@ -1,8 +1,7 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import randomstring from 'randomstring';
-import { Layout, Loading, QRCode, RandomGraphicElement, WebSocket } from '../../components';
+import { Layout, Loading, QRCode, RandomGraphicElement } from '../../components';
 import useStep from '../../utils/useStep';
-import config from '../../config.json';
 import { useTranslation, Trans } from 'react-i18next';
 import { Router, useNavigate } from 'react-router';
 import { Actions, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
@@ -12,6 +11,9 @@ import { Scopes } from '@shared/types/Scopes';
 
 import { v4 as uuidv4 } from 'uuid';
 import CitizenCredentialConfig  from '@shared/credentials/CitizenCredential.json';
+import { routes } from '../../steps';
+import { App } from 'antd';
+import i18n from '../../i18n';
 
 
 const ProvideData: React.FC = () => {
@@ -28,7 +30,19 @@ const ProvideData: React.FC = () => {
         navigate(nextStep);
     }, [nextStep, navigate]);
 
+    const fallbackRoute = routes.find(elem => elem.id === "companyEntry");
+
+    const { message } = App.useApp();
+
     useEffect(() => {
+
+        if(!state[Scopes.CompanyHouse]?.connectedDID) {
+            message.open({
+                type: 'error',
+                content: 'Please reconnect your digital identity', //TODO: translate
+            });
+            return navigate(fallbackRoute!.path.replace(":lng?", i18n.language.toString()));
+        }
 
         dispatch?.({
             type: Actions.REQUEST_PRESENTATION,
@@ -41,7 +55,7 @@ const ProvideData: React.FC = () => {
 
         })
 
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         if (state[Scopes.CompanyHouse]?.credentials?.length) {

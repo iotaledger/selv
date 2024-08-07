@@ -8,6 +8,9 @@ import { Issuers } from '@shared/types/Issuers';
 import { Providers } from '@shared/types/Providers';
 import { Scopes } from '@shared/types/Scopes';
 import CompanyCredentialConfig  from '@shared/credentials/CompanyCredential.json';
+import { App } from 'antd';
+import i18n from '../../i18n';
+import { routes } from '../../steps';
 
 const ReceiveCredentials: React.FC = () => {
     const { t } = useTranslation();
@@ -19,11 +22,24 @@ const ReceiveCredentials: React.FC = () => {
     const dispatch = useCredentialsDispatch();
     const { state } = useGlobalState();
 
+    const { message } = App.useApp();
+
     const goToNextStep = useCallback(() => {
         navigate(nextStep);
     }, [nextStep, navigate]);
 
+    const fallbackRoute = routes.find(elem => elem.id === "companyData");
+
     useEffect(() => {
+
+        if(!state[Scopes.CompanyHouse]?.connectedDID) {
+            message.open({
+                type: 'error',
+                content: 'Please fill out the company data', //TODO: translate
+            });
+            return navigate(fallbackRoute!.path.replace(":lng?", i18n.language.toString()));
+        }
+
         dispatch?.({
             type: Actions.REQUEST_ISSUANCE,
             provider: Providers.Impierce,
@@ -31,7 +47,7 @@ const ReceiveCredentials: React.FC = () => {
             credentials: [{type: CompanyCredentialConfig.template.type.at(-1) as string, data: state.COMPANY_HOUSE?.issuanceData}],
             issuer: Issuers.Bank //TODO: should be COMPANY_HOUSE?
         })
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         if(state[Scopes.CompanyHouse]?.issuanceComplete) {

@@ -15,18 +15,18 @@ const QRCodeComponent = ({ text, size }: { text: string; size?: number; }) => {
                 navigator.clipboard.writeText(text).then(function () {
                     message.open({
                         type: 'success',
-                        content: 'Link copied to clipboard',
+                        content: 'Link copied to clipboard', // TODO: translate
                     });
                 }, function (err) {
                     message.open({
                         type: 'error',
-                        content: 'Could not copy text to clipboard',
+                        content: 'Could not copy text to clipboard', // TODO: translate
                     });
                 });
             } else {
                 message.open({
                     type: 'error',
-                    content: 'Could not get permission to copy text to clipboard',
+                    content: 'Could not get permission to copy text to clipboard', // TODO: translate
                 });
             }
         });

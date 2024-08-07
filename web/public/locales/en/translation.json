@@ -21,9 +21,10 @@
       "benefitsUserExperience": "Retain more customers through an enhanced user experience. Less manual typing required."
     },
     "controlIdentity": {
-      "youControlYour": "You Control Your",
-      "ownIdentity": "Own Identity",
-      "whatItIsDetailed": "Through Self-Sovereign Identity, people, organizations and things are empowered to collect and share their own verified data and digital identity. This approach increases privacy and control, enabling a “Bring Your Own Identity” (BYOI) style of engagement with corporations, removing the need to perform expensive data collection."
+      "theProblem": "The Problem",
+      "theProblemText": " In today's internet, a significant portion of user identification and authentication relies on email addresses tied to centralized platforms, such as Google. This approach comes with notable privacy and security concerns, as email addresses are frequently targeted by hackers, leading to data breaches and identity theft. Moreover, users have limited control over their personal information once it is shared with corporations, who may use or sell this data without explicit consent.",
+      "theSolution": "The Solution",
+      "theSolutionText": "Through Self-Sovereign Identity and Decentralized Identifiers (DIDs), people, organizations, and things are empowered to control their own digital identity as well as collect and share their own verified data. Unlike traditional email-based identities, IOTA Identities are not bound to any centralized platform, but are managed on a permissionless and decentralized network. This enables a seamless, single login experience across all platforms, enhancing privacy and control. By adopting a “Bring Your Own Identity” (BYOI) approach, users can engage with corporations without the need for costly and invasive data collection processes, maintaining ownership of their personal information and sharing it only when necessary."
     },
     "FAQ": {
       "question1": "Does the IOTA Foundation track my data and usage?",
@@ -93,6 +94,7 @@
     "setup": "Identity Creation",
     "tryTheDemo": "Try the Demo",
     "continue": "Continue",
+    "select": "Select",
     "letsDoIt": "Let's Do It",
     "continueNextStep": "Continue to Next Step",
     "registerNewCompany": "Register New Company",
@@ -117,14 +119,14 @@
       "title": "Identity wallet setup"
     },
     "government": {
-      "title": "National Id Agency",
+      "title": "National ID Agency",
       "processes": {
         "signIn": "Log In",
         "issueCredential": "Claim national ID"
       }
     },
     "company": {
-      "title": "Company registration agency",
+      "title": "Company Registration Agency",
       "processes": {
         "signIn": "Log In",
         "presentCredential": "Present National ID",
@@ -194,7 +196,7 @@
       "thankYou": {
         "thanksForTryingSelv": "Thanks for Trying Selv!",
         "improvedExperience": "Improved Experience",
-        "savedTime": "With Selv, powered by IOTA, you managed to set up an entire company, corporate bank account and insurance with just a few clicks. Your credentials are reusable,  making them a real time-saver.",
+        "savedTime": "With Selv, powered by IOTA, you managed to set up an entire company with just a few clicks. Your credentials are reusable,  making them a real time-saver.",
         "selfSovereignty": "Self-Sovereignty",
         "sovereigntyText": "You have taken full control of your data. You decided who you shared your credentials with and when. You can even share them with others manually via QR-Code.",
         "moreTrust": "More Trust",
@@ -217,7 +219,7 @@
         "signInSuccess": "You have successfully logged in to the National ID agency portal without ever creating an account, and using only the identity on your wallet. No more need for endless account and password creation."
       },
       "receiveCredentials": {
-        "title": "Claim your government emitted National Id",
+        "title": "Claim your government emitted National ID",
         "subTitle": "Scan the QR code with your wallet app to receive the credential that represents your National ID"
       },
       "confirmation": {
@@ -237,6 +239,10 @@
       "provideData": {
         "title": "Present National ID to the Company Registration Agency",
         "subTitle": "Scan the QR code with your wallet app to authenticate with your National ID in order to register your company"
+      },
+      "presentationConfirmation": {
+        "title": "National ID Verified Successfully",
+        "signInSuccess": "Your national ID has been successfully presented to the company registration agency."
       },
       "receiveCredentials": {
         "title": "Company Registered Successfully",

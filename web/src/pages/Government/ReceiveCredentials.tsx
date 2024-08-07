@@ -8,6 +8,9 @@ import { Issuers } from '@shared/types/Issuers';
 import { Providers } from '@shared/types/Providers';
 import { Scopes } from '@shared/types/Scopes';
 import CitizenCredentialConfig  from '@shared/credentials/CitizenCredential.json';
+import { routes } from '../../steps';
+import i18n from '../../i18n';
+import { App } from 'antd';
 
 const ReceiveCredentials: React.FC = () => {
     const { t } = useTranslation();
@@ -19,19 +22,32 @@ const ReceiveCredentials: React.FC = () => {
     const dispatch = useCredentialsDispatch();
     const { state } = useGlobalState();
 
+    const fallbackRoute = routes.find(elem => elem.id === "governmentEntry");
+
     const goToNextStep = useCallback(() => {
         navigate(nextStep);
     }, [nextStep, navigate]);
 
+    const { message } = App.useApp();
+
     useEffect(() => {
+
+        if(!state[Scopes.Government]?.connectedDID) {
+            message.open({
+                type: 'error',
+                content: 'Please reconnect your digital identity', //TODO: translate
+            });
+            return navigate(fallbackRoute!.path.replace(":lng?", i18n.language.toString()));
+        }
+
         dispatch?.({
-            type: Actions.REQUEST_ISSUANCE, 
+            type: Actions.REQUEST_ISSUANCE,
             provider: Providers.TangleLabs, 
             scope: Scopes.Government, 
             credentials: [{type: CitizenCredentialConfig.template.type.at(-1) as string}],
             issuer: Issuers.Government
         })
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         if (state[Scopes.Government]?.issuanceComplete) {

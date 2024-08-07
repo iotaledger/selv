@@ -3,7 +3,6 @@ import { createContext, useContext, useReducer } from 'react';
 import { routes, mainSteps } from '../steps';
 import SocketIOClient, { Socket } from 'socket.io-client';
 
-import config from '../config.json';
 import { Issuers } from '@shared/types/Issuers';
 import { Scopes } from '@shared/types/Scopes';
 import { Providers } from '@shared/types/Providers';
@@ -19,6 +18,7 @@ export enum Actions {
     REQUEST_DOMAIN_LINKAGE_VALIDATION,
     SET_DOMAIN_LINKAGE_VALIDATION,
     SET_ISSUANCE_DATA,
+    RESET_STATE,
 }
 
 export type ValidationResult = {
@@ -99,6 +99,10 @@ interface SetDomainLinkageValidation extends ReducerBaseAction {
     result: ValidationResult,
 }
 
+interface ResetState extends ReducerBaseAction {
+    type: Actions.RESET_STATE,
+}
+
 interface StoredCredential {
     credential: any;
 };
@@ -117,7 +121,7 @@ export type State = {
     }
 };
 
-type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction | SetIssuanceData | RequestDomainLinkageValidation | SetDomainLinkageValidation;
+type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction | SetIssuanceData | RequestDomainLinkageValidation | SetDomainLinkageValidation | ResetState;
 
 const socket = SocketIOClient("/", {
     autoConnect: true,
@@ -353,6 +357,12 @@ export function GlobalStateProvider({ children }: any) {
 
                     }
                 };
+            }
+
+            case Actions.RESET_STATE: {
+                return ({
+                    validatedDomains: state.validatedDomains
+                });
             }
 
             default: {

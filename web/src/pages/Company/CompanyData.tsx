@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, notification, Popover, Tooltip, Typography } from 'antd';
+import { App, Button, notification, Popover, Tooltip, Typography } from 'antd';
 import { flattenObject } from '../../utils/helper';
 import { Layout, Loading, Form, PrefilledForm } from '../../components';
 import { useTranslation } from 'react-i18next';
@@ -10,6 +10,8 @@ import { Scopes } from '@shared/types/Scopes';
 import CitizenCredentialConfig from '@shared/credentials/CitizenCredential.json';
 import DomainCheck from '../../components/DomainCheck';
 import { ExportOutlined } from '@ant-design/icons';
+import { routes } from '../../steps';
+import i18n from '../../i18n';
 const { Link } = Typography;
 
 const emptyFields = [{
@@ -59,6 +61,10 @@ const CompanyData: React.FC = ({ history, match }: any) => {
 
     const { t } = useTranslation();
 
+    const { message } = App.useApp();
+
+    const fallbackRoute = routes.find(elem => elem.id === "companyPresentation");
+
     async function processValues(fields: object) {
         setFields(fields);
     }
@@ -73,9 +79,19 @@ const CompanyData: React.FC = ({ history, match }: any) => {
     }
 
     useEffect(() => {
+
+        if(!state[Scopes.CompanyHouse]?.credentials.length) {
+            message.open({
+                type: 'error',
+                content: 'Please present your national ID crendential', //TODO: translate
+            });
+            return navigate(fallbackRoute!.path.replace(":lng?", i18n.language.toString()));
+        }
+
+
         if (!state[Scopes.CompanyHouse]?.credentials.length) return;
         setRelevantCredential(state[Scopes.CompanyHouse].credentials.filter((c: any) => c.credential?.type.includes(CitizenCredentialConfig.template.type.pop()))?.[0]?.credential);
-    }, [state, setRelevantCredential])
+    }, [])
 
     useEffect(() => {
         if (!relevantCredential) return;
@@ -120,7 +136,7 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                             did:iota:rms:0x4868d61773a9f8e54741261a0e82fc883e299c2614c94b2400e2423d4c5bbe6a <ExportOutlined />
                         </Link>
                     }><b>company.selv.iota.org</b></Popover></p> {/* TODO */}
-                <p>to <b>{state.COMPANY_HOUSE?.connectedDID}</b></p> {/* TODO */}
+                <p>to <b style={{wordBreak: "break-all"}}>{state.COMPANY_HOUSE?.connectedDID}</b></p> {/* TODO */}
                 <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")} />
             </section>
             {
