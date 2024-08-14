@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { App, Button, notification, Popover, Tooltip, Typography } from 'antd';
-import { flattenObject } from '../../utils/helper';
+import { App, Popover, Typography } from 'antd';
 import { Layout, Loading, Form, PrefilledForm } from '../../components';
 import { useTranslation } from 'react-i18next';
-import { Actions, State, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
+import { Actions, ParsedDIDResult, State, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
 import { useNavigate } from 'react-router-dom';
 import useStep from '../../utils/useStep';
 import { Scopes } from '@shared/types/Scopes';
@@ -12,6 +11,8 @@ import DomainCheck from '../../components/DomainCheck';
 import { ExportOutlined } from '@ant-design/icons';
 import { routes } from '../../steps';
 import i18n from '../../i18n';
+import { getExplorerLinkFromDID } from '../../utils/explorer';
+
 const { Link } = Typography;
 
 const emptyFields = [{
@@ -39,25 +40,19 @@ const messages = {
     verifying: 'general.messages.verifying'
 };
 
-// const notify = (type: string, message: string, description: string) => {
-//     return type === 'error'
-//         ? notification.error({ message, description })
-//         : notification.warning({ message, description });
-// };
-
-/**
- * Component which will display a CompanyData.
- */
-const CompanyData: React.FC = ({ history, match }: any) => {
+const CompanyData: React.FC = () => {
     const [fields, setFields] = useState<object>();
     const [status, setStatus] = useState('');
     const [relevantCredential, setRelevantCredential] = useState<null | any>(null);
     const [prefilledData, setPrefilledData] = useState({});
-    const [validatedDomains, setValidatedDomains] = useState<State['validatedDomains'][keyof State['validatedDomains']] | null>(null);
+    const [issuerDomains, setIssuerDomains] = useState<State['validatedDomains'][keyof State['validatedDomains']] | null>(null);
+    const [credentialsDomains, setCredentialDomains] = useState<State['validatedDomains'][keyof State['validatedDomains']] | null>(null);
     const { state } = useGlobalState();
     const { nextStep } = useStep();
     const dispatch = useCredentialsDispatch();
     const navigate = useNavigate();
+
+    const issuerDID = process.env[`REACT_APP_ISSUERS_${Scopes.CompanyHouse}_DID`];
 
     const { t } = useTranslation();
 
@@ -83,15 +78,29 @@ const CompanyData: React.FC = ({ history, match }: any) => {
         if(!state[Scopes.CompanyHouse]?.credentials.length) {
             message.open({
                 type: 'error',
-                content: 'Please present your national ID crendential', //TODO: translate
+                content: 'Please present your national ID credential', //TODO: translate
             });
             return navigate(fallbackRoute!.path.replace(":lng?", i18n.language.toString()));
         }
-
-
-        if (!state[Scopes.CompanyHouse]?.credentials.length) return;
+        
         setRelevantCredential(state[Scopes.CompanyHouse].credentials.filter((c: any) => c.credential?.type.includes(CitizenCredentialConfig.template.type.pop()))?.[0]?.credential);
     }, [])
+
+    useEffect(() => {
+
+        if(relevantCredential && !state.parsedDID[relevantCredential.issuer]) {
+            dispatch?.({ type: Actions.REQUEST_PARSED_DID, did: relevantCredential.issuer });
+        }
+
+    }, [state, relevantCredential, dispatch])
+
+    useEffect(() => {
+
+        if(issuerDID && !state.parsedDID[issuerDID]) {
+            dispatch?.({ type: Actions.REQUEST_PARSED_DID, did: issuerDID });
+        }
+        
+    }, [state, issuerDID, dispatch])
 
     useEffect(() => {
         if (!relevantCredential) return;
@@ -108,8 +117,15 @@ const CompanyData: React.FC = ({ history, match }: any) => {
 
     useEffect(() => {
         if (!relevantCredential) return;
-        setValidatedDomains(state.validatedDomains[relevantCredential.issuer])
+        setCredentialDomains(state.validatedDomains[relevantCredential.issuer])
     }, [state, relevantCredential])
+
+    useEffect(() => {
+        if (!dispatch || !state || !issuerDID || state.validatedDomains[issuerDID]) return;
+
+        dispatch?.({ type: Actions.REQUEST_DOMAIN_LINKAGE_VALIDATION, did: issuerDID });
+        setIssuerDomains(state.validatedDomains[issuerDID])
+    }, [state, issuerDID, dispatch])
 
     return (
         <Layout>
@@ -118,8 +134,28 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                 <h3>{t("pages.company.companyData.subTitle")}</h3>
                 <section>
                     <h3 className='section-header'>{t("pages.insurance.insuranceData.businessOwner")}</h3>
-                    {validatedDomains && (validatedDomains !== 'in-flight') && (
-                        <DomainCheck result={validatedDomains} />
+
+                    {relevantCredential && relevantCredential.issuer && 
+                        <>
+                            <p>Issued by {(state.parsedDID[relevantCredential.issuer] && state.parsedDID[relevantCredential.issuer] !== "in-flight") ? 
+                                <Popover content={
+                                    <Link 
+                                    href={getExplorerLinkFromDID(relevantCredential.issuer, state.parsedDID[relevantCredential.issuer] as ParsedDIDResult)}
+                                    target="_blank"
+                                    >
+                                        IOTA Explorer <ExportOutlined />
+                                    </Link>
+                                    }><b>{relevantCredential.issuer}</b>
+                                </Popover> 
+                            : 
+                                relevantCredential.issuer 
+                            }   
+                            </p>
+                            <p>to <b style={{wordBreak: "break-all"}}>{relevantCredential.credentialSubject.id}</b></p> 
+                        </>
+                    }
+                    {credentialsDomains && (credentialsDomains !== 'in-flight') && (
+                        <DomainCheck validatedDomains={credentialsDomains} />
                     )}
                     {
                         // Object.keys(prefilledFormData.dataFields).length &&
@@ -128,15 +164,24 @@ const CompanyData: React.FC = ({ history, match }: any) => {
                 </section>
                 <section>
                     <h3 className='section-header'>{t("pages.insurance.insuranceData.companyDetails")}</h3>
-                    <p>Will be issued by <Popover content={
-                        <Link 
-                            href="https://explorer.iota.org/shimmer-testnet/addr/rms1ppyx34shww5l3e28gynp5r5zljyru2vuyc2vjjeyqr3yy02vtwlx52sh4rj?tab=DID"
-                            target="_blank"
-                        >
-                            did:iota:rms:0x4868d61773a9f8e54741261a0e82fc883e299c2614c94b2400e2423d4c5bbe6a <ExportOutlined />
-                        </Link>
-                    }><b>company.selv.iota.org</b></Popover></p> {/* TODO */}
-                <p>to <b style={{wordBreak: "break-all"}}>{state.COMPANY_HOUSE?.connectedDID}</b></p> {/* TODO */}
+                   
+                   {issuerDID &&
+                        <>
+                            <p>Will be issued by {(state.parsedDID[issuerDID] && state.parsedDID[issuerDID] !== "in-flight") ? <Popover content={ //TODO
+                                <Link 
+                                href={getExplorerLinkFromDID(issuerDID, state.parsedDID[issuerDID] as ParsedDIDResult)}
+                                target="_blank"
+                                >
+                                    IOTA Explorer <ExportOutlined />
+                                </Link>
+                            }><b>{issuerDID}</b></Popover> : issuerDID }</p>
+                        
+                            {issuerDomains && (issuerDomains !== 'in-flight') && (
+                                <DomainCheck validatedDomains={issuerDomains} />
+                            )}
+                            <p>to <b style={{wordBreak: "break-all"}}>{state.COMPANY_HOUSE?.connectedDID}</b></p>
+                        </>
+                    }
                 <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")} />
             </section>
             {

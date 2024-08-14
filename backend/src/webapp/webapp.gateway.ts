@@ -186,6 +186,29 @@ export class WebAppGateway {
     this.logger.debug(`send validation response for did:${payload.did}`);
   }
 
+  @SubscribeMessage('requestDIDParsing')
+  async requestDIDParsing(
+    @MessageBody()
+    payload: {
+      did: string;
+    },
+    @ConnectedSocket() client: Socket,
+  ) {
+    this.logger.debug(
+      `receiving DIDParsing request for did :${payload.did}`,
+      payload,
+    );
+
+    const result = await this.webAppService.requestDIDParsing(payload.did);
+
+    await client.emitWithAck('parsedDID', {
+      did: payload.did,
+      result,
+    });
+
+    this.logger.debug(`send parsing response for did:${payload.did}`);
+  }
+
   async connectDid(session_id: string, did: string, scope: Scopes) {
     const connectedClient = this.findClient(session_id);
 

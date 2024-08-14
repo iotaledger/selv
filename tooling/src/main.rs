@@ -1,5 +1,5 @@
 use anyhow::Context as _;
-use identity_eddsa_verifier::EdDSAJwsVerifier;
+use identity_ecdsa_verifier::EcDSAJwsVerifier;
 use identity_iota::core::Duration;
 use identity_iota::core::Object;
 use identity_iota::core::OrderedSet;
@@ -20,8 +20,8 @@ use identity_iota::iota::NetworkName;
 use identity_iota::resolver::Resolver;
 use identity_iota::storage::JwkDocumentExt;
 use identity_iota::storage::KeyId;
+use identity_iota::storage::KeyType;
 use identity_iota::storage::MethodDigest;
-use identity_stronghold::ED25519_KEY_TYPE;
 
 use iota_sdk::types::block::output::AliasOutputBuilder;
 use rand::distributions::{Alphanumeric, DistString};
@@ -41,6 +41,7 @@ use iota_sdk::types::block::address::Address;
 use iota_sdk::types::block::output::AliasOutput;
 
 use std::io::Write;
+use std::iter::Inspect;
 
 // The API endpoint of an IOTA node, e.g. Hornet.
 // const API_ENDPOINT: &str = "http://localhost";
@@ -140,8 +141,8 @@ async fn create_issuer(
     let fragment = document
         .generate_method(
             &storage,
-            ED25519_KEY_TYPE.clone(), // TODO change this in stronghold example aswell
-            JwsAlgorithm::EdDSA,
+            KeyType::from_static_str("ES256"), // TODO change this in stronghold example aswell
+            JwsAlgorithm::ES256,
             None,
             MethodScope::VerificationMethod,
         )
@@ -197,11 +198,12 @@ async fn create_issuer(
         .create_jws(&storage, &fragment, data, &JwsSignatureOptions::default())
         .await?;
 
+
     // Verify Signature.
     let decoded_jws: DecodedJws = resolved_document.verify_jws(
         &jws,
         None,
-        &EdDSAJwsVerifier::default(),
+        &EcDSAJwsVerifier::default(),
         &JwsVerificationOptions::default(),
     )?;
 

@@ -136,3 +136,13 @@ GRPC /DidJwk/resolve
 {
     "did": "did:jwk:eyJhbGciOiJFZERTQSIsImNydiI6IkVkMjU1MTkiLCJraWQiOiJycHpFMUhrUmZiZXRWZFd5YmpDTEFJLVRqcjVrTlVjMFNFeWlieEFSTjlrIiwia3R5IjoiT0tQIiwieCI6InpHdFNuVXppdWhXVVN2MThjQVVzdk5iUXdxZ0l5d2hOY2pUQnhnSHNzSUkifQ"
 }
+###
+{{
+    //pre request script
+    exports.data = new TextEncoder().encode("test");
+}}
+
+GRPC /IotaUtils/did_iota_to_alias_address
+{
+    "did": "did:iota:rms:0x13a9b9a4d6a35e28cac6fa90e0d558912648e80a142d90d642b08e1b3627cbd5"
+}

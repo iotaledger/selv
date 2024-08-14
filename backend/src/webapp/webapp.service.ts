@@ -20,6 +20,7 @@ import * as CompanyCredentialConfig from '../../../shared/credentials/CompanyCre
 import { Providers } from '../../../shared/types/Providers';
 import { ValidateDidResponse } from 'src/identity/domain_linkage';
 import { JwtCreationResponse } from 'src/identity/credentials';
+import { IotaDidToAliasAddressResponse } from 'src/identity/utils';
 
 type Token = {
   sessionId: string;
@@ -137,6 +138,16 @@ export class WebAppService {
     this.logger.debug(`validation for did:${did}`, did);
 
     return validation;
+  }
+
+  async requestDIDParsing(did: string): Promise<IotaDidToAliasAddressResponse> {
+    this.logger.debug(`receiving DIDParsing request for did:${did}`);
+
+    const result = await this.identityService.parseDID(did);
+
+    this.logger.debug(`parsing for did:${did}`, did);
+
+    return result;
   }
 
   async connectUser(user: User): Promise<void> {

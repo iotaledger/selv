@@ -11,10 +11,12 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.web-dev.address=:9000"
       - "--entrypoints.grpc.address=:5000"
       # - "--log.level=DEBUG"
     ports:
       - "${HTTP_PORT}:80/tcp"
+      - "9000:9000/tcp"
       - "${GRPC_PORT}:5000/tcp"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
@@ -33,21 +35,27 @@ services:
     extends:
       file: docker-compose.yml
       service: backend
+    expose:
+      - '9000'
     volumes: 
       - ./backend/src:/backend/src
-      - ./web/build:/web/build
+      - ./web/src:/web/src
       - ./proto:/proto
       - ./types:/types
     entrypoint:
-    - npm
-    - run
-    - start:dev
+    - "/bin/sh"
+    - "-c"
+    - "npm run start:dev & cd ../web/ && npm run start"
     labels:
       traefik.enable: true
       traefik.http.routers.backend.rule: Host(`selv.local`)
       traefik.http.routers.backend.entrypoints: web
       traefik.http.routers.backend.service: backend
       traefik.http.services.backend.loadbalancer.server.port: "3000"
+      traefik.http.routers.web-dev-server.rule: Host(`selv.local`)
+      traefik.http.routers.web-dev-server.entrypoints: web-dev
+      traefik.http.routers.web-dev-server.service: web-dev-server
+      traefik.http.services.web-dev-server.loadbalancer.server.port: "9000"
       traefik.http.routers.backend-grpc.rule: PathPrefix(`/backend`)
       traefik.http.routers.backend-grpc.middlewares: backend-grpc-stripprefix
       traefik.http.middlewares.backend-grpc-stripprefix.stripprefix.prefixes: /backend

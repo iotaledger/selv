@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "proto:generate": "protoc --experimental_allow_proto3_optional --ts_proto_out=./src --proto_path=../shared/proto identity/domain_linkage.proto identity/presentation.proto identity/credentials.proto user/user.proto oid4vc/siopv2.proto oid4vc/oid4vci.proto oid4vc/oid4vp.proto --ts_proto_opt=esModuleInterop=true --ts_proto_opt=nestJs=true"
+    "proto:generate": "protoc --experimental_allow_proto3_optional --ts_proto_out=./src --proto_path=../shared/proto identity/domain_linkage.proto identity/presentation.proto identity/credentials.proto identity/utils.proto user/user.proto oid4vc/siopv2.proto oid4vc/oid4vci.proto oid4vc/oid4vp.proto --ts_proto_opt=esModuleInterop=true --ts_proto_opt=nestJs=true"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.9.13",

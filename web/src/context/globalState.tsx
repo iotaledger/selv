@@ -1,7 +1,7 @@
-import React, { Dispatch, Provider, useEffect, useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import { createContext, useContext, useReducer } from 'react';
 import { routes, mainSteps } from '../steps';
-import SocketIOClient, { Socket } from 'socket.io-client';
+import SocketIOClient from 'socket.io-client';
 
 import { Issuers } from '@shared/types/Issuers';
 import { Scopes } from '@shared/types/Scopes';
@@ -19,6 +19,8 @@ export enum Actions {
     SET_DOMAIN_LINKAGE_VALIDATION,
     SET_ISSUANCE_DATA,
     RESET_STATE,
+    REQUEST_PARSED_DID,
+    SET_PARSED_DID,
 }
 
 export type ValidationResult = {
@@ -32,6 +34,11 @@ export type ValidationResult = {
         serviceId: string;
         error: string;
     }[]
+};
+
+export type ParsedDIDResult = {
+    aliasAddress: string,
+    network: string,
 };
 
 interface ReducerBaseAction {
@@ -82,25 +89,35 @@ interface SetQRContentAction extends ScopedReducerAction {
 interface SetCompleteIssuanceAction extends ScopedReducerAction {
     type: Actions.COMPLETE_ISSUANCE,
 }
-interface SetIssuanceData extends ScopedReducerAction {
+interface SetIssuanceDataAction extends ScopedReducerAction {
     type: Actions.SET_ISSUANCE_DATA,
     issuanceData: any,
 }
 
-interface RequestDomainLinkageValidation extends ReducerBaseAction {
+interface RequestDomainLinkageValidationAction extends ReducerBaseAction {
     type: Actions.REQUEST_DOMAIN_LINKAGE_VALIDATION,
     did: string,
 }
 
 
-interface SetDomainLinkageValidation extends ReducerBaseAction {
+interface SetDomainLinkageValidationAction extends ReducerBaseAction {
     type: Actions.SET_DOMAIN_LINKAGE_VALIDATION,
     did: string,
     result: ValidationResult,
 }
 
-interface ResetState extends ReducerBaseAction {
+interface ResetStateAction extends ReducerBaseAction {
     type: Actions.RESET_STATE,
+}
+interface RequestParsedDIDAction extends ReducerBaseAction {
+    type: Actions.REQUEST_PARSED_DID,
+    did: string,
+}
+
+interface SetParsedDIDAction extends ReducerBaseAction {
+    type: Actions.SET_PARSED_DID,
+    did: string,
+    result: ParsedDIDResult,
 }
 
 interface StoredCredential {
@@ -118,10 +135,13 @@ export type State = {
 } & {
     validatedDomains: {
         [did: string]: ValidationResult | "in-flight";
+    },
+    parsedDID: {
+        [did: string]: ParsedDIDResult | "in-flight";
     }
 };
 
-type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction | SetIssuanceData | RequestDomainLinkageValidation | SetDomainLinkageValidation | ResetState;
+type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction | SetIssuanceDataAction | RequestDomainLinkageValidationAction | SetDomainLinkageValidationAction | ResetStateAction | RequestParsedDIDAction | SetParsedDIDAction;
 
 const socket = SocketIOClient("/", {
     autoConnect: true,
@@ -160,13 +180,20 @@ const requestDomainLinkageValidation: RequestDomainLinkage = (did) => {
     socket.emit('requestDomainLinkageValidation', { did });
 }
 
+// DomainLinkage
+type RequestParsedDID = (did: string) => void
+const RequestDIDParsing: RequestParsedDID = (did) => {
+    socket.emit('requestDIDParsing', { did });
+}
+
+
 export function GlobalStateProvider({ children }: any) {
 
     const [isConnected, setIsConnected] = useState(socket.connected);
 
     const [state, dispatch] = useReducer(
         stateReducer,
-        { validatedDomains: {} }
+        { validatedDomains: {}, parsedDID: {} }
     );
 
     useEffect(() => {
@@ -253,6 +280,15 @@ export function GlobalStateProvider({ children }: any) {
             cb();
         })
 
+        socket.on('parsedDID', (data, cb) => {
+            dispatch({
+                type: Actions.SET_PARSED_DID,
+                did: data.did,
+                result: data.result,
+            });
+            cb();
+        })
+
 
         return () => {
             socket.off('connect', onConnect);
@@ -291,6 +327,11 @@ export function GlobalStateProvider({ children }: any) {
 
             case Actions.REQUEST_ISSUANCE: {
                 requestIssuance(action.provider, action.scope, action.credentials, action.issuer);
+                return state;
+            }
+
+            case Actions.REQUEST_PARSED_DID: {
+                RequestDIDParsing(action.did);
                 return state;
             }
 
@@ -359,9 +400,21 @@ export function GlobalStateProvider({ children }: any) {
                 };
             }
 
+            case Actions.SET_PARSED_DID: {
+                return {
+                    ...state,
+                    parsedDID: {
+                        ...state.parsedDID,
+                        [action.did]: action.result
+
+                    }
+                };
+            }
+
             case Actions.RESET_STATE: {
                 return ({
-                    validatedDomains: state.validatedDomains
+                    validatedDomains: state.validatedDomains,
+                    parsedDID: state.parsedDID
                 });
             }
 
@@ -387,7 +440,7 @@ export function GlobalStateProvider({ children }: any) {
     );
 };
 
-const GlobalStateContext = createContext<{ mainSteps: any, routes: any, state: State }>({ mainSteps: null, routes: null, state: { validatedDomains: {} } });
+const GlobalStateContext = createContext<{ mainSteps: any, routes: any, state: State }>({ mainSteps: null, routes: null, state: { validatedDomains: {}, parsedDID: {} } });
 const DispatchContext = createContext<Dispatch<ReducerAction> | null>(null);
 
 export function useGlobalState() {

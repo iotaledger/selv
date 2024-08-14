@@ -20,12 +20,18 @@ import {
   DomainLinkageClient,
   ValidateDidResponse,
 } from './domain_linkage';
+import {
+  IOTA_UTILS_SERVICE_NAME,
+  IotaDidToAliasAddressResponse,
+  IotaUtilsClient,
+} from './utils';
 
 @Injectable()
 export class IdentityService implements OnModuleInit {
   private identityService: JwtClient;
   private presentationService: CredentialPresentationClient;
   private domainLinkageService: DomainLinkageClient;
+  private utilsService: IotaUtilsClient;
 
   private readonly logger = new Logger(IdentityService.name);
 
@@ -42,6 +48,9 @@ export class IdentityService implements OnModuleInit {
       );
     this.domainLinkageService = this.client.getService<DomainLinkageClient>(
       DOMAIN_LINKAGE_SERVICE_NAME,
+    );
+    this.utilsService = this.client.getService<IotaUtilsClient>(
+      IOTA_UTILS_SERVICE_NAME,
     );
   }
 
@@ -120,6 +129,27 @@ export class IdentityService implements OnModuleInit {
           ),
       );
       this.logger.debug('validation response', response);
+      return response;
+    } catch (error) {
+      this.logger.error(error);
+      throw error;
+    }
+  }
+
+  async parseDID(did: string): Promise<IotaDidToAliasAddressResponse> {
+    this.logger.debug('Received DID parsing request', did);
+
+    try {
+      const response = await lastValueFrom(
+        this.utilsService
+          .didIotaToAliasAddress({
+            did,
+          })
+          .pipe(
+            timeout(this.configService.get<number>('grpc_service_timeout')),
+          ),
+      );
+      this.logger.debug('parsing response', response);
       return response;
     } catch (error) {
       this.logger.error(error);

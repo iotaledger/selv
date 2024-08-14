@@ -10,6 +10,9 @@ services:
     build:
       context: ./
       dockerfile: ./backend/Dockerfile
+      args:
+        REACT_APP_ISSUERS_GOVERNMENT_DID: ${ISSUERS_GOVERNMENT_DID}
+        REACT_APP_ISSUERS_COMPANY_HOUSE_DID: ${ISSUERS_COMPANY_HOUSE_DID}
     expose:
       - '3000'
       - '50051'
@@ -20,12 +23,10 @@ services:
     #   - identity
     restart: unless-stopped
     environment:
-      ISSUERS_BANK_DID: ${ISSUERS_BANK_DID}
-      ISSUERS_BANK_FRAGMENT: ${ISSUERS_BANK_FRAGMENT}
       ISSUERS_GOVERNMENT_DID: ${ISSUERS_GOVERNMENT_DID}
       ISSUERS_GOVERNMENT_FRAGMENT: ${ISSUERS_GOVERNMENT_FRAGMENT}
-      ISSUERS_INSURANCE_DID: ${ISSUERS_INSURANCE_DID}
-      ISSUERS_INSURANCE_FRAGMENT: ${ISSUERS_INSURANCE_FRAGMENT}
+      ISSUERS_COMPANY_HOUSE_DID: ${ISSUERS_COMPANY_HOUSE_DID}
+      ISSUERS_COMPANY_HOUSE_FRAGMENT: ${ISSUERS_COMPANY_HOUSE_FRAGMENT}
   
   identity:
     image: iotaledger/identity-grpc:alpha
@@ -49,10 +50,10 @@ services:
       dockerfile: ./oid4vc/TangleLabs/Dockerfile
     restart: unless-stopped
     environment:
-      RP_DID: ${ISSUERS_BANK_DID}
-      SIGNER_KEYID: ${ISSUERS_BANK_KEYID}
-      KEY_FRAGMENT: ${ISSUERS_BANK_FRAGMENT}
-      PUBLIC_URL: ${BANK_PUBLIC_URL}
+      RP_DID: ${ISSUERS_GOVERNMENT_DID}
+      SIGNER_KEYID: ${ISSUERS_GOVERNMENT_KEYID}
+      KEY_FRAGMENT: ${ISSUERS_GOVERNMENT_FRAGMENT}
+      PUBLIC_URL: ${GOVERNMENT_PUBLIC_URL}
     expose:
       - '3333'
       - '50051'
@@ -75,7 +76,7 @@ services:
   #     - ./shared:/usr/shared
 
   oid4vc-impierce:
-    image: impiercetechnologies/ssi-agent:c25f9da
+    image: impiercetechnologies/ssi-agent:fd8ed66
     depends_on:
       - cqrs-postgres-db
     restart: unless-stopped
@@ -86,22 +87,18 @@ services:
     volumes:
       - ./shared:/usr/shared
       - ./data/stronghold.hodl:/stronghold.hodl:ro
-      - ./oid4vc/impierce/event_publisher_config.yml:/app/agent_event_publisher_http/config.yml:ro
-      - ./oid4vc/impierce/config.yml:/app/agent_application/config.yml:ro
-      - ./oid4vc/impierce/issuance_config.yml:/app/agent_issuance/issuance_config.yml:ro
+      - ./oid4vc/impierce/config.yml:/app/agent_application/config.yaml:ro
       - ./data/tmp:/app/agent_api_rest
-    entrypoint: [ '/bin/sh', '-c', 'export AGENT_CONFIG_STRONGHOLD_PASSWORD=$$(cat /run/secrets/stronghold_pwd) ; /usr/local/bin/agent_application' ]
+    entrypoint: [ '/bin/sh', '-c', 'export UNICORE__SECRET_MANAGER__STRONGHOLD_PASSWORD=$$(cat /run/secrets/stronghold_pwd) ; /usr/local/bin/agent_application' ]
     environment:
-      AGENT_CONFIG_URL: ${INSURANCE_PUBLIC_URL}
-      AGENT_SECRET_MANAGER_STRONGHOLD_PATH: /stronghold.hodl
-      AGENT_CONFIG_ISSUER_KEY_ID: ${ISSUERS_INSURANCE_KEYID}
-      AGENT_CONFIG_ISSUER_DID: ${ISSUERS_INSURANCE_DID}
-      AGENT_CONFIG_ISSUER_FRAGMENT: ${ISSUERS_INSURANCE_FRAGMENT}
-      AGENT_CONFIG_DEFAULT_DID_METHOD: "did:iota:rms"
-      AGENT_APPLICATION_ENABLE_CORS: true
-      #AGENT_CONFIG_LOG_FORMAT: json
-      AGENT_CONFIG_EVENT_STORE: postgres
-      AGENT_STORE_DB_CONNECTION_STRING: postgresql://demo_user:demo_pass@cqrs-postgres-db:5432/demo
+      UNICORE__URL: ${COMPANY_HOUSE_PUBLIC_URL}
+      UNICORE__SECRET_MANAGER__STRONGHOLD_PATH: /stronghold.hodl
+      UNICORE__SECRET_MANAGER__ISSUER_ES256_KEY_ID: ${ISSUERS_COMPANY_HOUSE_KEYID}
+      UNICORE__SECRET_MANAGER__ISSUER_DID: ${ISSUERS_COMPANY_HOUSE_DID}
+      UNICORE__SECRET_MANAGER__ISSUER_FRAGMENT: ${ISSUERS_COMPANY_HOUSE_FRAGMENT}
+      UNICORE__CORS_ENABLED: true
+      #UNICORE__LOG_FORMAT: json
+      UNICORE__EVENT_STORE__CONNECTION_STRING: postgresql://demo_user:demo_pass@cqrs-postgres-db:5432/demo
       #RUST_LOG: debug
     secrets:
       - stronghold_pwd
