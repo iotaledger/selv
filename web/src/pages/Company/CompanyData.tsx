@@ -121,7 +121,7 @@ const CompanyData: React.FC = () => {
     }, [state, relevantCredential])
 
     useEffect(() => {
-        if (!dispatch || !state || !issuerDID || state.validatedDomains[issuerDID]) return;
+        if (!dispatch || !issuerDID || !state) return;
 
         dispatch?.({ type: Actions.REQUEST_DOMAIN_LINKAGE_VALIDATION, did: issuerDID });
         setIssuerDomains(state.validatedDomains[issuerDID])
@@ -151,12 +151,12 @@ const CompanyData: React.FC = () => {
                                 relevantCredential.issuer 
                             }   
                             </p>
-                            <p>to <Popover content={relevantCredential.credentialSubject.id}><b style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", width: "350px"}}>{relevantCredential.credentialSubject.id}</b></Popover></p> 
+                            {credentialsDomains && (credentialsDomains !== 'in-flight') && (
+                                <DomainCheck validatedDomains={credentialsDomains} />
+                            )}
+                            <p>to <Popover content={relevantCredential.credentialSubject.id}><b style={{display: "inline-block", verticalAlign: "bottom", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", width: "350px"}}>{relevantCredential.credentialSubject.id}</b></Popover></p> 
                         </>
                     }
-                    {credentialsDomains && (credentialsDomains !== 'in-flight') && (
-                        <DomainCheck validatedDomains={credentialsDomains} />
-                    )}
                     {
                         // Object.keys(prefilledFormData.dataFields).length &&
                         <PrefilledForm dataFields={prefilledData} />
@@ -179,7 +179,7 @@ const CompanyData: React.FC = () => {
                             {issuerDomains && (issuerDomains !== 'in-flight') && (
                                 <DomainCheck validatedDomains={issuerDomains} />
                             )}
-                            <p>to <Popover content={state.COMPANY_HOUSE?.connectedDID}><b style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", width: "350px"}}>{state.COMPANY_HOUSE?.connectedDID}</b></Popover></p>
+                            <p>to <Popover content={state.COMPANY_HOUSE?.connectedDID}><b style={{display: "inline-block", verticalAlign: "bottom", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", width: "350px"}}>{state.COMPANY_HOUSE?.connectedDID}</b></Popover></p>
                         </>
                     }
                 <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")} />
