@@ -151,7 +151,7 @@ const CompanyData: React.FC = () => {
                                 relevantCredential.issuer 
                             }   
                             </p>
-                            <p>to <b style={{wordBreak: "break-all"}}>{relevantCredential.credentialSubject.id}</b></p> 
+                            <p>to <Popover content={relevantCredential.credentialSubject.id}><b style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", width: "350px"}}>{relevantCredential.credentialSubject.id}</b></Popover></p> 
                         </>
                     }
                     {credentialsDomains && (credentialsDomains !== 'in-flight') && (
@@ -179,7 +179,7 @@ const CompanyData: React.FC = () => {
                             {issuerDomains && (issuerDomains !== 'in-flight') && (
                                 <DomainCheck validatedDomains={issuerDomains} />
                             )}
-                            <p>to <b style={{wordBreak: "break-all"}}>{state.COMPANY_HOUSE?.connectedDID}</b></p>
+                            <p>to <Popover content={state.COMPANY_HOUSE?.connectedDID}><b style={{overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", width: "350px"}}>{state.COMPANY_HOUSE?.connectedDID}</b></Popover></p>
                         </>
                     }
                 <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")} />
