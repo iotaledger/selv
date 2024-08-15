@@ -4,6 +4,7 @@ import { dirname } from 'path';
 import * as grpc from "@grpc/grpc-js";
 import { loadSync } from "@grpc/proto-loader";
 import { Signer } from 'did-jwt';
+import { KeyType } from "@sphereon/did-resolver-jwk";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -28,6 +29,7 @@ export const remoteSigner: (keyId: string) => Signer = (keyId) => async (data) =
   
     const response = await new Promise((resolve, reject) => identityClient.sign({
       keyId,
+      keyType: "ES256",
       data: Uint8Array.from(Buffer.from(data)),
     }, (err, response) => {
       if (err) {

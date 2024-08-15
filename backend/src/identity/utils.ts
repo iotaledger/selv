@@ -15,6 +15,8 @@ export interface DataSigningRequest {
   data: Uint8Array;
   /** Signing key's ID. */
   keyId: string;
+  /** Key type of the key with id `key_id`. Valid values are: Ed25519, ES256, ES256K. */
+  keyType: string;
 }
 
 export interface DataSigningResponse {
