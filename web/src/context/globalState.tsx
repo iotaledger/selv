@@ -162,7 +162,6 @@ const requestPresentation: RequestPresentation = (provider, scope, presentationD
 }
 
 // OIDC4VCI
-// TODO: Issuers.Bank
 type RequestIssuance = (provider: Providers, scope: Scopes, credentials: {type: string, data?: any}[], issuer: Issuers) => void
 const requestIssuance: RequestIssuance = (provider, scope, credentials, issuer) => {
     socket.emit('requestIssuance',

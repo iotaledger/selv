@@ -133,7 +133,7 @@ const CompanyData: React.FC = () => {
                 <h2>{t("pages.company.companyData.setUpPrivateCompany")}</h2>
                 <h3>{t("pages.company.companyData.subTitle")}</h3>
                 <section>
-                    <h3 className='section-header'>{t("pages.insurance.insuranceData.businessOwner")}</h3>
+                    <h3 className='section-header'>{t("pages.company.companyData.businessOwner")}</h3>
 
                     {relevantCredential && relevantCredential.issuer && 
                         <>
@@ -163,7 +163,7 @@ const CompanyData: React.FC = () => {
                     }
                 </section>
                 <section>
-                    <h3 className='section-header'>{t("pages.insurance.insuranceData.companyDetails")}</h3>
+                    <h3 className='section-header'>{t("pages.company.companyData.companyDetails")}</h3>
                    
                    {issuerDID &&
                         <>

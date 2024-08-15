@@ -257,6 +257,8 @@
         "newlyIncorporatedCompanies": "Newly Incorporated Companies"
       },
       "companyData": {
+        "businessOwner": "Business Owner",
+        "companyDetails": "Company Details",
         "companyName": "Company Name",
         "companyAddress": "Company Address",
         "companyType": "Company Type",
@@ -264,46 +266,6 @@
         "setUpPrivateCompany": "Register Your Private Limited Company",
         "subTitle": "Fill in Your Company Details to Complete the Registration"
 
-      }
-    },
-    "bank": {
-      "confirmation": {
-        "confirmation": "Your Bank Credential Was Sent To Your Wallet",
-        "title": "🎉",
-        "success": "Congratulations, You Claimed Your Bank Account!",
-        "nextStep": "Next, Apply for Insurance"
-      },
-      "bankData": {
-        "accountTypes": {
-          "label": "Choose Bank Account Type",
-          "error": "Please choose an account type",
-          "accounts1": "Business Checking Account",
-          "accounts2": "Business Savings Account",
-          "special": "Brokerage Account"
-        }
-      }
-    },
-    "insurance": {
-      "confirmation": {
-        "confirmation": "Your Insurance Credential Was Sent To Your Wallet",
-        "title": "🎉",
-        "success": "Congratulations, You Claimed Your Insurance!",
-        "nextStep": "Ready for business"
-      },
-      "insuranceData": {
-        "openAnAccount": "Open an Account",
-        "accountType": "Account Type",
-        "businessOwner": "Business Owner",
-        "companyDetails": "Company Details",
-        "bankAccountDetails": "Bank Account Details",
-        "accountTypes": {
-          "label": "Choose Liability Insurance Type",
-          "error": "Please choose a type of liability insurance",
-          "accounts1": "General Liability",
-          "accounts2": "Professional Liability",
-          "accounts3": "Employer Liability",
-          "special": "Business Liability"
-        }
       }
     },
     "general": {
