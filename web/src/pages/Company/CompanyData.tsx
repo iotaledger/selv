@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { App, Popover, Typography } from 'antd';
+import { App, Space, Typography } from 'antd';
 import { Layout, Loading, Form, PrefilledForm } from '../../components';
 import { useTranslation } from 'react-i18next';
-import { Actions, ParsedDIDResult, State, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
+import { Actions, State, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
 import { useNavigate } from 'react-router-dom';
 import useStep from '../../utils/useStep';
 import { Scopes } from '@shared/types/Scopes';
 import CitizenCredentialConfig from '@shared/credentials/CitizenCredential.json';
-import DomainCheck from '../../components/DomainCheck';
-import { ExportOutlined } from '@ant-design/icons';
 import { routes } from '../../steps';
 import i18n from '../../i18n';
-import { getExplorerLinkFromDID } from '../../utils/explorer';
+import DIDCard from '../../components/DIDCard';
 
 const { Link } = Typography;
 
@@ -134,67 +132,53 @@ const CompanyData: React.FC = () => {
                 <h3>{t("pages.company.companyData.subTitle")}</h3>
                 <section>
                     <h3 className='section-header'>{t("pages.company.companyData.businessOwner")}</h3>
+                    <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
 
-                    {relevantCredential && relevantCredential.issuer && 
-                        <>
-                            <p>Issued by {(state.parsedDID[relevantCredential.issuer] && state.parsedDID[relevantCredential.issuer] !== "in-flight") ? 
-                                <Popover content={
-                                    <Link 
-                                    href={getExplorerLinkFromDID(relevantCredential.issuer, state.parsedDID[relevantCredential.issuer] as ParsedDIDResult)}
-                                    target="_blank"
-                                    >
-                                        IOTA Explorer <ExportOutlined />
-                                    </Link>
-                                    }><b>{relevantCredential.issuer}</b>
-                                </Popover> 
-                            : 
-                                relevantCredential.issuer 
-                            }   
-                            </p>
-                            {credentialsDomains && (credentialsDomains !== 'in-flight') && (
-                                <DomainCheck validatedDomains={credentialsDomains} />
-                            )}
-                            <p>to <Popover content={relevantCredential.credentialSubject.id}><b style={{display: "inline-block", verticalAlign: "bottom", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", width: "350px"}}>{relevantCredential.credentialSubject.id}</b></Popover></p> 
-                        </>
-                    }
-                    {
-                        // Object.keys(prefilledFormData.dataFields).length &&
+                        <p>Issued by:</p>
+                        <DIDCard 
+                            loading={!relevantCredential?.issuer || !state.parsedDID[relevantCredential.issuer] || state.parsedDID[relevantCredential.issuer] === "in-flight"} 
+                            did={relevantCredential?.issuer ?? null}
+                            parsedDID={relevantCredential?.issuer ? state.parsedDID[relevantCredential?.issuer] : null}
+                            domains={credentialsDomains}
+                        />
+            
                         <PrefilledForm dataFields={prefilledData} />
-                    }
+                    
+                    </Space>
                 </section>
                 <section>
                     <h3 className='section-header'>{t("pages.company.companyData.companyDetails")}</h3>
-                   
-                   {issuerDID &&
-                        <>
-                            <p>Will be issued by {(state.parsedDID[issuerDID] && state.parsedDID[issuerDID] !== "in-flight") ? <Popover content={ //TODO
-                                <Link 
-                                href={getExplorerLinkFromDID(issuerDID, state.parsedDID[issuerDID] as ParsedDIDResult)}
-                                target="_blank"
-                                >
-                                    IOTA Explorer <ExportOutlined />
-                                </Link>
-                            }><b>{issuerDID}</b></Popover> : issuerDID }</p>
-                        
-                            {issuerDomains && (issuerDomains !== 'in-flight') && (
-                                <DomainCheck validatedDomains={issuerDomains} />
-                            )}
-                            <p>to <Popover content={state.COMPANY_HOUSE?.connectedDID}><b style={{display: "inline-block", verticalAlign: "bottom", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis", width: "350px"}}>{state.COMPANY_HOUSE?.connectedDID}</b></Popover></p>
-                        </>
-                    }
-                <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")} />
-            </section>
-            {
-                status && (
-                    <div className='loading'>
-                        <p className='bold'>{t(status)}</p>
-                        {
-                            status === messages.waiting && <Loading />
-                        }
-                    </div>
-                )
-            }
-        </div>
+                    <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+
+                        <p>Will be issued by:</p>
+                        <DIDCard 
+                            loading={!issuerDID || !state.parsedDID[issuerDID] || state.parsedDID[issuerDID] === "in-flight"} 
+                            did={issuerDID ?? null}
+                            parsedDID={issuerDID ? state.parsedDID[issuerDID] : null}
+                            domains={issuerDomains}
+                            />
+                        <p>to</p>
+                        <DIDCard 
+                            loading={!state.COMPANY_HOUSE?.connectedDID} 
+                            did={state.COMPANY_HOUSE?.connectedDID ?? null}
+                            parsedDID={null}
+                            domains={null}
+                            />
+                    
+                        <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")} />
+                    </Space>
+                </section>
+                {
+                    status && (
+                        <div className='loading'>
+                            <p className='bold'>{t(status)}</p>
+                            {
+                                status === messages.waiting && <Loading />
+                            }
+                        </div>
+                    )
+                }
+            </div>
 
         </Layout >
     );
