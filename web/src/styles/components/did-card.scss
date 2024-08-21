@@ -1,0 +1,23 @@
+.did-card {
+
+    overflow: hidden;
+
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        right: -20px;
+        top: -20px;
+        width: 90px;
+        height: 90px;
+        opacity: 0.5;
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        background-size: contain;
+    }
+    &.did-method_iota {
+        &:after {
+            background-image: url("../../assets/iota.png");
+        }
+    }
+}

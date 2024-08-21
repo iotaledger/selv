@@ -75,7 +75,7 @@ const CompanyData: React.FC = () => {
 
         if(!state[Scopes.CompanyHouse]?.credentials.length) {
             message.open({
-                type: 'error',
+                type: 'info',
                 content: 'Please present your national ID credential', //TODO: translate
             });
             return navigate(fallbackRoute!.path.replace(":lng?", i18n.language.toString()));
@@ -134,7 +134,10 @@ const CompanyData: React.FC = () => {
                     <h3 className='section-header'>{t("pages.company.companyData.businessOwner")}</h3>
                     <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
 
+                        <PrefilledForm dataFields={prefilledData} />
+                        
                         <p>Issued by:</p>
+                        
                         <DIDCard 
                             loading={!relevantCredential?.issuer || !state.parsedDID[relevantCredential.issuer] || state.parsedDID[relevantCredential.issuer] === "in-flight"} 
                             did={relevantCredential?.issuer ?? null}
@@ -142,30 +145,33 @@ const CompanyData: React.FC = () => {
                             domains={credentialsDomains}
                         />
             
-                        <PrefilledForm dataFields={prefilledData} />
-                    
+            
                     </Space>
                 </section>
                 <section>
                     <h3 className='section-header'>{t("pages.company.companyData.companyDetails")}</h3>
                     <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+                        
+                        <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")} />
 
                         <p>Will be issued by:</p>
+                        
                         <DIDCard 
                             loading={!issuerDID || !state.parsedDID[issuerDID] || state.parsedDID[issuerDID] === "in-flight"} 
                             did={issuerDID ?? null}
                             parsedDID={issuerDID ? state.parsedDID[issuerDID] : null}
                             domains={issuerDomains}
-                            />
-                        <p>to</p>
+                        />
+                        
+                        <p>to:</p>
+                        
                         <DIDCard 
                             loading={!state.COMPANY_HOUSE?.connectedDID} 
                             did={state.COMPANY_HOUSE?.connectedDID ?? null}
                             parsedDID={null}
                             domains={null}
-                            />
+                        />
                     
-                        <Form dataFields={emptyFields} onSubmit={onSubmit} submitLabel={t("actions.continue")} />
                     </Space>
                 </section>
                 {

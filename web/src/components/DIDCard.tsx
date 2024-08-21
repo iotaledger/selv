@@ -17,6 +17,10 @@ const shortenDID = (did: string):string => {
     return [...splitDID, shortMethodSpecificIdentifier].join(':');
 }
 
+const extractDIDMethod = (did: string):string => {
+    const splitDID = did.split(':');
+    return splitDID[1] ?? "";
+}
 
 const DIDCard = ({ did, parsedDID, domains, loading }: { 
     did: string | null, 
@@ -40,7 +44,7 @@ const DIDCard = ({ did, parsedDID, domains, loading }: {
 
     return (
         
-        <Card loading={loading} actions={actions} style={{ minWidth: 300 }}>
+        <Card loading={loading} actions={actions} style={{ minWidth: 300 }} className={ `did-card did-method_${extractDIDMethod(did ?? "")}` }>
             <Card.Meta
                 // avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" />}
                 title={
@@ -48,7 +52,7 @@ const DIDCard = ({ did, parsedDID, domains, loading }: {
                     content={
                         <pre style={{ maxWidth: 300, wordBreak: "break-all", whiteSpace: "pre-wrap" }}>{did}</pre>
                     }>
-                            {did && shortenDID(did)}
+                            <pre>{did && shortenDID(did)}</pre>
                     </Popover>
                 }
                 description={

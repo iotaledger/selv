@@ -4,13 +4,11 @@ import { Button, Flex, Modal } from 'antd';
 import { Layout, RandomGraphicElement } from '../components';
 import { QRCode } from 'antd';
 import useStep from '../utils/useStep';
-import appStore from '../assets/appStore.svg';
-import googlePlay from '../assets/googlePlay.svg';
 import avatar1 from '../assets/avatar1.png';
 import avatar2 from '../assets/avatar2.png';
 import dots from '../assets/backgrounds/dots.png';
 import circle from '../assets/backgrounds/circleFrame6.svg';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { wallets } from '../wallets';
 import { utilityRoutes } from '../steps';
 import { Actions, useCredentialsDispatch } from '../context/globalState';
@@ -82,9 +80,14 @@ const AppPicker: React.FC = () => {
                                                     </div>
                                                     <p>{wallet.description}</p>
 
-                                                    <div className='wallet-modal__qr'>
-                                                        <QRCode type="svg" bordered={false} errorLevel='H' size={200} value={window.location.origin + generatePath(walletDownloadRoute!.path, { wallet: wallet.name })} />
-                                                    </div>
+                                                    {wallet.storeLinks && 
+                                                        <>
+                                                            <p><b>Scan QR code to download:</b></p> {/* TODO: translate */}
+                                                            <div className='wallet-modal__qr'>
+                                                                <QRCode type="svg" bordered={false} errorLevel='H' size={200} value={window.location.origin + generatePath(walletDownloadRoute!.path, { wallet: wallet.name })} />
+                                                            </div>
+                                                        </>
+                                                    }
                                                 </section>
                                             </Modal>
                                         </div>

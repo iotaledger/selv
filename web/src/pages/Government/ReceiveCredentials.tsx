@@ -34,7 +34,7 @@ const ReceiveCredentials: React.FC = () => {
 
         if(!state[Scopes.Government]?.connectedDID) {
             message.open({
-                type: 'error',
+                type: 'info',
                 content: 'Please reconnect your digital identity', //TODO: translate
             });
             return navigate(fallbackRoute!.path.replace(":lng?", i18n.language.toString()));
