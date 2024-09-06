@@ -258,27 +258,27 @@ export class WebAppService {
                     break;
 
                   case '**TEMPLATE_FIRSTNAME':
-                    obj[key] = faker.person.firstName;
+                    obj[key] = faker.person.firstName();
                     break;
 
                   case '**TEMPLATE_LASTNAME':
-                    obj[key] = faker.person.firstName;
+                    obj[key] = faker.person.lastName();
                     break;
 
                   case '**TEMPLATE_NATIONALITY':
-                    obj[key] = faker.location.countryCode;
+                    obj[key] = faker.location.countryCode();
                     break;
 
                   case '**TEMPLATE_BIRTHPLACE':
-                    obj[key] = faker.location.city;
+                    obj[key] = faker.location.city();
                     break;
 
                   case '**TEMPLATE_COUNTRY':
-                    obj[key] = faker.location.country;
+                    obj[key] = faker.location.country();
                     break;
 
                   case '**TEMPLATE_PHONE':
-                    obj[key] = faker.phone.number;
+                    obj[key] = faker.phone.number();
                     break;
 
                   case '**TEMPLATE_BIRTHDAY':
