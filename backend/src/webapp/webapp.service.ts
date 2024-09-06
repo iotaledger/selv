@@ -21,6 +21,7 @@ import { Providers } from '../../../shared/types/Providers';
 import { ValidateDidResponse } from 'src/identity/domain_linkage';
 import { JwtCreationResponse } from 'src/identity/credentials';
 import { IotaDidToAliasAddressResponse } from 'src/identity/utils';
+import { faker } from '@faker-js/faker';
 
 type Token = {
   sessionId: string;
@@ -254,6 +255,30 @@ export class WebAppService {
                 switch (val) {
                   case '**TEMPLATE_DATENOW':
                     obj[key] = new Date().toISOString();
+                    break;
+
+                  case '**TEMPLATE_FIRSTNAME':
+                    obj[key] = faker.person.firstName;
+                    break;
+
+                  case '**TEMPLATE_LASTNAME':
+                    obj[key] = faker.person.firstName;
+                    break;
+
+                  case '**TEMPLATE_NATIONALITY':
+                    obj[key] = faker.location.countryCode;
+                    break;
+
+                  case '**TEMPLATE_BIRTHPLACE':
+                    obj[key] = faker.location.city;
+                    break;
+
+                  case '**TEMPLATE_COUNTRY':
+                    obj[key] = faker.location.country;
+                    break;
+
+                  case '**TEMPLATE_PHONE':
+                    obj[key] = faker.phone.number;
                     break;
 
                   case '**TEMPLATE_BIRTHDAY':
