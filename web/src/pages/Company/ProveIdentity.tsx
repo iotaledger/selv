@@ -55,7 +55,7 @@ const ProveIdentity: React.FC = () => {
                         <Trans i18nKey="pages.company.signIn.subtitle" />
                     </p>
                     <div className='qr-wrapper'>
-                        <QRCode text={state[Scopes.CompanyHouse]?.QRcontent} />
+                        <QRCode text={undefined} />
                     </div>
                     <p className='bold'>{t(status)}</p>
                     {loading && <Loading />}

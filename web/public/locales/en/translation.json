@@ -334,6 +334,11 @@
       "incorporatedOn": "Incorporated on",
       "status": "Status"
     },
+    "QR": {
+      "copySuccess": "Link copied to clipboard",
+      "copyErrorPermission": "Could not get permission to copy text to clipboard",
+      "copyError": "Could not copy text to clipboard"
+    },
     "websocket": {
       "connectionErrorDescription": "Please try again!",
       "verification": "Verification",

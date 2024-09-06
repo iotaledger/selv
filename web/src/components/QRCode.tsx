@@ -1,10 +1,13 @@
 import React from 'react';
 import { App, Input, QRCode } from 'antd';
 import { CopyOutlined, SendOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const QRCodeComponent = ({ text, size }: { text?: string; size?: number; }) => {
 
     const { message } = App.useApp();
+
+    const { t } = useTranslation();
 
     const copyToClipbloard = (text: string) => {
 
@@ -15,18 +18,18 @@ const QRCodeComponent = ({ text, size }: { text?: string; size?: number; }) => {
                 navigator.clipboard.writeText(text).then(function () {
                     message.open({
                         type: 'success',
-                        content: 'Link copied to clipboard', // TODO: translate
+                        content: t("components.QR.copySuccess"),
                     });
                 }, function (err) {
                     message.open({
                         type: 'error',
-                        content: 'Could not copy text to clipboard', // TODO: translate
+                        content: t("components.QR.copyError"),
                     });
                 });
             } else {
                 message.open({
                     type: 'error',
-                    content: 'Could not get permission to copy text to clipboard', // TODO: translate
+                    content: t("components.QR.copyErrorPermission"),
                 });
             }
         });
@@ -41,9 +44,7 @@ const QRCodeComponent = ({ text, size }: { text?: string; size?: number; }) => {
     return (
         <>
             <div className='qr-code'>
-                {text && (
-                    <QRCode type="svg" status={text ? 'active' : 'loading'} bordered={false} value={text} errorLevel='H' size={size || 290} />
-                )}
+                <QRCode type="svg" status={text ? 'active' : 'loading'} bordered={false} value={text ?? "loading"} errorLevel='H' size={size || 290} />
             </div>
             <div className='qr-code__link'>
                 <Input addonBefore={<CopyOutlined onClick={() => copyToClipbloard(text ?? "")} />} value={text} onChange={() => undefined} addonAfter={<SendOutlined onClick={() => gotoLink(text ?? "")} />} />
