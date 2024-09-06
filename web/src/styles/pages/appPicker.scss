@@ -42,13 +42,14 @@
     margin-bottom: 20px;
     text-align: center;
   }
-
+  
   h2 {
     @include themify($themes) {
       color: themed("trinaryColor");
       font-size: themed("h2TextSize");
       line-height: themed("h2LineHeight");
     }
+    font-weight: 400;
   }
 
   p {

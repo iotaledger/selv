@@ -46,7 +46,7 @@ const AppPicker: React.FC = () => {
                                 <h2 className='subTitle'>{t("pages.walletSelect.subTitle")}</h2>
                                 <div className='apps'>
                                     {randomOrderWallets.map(wallet => (
-                                        <div className="app">
+                                        <div className="app" key={wallet.name}>
                                             <section className="app__wrapper">
                                                 <div className='app__column'>
                                                     {wallet.logo}
@@ -61,7 +61,7 @@ const AppPicker: React.FC = () => {
                                                         </Button>
                                                     </div>
                                                 </div>
-                                                <img className="app__image" src={wallet.image}></img>
+                                                <img className="app__image" alt={wallet.name} src={wallet.image}></img>
                                             </section>
                                             <Modal
                                                 open={open === wallet.name}

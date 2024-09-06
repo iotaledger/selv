@@ -1,22 +1,17 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import randomstring from 'randomstring';
+import React, { useCallback, useEffect } from 'react';
 import { Layout, Loading, QRCode, RandomGraphicElement } from '../../components';
 import useStep from '../../utils/useStep';
 import { useTranslation, Trans } from 'react-i18next';
-import { Router, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { Actions, useCredentialsDispatch, useGlobalState } from '../../context/globalState';
 import { Providers } from '@shared/types/Providers';
-import { Issuers } from '@shared/types/Issuers';
 import { Scopes } from '@shared/types/Scopes';
-import { copyFile } from 'fs';
 
 const ProveIdentity: React.FC = () => {
     const { t } = useTranslation();
 
     const { nextStep } = useStep();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
-    const [status, setStatus] = useState("pages.general.proveIdentity.waitingForLogin");
     const dispatch = useCredentialsDispatch();
     const { state } = useGlobalState();
 
@@ -34,17 +29,6 @@ const ProveIdentity: React.FC = () => {
             goToNextStep();
         }
     }, [state, goToNextStep])
-    
-    const messages = {
-        waiting: 'general.messages.waiting',
-        connectionError: 'general.messages.connectionError',
-        missing: 'general.messages.missing',
-        verifying: 'general.messages.verifying'
-    };
-
-    function setStatusMessage(message: string) {
-        setStatus(message);
-    }
 
     return (
         <Layout>
@@ -57,8 +41,8 @@ const ProveIdentity: React.FC = () => {
                     <div className='qr-wrapper'>
                         <QRCode text={state[Scopes.CompanyHouse]?.QRcontent} />
                     </div>
-                    <p className='bold'>{t(status)}</p>
-                    {loading && <Loading />}
+                    <p className='bold'>{t("pages.general.proveIdentity.waitingForLogin")}</p>
+                    <Loading />
                 </div>
             </RandomGraphicElement>
         </Layout>
