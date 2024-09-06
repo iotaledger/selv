@@ -2,7 +2,7 @@ import React from 'react';
 import { App, Input, QRCode } from 'antd';
 import { CopyOutlined, SendOutlined } from '@ant-design/icons';
 
-const QRCodeComponent = ({ text, size }: { text: string; size?: number; }) => {
+const QRCodeComponent = ({ text, size }: { text?: string; size?: number; }) => {
 
     const { message } = App.useApp();
 
@@ -46,7 +46,7 @@ const QRCodeComponent = ({ text, size }: { text: string; size?: number; }) => {
                 )}
             </div>
             <div className='qr-code__link'>
-                <Input addonBefore={<CopyOutlined onClick={() => copyToClipbloard(text)} />} value={text} onChange={() => undefined} addonAfter={<SendOutlined onClick={() => gotoLink(text)} />} />
+                <Input addonBefore={<CopyOutlined onClick={() => copyToClipbloard(text ?? "")} />} value={text} onChange={() => undefined} addonAfter={<SendOutlined onClick={() => gotoLink(text ?? "")} />} />
             </div>
         </>
     )

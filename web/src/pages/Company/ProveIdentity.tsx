@@ -25,6 +25,7 @@ const ProveIdentity: React.FC = () => {
     }, [nextStep, navigate]);
 
     useEffect(() => {
+        dispatch?.({type: Actions.RESET_QR_CONTENT, scope: Scopes.CompanyHouse});
         dispatch?.({type: Actions.REQUEST_INVITE, provider: Providers.Impierce, scope: Scopes.CompanyHouse});
     }, [dispatch]);
 
@@ -54,8 +55,7 @@ const ProveIdentity: React.FC = () => {
                         <Trans i18nKey="pages.company.signIn.subtitle" />
                     </p>
                     <div className='qr-wrapper'>
-                        {/* TODO: Handle loading state */}
-                        <QRCode text={state[Scopes.CompanyHouse]?.QRcontent ?? ""} />
+                        <QRCode text={state[Scopes.CompanyHouse]?.QRcontent} />
                     </div>
                     <p className='bold'>{t(status)}</p>
                     {loading && <Loading />}

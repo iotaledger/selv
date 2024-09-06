@@ -22,6 +22,7 @@ const ProveIdentity: React.FC = () => {
     }, [nextStep, navigate]);
 
     useEffect(() => {
+        dispatch?.({type: Actions.RESET_QR_CONTENT, scope: Scopes.Government});
         dispatch?.({type: Actions.REQUEST_INVITE, provider: Providers.TangleLabs, scope: Scopes.Government});
     }, [dispatch]);
 
@@ -51,8 +52,7 @@ const ProveIdentity: React.FC = () => {
                         <Trans i18nKey="pages.government.signIn.subtitle" />
                     </p>
                     <div className='qr-wrapper'>
-                        {/* TODO: Handle loading state */}
-                        <QRCode text={state[Scopes.Government]?.QRcontent ?? ""} />
+                        <QRCode text={state[Scopes.Government]?.QRcontent} />
                     </div>
                     <p className='bold'>{t(status)}</p>
                     {loading && <Loading />}

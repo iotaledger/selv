@@ -14,6 +14,7 @@ export enum Actions {
     REQUEST_ISSUANCE,
     CONNECT_DID,
     SET_QR_CONTENT,
+    RESET_QR_CONTENT,
     COMPLETE_ISSUANCE,
     REQUEST_DOMAIN_LINKAGE_VALIDATION,
     SET_DOMAIN_LINKAGE_VALIDATION,
@@ -86,6 +87,10 @@ interface SetQRContentAction extends ScopedReducerAction {
     QRContent: string,
 }
 
+interface ResetQRContentAction extends ScopedReducerAction {
+    type: Actions.RESET_QR_CONTENT,
+}
+
 interface SetCompleteIssuanceAction extends ScopedReducerAction {
     type: Actions.COMPLETE_ISSUANCE,
 }
@@ -141,7 +146,21 @@ export type State = {
     }
 };
 
-type ReducerAction = AddCredentialAction | ConnectDIDAction | RequestInviteAction | RequestInviteAction | RequestIssuanceAction | RequestPresentationAction | SetQRContentAction | SetCompleteIssuanceAction | SetIssuanceDataAction | RequestDomainLinkageValidationAction | SetDomainLinkageValidationAction | ResetStateAction | RequestParsedDIDAction | SetParsedDIDAction;
+type ReducerAction = AddCredentialAction |
+    ConnectDIDAction |
+    RequestInviteAction | 
+    RequestInviteAction |
+    RequestIssuanceAction |
+    RequestPresentationAction |
+    SetQRContentAction |
+    ResetQRContentAction |
+    SetCompleteIssuanceAction |
+    SetIssuanceDataAction |
+    RequestDomainLinkageValidationAction |
+    SetDomainLinkageValidationAction |
+    ResetStateAction |
+    RequestParsedDIDAction |
+    SetParsedDIDAction;
 
 const socket = SocketIOClient("/", {
     autoConnect: true,
@@ -366,6 +385,15 @@ export function GlobalStateProvider({ children }: any) {
                     ...state, [action.scope]: {
                         ...state[action.scope],
                         QRcontent: action.QRContent
+                    }
+                };
+            }
+
+            case Actions.RESET_QR_CONTENT: {
+                return {
+                    ...state, [action.scope]: {
+                        ...state[action.scope],
+                        QRcontent: undefined
                     }
                 };
             }

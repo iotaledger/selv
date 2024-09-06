@@ -40,6 +40,8 @@ const ReceiveCredentials: React.FC = () => {
             return navigate(fallbackRoute!.path.replace(":lng?", i18n.language.toString()));
         }
 
+        dispatch?.({type: Actions.RESET_QR_CONTENT, scope: Scopes.CompanyHouse});
+
         dispatch?.({
             type: Actions.REQUEST_ISSUANCE,
             provider: Providers.Impierce,
@@ -75,8 +77,7 @@ const ReceiveCredentials: React.FC = () => {
                         <Trans i18nKey="pages.company.receiveCredentials.subTitle" />
                     </p>
                     <div className='qr-wrapper'>
-                        {/* TODO: Handle loading state */}
-                        <QRCode text={state[Issuers.CompanyHouse]?.QRcontent ?? ""} />
+                        <QRCode text={state[Issuers.CompanyHouse]?.QRcontent} />
                     </div>
                     <p className='bold'>{t(status)}</p>
                     {loading && <Loading />}
